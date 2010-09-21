@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CrashReportSender.h"
 
 @class JiraConnectViewController;
 
-@interface JiraConnectAppDelegate : NSObject <UIApplicationDelegate> {
+@interface JiraConnectAppDelegate : NSObject <UIApplicationDelegate, CrashReportSenderDelegate> {
     UIWindow *window;
     JiraConnectViewController *viewController;
 }

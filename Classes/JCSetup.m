@@ -7,18 +7,18 @@
 //
 
 #import "JCSetup.h"
-
+#import "CrashReportSender.h"
 
 @implementation JCSetup
 
-void handleUncaughtException(NSException* exception) {
-	NSArray *callStackArray = [exception callStackReturnAddresses];
-	NSLog(@"Exception: %@ and callStack: %@", exception, callStackArray);
-}
 
 
 + (void) configureJiraConnect:(NSURL*) withUrl {
-	NSSetUncaughtExceptionHandler(&handleUncaughtException);
+
+    [[CrashReportSender sharedCrashReportSender] sendCrashReportToURL:withUrl
+                                                             delegate:self 
+                                                     activateFeedback:YES];
+	
 	NSLog(@"OI JC is Configured with url: %@", withUrl);
 }
 

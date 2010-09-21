@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		01645BB11248697C0018F0CA /* JCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645BB01248697C0018F0CA /* JCSetup.m */; };
+		01645D5112489ADA0018F0CA /* CrashReportSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645D5012489ADA0018F0CA /* CrashReportSender.m */; };
+		01645D5312489AE90018F0CA /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01645D5212489AE90018F0CA /* CrashReporter.framework */; };
+		01645D6712489B100018F0CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01645D6612489B100018F0CA /* SystemConfiguration.framework */; };
+		01645DC012489EC90018F0CA /* CrashReporterDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645DBF12489EC90018F0CA /* CrashReporterDemoViewController.m */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -21,6 +25,12 @@
 /* Begin PBXFileReference section */
 		01645BAF1248697C0018F0CA /* JCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCSetup.h; path = Classes/JCSetup.h; sourceTree = "<group>"; };
 		01645BB01248697C0018F0CA /* JCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCSetup.m; path = Classes/JCSetup.m; sourceTree = "<group>"; };
+		01645D4F12489ADA0018F0CA /* CrashReportSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReportSender.h; sourceTree = "<group>"; };
+		01645D5012489ADA0018F0CA /* CrashReportSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReportSender.m; sourceTree = "<group>"; };
+		01645D5212489AE90018F0CA /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		01645D6612489B100018F0CA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		01645DBE12489EC90018F0CA /* CrashReporterDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporterDemoViewController.h; sourceTree = "<group>"; };
+		01645DBF12489EC90018F0CA /* CrashReporterDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporterDemoViewController.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -44,6 +54,8 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				01645D5312489AE90018F0CA /* CrashReporter.framework in Frameworks */,
+				01645D6712489B100018F0CA /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,15 +65,27 @@
 		01645BB712486A330018F0CA /* JCClasses */ = {
 			isa = PBXGroup;
 			children = (
+				01645D4F12489ADA0018F0CA /* CrashReportSender.h */,
+				01645D5012489ADA0018F0CA /* CrashReportSender.m */,
 				01645BAF1248697C0018F0CA /* JCSetup.h */,
 				01645BB01248697C0018F0CA /* JCSetup.m */,
 			);
 			name = JCClasses;
 			sourceTree = "<group>";
 		};
+		01645DBD12489EC90018F0CA /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				01645DBE12489EC90018F0CA /* CrashReporterDemoViewController.h */,
+				01645DBF12489EC90018F0CA /* CrashReporterDemoViewController.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				01645DBD12489EC90018F0CA /* View Controller */,
 				1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */,
 				1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* JiraConnectViewController.h */,
@@ -113,9 +137,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01645D5212489AE90018F0CA /* CrashReporter.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				01645D6612489B100018F0CA /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,6 +211,8 @@
 				1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* JiraConnectViewController.m in Sources */,
 				01645BB11248697C0018F0CA /* JCSetup.m in Sources */,
+				01645D5112489ADA0018F0CA /* CrashReportSender.m in Sources */,
+				01645DC012489EC90018F0CA /* CrashReporterDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +224,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -210,6 +242,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JiraConnect_Prefix.pch;
 				INFOPLIST_FILE = "JiraConnect-Info.plist";

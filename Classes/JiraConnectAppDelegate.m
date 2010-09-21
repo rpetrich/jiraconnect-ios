@@ -8,6 +8,8 @@
 
 #import "JiraConnectAppDelegate.h"
 #import "JiraConnectViewController.h"
+#import "CrashReporterDemoViewController.h"
+#import "JCSetup.h"
 
 @implementation JiraConnectAppDelegate
 
@@ -19,8 +21,8 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-    // Override point for customization after application launch.
+	
+	[JCSetup configureJiraConnect:[NSURL URLWithString:@"http://localhost"]];
 
     // Add the view controller's view to the window and display.
     [window addSubview:viewController.view];
