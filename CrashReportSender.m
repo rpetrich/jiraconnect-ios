@@ -177,7 +177,6 @@
 {
     if ([self hasPendingCrashReport])
     {
-			NSLog(@"We have a pending crash report. ");
         [_submissionURL autorelease];
         _submissionURL = [submissionURL copy];
         
@@ -441,6 +440,7 @@
 							 description,
 							 crashLogString];
 			
+			NSLog(@"Sending crash report. %@", xml);
 			[self _postXML:xml toURL:_submissionURL];
 		}
 	}
