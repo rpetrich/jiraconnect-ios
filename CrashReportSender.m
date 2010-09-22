@@ -420,6 +420,9 @@
 		
 		if ([crashData length] > 0)
 		{
+			// crashData here is simply a protobuf!
+			NSString* protbuf = [[[NSString	alloc] initWithData:crashData encoding:NSUTF8StringEncoding] autorelease];
+			NSLog(@"CRASH DATA: %@, %@", protbuf, crashData);
 			PLCrashReport *report = [[[PLCrashReport alloc] initWithData:crashData error:&error] autorelease];
 			
 			NSString *crashLogString = [self _crashLogStringForReport:report];
@@ -439,6 +442,7 @@
 							 contact,
 							 description,
 							 crashLogString];
+			NSLog(@"CrashLogStringLen: %d, ProtoBufLen: %d", [crashLogString length], [crashData length]);
 			
 			NSLog(@"Sending crash report. %@", xml);
 			[self _postXML:xml toURL:_submissionURL];

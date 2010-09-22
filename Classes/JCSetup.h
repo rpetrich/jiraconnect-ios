@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CrashReportSender.h"
 
-
-@interface JCSetup : NSObject {
+@interface JCSetup : NSObject <CrashReportSenderDelegate> {
 
 }
 
-+ (void) configureJiraConnect:(NSURL*) withUrl;
++ (JCSetup*) instance;
+
+- (void) configureJiraConnect:(NSURL*) withUrl;
 
 @end

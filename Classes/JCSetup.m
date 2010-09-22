@@ -7,13 +7,21 @@
 //
 
 #import "JCSetup.h"
-#import "CrashReportSender.h"
 
 @implementation JCSetup
 
 
++(JCSetup*) instance {
+	static JCSetup *singleton = nil;
+	
+	if (singleton == nil) {
+		singleton = [[JCSetup alloc] init];
+	}
+	return singleton;
+}
 
-+ (void) configureJiraConnect:(NSURL*) withUrl {
+
+- (void) configureJiraConnect:(NSURL*) withUrl {
 
     [[CrashReportSender sharedCrashReportSender] sendCrashReportToURL:withUrl
                                                              delegate:self 
@@ -23,6 +31,18 @@
 }
 
 
+-(NSString*) crashReportUserID {
+	return [[UIDevice currentDevice] uniqueIdentifier];
+	
+}
+
+-(NSString*) crashReportContact {
+	return @"Contact - TODO";
+}
+
+-(NSString*) crashReportDescription {
+	return @"Description - TODO";
+}
 
 
 @end
