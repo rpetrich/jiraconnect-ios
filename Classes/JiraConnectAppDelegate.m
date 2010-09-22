@@ -21,7 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 	
-	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://localhost"]];
+	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://localhost:2990/jira/"]];
 
     // Add the view controller's view to the window and display.
     [window addSubview:viewController.view];

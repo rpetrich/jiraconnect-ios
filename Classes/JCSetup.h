@@ -11,11 +11,14 @@
 
 @interface JCSetup : NSObject <CrashReportSenderDelegate> {
 
+	NSURL* _url;
+	
 }
+
+@property (nonatomic, retain) NSURL* url;
 
 + (JCSetup*) instance;
 
 - (void) configureJiraConnect:(NSURL*) withUrl;
-- (void) sendPing;
 
 @end
