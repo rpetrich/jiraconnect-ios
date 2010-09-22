@@ -80,6 +80,10 @@
 	[request addRequestHeader:@"Content-Type" value:@"application/json"];
 	[request appendPostData: [[pingObj JSONRepresentation] dataUsingEncoding: NSUTF8StringEncoding]];
 	[request startAsynchronous];
+	
+	// clean up
+	[info release];
+	[pingObj release];
 }
 
 @end
