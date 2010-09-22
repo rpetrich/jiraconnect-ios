@@ -7,7 +7,6 @@
 //
 
 #import "JiraConnectAppDelegate.h"
-#import "JiraConnectViewController.h"
 #import "CrashReporterDemoViewController.h"
 #import "JCSetup.h"
 

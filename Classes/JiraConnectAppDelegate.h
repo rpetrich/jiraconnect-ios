@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CrashReporterDemoViewController.h"
 
-@class JiraConnectViewController;
+@class CrashReporterDemoViewController;
 
 @interface JiraConnectAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    JiraConnectViewController *viewController;
+    CrashReporterDemoViewController *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet JiraConnectViewController *viewController;
+@property (nonatomic, retain) IBOutlet CrashReporterDemoViewController *viewController;
 
 @end
 
