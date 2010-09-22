@@ -16,5 +16,6 @@
 + (JCSetup*) instance;
 
 - (void) configureJiraConnect:(NSURL*) withUrl;
+- (void) sendPing;
 
 @end
