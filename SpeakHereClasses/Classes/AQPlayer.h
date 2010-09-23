@@ -53,6 +53,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #include "CAXException.h"
 
 #define kNumberBuffers 3
+#define kBufferDurationSeconds .5
 
 class AQPlayer
 	{
