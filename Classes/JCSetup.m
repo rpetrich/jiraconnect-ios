@@ -9,6 +9,7 @@
 #import "JCSetup.h"
 #import "JCPing.h"
 #import "JCCreateViewController.h"
+#import "JCNotifier.h"
 
 
 @implementation JCSetup
@@ -16,7 +17,19 @@
 @synthesize url=_url;
 
 JCPing* pinger;
+JCNotifier* notifier;
 JCCreateViewController *jcController;
+
+-(void) dealloc {
+	[super dealloc];
+	[_url release];
+	[pinger release];
+	[notifier release];
+	[jcController release];
+	_url, 
+	jcController,
+	pinger = nil;
+}
 
 +(JCSetup*) instance {
 	static JCSetup *singleton = nil;
@@ -30,6 +43,7 @@ JCCreateViewController *jcController;
 - (id)init {
 	if (self = [super init]) {
 		pinger = [[[JCPing alloc] init] retain];
+		notifier = [[[JCNotifier alloc] init] retain];
 		jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];
 	}
 	return self;
@@ -63,16 +77,6 @@ JCCreateViewController *jcController;
 
 -(NSString*) crashReportDescription {
 	return @"Description - TODO";
-}
-
--(void) dealloc {
-	[super dealloc];
-	[_url release];
-	[pinger release];
-	[jcController release];
-	_url, 
-	jcController,
-	pinger = nil;
 }
 
 

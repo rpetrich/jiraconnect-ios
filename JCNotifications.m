@@ -11,15 +11,30 @@
 
 @implementation JCNotifications
 
-@synthesize notifications=_notifications;
-
-
-
--(void) dealloc {
+- (void) dealloc {
+	[_notifications release]; _notifications = nil;
 	[super dealloc];
-	[_notifications release];
-	_notifications = nil;
-	
+}
+
+- (id) init {
+	if (self = [super init]) {
+		_notifications = [[[NSMutableArray alloc] init] retain];
+	}
+	return self;
+}
+
+- (NSArray*) readAndClear {
+	NSArray* clone = [NSArray arrayWithArray:_notifications];
+	[_notifications removeAllObjects];
+	return clone;
+}
+
+- (void) add:(NSString*)message {
+	[_notifications addObject:message];
+}
+
+- (bool) hasNotifications {
+	return [_notifications count] > 0;
 }
 
 @end

@@ -13,6 +13,8 @@
 	NSMutableArray* _notifications;
 }
 
-@property (nonatomic, retain) NSMutableArray* notifications;
+- (NSArray*)readAndClear;
+- (void)add:(NSString*)message;
+- (bool)hasNotifications;
 
 @end

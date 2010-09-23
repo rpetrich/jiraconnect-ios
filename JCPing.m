@@ -18,13 +18,12 @@
 
 - (id) init {
 	if (self = [super init]) {
-		_location = [[JCLocation alloc] init];
+		_location = [[[JCLocation alloc] init] retain];
 	}
 	return self;
 }
 
 - (void) startPinging:(NSURL*) url {
-	// TODO start a pinger NSTimer..
 	[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
 	NSLog(@"Start pinging...");
 }
