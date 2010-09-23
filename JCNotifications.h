@@ -13,6 +13,6 @@
 	NSMutableArray* _notifications;
 }
 
-@property (nonatomic, retain) NSMutableArray* notifcations;
+@property (nonatomic, retain) NSMutableArray* notifications;
 
 @end
