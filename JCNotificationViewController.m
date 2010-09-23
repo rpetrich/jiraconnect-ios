@@ -8,8 +8,22 @@
 
 #import "JCNotificationViewController.h"
 
-
 @implementation JCNotificationViewController
+
+@synthesize textView=_textView;
+
+- (IBAction) dismiss:(id)sender {
+	[UIView beginAnimations:@"dismissView" context:nil];
+	[UIView setAnimationDuration:0.4];
+	[self.view setFrame:CGRectMake(0, 480, 320, 480)]; //notice this is ON screen!
+	[UIView commitAnimations];	
+	
+	[self performSelector:@selector(removeView) withObject:nil afterDelay:0.4];
+}
+
+- (void)removeView {
+	[self.view removeFromSuperview];
+}
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

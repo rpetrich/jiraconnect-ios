@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "JCNotifications.h"
+#import "JCNotificationViewController.h"
 
 @interface JCNotifier : NSObject {
 	UIView* _view;
 	JCNotifications* _notifications;
+	JCNotificationViewController* _viewController;
+	UIToolbar* _toolbar;
+	UILabel* _label;
+	UIButton* _button;
 }
 
 - (id) initWithView:(UIView*)parentView notifications:(JCNotifications*)notifications;

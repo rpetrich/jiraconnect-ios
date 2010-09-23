@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface JCNotificationViewController : UIViewController {
-
+	UITextView* _textView;
 }
+
+- (IBAction) dismiss:(id)sender;
+
+@property (nonatomic, retain) IBOutlet UITextView* textView;
 
 @end
