@@ -17,6 +17,7 @@
 	IBOutlet UITextView* descriptionField;
 	IBOutlet UITextField* subjectField;
 	IBOutlet UIImagePickerController* imagePicker;	
+	IBOutlet UIActivityIndicatorView *activityIndicator;
 
 	
 }
@@ -26,6 +27,7 @@
 @property (retain, nonatomic) IBOutlet UITextView* descriptionField;
 @property (retain, nonatomic) IBOutlet UITextField* subjectField;
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
 
 - (IBAction) sendFeedback;
 - (IBAction) addScreenshot;

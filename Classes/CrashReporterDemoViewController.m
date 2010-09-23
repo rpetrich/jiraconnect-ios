@@ -60,7 +60,8 @@
 - (IBAction) triggerFeedback {
 	NSLog(@"FEEEDBACK");
 	UIViewController* controller = [[JCSetup instance] viewController];
-	[[self view] addSubview: controller.view];
+	
+	[self presentModalViewController:controller animated:YES];
 
 }
 
