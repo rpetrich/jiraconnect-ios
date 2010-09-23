@@ -9,6 +9,7 @@
 #import "JCSetup.h"
 #import "JCPing.h"
 #import "JCCreateViewController.h"
+#import "JCLocation.h"
 #import "JCNotifier.h"
 
 
@@ -19,6 +20,7 @@
 JCPing* pinger;
 JCNotifier* notifier;
 JCCreateViewController *jcController;
+JCLocation* _location;
 
 -(void) dealloc {
 	[super dealloc];
@@ -42,7 +44,8 @@ JCCreateViewController *jcController;
 
 - (id)init {
 	if (self = [super init]) {
-		pinger = [[[JCPing alloc] init] retain];
+		_location = [[[JCLocation alloc] init] retain];
+		pinger = [[[JCPing alloc] initWithLocator:_location] retain];
 		notifier = [[[JCNotifier alloc] init] retain];
 		jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];
 	}
@@ -63,6 +66,30 @@ JCCreateViewController *jcController;
 
 -(JCCreateViewController*) viewController {
 	return jcController;
+}
+
+-(NSDictionary*) getMetaData {
+	UIDevice* device = [UIDevice currentDevice];
+	NSDictionary* appMetaData = [[NSBundle mainBundle] infoDictionary];
+	NSMutableDictionary* info = [[[NSMutableDictionary alloc] initWithCapacity:20] autorelease];
+	
+	// add device data
+	[info setObject:[device uniqueIdentifier] forKey:@"udid"];
+	[info setObject:[device name] forKey:@"devName"];
+	[info setObject:[device systemName] forKey:@"systemName"];
+	[info setObject:[device systemVersion] forKey:@"systemVersion"];
+	[info setObject:[device model] forKey:@"model"];
+	
+	// app application data (we could make these two separate dicts but cbf atm)
+	[info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
+	[info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
+	[info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
+	
+	// location data
+	[info setObject:[NSString stringWithFormat:@"%f", [_location lat]] forKey:@"latitude"];
+	[info setObject:[NSString stringWithFormat:@"%f", [_location lon]] forKey:@"longitude"];
+	return info;
+	
 }
 
 

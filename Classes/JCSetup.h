@@ -11,9 +11,7 @@
 #import "JCCreateViewController.h"
 
 @interface JCSetup : NSObject <CrashReportSenderDelegate> {
-
-	NSURL* _url;
-	
+	NSURL* _url;	
 }
 
 @property (nonatomic, retain) NSURL* url;
@@ -22,5 +20,6 @@
 
 - (void) configureJiraConnect:(NSURL*) withUrl;
 - (JCCreateViewController*) viewController;
+- (NSDictionary*) getMetaData;
 
 @end

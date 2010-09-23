@@ -8,6 +8,7 @@
 
 #import "JCPing.h"
 #import "JCLocation.h"
+#import "JCSetup.h"
 
 @implementation JCPing
 
@@ -16,9 +17,10 @@
 	[super dealloc];
 }
 
-- (id) init {
+- (id) initWithLocator:(JCLocation*)locator {
 	if (self = [super init]) {
-		_location = [[[JCLocation alloc] init] retain];
+
+		_location = locator;
 	}
 	return self;
 }
@@ -33,30 +35,12 @@
 	NSURL* baseUrl = [timer userInfo];
 	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/ping" relativeToURL:baseUrl];
 	NSLog(@"Pinging...%@", url);
-	UIDevice* device = [UIDevice currentDevice];
-	NSDictionary* appMetaData = [[NSBundle mainBundle] infoDictionary];
 	
-	
-	NSMutableDictionary* info = [[[NSMutableDictionary alloc] initWithCapacity:20] autorelease];
-	
-	// add device data
-	[info setObject:[device uniqueIdentifier] forKey:@"udid"];
-	[info setObject:[device name] forKey:@"devName"];
-	[info setObject:[device systemName] forKey:@"systemName"];
-	[info setObject:[device systemVersion] forKey:@"systemVersion"];
-	[info setObject:[device model] forKey:@"model"];
-	
-	// app application data (we could make these two separate dicts but cbf atm)
-	[info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
-	[info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
-	[info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
-	
-	// location data
-	[info setObject:[NSString stringWithFormat:@"%f", [_location lat]] forKey:@"latitude"];
-	[info setObject:[NSString stringWithFormat:@"%f", [_location lon]] forKey:@"longitude"];
+
+	// get app data
 	
 	NSMutableDictionary* pingObj = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
-	[pingObj setObject:info forKey:@"ping"];
+	[pingObj setObject:[[JCSetup instance] getMetaData] forKey:@"ping"];
 	
 	NSLog(@"Ping data : %@", [pingObj JSONRepresentation]);
 	

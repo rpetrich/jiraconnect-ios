@@ -16,6 +16,7 @@
 	JCLocation* _location;
 }
 
+-(id)initWithLocator:(JCLocation*) locator;
 - (void) startPinging:(NSURL*) url;
 
 @end
