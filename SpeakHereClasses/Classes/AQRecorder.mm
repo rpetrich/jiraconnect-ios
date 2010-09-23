@@ -176,6 +176,8 @@ void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
 		mRecordFormat.mBitsPerChannel = 16;
 		mRecordFormat.mBytesPerPacket = mRecordFormat.mBytesPerFrame = (mRecordFormat.mBitsPerChannel / 8) * mRecordFormat.mChannelsPerFrame;
 		mRecordFormat.mFramesPerPacket = 1;
+		mRecordFormat.mSampleRate = 22050.0; //TODO: change me for less quality and less file size.
+		NSLog(@"Sample Rate: %f", mRecordFormat.mSampleRate);
 	}
 }
 

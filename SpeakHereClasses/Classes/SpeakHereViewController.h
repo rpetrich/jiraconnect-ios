@@ -54,7 +54,10 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 @interface SpeakHereViewController : UIViewController {
 
 	IBOutlet SpeakHereController *controller;
+	NSString* recordFile;
 }
+
+@property (nonatomic, retain) NSString* recordFile;
 
 @end
 

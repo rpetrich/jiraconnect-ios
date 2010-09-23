@@ -18,7 +18,6 @@
 		0100DB18124B4F9F004F1E4C /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB02124B4F9F004F1E4C /* AQPlayer.mm */; };
 		0100DB19124B4F9F004F1E4C /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB03124B4F9F004F1E4C /* AQRecorder.mm */; };
 		0100DB1A124B4F9F004F1E4C /* SpeakHereController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB07124B4F9F004F1E4C /* SpeakHereController.mm */; };
-		0100DB1B124B4F9F004F1E4C /* SpeakHereAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB09124B4F9F004F1E4C /* SpeakHereAppDelegate.m */; };
 		0100DB1C124B4F9F004F1E4C /* SpeakHereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB0B124B4F9F004F1E4C /* SpeakHereViewController.m */; };
 		0100DB1D124B4F9F004F1E4C /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB0D124B4F9F004F1E4C /* CADebugMacros.cpp */; };
 		0100DB1E124B4F9F004F1E4C /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB10124B4F9F004F1E4C /* CAStreamBasicDescription.cpp */; };
@@ -83,8 +82,6 @@
 		0100DB05124B4F9F004F1E4C /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
 		0100DB06124B4F9F004F1E4C /* SpeakHereController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHereController.h; sourceTree = "<group>"; };
 		0100DB07124B4F9F004F1E4C /* SpeakHereController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SpeakHereController.mm; sourceTree = "<group>"; };
-		0100DB08124B4F9F004F1E4C /* SpeakHereAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHereAppDelegate.h; sourceTree = "<group>"; };
-		0100DB09124B4F9F004F1E4C /* SpeakHereAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakHereAppDelegate.m; sourceTree = "<group>"; };
 		0100DB0A124B4F9F004F1E4C /* SpeakHereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHereViewController.h; sourceTree = "<group>"; };
 		0100DB0B124B4F9F004F1E4C /* SpeakHereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakHereViewController.m; sourceTree = "<group>"; };
 		0100DB0D124B4F9F004F1E4C /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
@@ -218,8 +215,6 @@
 			children = (
 				0100DB06124B4F9F004F1E4C /* SpeakHereController.h */,
 				0100DB07124B4F9F004F1E4C /* SpeakHereController.mm */,
-				0100DB08124B4F9F004F1E4C /* SpeakHereAppDelegate.h */,
-				0100DB09124B4F9F004F1E4C /* SpeakHereAppDelegate.m */,
 				0100DB0A124B4F9F004F1E4C /* SpeakHereViewController.h */,
 				0100DB0B124B4F9F004F1E4C /* SpeakHereViewController.m */,
 				0100DB01124B4F9F004F1E4C /* Play & Record */,
@@ -511,7 +506,6 @@
 				0100DB18124B4F9F004F1E4C /* AQPlayer.mm in Sources */,
 				0100DB19124B4F9F004F1E4C /* AQRecorder.mm in Sources */,
 				0100DB1A124B4F9F004F1E4C /* SpeakHereController.mm in Sources */,
-				0100DB1B124B4F9F004F1E4C /* SpeakHereAppDelegate.m in Sources */,
 				0100DB1C124B4F9F004F1E4C /* SpeakHereViewController.m in Sources */,
 				0100DB1D124B4F9F004F1E4C /* CADebugMacros.cpp in Sources */,
 				0100DB1E124B4F9F004F1E4C /* CAStreamBasicDescription.cpp in Sources */,

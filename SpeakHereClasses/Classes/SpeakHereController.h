@@ -53,12 +53,14 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 #import "AQPlayer.h"
 #import "AQRecorder.h"
-
+#import "SpeakHereViewController.h"
 
 @interface SpeakHereController : NSObject {
 
 	IBOutlet UIBarButtonItem*	btn_record;
 	IBOutlet UIBarButtonItem*	btn_play;
+	IBOutlet UIBarButtonItem*	btn_done;
+	IBOutlet SpeakHereViewController*	viewController;
 	IBOutlet UILabel*			fileDescription;
 	IBOutlet AQLevelMeter*		lvlMeter_in;
 
@@ -72,14 +74,18 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 @property (nonatomic, retain)	UIBarButtonItem		*btn_record;
 @property (nonatomic, retain)	UIBarButtonItem		*btn_play;
+@property (nonatomic, retain)	UIBarButtonItem		*btn_done;
+@property (nonatomic, retain)	SpeakHereViewController	*viewController;
 @property (nonatomic, retain)	UILabel				*fileDescription;
 @property (nonatomic, retain)	AQLevelMeter		*lvlMeter_in;
 
 @property (readonly)			AQPlayer			*player;
 @property (readonly)			AQRecorder			*recorder;
+@property (readonly)			CFStringRef			recordFilePath;
 @property						BOOL				playbackWasInterrupted;
 
 - (IBAction)record: (id) sender;
 - (IBAction)play: (id) sender;
+- (IBAction)done: (id) sender;
 
 @end

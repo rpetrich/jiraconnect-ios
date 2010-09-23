@@ -16,6 +16,7 @@
 
 UIImage* _image;
 NSString* _imageName;
+SpeakHereViewController* _speakController;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -30,8 +31,8 @@ NSString* _imageName;
 
 - (IBAction) addVoice {
 	NSLog(@"add voice...%@", @"voice data");
-	SpeakHereViewController* speakController = [[[SpeakHereViewController alloc] initWithNibName:@"SpeakHereViewController" bundle:nil] retain];
-	[self presentModalViewController:speakController animated:YES];
+	_speakController = [[[SpeakHereViewController alloc] initWithNibName:@"SpeakHereViewController" bundle:nil] autorelease];
+	[self presentModalViewController:_speakController animated:YES];
 }
 
 
@@ -39,6 +40,9 @@ NSString* _imageName;
 
 - (IBAction) sendFeedback {
 	NSLog(@"Sending feedback...%@, %@, %@", [screenshotButton currentBackgroundImage], self.subjectField.text, self.descriptionField.text);
+
+	NSString* recordFile = _speakController.recordFile;
+	NSLog(@"RECORD FILE %@", recordFile);
 
 
 	// issue creation url is:
@@ -67,7 +71,15 @@ NSString* _imageName;
 		[upRequest setData:imgData withFileName:_imageName andContentType:@"image/png" forKey:@"image"];
 		
 	}
-
+	
+	if (recordFile != nil) // also attach a recording
+	{
+		NSData* imgData = [NSData dataWithContentsOfFile:recordFile];
+		[upRequest setData:imgData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
+	}
+	
+//	NSLog(@"POST DATA: \n%@", );
+	
 	[upRequest setDelegate:self];
 	[upRequest setTimeOutSeconds:15];
 	[upRequest startAsynchronous];

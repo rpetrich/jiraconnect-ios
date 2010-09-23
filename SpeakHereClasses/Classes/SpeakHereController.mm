@@ -60,6 +60,9 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 @synthesize fileDescription;
 @synthesize lvlMeter_in;
 @synthesize playbackWasInterrupted;
+@synthesize btn_done;
+@synthesize viewController;
+@synthesize recordFilePath;
 
 char *OSTypeToStr(char *buf, OSType t)
 {
@@ -115,6 +118,7 @@ char *OSTypeToStr(char *buf, OSType t)
 	// now create a new queue for the recorded file
 	recordFilePath = (CFStringRef)[NSTemporaryDirectory() stringByAppendingPathComponent: @"recordedFile.caf"];
 	NSLog(@"Saving recording too: %@", recordFilePath);
+	self.viewController.recordFile = (NSString*) recordFilePath;
 	player->CreateQueueForFile(recordFilePath);
 		
 	// Set the button's state back to "record"
@@ -157,12 +161,18 @@ char *OSTypeToStr(char *buf, OSType t)
 				
 		// Start the recorder
 		recorder->StartRecord(CFSTR("recordedFile.caf"));
+
 		
 		[self setFileDescriptionForFormat:recorder->DataFormat() withName:@"Recorded File"];
 		
 		// Hook the level meter up to the Audio Queue for the recorder
 		[lvlMeter_in setAq: recorder->Queue()];
 	}	
+}
+
+- (IBAction)done:(id)sender {
+	NSLog(@"DONE. %@", sender);
+	[viewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark AudioSession listeners

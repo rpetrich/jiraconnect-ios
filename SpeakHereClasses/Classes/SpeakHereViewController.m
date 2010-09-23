@@ -51,6 +51,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 @implementation SpeakHereViewController
 
+@synthesize recordFile;
 
 
 /*
@@ -95,6 +96,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 - (void)dealloc {
     [super dealloc];
+	[recordFile release];
 }
 
 @end
