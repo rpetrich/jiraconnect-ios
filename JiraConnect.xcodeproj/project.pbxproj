@@ -13,6 +13,8 @@
 		01645D6712489B100018F0CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01645D6612489B100018F0CA /* SystemConfiguration.framework */; };
 		01645DC012489EC90018F0CA /* CrashReporterDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645DBF12489EC90018F0CA /* CrashReporterDemoViewController.m */; };
 		01F6E1A2124AB7FF008D7C4A /* JCPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6E1A1124AB7FF008D7C4A /* JCPing.m */; };
+		01F6E254124ACB31008D7C4A /* JCNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6E253124ACB31008D7C4A /* JCNotifications.m */; };
+		01F6E25F124ACDA2008D7C4A /* JCCreate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6E25E124ACDA2008D7C4A /* JCCreate.xib */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -48,6 +50,9 @@
 		01645DBF12489EC90018F0CA /* CrashReporterDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporterDemoViewController.m; sourceTree = "<group>"; };
 		01F6E1A0124AB7FF008D7C4A /* JCPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPing.h; sourceTree = "<group>"; };
 		01F6E1A1124AB7FF008D7C4A /* JCPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPing.m; sourceTree = "<group>"; };
+		01F6E252124ACB31008D7C4A /* JCNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotifications.h; sourceTree = "<group>"; };
+		01F6E253124ACB31008D7C4A /* JCNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotifications.m; sourceTree = "<group>"; };
+		01F6E25E124ACDA2008D7C4A /* JCCreate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCCreate.xib; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -115,12 +120,15 @@
 		01645BB712486A330018F0CA /* JCClasses */ = {
 			isa = PBXGroup;
 			children = (
+				01F6E290124ADC37008D7C4A /* ViewControllers */,
 				01645D4F12489ADA0018F0CA /* CrashReportSender.h */,
 				01645D5012489ADA0018F0CA /* CrashReportSender.m */,
 				01645BAF1248697C0018F0CA /* JCSetup.h */,
 				01645BB01248697C0018F0CA /* JCSetup.m */,
 				01F6E1A0124AB7FF008D7C4A /* JCPing.h */,
 				01F6E1A1124AB7FF008D7C4A /* JCPing.m */,
+				01F6E252124ACB31008D7C4A /* JCNotifications.h */,
+				01F6E253124ACB31008D7C4A /* JCNotifications.m */,
 			);
 			name = JCClasses;
 			sourceTree = "<group>";
@@ -132,6 +140,13 @@
 				01645DBF12489EC90018F0CA /* CrashReporterDemoViewController.m */,
 			);
 			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		01F6E290124ADC37008D7C4A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -166,6 +181,7 @@
 				726A0B5C1249CC430026F82B /* CFNetwork.framework */,
 				726A0B621249CC8F0026F82B /* MobileCoreServices.framework */,
 				726A0B661249CCB70026F82B /* libz.1.2.3.dylib */,
+				01F6E25E124ACDA2008D7C4A /* JCCreate.xib */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -295,6 +311,7 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* CrashReporterDemoViewController.xib in Resources */,
+				01F6E25F124ACDA2008D7C4A /* JCCreate.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +340,7 @@
 				726A0B561249CAC20026F82B /* ASIAuthenticationDialog.m in Sources */,
 				726A0B591249CAD60026F82B /* Reachability.m in Sources */,
 				01F6E1A2124AB7FF008D7C4A /* JCPing.m in Sources */,
+				01F6E254124ACB31008D7C4A /* JCNotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
