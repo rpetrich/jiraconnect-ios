@@ -53,15 +53,32 @@
 		label.backgroundColor = [UIColor clearColor];
 		label.textAlignment =  UITextAlignmentCenter;
 		label.textColor = [UIColor whiteColor];
-		[toolbar addSubview:label];
+		[toolbar addSubview:label];		
 								 		
 		[_view addSubview:toolbar];
 		
 		[UIView beginAnimations:@"animateToolbar" context:nil];
 		[UIView setAnimationDuration:0.4];
 		[toolbar setFrame:CGRectMake(0, 440, 320, 40)]; //notice this is ON screen!
-		[UIView commitAnimations];						
+		[UIView commitAnimations];		
+		
+		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+		[button setFrame:CGRectMake(0, 440, 320, 40)];
+		[button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];		
+		[_view addSubview:button];
 	}
+}
+
+- (void)displayNotifications:(id)sender {
+	
+	 UIActionSheet* alert = [[[UIActionSheet alloc] 
+	 initWithTitle:@"notifications" 
+	 delegate:nil 
+	 cancelButtonTitle:@"Dismiss"  destructiveButtonTitle:nil 
+	 otherButtonTitles:@"View", nil] 
+	 autorelease];
+	 [alert showInView:_view];
+	 
 }
 	
 
