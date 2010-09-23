@@ -25,7 +25,7 @@
 		// hack
 		[_notifications add:@"No, you can't have a pony."];
 		
-		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:YES];
+	//	[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:YES];
 	}
 	return self;
 }

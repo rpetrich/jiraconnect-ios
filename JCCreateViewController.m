@@ -10,6 +10,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JCSetup.h"
+#import "SpeakHereViewController.h"
 
 @implementation JCCreateViewController
 
@@ -29,6 +30,8 @@ NSString* _imageName;
 
 - (IBAction) addVoice {
 	NSLog(@"add voice...%@", @"voice data");
+	SpeakHereViewController* speakController = [[[SpeakHereViewController alloc] initWithNibName:@"SpeakHereViewController" bundle:nil] retain];
+	[self presentModalViewController:speakController animated:YES];
 }
 
 

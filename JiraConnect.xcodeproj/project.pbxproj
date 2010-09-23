@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0100DADC124B4EED004F1E4C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0100DADB124B4EED004F1E4C /* OpenGLES.framework */; };
+		0100DADE124B4EED004F1E4C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0100DADD124B4EED004F1E4C /* QuartzCore.framework */; };
+		0100DAE4124B4EFD004F1E4C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0100DAE3124B4EFD004F1E4C /* AudioToolbox.framework */; };
+		0100DAEE124B4F27004F1E4C /* SpeakHereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0100DAED124B4F27004F1E4C /* SpeakHereViewController.xib */; };
+		0100DB14124B4F9F004F1E4C /* MeterTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0100DAF9124B4F9F004F1E4C /* MeterTable.cpp */; };
+		0100DB15124B4F9F004F1E4C /* AQLevelMeter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DAFB124B4F9F004F1E4C /* AQLevelMeter.mm */; };
+		0100DB16124B4F9F004F1E4C /* GLLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DAFD124B4F9F004F1E4C /* GLLevelMeter.m */; };
+		0100DB17124B4F9F004F1E4C /* LevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DAFF124B4F9F004F1E4C /* LevelMeter.m */; };
+		0100DB18124B4F9F004F1E4C /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB02124B4F9F004F1E4C /* AQPlayer.mm */; };
+		0100DB19124B4F9F004F1E4C /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB03124B4F9F004F1E4C /* AQRecorder.mm */; };
+		0100DB1A124B4F9F004F1E4C /* SpeakHereController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB07124B4F9F004F1E4C /* SpeakHereController.mm */; };
+		0100DB1B124B4F9F004F1E4C /* SpeakHereAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB09124B4F9F004F1E4C /* SpeakHereAppDelegate.m */; };
+		0100DB1C124B4F9F004F1E4C /* SpeakHereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB0B124B4F9F004F1E4C /* SpeakHereViewController.m */; };
+		0100DB1D124B4F9F004F1E4C /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB0D124B4F9F004F1E4C /* CADebugMacros.cpp */; };
+		0100DB1E124B4F9F004F1E4C /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB10124B4F9F004F1E4C /* CAStreamBasicDescription.cpp */; };
+		0100DB1F124B4F9F004F1E4C /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0100DB12124B4F9F004F1E4C /* CAXException.cpp */; };
+		0100DB3A124B52F4004F1E4C /* soundbar_plate_mono.png in Resources */ = {isa = PBXBuildFile; fileRef = 0100DB36124B52F4004F1E4C /* soundbar_plate_mono.png */; };
+		0100DB3B124B52F4004F1E4C /* speaker_grill.png in Resources */ = {isa = PBXBuildFile; fileRef = 0100DB38124B52F4004F1E4C /* speaker_grill.png */; };
 		01645BB11248697C0018F0CA /* JCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645BB01248697C0018F0CA /* JCSetup.m */; };
 		01645D5112489ADA0018F0CA /* CrashReportSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645D5012489ADA0018F0CA /* CrashReportSender.m */; };
 		01645D5312489AE90018F0CA /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01645D5212489AE90018F0CA /* CrashReporter.framework */; };
@@ -47,6 +65,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0100DADB124B4EED004F1E4C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		0100DADD124B4EED004F1E4C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0100DAE3124B4EFD004F1E4C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0100DAED124B4F27004F1E4C /* SpeakHereViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeakHereViewController.xib; sourceTree = "<group>"; };
+		0100DAF8124B4F9F004F1E4C /* MeterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterTable.h; sourceTree = "<group>"; };
+		0100DAF9124B4F9F004F1E4C /* MeterTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeterTable.cpp; sourceTree = "<group>"; };
+		0100DAFA124B4F9F004F1E4C /* AQLevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQLevelMeter.h; sourceTree = "<group>"; };
+		0100DAFB124B4F9F004F1E4C /* AQLevelMeter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQLevelMeter.mm; sourceTree = "<group>"; };
+		0100DAFC124B4F9F004F1E4C /* GLLevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLevelMeter.h; sourceTree = "<group>"; };
+		0100DAFD124B4F9F004F1E4C /* GLLevelMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLevelMeter.m; sourceTree = "<group>"; };
+		0100DAFE124B4F9F004F1E4C /* LevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelMeter.h; sourceTree = "<group>"; };
+		0100DAFF124B4F9F004F1E4C /* LevelMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelMeter.m; sourceTree = "<group>"; };
+		0100DB02124B4F9F004F1E4C /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
+		0100DB03124B4F9F004F1E4C /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
+		0100DB04124B4F9F004F1E4C /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
+		0100DB05124B4F9F004F1E4C /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
+		0100DB06124B4F9F004F1E4C /* SpeakHereController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHereController.h; sourceTree = "<group>"; };
+		0100DB07124B4F9F004F1E4C /* SpeakHereController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SpeakHereController.mm; sourceTree = "<group>"; };
+		0100DB08124B4F9F004F1E4C /* SpeakHereAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHereAppDelegate.h; sourceTree = "<group>"; };
+		0100DB09124B4F9F004F1E4C /* SpeakHereAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakHereAppDelegate.m; sourceTree = "<group>"; };
+		0100DB0A124B4F9F004F1E4C /* SpeakHereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHereViewController.h; sourceTree = "<group>"; };
+		0100DB0B124B4F9F004F1E4C /* SpeakHereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakHereViewController.m; sourceTree = "<group>"; };
+		0100DB0D124B4F9F004F1E4C /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		0100DB0E124B4F9F004F1E4C /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		0100DB0F124B4F9F004F1E4C /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		0100DB10124B4F9F004F1E4C /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		0100DB11124B4F9F004F1E4C /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		0100DB12124B4F9F004F1E4C /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		0100DB13124B4F9F004F1E4C /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		0100DB37124B52F4004F1E4C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/soundbar_plate_mono.png; sourceTree = "<group>"; };
+		0100DB39124B52F4004F1E4C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/speaker_grill.png; sourceTree = "<group>"; };
 		01645BAF1248697C0018F0CA /* JCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCSetup.h; path = Classes/JCSetup.h; sourceTree = "<group>"; };
 		01645BB01248697C0018F0CA /* JCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCSetup.m; path = Classes/JCSetup.m; sourceTree = "<group>"; };
 		01645D4F12489ADA0018F0CA /* CrashReportSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReportSender.h; sourceTree = "<group>"; };
@@ -130,15 +179,83 @@
 				726A0B631249CC8F0026F82B /* MobileCoreServices.framework in Frameworks */,
 				726A0B671249CCB70026F82B /* libz.1.2.3.dylib in Frameworks */,
 				7234BFA3124AEB5600A6CB83 /* CoreLocation.framework in Frameworks */,
+				0100DADC124B4EED004F1E4C /* OpenGLES.framework in Frameworks */,
+				0100DADE124B4EED004F1E4C /* QuartzCore.framework in Frameworks */,
+				0100DAE4124B4EFD004F1E4C /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0100DAEF124B4F46004F1E4C /* SpeakHereClasses */ = {
+			isa = PBXGroup;
+			children = (
+				0100DAF7124B4F9F004F1E4C /* AudioViews */,
+				0100DB00124B4F9F004F1E4C /* Classes */,
+				0100DB0C124B4F9F004F1E4C /* iPublicUtility */,
+			);
+			path = SpeakHereClasses;
+			sourceTree = "<group>";
+		};
+		0100DAF7124B4F9F004F1E4C /* AudioViews */ = {
+			isa = PBXGroup;
+			children = (
+				0100DAF8124B4F9F004F1E4C /* MeterTable.h */,
+				0100DAF9124B4F9F004F1E4C /* MeterTable.cpp */,
+				0100DAFA124B4F9F004F1E4C /* AQLevelMeter.h */,
+				0100DAFB124B4F9F004F1E4C /* AQLevelMeter.mm */,
+				0100DAFC124B4F9F004F1E4C /* GLLevelMeter.h */,
+				0100DAFD124B4F9F004F1E4C /* GLLevelMeter.m */,
+				0100DAFE124B4F9F004F1E4C /* LevelMeter.h */,
+				0100DAFF124B4F9F004F1E4C /* LevelMeter.m */,
+			);
+			path = AudioViews;
+			sourceTree = "<group>";
+		};
+		0100DB00124B4F9F004F1E4C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0100DB06124B4F9F004F1E4C /* SpeakHereController.h */,
+				0100DB07124B4F9F004F1E4C /* SpeakHereController.mm */,
+				0100DB08124B4F9F004F1E4C /* SpeakHereAppDelegate.h */,
+				0100DB09124B4F9F004F1E4C /* SpeakHereAppDelegate.m */,
+				0100DB0A124B4F9F004F1E4C /* SpeakHereViewController.h */,
+				0100DB0B124B4F9F004F1E4C /* SpeakHereViewController.m */,
+				0100DB01124B4F9F004F1E4C /* Play & Record */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0100DB01124B4F9F004F1E4C /* Play & Record */ = {
+			isa = PBXGroup;
+			children = (
+				0100DB02124B4F9F004F1E4C /* AQPlayer.mm */,
+				0100DB03124B4F9F004F1E4C /* AQRecorder.mm */,
+				0100DB04124B4F9F004F1E4C /* AQRecorder.h */,
+				0100DB05124B4F9F004F1E4C /* AQPlayer.h */,
+			);
+			name = "Play & Record";
+			sourceTree = "<group>";
+		};
+		0100DB0C124B4F9F004F1E4C /* iPublicUtility */ = {
+			isa = PBXGroup;
+			children = (
+				0100DB0D124B4F9F004F1E4C /* CADebugMacros.cpp */,
+				0100DB0E124B4F9F004F1E4C /* CADebugMacros.h */,
+				0100DB0F124B4F9F004F1E4C /* CAMath.h */,
+				0100DB10124B4F9F004F1E4C /* CAStreamBasicDescription.cpp */,
+				0100DB11124B4F9F004F1E4C /* CAStreamBasicDescription.h */,
+				0100DB12124B4F9F004F1E4C /* CAXException.cpp */,
+				0100DB13124B4F9F004F1E4C /* CAXException.h */,
+			);
+			path = iPublicUtility;
+			sourceTree = "<group>";
+		};
 		01645BB712486A330018F0CA /* JCClasses */ = {
 			isa = PBXGroup;
 			children = (
+				0100DAEF124B4F46004F1E4C /* SpeakHereClasses */,
 				7234BF99124AEB2400A6CB83 /* JCLocation.h */,
 				7234BF9A124AEB2400A6CB83 /* JCLocation.m */,
 				01F6E290124ADC37008D7C4A /* ViewControllers */,
@@ -227,7 +344,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0100DB36124B52F4004F1E4C /* soundbar_plate_mono.png */,
+				0100DB38124B52F4004F1E4C /* speaker_grill.png */,
 				01F6E364124AEEE8008D7C4A /* addbutton.png */,
+				0100DAED124B4F27004F1E4C /* SpeakHereViewController.xib */,
 				2899E5210DE3E06400AC0155 /* CrashReporterDemoViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* JiraConnect-Info.plist */,
@@ -243,6 +363,9 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				01645D6612489B100018F0CA /* SystemConfiguration.framework */,
+				0100DADB124B4EED004F1E4C /* OpenGLES.framework */,
+				0100DADD124B4EED004F1E4C /* QuartzCore.framework */,
+				0100DAE3124B4EFD004F1E4C /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -324,6 +447,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -344,6 +468,9 @@
 				01F6E29D124AE134008D7C4A /* JCCreateViewController.xib in Resources */,
 				01F6E365124AEEE8008D7C4A /* addbutton.png in Resources */,
 				7240E437124B2E4600E3D4AE /* JCNotificationViewController.xib in Resources */,
+				0100DAEE124B4F27004F1E4C /* SpeakHereViewController.xib in Resources */,
+				0100DB3A124B52F4004F1E4C /* soundbar_plate_mono.png in Resources */,
+				0100DB3B124B52F4004F1E4C /* speaker_grill.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,10 +504,41 @@
 				7234BF9B124AEB2400A6CB83 /* JCLocation.m in Sources */,
 				7234BFC0124AF78C00A6CB83 /* JCNotifier.m in Sources */,
 				7240E436124B2E4600E3D4AE /* JCNotificationViewController.m in Sources */,
+				0100DB14124B4F9F004F1E4C /* MeterTable.cpp in Sources */,
+				0100DB15124B4F9F004F1E4C /* AQLevelMeter.mm in Sources */,
+				0100DB16124B4F9F004F1E4C /* GLLevelMeter.m in Sources */,
+				0100DB17124B4F9F004F1E4C /* LevelMeter.m in Sources */,
+				0100DB18124B4F9F004F1E4C /* AQPlayer.mm in Sources */,
+				0100DB19124B4F9F004F1E4C /* AQRecorder.mm in Sources */,
+				0100DB1A124B4F9F004F1E4C /* SpeakHereController.mm in Sources */,
+				0100DB1B124B4F9F004F1E4C /* SpeakHereAppDelegate.m in Sources */,
+				0100DB1C124B4F9F004F1E4C /* SpeakHereViewController.m in Sources */,
+				0100DB1D124B4F9F004F1E4C /* CADebugMacros.cpp in Sources */,
+				0100DB1E124B4F9F004F1E4C /* CAStreamBasicDescription.cpp in Sources */,
+				0100DB1F124B4F9F004F1E4C /* CAXException.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0100DB36124B52F4004F1E4C /* soundbar_plate_mono.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0100DB37124B52F4004F1E4C /* en */,
+			);
+			name = soundbar_plate_mono.png;
+			sourceTree = "<group>";
+		};
+		0100DB38124B52F4004F1E4C /* speaker_grill.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0100DB39124B52F4004F1E4C /* en */,
+			);
+			name = speaker_grill.png;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
