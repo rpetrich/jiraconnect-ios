@@ -35,8 +35,6 @@
 		NSArray* notes = [_notifications readAndClear];
 		NSLog(@"got %d notification(s)", [notes count]);
 		
-		NSString* msg = @"STUFF";
-		
 		/*
 		UIActionSheet* alert = [[[UIActionSheet alloc] 
 							   initWithTitle:msg 
@@ -50,11 +48,13 @@
 		UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
 		[toolbar setBarStyle:UIBarStyleBlack];
 		[toolbar setTranslucent:YES];
-		UILabel* toolBarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-		toolBarLabel.text = @"1 new notification from developer";
-		[toolbar addSubview:toolBarLabel];
-								 
-		
+		UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 20)];
+		label.text = [NSString stringWithFormat:@"%d new notification from developer", [notes count]];
+		label.backgroundColor = [UIColor clearColor];
+		label.textAlignment =  UITextAlignmentCenter;
+		label.textColor = [UIColor whiteColor];
+		[toolbar addSubview:label];
+								 		
 		[_view addSubview:toolbar];
 		
 		[UIView beginAnimations:@"animateToolbar" context:nil];
