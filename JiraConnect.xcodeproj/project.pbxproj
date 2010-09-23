@@ -16,6 +16,7 @@
 		01F6E254124ACB31008D7C4A /* JCNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6E253124ACB31008D7C4A /* JCNotifications.m */; };
 		01F6E29C124AE134008D7C4A /* JCCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6E29A124AE134008D7C4A /* JCCreateViewController.m */; };
 		01F6E29D124AE134008D7C4A /* JCCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6E29B124AE134008D7C4A /* JCCreateViewController.xib */; };
+		01F6E365124AEEE8008D7C4A /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F6E364124AEEE8008D7C4A /* addbutton.png */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -58,6 +59,7 @@
 		01F6E299124AE134008D7C4A /* JCCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCreateViewController.h; sourceTree = "<group>"; };
 		01F6E29A124AE134008D7C4A /* JCCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCreateViewController.m; sourceTree = "<group>"; };
 		01F6E29B124AE134008D7C4A /* JCCreateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCCreateViewController.xib; sourceTree = "<group>"; };
+		01F6E364124AEEE8008D7C4A /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01F6E364124AEEE8008D7C4A /* addbutton.png */,
 				2899E5210DE3E06400AC0155 /* CrashReporterDemoViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* JiraConnect-Info.plist */,
@@ -326,6 +329,7 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* CrashReporterDemoViewController.xib in Resources */,
 				01F6E29D124AE134008D7C4A /* JCCreateViewController.xib in Resources */,
+				01F6E365124AEEE8008D7C4A /* addbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

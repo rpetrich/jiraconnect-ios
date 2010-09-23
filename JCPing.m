@@ -25,7 +25,7 @@
 
 - (void) startPinging:(NSURL*) url {
 	// TODO start a pinger NSTimer..
-	[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
+	[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
 	NSLog(@"Start pinging...");
 }
 
