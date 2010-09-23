@@ -22,7 +22,7 @@
 		_notifications = [notifications retain];
 		
 		// hack
-		[_notifications add:@"some crap"];
+		[_notifications add:@"No, you can't have a pony."];
 		
 		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:YES];
 	}
@@ -32,7 +32,35 @@
 - (void) notify:(NSTimer*) timer {
 	// check notifications
 	if ([_notifications hasNotifications]) {
-		NSLog(@"got notifications");
+		NSArray* notes = [_notifications readAndClear];
+		NSLog(@"got %d notification(s)", [notes count]);
+		
+		NSString* msg = @"STUFF";
+		
+		/*
+		UIActionSheet* alert = [[[UIActionSheet alloc] 
+							   initWithTitle:msg 
+							   delegate:nil 
+							   cancelButtonTitle:@"Dismiss"  destructiveButtonTitle:nil 
+							   otherButtonTitles:@"View", nil] 
+							  autorelease];
+		[alert showInView:_view];
+		 */
+		
+		UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
+		[toolbar setBarStyle:UIBarStyleBlack];
+		[toolbar setTranslucent:YES];
+		UILabel* toolBarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+		toolBarLabel.text = @"1 new notification from developer";
+		[toolbar addSubview:toolBarLabel];
+								 
+		
+		[_view addSubview:toolbar];
+		
+		[UIView beginAnimations:@"animateToolbar" context:nil];
+		[UIView setAnimationDuration:0.4];
+		[toolbar setFrame:CGRectMake(0, 440, 320, 40)]; //notice this is ON screen!
+		[UIView commitAnimations];						
 	}
 }
 	

@@ -11,26 +11,27 @@
 #import "JCCreateViewController.h"
 #import "JCLocation.h"
 #import "JCNotifier.h"
+#import "JCNotifications.h"
 
 
 @implementation JCSetup
 
 @synthesize url=_url;
 
-JCPing* pinger;
-JCNotifier* notifier;
-JCCreateViewController *jcController;
+JCPing* _pinger;
+JCNotifier* _notifier;
+JCNotifications* _notifications;
+JCCreateViewController* _jcController;
 JCLocation* _location;
 
 -(void) dealloc {
+	[_url release]; _url = nil;
+	[_pinger release]; _pinger = nil;
+	[_notifier release]; _notifier = nil;
+	[_notifications release]; _notifications = nil;
+	[_jcController release]; _jcController = nil;
+	[_location release]; _location = nil;
 	[super dealloc];
-	[_url release];
-	[pinger release];
-	[notifier release];
-	[jcController release];
-	_url, 
-	jcController,
-	pinger = nil;
 }
 
 +(JCSetup*) instance {
@@ -44,10 +45,13 @@ JCLocation* _location;
 
 - (id)init {
 	if (self = [super init]) {
+		_notifications = [[[JCNotifications alloc] init] retain];
 		_location = [[[JCLocation alloc] init] retain];
-		pinger = [[[JCPing alloc] initWithLocator:_location] retain];
-		notifier = [[[JCNotifier alloc] init] retain];
-		jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];
+		_pinger = [[[JCPing alloc] initWithLocator:_location] retain];
+		UIView* window = [[UIApplication sharedApplication] keyWindow];
+		_notifier = [[[JCNotifier alloc] initWithView:window notifications:_notifications] retain];
+		_jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];
+		
 	}
 	return self;
 }
@@ -58,14 +62,14 @@ JCLocation* _location;
                                                              delegate:self 
                                                      activateFeedback:YES];
 	self.url = withUrl;
-	[pinger startPinging:withUrl];
+	[_pinger startPinging:withUrl];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);
 	
 }
 
 -(JCCreateViewController*) viewController {
-	return jcController;
+	return _jcController;
 }
 
 -(NSDictionary*) getMetaData {
