@@ -27,6 +27,8 @@
 		7234BF9B124AEB2400A6CB83 /* JCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7234BF9A124AEB2400A6CB83 /* JCLocation.m */; };
 		7234BFA3124AEB5600A6CB83 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7234BFA2124AEB5600A6CB83 /* CoreLocation.framework */; };
 		7234BFC0124AF78C00A6CB83 /* JCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7234BFBF124AF78C00A6CB83 /* JCNotifier.m */; };
+		7240E436124B2E4600E3D4AE /* JCNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7240E434124B2E4600E3D4AE /* JCNotificationViewController.m */; };
+		7240E437124B2E4600E3D4AE /* JCNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7240E435124B2E4600E3D4AE /* JCNotificationViewController.xib */; };
 		726A0B0A1249BEFD0026F82B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 726A0AFF1249BEFD0026F82B /* SBJsonWriter.m */; };
 		726A0B0B1249BEFD0026F82B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 726A0B011249BEFD0026F82B /* SBJsonParser.m */; };
 		726A0B0C1249BEFD0026F82B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 726A0B031249BEFD0026F82B /* SBJsonBase.m */; };
@@ -76,6 +78,9 @@
 		7234BFA2124AEB5600A6CB83 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7234BFBE124AF78C00A6CB83 /* JCNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotifier.h; sourceTree = "<group>"; };
 		7234BFBF124AF78C00A6CB83 /* JCNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotifier.m; sourceTree = "<group>"; };
+		7240E433124B2E4600E3D4AE /* JCNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationViewController.h; sourceTree = "<group>"; };
+		7240E434124B2E4600E3D4AE /* JCNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationViewController.m; sourceTree = "<group>"; };
+		7240E435124B2E4600E3D4AE /* JCNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCNotificationViewController.xib; sourceTree = "<group>"; };
 		726A0AFF1249BEFD0026F82B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		726A0B001249BEFD0026F82B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		726A0B011249BEFD0026F82B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
@@ -166,6 +171,9 @@
 				01F6E299124AE134008D7C4A /* JCCreateViewController.h */,
 				01F6E29A124AE134008D7C4A /* JCCreateViewController.m */,
 				01F6E29B124AE134008D7C4A /* JCCreateViewController.xib */,
+				7240E433124B2E4600E3D4AE /* JCNotificationViewController.h */,
+				7240E434124B2E4600E3D4AE /* JCNotificationViewController.m */,
+				7240E435124B2E4600E3D4AE /* JCNotificationViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 				2899E5220DE3E06400AC0155 /* CrashReporterDemoViewController.xib in Resources */,
 				01F6E29D124AE134008D7C4A /* JCCreateViewController.xib in Resources */,
 				01F6E365124AEEE8008D7C4A /* addbutton.png in Resources */,
+				7240E437124B2E4600E3D4AE /* JCNotificationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +376,7 @@
 				01F6E29C124AE134008D7C4A /* JCCreateViewController.m in Sources */,
 				7234BF9B124AEB2400A6CB83 /* JCLocation.m in Sources */,
 				7234BFC0124AF78C00A6CB83 /* JCNotifier.m in Sources */,
+				7240E436124B2E4600E3D4AE /* JCNotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

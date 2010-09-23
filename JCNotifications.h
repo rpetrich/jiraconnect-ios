@@ -15,6 +15,6 @@
 
 - (NSArray*)readAndClear;
 - (void)add:(NSString*)message;
-- (bool)hasNotifications;
+- (NSInteger)notificationCount;
 
 @end

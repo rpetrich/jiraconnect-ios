@@ -7,6 +7,7 @@
 //
 
 #import "JCNotifier.h"
+#import "JCNotificationViewController.h"
 
 @implementation JCNotifier
 
@@ -31,7 +32,7 @@
 
 - (void) notify:(NSTimer*) timer {
 	// check notifications
-	if ([_notifications hasNotifications]) {
+	if ([_notifications notificationCount] > 0) {
 		NSArray* notes = [_notifications readAndClear];
 		NSLog(@"got %d notification(s)", [notes count]);
 		
@@ -56,6 +57,7 @@
 		[toolbar addSubview:label];		
 								 		
 		[_view addSubview:toolbar];
+		[toolbar release];
 		
 		[UIView beginAnimations:@"animateToolbar" context:nil];
 		[UIView setAnimationDuration:0.4];
@@ -66,19 +68,14 @@
 		[button setFrame:CGRectMake(0, 440, 320, 40)];
 		[button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];		
 		[_view addSubview:button];
+	
 	}
 }
 
 - (void)displayNotifications:(id)sender {
-	
-	 UIActionSheet* alert = [[[UIActionSheet alloc] 
-	 initWithTitle:@"notifications" 
-	 delegate:nil 
-	 cancelButtonTitle:@"Dismiss"  destructiveButtonTitle:nil 
-	 otherButtonTitles:@"View", nil] 
-	 autorelease];
-	 [alert showInView:_view];
-	 
+	JCNotificationViewController* controller = [[JCNotificationViewController alloc] initWithNibName:@"JCNotificationViewController" bundle:nil];
+	[controller.view setFrame:CGRectMake(0, 20, 320, 480)];
+	[_view addSubview:controller.view];
 }
 	
 

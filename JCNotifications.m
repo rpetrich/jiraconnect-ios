@@ -33,8 +33,8 @@
 	[_notifications addObject:message];
 }
 
-- (bool) hasNotifications {
-	return [_notifications count] > 0;
+- (NSInteger) notificationCount {
+	return [_notifications count];
 }
 
 @end
