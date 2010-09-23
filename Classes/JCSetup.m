@@ -12,6 +12,7 @@
 #import "JCLocation.h"
 #import "JCNotifier.h"
 #import "JCNotifications.h"
+#import "JSON.h"
 
 
 @implementation JCSetup
@@ -107,7 +108,7 @@ JCLocation* _location;
 }
 
 -(NSString*) crashReportDescription {
-	return @"Description - TODO";
+	return [[self getMetaData] JSONRepresentation];
 }
 
 

@@ -31,6 +31,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "CrashReportSender.h"
 
+
 #define USER_AGENT @"CrashReportSender/1.0"
 
 @interface CrashReportSender ()
@@ -426,13 +427,14 @@
 			PLCrashReport *report = [[[PLCrashReport alloc] initWithData:crashData error:&error] autorelease];
 			
 			NSString *crashLogString = [self _crashLogStringForReport:report];
+
 			
 			if ([report.applicationInfo.applicationVersion compare:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]] != NSOrderedSame)
 			{
 				_crashIdenticalCurrentVersion = NO;
 			}
 			
-			NSString *xml = [NSString stringWithFormat:@"<crash><appName>%s</appName><bundleidentifier>%@</bundleidentifier><systemversion>%@</systemversion><senderversion>%@</senderversion><appVersion>%@</appVersion><udid>%@</udid><contact>%@</contact><description>%@</description><log><![CDATA[%@]]></log></crash>",
+			NSString *xml = [NSString stringWithFormat:@"<crash><appName>%s</appName><appId>%@</appId><systemVersion>%@</systemVersion><senderversion>%@</senderversion><appVersion>%@</appVersion><udid>%@</udid><contact>%@</contact><description><![CDATA[%@]]></description><log><![CDATA[%@]]></log></crash>",
 							 [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleExecutable"] UTF8String],
 							 report.applicationInfo.applicationIdentifier,
 							 [[UIDevice currentDevice] systemVersion],
@@ -680,7 +682,9 @@
 	[postBody appendData:[@"Content-Disposition: form-data; name=\"xmlstring\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
 	[request setHTTPBody:postBody];
+	
 	
 	_serverResult = CrashReportStatusUnknown;
 	_statusCode = 200;
