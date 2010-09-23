@@ -8,6 +8,7 @@
 
 #import "JCSetup.h"
 #import "JCPing.h"
+#import "JCCreateViewController.h"
 
 
 @implementation JCSetup
@@ -15,6 +16,7 @@
 @synthesize url=_url;
 
 JCPing* pinger;
+JCCreateViewController *jcController;
 
 +(JCSetup*) instance {
 	static JCSetup *singleton = nil;
@@ -28,6 +30,7 @@ JCPing* pinger;
 - (id)init {
 	if (self = [super init]) {
 		pinger = [[[JCPing alloc] init] retain];
+		jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];
 	}
 	return self;
 }
@@ -42,6 +45,10 @@ JCPing* pinger;
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);
 	
+}
+
+-(JCCreateViewController*) viewController {
+	return jcController;
 }
 
 
@@ -62,7 +69,9 @@ JCPing* pinger;
 	[super dealloc];
 	[_url release];
 	[pinger release];
+	[jcController release];
 	_url, 
+	jcController,
 	pinger = nil;
 }
 

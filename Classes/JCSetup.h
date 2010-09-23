@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CrashReportSender.h"
+#import "JCCreateViewController.h"
 
 @interface JCSetup : NSObject <CrashReportSenderDelegate> {
 
@@ -20,5 +21,6 @@
 + (JCSetup*) instance;
 
 - (void) configureJiraConnect:(NSURL*) withUrl;
+- (JCCreateViewController*) viewController;
 
 @end

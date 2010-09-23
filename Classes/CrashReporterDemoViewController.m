@@ -27,11 +27,13 @@
  */
 
 #import "CrashReporterDemoViewController.h"
+#import "JCSetup.h"
 
 @implementation CrashReporterDemoViewController
 
 @synthesize triggerButtonMemoryLeak;
 @synthesize triggerButtonCrash;
+@synthesize triggerButtonFeedback;
 
 
 - (void) allocMoreMemory
@@ -54,6 +56,13 @@
 																						 repeats: YES];
 }
 
+
+- (IBAction) triggerFeedback {
+	NSLog(@"FEEEDBACK");
+	UIViewController* controller = [[JCSetup instance] viewController];
+	[[self view] addSubview: controller.view];
+
+}
 
 - (IBAction) triggerCrash
 {
