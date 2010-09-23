@@ -10,9 +10,10 @@
 #import "ASIHTTPRequest.h"
 #import "JSON.h"
 #import "JCNotifications.h"
+#import "JCLocation.h"
 
 @interface JCPing : NSObject {
-
+	JCLocation* _location;
 }
 
 - (void) startPinging:(NSURL*) url;

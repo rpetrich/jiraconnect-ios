@@ -7,9 +7,21 @@
 //
 
 #import "JCPing.h"
+#import "JCLocation.h"
 
 @implementation JCPing
 
+- (void) dealloc {
+	[_location release]; _location = nil;
+	[super dealloc];
+}
+
+- (id) init {
+	if (self = [super init]) {
+		_location = [[JCLocation alloc] init];
+	}
+	return self;
+}
 
 - (void) startPinging:(NSURL*) url {
 	// TODO start a pinger NSTimer..
@@ -39,6 +51,10 @@
 	[info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
 	[info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
 	[info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
+	
+	// location data
+	[info setObject:[NSString stringWithFormat:@"%f", [_location lat]] forKey:@"latitude"];
+	[info setObject:[NSString stringWithFormat:@"%f", [_location lon]] forKey:@"longitude"];
 	
 	NSMutableDictionary* pingObj = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
 	[pingObj setObject:info forKey:@"ping"];

@@ -7,18 +7,21 @@
 //
 
 #import "JCLocation.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 @implementation JCLocation
 
 @synthesize lat=_lat;
 @synthesize lon=_lon;
 
--(void) dealloc {
+
+- (void) dealloc {
 	[_locationManager release]; _locationManager = nil;
 	[super dealloc];	
 }
 
-- (id)init {
+- (id) init {
 	if (self = [super init]) {
 		_lat = 0.0f;
 		_lon = 0.0f;
@@ -34,7 +37,7 @@
 
 #pragma mark -
 #pragma mark CLLocationManagerDelegate methods
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
 	_lat = newLocation.coordinate.latitude;
 	_lon = newLocation.coordinate.longitude;
