@@ -47,8 +47,8 @@
 		7234BFC0124AF78C00A6CB83 /* JCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7234BFBF124AF78C00A6CB83 /* JCNotifier.m */; };
 		7240E436124B2E4600E3D4AE /* JCNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7240E434124B2E4600E3D4AE /* JCNotificationViewController.m */; };
 		7240E437124B2E4600E3D4AE /* JCNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7240E435124B2E4600E3D4AE /* JCNotificationViewController.xib */; };
-		7240E5B8124B8CA800E3D4AE /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 7240E5B7124B8CA800E3D4AE /* feedback.png */; };
 		7240E5E0124C291600E3D4AE /* Resonse_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7240E5DF124C291600E3D4AE /* Resonse_bg.png */; };
+		7240E690124C3F4D00E3D4AE /* feedback-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7240E68F124C3F4D00E3D4AE /* feedback-v2.png */; };
 		726A0B0A1249BEFD0026F82B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 726A0AFF1249BEFD0026F82B /* SBJsonWriter.m */; };
 		726A0B0B1249BEFD0026F82B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 726A0B011249BEFD0026F82B /* SBJsonParser.m */; };
 		726A0B0C1249BEFD0026F82B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 726A0B031249BEFD0026F82B /* SBJsonBase.m */; };
@@ -132,8 +132,8 @@
 		7240E433124B2E4600E3D4AE /* JCNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationViewController.h; sourceTree = "<group>"; };
 		7240E434124B2E4600E3D4AE /* JCNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationViewController.m; sourceTree = "<group>"; };
 		7240E435124B2E4600E3D4AE /* JCNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCNotificationViewController.xib; sourceTree = "<group>"; };
-		7240E5B7124B8CA800E3D4AE /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
 		7240E5DF124C291600E3D4AE /* Resonse_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Resonse_bg.png; sourceTree = "<group>"; };
+		7240E68F124C3F4D00E3D4AE /* feedback-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback-v2.png"; sourceTree = "<group>"; };
 		726A0AFF1249BEFD0026F82B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		726A0B001249BEFD0026F82B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		726A0B011249BEFD0026F82B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7240E68F124C3F4D00E3D4AE /* feedback-v2.png */,
 				7240E5DF124C291600E3D4AE /* Resonse_bg.png */,
-				7240E5B7124B8CA800E3D4AE /* feedback.png */,
 				0100DB36124B52F4004F1E4C /* soundbar_plate_mono.png */,
 				0100DB38124B52F4004F1E4C /* speaker_grill.png */,
 				01F6E364124AEEE8008D7C4A /* addbutton.png */,
@@ -477,8 +477,8 @@
 				0100DB3A124B52F4004F1E4C /* soundbar_plate_mono.png in Resources */,
 				0100DB3B124B52F4004F1E4C /* speaker_grill.png in Resources */,
 				0100DD95124B76B4004F1E4C /* SpeakHereViewController.xib in Resources */,
-				7240E5B8124B8CA800E3D4AE /* feedback.png in Resources */,
 				7240E5E0124C291600E3D4AE /* Resonse_bg.png in Resources */,
+				7240E690124C3F4D00E3D4AE /* feedback-v2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
