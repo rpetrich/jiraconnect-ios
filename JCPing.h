@@ -14,9 +14,10 @@
 
 @interface JCPing : NSObject {
 	JCLocation* _location;
+	JCNotifications* _notifications;
 }
 
--(id)initWithLocator:(JCLocation*) locator;
+- (id)initWithLocator:(JCLocation*) locator notifications:(JCNotifications*)notes;
 - (void) startPinging:(NSURL*) url;
 
 @end

@@ -48,7 +48,7 @@ JCLocation* _location;
 	if (self = [super init]) {
 		_notifications = [[[JCNotifications alloc] init] retain];
 		_location = [[[JCLocation alloc] init] retain];
-		_pinger = [[[JCPing alloc] initWithLocator:_location] retain];
+		_pinger = [[[JCPing alloc] initWithLocator:_location notifications:_notifications] retain];
 		UIView* window = [[UIApplication sharedApplication] keyWindow];
 		_notifier = [[[JCNotifier alloc] initWithView:window notifications:_notifications] retain];
 		_jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];

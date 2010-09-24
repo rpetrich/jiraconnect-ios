@@ -14,13 +14,14 @@
 
 - (void) dealloc {
 	[_location release]; _location = nil;
+	[_notifications release]; _notifications = nil;
 	[super dealloc];
 }
 
-- (id) initWithLocator:(JCLocation*)locator {
+- (id)initWithLocator:(JCLocation*) locator notifications:(JCNotifications*)notes {
 	if (self = [super init]) {
-
-		_location = locator;
+		_location = [locator retain];
+		_notifications = [notes retain];
 	}
 	return self;
 }
@@ -50,7 +51,32 @@
 	[request setRequestMethod:@"POST"];
 	[request addRequestHeader:@"Content-Type" value:@"application/json"];
 	[request appendPostData: [[pingObj JSONRepresentation] dataUsingEncoding: NSUTF8StringEncoding]];
-	[request startAsynchronous];
+	[request setDelegate:self];
+	[request startAsynchronous];	
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+	/*
+	 {"ping-response":
+	 {"issue-updates":
+	 [{"issue-update":
+	 {"issueKey":"JRA-1330","message":"JRA-1330 has been closed: Won't fix"}}
+	 ]}}
+	 */
+	
+	NSString* responseString = [request responseString];
+	
+	NSLog(@"ping response: %@", responseString);
+	
+	NSDictionary* data = [responseString JSONValue];
+	NSDictionary* pingResponse = [data objectForKey:@"ping-response"];
+	NSArray* issueUpdates = [pingResponse objectForKey:@"issue-update"];
+	for (NSDictionary* issueUpdate in issueUpdates)
+	{
+		NSString* message = [issueUpdate objectForKey:@"message"];
+		[_notifications add:message];
+	}
 	
 }
 
