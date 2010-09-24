@@ -11,12 +11,13 @@
 
 @class CrashReporterDemoViewController;
 
+
 @interface JiraConnectAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     CrashReporterDemoViewController *viewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) IBOutlet CrashReporterDemoViewController *viewController;
 
 @end

@@ -10,6 +10,7 @@
 #import "CrashReporterDemoViewController.h"
 #import "JCSetup.h"
 
+
 @implementation JiraConnectAppDelegate
 
 @synthesize window;
@@ -20,13 +21,13 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-	
+
     // Add the view controller's view to the window and display.
+	
+	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://localhost:2990/jira/"]];
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 	
-	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://localhost:2990/jira/"]];
-
     return YES;
 }
 

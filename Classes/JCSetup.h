@@ -10,6 +10,7 @@
 #import "CrashReportSender.h"
 #import "JCCreateViewController.h"
 
+
 @interface JCSetup : NSObject <CrashReportSenderDelegate> {
 	NSURL* _url;	
 }
@@ -18,7 +19,7 @@
 
 + (JCSetup*) instance;
 
-- (void) configureJiraConnect:(NSURL*) withUrl;
+- (UIWindow*) configureJiraConnect:(NSURL*)url;
 - (JCCreateViewController*) viewController;
 - (NSDictionary*) getMetaData;
 

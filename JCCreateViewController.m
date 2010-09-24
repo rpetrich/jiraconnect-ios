@@ -11,6 +11,7 @@
 #import "ASIFormDataRequest.h"
 #import "JCSetup.h"
 #import "SpeakHereViewController.h"
+#import "JSON.h"
 
 @implementation JCCreateViewController
 
@@ -64,11 +65,15 @@ SpeakHereViewController* _speakController;
 	[self.activityIndicator startAnimating];
 	
 	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
+
+	NSData* jsonData = [[params JSONRepresentation]	dataUsingEncoding:NSUTF8StringEncoding];
+	[upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
+			
 	
 	if (_image != nil) // take a screenshot of the movie to upload as well.
 	{
 		NSData* imgData = UIImagePNGRepresentation(_image);	
-		[upRequest setData:imgData withFileName:_imageName andContentType:@"image/png" forKey:@"image"];
+		[upRequest setData:imgData withFileName:_imageName andContentType:@"image/png" forKey:@"screenshot"];
 		
 	}
 	
@@ -166,6 +171,35 @@ SpeakHereViewController* _speakController;
 	return YES;
 }
 
+
+#pragma mark UIResponder
+//- (BOOL)canBecomeFirstResponder {
+//    return YES;
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [self becomeFirstResponder];
+//}
+//
+//- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+//{
+//	NSLog(@"Shake it up baby!");
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:0.5];
+//    self.view.transform = CGAffineTransformIdentity;
+//	
+//    for (UIView *subview in self.view.subviews) {
+//        subview.transform = CGAffineTransformIdentity;
+//    }
+//    [UIView commitAnimations];
+//	//
+////    for (TransformGesture *gesture in [window allTransformGestures]) {
+////        [gesture resetTransform];
+////    }
+//}
+
+
+#pragma mark end
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

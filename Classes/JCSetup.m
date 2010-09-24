@@ -13,6 +13,8 @@
 #import "JCNotifier.h"
 #import "JCNotifications.h"
 #import "JSON.h"
+#import <objc/runtime.h> 
+#import <objc/message.h>
 
 
 @implementation JCSetup
@@ -57,17 +59,25 @@ JCLocation* _location;
 	return self;
 }
 
-- (void) configureJiraConnect:(NSURL*) withUrl {
 
+- (void) configureJiraConnect:(NSURL*) withUrl {
+	
     [[CrashReportSender sharedCrashReportSender] sendCrashReportToURL:withUrl
                                                              delegate:self 
                                                      activateFeedback:YES];
 	self.url = withUrl;
 	[_pinger startPinging:withUrl];
 	
-	NSLog(@"JiraConnect is Configured with url: %@", withUrl);
 	
+	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }
+
+
+- (void)myMotionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+//	NSLog(@"%s","My Shake!");
+}
+
+
 
 -(JCCreateViewController*) viewController {
 	return _jcController;

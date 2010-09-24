@@ -57,6 +57,22 @@
 }
 
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self becomeFirstResponder];
+}
+
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+	NSLog(@"%s","Shake!");
+    if (motion == UIEventSubtypeMotionShake) {
+		NSLog(@"%s","Shake!");
+		[self presentModalViewController:[[JCSetup instance] viewController] animated:YES];
+    }
+}
+
 - (IBAction) triggerFeedback {
 	NSLog(@"FEEEDBACK");
 	UIViewController* controller = [[JCSetup instance] viewController];
