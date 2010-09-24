@@ -27,7 +27,7 @@
 }
 
 - (void) startPinging:(NSURL*) url {
-//	[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
+	[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
 	NSLog(@"Start pinging...");
 }
 
@@ -69,12 +69,16 @@
 	
 	NSLog(@"ping response: %@", responseString);
 	
+	if ([responseString isEqualToString:@"null"]) {
+		return;
+	}
+	
 	NSDictionary* data = [responseString JSONValue];
-	NSDictionary* pingResponse = [data objectForKey:@"ping-response"];
-	NSArray* issueUpdates = [pingResponse objectForKey:@"issue-update"];
+	NSArray* issueUpdates = [data objectForKey:@"issue-updates"];
 	for (NSDictionary* issueUpdate in issueUpdates)
 	{
 		NSString* message = [issueUpdate objectForKey:@"message"];
+		NSLog(@"adding note: %@", message);
 		[_notifications add:message];
 	}
 	

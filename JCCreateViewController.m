@@ -61,8 +61,6 @@ SpeakHereViewController* _speakController;
 	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/issue" relativeToURL:[JCSetup instance].url];
 
 	NSLog(@"About to send: %@ to: %@", params, url);
-
-	[self.activityIndicator startAnimating];
 	
 	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
 
@@ -101,7 +99,6 @@ SpeakHereViewController* _speakController;
 	NSArray *components = [location	componentsSeparatedByString:@"/"];
 	NSString* issueKey = [components lastObject];
 	NSLog(@"Got issue key: %@", issueKey);
-	[activityIndicator stopAnimating];
 	[self dismissModalViewControllerAnimated:YES];
 
 }
@@ -109,9 +106,7 @@ SpeakHereViewController* _speakController;
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
 	NSError *error = [request error];
-	
-	[self.activityIndicator stopAnimating];
-	
+		
 	NSString* msg = [NSString stringWithFormat:@"You need an Internet Connection to use this app. \n %@, \n URL: %@ \n status code: %d", 
 					 [error localizedDescription], [request url], [request  responseStatusCode] ];
 	NSLog(@"requestFailed: %@", msg);
@@ -222,7 +217,7 @@ SpeakHereViewController* _speakController;
     // e.g. self.myOutlet = nil;
 }
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, imagePicker,activityIndicator;
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, imagePicker;
 
 - (void)dealloc {
     [super dealloc];

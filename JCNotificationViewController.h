@@ -13,6 +13,8 @@
 }
 
 - (IBAction) dismiss:(id)sender;
+- (IBAction) reply:(id)sender;
+
 
 @property (nonatomic, retain) IBOutlet UITextView* textView;
 

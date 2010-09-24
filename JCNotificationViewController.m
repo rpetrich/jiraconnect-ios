@@ -7,6 +7,7 @@
 //
 
 #import "JCNotificationViewController.h"
+#import "JCSetup.h"
 
 @implementation JCNotificationViewController
 
@@ -21,9 +22,18 @@
 	[self performSelector:@selector(removeView) withObject:nil afterDelay:0.4];
 }
 
+- (IBAction) reply:(id)sender {
+	JCCreateViewController* controller = [[JCSetup instance] viewController];
+	controller.descriptionField.text = @"";
+	[controller.screenshotButton setBackgroundImage:nil forState:UIControlStateNormal];
+	[self presentModalViewController:[[JCSetup instance] viewController] animated:YES];
+}
+
 - (void)removeView {
 	[self.view removeFromSuperview];
 }
+
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

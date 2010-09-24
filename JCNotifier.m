@@ -43,7 +43,7 @@
 		[_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 		
 		// hack
-		[_notifications add:@"No, you can't have a pony."];
+		//[_notifications add:@"No, you can't have a pony."];
 		
 		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:YES];
 	}
