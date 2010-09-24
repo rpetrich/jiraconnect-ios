@@ -172,6 +172,7 @@ SpeakHereViewController* _speakController;
 }
 
 
+
 #pragma mark UIResponder
 //- (BOOL)canBecomeFirstResponder {
 //    return YES;

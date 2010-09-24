@@ -58,7 +58,7 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self becomeFirstResponder];
+//    [self becomeFirstResponder];
 }
 
 -(BOOL)canBecomeFirstResponder {

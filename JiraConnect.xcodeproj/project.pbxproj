@@ -24,6 +24,7 @@
 		0100DB3A124B52F4004F1E4C /* soundbar_plate_mono.png in Resources */ = {isa = PBXBuildFile; fileRef = 0100DB36124B52F4004F1E4C /* soundbar_plate_mono.png */; };
 		0100DB3B124B52F4004F1E4C /* speaker_grill.png in Resources */ = {isa = PBXBuildFile; fileRef = 0100DB38124B52F4004F1E4C /* speaker_grill.png */; };
 		0100DD95124B76B4004F1E4C /* SpeakHereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0100DD94124B76B4004F1E4C /* SpeakHereViewController.xib */; };
+		0100DF60124C3203004F1E4C /* JiraConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DF5F124C3203004F1E4C /* JiraConnectViewController.m */; };
 		01645BB11248697C0018F0CA /* JCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645BB01248697C0018F0CA /* JCSetup.m */; };
 		01645D5112489ADA0018F0CA /* CrashReportSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645D5012489ADA0018F0CA /* CrashReportSender.m */; };
 		01645D5312489AE90018F0CA /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01645D5212489AE90018F0CA /* CrashReporter.framework */; };
@@ -95,6 +96,8 @@
 		0100DB37124B52F4004F1E4C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/soundbar_plate_mono.png; sourceTree = "<group>"; };
 		0100DB39124B52F4004F1E4C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/speaker_grill.png; sourceTree = "<group>"; };
 		0100DD94124B76B4004F1E4C /* SpeakHereViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeakHereViewController.xib; sourceTree = "<group>"; };
+		0100DF5E124C3203004F1E4C /* JiraConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JiraConnectViewController.h; path = Classes/JiraConnectViewController.h; sourceTree = "<group>"; };
+		0100DF5F124C3203004F1E4C /* JiraConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JiraConnectViewController.m; path = Classes/JiraConnectViewController.m; sourceTree = "<group>"; };
 		01645BAF1248697C0018F0CA /* JCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCSetup.h; path = Classes/JCSetup.h; sourceTree = "<group>"; };
 		01645BB01248697C0018F0CA /* JCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCSetup.m; path = Classes/JCSetup.m; sourceTree = "<group>"; };
 		01645D4F12489ADA0018F0CA /* CrashReportSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReportSender.h; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 		01F6E290124ADC37008D7C4A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0100DF5E124C3203004F1E4C /* JiraConnectViewController.h */,
+				0100DF5F124C3203004F1E4C /* JiraConnectViewController.m */,
 				01F6E299124AE134008D7C4A /* JCCreateViewController.h */,
 				01F6E29A124AE134008D7C4A /* JCCreateViewController.m */,
 				01F6E29B124AE134008D7C4A /* JCCreateViewController.xib */,
@@ -518,6 +523,7 @@
 				0100DB1D124B4F9F004F1E4C /* CADebugMacros.cpp in Sources */,
 				0100DB1E124B4F9F004F1E4C /* CAStreamBasicDescription.cpp in Sources */,
 				0100DB1F124B4F9F004F1E4C /* CAXException.cpp in Sources */,
+				0100DF60124C3203004F1E4C /* JiraConnectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
