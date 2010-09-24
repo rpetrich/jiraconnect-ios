@@ -51,7 +51,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">feedback.png</string>
+							<string key="NSResourceName">feedback-v2.png</string>
 						</object>
 					</object>
 					<object class="IBUITextField" id="478225681">
@@ -850,7 +850,7 @@
 		<string key="IBDocument.LastKnownRelativeProjectPath">JiraConnect.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">feedback.png</string>
+			<string key="NS.key.0">feedback-v2.png</string>
 			<string key="NS.object.0">{320, 460}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">123</string>
