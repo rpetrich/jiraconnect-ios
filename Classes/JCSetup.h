@@ -19,7 +19,7 @@
 
 + (JCSetup*) instance;
 
-- (UIWindow*) configureJiraConnect:(NSURL*)url;
+- (void) configureJiraConnect:(NSURL*)url;
 - (JCCreateViewController*) viewController;
 - (NSDictionary*) getMetaData;
 

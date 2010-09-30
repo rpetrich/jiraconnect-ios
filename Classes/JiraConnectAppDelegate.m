@@ -23,14 +23,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
     // Add the view controller's view to the window and display.
-	
+
+
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 
-	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://localhost:2990/jira/"]];
-
+	//http://172.20.4.225:2990/ rich!
+	// tim: 172.20.5.102
 	
-    return YES;
+	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://172.20.5.102:2990/jira/"]];
+    
+	return YES;
 }
 
 

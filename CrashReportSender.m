@@ -142,6 +142,7 @@
 
 - (BOOL)hasPendingCrashReport
 {
+	NSLog(@"crashReportActivated: %d", _crashReportActivated);
 	if (_crashReportActivated)
 	{
 		NSFileManager *fm = [NSFileManager defaultManager];
@@ -176,10 +177,16 @@
 
 - (void)sendCrashReportToURL:(NSURL *)submissionURL delegate:(id <CrashReportSenderDelegate>)delegate activateFeedback:(BOOL)activateFeedback;
 {
+	NSLog(@"has pending crash report? %@", submissionURL);
+	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/ping" relativeToURL:submissionURL];
+	
+	NSLog(@"NEW URL %@", url);
     if ([self hasPendingCrashReport])
     {
+		NSLog(@"pending crash REPORT!!");
         [_submissionURL autorelease];
-        _submissionURL = [submissionURL copy];
+        _submissionURL = [url copy];
+		NSLog(@"_submissionURL %@", _submissionURL);
         
         _crashReportFeedbackActivated = activateFeedback;
         _delegate = delegate;
@@ -666,6 +673,7 @@
 
 - (void)_postXML:(NSString*)xml toURL:(NSURL*)url
 {
+	NSLog(@"Sending to: %@", url);
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	NSString *boundary = @"----FOO";
 	
@@ -673,14 +681,14 @@
 	[request setValue:USER_AGENT forHTTPHeaderField:@"User-Agent"];
 	[request setTimeoutInterval: 15];
 	[request setHTTPMethod:@"POST"];
-	NSString *contentType = [NSString stringWithFormat:@"multipart/form-data, boundary=%@", boundary];
+	NSString *contentType = @"application/xml";
 	[request setValue:contentType forHTTPHeaderField:@"Content-type"];
 	
 	NSMutableData *postBody =  [NSMutableData data];
-	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[@"Content-Disposition: form-data; name=\"xmlstring\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//	[postBody appendData:[@"Content-Disposition: form-data; name=\"xmlstring\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//	[postBody appendData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
+//	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	[request setHTTPBody:postBody];
 	

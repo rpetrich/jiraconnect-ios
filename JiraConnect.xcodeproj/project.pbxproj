@@ -25,6 +25,7 @@
 		0100DB3B124B52F4004F1E4C /* speaker_grill.png in Resources */ = {isa = PBXBuildFile; fileRef = 0100DB38124B52F4004F1E4C /* speaker_grill.png */; };
 		0100DD95124B76B4004F1E4C /* SpeakHereViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0100DD94124B76B4004F1E4C /* SpeakHereViewController.xib */; };
 		0100DF60124C3203004F1E4C /* JiraConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100DF5F124C3203004F1E4C /* JiraConnectViewController.m */; };
+		01287E51124C4BAF002599CB /* match.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 01287E50124C4BAF002599CB /* match.jpg */; };
 		01645BB11248697C0018F0CA /* JCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645BB01248697C0018F0CA /* JCSetup.m */; };
 		01645D5112489ADA0018F0CA /* CrashReportSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 01645D5012489ADA0018F0CA /* CrashReportSender.m */; };
 		01645D5312489AE90018F0CA /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01645D5212489AE90018F0CA /* CrashReporter.framework */; };
@@ -98,6 +99,7 @@
 		0100DD94124B76B4004F1E4C /* SpeakHereViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeakHereViewController.xib; sourceTree = "<group>"; };
 		0100DF5E124C3203004F1E4C /* JiraConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JiraConnectViewController.h; path = Classes/JiraConnectViewController.h; sourceTree = "<group>"; };
 		0100DF5F124C3203004F1E4C /* JiraConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JiraConnectViewController.m; path = Classes/JiraConnectViewController.m; sourceTree = "<group>"; };
+		01287E50124C4BAF002599CB /* match.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = match.jpg; sourceTree = "<group>"; };
 		01645BAF1248697C0018F0CA /* JCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCSetup.h; path = Classes/JCSetup.h; sourceTree = "<group>"; };
 		01645BB01248697C0018F0CA /* JCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCSetup.m; path = Classes/JCSetup.m; sourceTree = "<group>"; };
 		01645D4F12489ADA0018F0CA /* CrashReportSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReportSender.h; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01287E50124C4BAF002599CB /* match.jpg */,
 				7240E68F124C3F4D00E3D4AE /* feedback-v2.png */,
 				7240E5DF124C291600E3D4AE /* Resonse_bg.png */,
 				0100DB36124B52F4004F1E4C /* soundbar_plate_mono.png */,
@@ -479,6 +482,7 @@
 				0100DD95124B76B4004F1E4C /* SpeakHereViewController.xib in Resources */,
 				7240E5E0124C291600E3D4AE /* Resonse_bg.png in Resources */,
 				7240E690124C3F4D00E3D4AE /* feedback-v2.png in Resources */,
+				01287E51124C4BAF002599CB /* match.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

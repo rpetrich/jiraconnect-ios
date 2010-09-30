@@ -68,7 +68,6 @@ JCLocation* _location;
 	self.url = withUrl;
 	[_pinger startPinging:withUrl];
 	
-	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }
 

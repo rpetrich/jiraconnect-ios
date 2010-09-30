@@ -83,6 +83,7 @@
 
 - (IBAction) triggerCrash
 {
+	NSLog(@"Trigger crash!");
 	/* Trigger a crash */
 	CFRelease(NULL);
 }

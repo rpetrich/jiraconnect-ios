@@ -50,7 +50,7 @@ SpeakHereViewController* _speakController;
 	// curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/reallife/1.0/jirarl/upload?location=blah&pid=10000&issuetype=1&summary=testing123&reporter=admin"
 	
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	[params setObject:subjectField.text forKey:@"subject"];
+	[params setObject:subjectField.text forKey:@"summary"];
 	[params setObject:descriptionField.text forKey:@"description"];
 	NSDictionary* metaData = [[JCSetup instance] getMetaData];
 	[params addEntriesFromDictionary:metaData];
