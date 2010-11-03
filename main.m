@@ -2,8 +2,8 @@
 //  main.m
 //  JiraConnect
 //
-//  Created by Nicholas Pellow on 21/09/10.
-//  Copyright 2010 Nick Pellow. All rights reserved.
+//  Created by Nick Pellow on 3/11/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

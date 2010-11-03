@@ -2,40 +2,39 @@
 //  JiraConnectViewController.m
 //  JiraConnect
 //
-//  Created by Nicholas Pellow on 21/09/10.
-//  Copyright 2010 Nick Pellow. All rights reserved.
+//  Created by Nick Pellow on 3/11/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import "JiraConnectViewController.h"
-
-NSMutableArray* arrayOfDeath;
 
 @implementation JiraConnectViewController
 
 
 
+/*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
-		NSLog(@"Doing initialisation...");
-		arrayOfDeath = [[NSMutableArray alloc] init];
-		[arrayOfDeath addObject:@"Bah!"];
     }
     return self;
 }
+*/
+
+/*
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView {
+}
+*/
 
 
-
-
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	NSLog(@"Triggering a crash");
-	CFRelease(NULL);
-
 }
-
+*/
 
 
 /*

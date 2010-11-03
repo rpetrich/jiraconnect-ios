@@ -2,14 +2,12 @@
 //  JiraConnectAppDelegate.m
 //  JiraConnect
 //
-//  Created by Nicholas Pellow on 21/09/10.
-//  Copyright 2010 Nick Pellow. All rights reserved.
+//  Created by Nick Pellow on 3/11/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import "JiraConnectAppDelegate.h"
-#import "CrashReporterDemoViewController.h"
-#import "JCSetup.h"
-
+#import "JiraConnectViewController.h"
 
 @implementation JiraConnectAppDelegate
 
@@ -21,19 +19,14 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+    
+    // Override point for customization after application launch.
 
     // Add the view controller's view to the window and display.
-
-
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 
-	//http://172.20.4.225:2990/ rich!
-	// tim: 172.20.5.102
-	
-	[[JCSetup instance] configureJiraConnect:[NSURL URLWithString:@"http://172.20.5.102:2990/jira/"]];
-    
-	return YES;
+    return YES;
 }
 
 

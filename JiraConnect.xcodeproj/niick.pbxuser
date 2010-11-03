@@ -1,0 +1,66 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* JiraConnect */ = {
+		activeExec = 0;
+		executables = (
+			8D5062FA128107F900B3E1A0 /* JiraConnect */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 8D5062FA128107F900B3E1A0 /* JiraConnect */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* JiraConnect */;
+		codeSenseManager = 8D50630C1281081700B3E1A0 /* Code sense */;
+		executables = (
+			8D5062FA128107F900B3E1A0 /* JiraConnect */,
+		);
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 310446073;
+			PBXWorkspaceStateSaveDate = 310446073;
+		};
+		sourceControlManager = 8D50630B1281081700B3E1A0 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D5062FA128107F900B3E1A0 /* JiraConnect */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = JiraConnect;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	8D50630B1281081700B3E1A0 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	8D50630C1281081700B3E1A0 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+}
