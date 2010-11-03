@@ -1,5 +1,19 @@
 // !$*UTF8*$!
 {
+	1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1026, 777}}";
+			sepNavSelRange = "{206, 0}";
+			sepNavVisRange = "{0, 490}";
+		};
+	};
+	1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1157}}";
+			sepNavSelRange = "{197, 21}";
+			sepNavVisRange = "{710, 2004}";
+		};
+	};
 	1D6058900D05DD3D006BFB54 /* JiraConnect */ = {
 		activeExec = 0;
 		executables = (
@@ -68,6 +82,34 @@
 		perUserProjectItems = {
 			8D2FA6F112812F0100828713 /* XCBuildMessageTextBookmark */ = 8D2FA6F112812F0100828713 /* XCBuildMessageTextBookmark */;
 			8D2FA6F212812F0100828713 /* PBXTextBookmark */ = 8D2FA6F212812F0100828713 /* PBXTextBookmark */;
+			8D2FA7A2128139A400828713 /* PBXTextBookmark */ = 8D2FA7A2128139A400828713 /* PBXTextBookmark */;
+			8D2FA7A3128139A400828713 /* XCBuildMessageTextBookmark */ = 8D2FA7A3128139A400828713 /* XCBuildMessageTextBookmark */;
+			8D2FA7A4128139A400828713 /* PBXTextBookmark */ = 8D2FA7A4128139A400828713 /* PBXTextBookmark */;
+			8D2FA7AF128139A500828713 /* PBXTextBookmark */ = 8D2FA7AF128139A500828713 /* PBXTextBookmark */;
+			8D2FA7B0128139A500828713 /* PBXTextBookmark */ = 8D2FA7B0128139A500828713 /* PBXTextBookmark */;
+			8D2FA7B1128139A500828713 /* PBXTextBookmark */ = 8D2FA7B1128139A500828713 /* PBXTextBookmark */;
+			8D2FA7B2128139A500828713 /* PBXTextBookmark */ = 8D2FA7B2128139A500828713 /* PBXTextBookmark */;
+			8D2FA7DB12813C2F00828713 /* XCBuildMessageTextBookmark */ = 8D2FA7DB12813C2F00828713 /* XCBuildMessageTextBookmark */;
+			8D2FA7DE12813C3800828713 /* PBXTextBookmark */ = 8D2FA7DE12813C3800828713 /* PBXTextBookmark */;
+			8D2FA7DF12813C3800828713 /* PBXTextBookmark */ = 8D2FA7DF12813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E012813C3800828713 /* PBXTextBookmark */ = 8D2FA7E012813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E112813C3800828713 /* PBXTextBookmark */ = 8D2FA7E112813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E212813C3800828713 /* PBXTextBookmark */ = 8D2FA7E212813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E312813C3800828713 /* PBXTextBookmark */ = 8D2FA7E312813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E412813C3800828713 /* PBXTextBookmark */ = 8D2FA7E412813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E512813C3800828713 /* PBXTextBookmark */ = 8D2FA7E512813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E812813C3800828713 /* PBXTextBookmark */ = 8D2FA7E812813C3800828713 /* PBXTextBookmark */;
+			8D2FA7E912813C7D00828713 /* PBXTextBookmark */ = 8D2FA7E912813C7D00828713 /* PBXTextBookmark */;
+			8D2FA7EA12813C7D00828713 /* PBXTextBookmark */ = 8D2FA7EA12813C7D00828713 /* PBXTextBookmark */;
+			8D2FA7EB12813C7D00828713 /* PBXTextBookmark */ = 8D2FA7EB12813C7D00828713 /* PBXTextBookmark */;
+			8D2FA7EC12813C7D00828713 /* XCBuildMessageTextBookmark */ = 8D2FA7EC12813C7D00828713 /* XCBuildMessageTextBookmark */;
+			8D2FA7ED12813C7D00828713 /* PBXTextBookmark */ = 8D2FA7ED12813C7D00828713 /* PBXTextBookmark */;
+			8D2FA7EE12813C7D00828713 /* PBXTextBookmark */ = 8D2FA7EE12813C7D00828713 /* PBXTextBookmark */;
+			8D2FA7F312813CD900828713 /* PBXTextBookmark */ = 8D2FA7F312813CD900828713 /* PBXTextBookmark */;
+			8D2FA7F412813CD900828713 /* PBXTextBookmark */ = 8D2FA7F412813CD900828713 /* PBXTextBookmark */;
+			8D2FA7F512813CD900828713 /* PBXTextBookmark */ = 8D2FA7F512813CD900828713 /* PBXTextBookmark */;
+			8D2FA7F612813CD900828713 /* PBXTextBookmark */ = 8D2FA7F612813CD900828713 /* PBXTextBookmark */;
+			8D2FA7F712813CD900828713 /* PBXTextBookmark */ = 8D2FA7F712813CD900828713 /* PBXTextBookmark */;
 			8D506421128118C200B3E1A0 = 8D506421128118C200B3E1A0 /* PBXTextBookmark */;
 			8D506422128118C200B3E1A0 = 8D506422128118C200B3E1A0 /* PBXTextBookmark */;
 			8D506423128118C200B3E1A0 = 8D506423128118C200B3E1A0 /* PlistBookmark */;
@@ -114,6 +156,298 @@
 		vrLen = 1867;
 		vrLoc = 16042;
 	};
+	8D2FA7921281326100828713 /* JCODemoViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1026, 777}}";
+			sepNavSelRange = "{1748, 0}";
+			sepNavVisRange = "{0, 1748}";
+		};
+	};
+	8D2FA7931281326100828713 /* JCODemoViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1122, 1313}}";
+			sepNavSelRange = "{2545, 0}";
+			sepNavVisRange = "{1837, 880}";
+			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
+		};
+	};
+	8D2FA7A2128139A400828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		name = "CrashReportSender.m: 524";
+		rLen = 0;
+		rLoc = 16127;
+		rType = 0;
+		vrLen = 1867;
+		vrLoc = 16042;
+	};
+	8D2FA7A3128139A400828713 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'JCSetup' undeclared (first use in this function)";
+		fRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 71;
+		rType = 1;
+	};
+	8D2FA7A4128139A400828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */;
+		name = "JCODemoViewController.m: 78";
+		rLen = 0;
+		rLoc = 2545;
+		rType = 0;
+		vrLen = 898;
+		vrLoc = 1837;
+	};
+	8D2FA7AF128139A500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		name = "CrashReportSender.m: 467";
+		rLen = 0;
+		rLoc = 14562;
+		rType = 0;
+		vrLen = 1490;
+		vrLoc = 14079;
+	};
+	8D2FA7B0128139A500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8DC8035812812EE90080D3C8 /* PLCrashReport.h */;
+		name = "PLCrashReport.h: 94";
+		rLen = 0;
+		rLoc = 3204;
+		rType = 0;
+		vrLen = 1639;
+		vrLoc = 2661;
+	};
+	8D2FA7B1128139A500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA7921281326100828713 /* JCODemoViewController.h */;
+		name = "JCODemoViewController.h: 47";
+		rLen = 0;
+		rLoc = 1748;
+		rType = 0;
+		vrLen = 1748;
+		vrLoc = 0;
+	};
+	8D2FA7B2128139A500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */;
+		name = "JCODemoViewController.m: 72";
+		rLen = 0;
+		rLoc = 2364;
+		rType = 0;
+		vrLen = 1497;
+		vrLoc = 1276;
+	};
+	8D2FA7DB12813C2F00828713 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'JCCreateViewController' undeclared (first use in this function)";
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 56;
+		rType = 1;
+	};
+	8D2FA7DE12813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */;
+		name = "JiraConnectAppDelegate.m: 10";
+		rLen = 21;
+		rLoc = 197;
+		rType = 0;
+		vrLen = 2004;
+		vrLoc = 710;
+	};
+	8D2FA7DF12813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */;
+		name = "JiraConnectAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 206;
+		rType = 0;
+		vrLen = 490;
+		vrLoc = 0;
+	};
+	8D2FA7E012813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA7921281326100828713 /* JCODemoViewController.h */;
+		name = "JCODemoViewController.h: 47";
+		rLen = 0;
+		rLoc = 1748;
+		rType = 0;
+		vrLen = 1748;
+		vrLoc = 0;
+	};
+	8D2FA7E112813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */;
+		name = "JCODemoViewController.m: 78";
+		rLen = 14;
+		rLoc = 2556;
+		rType = 0;
+		vrLen = 1357;
+		vrLoc = 1622;
+	};
+	8D2FA7E212813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 76";
+		rLen = 17;
+		rLoc = 1896;
+		rType = 0;
+		vrLen = 2138;
+		vrLoc = 722;
+	};
+	8D2FA7E312813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
+		name = "JCOViewController.m: 16";
+		rLen = 0;
+		rLoc = 292;
+		rType = 0;
+		vrLen = 2163;
+		vrLoc = 1150;
+	};
+	8D2FA7E412813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B31281123500B3E1A0 /* JCOViewController.h */;
+		name = "JCOViewController.h: 12";
+		rLen = 0;
+		rLoc = 206;
+		rType = 0;
+		vrLen = 991;
+		vrLoc = 0;
+	};
+	8D2FA7E512813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B31281123500B3E1A0 /* JCOViewController.h */;
+		name = "JCOViewController.h: 12";
+		rLen = 0;
+		rLoc = 206;
+		rType = 0;
+		vrLen = 991;
+		vrLoc = 0;
+	};
+	8D2FA7E812813C3800828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 57";
+		rLen = 0;
+		rLoc = 1402;
+		rType = 0;
+		vrLen = 1192;
+		vrLoc = 764;
+	};
+	8D2FA7E912813C7D00828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */;
+		name = "JCODemoViewController.m: 78";
+		rLen = 0;
+		rLoc = 2545;
+		rType = 0;
+		vrLen = 880;
+		vrLoc = 1837;
+	};
+	8D2FA7EA12813C7D00828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
+		name = "JCO.h: 22";
+		rLen = 0;
+		rLoc = 430;
+		rType = 0;
+		vrLen = 427;
+		vrLoc = 0;
+	};
+	8D2FA7EB12813C7D00828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064071281179800B3E1A0 /* JCNotificationViewController.m */;
+		name = "JCNotificationViewController.m: 26";
+		rLen = 0;
+		rLoc = 645;
+		rType = 0;
+		vrLen = 980;
+		vrLoc = 0;
+	};
+	8D2FA7EC12813C7D00828713 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Class 'JCO' does not implement the 'CrashReportSenderDelegate' protocol";
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 67;
+		rType = 1;
+	};
+	8D2FA7ED12813C7D00828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 68";
+		rLen = 0;
+		rLoc = 1697;
+		rType = 0;
+		vrLen = 764;
+		vrLoc = 0;
+	};
+	8D2FA7EE12813C7D00828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 68";
+		rLen = 0;
+		rLoc = 1697;
+		rType = 0;
+		vrLen = 764;
+		vrLoc = 0;
+	};
+	8D2FA7F312813CD900828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B31281123500B3E1A0 /* JCOViewController.h */;
+		name = "JCOViewController.h: 12";
+		rLen = 0;
+		rLoc = 266;
+		rType = 0;
+		vrLen = 991;
+		vrLoc = 0;
+	};
+	8D2FA7F412813CD900828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
+		name = "JCOViewController.m: 16";
+		rLen = 0;
+		rLoc = 292;
+		rType = 0;
+		vrLen = 2163;
+		vrLoc = 1150;
+	};
+	8D2FA7F512813CD900828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 76";
+		rLen = 17;
+		rLoc = 1896;
+		rType = 0;
+		vrLen = 2121;
+		vrLoc = 717;
+	};
+	8D2FA7F612813CD900828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
+		name = "JCO.h: 13";
+		rLen = 0;
+		rLoc = 284;
+		rType = 0;
+		vrLen = 427;
+		vrLoc = 0;
+	};
+	8D2FA7F712813CD900828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
+		name = "JCO.h: 12";
+		rLen = 0;
+		rLoc = 227;
+		rType = 0;
+		vrLen = 486;
+		vrLoc = 0;
+	};
 	8D5062FA128107F900B3E1A0 /* JiraConnect */ = {
 		isa = PBXExecutable;
 		activeArgIndices = (
@@ -130,6 +464,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -178,30 +513,30 @@
 	};
 	8D5063B31281123500B3E1A0 /* JCOViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1026, 808}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 996}";
+			sepNavIntBoundsRect = "{{0, 0}, {1026, 777}}";
+			sepNavSelRange = "{266, 0}";
+			sepNavVisRange = "{0, 991}";
 		};
 	};
 	8D5063B41281123500B3E1A0 /* JCOViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1251, 2574}}";
-			sepNavSelRange = "{3598, 0}";
-			sepNavVisRange = "{2160, 2033}";
+			sepNavIntBoundsRect = "{{0, 0}, {1251, 2470}}";
+			sepNavSelRange = "{292, 0}";
+			sepNavVisRange = "{1150, 2163}";
 		};
 	};
 	8D5063C91281157B00B3E1A0 /* JCO.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1026, 783}}";
-			sepNavSelRange = "{225, 0}";
-			sepNavVisRange = "{0, 432}";
+			sepNavIntBoundsRect = "{{0, 0}, {1026, 777}}";
+			sepNavSelRange = "{227, 0}";
+			sepNavVisRange = "{0, 486}";
 		};
 	};
 	8D5063CA1281157B00B3E1A0 /* JCO.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1122, 1482}}";
-			sepNavSelRange = "{1562, 0}";
-			sepNavVisRange = "{1279, 1419}";
+			sepNavIntBoundsRect = "{{0, 0}, {1026, 1430}}";
+			sepNavSelRange = "{1896, 17}";
+			sepNavVisRange = "{717, 2121}";
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
@@ -220,6 +555,14 @@
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
+	8D5064071281179800B3E1A0 /* JCNotificationViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1146, 1040}}";
+			sepNavSelRange = "{645, 0}";
+			sepNavVisRange = "{0, 980}";
+			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
+		};
+	};
 	8D50640F1281189B00B3E1A0 /* CrashReportSender.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1272, 1391}}";
@@ -229,9 +572,9 @@
 	};
 	8D5064101281189B00B3E1A0 /* CrashReportSender.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2161, 10933}}";
-			sepNavSelRange = "{14562, 0}";
-			sepNavVisRange = "{14079, 1490}";
+			sepNavIntBoundsRect = "{{0, 0}, {1122, 10673}}";
+			sepNavSelRange = "{16127, 0}";
+			sepNavVisRange = "{16042, 1867}";
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
@@ -483,7 +826,7 @@
 		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
 		name = "JCO.h: 13";
 		rLen = 0;
-		rLoc = 225;
+		rLoc = 284;
 		rType = 0;
 		vrLen = 432;
 		vrLoc = 0;
@@ -493,7 +836,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 114";
 		rLen = 0;
-		rLoc = 3598;
+		rLoc = 3593;
 		rType = 0;
 		vrLen = 2033;
 		vrLoc = 2160;
@@ -552,9 +895,9 @@
 		path = /Users/niick/projects/JCONNECT/ios/JiraConnect/Resources/CrashReporter.framework/Headers/PLCrashReport.h;
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1026, 2002}}";
-			sepNavSelRange = "{3390, 0}";
-			sepNavVisRange = "{2661, 1692}";
+			sepNavIntBoundsRect = "{{0, 0}, {1026, 1976}}";
+			sepNavSelRange = "{3204, 0}";
+			sepNavVisRange = "{2661, 1639}";
 		};
 	};
 }

@@ -7,7 +7,7 @@
 //
 
 #import "JiraConnectAppDelegate.h"
-#import "JiraConnectViewController.h"
+#import "JCODemoViewController.h"
 
 @implementation JiraConnectAppDelegate
 

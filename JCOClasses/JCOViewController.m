@@ -13,7 +13,7 @@
 
 #import "JSON.h"
 
-@implementation JCCreateViewController
+@implementation JCOViewController
 
 UIImage* _image;
 NSString* _imageName;

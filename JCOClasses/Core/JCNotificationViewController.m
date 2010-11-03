@@ -23,7 +23,7 @@
 }
 
 - (IBAction) reply:(id)sender {
-	JCCreateViewController* controller = [[JCO instance] viewController];
+	JCOViewController* controller = [[JCO instance] viewController];
 	controller.descriptionField.text = @"";
 	[controller.screenshotButton setBackgroundImage:nil forState:UIControlStateNormal];
 	[self presentModalViewController:[[JCO instance] viewController] animated:YES];

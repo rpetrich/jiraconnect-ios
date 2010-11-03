@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "JCOViewController.h"
+#import "CrashReportSender.h"
 
 
-@interface JCO : NSObject {
+
+@interface JCO : NSObject <CrashReportSenderDelegate> {
 	NSURL* _url;	
 }
 
@@ -19,7 +21,7 @@
 + (JCO*) instance;
 
 - (void) configureJiraConnect:(NSURL*)url;
-- (JCCreateViewController*) viewController;
+- (JCOViewController*) viewController;
 - (NSDictionary*) getMetaData;
 
 @end

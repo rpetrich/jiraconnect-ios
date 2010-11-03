@@ -25,7 +25,7 @@
 JCPing* _pinger;
 JCNotifier* _notifier;
 JCNotifications* _notifications;
-JCCreateViewController* _jcController;
+JCOViewController* _jcController;
 JCLocation* _location;
 
 -(void) dealloc {
@@ -54,7 +54,7 @@ JCLocation* _location;
 		_pinger = [[[JCPing alloc] initWithLocator:_location notifications:_notifications] retain];
 		UIView* window = [[UIApplication sharedApplication] keyWindow];
 		_notifier = [[[JCNotifier alloc] initWithView:window notifications:_notifications] retain];
-		_jcController = [[[JCCreateViewController alloc] initWithNibName:@"JCCreateViewController" bundle:nil] retain];
+		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
 		
 	}
 	return self;
@@ -73,7 +73,7 @@ JCLocation* _location;
 }
 
 
--(JCCreateViewController*) viewController {
+-(JCOViewController*) viewController {
 	return _jcController;
 }
 

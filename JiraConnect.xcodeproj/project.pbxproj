@@ -12,9 +12,11 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
-		28D7ACF80DDB3853001CB0EB /* JiraConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* JiraConnectViewController.m */; };
 		8D2FA70312812F2B00828713 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA70212812F2B00828713 /* CrashReporter.framework */; };
 		8D2FA78512812FB600828713 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA78412812FB600828713 /* CoreLocation.framework */; };
+		8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */; };
+		8D2FA7961281327500828713 /* JCODemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA7951281327500828713 /* JCODemoViewController.xib */; };
+		8D2FA79B1281395400828713 /* charles_320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA79A1281395400828713 /* charles_320x480.png */; };
 		8D50638412810ED300B3E1A0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637212810ED300B3E1A0 /* Reachability.m */; };
 		8D50638512810ED300B3E1A0 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637512810ED300B3E1A0 /* ASINetworkQueue.m */; };
 		8D50638612810ED300B3E1A0 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637712810ED300B3E1A0 /* ASIInputStream.m */; };
@@ -34,7 +36,6 @@
 		8D5063B61281123500B3E1A0 /* JCOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */; };
 		8D5063B71281123500B3E1A0 /* JCOViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5063B51281123500B3E1A0 /* JCOViewController.xib */; };
 		8D5063C4128114E600B3E1A0 /* JiraConnect-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */; };
-		8D5063C5128114E600B3E1A0 /* JiraConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5063C2128114E600B3E1A0 /* JiraConnectViewController.xib */; };
 		8D5063C6128114E600B3E1A0 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5063C3128114E600B3E1A0 /* MainWindow.xib */; };
 		8D5063C81281154300B3E1A0 /* feedback-v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5063C71281154300B3E1A0 /* feedback-v2.png */; };
 		8D5063CB1281157B00B3E1A0 /* JCO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */; };
@@ -54,12 +55,14 @@
 		1D6058910D05DD3D006BFB54 /* JiraConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28D7ACF60DDB3853001CB0EB /* JiraConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectViewController.h; sourceTree = "<group>"; };
-		28D7ACF70DDB3853001CB0EB /* JiraConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* JiraConnect_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnect_Prefix.pch; sourceTree = "<group>"; };
 		8D2FA70212812F2B00828713 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = Resources/CrashReporter.framework; sourceTree = "<group>"; };
 		8D2FA78412812FB600828713 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8D2FA7921281326100828713 /* JCODemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCODemoViewController.h; sourceTree = "<group>"; };
+		8D2FA7931281326100828713 /* JCODemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCODemoViewController.m; sourceTree = "<group>"; };
+		8D2FA7951281327500828713 /* JCODemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCODemoViewController.xib; sourceTree = "<group>"; };
+		8D2FA79A1281395400828713 /* charles_320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_320x480.png; sourceTree = "<group>"; };
 		8D50637212810ED300B3E1A0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D50637312810ED300B3E1A0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8D50637412810ED300B3E1A0 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
@@ -97,7 +100,6 @@
 		8D5063B41281123500B3E1A0 /* JCOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOViewController.m; sourceTree = "<group>"; };
 		8D5063B51281123500B3E1A0 /* JCOViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCOViewController.xib; sourceTree = "<group>"; };
 		8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
-		8D5063C2128114E600B3E1A0 /* JiraConnectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JiraConnectViewController.xib; sourceTree = "<group>"; };
 		8D5063C3128114E600B3E1A0 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		8D5063C71281154300B3E1A0 /* feedback-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback-v2.png"; sourceTree = "<group>"; };
 		8D5063C91281157B00B3E1A0 /* JCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCO.h; sourceTree = "<group>"; };
@@ -140,10 +142,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8D2FA7921281326100828713 /* JCODemoViewController.h */,
+				8D2FA7931281326100828713 /* JCODemoViewController.m */,
+				8D2FA7951281327500828713 /* JCODemoViewController.xib */,
 				1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */,
 				1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */,
-				28D7ACF60DDB3853001CB0EB /* JiraConnectViewController.h */,
-				28D7ACF70DDB3853001CB0EB /* JiraConnectViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -181,9 +184,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8D2FA79A1281395400828713 /* charles_320x480.png */,
 				8D5063C71281154300B3E1A0 /* feedback-v2.png */,
 				8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */,
-				8D5063C2128114E600B3E1A0 /* JiraConnectViewController.xib */,
 				8D5063C3128114E600B3E1A0 /* MainWindow.xib */,
 			);
 			path = Resources;
@@ -350,10 +353,11 @@
 			files = (
 				8D5063B71281123500B3E1A0 /* JCOViewController.xib in Resources */,
 				8D5063C4128114E600B3E1A0 /* JiraConnect-Info.plist in Resources */,
-				8D5063C5128114E600B3E1A0 /* JiraConnectViewController.xib in Resources */,
 				8D5063C6128114E600B3E1A0 /* MainWindow.xib in Resources */,
 				8D5063C81281154300B3E1A0 /* feedback-v2.png in Resources */,
 				8D50640A1281179800B3E1A0 /* JCNotificationViewController.xib in Resources */,
+				8D2FA7961281327500828713 /* JCODemoViewController.xib in Resources */,
+				8D2FA79B1281395400828713 /* charles_320x480.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +370,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */,
-				28D7ACF80DDB3853001CB0EB /* JiraConnectViewController.m in Sources */,
 				8D50638412810ED300B3E1A0 /* Reachability.m in Sources */,
 				8D50638512810ED300B3E1A0 /* ASINetworkQueue.m in Sources */,
 				8D50638612810ED300B3E1A0 /* ASIInputStream.m in Sources */,
@@ -387,6 +390,7 @@
 				8D5063F4128116D600B3E1A0 /* JCLocation.m in Sources */,
 				8D5064091281179800B3E1A0 /* JCNotificationViewController.m in Sources */,
 				8D5064111281189B00B3E1A0 /* CrashReportSender.m in Sources */,
+				8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

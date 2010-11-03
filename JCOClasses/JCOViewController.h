@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface JCCreateViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
+@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;
