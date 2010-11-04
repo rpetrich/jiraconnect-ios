@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "JCOTransport.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate> {
+@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;

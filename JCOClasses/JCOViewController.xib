@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1024</int>
 		<string key="IBDocument.SystemVersion">10F569</string>
-		<string key="IBDocument.InterfaceBuilderVersion">804</string>
+		<string key="IBDocument.InterfaceBuilderVersion">788</string>
 		<string key="IBDocument.AppKitVersion">1038.29</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">123</string>
+			<string key="NS.object.0">117</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -203,9 +203,12 @@
 							<object class="IBUIProgressView" id="347453089">
 								<reference key="NSNextResponder" ref="197009698"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{58, 210}, {180, 11}}</string>
+								<string key="NSFrame">{{10, 117}, {180, 11}}</string>
 								<reference key="NSSuperview" ref="197009698"/>
-								<reference key="IBUIBackgroundColor" ref="463050577"/>
+								<object class="NSColor" key="IBUIBackgroundColor" id="709230024">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
+								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIProgressViewStyle">1</int>
@@ -213,9 +216,9 @@
 							<object class="IBUILabel" id="811370056">
 								<reference key="NSNextResponder" ref="197009698"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{99, 176}, {98, 22}}</string>
+								<string key="NSFrame">{{51, 87}, {98, 22}}</string>
 								<reference key="NSSuperview" ref="197009698"/>
-								<reference key="IBUIBackgroundColor" ref="463050577"/>
+								<reference key="IBUIBackgroundColor" ref="709230024"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -227,16 +230,21 @@
 									<bytes key="NSRGB">MC44IDAgMAA</bytes>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="463050577"/>
+								<object class="NSColor" key="IBUIShadowColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwIDAgMC43NAA</bytes>
+								</object>
+								<string key="IBUIShadowOffset">{1, 1}</string>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">1</int>
 							</object>
 						</object>
-						<string key="NSFrame">{{11, 91}, {297, 240}}</string>
+						<string key="NSFrame">{{59, 156}, {200, 147}}</string>
 						<reference key="NSSuperview" ref="481240288"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAgMC42NgA</bytes>
 						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -507,8 +515,8 @@
 						<reference key="object" ref="197009698"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="811370056"/>
 							<reference ref="347453089"/>
+							<reference ref="811370056"/>
 						</object>
 						<reference key="parent" ref="481240288"/>
 					</object>
@@ -1061,6 +1069,6 @@
 			<string key="NS.key.0">feedback-v2.png</string>
 			<string key="NS.object.0">{320, 460}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">123</string>
+		<string key="IBCocoaTouchPluginVersion">117</string>
 	</data>
 </archive>

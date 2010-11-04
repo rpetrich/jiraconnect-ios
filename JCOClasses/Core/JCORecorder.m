@@ -22,7 +22,7 @@ NSString* _recorderFilePath;
 -(id)init {
 	if (self = [super init]) {
 		
-		self.recordTime = 40;
+		self.recordTime = 10;
 		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.caf", DOCUMENTS_FOLDER] retain];
 		
 		// delete the previous recording.

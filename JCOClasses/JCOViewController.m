@@ -24,6 +24,9 @@ NSTimer* _timer;
     [super viewDidLoad];
 	self.transport = [[JCOTransport alloc] init];
 	_recorder = [[JCORecorder initialize] retain]; // TODO: work out how to stoip. use a delegate!
+	_recorder.recorder.delegate = self;
+	self.countdownView.layer.cornerRadius = 9.0;
+
 		
 }
 
@@ -53,13 +56,16 @@ NSTimer* _timer;
 	[self presentModalViewController:imagePicker animated:YES];
 }
 
--(void) updateCountdown:(NSTimer*)theTimer {
-	
+-(void) updateProgress:(NSTimer*)theTimer {
 	float progress = (float) (_recorder.recorder.currentTime/_recorder.recordTime);
 	NSLog(@"Progress: %f", progress);
+	self.progressView.progress = progress;	
+}
 
-	self.progressView.progress = progress;
-	
+-(void) hideAudioProgress {
+	self.countdownView.hidden = YES; 
+	self.progressView.progress = 0;
+	[_timer invalidate];
 }
 
 - (IBAction) addVoice {
@@ -70,20 +76,23 @@ NSTimer* _timer;
 		
 		[_recorder stop];
 		NSLog(@"Stopped recorder. Sound saved to: %@", _recorder.recorder.url );
-		self.countdownView.hidden = YES; 
-		self.progressView.progress = 0;
-		[_timer invalidate];
+		[self hideAudioProgress];
 
 	} else {
 
 		[_recorder start];
 		NSLog(@"Started recording...");
 		self.progressView.progress = 0;
-		_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateCountdown:) userInfo:nil repeats:YES];
+		_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
 		self.countdownView.hidden = NO;
 	}
 }
 
+
+-(void) audioRecorderDidFinishRecording:(AVAudioRecorder*)recorder successfully:(BOOL)success {
+	[self hideAudioProgress];
+	
+}
 
 - (IBAction) sendFeedback {
 

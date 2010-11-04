@@ -247,6 +247,7 @@
 		8D50635712810E6C00B3E1A0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8D50640E1281183A00B3E1A0 /* CrashReporter */,
 				8D50638B12810F6F00B3E1A0 /* JSON */,
 				8D50635812810EA000B3E1A0 /* ASIHTTP */,
 			);
@@ -299,7 +300,6 @@
 		8D5063D01281165700B3E1A0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				8D50640E1281183A00B3E1A0 /* CrashReporter */,
 				8D5064061281179800B3E1A0 /* JCNotificationViewController.h */,
 				8D5064071281179800B3E1A0 /* JCNotificationViewController.m */,
 				8D5064081281179800B3E1A0 /* JCNotificationViewController.xib */,
@@ -325,7 +325,8 @@
 				8D50640F1281189B00B3E1A0 /* CrashReportSender.h */,
 				8D5064101281189B00B3E1A0 /* CrashReportSender.m */,
 			);
-			path = CrashReporter;
+			name = CrashReporter;
+			path = ../Core/CrashReporter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
