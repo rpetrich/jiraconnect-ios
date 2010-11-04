@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JCOTransport.h"
 
-
-@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
+@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;
 	IBOutlet UIButton* screenshotButton;
 	IBOutlet UITextView* descriptionField;
 	IBOutlet UITextField* subjectField;
-	IBOutlet UIImagePickerController* imagePicker;	
+	IBOutlet UIImagePickerController* imagePicker;
+	JCOTransport* _transport;
 	
 }
 @property (retain, nonatomic) IBOutlet UIButton* sendButton;
@@ -25,9 +26,11 @@
 @property (retain, nonatomic) IBOutlet UITextView* descriptionField;
 @property (retain, nonatomic) IBOutlet UITextField* subjectField;
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
+@property (retain, nonatomic) IBOutlet JCOTransport* transport;
 
 - (IBAction) sendFeedback;
 - (IBAction) addScreenshot;
 - (IBAction) addVoice;
+- (IBAction) dismiss;
 
 @end

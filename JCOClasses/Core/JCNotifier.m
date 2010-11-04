@@ -8,6 +8,7 @@
 
 #import "JCNotifier.h"
 #import "JCNotificationViewController.h"
+#import "JCO.h"
 
 @implementation JCNotifier
 

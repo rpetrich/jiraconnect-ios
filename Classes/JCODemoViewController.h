@@ -29,18 +29,15 @@
 #import <UIKit/UIKit.h>
 
 @interface JCODemoViewController : UIViewController {
-	IBOutlet UIButton *triggerButtonMemoryLeak;
 	IBOutlet UIButton *triggerButtonCrash;
 	IBOutlet UIButton *triggerButtonFeedback;	
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *triggerButtonMemoryLeak;
 @property (nonatomic, retain) IBOutlet UIButton *triggerButtonCrash;
 @property (nonatomic, retain) IBOutlet UIButton *triggerButtonFeedback;
 
-- (IBAction) triggerFeedback;
-- (IBAction) triggerMemoryLeak;
 - (IBAction) triggerCrash;
+- (IBAction) triggerFeedback;
 
 @end
 

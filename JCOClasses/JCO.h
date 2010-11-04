@@ -10,10 +10,9 @@
 #import "JCOViewController.h"
 #import "CrashReportSender.h"
 
-
-
 @interface JCO : NSObject <CrashReportSenderDelegate> {
 	NSURL* _url;	
+	id<CrashReportSenderDelegate> senderDelegate;
 }
 
 @property (nonatomic, retain) NSURL* url;
