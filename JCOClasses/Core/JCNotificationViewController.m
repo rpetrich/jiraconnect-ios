@@ -3,7 +3,7 @@
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Atlassian . All rights reserved.
 //
 
 #import "JCNotificationViewController.h"

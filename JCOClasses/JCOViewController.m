@@ -8,19 +8,23 @@
 
 #import "JCOViewController.h"
 #import "JCO.h"
-
 #import "JSON.h"
+#import "JCORecorder.h"
+
 
 @implementation JCOViewController
 
 UIImage* _image;
-NSString* _imageName;
+JCORecorder* _recorder;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.transport = [[JCOTransport alloc] init];
+	_recorder = [[JCORecorder initialize] retain];
+		
 }
+
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -32,6 +36,7 @@ NSString* _imageName;
 	self.descriptionField, 
 	self.imagePicker = nil;
 	[_transport release]; _transport = nil;
+	[_recorder release]; _recorder = nil;
 	
 }
 
@@ -45,8 +50,18 @@ NSString* _imageName;
 }
 
 - (IBAction) addVoice {
-	NSLog(@"add voice...%@", @"voice data");
-	// TODO: voice
+	
+	NSLog(@"addVoice: Is recording? %d - %@", _recorder.recorder.recording, _recorder.recorder);
+	
+	if (_recorder.recorder.recording) {
+		NSData* voiceData = [_recorder stop];
+		NSLog(@"Reorded voice: %@", _recorder.recorder.url );
+	} else {
+		NSLog(@"adding voice...%@", @"voice data");
+		[_recorder start];
+		NSLog(@"Is recording? %d", _recorder.recorder.recording);
+	}
+
 
 }
 

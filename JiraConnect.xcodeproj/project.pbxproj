@@ -19,6 +19,8 @@
 		8D2FA79B1281395400828713 /* charles_320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA79A1281395400828713 /* charles_320x480.png */; };
 		8D2FA81E1282351900828713 /* JCOTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA81D1282351900828713 /* JCOTransport.m */; };
 		8D2FA8D11282565400828713 /* reply_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA8D01282565400828713 /* reply_bg.png */; };
+		8D2FA9031282614A00828713 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA9021282614A00828713 /* AVFoundation.framework */; };
+		8D2FA96612826BB100828713 /* JCORecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA96512826BB100828713 /* JCORecorder.m */; };
 		8D50638412810ED300B3E1A0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637212810ED300B3E1A0 /* Reachability.m */; };
 		8D50638512810ED300B3E1A0 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637512810ED300B3E1A0 /* ASINetworkQueue.m */; };
 		8D50638612810ED300B3E1A0 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637712810ED300B3E1A0 /* ASIInputStream.m */; };
@@ -68,6 +70,9 @@
 		8D2FA81C1282351900828713 /* JCOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOTransport.h; sourceTree = "<group>"; };
 		8D2FA81D1282351900828713 /* JCOTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOTransport.m; sourceTree = "<group>"; };
 		8D2FA8D01282565400828713 /* reply_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reply_bg.png; sourceTree = "<group>"; };
+		8D2FA9021282614A00828713 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8D2FA96412826BB100828713 /* JCORecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCORecorder.h; sourceTree = "<group>"; };
+		8D2FA96512826BB100828713 /* JCORecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCORecorder.m; sourceTree = "<group>"; };
 		8D50637212810ED300B3E1A0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D50637312810ED300B3E1A0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8D50637412810ED300B3E1A0 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 				8D5063A61281111D00B3E1A0 /* libz.1.2.3.dylib in Frameworks */,
 				8D2FA70312812F2B00828713 /* CrashReporter.framework in Frameworks */,
 				8D2FA78512812FB600828713 /* CoreLocation.framework in Frameworks */,
+				8D2FA9031282614A00828713 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +215,7 @@
 				8D5063A51281111D00B3E1A0 /* libz.1.2.3.dylib */,
 				8D2FA70212812F2B00828713 /* CrashReporter.framework */,
 				8D2FA78412812FB600828713 /* CoreLocation.framework */,
+				8D2FA9021282614A00828713 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -306,6 +313,8 @@
 				8D5063EC128116BF00B3E1A0 /* JCNotifier.m */,
 				8D2FA81C1282351900828713 /* JCOTransport.h */,
 				8D2FA81D1282351900828713 /* JCOTransport.m */,
+				8D2FA96412826BB100828713 /* JCORecorder.h */,
+				8D2FA96512826BB100828713 /* JCORecorder.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -344,6 +353,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Atlassian;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JiraConnect" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -410,6 +422,7 @@
 				8D5064111281189B00B3E1A0 /* CrashReportSender.m in Sources */,
 				8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */,
 				8D2FA81E1282351900828713 /* JCOTransport.m in Sources */,
+				8D2FA96612826BB100828713 /* JCORecorder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
