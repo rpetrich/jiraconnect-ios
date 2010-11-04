@@ -22,7 +22,12 @@ NSString* _recorderFilePath;
 -(id)init {
 	if (self = [super init]) {
 		
+		self.recordTime = 40;
 		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.caf", DOCUMENTS_FOLDER] retain];
+		
+		// delete the previous recording.
+		NSFileManager *fm = [NSFileManager defaultManager];
+		[fm removeItemAtPath:_recorderFilePath error:nil];
 		
 		AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 		NSError *err = nil;
@@ -41,17 +46,15 @@ NSString* _recorderFilePath;
 		NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
 		
 		[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-		[recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey]; 
+		[recordSetting setValue:[NSNumber numberWithFloat:22050] forKey:AVSampleRateKey]; 
 		[recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
 		
-		[recordSetting setValue :[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+		[recordSetting setValue :[NSNumber numberWithInt:8] forKey:AVLinearPCMBitDepthKey];
 		[recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
 		[recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
 		
 		
-		
-		// Create a new dated file
-		
+		// Create a recording file	
 		NSURL *url = [NSURL fileURLWithPath:_recorderFilePath];
 		err = nil;
 		AVAudioRecorder* recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
@@ -70,7 +73,7 @@ NSString* _recorderFilePath;
 		
 		//prepare to record
 		[recorder prepareToRecord];
-//		recorder.meteringEnabled = YES;	
+		recorder.meteringEnabled = YES;	
 		self.recorder = recorder;
 	}
 	return self;
@@ -86,31 +89,32 @@ NSString* _recorderFilePath;
         [[UIAlertView alloc] initWithTitle: @"Warning"
 								   message: @"Audio input hardware not available"
 								  delegate: nil
-						 cancelButtonTitle:@"OK"
-						 otherButtonTitles:nil];
+						 cancelButtonTitle: @"OK"
+						 otherButtonTitles: nil];
         [cantRecordAlert show];
         [cantRecordAlert release]; 
         return;
 	}
-	[self.recorder record];
+	[self.recorder recordForDuration:self.recordTime];
 	
 	
 }
 
--(NSData*) stop {
-	
+-(void) stop {	
 	[_recorder stop];
+}
+
+-(NSData*) audioData {
 	NSURL *url = [NSURL fileURLWithPath: _recorderFilePath];
 	NSError *err = nil;
 	NSData *audioData = [NSData dataWithContentsOfFile:[url path] options: 0 error:&err];
 	if(!audioData) {
 		NSLog(@"audio data: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
 	}
-	return audioData;
-
+	return audioData;	
 }
 
-@synthesize recorder=_recorder;
+@synthesize recorder=_recorder, recordTime;
 
 - (void) dealloc {
 	[super dealloc];

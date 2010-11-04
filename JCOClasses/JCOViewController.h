@@ -8,18 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "JCOTransport.h"
-#import <AVFoundation/AVFoundation.h>
 
-
-@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate> {
+@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;
 	IBOutlet UIButton* screenshotButton;
 	IBOutlet UITextView* descriptionField;
 	IBOutlet UITextField* subjectField;
+	
+	IBOutlet UILabel* countdownTimer;
+	IBOutlet UIProgressView* progressView;
+	IBOutlet UIView* countdownView;
+	
 	IBOutlet UIImagePickerController* imagePicker;
 	JCOTransport* _transport;
+	
 	
 }
 @property (retain, nonatomic) IBOutlet UIButton* sendButton;
@@ -27,6 +31,11 @@
 @property (retain, nonatomic) IBOutlet UIButton* screenshotButton;
 @property (retain, nonatomic) IBOutlet UITextView* descriptionField;
 @property (retain, nonatomic) IBOutlet UITextField* subjectField;
+
+@property (retain, nonatomic) IBOutlet UIView* countdownView;
+@property (retain, nonatomic) IBOutlet UIProgressView* progressView;
+
+
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
 @property (retain, nonatomic) IBOutlet JCOTransport* transport;
 

@@ -15,13 +15,15 @@
 @implementation JCOViewController
 
 UIImage* _image;
+
 JCORecorder* _recorder;
+NSTimer* _timer;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.transport = [[JCOTransport alloc] init];
-	_recorder = [[JCORecorder initialize] retain];
+	_recorder = [[JCORecorder initialize] retain]; // TODO: work out how to stoip. use a delegate!
 		
 }
 
@@ -34,6 +36,8 @@ JCORecorder* _recorder;
 	self.screenshotButton, 
 	self.descriptionField, 
 	self.descriptionField, 
+	self.countdownView,
+	self.progressView,
 	self.imagePicker = nil;
 	[_transport release]; _transport = nil;
 	[_recorder release]; _recorder = nil;
@@ -49,20 +53,35 @@ JCORecorder* _recorder;
 	[self presentModalViewController:imagePicker animated:YES];
 }
 
+-(void) updateCountdown:(NSTimer*)theTimer {
+	
+	float progress = (float) (_recorder.recorder.currentTime/_recorder.recordTime);
+	NSLog(@"Progress: %f", progress);
+
+	self.progressView.progress = progress;
+	
+}
+
 - (IBAction) addVoice {
 	
 	NSLog(@"addVoice: Is recording? %d - %@", _recorder.recorder.recording, _recorder.recorder);
 	
 	if (_recorder.recorder.recording) {
-		NSData* voiceData = [_recorder stop];
-		NSLog(@"Reorded voice: %@", _recorder.recorder.url );
+		
+		[_recorder stop];
+		NSLog(@"Stopped recorder. Sound saved to: %@", _recorder.recorder.url );
+		self.countdownView.hidden = YES; 
+		self.progressView.progress = 0;
+		[_timer invalidate];
+
 	} else {
-		NSLog(@"adding voice...%@", @"voice data");
+
 		[_recorder start];
-		NSLog(@"Is recording? %d", _recorder.recorder.recording);
+		NSLog(@"Started recording...");
+		self.progressView.progress = 0;
+		_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateCountdown:) userInfo:nil repeats:YES];
+		self.countdownView.hidden = NO;
 	}
-
-
 }
 
 
@@ -70,7 +89,7 @@ JCORecorder* _recorder;
 
 	self.transport.delegate = self;
 	NSLog(@"Sending feedback...%@, %@, %@", [screenshotButton currentBackgroundImage], self.subjectField.text, self.descriptionField.text);
-	[self.transport send:self.subjectField.text description:self.descriptionField.text screenshot:_image andVoiceData:nil]; //TODO get voice data
+	[self.transport send:self.subjectField.text description:self.descriptionField.text screenshot:_image andVoiceData:[_recorder audioData]]; 
 	
 }
 
@@ -130,7 +149,7 @@ JCORecorder* _recorder;
 }
 
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, imagePicker;
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker;
 @synthesize transport=_transport;
 
 - (void)dealloc {

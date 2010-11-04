@@ -13,12 +13,16 @@
 @interface JCORecorder : NSObject {
 
 	AVAudioRecorder* _recorder;
+	float recordTime;
 }
 
 @property (nonatomic, retain) AVAudioRecorder* recorder;
+@property (assign) float recordTime;
 
 +(JCORecorder*) initialize;
+
 -(void) start;
--(NSData*) stop;
+-(void) stop;
+-(NSData*) audioData;
 
 @end
