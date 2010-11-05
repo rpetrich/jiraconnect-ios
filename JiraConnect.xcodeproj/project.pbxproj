@@ -21,6 +21,13 @@
 		8D2FA8D11282565400828713 /* reply_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA8D01282565400828713 /* reply_bg.png */; };
 		8D2FA9031282614A00828713 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA9021282614A00828713 /* AVFoundation.framework */; };
 		8D2FA96612826BB100828713 /* JCORecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA96512826BB100828713 /* JCORecorder.m */; };
+		8D2FAB0612838AB600828713 /* button_Capture_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0012838AB600828713 /* button_Capture_active.png */; };
+		8D2FAB0712838AB600828713 /* button_Capture.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0112838AB600828713 /* button_Capture.png */; };
+		8D2FAB0812838AB600828713 /* button_Record_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0212838AB600828713 /* button_Record_active.png */; };
+		8D2FAB0912838AB600828713 /* button_Record.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0312838AB600828713 /* button_Record.png */; };
+		8D2FAB0A12838AB600828713 /* button_Send_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0412838AB600828713 /* button_Send_active.png */; };
+		8D2FAB0B12838AB600828713 /* button_Send.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0512838AB600828713 /* button_Send.png */; };
+		8D2FAB3A1283A08200828713 /* button_Record-OnAir.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB391283A08200828713 /* button_Record-OnAir.png */; };
 		8D50638412810ED300B3E1A0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637212810ED300B3E1A0 /* Reachability.m */; };
 		8D50638512810ED300B3E1A0 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637512810ED300B3E1A0 /* ASINetworkQueue.m */; };
 		8D50638612810ED300B3E1A0 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637712810ED300B3E1A0 /* ASIInputStream.m */; };
@@ -73,6 +80,13 @@
 		8D2FA9021282614A00828713 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8D2FA96412826BB100828713 /* JCORecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCORecorder.h; sourceTree = "<group>"; };
 		8D2FA96512826BB100828713 /* JCORecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCORecorder.m; sourceTree = "<group>"; };
+		8D2FAB0012838AB600828713 /* button_Capture_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Capture_active.png; sourceTree = "<group>"; };
+		8D2FAB0112838AB600828713 /* button_Capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Capture.png; sourceTree = "<group>"; };
+		8D2FAB0212838AB600828713 /* button_Record_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Record_active.png; sourceTree = "<group>"; };
+		8D2FAB0312838AB600828713 /* button_Record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Record.png; sourceTree = "<group>"; };
+		8D2FAB0412838AB600828713 /* button_Send_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Send_active.png; sourceTree = "<group>"; };
+		8D2FAB0512838AB600828713 /* button_Send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Send.png; sourceTree = "<group>"; };
+		8D2FAB391283A08200828713 /* button_Record-OnAir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Record-OnAir.png"; sourceTree = "<group>"; };
 		8D50637212810ED300B3E1A0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D50637312810ED300B3E1A0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8D50637412810ED300B3E1A0 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
@@ -111,7 +125,7 @@
 		8D5063B51281123500B3E1A0 /* JCOViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCOViewController.xib; sourceTree = "<group>"; };
 		8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
 		8D5063C3128114E600B3E1A0 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		8D5063C71281154300B3E1A0 /* feedback-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedback-v2.png"; path = "../../Resources/feedback-v2.png"; sourceTree = "<group>"; };
+		8D5063C71281154300B3E1A0 /* feedback-v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback-v2.png"; sourceTree = "<group>"; };
 		8D5063C91281157B00B3E1A0 /* JCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCO.h; sourceTree = "<group>"; };
 		8D5063CA1281157B00B3E1A0 /* JCO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCO.m; sourceTree = "<group>"; };
 		8D5063E7128116BF00B3E1A0 /* JCPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPing.h; sourceTree = "<group>"; };
@@ -223,6 +237,13 @@
 		8D2FA87312824FF800828713 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8D2FAB391283A08200828713 /* button_Record-OnAir.png */,
+				8D2FAB0012838AB600828713 /* button_Capture_active.png */,
+				8D2FAB0112838AB600828713 /* button_Capture.png */,
+				8D2FAB0212838AB600828713 /* button_Record_active.png */,
+				8D2FAB0312838AB600828713 /* button_Record.png */,
+				8D2FAB0412838AB600828713 /* button_Send_active.png */,
+				8D2FAB0512838AB600828713 /* button_Send.png */,
 				8D2FA8D01282565400828713 /* reply_bg.png */,
 				8D5063C71281154300B3E1A0 /* feedback-v2.png */,
 			);
@@ -389,6 +410,13 @@
 				8D2FA7961281327500828713 /* JCODemoViewController.xib in Resources */,
 				8D2FA79B1281395400828713 /* charles_320x480.png in Resources */,
 				8D2FA8D11282565400828713 /* reply_bg.png in Resources */,
+				8D2FAB0612838AB600828713 /* button_Capture_active.png in Resources */,
+				8D2FAB0712838AB600828713 /* button_Capture.png in Resources */,
+				8D2FAB0812838AB600828713 /* button_Record_active.png in Resources */,
+				8D2FAB0912838AB600828713 /* button_Record.png in Resources */,
+				8D2FAB0A12838AB600828713 /* button_Send_active.png in Resources */,
+				8D2FAB0B12838AB600828713 /* button_Send.png in Resources */,
+				8D2FAB3A1283A08200828713 /* button_Record-OnAir.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

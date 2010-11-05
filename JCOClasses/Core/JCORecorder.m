@@ -96,12 +96,18 @@ NSString* _recorderFilePath;
         return;
 	}
 	[self.recorder recordForDuration:self.recordTime];
-	
-	
+	self.startTime = [NSDate date];
 }
 
 -(void) stop {	
 	[_recorder stop];
+	_lastDuration = -[_startTime timeIntervalSinceNow];
+	_startTime = nil;
+	
+}
+
+-(float) currentDuration {
+	return -[_startTime timeIntervalSinceNow];
 }
 
 -(NSData*) audioData {
@@ -114,12 +120,13 @@ NSString* _recorderFilePath;
 	return audioData;	
 }
 
-@synthesize recorder=_recorder, recordTime;
+@synthesize recorder=_recorder, lastDuration=_lastDuration, startTime=_startTime, recordTime;
 
 - (void) dealloc {
 	[super dealloc];
 	[_recorder release]; _recorder = nil;
 	[_recorderFilePath release]; _recorderFilePath = nil;
+	[_startTime release]; _startTime = nil;
 }	
 
 @end

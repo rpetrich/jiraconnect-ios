@@ -25,8 +25,7 @@ NSTimer* _timer;
 	self.transport = [[JCOTransport alloc] init];
 	_recorder = [[JCORecorder initialize] retain]; // TODO: work out how to stoip. use a delegate!
 	_recorder.recorder.delegate = self;
-	self.countdownView.layer.cornerRadius = 9.0;
-
+	self.countdownView.layer.cornerRadius = 7.0;
 		
 }
 
@@ -52,39 +51,45 @@ NSTimer* _timer;
 }
 
 -(IBAction) addScreenshot {
-	NSLog(@"add screenshot...%@", 	[screenshotButton.imageView image]);
 	[self presentModalViewController:imagePicker animated:YES];
 }
 
 -(void) updateProgress:(NSTimer*)theTimer {
-	float progress = (float) (_recorder.recorder.currentTime/_recorder.recordTime);
-	NSLog(@"Progress: %f", progress);
+	float progress = (float) ([_recorder currentDuration]/_recorder.recordTime);
 	self.progressView.progress = progress;	
+	
+	NSString* durationStr = [NSString stringWithFormat:@"%.2f\"", -[_recorder.startTime timeIntervalSinceNow]];
+	[self.voiceButton  setTitle:durationStr forState:UIControlStateNormal];
+	[self.voiceButton  setTitle:durationStr forState:UIControlStateSelected];
+	[self.voiceButton  setTitle:durationStr forState:UIControlStateHighlighted];
 }
 
 -(void) hideAudioProgress {
 	self.countdownView.hidden = YES; 
 	self.progressView.progress = 0;
+	[self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record.png"] forState:UIControlStateNormal];
 	[_timer invalidate];
+	
 }
 
 - (IBAction) addVoice {
 	
-	NSLog(@"addVoice: Is recording? %d - %@", _recorder.recorder.recording, _recorder.recorder);
-	
 	if (_recorder.recorder.recording) {
 		
 		[_recorder stop];
-		NSLog(@"Stopped recorder. Sound saved to: %@", _recorder.recorder.url );
-		[self hideAudioProgress];
+		// update the label
+		NSString* durationStr = [NSString stringWithFormat:@"%.2f\"", _recorder.lastDuration];
+		[self.voiceButton  setTitle:durationStr forState:UIControlStateNormal];
+		[self.voiceButton  setTitle:durationStr forState:UIControlStateSelected];
+		[self.voiceButton  setTitle:durationStr forState:UIControlStateHighlighted];
 
 	} else {
 
 		[_recorder start];
-		NSLog(@"Started recording...");
 		self.progressView.progress = 0;
-		_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+		_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
 		self.countdownView.hidden = NO;
+		[self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record-OnAir.png"] forState:UIControlStateNormal];
 	}
 }
 
