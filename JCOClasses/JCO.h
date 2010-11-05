@@ -19,7 +19,7 @@
 
 + (JCO*) instance;
 
-- (void) configureJiraConnect:(NSURL*)url;
+- (void) configureJiraConnect:(NSString*) withUrl;
 - (JCOViewController*) viewController;
 - (NSDictionary*) getMetaData;
 

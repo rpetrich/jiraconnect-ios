@@ -54,14 +54,20 @@ NSTimer* _timer;
 	[self presentModalViewController:imagePicker animated:YES];
 }
 
--(void) updateProgress:(NSTimer*)theTimer {
-	float progress = (float) ([_recorder currentDuration]/_recorder.recordTime);
-	self.progressView.progress = progress;	
-	
-	NSString* durationStr = [NSString stringWithFormat:@"%.2f\"", -[_recorder.startTime timeIntervalSinceNow]];
+-(void) setVoiceButtonTitleWithDuration:(float)duration {
+
+	NSString* durationStr = [NSString stringWithFormat:@"%.2f\"", duration];
 	[self.voiceButton  setTitle:durationStr forState:UIControlStateNormal];
 	[self.voiceButton  setTitle:durationStr forState:UIControlStateSelected];
 	[self.voiceButton  setTitle:durationStr forState:UIControlStateHighlighted];
+}
+
+-(void) updateProgress:(NSTimer*)theTimer {
+	float progress = (float) ([_recorder currentDuration]/_recorder.recordTime);
+	self.progressView.progress = progress;	
+	[self setVoiceButtonTitleWithDuration:-[_recorder.startTime timeIntervalSinceNow]];
+	
+
 }
 
 -(void) hideAudioProgress {
@@ -69,7 +75,6 @@ NSTimer* _timer;
 	self.progressView.progress = 0;
 	[self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record.png"] forState:UIControlStateNormal];
 	[_timer invalidate];
-	
 }
 
 - (IBAction) addVoice {
@@ -78,10 +83,8 @@ NSTimer* _timer;
 		
 		[_recorder stop];
 		// update the label
-		NSString* durationStr = [NSString stringWithFormat:@"%.2f\"", _recorder.lastDuration];
-		[self.voiceButton  setTitle:durationStr forState:UIControlStateNormal];
-		[self.voiceButton  setTitle:durationStr forState:UIControlStateSelected];
-		[self.voiceButton  setTitle:durationStr forState:UIControlStateHighlighted];
+
+		[self setVoiceButtonTitleWithDuration:_recorder.lastDuration];
 
 	} else {
 
@@ -119,7 +122,8 @@ NSTimer* _timer;
 	NSLog(@"Picked Media: %@", info);
 	UIImage* origImg = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
 	[self dismissModalViewControllerAnimated:YES];
-	[screenshotButton setBackgroundImage:origImg forState:UIControlStateNormal];
+	[self.screenshotButton setBackgroundImage:origImg forState:UIControlStateNormal];
+	[self.screenshotButton setTitle:nil forState:UIControlStateNormal];
 	_image = origImg;
 	[_image retain];
 	

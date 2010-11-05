@@ -8,6 +8,7 @@
 
 #import "JiraConnectAppDelegate.h"
 #import "JCODemoViewController.h"
+#import "JCO.h"
 
 @implementation JiraConnectAppDelegate
 
@@ -21,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
+
+	[[JCO instance] configureJiraConnect:@"http://connect.onjira.com"];
 
     // Add the view controller's view to the window and display.
     [window addSubview:viewController.view];

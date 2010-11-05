@@ -2,16 +2,16 @@
 {
 	1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1026, 800}}";
-			sepNavSelRange = "{206, 0}";
-			sepNavVisRange = "{0, 490}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 800}}";
+			sepNavSelRange = "{199, 0}";
+			sepNavVisRange = "{0, 483}";
 		};
 	};
 	1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1157}}";
-			sepNavSelRange = "{1324, 0}";
-			sepNavVisRange = "{0, 2338}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1092}}";
+			sepNavSelRange = "{577, 20}";
+			sepNavVisRange = "{0, 2240}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* JiraConnect */ = {
@@ -28,10 +28,11 @@
 			1D6058900D05DD3D006BFB54 /* JiraConnect */,
 		);
 		breakpoints = (
-			8D2FAAD51283859900828713 /* JCOViewController.m:58 */,
-			8D2FAB1512838B8000828713 /* JCOViewController.m:85 */,
-			8D2FAB2312838C0300828713 /* JCOViewController.m:68 */,
-			8D2FAB581283A9CC00828713 /* JCOViewController.m:92 */,
+			8D2FAAD51283859900828713 /* JCOViewController.m:66 */,
+			8D2FAB1512838B8000828713 /* JCOViewController.m:88 */,
+			8D2FAB2312838C0300828713 /* JCOViewController.m:74 */,
+			8D2FAB581283A9CC00828713 /* JCOViewController.m:95 */,
+			8D2FABF11283CD6B00828713 /* CrashReporter.m:476 */,
 		);
 		codeSenseManager = 8D50630C1281081700B3E1A0 /* Code sense */;
 		executables = (
@@ -43,7 +44,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					1047,
+					1120,
 					20,
 					48,
 					43,
@@ -467,6 +468,32 @@
 			8D2FABCE1283BCB300828713 /* PlistBookmark */ = 8D2FABCE1283BCB300828713 /* PlistBookmark */;
 			8D2FABCF1283BCB300828713 /* PBXBookmark */ = 8D2FABCF1283BCB300828713 /* PBXBookmark */;
 			8D2FABD01283BCB300828713 /* PBXBookmark */ = 8D2FABD01283BCB300828713 /* PBXBookmark */;
+			8D2FABD81283BDEC00828713 /* PBXBookmark */ = 8D2FABD81283BDEC00828713 /* PBXBookmark */;
+			8D2FABD91283BDEC00828713 /* PBXTextBookmark */ = 8D2FABD91283BDEC00828713 /* PBXTextBookmark */;
+			8D2FABE21283BEC000828713 /* PBXTextBookmark */ = 8D2FABE21283BEC000828713 /* PBXTextBookmark */;
+			8D2FABF51283D19500828713 /* PBXTextBookmark */ = 8D2FABF51283D19500828713 /* PBXTextBookmark */;
+			8D2FABF61283D19500828713 /* PBXTextBookmark */ = 8D2FABF61283D19500828713 /* PBXTextBookmark */;
+			8D2FABF81283D19500828713 /* PBXTextBookmark */ = 8D2FABF81283D19500828713 /* PBXTextBookmark */;
+			8D2FABF91283D19500828713 /* PBXTextBookmark */ = 8D2FABF91283D19500828713 /* PBXTextBookmark */;
+			8D2FABFA1283D19500828713 /* PBXTextBookmark */ = 8D2FABFA1283D19500828713 /* PBXTextBookmark */;
+			8D2FABFB1283D19500828713 /* PBXTextBookmark */ = 8D2FABFB1283D19500828713 /* PBXTextBookmark */;
+			8D2FABFC1283D19500828713 /* PBXTextBookmark */ = 8D2FABFC1283D19500828713 /* PBXTextBookmark */;
+			8D2FABFD1283D19500828713 /* PBXTextBookmark */ = 8D2FABFD1283D19500828713 /* PBXTextBookmark */;
+			8D2FAC091283D2A600828713 /* PBXTextBookmark */ = 8D2FAC091283D2A600828713 /* PBXTextBookmark */;
+			8D2FAC0A1283D2A600828713 /* PBXTextBookmark */ = 8D2FAC0A1283D2A600828713 /* PBXTextBookmark */;
+			8D2FAC171283D35500828713 /* PBXTextBookmark */ = 8D2FAC171283D35500828713 /* PBXTextBookmark */;
+			8D2FAC181283D35500828713 /* PBXTextBookmark */ = 8D2FAC181283D35500828713 /* PBXTextBookmark */;
+			8D2FAC191283D35500828713 /* PBXTextBookmark */ = 8D2FAC191283D35500828713 /* PBXTextBookmark */;
+			8D2FAC1A1283D35500828713 /* PBXTextBookmark */ = 8D2FAC1A1283D35500828713 /* PBXTextBookmark */;
+			8D2FAC1B1283D35500828713 /* PBXTextBookmark */ = 8D2FAC1B1283D35500828713 /* PBXTextBookmark */;
+			8D2FAC221283D3C200828713 /* PBXTextBookmark */ = 8D2FAC221283D3C200828713 /* PBXTextBookmark */;
+			8D2FAC231283D3C200828713 /* PBXTextBookmark */ = 8D2FAC231283D3C200828713 /* PBXTextBookmark */;
+			8D2FAC241283D3C200828713 /* PBXTextBookmark */ = 8D2FAC241283D3C200828713 /* PBXTextBookmark */;
+			8D2FAC251283D3C200828713 /* PBXTextBookmark */ = 8D2FAC251283D3C200828713 /* PBXTextBookmark */;
+			8D2FAC301283D82300828713 /* PBXTextBookmark */ = 8D2FAC301283D82300828713 /* PBXTextBookmark */;
+			8D2FAC311283D82300828713 /* PBXTextBookmark */ = 8D2FAC311283D82300828713 /* PBXTextBookmark */;
+			8D2FAC321283D82300828713 /* PBXTextBookmark */ = 8D2FAC321283D82300828713 /* PBXTextBookmark */;
+			8D2FAC331283D82300828713 /* PBXTextBookmark */ = 8D2FAC331283D82300828713 /* PBXTextBookmark */;
 			8D506421128118C200B3E1A0 = 8D506421128118C200B3E1A0 /* PBXTextBookmark */;
 			8D506422128118C200B3E1A0 = 8D506422128118C200B3E1A0 /* PBXTextBookmark */;
 			8D506423128118C200B3E1A0 = 8D506423128118C200B3E1A0 /* PlistBookmark */;
@@ -504,17 +531,17 @@
 	8D2FA6F112812F0100828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Request for member 'hasProcessInfo' in something not a structure or union";
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		rLen = 1;
-		rLoc = 523;
+		rLoc = 298;
 		rType = 1;
 	};
 	8D2FA6F212812F0100828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 524";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 1867;
 		vrLoc = 16042;
@@ -536,10 +563,10 @@
 	};
 	8D2FA7A2128139A400828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 524";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 1867;
 		vrLoc = 16042;
@@ -564,10 +591,10 @@
 	};
 	8D2FA7AF128139A500828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 467";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 1490;
 		vrLoc = 14079;
@@ -617,7 +644,7 @@
 		rLen = 21;
 		rLoc = 190;
 		rType = 0;
-		vrLen = 2004;
+		vrLen = 1997;
 		vrLoc = 710;
 	};
 	8D2FA7DF12813C3800828713 /* PBXTextBookmark */ = {
@@ -627,7 +654,7 @@
 		rLen = 0;
 		rLoc = 199;
 		rType = 0;
-		vrLen = 490;
+		vrLen = 483;
 		vrLoc = 0;
 	};
 	8D2FA7E012813C3800828713 /* PBXTextBookmark */ = {
@@ -655,7 +682,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 76";
 		rLen = 17;
-		rLoc = 1896;
+		rLoc = 1791;
 		rType = 0;
 		vrLen = 2138;
 		vrLoc = 722;
@@ -715,7 +742,7 @@
 		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
 		name = "JCO.h: 22";
 		rLen = 0;
-		rLoc = 475;
+		rLoc = 483;
 		rType = 0;
 		vrLen = 427;
 		vrLoc = 0;
@@ -743,7 +770,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 68";
 		rLen = 0;
-		rLoc = 1697;
+		rLoc = 1589;
 		rType = 0;
 		vrLen = 764;
 		vrLoc = 0;
@@ -753,7 +780,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 68";
 		rLen = 0;
-		rLoc = 1697;
+		rLoc = 1589;
 		rType = 0;
 		vrLen = 764;
 		vrLoc = 0;
@@ -783,7 +810,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 76";
 		rLen = 17;
-		rLoc = 1896;
+		rLoc = 1791;
 		rType = 0;
 		vrLen = 2121;
 		vrLoc = 717;
@@ -825,7 +852,7 @@
 		rLen = 0;
 		rLoc = 199;
 		rType = 0;
-		vrLen = 490;
+		vrLen = 483;
 		vrLoc = 0;
 	};
 	8D2FA814128232F800828713 /* PBXTextBookmark */ = {
@@ -853,7 +880,7 @@
 		fRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */;
 		name = "JiraConnectAppDelegate.m: 43";
 		rLen = 0;
-		rLoc = 1317;
+		rLoc = 1403;
 		rType = 0;
 		vrLen = 2338;
 		vrLoc = 0;
@@ -870,10 +897,10 @@
 	};
 	8D2FA818128232F800828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D50640F1281189B00B3E1A0 /* CrashReportSender.h */;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
 		name = "CrashReportSender.h: 64";
-		rLen = 25;
-		rLoc = 4212;
+		rLen = 0;
+		rLoc = 4151;
 		rType = 0;
 		vrLen = 3715;
 		vrLoc = 1873;
@@ -917,9 +944,9 @@
 	};
 	8D2FA81D1282351900828713 /* JCOTransport.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1251, 1391}}";
-			sepNavSelRange = "{3218, 38}";
-			sepNavVisRange = "{1368, 1935}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 1391}}";
+			sepNavSelRange = "{1198, 18}";
+			sepNavVisRange = "{178, 2228}";
 		};
 	};
 	8D2FA82112823B1B00828713 /* PBXTextBookmark */ = {
@@ -927,7 +954,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 68";
 		rLen = 0;
-		rLoc = 1697;
+		rLoc = 1589;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -984,27 +1011,27 @@
 		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
 		name = "JCO.h: 26";
 		rLen = 11;
-		rLoc = 512;
+		rLoc = 520;
 		rType = 0;
 		vrLen = 530;
 		vrLoc = 0;
 	};
 	8D2FA83312823B2E00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 467";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 1739;
 		vrLoc = 13950;
 	};
 	8D2FA83412823B2E00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D50640F1281189B00B3E1A0 /* CrashReportSender.h */;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
 		name = "CrashReportSender.h: 64";
-		rLen = 675;
-		rLoc = 4202;
+		rLen = 0;
+		rLoc = 4151;
 		rType = 0;
 		vrLen = 3748;
 		vrLoc = 1840;
@@ -1084,7 +1111,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 68";
 		rLen = 0;
-		rLoc = 1697;
+		rLoc = 1589;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1104,7 +1131,7 @@
 		rLen = 0;
 		rLoc = 299;
 		rType = 0;
-		vrLen = 533;
+		vrLen = 531;
 		vrLoc = 0;
 	};
 	8D2FA85812823D6700828713 /* PBXTextBookmark */ = {
@@ -1119,10 +1146,10 @@
 	};
 	8D2FA85912823D8500828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D50640F1281189B00B3E1A0 /* CrashReportSender.h */;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
 		name = "CrashReportSender.h: 64";
-		rLen = 675;
-		rLoc = 4202;
+		rLen = 0;
+		rLoc = 4151;
 		rType = 0;
 		vrLen = 3748;
 		vrLoc = 1840;
@@ -1164,7 +1191,7 @@
 		rLen = 0;
 		rLoc = 299;
 		rType = 0;
-		vrLen = 533;
+		vrLen = 531;
 		vrLoc = 0;
 	};
 	8D2FA85E12823D8500828713 /* PBXTextBookmark */ = {
@@ -1192,7 +1219,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 101";
 		rLen = 0;
-		rLoc = 4461;
+		rLoc = 4394;
 		rType = 0;
 		vrLen = 1815;
 		vrLoc = 465;
@@ -1274,7 +1301,7 @@
 		rLen = 0;
 		rLoc = 299;
 		rType = 0;
-		vrLen = 533;
+		vrLen = 531;
 		vrLoc = 0;
 	};
 	8D2FA87A1282502C00828713 /* PBXTextBookmark */ = {
@@ -1306,7 +1333,7 @@
 		rLen = 0;
 		rLoc = 299;
 		rType = 0;
-		vrLen = 533;
+		vrLen = 531;
 		vrLoc = 0;
 	};
 	8D2FA8811282508900828713 /* PBXTextBookmark */ = {
@@ -1391,7 +1418,7 @@
 		rLen = 0;
 		rLoc = 299;
 		rType = 0;
-		vrLen = 533;
+		vrLen = 531;
 		vrLoc = 0;
 	};
 	8D2FA88C128250CC00828713 /* PBXTextBookmark */ = {
@@ -1677,7 +1704,7 @@
 		rLen = 0;
 		rLoc = 228;
 		rType = 0;
-		vrLen = 746;
+		vrLen = 531;
 		vrLoc = 0;
 	};
 	8D2FA8BE1282539000828713 /* PBXTextBookmark */ = {
@@ -1752,7 +1779,7 @@
 	};
 	8D2FA8C51282539000828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D50640F1281189B00B3E1A0 /* CrashReportSender.h */;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
 		name = "CrashReportSender.h: 58";
 		rLen = 0;
 		rLoc = 4062;
@@ -1762,20 +1789,20 @@
 	};
 	8D2FA8C61282539000828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 123";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 1617;
 		vrLoc = 13943;
 	};
 	8D2FA8C71282539000828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 365";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 11065;
@@ -1793,17 +1820,17 @@
 	8D2FA8CB128253AF00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Unused variable 'boundary'";
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
-		rLen = 1;
-		rLoc = 677;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
+		rLen = 0;
+		rLoc = 447;
 		rType = 1;
 	};
 	8D2FA8CC128253AF00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 678";
 		rLen = 0;
-		rLoc = 22282;
+		rLoc = 14665;
 		rType = 0;
 		vrLen = 1492;
 		vrLoc = 21736;
@@ -1820,10 +1847,10 @@
 	};
 	8D2FA8D4128256BF00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 678";
 		rLen = 0;
-		rLoc = 22282;
+		rLoc = 14665;
 		rType = 0;
 		vrLen = 1427;
 		vrLoc = 21736;
@@ -1840,10 +1867,10 @@
 	};
 	8D2FA8D8128256C500828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 674";
 		rLen = 0;
-		rLoc = 22135;
+		rLoc = 14665;
 		rType = 0;
 		vrLen = 2173;
 		vrLoc = 21603;
@@ -1867,7 +1894,7 @@
 		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
 		name = "JCO.m: 64";
 		rLen = 0;
-		rLoc = 1532;
+		rLoc = 1535;
 		rType = 0;
 		vrLen = 2182;
 		vrLoc = 875;
@@ -1897,7 +1924,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 100";
 		rLen = 0;
-		rLoc = 4121;
+		rLoc = 4054;
 		rType = 0;
 		vrLen = 1448;
 		vrLoc = 0;
@@ -1917,7 +1944,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 100";
 		rLen = 0;
-		rLoc = 4121;
+		rLoc = 4054;
 		rType = 0;
 		vrLen = 1517;
 		vrLoc = 95;
@@ -2004,10 +2031,10 @@
 	};
 	8D2FA9001282613E00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 678";
 		rLen = 0;
-		rLoc = 22282;
+		rLoc = 14665;
 		rType = 0;
 		vrLen = 1492;
 		vrLoc = 21736;
@@ -2027,7 +2054,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 51";
 		rLen = 0;
-		rLoc = 2509;
+		rLoc = 2368;
 		rType = 0;
 		vrLen = 1670;
 		vrLoc = 0;
@@ -2037,7 +2064,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 52";
 		rLen = 0;
-		rLoc = 2509;
+		rLoc = 2368;
 		rType = 0;
 		vrLen = 1680;
 		vrLoc = 0;
@@ -2047,7 +2074,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 52";
 		rLen = 0;
-		rLoc = 2038;
+		rLoc = 2149;
 		rType = 0;
 		vrLen = 1479;
 		vrLoc = 0;
@@ -2057,7 +2084,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 51";
 		rLen = 0;
-		rLoc = 1368;
+		rLoc = 1730;
 		rType = 0;
 		vrLen = 1562;
 		vrLoc = 0;
@@ -2089,7 +2116,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 52";
 		rLen = 9;
-		rLoc = 1817;
+		rLoc = 1930;
 		rType = 0;
 		vrLen = 1562;
 		vrLoc = 0;
@@ -2099,7 +2126,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 51";
 		rLen = 0;
-		rLoc = 1788;
+		rLoc = 1901;
 		rType = 0;
 		vrLen = 1579;
 		vrLoc = 0;
@@ -2173,10 +2200,10 @@
 	};
 	8D2FA96012826B7F00828713 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 678";
 		rLen = 0;
-		rLoc = 22282;
+		rLoc = 14665;
 		rType = 0;
 		vrLen = 1492;
 		vrLoc = 21736;
@@ -2329,7 +2356,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1674;
 		vrLoc = 215;
@@ -2339,7 +2366,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1644;
 		vrLoc = 215;
@@ -2349,7 +2376,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 61";
 		rLen = 0;
-		rLoc = 2058;
+		rLoc = 2169;
 		rType = 0;
 		vrLen = 1644;
 		vrLoc = 215;
@@ -2389,7 +2416,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 61";
 		rLen = 0;
-		rLoc = 2058;
+		rLoc = 2169;
 		rType = 0;
 		vrLen = 1662;
 		vrLoc = 198;
@@ -2399,7 +2426,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1689;
 		vrLoc = 182;
@@ -2409,7 +2436,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1689;
 		vrLoc = 182;
@@ -2419,7 +2446,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1689;
 		vrLoc = 182;
@@ -2559,7 +2586,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 4;
-		rLoc = 1958;
+		rLoc = 2071;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 198;
@@ -2629,7 +2656,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 62";
 		rLen = 5;
-		rLoc = 2064;
+		rLoc = 2175;
 		rType = 0;
 		vrLen = 1687;
 		vrLoc = 241;
@@ -2706,7 +2733,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 66";
 		rLen = 0;
-		rLoc = 2505;
+		rLoc = 2364;
 		rType = 0;
 		vrLen = 1704;
 		vrLoc = 293;
@@ -2716,7 +2743,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 136";
 		rLen = 0;
-		rLoc = 4579;
+		rLoc = 4512;
 		rType = 0;
 		vrLen = 1676;
 		vrLoc = 2021;
@@ -2726,7 +2753,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 68";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1938;
 		vrLoc = 586;
@@ -2736,7 +2763,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 68";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1938;
 		vrLoc = 586;
@@ -2766,7 +2793,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 60";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1938;
 		vrLoc = 586;
@@ -2786,7 +2813,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 59";
 		rLen = 4;
-		rLoc = 1958;
+		rLoc = 2071;
 		rType = 0;
 		vrLen = 1958;
 		vrLoc = 586;
@@ -2796,7 +2823,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 63";
 		rLen = 0;
-		rLoc = 2050;
+		rLoc = 2161;
 		rType = 0;
 		vrLen = 1919;
 		vrLoc = 586;
@@ -2806,7 +2833,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 68";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1956;
 		vrLoc = 586;
@@ -2816,7 +2843,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 70";
 		rLen = 0;
-		rLoc = 2444;
+		rLoc = 2303;
 		rType = 0;
 		vrLen = 1766;
 		vrLoc = 577;
@@ -2825,7 +2852,7 @@
 		isa = PBXTextBookmark;
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		rLen = 1;
-		rLoc = 89;
+		rLoc = 92;
 		rType = 1;
 	};
 	8D2FAA121282818100828713 /* PBXTextBookmark */ = {
@@ -2833,7 +2860,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 79";
 		rLen = 0;
-		rLoc = 2512;
+		rLoc = 2371;
 		rType = 0;
 		vrLen = 1772;
 		vrLoc = 577;
@@ -2860,7 +2887,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 71";
 		rLen = 0;
-		rLoc = 2505;
+		rLoc = 2364;
 		rType = 0;
 		vrLen = 1772;
 		vrLoc = 577;
@@ -2870,7 +2897,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2511;
+		rLoc = 2370;
 		rType = 0;
 		vrLen = 1854;
 		vrLoc = 577;
@@ -2890,7 +2917,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2511;
+		rLoc = 2370;
 		rType = 0;
 		vrLen = 1854;
 		vrLoc = 577;
@@ -2900,7 +2927,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 81";
 		rLen = 0;
-		rLoc = 2511;
+		rLoc = 2370;
 		rType = 0;
 		vrLen = 1904;
 		vrLoc = 577;
@@ -2930,7 +2957,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2511;
+		rLoc = 2370;
 		rType = 0;
 		vrLen = 1904;
 		vrLoc = 577;
@@ -2940,7 +2967,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2511;
+		rLoc = 2370;
 		rType = 0;
 		vrLen = 1914;
 		vrLoc = 575;
@@ -2950,7 +2977,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2505;
+		rLoc = 2364;
 		rType = 0;
 		vrLen = 1875;
 		vrLoc = 575;
@@ -2960,7 +2987,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2505;
+		rLoc = 2364;
 		rType = 0;
 		vrLen = 1877;
 		vrLoc = 575;
@@ -2970,7 +2997,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 61";
 		rLen = 0;
-		rLoc = 1365;
+		rLoc = 1727;
 		rType = 0;
 		vrLen = 1792;
 		vrLoc = 575;
@@ -3010,7 +3037,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 84";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1619;
 		vrLoc = 575;
@@ -3020,7 +3047,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 87";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1718;
 		vrLoc = 575;
@@ -3030,7 +3057,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 88";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1900;
 		vrLoc = 821;
@@ -3040,7 +3067,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 88";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1935;
 		vrLoc = 821;
@@ -3050,7 +3077,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 89";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1974;
 		vrLoc = 821;
@@ -3060,7 +3087,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 88";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1973;
 		vrLoc = 821;
@@ -3070,7 +3097,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1974;
 		vrLoc = 821;
@@ -3080,7 +3107,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1868;
 		vrLoc = 821;
@@ -3090,7 +3117,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1868;
 		vrLoc = 821;
@@ -3170,7 +3197,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1289;
+		rLoc = 1651;
 		rType = 0;
 		vrLen = 1739;
 		vrLoc = 2661;
@@ -3180,7 +3207,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1289;
+		rLoc = 1651;
 		rType = 0;
 		vrLen = 1739;
 		vrLoc = 2661;
@@ -3190,7 +3217,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 91";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1776;
 		vrLoc = 820;
@@ -3200,7 +3227,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1289;
+		rLoc = 1651;
 		rType = 0;
 		vrLen = 1785;
 		vrLoc = 820;
@@ -3220,7 +3247,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 59";
 		rLen = 0;
-		rLoc = 1327;
+		rLoc = 1689;
 		rType = 0;
 		vrLen = 1722;
 		vrLoc = 820;
@@ -3230,7 +3257,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1289;
+		rLoc = 1651;
 		rType = 0;
 		vrLen = 1713;
 		vrLoc = 820;
@@ -3240,7 +3267,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1289;
+		rLoc = 1651;
 		rType = 0;
 		vrLen = 1702;
 		vrLoc = 820;
@@ -3250,7 +3277,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 59";
 		rLen = 0;
-		rLoc = 1327;
+		rLoc = 1689;
 		rType = 0;
 		vrLen = 1718;
 		vrLoc = 820;
@@ -3260,7 +3287,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 60";
 		rLen = 0;
-		rLoc = 1354;
+		rLoc = 1716;
 		rType = 0;
 		vrLen = 1704;
 		vrLoc = 820;
@@ -3270,7 +3297,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 91";
 		rLen = 0;
-		rLoc = 2472;
+		rLoc = 2331;
 		rType = 0;
 		vrLen = 1756;
 		vrLoc = 949;
@@ -3280,7 +3307,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 77";
 		rLen = 0;
-		rLoc = 2015;
+		rLoc = 2126;
 		rType = 0;
 		vrLen = 1846;
 		vrLoc = 1182;
@@ -3290,7 +3317,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1268;
+		rLoc = 1630;
 		rType = 0;
 		vrLen = 1846;
 		vrLoc = 1182;
@@ -3300,7 +3327,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1268;
+		rLoc = 1630;
 		rType = 0;
 		vrLen = 1847;
 		vrLoc = 1182;
@@ -3310,7 +3337,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 81";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1759;
 		vrLoc = 1182;
@@ -3320,7 +3347,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 75";
 		rLen = 0;
-		rLoc = 2011;
+		rLoc = 2122;
 		rType = 0;
 		vrLen = 1858;
 		vrLoc = 1182;
@@ -3330,7 +3357,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1268;
+		rLoc = 1630;
 		rType = 0;
 		vrLen = 1745;
 		vrLoc = 799;
@@ -3390,7 +3417,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1268;
+		rLoc = 1630;
 		rType = 0;
 		vrLen = 1743;
 		vrLoc = 799;
@@ -3400,7 +3427,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1288;
+		rLoc = 1650;
 		rType = 0;
 		vrLen = 1758;
 		vrLoc = 799;
@@ -3410,7 +3437,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 86";
 		rLen = 0;
-		rLoc = 2429;
+		rLoc = 2288;
 		rType = 0;
 		vrLen = 1739;
 		vrLoc = 865;
@@ -3420,7 +3447,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 59";
 		rLen = 0;
-		rLoc = 1326;
+		rLoc = 1688;
 		rType = 0;
 		vrLen = 1729;
 		vrLoc = 865;
@@ -3430,7 +3457,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 58";
 		rLen = 0;
-		rLoc = 1288;
+		rLoc = 1650;
 		rType = 0;
 		vrLen = 1732;
 		vrLoc = 865;
@@ -3440,7 +3467,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 84";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1801;
 		vrLoc = 865;
@@ -3470,7 +3497,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 84";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1801;
 		vrLoc = 865;
@@ -3485,7 +3512,7 @@
 		vrLen = 1832;
 		vrLoc = 2056;
 	};
-	8D2FAAD51283859900828713 /* JCOViewController.m:58 */ = {
+	8D2FAAD51283859900828713 /* JCOViewController.m:66 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3497,8 +3524,8 @@
 		functionName = "-updateProgress:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 58;
-		modificationTime = 310618579.063662;
+		lineNumber = 66;
+		modificationTime = 310627691.375395;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3537,7 +3564,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 61";
 		rLen = 0;
-		rLoc = 1368;
+		rLoc = 1730;
 		rType = 0;
 		vrLen = 1707;
 		vrLoc = 657;
@@ -3547,7 +3574,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 86";
 		rLen = 0;
-		rLoc = 2529;
+		rLoc = 2388;
 		rType = 0;
 		vrLen = 1798;
 		vrLoc = 997;
@@ -3557,7 +3584,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 87";
 		rLen = 0;
-		rLoc = 2533;
+		rLoc = 2392;
 		rType = 0;
 		vrLen = 1811;
 		vrLoc = 997;
@@ -3567,7 +3594,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 86";
 		rLen = 0;
-		rLoc = 2533;
+		rLoc = 2392;
 		rType = 0;
 		vrLen = 1799;
 		vrLoc = 997;
@@ -3587,7 +3614,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 100";
 		rLen = 0;
-		rLoc = 3127;
+		rLoc = 2986;
 		rType = 0;
 		vrLen = 1876;
 		vrLoc = 1684;
@@ -3607,7 +3634,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 100";
 		rLen = 0;
-		rLoc = 3127;
+		rLoc = 2986;
 		rType = 0;
 		vrLen = 1895;
 		vrLoc = 1684;
@@ -3617,7 +3644,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1826;
 		vrLoc = 971;
@@ -3627,7 +3654,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1826;
 		vrLoc = 971;
@@ -3642,7 +3669,7 @@
 		vrLen = 1548;
 		vrLoc = 2195;
 	};
-	8D2FAB1512838B8000828713 /* JCOViewController.m:85 */ = {
+	8D2FAB1512838B8000828713 /* JCOViewController.m:88 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3654,9 +3681,9 @@
 		functionName = "-addVoice";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 85;
+		lineNumber = 88;
 		location = JiraConnect;
-		modificationTime = 310618579.06394;
+		modificationTime = 310627691.375501;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3675,7 +3702,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1864;
 		vrLoc = 880;
@@ -3685,12 +3712,12 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1834;
 		vrLoc = 880;
 	};
-	8D2FAB2312838C0300828713 /* JCOViewController.m:68 */ = {
+	8D2FAB2312838C0300828713 /* JCOViewController.m:74 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3702,9 +3729,9 @@
 		functionName = "-hideAudioProgress";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 68;
+		lineNumber = 74;
 		location = JiraConnect;
-		modificationTime = 310618579.064087;
+		modificationTime = 310627691.375561;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3713,7 +3740,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1834;
 		vrLoc = 880;
@@ -3723,7 +3750,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1834;
 		vrLoc = 880;
@@ -3733,7 +3760,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1807;
 		vrLoc = 880;
@@ -3743,7 +3770,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2924;
+		rLoc = 2783;
 		rType = 0;
 		vrLen = 1533;
 		vrLoc = 880;
@@ -3775,7 +3802,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 64";
 		rLen = 0;
-		rLoc = 1957;
+		rLoc = 2070;
 		rType = 0;
 		vrLen = 1599;
 		vrLoc = 734;
@@ -3785,7 +3812,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 65";
 		rLen = 0;
-		rLoc = 1845;
+		rLoc = 1958;
 		rType = 0;
 		vrLen = 1677;
 		vrLoc = 734;
@@ -3795,7 +3822,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1761;
 		vrLoc = 734;
@@ -3809,7 +3836,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 81";
 		rLen = 0;
-		rLoc = 2760;
+		rLoc = 2619;
 		rType = 0;
 		vrLen = 1677;
 		vrLoc = 734;
@@ -3819,7 +3846,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1781;
 		vrLoc = 710;
@@ -3829,7 +3856,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1785;
 		vrLoc = 710;
@@ -3851,7 +3878,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1783;
 		vrLoc = 710;
@@ -3864,7 +3891,7 @@
 		isa = PBXBookmark;
 		fRef = 8D2FAB391283A08200828713 /* button_Record-OnAir.png */;
 	};
-	8D2FAB581283A9CC00828713 /* JCOViewController.m:92 */ = {
+	8D2FAB581283A9CC00828713 /* JCOViewController.m:95 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3874,11 +3901,11 @@
 		delayBeforeContinue = 0;
 		fileReference = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		functionName = "-addVoice";
-		hitCount = 1;
+		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 92;
+		lineNumber = 95;
 		location = JiraConnect;
-		modificationTime = 310618583.952592;
+		modificationTime = 310629014.619276;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -3891,7 +3918,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2526;
+		rLoc = 2385;
 		rType = 0;
 		vrLen = 1783;
 		vrLoc = 710;
@@ -3901,7 +3928,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2526;
+		rLoc = 2385;
 		rType = 0;
 		vrLen = 1783;
 		vrLoc = 710;
@@ -3911,7 +3938,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2526;
+		rLoc = 2385;
 		rType = 0;
 		vrLen = 1723;
 		vrLoc = 710;
@@ -3921,7 +3948,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2526;
+		rLoc = 2385;
 		rType = 0;
 		vrLen = 1723;
 		vrLoc = 710;
@@ -3939,7 +3966,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 83";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1724;
 		vrLoc = 710;
@@ -3949,7 +3976,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1724;
 		vrLoc = 710;
@@ -3959,7 +3986,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1723;
 		vrLoc = 710;
@@ -3969,7 +3996,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 83";
 		rLen = 0;
-		rLoc = 2642;
+		rLoc = 2501;
 		rType = 0;
 		vrLen = 1610;
 		vrLoc = 710;
@@ -3979,7 +4006,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 65";
 		rLen = 0;
-		rLoc = 1919;
+		rLoc = 2032;
 		rType = 0;
 		vrLen = 1829;
 		vrLoc = 710;
@@ -3989,7 +4016,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2421;
+		rLoc = 2280;
 		rType = 0;
 		vrLen = 1829;
 		vrLoc = 710;
@@ -3999,7 +4026,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2680;
+		rLoc = 2539;
 		rType = 0;
 		vrLen = 1716;
 		vrLoc = 930;
@@ -4021,7 +4048,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 82";
 		rLen = 0;
-		rLoc = 2680;
+		rLoc = 2539;
 		rType = 0;
 		vrLen = 1716;
 		vrLoc = 930;
@@ -4031,7 +4058,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1805;
 		vrLoc = 930;
@@ -4071,7 +4098,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1828;
 		vrLoc = 930;
@@ -4081,7 +4108,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1832;
 		vrLoc = 930;
@@ -4091,7 +4118,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1809;
 		vrLoc = 930;
@@ -4101,7 +4128,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1832;
 		vrLoc = 930;
@@ -4111,7 +4138,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1835;
 		vrLoc = 930;
@@ -4121,7 +4148,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1835;
 		vrLoc = 930;
@@ -4131,7 +4158,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1838;
 		vrLoc = 930;
@@ -4141,7 +4168,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1837;
 		vrLoc = 930;
@@ -4151,7 +4178,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 77";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1877;
 		vrLoc = 930;
@@ -4161,7 +4188,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 78";
 		rLen = 0;
-		rLoc = 2286;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1894;
 		vrLoc = 930;
@@ -4171,7 +4198,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 79";
 		rLen = 0;
-		rLoc = 2408;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1971;
 		vrLoc = 930;
@@ -4181,7 +4208,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 80";
 		rLen = 0;
-		rLoc = 2411;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1972;
 		vrLoc = 930;
@@ -4191,7 +4218,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2151;
+		rLoc = 2204;
 		rType = 0;
 		vrLen = 1973;
 		vrLoc = 930;
@@ -4201,7 +4228,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2152;
+		rLoc = 2204;
 		rType = 0;
 		vrLen = 1972;
 		vrLoc = 930;
@@ -4211,7 +4238,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 76";
 		rLen = 0;
-		rLoc = 2151;
+		rLoc = 2204;
 		rType = 0;
 		vrLen = 1974;
 		vrLoc = 930;
@@ -4241,7 +4268,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 61";
 		rLen = 0;
-		rLoc = 1517;
+		rLoc = 1859;
 		rType = 0;
 		vrLen = 2008;
 		vrLoc = 930;
@@ -4251,7 +4278,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 61";
 		rLen = 0;
-		rLoc = 1519;
+		rLoc = 1859;
 		rType = 0;
 		vrLen = 2029;
 		vrLoc = 930;
@@ -4261,7 +4288,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2531;
+		rLoc = 2390;
 		rType = 0;
 		vrLen = 2305;
 		vrLoc = 930;
@@ -4271,7 +4298,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2532;
+		rLoc = 2391;
 		rType = 0;
 		vrLen = 2029;
 		vrLoc = 930;
@@ -4281,7 +4308,7 @@
 		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
 		name = "JCOViewController.m: 90";
 		rLen = 0;
-		rLoc = 2532;
+		rLoc = 2391;
 		rType = 0;
 		vrLen = 2028;
 		vrLoc = 930;
@@ -4304,6 +4331,284 @@
 	8D2FABD01283BCB300828713 /* PBXBookmark */ = {
 		isa = PBXBookmark;
 		fRef = 8D2FAB0512838AB600828713 /* button_Send.png */;
+	};
+	8D2FABD81283BDEC00828713 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 8D2FAB0512838AB600828713 /* button_Send.png */;
+	};
+	8D2FABD91283BDEC00828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
+		name = "JCOViewController.m: 122";
+		rLen = 0;
+		rLoc = 3521;
+		rType = 0;
+		vrLen = 2052;
+		vrLoc = 2332;
+	};
+	8D2FABE21283BEC000828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
+		name = "JCOViewController.m: 87";
+		rLen = 0;
+		rLoc = 2267;
+		rType = 0;
+		vrLen = 1853;
+		vrLoc = 930;
+	};
+	8D2FABF11283CD6B00828713 /* CrashReporter.m:476 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
+		functionName = "-handleCrashReport";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 476;
+		location = JiraConnect;
+		modificationTime = 310627693.10216;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	8D2FABF51283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 66";
+		rLen = 0;
+		rLoc = 1589;
+		rType = 0;
+		vrLen = 2245;
+		vrLoc = 937;
+	};
+	8D2FABF61283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FABF71283D19500828713 /* PLCrashReporter.h */;
+		name = "PLCrashReporter.h: 53";
+		rLen = 34;
+		rLoc = 1824;
+		rType = 0;
+		vrLen = 2032;
+		vrLoc = 0;
+	};
+	8D2FABF71283D19500828713 /* PLCrashReporter.h */ = {
+		isa = PBXFileReference;
+		name = PLCrashReporter.h;
+		path = /Users/niick/projects/JCONNECT/ios/JiraConnect/Resources/CrashReporter.framework/Headers/PLCrashReporter.h;
+		sourceTree = "<absolute>";
+	};
+	8D2FABF81283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B31281123500B3E1A0 /* JCOViewController.h */;
+		name = "JCOViewController.h: 41";
+		rLen = 9;
+		rLoc = 1342;
+		rType = 0;
+		vrLen = 1460;
+		vrLoc = 0;
+	};
+	8D2FABF91283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
+		name = "JCOViewController.m: 171";
+		rLen = 34;
+		rLoc = 4787;
+		rType = 0;
+		vrLen = 1696;
+		vrLoc = 2750;
+	};
+	8D2FABFA1283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D2FA81D1282351900828713 /* JCOTransport.m */;
+		name = "JCOTransport.m: 39";
+		rLen = 18;
+		rLoc = 1198;
+		rType = 0;
+		vrLen = 2228;
+		vrLoc = 178;
+	};
+	8D2FABFB1283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
+		name = "CrashReportSender.h: 75";
+		rLen = 42;
+		rLoc = 4152;
+		rType = 0;
+		vrLen = 3285;
+		vrLoc = 1792;
+	};
+	8D2FABFC1283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
+		name = "CrashReportSender.m: 46";
+		rLen = 17;
+		rLoc = 1587;
+		rType = 0;
+		vrLen = 1887;
+		vrLoc = 0;
+	};
+	8D2FABFD1283D19500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
+		name = "CrashReportSender.m: 46";
+		rLen = 17;
+		rLoc = 1587;
+		rType = 0;
+		vrLen = 1957;
+		vrLoc = 2126;
+	};
+	8D2FAC091283D2A600828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
+		name = "CrashReportSender.m: 48";
+		rLen = 47;
+		rLoc = 1606;
+		rType = 0;
+		vrLen = 1721;
+		vrLoc = 710;
+	};
+	8D2FAC0A1283D2A600828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 67";
+		rLen = 0;
+		rLoc = 1684;
+		rType = 0;
+		vrLen = 2188;
+		vrLoc = 956;
+	};
+	8D2FAC171283D35500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */;
+		name = "JiraConnectAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 199;
+		rType = 0;
+		vrLen = 483;
+		vrLoc = 0;
+	};
+	8D2FAC181283D35500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */;
+		name = "JiraConnectAppDelegate.m: 26";
+		rLen = 20;
+		rLoc = 577;
+		rType = 0;
+		vrLen = 2240;
+		vrLoc = 0;
+	};
+	8D2FAC191283D35500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 70";
+		rLen = 0;
+		rLoc = 1719;
+		rType = 0;
+		vrLen = 1606;
+		vrLoc = 345;
+	};
+	8D2FAC1A1283D35500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
+		name = "JCO.h: 13";
+		rLen = 0;
+		rLoc = 228;
+		rType = 0;
+		vrLen = 531;
+		vrLoc = 0;
+	};
+	8D2FAC1B1283D35500828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
+		name = "JCO.h: 22";
+		rLen = 0;
+		rLoc = 462;
+		rType = 0;
+		vrLen = 539;
+		vrLoc = 0;
+	};
+	8D2FAC221283D3C200828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
+		name = "JCO.h: 22";
+		rLen = 0;
+		rLoc = 462;
+		rType = 0;
+		vrLen = 539;
+		vrLoc = 0;
+	};
+	8D2FAC231283D3C200828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
+		name = "CrashReportSender.h: 75";
+		rLen = 42;
+		rLoc = 4152;
+		rType = 0;
+		vrLen = 3340;
+		vrLoc = 1737;
+	};
+	8D2FAC241283D3C200828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 68";
+		rLen = 43;
+		rLoc = 1627;
+		rType = 0;
+		vrLen = 1678;
+		vrLoc = 319;
+	};
+	8D2FAC251283D3C200828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 68";
+		rLen = 0;
+		rLoc = 1684;
+		rType = 0;
+		vrLen = 1666;
+		vrLoc = 371;
+	};
+	8D2FAC301283D82300828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
+		name = "JCO.m: 68";
+		rLen = 23;
+		rLoc = 1646;
+		rType = 0;
+		vrLen = 2124;
+		vrLoc = 629;
+	};
+	8D2FAC311283D82300828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
+		name = "CrashReportSender.m: 454";
+		rLen = 17;
+		rLoc = 14755;
+		rType = 0;
+		vrLen = 1746;
+		vrLoc = 13712;
+	};
+	8D2FAC321283D82300828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
+		name = "CrashReportSender.h: 38";
+		rLen = 22;
+		rLoc = 1793;
+		rType = 0;
+		vrLen = 4249;
+		vrLoc = 0;
+	};
+	8D2FAC331283D82300828713 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
+		name = "CrashReportSender.h: 64";
+		rLen = 17;
+		rLoc = 4163;
+		rType = 0;
+		vrLen = 3400;
+		vrLoc = 1165;
 	};
 	8D5062FA128107F900B3E1A0 /* JiraConnect */ = {
 		isa = PBXExecutable;
@@ -4374,32 +4679,32 @@
 	};
 	8D5063B31281123500B3E1A0 /* JCOViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1225, 825}}";
-			sepNavSelRange = "{686, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 800}}";
+			sepNavSelRange = "{1342, 9}";
 			sepNavVisRange = "{0, 1460}";
 		};
 	};
 	8D5063B41281123500B3E1A0 /* JCOViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {937, 2431}}";
-			sepNavSelRange = "{2642, 0}";
-			sepNavVisRange = "{1369, 1043}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 2353}}";
+			sepNavSelRange = "{4787, 34}";
+			sepNavVisRange = "{2750, 1696}";
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
 	8D5063C91281157B00B3E1A0 /* JCO.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1225, 781}}";
-			sepNavSelRange = "{228, 0}";
-			sepNavVisRange = "{0, 531}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 823}}";
+			sepNavSelRange = "{462, 0}";
+			sepNavVisRange = "{0, 539}";
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
 	8D5063CA1281157B00B3E1A0 /* JCO.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1225, 1469}}";
-			sepNavSelRange = "{1532, 0}";
-			sepNavVisRange = "{875, 2182}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 1443}}";
+			sepNavSelRange = "{1646, 23}";
+			sepNavVisRange = "{629, 2124}";
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
@@ -4462,18 +4767,18 @@
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
-	8D50640F1281189B00B3E1A0 /* CrashReportSender.h */ = {
+	8D50640F1281189B00B3E1A0 /* CrashReporter.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1272, 1391}}";
-			sepNavSelRange = "{4062, 0}";
-			sepNavVisRange = "{1840, 3742}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 1157}}";
+			sepNavSelRange = "{4163, 17}";
+			sepNavVisRange = "{1165, 3400}";
 		};
 	};
-	8D5064101281189B00B3E1A0 /* CrashReportSender.m */ = {
+	8D5064101281189B00B3E1A0 /* CrashReporter.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1433, 11037}}";
-			sepNavSelRange = "{22282, 0}";
-			sepNavVisRange = "{21736, 1492}";
+			sepNavIntBoundsRect = "{{0, 0}, {1298, 6214}}";
+			sepNavSelRange = "{14755, 17}";
+			sepNavVisRange = "{13712, 1746}";
 			sepNavWindowFrame = "{{15, 494}, {1905, 679}}";
 		};
 	};
@@ -4673,7 +4978,7 @@
 	};
 	8D5064D612812B7B00B3E1A0 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D50640F1281189B00B3E1A0 /* CrashReportSender.h */;
+		fRef = 8D50640F1281189B00B3E1A0 /* CrashReporter.h */;
 		name = "CrashReportSender.h: 1";
 		rLen = 0;
 		rLoc = 0;
@@ -4747,10 +5052,10 @@
 	};
 	8DC8035412812EE90080D3C8 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 8D5064101281189B00B3E1A0 /* CrashReportSender.m */;
+		fRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */;
 		name = "CrashReportSender.m: 536";
 		rLen = 0;
-		rLoc = 4057;
+		rLoc = 3690;
 		rType = 0;
 		vrLen = 2586;
 		vrLoc = 15323;

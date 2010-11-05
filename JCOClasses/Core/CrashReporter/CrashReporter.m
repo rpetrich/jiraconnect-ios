@@ -31,24 +31,14 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "CrashReportSender.h"
 
-
 #define USER_AGENT @"CrashReportSender/1.0"
 
 @interface CrashReportSender ()
 
-- (void)attemptCrashReportSubmission;
-- (void)showCrashStatusMessage;
 
 - (void)handleCrashReport;
-- (void)_cleanCrashReports;
-- (void)_sendCrashReports;
 
 - (NSString *)_crashLogStringForReport:(PLCrashReport *)report;
-- (void)_postXML:(NSString*)xml toURL:(NSURL*)url;
-- (BOOL)_isSubmissionHostReachable;
-
-- (BOOL)hasPendingCrashReport;
-- (void)wentOnline:(NSNotification *)note;
 
 @end
 
@@ -71,11 +61,8 @@
 
 	if ( self != nil)
 	{
-		_serverResult = -1;
 		_amountCrashes = 0;
 		_crashIdenticalCurrentVersion = YES;
-		_crashReportFeedbackActivated = NO;
-		_delegate = nil;
 		
 		NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:kCrashReportAnalyzerStarted];
 		if (testValue == nil)
@@ -132,11 +119,6 @@
 	[super dealloc];
 	[_crashesDir release];
 	[_crashFiles release];
-	if (_submitTimer != nil)
-	{
-		[_submitTimer invalidate];
-		[_submitTimer release];
-	}
 }
 
 
@@ -175,28 +157,6 @@
 		return NO;
 }
 
-- (void)sendCrashReportToURL:(NSURL *)submissionURL delegate:(id <CrashReportSenderDelegate>)delegate activateFeedback:(BOOL)activateFeedback;
-{
-	NSLog(@"has pending crash report? %@", submissionURL);
-	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/ping" relativeToURL:submissionURL];
-	
-	NSLog(@"NEW URL %@", url);
-    if ([self hasPendingCrashReport])
-    {
-		NSLog(@"pending crash REPORT!!");
-        [_submissionURL autorelease];
-        _submissionURL = [url copy];
-		NSLog(@"_submissionURL %@", _submissionURL);
-        
-        _crashReportFeedbackActivated = activateFeedback;
-        _delegate = delegate;
-        
-        if (_submitTimer == nil) {
-            _submitTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(attemptCrashReportSubmission) userInfo:nil repeats:NO];
-        }
-    }
-}
-
 - (void)registerOnline
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -215,176 +175,13 @@
 - (void)wentOnline:(NSNotification *)note
 {
 	[self unregisterOnline];
-	[self attemptCrashReportSubmission];
-}
 
-- (void)attemptCrashReportSubmission
-{
-	_submitTimer = nil;
-	
-	if (![self _isSubmissionHostReachable]) {
-		[self registerOnline];
-	} else if ([self hasPendingCrashReport]) {
-		[self unregisterOnline];
-        
-		if (![[NSUserDefaults standardUserDefaults] boolForKey: kAutomaticallySendCrashReports]) {
-			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
-																message:NSLocalizedString(@"CrashDataFoundDescription", @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server")
-															   delegate:self
-													  cancelButtonTitle:NSLocalizedString(@"No", @"")
-													  otherButtonTitles:NSLocalizedString(@"Yes", @""), NSLocalizedString(@"Always", @""), nil];
-
-			[alertView setTag: CrashAlertTypeSend];
-			[alertView show];
-			[alertView release];
-		} else {
-			[self _sendCrashReports];
-		}
-	}
-}
-
-
-- (void) showCrashStatusMessage
-{
-	UIAlertView *alertView;
-	
-	_amountCrashes--;
-	if (_crashReportFeedbackActivated && _amountCrashes == 0 && _serverResult >= CrashReportStatusAssigned && _crashIdenticalCurrentVersion)
-	{
-		// show some feedback to the user about the crash status
-		
-		switch (_serverResult) {
-			case CrashReportStatusAssigned:
-				alertView = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"CrashResponseTitle", @"Title for the alertview giving feedback about the crash")
-													   message: NSLocalizedString(@"CrashResponseNextRelease", @"Full text telling the bug is fixed and will be available in an upcoming release")
-													  delegate: self
-											 cancelButtonTitle: NSLocalizedString(@"Ok", @"")
-											 otherButtonTitles: nil];
-				break;
-			case CrashReportStatusSubmitted:
-				alertView = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"CrashResponseTitle", @"Title for the alertview giving feedback about the crash")
-													   message: NSLocalizedString(@"CrashResponseWaitingApple", @"Full text telling the bug is fixed and the new release is waiting at Apple for approval")
-													  delegate: self
-											 cancelButtonTitle: NSLocalizedString(@"Ok", @"")
-											 otherButtonTitles: nil];
-				break;
-			case CrashReportStatusAvailable:
-				alertView = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"CrashResponseTitle", @"Title for the alertview giving feedback about the crash")
-													   message: NSLocalizedString(@"CrashResponseAvailable", @"Full text telling the bug is fixed and an update is available in the AppStore for download")
-													  delegate: self
-											 cancelButtonTitle: NSLocalizedString(@"Ok", @"")
-											 otherButtonTitles: nil];
-				break;
-			default:
-				alertView = nil;
-				break;
-		}
-		
-		if (alertView != nil)
-		{
-			[alertView setTag: CrashAlertTypeFeedback];
-			[alertView show];
-			[alertView release];
-		}
-	}
-}
-
-
-#pragma mark -
-#pragma mark UIAlertView Delegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	if ([alertView tag] == CrashAlertTypeSend)
-	{
-		switch (buttonIndex) {
-			case 0:
-				[self _cleanCrashReports];
-				break;
-			case 1:
-				[self _sendCrashReports];
-				break;
-			case 2:
-				[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAutomaticallySendCrashReports];
-				
-				[self _sendCrashReports];
-				break;
-		}
-	}
-}
-
-#pragma mark -
-#pragma mark NSXMLParser Delegate
-
-#pragma mark NSXMLParser
-
-- (void)parseXMLFileAtURL:(NSString *)url parseError:(NSError **)error
-{	
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-	// Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
-	[parser setDelegate:self];
-	// Depending on the XML document you're parsing, you may want to enable these features of NSXMLParser.
-	[parser setShouldProcessNamespaces:NO];
-	[parser setShouldReportNamespacePrefixes:NO];
-	[parser setShouldResolveExternalEntities:NO];
-	
-	[parser parse];
-	
-	NSError *parseError = [parser parserError];
-	if (parseError && error) {
-		*error = parseError;
-	}
-	
-	[parser release];
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
-{
-	if (qName)
-	{
-		elementName = qName;
-	}
-	
-	if ([elementName isEqualToString:@"result"]) {
-		_contentOfProperty = [NSMutableString string];
-	}
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{     
-	if (qName)
-	{
-		elementName = qName;
-	}
-	
-	if ([elementName isEqualToString: @"result"]) {
-		if ([_contentOfProperty intValue] > _serverResult) {
-			_serverResult = [_contentOfProperty intValue];
-		} else {
-            CrashReportStatus errorcode = [_contentOfProperty intValue];
-            NSLog(@"CrashReporter ended in error code: %i", errorcode);
-        }
-	}
-}
-
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
-{
-	if (_contentOfProperty)
-	{
-		// If the current element is one whose content we care about, append 'string'
-		// to the property that holds the content of the current element.
-		if (string != nil)
-		{
-			[_contentOfProperty appendString:string];
-		}
-	}
 }
 
 #pragma mark -
 #pragma mark Private
 
-- (void)_cleanCrashReports
+- (void)cleanCrashReports
 {
 	NSError *error;
 	
@@ -397,29 +194,11 @@
 	[_crashFiles removeAllObjects];	
 }
 
-- (void)_sendCrashReports
+- (NSArray*)crashReports
 {
 	NSError *error;
-		
-	NSString *userid = @"";
-	NSString *contact = @"";
-	NSString *description = @"";
 	
-	if (_delegate != nil && [_delegate respondsToSelector:@selector(crashReportUserID)])
-	{
-		userid = [_delegate crashReportUserID];
-	}
-
-	if (_delegate != nil && [_delegate respondsToSelector:@selector(crashReportContact)])
-	{
-		contact = [_delegate crashReportContact];
-	}
-
-	if (_delegate != nil && [_delegate respondsToSelector:@selector(crashReportDescription)])
-	{
-		description = [_delegate crashReportDescription];
-	}
-	
+	NSMutableArray* crashReports = [NSMutableArray arrayWithCapacity:[_crashFiles count]];
 
 	for (int i=0; i < [_crashFiles count]; i++)
 	{
@@ -440,24 +219,20 @@
 				_crashIdenticalCurrentVersion = NO;
 			}
 			
-			NSString *xml = [NSString stringWithFormat:@"<crash><appName>%s</appName><appId>%@</appId><systemVersion>%@</systemVersion><senderversion>%@</senderversion><appVersion>%@</appVersion><udid>%@</udid><contact>%@</contact><description><![CDATA[%@]]></description><log><![CDATA[%@]]></log></crash>",
-							 [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleExecutable"] UTF8String],
-							 report.applicationInfo.applicationIdentifier,
-							 [[UIDevice currentDevice] systemVersion],
-							 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
-							 report.applicationInfo.applicationVersion,
-							 userid,
-							 contact,
-							 description,
-							 crashLogString];
+			NSMutableDictionary* crashDataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+												  report.applicationInfo.applicationIdentifier, @"appId",
+												  [[UIDevice currentDevice] systemVersion], @"systemVersion",
+												  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], @"senderVersion", 
+												  report.applicationInfo.applicationVersion, @"appVersion",
+												  crashLogString, @"crashLog",
+												  nil];
+			
 			NSLog(@"CrashLogStringLen: %d, ProtoBufLen: %d", [crashLogString length], [crashData length]);
 			
-			NSLog(@"Sending crash report. %@", xml);
-			[self _postXML:xml toURL:_submissionURL];
+			[crashReports addObject:crashDataDict];
 		}
 	}
-	
-	[self _cleanCrashReports];
+	return crashReports;
 }
 
 
@@ -671,99 +446,6 @@
 	return xmlString;
 }
 
-- (void)_postXML:(NSString*)xml toURL:(NSURL*)url
-{
-	NSLog(@"Sending to: %@", url);
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	NSString *boundary = @"----FOO";
-	
-	[request setCachePolicy: NSURLRequestReloadIgnoringLocalCacheData];
-	[request setValue:USER_AGENT forHTTPHeaderField:@"User-Agent"];
-	[request setTimeoutInterval: 15];
-	[request setHTTPMethod:@"POST"];
-	NSString *contentType = @"application/xml";
-	[request setValue:contentType forHTTPHeaderField:@"Content-type"];
-	
-	NSMutableData *postBody =  [NSMutableData data];
-//	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//	[postBody appendData:[@"Content-Disposition: form-data; name=\"xmlstring\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-//	[postBody appendData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
-//	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	
-	[request setHTTPBody:postBody];
-	
-	
-	_serverResult = CrashReportStatusUnknown;
-	_statusCode = 200;
-	
-	//Release when done in the delegate method
-	_responseData = [[NSMutableData alloc] init];
-	
-	if (_delegate != nil && [_delegate respondsToSelector:@selector(connectionOpened)])
-	{
-		[_delegate connectionOpened];
-	}
-	
-	[[NSURLConnection connectionWithRequest:request delegate:self] retain];
-}
-
-#pragma mark NSURLConnection Delegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-	if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-		_statusCode = [(NSHTTPURLResponse *)response statusCode];
-	}
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-	[_responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	[_responseData release];
-	_responseData = nil;
-	[connection autorelease];
-
-	if (_delegate != nil && [_delegate respondsToSelector:@selector(connectionClosed)])
-	{
-		[_delegate connectionClosed];
-	}
-	
-	[self showCrashStatusMessage];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{	
-	if (_statusCode >= 200 && _statusCode < 400)
-	{
-		NSXMLParser *parser = [[NSXMLParser alloc] initWithData:_responseData];
-		// Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
-		[parser setDelegate:self];
-		// Depending on the XML document you're parsing, you may want to enable these features of NSXMLParser.
-		[parser setShouldProcessNamespaces:NO];
-		[parser setShouldReportNamespacePrefixes:NO];
-		[parser setShouldResolveExternalEntities:NO];
-		
-		[parser parse];
-		
-		[parser release];
-	}
-	
-	[_responseData release];
-	_responseData = nil;
-	[connection autorelease];
-
-	if (_delegate != nil && [_delegate respondsToSelector:@selector(connectionClosed)])
-	{
-		[_delegate connectionClosed];
-	}
-	
-	[self showCrashStatusMessage];
-}
-
 #pragma mark PLCrashReporter
 
 //
@@ -810,31 +492,6 @@ finish:
 		
 	[crashReporter purgePendingCrashReport];
 	return;
-}
-
-#pragma mark Reachability
-		
-- (BOOL)_isSubmissionHostReachable
-{
-	SCNetworkReachabilityFlags flags;
-    SCNetworkReachabilityRef reachabilityRef = nil;
-    
-    if (![_submissionURL host] || ![[_submissionURL host] length]) {
-		return NO;
-	}
-    
-    reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, [[_submissionURL host] UTF8String]);
-    
-	if (!reachabilityRef) {
-		return NO;
-	}
-    
-	BOOL gotFlags = SCNetworkReachabilityGetFlags(reachabilityRef, &flags);
-    
-    if (reachabilityRef != nil)
-		CFRelease(reachabilityRef);
-    
-	return gotFlags && flags & kSCNetworkReachabilityFlagsReachable && (flags & kSCNetworkReachabilityFlagsIsWWAN || !(flags & kSCNetworkReachabilityFlagsConnectionRequired));
 }
 
 @end

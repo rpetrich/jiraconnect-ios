@@ -61,13 +61,13 @@ JCLocation* _location;
 }
 
 
-- (void) configureJiraConnect:(NSURL*) withUrl {
-	
-    [[CrashReportSender sharedCrashReportSender] sendCrashReportToURL:withUrl
-                                                             delegate:self 
-                                                     activateFeedback:YES];
-	self.url = withUrl;
-	[_pinger startPinging:withUrl];
+- (void) configureJiraConnect:(NSString*) withUrl {
+
+	self.url = [NSURL URLWithString:withUrl];
+
+	NSLog(@"PENDING CRASH REPORTS? %d", [[CrashReportSender sharedCrashReportSender] crashReports]);
+
+	[_pinger startPinging:self.url];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }

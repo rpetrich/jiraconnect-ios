@@ -60,28 +60,13 @@ typedef enum CrashReportStatus {
 	CrashReportStatusAvailable = 3,
 } CrashReportStatus;
 
-// This protocol is used to send the image updates
-@protocol CrashReportSenderDelegate <NSObject>
 
-@optional
-
--(NSString *) crashReportUserID;					// Return the userid the crashreport should contain, empty by default
--(NSString *) crashReportContact;					// Return the contact value (e.g. email) the crashreport should contain, empty by default
--(NSString *) crashReportDescription;				// Return the description the crashreport should contain, empty by default
-
--(void) connectionOpened;							// Invoked when the internet connection is started, to let the app enable the activity indicator
--(void) connectionClosed;							// Invoked when the internet connection is closed, to let the app disable the activity indicator
-
-@end
-
-@interface CrashReportSender : NSObject <NSXMLParserDelegate> {
-	NSTimer *_submitTimer;
+@interface CrashReportSender : NSObject {
 	
 	NSMutableString *_contentOfProperty;
-	CrashReportStatus _serverResult;
 	
 	BOOL _crashReportActivated;
-	BOOL _crashReportFeedbackActivated;
+
 	
 	int _crashReportAnalyzerStarted;
 	NSString *_crashesDir;
@@ -89,18 +74,15 @@ typedef enum CrashReportStatus {
 	int _amountCrashes;
 	BOOL _crashIdenticalCurrentVersion;
 	
-	id <CrashReportSenderDelegate> _delegate;
-	
 	NSMutableArray *_crashFiles;
 	
-	NSURL *_submissionURL;
-	NSMutableData *_responseData;
-	NSInteger _statusCode;
 }
 
-+ (CrashReportSender *)sharedCrashReportSender;
++ (CrashReportSender*) sharedCrashReportSender;
 
-- (void)sendCrashReportToURL:(NSURL *)submissionURL delegate:(id <CrashReportSenderDelegate>)delegate activateFeedback:(BOOL)activateFeedback;
+- (BOOL) hasPendingCrashReport;
+- (NSArray*)crashReports;
+- (void) cleanCrashReports;
 
 
 @end
