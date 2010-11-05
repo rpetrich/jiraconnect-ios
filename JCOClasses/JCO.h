@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "JCOViewController.h"
-#import "CrashReportSender.h"
+#import "CrashReporter.h"
 
-@interface JCO : NSObject <CrashReportSenderDelegate> {
+@interface JCO : NSObject {
 	NSURL* _url;	
-	id<CrashReportSenderDelegate> senderDelegate;
 }
 
 @property (nonatomic, retain) NSURL* url;

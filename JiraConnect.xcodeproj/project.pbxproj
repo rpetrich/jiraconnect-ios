@@ -28,6 +28,7 @@
 		8D2FAB0A12838AB600828713 /* button_Send_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0412838AB600828713 /* button_Send_active.png */; };
 		8D2FAB0B12838AB600828713 /* button_Send.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB0512838AB600828713 /* button_Send.png */; };
 		8D2FAB3A1283A08200828713 /* button_Record-OnAir.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FAB391283A08200828713 /* button_Record-OnAir.png */; };
+		8D2FAC3C1283DAA000828713 /* JCOCrashSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */; };
 		8D50638412810ED300B3E1A0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637212810ED300B3E1A0 /* Reachability.m */; };
 		8D50638512810ED300B3E1A0 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637512810ED300B3E1A0 /* ASINetworkQueue.m */; };
 		8D50638612810ED300B3E1A0 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D50637712810ED300B3E1A0 /* ASIInputStream.m */; };
@@ -87,6 +88,8 @@
 		8D2FAB0412838AB600828713 /* button_Send_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Send_active.png; sourceTree = "<group>"; };
 		8D2FAB0512838AB600828713 /* button_Send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Send.png; sourceTree = "<group>"; };
 		8D2FAB391283A08200828713 /* button_Record-OnAir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Record-OnAir.png"; sourceTree = "<group>"; };
+		8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashSender.h; sourceTree = "<group>"; };
+		8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOCrashSender.m; sourceTree = "<group>"; };
 		8D50637212810ED300B3E1A0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8D50637312810ED300B3E1A0 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8D50637412810ED300B3E1A0 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
@@ -336,6 +339,8 @@
 				8D2FA81D1282351900828713 /* JCOTransport.m */,
 				8D2FA96412826BB100828713 /* JCORecorder.h */,
 				8D2FA96512826BB100828713 /* JCORecorder.m */,
+				8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */,
+				8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 				8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */,
 				8D2FA81E1282351900828713 /* JCOTransport.m in Sources */,
 				8D2FA96612826BB100828713 /* JCORecorder.m in Sources */,
+				8D2FAC3C1283DAA000828713 /* JCOCrashSender.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

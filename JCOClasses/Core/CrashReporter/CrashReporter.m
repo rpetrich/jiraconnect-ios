@@ -29,11 +29,11 @@
 
 #import <CrashReporter/CrashReporter.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-#import "CrashReportSender.h"
+#import "CrashReporter.h"
 
 #define USER_AGENT @"CrashReportSender/1.0"
 
-@interface CrashReportSender ()
+@interface CrashReporter ()
 
 
 - (void)handleCrashReport;
@@ -42,14 +42,14 @@
 
 @end
 
-@implementation CrashReportSender
+@implementation CrashReporter
 
-+ (CrashReportSender *)sharedCrashReportSender
++ (CrashReporter *)sharedCrashReportSender
 {
-	static CrashReportSender *crashReportSender = nil;
+	static CrashReporter *crashReportSender = nil;
 	
 	if (crashReportSender == nil) {
-		crashReportSender = [[CrashReportSender alloc] init];
+		crashReportSender = [[CrashReporter alloc] init];
 	}
 	
 	return crashReportSender;
@@ -157,26 +157,6 @@
 		return NO;
 }
 
-- (void)registerOnline
-{
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(wentOnline:)
-												 name:@"kNetworkReachabilityChangedNotification"
-											   object:nil];            
-}
-
-- (void)unregisterOnline
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:@"kNetworkReachabilityChangedNotification"
-												  object:nil];
-}
-
-- (void)wentOnline:(NSNotification *)note
-{
-	[self unregisterOnline];
-
-}
 
 #pragma mark -
 #pragma mark Private

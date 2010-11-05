@@ -61,7 +61,7 @@ typedef enum CrashReportStatus {
 } CrashReportStatus;
 
 
-@interface CrashReportSender : NSObject {
+@interface CrashReporter : NSObject {
 	
 	NSMutableString *_contentOfProperty;
 	
@@ -78,7 +78,7 @@ typedef enum CrashReportStatus {
 	
 }
 
-+ (CrashReportSender*) sharedCrashReportSender;
++ (CrashReporter*) sharedCrashReportSender;
 
 - (BOOL) hasPendingCrashReport;
 - (NSArray*)crashReports;

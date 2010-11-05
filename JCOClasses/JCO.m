@@ -12,7 +12,9 @@
 #import "JCLocation.h"
 #import "JCNotifier.h"
 #import "JCNotifications.h"
-#import "CrashReportSender.h"
+#import "JCOCrashSender.h"
+
+#import "CrashReporter.h"
 #import "JSON.h"
 #import <objc/runtime.h> 
 #import <objc/message.h>
@@ -27,6 +29,7 @@ JCNotifier* _notifier;
 JCNotifications* _notifications;
 JCOViewController* _jcController;
 JCLocation* _location;
+JCOCrashSender* _crashSender;
 
 -(void) dealloc {
 	[_url release]; _url = nil;
@@ -35,6 +38,7 @@ JCLocation* _location;
 	[_notifications release]; _notifications = nil;
 	[_jcController release]; _jcController = nil;
 	[_location release]; _location = nil;
+	[_crashSender release]; _location = nil;
 	[super dealloc];
 }
 
@@ -54,6 +58,7 @@ JCLocation* _location;
 		_pinger = [[[JCPing alloc] initWithLocator:_location notifications:_notifications] retain];
 		UIView* window = [[UIApplication sharedApplication] keyWindow];
 		_notifier = [[[JCNotifier alloc] initWithView:window notifications:_notifications] retain];
+		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
 		
 	}
@@ -65,9 +70,9 @@ JCLocation* _location;
 
 	self.url = [NSURL URLWithString:withUrl];
 
-	NSLog(@"PENDING CRASH REPORTS? %d", [[CrashReportSender sharedCrashReportSender] crashReports]);
 
 	[_pinger startPinging:self.url];
+	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReports) userInfo:nil repeats:YES];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }
@@ -100,20 +105,5 @@ JCLocation* _location;
 	return info;
 	
 }
-
-
--(NSString*) crashReportUserID {
-	return [[UIDevice currentDevice] uniqueIdentifier];
-	
-}
-
--(NSString*) crashReportContact {
-	return @"Contact - TODO";
-}
-
--(NSString*) crashReportDescription {
-	return [[self getMetaData] JSONRepresentation];
-}
-
 
 @end
