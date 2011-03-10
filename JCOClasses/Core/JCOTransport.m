@@ -52,7 +52,7 @@
 		[upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
 	}
 	
-	//	NSLog(@"POST DATA: \n%@", );
+	NSLog(@"POST DATA: \n%@", jsonData);
 	
 	[upRequest setDelegate:self];
 	[upRequest setTimeOutSeconds:15];

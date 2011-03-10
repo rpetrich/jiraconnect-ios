@@ -103,7 +103,7 @@ NSString* _recorderFilePath;
 	[_recorder stop];
 	_lastDuration = -[_startTime timeIntervalSinceNow];
 	_startTime = nil;
-	
+	NSLog(@"Saved audio data to: %@", _recorderFilePath);
 }
 
 -(float) currentDuration {

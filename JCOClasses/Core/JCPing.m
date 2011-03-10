@@ -27,7 +27,7 @@
 }
 
 - (void) startPinging:(NSURL*) url {
-	[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
+	[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(sendPing:) userInfo:url repeats:YES];
 	NSLog(@"Start pinging...");
 }
 

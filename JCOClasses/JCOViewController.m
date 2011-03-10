@@ -106,6 +106,7 @@ NSTimer* _timer;
 
 	self.transport.delegate = self;
 	NSLog(@"Sending feedback...%@, %@, %@", [screenshotButton currentBackgroundImage], self.subjectField.text, self.descriptionField.text);
+
 	[self.transport send:self.subjectField.text description:self.descriptionField.text screenshot:_image andVoiceData:[_recorder audioData]]; 
 	
 }

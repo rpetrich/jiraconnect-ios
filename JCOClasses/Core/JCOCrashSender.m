@@ -29,7 +29,6 @@ BOOL _sending = NO;
 	
 	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
 	for (NSMutableDictionary* report in reports) {
-
 		[report addEntriesFromDictionary:[[JCO instance] getMetaData]];
 		NSData* jsonData = [[report JSONRepresentation]	dataUsingEncoding:NSUTF8StringEncoding];
 		[upRequest setData:jsonData withFileName:@"crash.json" andContentType:@"application/json" forKey:@"issue"];	
