@@ -71,7 +71,7 @@ JCOCrashSender* _crashSender;
 	self.url = [NSURL URLWithString:withUrl];
 
 
-	[_pinger startPinging:self.url];
+//	[_pinger startPinging:self.url];
 	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReports) userInfo:nil repeats:YES];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	

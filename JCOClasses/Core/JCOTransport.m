@@ -30,15 +30,13 @@
 	
 	NSLog(@"App Data is :%@", params);
 	
-	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
-	
-	NSLog(@"About to send: %@ to: %@", params, url);
+	NSURL* url = [NSURL URLWithString:@"jira/rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
 	
 	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
 	
 	NSData* jsonData = [[params JSONRepresentation]	dataUsingEncoding:NSUTF8StringEncoding];
 	[upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
-	
+	NSLog(@"About to send: %@ to: %@", [params JSONRepresentation], url);	
 	
 	if (screenshot != nil) // take a screenshot of the movie to upload as well.
 	{
