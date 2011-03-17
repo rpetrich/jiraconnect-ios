@@ -23,12 +23,13 @@
     
     // Override point for customization after application launch.
 
-	[[JCO instance] configureJiraConnect:@"http://localhost:2990"];
-
     // Add the view controller's view to the window and display.
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 
+    // NOTE: JCO must be configured after the keyWindow is made.
+	[[JCO instance] configureJiraConnect:@"http://localhost:2990"];
+    
     return YES;
 }
 

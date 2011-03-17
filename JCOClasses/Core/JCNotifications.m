@@ -17,7 +17,7 @@
 }
 
 - (id) init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		_notifications = [[[NSMutableArray alloc] init] retain];
 	}
 	return self;

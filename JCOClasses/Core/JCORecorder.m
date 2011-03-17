@@ -14,13 +14,8 @@
 
 NSString* _recorderFilePath;
 
-+(JCORecorder*) initialize {
-
-	return [[JCORecorder alloc] init];
-}
-
 -(id)init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		
 		self.recordTime = 10;
 		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.caf", DOCUMENTS_FOLDER] retain];
@@ -43,7 +38,7 @@ NSString* _recorderFilePath;
 			return nil;
 		}
 		
-		NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary* recordSetting = [[[NSMutableDictionary alloc] init] autorelease];
 		
 		[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
 		[recordSetting setValue:[NSNumber numberWithFloat:22050] forKey:AVSampleRateKey]; 
@@ -68,6 +63,7 @@ NSString* _recorderFilePath;
 							 otherButtonTitles:nil];
 			[alert show];
 			[alert release];
+
 			return nil;
 		}
 		
@@ -100,7 +96,7 @@ NSString* _recorderFilePath;
 }
 
 -(void) stop {	
-	[_recorder stop];
+	[self.recorder stop];
 	_lastDuration = -[_startTime timeIntervalSinceNow];
 	_startTime = nil;
 	NSLog(@"Saved audio data to: %@", _recorderFilePath);
@@ -123,6 +119,7 @@ NSString* _recorderFilePath;
 @synthesize recorder=_recorder, lastDuration=_lastDuration, startTime=_startTime, recordTime;
 
 - (void) dealloc {
+    NSLog(@"DEALLOC:");
 	[super dealloc];
 	[_recorder release]; _recorder = nil;
 	[_recorderFilePath release]; _recorderFilePath = nil;

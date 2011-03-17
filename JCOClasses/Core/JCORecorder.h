@@ -25,8 +25,6 @@
 @property (nonatomic, retain) NSDate* startTime;
 
 
-+(JCORecorder*) initialize;
-
 -(void) start;
 -(void) stop;
 -(float) currentDuration;

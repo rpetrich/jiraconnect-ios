@@ -23,11 +23,15 @@
 }
 
 - (id) initWithView:(UIView*)parentView notifications:(JCNotifications*)notifications {
-	if (self = [super init]) {
+	if ((self = [super init])) {
+        
+        NSLog(@"ParentView: %@", parentView);
+        
 		_view = [parentView retain];
 		_notifications = [notifications retain];
 		_viewController = [[JCNotificationViewController alloc] initWithNibName:@"JCNotificationViewController" bundle:nil];
-		_viewController.view;
+		[_viewController loadView];
+        
 		
 		_toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
 		[_toolbar setBarStyle:UIBarStyleBlack];
@@ -44,7 +48,7 @@
 		[_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 		
 		// hack
-		//[_notifications add:@"No, you can't have a pony."];
+		[_notifications add:@"No, you can't have a pony."];
 		
 		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:YES];
 	}
@@ -57,21 +61,15 @@
 		NSArray* notes = [_notifications readAndClear];
 		NSLog(@"got %d notification(s)", [notes count]);
 		
-		/*
-		UIActionSheet* alert = [[[UIActionSheet alloc] 
-							   initWithTitle:msg 
-							   delegate:nil 
-							   cancelButtonTitle:@"Dismiss"  destructiveButtonTitle:nil 
-							   otherButtonTitles:@"View", nil] 
-							  autorelease];
-		[alert showInView:_view];
-		 */
-		
+			
 		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [notes count]];
 		NSString* text = [notes objectAtIndex:0]; // TODO FIX HACK OR GET TIM TO SEND A SINGLE STRING
 		NSLog(@"Notification: %@", text);
 		[_viewController.textView setText:text];
 		
+        NSLog(@"View: %@", _view);
+		
+        
 		[_toolbar setFrame:CGRectMake(0, 520, 320, 40)];
 		[_view addSubview:_toolbar];
 

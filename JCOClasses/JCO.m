@@ -56,7 +56,7 @@ JCOCrashSender* _crashSender;
 		_notifications = [[[JCNotifications alloc] init] retain];
 		_location = [[[JCLocation alloc] init] retain];
 		_pinger = [[[JCPing alloc] initWithLocator:_location notifications:_notifications] retain];
-		UIView* window = [[UIApplication sharedApplication] keyWindow];
+		UIView* window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present our replies dialog.
 		_notifier = [[[JCNotifier alloc] initWithView:window notifications:_notifications] retain];
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];

@@ -23,7 +23,7 @@ NSTimer* _timer;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.transport = [[JCOTransport alloc] init];
-	_recorder = [[JCORecorder initialize] retain]; // TODO: work out how to stoip. use a delegate!
+	_recorder = [[[JCORecorder alloc] init] retain]; // TODO: work out how to stoip. use a delegate!
 	_recorder.recorder.delegate = self;
 	self.countdownView.layer.cornerRadius = 7.0;
 		
@@ -43,6 +43,7 @@ NSTimer* _timer;
 	self.imagePicker = nil;
 	[_transport release]; _transport = nil;
 	[_recorder release]; _recorder = nil;
+
 	
 }
 
@@ -175,6 +176,7 @@ NSTimer* _timer;
     [super dealloc];
 	[_image release];_image = nil;
 	[_transport release];_transport = nil;
+    [_recorder release];_recorder = nil;
 }
 
 

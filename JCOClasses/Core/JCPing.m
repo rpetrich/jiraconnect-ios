@@ -19,7 +19,7 @@
 }
 
 - (id)initWithLocator:(JCLocation*) locator notifications:(JCNotifications*)notes {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		_location = [locator retain];
 		_notifications = [notes retain];
 	}
