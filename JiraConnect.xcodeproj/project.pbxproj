@@ -277,6 +277,9 @@
 		72040235133224CD0002B9C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01BE65E3133210AB0039F83C /* ViewFactory.h */,
+				01BE65E4133210AD0039F83C /* ViewFactory.m */,
+				01BE65E61332112D0039F83C /* JCCommentCell.xib */,
 				7204022E133223C40002B9C7 /* JCONotificationsViewController.h */,
 				7204022F133223C50002B9C7 /* JCONotificationsViewController.m */,
 				72040230133223C50002B9C7 /* JCONotificationsViewController.xib */,
@@ -393,15 +396,6 @@
 				8D2FA96512826BB100828713 /* JCORecorder.m */,
 				8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */,
 				8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */,
-				01BE650B1331CA1A0039F83C /* JCONotificationsViewController.h */,
-				01BE650C1331CA1D0039F83C /* JCONotificationsViewController.m */,
-				01BE650D1331CA1F0039F83C /* JCONotificationsViewController.xib */,
-				01BE65E3133210AB0039F83C /* ViewFactory.h */,
-				01BE65E4133210AD0039F83C /* ViewFactory.m */,
-				01BE65101331DD770039F83C /* JCCommentViewController.h */,
-				01BE65111331DD790039F83C /* JCCommentViewController.m */,
-				01BE65121331DD7C0039F83C /* JCCommentViewController.xib */,
-				01BE65E61332112D0039F83C /* JCCommentCell.xib */,
 			);
 			path = Core;
 			sourceTree = "<group>";

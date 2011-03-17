@@ -87,7 +87,7 @@ float cellHeight;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -95,18 +95,15 @@ float cellHeight;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return [self.data count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"Number of rows in section %d = %d", section, [[self.data objectAtIndex:section] count]);
     return [[self.data objectAtIndex:section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    // fixed font style. use custom view (UILabel) if you want
     return section == 0 ? @"New" : @"Existing";
 }
 
