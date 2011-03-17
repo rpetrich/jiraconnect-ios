@@ -91,10 +91,9 @@
 {
 	NSError *error = [request error];
 	
-	NSString* msg = [NSString stringWithFormat:@"You need an Internet Connection to use this app. \n %@, \n URL: %@ \n status code: %d", 
-					 [error localizedDescription], [request url], [request  responseStatusCode] ];
-	NSLog(@"requestFailed: %@", msg);
-	UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Error uploading data to server"
+	NSString* msg = [NSString stringWithFormat:@"\n %@.\n Please try again later.", [error localizedDescription]];
+	NSLog(@"requestFailed: %@. URL: %@, response code: %d", msg, [request url], [request  responseStatusCode] );
+	UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Error submitting Feedback."
 														 message:msg
 														delegate:self 
 											   cancelButtonTitle:@"Ok"
