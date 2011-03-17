@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSString* author;
 @property (nonatomic, retain) NSString* body;
 
+- (id) initWithAuthor:(NSString*)p_author body:(NSString*)p_body;
+
 @end

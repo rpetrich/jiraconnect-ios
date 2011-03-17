@@ -99,17 +99,20 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-    NSLog(@"issue =>> %@", self.issue);
-    
+        
     if (indexPath.section == 0)
     {
-        cell.textLabel.text = self.issue.key;
+        NSString* issueData = [NSString stringWithFormat:@"Issue: %@\nStatus: %@\nDescription: %@", self.issue.title, self.issue.status, self.issue.description];
+        
+        cell.textLabel.text = issueData;
     }
     else
     {
         JCComment* comment = [self.issue.comments objectAtIndex:indexPath.row];
-        cell.textLabel.text = [comment body];
+        
+        NSString* commentData = [NSString stringWithFormat:@"Author: %@\nComment: %@", comment.author, comment.body];
+        
+        cell.textLabel.text = commentData;
     }
     
     return cell;

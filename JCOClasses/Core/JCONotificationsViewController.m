@@ -106,7 +106,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Number of rows in section %d = %d", section, [[self.data objectAtIndex:section] count]);
+    //NSLog(@"Number of rows in section %d = %d", section, [[self.data objectAtIndex:section] count]);
     return [[self.data objectAtIndex:section] count];
 }
 
@@ -119,11 +119,11 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    NSLog(@"About to render cell at section %d and row %d", indexPath.section, indexPath.row);
+    //NSLog(@"About to render cell at section %d and row %d", indexPath.section, indexPath.row);
     
     NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
     
-    NSLog(@"There are %d issues in this section", [sectionData count]);
+    //NSLog(@"There are %d issues in this section", [sectionData count]);
     
     JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
     

@@ -7,7 +7,7 @@
 //
 
 #import "JCIssue.h"
-
+#import "JCComment.h"
 
 @implementation JCIssue
 
@@ -31,7 +31,47 @@
 		self.key = [map objectForKey:@"key"];
         self.status = [map objectForKey:@"status"];
         self.title = [map objectForKey:@"title"];
-        self.description = [map objectForKey:@"description"];   
+        self.description = [map objectForKey:@"description"];    
+        
+        if (!self.key)
+        {
+            self.key = @"(no issue key)";
+        }
+        if (!self.status)
+        {
+            self.status = @"(no status)";
+        }
+        if (!self.title)
+        {
+            self.title = @"(no title)";
+        }
+        if (!self.description)
+        {
+            self.description = @"(no description)";
+        }
+        
+        NSArray* commentDataArray = [map objectForKey:@"comments"];
+        if (commentDataArray)
+        {
+            NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:[commentDataArray count]];
+            for (NSDictionary* data in commentDataArray)
+            {
+                NSString* author = [data objectForKey:@"username"];
+                if (!author)
+                {
+                    author = @"(no author)";
+                }
+                NSString* body = [data objectForKey:@"text"];
+                if (!body)
+                {
+                    body = @"(no body)";
+                }
+                JCComment* comment = [[JCComment alloc] initWithAuthor:author body:body];
+                [array addObject:comment];
+            }
+            self.comments = array;
+            [array release];
+        }
     }
     
     NSLog(@"self = %@", self);
@@ -39,8 +79,8 @@
 	return self;
 }
 
-- (NSString*) description {
-    return [NSString stringWithFormat:@"key: %@, status %@, title: %@", self.key, self.status, self.title];
+- (NSString*) asString {
+    return [NSString stringWithFormat:@"key: %@, status %@, title: %@, description: %@", _key, _status, _title, _description];
 }
 
 @end
