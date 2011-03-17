@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "JCNotifications.h"
-#import "JCNotificationViewController.h"
+#import "JCONotificationsViewController.h"
 
 @interface JCNotifier : NSObject {
 	UIView* _view;
 	JCNotifications* _notifications;
-	JCNotificationViewController* _viewController;
+	UINavigationController* _viewController;
 	UIToolbar* _toolbar;
 	UILabel* _label;
 	UIButton* _button;

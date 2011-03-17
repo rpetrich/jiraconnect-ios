@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01BE650E1331CA230039F83C /* JCONotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BE650C1331CA1D0039F83C /* JCONotificationsViewController.m */; };
+		01BE650F1331CA230039F83C /* JCONotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BE650D1331CA1F0039F83C /* JCONotificationsViewController.xib */; };
+		01BE65131331DD800039F83C /* JCCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BE65111331DD790039F83C /* JCCommentViewController.m */; };
+		01BE65141331DD800039F83C /* JCCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BE65121331DD7C0039F83C /* JCCommentViewController.xib */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -61,6 +65,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01BE650B1331CA1A0039F83C /* JCONotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationsViewController.h; sourceTree = "<group>"; };
+		01BE650C1331CA1D0039F83C /* JCONotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationsViewController.m; sourceTree = "<group>"; };
+		01BE650D1331CA1F0039F83C /* JCONotificationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCONotificationsViewController.xib; sourceTree = "<group>"; };
+		01BE65101331DD770039F83C /* JCCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCCommentViewController.h; sourceTree = "<group>"; };
+		01BE65111331DD790039F83C /* JCCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCommentViewController.m; sourceTree = "<group>"; };
+		01BE65121331DD7C0039F83C /* JCCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCCommentViewController.xib; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -341,6 +351,12 @@
 				8D2FA96512826BB100828713 /* JCORecorder.m */,
 				8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */,
 				8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */,
+				01BE650B1331CA1A0039F83C /* JCONotificationsViewController.h */,
+				01BE650C1331CA1D0039F83C /* JCONotificationsViewController.m */,
+				01BE650D1331CA1F0039F83C /* JCONotificationsViewController.xib */,
+				01BE65101331DD770039F83C /* JCCommentViewController.h */,
+				01BE65111331DD790039F83C /* JCCommentViewController.m */,
+				01BE65121331DD7C0039F83C /* JCCommentViewController.xib */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -422,6 +438,8 @@
 				8D2FAB0A12838AB600828713 /* button_Send_active.png in Resources */,
 				8D2FAB0B12838AB600828713 /* button_Send.png in Resources */,
 				8D2FAB3A1283A08200828713 /* button_Record-OnAir.png in Resources */,
+				01BE650F1331CA230039F83C /* JCONotificationsViewController.xib in Resources */,
+				01BE65141331DD800039F83C /* JCCommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +476,8 @@
 				8D2FA81E1282351900828713 /* JCOTransport.m in Sources */,
 				8D2FA96612826BB100828713 /* JCORecorder.m in Sources */,
 				8D2FAC3C1283DAA000828713 /* JCOCrashSender.m in Sources */,
+				01BE650E1331CA230039F83C /* JCONotificationsViewController.m in Sources */,
+				01BE65131331DD800039F83C /* JCCommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

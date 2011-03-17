@@ -22,7 +22,7 @@
 }
 
 - (id) init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		_lat = 0.0f;
 		_lon = 0.0f;
 		

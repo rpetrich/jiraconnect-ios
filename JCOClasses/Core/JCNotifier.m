@@ -7,7 +7,7 @@
 //
 
 #import "JCNotifier.h"
-#import "JCNotificationViewController.h"
+#import "JCONotificationsViewController.h"
 #import "JCO.h"
 
 @implementation JCNotifier
@@ -28,10 +28,7 @@
         NSLog(@"ParentView: %@", parentView);
         
 		_view = [parentView retain];
-		_notifications = [notifications retain];
-		_viewController = [[JCNotificationViewController alloc] initWithNibName:@"JCNotificationViewController" bundle:nil];
-		[_viewController loadView];
-        
+		_notifications = [notifications retain];        
 		
 		_toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
 		[_toolbar setBarStyle:UIBarStyleBlack];
@@ -65,7 +62,13 @@
 		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [notes count]];
 		NSString* text = [notes objectAtIndex:0]; // TODO FIX HACK OR GET TIM TO SEND A SINGLE STRING
 		NSLog(@"Notification: %@", text);
-		[_viewController.textView setText:text];
+        
+        JCONotificationsViewController* tableViewController = [[JCONotificationsViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];
+		[tableViewController loadView];        
+		[tableViewController setData:[NSArray arrayWithObjects:notes, notes, nil]]; // todo get real data. A 2D Array of notes.
+        
+        _viewController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
+        [tableViewController release];
 		
         NSLog(@"View: %@", _view);
 		
@@ -88,7 +91,7 @@
 	
 	[UIView beginAnimations:@"animateView" context:nil];
 	[UIView setAnimationDuration:0.4];
-	[_viewController.view setFrame:CGRectMake(0, 20, 320, 480)]; //notice this is ON screen!
+	[_viewController.view setFrame:CGRectMake(0, 0, 320, 480)]; //notice this is ON screen!
 	[UIView commitAnimations];	
 	
 	[_button removeFromSuperview];
