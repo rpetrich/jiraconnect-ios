@@ -8,7 +8,7 @@
 
 #import "JCONotificationsViewController.h"
 #import "JCCommentViewController.h"
-
+#import "JCIssue.h"
 
 @implementation JCONotificationsViewController
 
@@ -25,8 +25,8 @@
 
 - (void)dealloc
 {
+    [_data release];_data = nil;  
     [super dealloc];
-    [_data release];_data = nil;   
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,8 +92,21 @@
     return [self.data count];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return @"Updated Issues";
+    }
+    else
+    {
+        return @"Existing Issues";
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"Number of rows in section %d = %d", section, [[self.data objectAtIndex:section] count]);
     return [[self.data objectAtIndex:section] count];
 }
 
@@ -106,9 +119,16 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    NSLog(@"Index Row: %d", indexPath.row);
+    NSLog(@"About to render cell at section %d and row %d", indexPath.section, indexPath.row);
+    
     NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
-    cell.textLabel.text = [sectionData objectAtIndex:indexPath.row];
+    
+    NSLog(@"There are %d issues in this section", [sectionData count]);
+    
+    JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [issue key];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -123,6 +143,12 @@
     NSLog(@"Selected: %@", indexPath);
     
     JCCommentViewController *detailViewController = [[JCCommentViewController alloc] initWithNibName: @"JCCommentViewController" bundle:nil];
+    
+    NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
+    JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
+    
+    detailViewController.issue = issue;
+    
      // ...
      // Pass the selected object to the new view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];

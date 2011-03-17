@@ -256,6 +256,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		720402341332248E0002B9C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72F3F01A1331D34900FBF320 /* JCIssueStore.h */,
+				72F3F01B1331D34900FBF320 /* JCIssueStore.m */,
+				72F3F01D1331D3EF00FBF320 /* JCIssue.h */,
+				72F3F01E1331D3EF00FBF320 /* JCIssue.m */,
+				72F3F0201331D40800FBF320 /* JCComment.h */,
+				72F3F0211331D40800FBF320 /* JCComment.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		72040235133224CD0002B9C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7204022E133223C40002B9C7 /* JCONotificationsViewController.h */,
+				7204022F133223C50002B9C7 /* JCONotificationsViewController.m */,
+				72040230133223C50002B9C7 /* JCONotificationsViewController.xib */,
+				720402291332237A0002B9C7 /* JCCommentViewController.h */,
+				7204022A1332237A0002B9C7 /* JCCommentViewController.m */,
+				7204022B1332237C0002B9C7 /* JCCommentViewController.xib */,
+				8D5064061281179800B3E1A0 /* JCNotificationViewController.h */,
+				8D5064071281179800B3E1A0 /* JCNotificationViewController.m */,
+				8D5064081281179800B3E1A0 /* JCNotificationViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		8D2FA87312824FF800828713 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,15 +372,8 @@
 		8D5063D01281165700B3E1A0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				7204022E133223C40002B9C7 /* JCONotificationsViewController.h */,
-				7204022F133223C50002B9C7 /* JCONotificationsViewController.m */,
-				72040230133223C50002B9C7 /* JCONotificationsViewController.xib */,
-				720402291332237A0002B9C7 /* JCCommentViewController.h */,
-				7204022A1332237A0002B9C7 /* JCCommentViewController.m */,
-				7204022B1332237C0002B9C7 /* JCCommentViewController.xib */,
-				8D5064061281179800B3E1A0 /* JCNotificationViewController.h */,
-				8D5064071281179800B3E1A0 /* JCNotificationViewController.m */,
-				8D5064081281179800B3E1A0 /* JCNotificationViewController.xib */,
+				72040235133224CD0002B9C7 /* View */,
+				720402341332248E0002B9C7 /* Model */,
 				8D5063F2128116D600B3E1A0 /* JCLocation.h */,
 				8D5063F3128116D600B3E1A0 /* JCLocation.m */,
 				8D5063E7128116BF00B3E1A0 /* JCPing.h */,
@@ -366,12 +388,6 @@
 				8D2FA96512826BB100828713 /* JCORecorder.m */,
 				8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */,
 				8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */,
-				72F3F01A1331D34900FBF320 /* JCIssueStore.h */,
-				72F3F01B1331D34900FBF320 /* JCIssueStore.m */,
-				72F3F01D1331D3EF00FBF320 /* JCIssue.h */,
-				72F3F01E1331D3EF00FBF320 /* JCIssue.m */,
-				72F3F0201331D40800FBF320 /* JCComment.h */,
-				72F3F0211331D40800FBF320 /* JCComment.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";

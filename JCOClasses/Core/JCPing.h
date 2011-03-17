@@ -18,6 +18,6 @@
 }
 
 - (id)initWithLocator:(JCLocation*) locator notifications:(JCNotifications*)notes;
-- (void) startPinging:(NSURL*) url;
+- (void) sendPing:(NSURL*)baseUrl;
 
 @end

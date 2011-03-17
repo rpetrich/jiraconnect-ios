@@ -7,9 +7,12 @@
 //
 
 #import "JCCommentViewController.h"
-
+#import "JCComment.h"
 
 @implementation JCCommentViewController
+
+@synthesize tableView = _tableView;
+@synthesize issue = _issue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +25,8 @@
 
 - (void)dealloc
 {
+    [_tableView release];
+    [_issue release];
     [super dealloc];
 }
 
@@ -52,6 +57,62 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return @"Issue Summary";
+    }
+    else
+    {
+        return @"Comments";
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return [[self.issue comments] count];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell2";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    NSLog(@"issue =>> %@", self.issue);
+    
+    if (indexPath.section == 0)
+    {
+        cell.textLabel.text = self.issue.key;
+    }
+    else
+    {
+        JCComment* comment = [self.issue.comments objectAtIndex:indexPath.row];
+        cell.textLabel.text = [comment body];
+    }
+    
+    return cell;
 }
 
 @end

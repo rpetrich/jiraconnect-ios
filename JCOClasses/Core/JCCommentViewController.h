@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JCIssue.h"
 
-
-@interface JCCommentViewController : UIViewController {
-    
+@interface JCCommentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    IBOutlet UITableView* _tableView;
+    JCIssue* _issue;
 }
+
+@property (nonatomic, retain) UITableView* tableView;
+@property (nonatomic, retain) JCIssue* issue;
 
 @end

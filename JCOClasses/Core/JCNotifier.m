@@ -9,6 +9,7 @@
 #import "JCNotifier.h"
 #import "JCONotificationsViewController.h"
 #import "JCO.h"
+#import "JCIssueStore.h"
 
 @implementation JCNotifier
 
@@ -45,26 +46,23 @@
 		[_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 		
 		// hack
-		[_notifications add:@"No, you can't have a pony."];
+		//[_notifications add:@"No, you can't have a pony."];
 		
-		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:YES];
+		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:NO];
 	}
 	return self;
 }
 
 - (void) notify:(NSTimer*) timer {
 	// check notifications
-	if ([_notifications notificationCount] > 0) {
-		NSArray* notes = [_notifications readAndClear];
-		NSLog(@"got %d notification(s)", [notes count]);
-					
-		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [notes count]];
-		NSString* text = [notes objectAtIndex:0]; // TODO FIX HACK OR GET TIM TO SEND A SINGLE STRING
-		NSLog(@"Notification: %@", text);
-        
+    
+    //hack -> for now always show that there is 1 notification
+	if ([[JCIssueStore instance] updatedIssues] > 0 || true) {					
+		_label.text = [NSString stringWithFormat:@"%d new notification from developer", 1];
+		
         JCONotificationsViewController* tableViewController = [[JCONotificationsViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];
 		[tableViewController loadView];        
-		[tableViewController setData:[NSArray arrayWithObjects:notes, notes, nil]]; // todo get real data. A 2D Array of notes.
+		[tableViewController setData:[NSArray arrayWithObjects:[[JCIssueStore instance] updatedIssues], [[JCIssueStore instance] oldIssues], nil]]; // todo get real data. A 2D Array of notes.
         
         _viewController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
         [tableViewController release];

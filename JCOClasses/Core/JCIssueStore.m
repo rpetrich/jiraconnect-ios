@@ -47,14 +47,14 @@
     for (NSDictionary* dict in updated)
     {
         JCIssue* issue = [[JCIssue alloc] initWithDictionary:dict];
-        [tempUpdated addObject:tempUpdated];
+        [tempUpdated addObject:issue];
         [issue release];
     }
     
     for (NSDictionary* dict in old)
     {
         JCIssue* issue = [[JCIssue alloc] initWithDictionary:dict];
-        [tempOld addObject:tempUpdated];
+        [tempOld addObject:issue];
         [issue release];
     }
     

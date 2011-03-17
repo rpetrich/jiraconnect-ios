@@ -31,9 +31,16 @@
 		self.key = [map objectForKey:@"key"];
         self.status = [map objectForKey:@"status"];
         self.title = [map objectForKey:@"title"];
-        self.description = [map objectForKey:@"description"];        
-	}
+        self.description = [map objectForKey:@"description"];   
+    }
+    
+    NSLog(@"self = %@", self);
+    
 	return self;
+}
+
+- (NSString*) description {
+    return [NSString stringWithFormat:@"key: %@, status %@, title: %@", self.key, self.status, self.title];
 }
 
 @end
