@@ -57,8 +57,7 @@
 	if ([_notifications notificationCount] > 0) {
 		NSArray* notes = [_notifications readAndClear];
 		NSLog(@"got %d notification(s)", [notes count]);
-		
-			
+					
 		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [notes count]];
 		NSString* text = [notes objectAtIndex:0]; // TODO FIX HACK OR GET TIM TO SEND A SINGLE STRING
 		NSLog(@"Notification: %@", text);
@@ -70,8 +69,7 @@
         _viewController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
         [tableViewController release];
 		
-        NSLog(@"View: %@", _view);
-		
+        NSLog(@"View: %@", _view);		
         
 		[_toolbar setFrame:CGRectMake(0, 520, 320, 40)];
 		[_view addSubview:_toolbar];
