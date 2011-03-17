@@ -45,8 +45,6 @@
 		[_button setFrame:CGRectMake(0, 440, 320, 40)];	
 		[_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 		
-		// hack
-		//[_notifications add:@"No, you can't have a pony."];
 		
 		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:NO];
 	}

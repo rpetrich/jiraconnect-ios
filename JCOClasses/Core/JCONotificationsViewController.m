@@ -8,19 +8,26 @@
 
 #import "JCONotificationsViewController.h"
 #import "JCCommentViewController.h"
+#import "ViewFactory.h"
 #import "JCIssue.h"
+
+static NSString *cellIdentifier = @"CommentCell";
+float cellHeight;
 
 @implementation JCONotificationsViewController
 
 @synthesize data=_data;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+
+
+-(id) initWithNibName:(NSString*) name bundle:(NSBundle*)bundle {
+    
+    id controller = [super initWithNibName:name bundle:bundle];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UITableViewCell *cell = [[ViewFactory instance] cellOfKind:cellIdentifier forTable:self.tableView];
+    cellHeight = cell.bounds.size.height;
+
+    return controller;
 }
 
 - (void)dealloc
@@ -47,7 +54,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+ 
 }
 
 - (void)viewDidUnload
@@ -92,37 +99,31 @@
     return [self.data count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if (section == 0)
-    {
-        return @"Updated Issues";
-    }
-    else
-    {
-        return @"Existing Issues";
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //NSLog(@"Number of rows in section %d = %d", section, [[self.data objectAtIndex:section] count]);
     return [[self.data objectAtIndex:section] count];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // fixed font style. use custom view (UILabel) if you want
+    return section == 0 ? @"New" : @"Existing";
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return cellHeight;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
     
-    //NSLog(@"About to render cell at section %d and row %d", indexPath.section, indexPath.row);
-    
+    UITableViewCell * cell = [[ViewFactory instance] cellOfKind:cellIdentifier forTable:tableView];
+        
+    NSLog(@"Index Row: %d", indexPath.row);
     NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
-    
+    [self.tableView setRowHeight:100.0f];
+
     //NSLog(@"There are %d issues in this section", [sectionData count]);
     
     JCIssue* issue = [sectionData objectAtIndex:indexPath.row];

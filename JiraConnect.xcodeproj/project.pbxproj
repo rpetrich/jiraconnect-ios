@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01BE65E5133210AF0039F83C /* ViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BE65E4133210AD0039F83C /* ViewFactory.m */; };
+		01BE65E7133211320039F83C /* JCCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BE65E61332112D0039F83C /* JCCommentCell.xib */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -68,6 +70,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01BE65E3133210AB0039F83C /* ViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFactory.h; sourceTree = "<group>"; };
+		01BE65E4133210AD0039F83C /* ViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFactory.m; sourceTree = "<group>"; };
+		01BE65E61332112D0039F83C /* JCCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCCommentCell.xib; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -388,6 +393,15 @@
 				8D2FA96512826BB100828713 /* JCORecorder.m */,
 				8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */,
 				8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */,
+				01BE650B1331CA1A0039F83C /* JCONotificationsViewController.h */,
+				01BE650C1331CA1D0039F83C /* JCONotificationsViewController.m */,
+				01BE650D1331CA1F0039F83C /* JCONotificationsViewController.xib */,
+				01BE65E3133210AB0039F83C /* ViewFactory.h */,
+				01BE65E4133210AD0039F83C /* ViewFactory.m */,
+				01BE65101331DD770039F83C /* JCCommentViewController.h */,
+				01BE65111331DD790039F83C /* JCCommentViewController.m */,
+				01BE65121331DD7C0039F83C /* JCCommentViewController.xib */,
+				01BE65E61332112D0039F83C /* JCCommentCell.xib */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -471,6 +485,7 @@
 				8D2FAB3A1283A08200828713 /* button_Record-OnAir.png in Resources */,
 				7204022D1332237E0002B9C7 /* JCCommentViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCONotificationsViewController.xib in Resources */,
+				01BE65E7133211320039F83C /* JCCommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +527,7 @@
 				72F3F0221331D40900FBF320 /* JCComment.m in Sources */,
 				7204022C1332237E0002B9C7 /* JCCommentViewController.m in Sources */,
 				72040231133223C60002B9C7 /* JCONotificationsViewController.m in Sources */,
+				01BE65E5133210AF0039F83C /* ViewFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
