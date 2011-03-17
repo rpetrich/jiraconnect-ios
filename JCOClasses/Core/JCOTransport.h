@@ -18,7 +18,7 @@
 @end
 
 
-@interface JCOTransport : NSObject {
+@interface JCOTransport : NSObject <UIAlertViewDelegate> {
 	id<JCOTransportDelegate> _delegate;
 }
 

@@ -52,7 +52,7 @@ JCOCrashSender* _crashSender;
 }
 
 - (id)init {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		_notifications = [[[JCNotifications alloc] init] retain];
 		_location = [[[JCLocation alloc] init] retain];
 		_pinger = [[[JCPing alloc] initWithLocator:_location notifications:_notifications] retain];
@@ -72,7 +72,7 @@ JCOCrashSender* _crashSender;
 
 
 //	[_pinger startPinging:self.url];
-	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReports) userInfo:nil repeats:YES];
+//	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReports) userInfo:nil repeats:YES];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }

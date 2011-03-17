@@ -57,6 +57,11 @@
 	[upRequest startAsynchronous];
 }
 
+#pragma mark UIAlertViewDelelgate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    [self.delegate transportDidFinish];
+}
+
 #pragma mark ASIHTTPRequest
 
 - (void)requestFinished:(ASIHTTPRequest *)request
@@ -69,8 +74,16 @@
 	NSArray *components = [location	componentsSeparatedByString:@"/"];
 	NSString* issueKey = [components lastObject];
 	NSLog(@"Got issue key: %@", issueKey);
-	[self.delegate transportDidFinish];
-
+    
+    NSString* msg = [NSString stringWithFormat:@"Your feedback has been received. Thank you, for the common good."];
+	NSLog(@"requestSuccess: %@", msg);
+	UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Thank you"
+														 message:msg
+														delegate:self 
+											   cancelButtonTitle:@"OK"
+											   otherButtonTitles:nil];
+	[alertView2 show];
+	[alertView2 release];
 	
 }
 
@@ -83,13 +96,12 @@
 	NSLog(@"requestFailed: %@", msg);
 	UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Error uploading data to server"
 														 message:msg
-														delegate:nil // TODO: make this object the delegate and call transportDidFinish
+														delegate:self 
 											   cancelButtonTitle:@"Ok"
 											   otherButtonTitles:nil];
 	[alertView2 show];
 	[alertView2 release];
 	
-	[self.delegate transportDidFinish];
 }
 
 #pragma mark end
