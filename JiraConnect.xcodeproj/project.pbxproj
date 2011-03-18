@@ -18,6 +18,8 @@
 		7204022D1332237E0002B9C7 /* JCCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7204022B1332237C0002B9C7 /* JCCommentViewController.xib */; };
 		72040231133223C60002B9C7 /* JCONotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7204022F133223C50002B9C7 /* JCONotificationsViewController.m */; };
 		72040232133223C60002B9C7 /* JCONotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72040230133223C50002B9C7 /* JCONotificationsViewController.xib */; };
+		720402401332CF5A0002B9C7 /* JCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7204023F1332CF5A0002B9C7 /* JCMessageCell.m */; };
+		720402421332CFB10002B9C7 /* JCMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 720402411332CFB10002B9C7 /* JCMessageCell.xib */; };
 		72F3F01C1331D34A00FBF320 /* JCIssueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F01B1331D34900FBF320 /* JCIssueStore.m */; };
 		72F3F01F1331D3F000FBF320 /* JCIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F01E1331D3EF00FBF320 /* JCIssue.m */; };
 		72F3F0221331D40900FBF320 /* JCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F0211331D40800FBF320 /* JCComment.m */; };
@@ -87,6 +89,9 @@
 		7204022E133223C40002B9C7 /* JCONotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationsViewController.h; sourceTree = "<group>"; };
 		7204022F133223C50002B9C7 /* JCONotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationsViewController.m; sourceTree = "<group>"; };
 		72040230133223C50002B9C7 /* JCONotificationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCONotificationsViewController.xib; sourceTree = "<group>"; };
+		7204023E1332CF590002B9C7 /* JCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCMessageCell.h; sourceTree = "<group>"; };
+		7204023F1332CF5A0002B9C7 /* JCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMessageCell.m; sourceTree = "<group>"; };
+		720402411332CFB10002B9C7 /* JCMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCMessageCell.xib; sourceTree = "<group>"; };
 		72F3F01A1331D34900FBF320 /* JCIssueStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCIssueStore.h; sourceTree = "<group>"; };
 		72F3F01B1331D34900FBF320 /* JCIssueStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCIssueStore.m; sourceTree = "<group>"; };
 		72F3F01D1331D3EF00FBF320 /* JCIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCIssue.h; sourceTree = "<group>"; };
@@ -277,20 +282,31 @@
 		72040235133224CD0002B9C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				720402431332D75C0002B9C7 /* Comment */,
 				01BE65E3133210AB0039F83C /* ViewFactory.h */,
 				01BE65E4133210AD0039F83C /* ViewFactory.m */,
 				01BE65E61332112D0039F83C /* JCCommentCell.xib */,
 				7204022E133223C40002B9C7 /* JCONotificationsViewController.h */,
 				7204022F133223C50002B9C7 /* JCONotificationsViewController.m */,
 				72040230133223C50002B9C7 /* JCONotificationsViewController.xib */,
-				720402291332237A0002B9C7 /* JCCommentViewController.h */,
-				7204022A1332237A0002B9C7 /* JCCommentViewController.m */,
-				7204022B1332237C0002B9C7 /* JCCommentViewController.xib */,
 				8D5064061281179800B3E1A0 /* JCNotificationViewController.h */,
 				8D5064071281179800B3E1A0 /* JCNotificationViewController.m */,
 				8D5064081281179800B3E1A0 /* JCNotificationViewController.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		720402431332D75C0002B9C7 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				720402291332237A0002B9C7 /* JCCommentViewController.h */,
+				7204022A1332237A0002B9C7 /* JCCommentViewController.m */,
+				7204022B1332237C0002B9C7 /* JCCommentViewController.xib */,
+				7204023E1332CF590002B9C7 /* JCMessageCell.h */,
+				7204023F1332CF5A0002B9C7 /* JCMessageCell.m */,
+				720402411332CFB10002B9C7 /* JCMessageCell.xib */,
+			);
+			name = Comment;
 			sourceTree = "<group>";
 		};
 		8D2FA87312824FF800828713 /* Resources */ = {
@@ -480,6 +496,7 @@
 				7204022D1332237E0002B9C7 /* JCCommentViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCONotificationsViewController.xib in Resources */,
 				01BE65E7133211320039F83C /* JCCommentCell.xib in Resources */,
+				720402421332CFB10002B9C7 /* JCMessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +539,7 @@
 				7204022C1332237E0002B9C7 /* JCCommentViewController.m in Sources */,
 				72040231133223C60002B9C7 /* JCONotificationsViewController.m in Sources */,
 				01BE65E5133210AF0039F83C /* ViewFactory.m in Sources */,
+				720402401332CF5A0002B9C7 /* JCMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
