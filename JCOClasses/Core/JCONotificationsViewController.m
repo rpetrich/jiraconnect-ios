@@ -23,12 +23,26 @@ float cellHeight;
 -(id) initWithNibName:(NSString*) name bundle:(NSBundle*)bundle {
     
     id controller = [super initWithNibName:name bundle:bundle];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     UITableViewCell *cell = [[ViewFactory instance] cellOfKind:cellIdentifier forTable:self.tableView];
     cellHeight = cell.bounds.size.height;
-
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                                           target:self 
+                                                                                           action:@selector(cancel:)] autorelease]; 
+    self.title = @"Your Feedback";
+    
     return controller;
 }
+
+-(void) cancel:(UIBarItem*)arg {
+
+    // Dismiss the entire notification view, the same way it gets displayed... TODO: is there a cleaner to do this?
+    [UIView beginAnimations:@"animateView" context:nil];
+	[UIView setAnimationDuration:0.4];
+    CGRect frame = self.navigationController.view.frame;
+	[self.navigationController.view setFrame:CGRectMake(0, 480, frame.size.width,frame.size.height)]; //notice this is ON screen!
+	[UIView commitAnimations];
+}
+
 
 - (void)dealloc
 {
@@ -116,8 +130,6 @@ float cellHeight;
     
     
     UITableViewCell * cell = [[ViewFactory instance] cellOfKind:cellIdentifier forTable:tableView];
-        
-    NSLog(@"Index Row: %d", indexPath.row);
     NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
     [self.tableView setRowHeight:100.0f];
 
@@ -136,9 +148,6 @@ float cellHeight;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    
-    NSLog(@"Selected: %@", indexPath);
     
     JCCommentViewController *detailViewController = [[JCCommentViewController alloc] initWithNibName: @"JCCommentViewController" bundle:nil];
     
@@ -147,8 +156,6 @@ float cellHeight;
     
     detailViewController.issue = issue;
     
-     // ...
-     // Pass the selected object to the new view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
     

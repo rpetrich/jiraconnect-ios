@@ -44,10 +44,9 @@
 					<object class="IBUIView" id="533174570">
 						<reference key="NSNextResponder" ref="16500110"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrameSize">{320, 20}</string>
+						<string key="NSFrameSize">{300, 54}</string>
 						<reference key="NSSuperview" ref="16500110"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -59,7 +58,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 20}</string>
+				<string key="NSFrameSize">{320, 54}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="533174570"/>
@@ -69,7 +68,15 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
+				<int key="IBUISelectionStyle">2</int>
+				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="533174570"/>
+				<int key="IBUILineBreakMode">2</int>
+				<object class="NSColor" key="IBUITextColor">
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC40ODM2OTU2NTIyIDAuNDgzNjk1NjUyMiAwLjQ4MzY5NTY1MjIAA</bytes>
+				</object>
+				<bool key="IBUIShouldIndentWhileEditing">NO</bool>
 				<string key="IBUIReuseIdentifier">CommentCell</string>
 			</object>
 		</object>

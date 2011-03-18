@@ -30,7 +30,7 @@
 	
 	NSLog(@"App Data is :%@", params);
 	
-	NSURL* url = [NSURL URLWithString:@"jira/rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
+	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
 	
 	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
 	
@@ -67,6 +67,7 @@
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
 	
+    //TODO: check for an issue key.
 	NSLog(@"Response: %@", [request responseString]);
 	NSLog(@"Headers: %@	", [request responseHeaders]);
 	NSString* location = [[request responseHeaders] objectForKey:@"Location"];

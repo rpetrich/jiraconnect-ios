@@ -63,6 +63,7 @@
 		[tableViewController setData:[NSArray arrayWithObjects:[[JCIssueStore instance] updatedIssues], [[JCIssueStore instance] oldIssues], nil]]; // todo get real data. A 2D Array of notes.
         
         _viewController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
+
         [tableViewController release];
 		
         NSLog(@"View: %@", _view);		
@@ -83,11 +84,14 @@
 	[_viewController.view setFrame:CGRectMake(0, 480, 320, 480)];
 	[_view addSubview:_viewController.view];
 	
+    
 	[UIView beginAnimations:@"animateView" context:nil];
 	[UIView setAnimationDuration:0.4];
 	[_viewController.view setFrame:CGRectMake(0, 0, 320, 480)]; //notice this is ON screen!
 	[UIView commitAnimations];	
 	
+    
+    
 	[_button removeFromSuperview];
 	[_toolbar removeFromSuperview];
 }
