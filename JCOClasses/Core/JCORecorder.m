@@ -17,12 +17,11 @@ NSString* _recorderFilePath;
 -(id)init {
 	if ((self = [super init])) {
 		
-		self.recordTime = 10;
+		self.recordTime = 1;
 		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.caf", DOCUMENTS_FOLDER] retain];
 		
 		// delete the previous recording.
-		NSFileManager *fm = [NSFileManager defaultManager];
-		[fm removeItemAtPath:_recorderFilePath error:nil];
+        [self cleanUp];
 		
 		AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 		NSError *err = nil;
@@ -53,6 +52,7 @@ NSString* _recorderFilePath;
 		NSURL *url = [NSURL fileURLWithPath:_recorderFilePath];
 		err = nil;
 		AVAudioRecorder* recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
+
 		if(!recorder){
 			NSLog(@"recorder: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
 			UIAlertView *alert =
@@ -97,13 +97,22 @@ NSString* _recorderFilePath;
 
 -(void) stop {	
 	[self.recorder stop];
-	_lastDuration = -[_startTime timeIntervalSinceNow];
 	_startTime = nil;
 	NSLog(@"Saved audio data to: %@", _recorderFilePath);
 }
 
 -(float) currentDuration {
-	return -[_startTime timeIntervalSinceNow];
+	return self.recorder.currentTime;
+}
+
+-(float) previousDuration {
+
+    AVAudioPlayer* player = [[[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil] autorelease];
+    player.volume = 1;
+    NSLog(@"Player Url: %@ and data: %@, %f", player.url, player.data, player.duration);
+    
+    return player.duration;
+
 }
 
 -(NSData*) audioData {
@@ -116,10 +125,16 @@ NSString* _recorderFilePath;
 	return audioData;	
 }
 
-@synthesize recorder=_recorder, lastDuration=_lastDuration, startTime=_startTime, recordTime;
+
+// deletes any cached audio files
+-(void) cleanUp {
+    NSLog(@"cleaning up...");
+    [[NSFileManager defaultManager] removeItemAtPath:_recorderFilePath error:nil];
+}
+
+@synthesize recorder=_recorder, startTime=_startTime, recordTime;
 
 - (void) dealloc {
-    NSLog(@"DEALLOC:");
 	[super dealloc];
 	[_recorder release]; _recorder = nil;
 	[_recorderFilePath release]; _recorderFilePath = nil;

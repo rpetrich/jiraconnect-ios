@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JCComment.h"
 
 
 @interface JCIssue : NSObject {
@@ -15,6 +16,7 @@
     NSString* _title;
     NSString* _description;
     NSArray* _comments;
+    BOOL hasUpdates;
 }
 
 @property (nonatomic, retain) NSString* key;
@@ -22,7 +24,9 @@
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* description;
 @property (nonatomic, retain) NSArray* comments;
+@property (nonatomic, assign) BOOL hasUpdates;
 
 - (id) initWithDictionary:(NSDictionary*)map;
+- (JCComment*) latestComment;
 
 @end

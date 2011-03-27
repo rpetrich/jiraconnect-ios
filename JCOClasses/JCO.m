@@ -81,6 +81,10 @@ JCOCrashSender* _crashSender;
 	return _jcController;
 }
 
+-(void) displayNotifications {
+    [_notifier displayNotifications:nil];
+}
+
 -(NSDictionary*) getMetaData {
 	UIDevice* device = [UIDevice currentDevice];
 	NSDictionary* appMetaData = [[NSBundle mainBundle] infoDictionary];

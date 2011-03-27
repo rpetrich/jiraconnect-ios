@@ -11,6 +11,11 @@
 #import "JSON.h"
 #import "JCORecorder.h"
 
+@interface JCOViewController()
+
+-(void) setVoiceButtonTitleWithDuration:(float)duration;
+
+@end
 
 @implementation JCOViewController
 
@@ -23,12 +28,17 @@ NSTimer* _timer;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.transport = [[JCOTransport alloc] init];
-	_recorder = [[[JCORecorder alloc] init] retain]; // TODO: work out how to stoip. use a delegate!
+	_recorder = [[[JCORecorder alloc] init] retain]; 
 	_recorder.recorder.delegate = self;
 	self.countdownView.layer.cornerRadius = 7.0;
-		
+
+    NSLog(@"View Did load!! %@", self);
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
+
+}
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -43,6 +53,7 @@ NSTimer* _timer;
 	self.imagePicker = nil;
 	[_transport release]; _transport = nil;
 	[_recorder release]; _recorder = nil;
+        NSLog(@"View Did unload!! %@", self);
 
 	
 }
@@ -64,11 +75,10 @@ NSTimer* _timer;
 }
 
 -(void) updateProgress:(NSTimer*)theTimer {
-	float progress = (float) ([_recorder currentDuration]/_recorder.recordTime);
+    float currentDuration = [_recorder currentDuration];
+	float progress = (float) (currentDuration/_recorder.recordTime);
 	self.progressView.progress = progress;	
-	[self setVoiceButtonTitleWithDuration:-[_recorder.startTime timeIntervalSinceNow]];
-	
-
+	[self setVoiceButtonTitleWithDuration:currentDuration];
 }
 
 -(void) hideAudioProgress {
@@ -84,14 +94,13 @@ NSTimer* _timer;
 		
 		[_recorder stop];
 		// update the label
-
-		[self setVoiceButtonTitleWithDuration:_recorder.lastDuration];
+		[self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
 
 	} else {
-
 		[_recorder start];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
 		self.progressView.progress = 0;
-		_timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+
 		self.countdownView.hidden = NO;
 		[self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record-OnAir.png"] forState:UIControlStateNormal];
 	}
@@ -99,6 +108,7 @@ NSTimer* _timer;
 
 
 -(void) audioRecorderDidFinishRecording:(AVAudioRecorder*)recorder successfully:(BOOL)success {
+	[self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
 	[self hideAudioProgress];
 	
 }

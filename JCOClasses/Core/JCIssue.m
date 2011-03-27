@@ -16,6 +16,7 @@
 @synthesize title = _title;
 @synthesize description = _description;
 @synthesize comments = _comments;
+@synthesize hasUpdates;
 
 - (void) dealloc {
 	[_key release];
@@ -24,6 +25,10 @@
     [_description release];
     [_comments release];
 	[super dealloc];
+}
+
+- (JCComment*) latestComment {
+    return [self.comments count] > 0 ? ((JCComment*)[self.comments lastObject]) : nil;
 }
 
 - (id) initWithDictionary:(NSDictionary*)map {
@@ -66,7 +71,9 @@
                 {
                     body = @"(no body)";
                 }
-                JCComment* comment = [[JCComment alloc] initWithAuthor:author body:body];
+                NSNumber* msSinceEpoch = [data objectForKey:@"date"];
+                NSDate* date = [NSDate dateWithTimeIntervalSince1970:[msSinceEpoch longLongValue]/1000];
+                JCComment* comment = [[JCComment alloc] initWithAuthor:author body:body date:date];
                 [array addObject:comment];
             }
             self.comments = array;

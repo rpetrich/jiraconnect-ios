@@ -7,28 +7,31 @@
 //
 
 #import "JCONotificationsViewController.h"
+#import "JCONotificationTableCell.h"
 #import "JCCommentViewController.h"
-#import "ViewFactory.h"
+#import "JCComment.h"
 #import "JCIssue.h"
 
 static NSString *cellIdentifier = @"CommentCell";
-float cellHeight;
 
 @implementation JCONotificationsViewController
 
-@synthesize data=_data;
+@synthesize data=_data, headers=_headers;
 
-
+NSDateFormatter *_dateFormatter;
 
 -(id) initWithNibName:(NSString*) name bundle:(NSBundle*)bundle {
     
     id controller = [super initWithNibName:name bundle:bundle];
-    UITableViewCell *cell = [[ViewFactory instance] cellOfKind:cellIdentifier forTable:self.tableView];
-    cellHeight = cell.bounds.size.height;
+    
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                            target:self 
                                                                                            action:@selector(cancel:)] autorelease]; 
     self.title = @"Your Feedback";
+    
+    _dateFormatter = [[[NSDateFormatter alloc] init] retain];
+    [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
     return controller;
 }
@@ -38,15 +41,24 @@ float cellHeight;
     // Dismiss the entire notification view, the same way it gets displayed... TODO: is there a cleaner to do this?
     [UIView beginAnimations:@"animateView" context:nil];
 	[UIView setAnimationDuration:0.4];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop)];
+
     CGRect frame = self.navigationController.view.frame;
 	[self.navigationController.view setFrame:CGRectMake(0, 480, frame.size.width,frame.size.height)]; //notice this is ON screen!
 	[UIView commitAnimations];
 }
 
+-(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    NSLog(@"View did cancel:");    
+}
+
+
 
 - (void)dealloc
 {
     [_data release];_data = nil;  
+    [_dateFormatter release];_dateFormatter = nil;
+    [_headers release];_headers = nil;
     [super dealloc];
 }
 
@@ -118,28 +130,26 @@ float cellHeight;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return section == 0 ? @"New" : @"Existing";
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return cellHeight;
+    return [self.headers objectAtIndex:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    UITableViewCell * cell = [[ViewFactory instance] cellOfKind:cellIdentifier forTable:tableView];
-    NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
-    [self.tableView setRowHeight:100.0f];
+    JCONotificationTableCell* cell = (JCONotificationTableCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == NULL) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"JCONotificationCell" owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+    }
 
-    //NSLog(@"There are %d issues in this section", [sectionData count]);
+    NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
     
     JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [issue key];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
+    JCComment* latestComment = [issue latestComment];
+    cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description ;
+    cell.titleLabel.text = [issue title];
+    cell.dateLabel.text = [_dateFormatter stringFromDate: latestComment.date]; 
+    cell.statusLabel.hidden = ! issue.hasUpdates;
     return cell;
 }
 

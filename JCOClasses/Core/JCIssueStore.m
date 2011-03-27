@@ -11,7 +11,6 @@
 
 @implementation JCIssueStore
 
-@synthesize updatedIssues = _updatedIssues;
 @synthesize oldIssues = _oldIssues;
 
 +(JCIssueStore*) instance {
@@ -24,14 +23,12 @@
 }
 
 - (void) dealloc {
-	[_updatedIssues release];
     [_oldIssues release];
 	[super dealloc];
 }
 
 - (id) init {
 	if ((self = [super init])) {
-        self.updatedIssues = [NSArray array];
         self.oldIssues = [NSArray array];
 	}
 	return self;
@@ -41,13 +38,15 @@
     NSArray* updated = [data objectForKey:@"updatedIssuesWithComments"];
     NSArray* old = [data objectForKey:@"oldIssuesWithComments"];
     
-    NSMutableArray* tempUpdated = [[NSMutableArray alloc] initWithCapacity:[updated count]];
-    NSMutableArray* tempOld = [[NSMutableArray alloc] initWithCapacity:[old count]];
+    NSMutableArray* tempOld = [[NSMutableArray alloc] initWithCapacity:[old count] + [updated count]];
     
     for (NSDictionary* dict in updated)
     {
         JCIssue* issue = [[JCIssue alloc] initWithDictionary:dict];
-        [tempUpdated addObject:issue];
+
+        issue.hasUpdates = YES;
+        NSLog(@"HAS UPDATES!");
+        [tempOld addObject:issue];
         [issue release];
     }
     
@@ -58,10 +57,8 @@
         [issue release];
     }
     
-    self.updatedIssues = tempUpdated;
     self.oldIssues = tempOld;
     
-    [tempUpdated release];
     [tempOld release];    
 }
 

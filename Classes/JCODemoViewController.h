@@ -31,13 +31,16 @@
 @interface JCODemoViewController : UIViewController {
 	IBOutlet UIButton *triggerButtonCrash;
 	IBOutlet UIButton *triggerButtonFeedback;	
+    IBOutlet UIButton *triggerButtonNotifications;	
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *triggerButtonCrash;
 @property (nonatomic, retain) IBOutlet UIButton *triggerButtonFeedback;
+@property (nonatomic, retain) IBOutlet UIButton *triggerButtonNotifications;
 
 - (IBAction) triggerCrash;
 - (IBAction) triggerFeedback;
+- (IBAction) triggerDisplayNotifications;
 
 @end
 

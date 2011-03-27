@@ -31,8 +31,7 @@
 
 @implementation JCODemoViewController
 
-@synthesize triggerButtonCrash;
-@synthesize triggerButtonFeedback;
+@synthesize triggerButtonCrash, triggerButtonFeedback, triggerButtonNotifications;
 
 
 - (IBAction) triggerFeedback {
@@ -40,7 +39,6 @@
 	UIViewController* controller = [[JCO instance] viewController];
 	
 	[self presentModalViewController:controller animated:YES];
-
 }
 
 - (IBAction) triggerCrash
@@ -50,6 +48,11 @@
 	CFRelease(NULL);
 }
 
+
+- (IBAction) triggerDisplayNotifications {
+    NSLog(@"Trigger notifications");
+    [[JCO instance] displayNotifications];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview

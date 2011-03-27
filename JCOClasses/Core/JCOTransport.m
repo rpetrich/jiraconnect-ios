@@ -44,13 +44,13 @@
 		[upRequest setData:imgData withFileName:@"jiraconnect-screenshot.png" andContentType:@"image/png" forKey:@"screenshot"];
 		
 	}
-	
+	NSLog(@"voiceData: %@", voiceData);
 	if (voiceData != nil) // also attach a recording
 	{
 		[upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
 	}
 	
-	NSLog(@"POST DATA: \n%@", jsonData);
+	NSLog(@"POST DATA: \n%@", upRequest);
 	
 	[upRequest setDelegate:self];
 	[upRequest setTimeOutSeconds:15];

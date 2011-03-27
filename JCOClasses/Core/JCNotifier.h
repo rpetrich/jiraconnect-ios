@@ -20,5 +20,6 @@
 }
 
 - (id) initWithView:(UIView*)parentView notifications:(JCNotifications*)notifications;
+- (void)displayNotifications:(id)sender;
 
 @end

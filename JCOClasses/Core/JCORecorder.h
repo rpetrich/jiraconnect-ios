@@ -14,20 +14,20 @@
 
 	AVAudioRecorder* _recorder;
 	float recordTime;
-	float _lastDuration;
 	NSDate* _startTime;
 
 }
 
 @property (nonatomic, retain) AVAudioRecorder* recorder;
 @property (assign) float recordTime;
-@property (assign) float lastDuration;
 @property (nonatomic, retain) NSDate* startTime;
 
 
 -(void) start;
 -(void) stop;
 -(float) currentDuration;
+-(float) previousDuration;
 -(NSData*) audioData;
+-(void) cleanUp;
 
 @end

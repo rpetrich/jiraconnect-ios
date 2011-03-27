@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01BE65E5133210AF0039F83C /* ViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BE65E4133210AD0039F83C /* ViewFactory.m */; };
-		01BE65E7133211320039F83C /* JCCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BE65E61332112D0039F83C /* JCCommentCell.xib */; };
+		01A2159C133F3B43001C80B5 /* JCONotificationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */; };
+		01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2159D133F440B001C80B5 /* JCONotificationCell.xib */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -72,9 +72,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01BE65E3133210AB0039F83C /* ViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFactory.h; sourceTree = "<group>"; };
-		01BE65E4133210AD0039F83C /* ViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFactory.m; sourceTree = "<group>"; };
-		01BE65E61332112D0039F83C /* JCCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCCommentCell.xib; sourceTree = "<group>"; };
+		01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationTableCell.h; sourceTree = "<group>"; };
+		01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationTableCell.m; sourceTree = "<group>"; };
+		01A2159D133F440B001C80B5 /* JCONotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCONotificationCell.xib; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -283,15 +283,15 @@
 			isa = PBXGroup;
 			children = (
 				720402431332D75C0002B9C7 /* Comment */,
-				01BE65E3133210AB0039F83C /* ViewFactory.h */,
-				01BE65E4133210AD0039F83C /* ViewFactory.m */,
-				01BE65E61332112D0039F83C /* JCCommentCell.xib */,
 				7204022E133223C40002B9C7 /* JCONotificationsViewController.h */,
 				7204022F133223C50002B9C7 /* JCONotificationsViewController.m */,
 				72040230133223C50002B9C7 /* JCONotificationsViewController.xib */,
 				8D5064061281179800B3E1A0 /* JCNotificationViewController.h */,
 				8D5064071281179800B3E1A0 /* JCNotificationViewController.m */,
 				8D5064081281179800B3E1A0 /* JCNotificationViewController.xib */,
+				01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */,
+				01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */,
+				01A2159D133F440B001C80B5 /* JCONotificationCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -495,8 +495,8 @@
 				8D2FAB3A1283A08200828713 /* button_Record-OnAir.png in Resources */,
 				7204022D1332237E0002B9C7 /* JCCommentViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCONotificationsViewController.xib in Resources */,
-				01BE65E7133211320039F83C /* JCCommentCell.xib in Resources */,
 				720402421332CFB10002B9C7 /* JCMessageCell.xib in Resources */,
+				01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,8 +538,8 @@
 				72F3F0221331D40900FBF320 /* JCComment.m in Sources */,
 				7204022C1332237E0002B9C7 /* JCCommentViewController.m in Sources */,
 				72040231133223C60002B9C7 /* JCONotificationsViewController.m in Sources */,
-				01BE65E5133210AF0039F83C /* ViewFactory.m in Sources */,
 				720402401332CF5A0002B9C7 /* JCMessageCell.m in Sources */,
+				01A2159C133F3B43001C80B5 /* JCONotificationTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

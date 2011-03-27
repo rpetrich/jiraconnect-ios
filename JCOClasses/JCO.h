@@ -20,6 +20,7 @@
 
 - (void) configureJiraConnect:(NSString*) withUrl;
 - (JCOViewController*) viewController;
+- (void) displayNotifications;
 - (NSDictionary*) getMetaData;
 
 @end

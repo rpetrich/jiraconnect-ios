@@ -12,8 +12,10 @@
 @interface JCONotificationsViewController : UITableViewController {
     // this is always an array of size 2, each element is an array of JCIssues
     NSArray* _data;
+    NSArray* _headers;
 }
 
 @property (retain, nonatomic) NSArray* data;
+@property (retain, nonatomic) NSArray* headers;
 
 @end
