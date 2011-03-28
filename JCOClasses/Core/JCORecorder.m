@@ -116,8 +116,13 @@ NSString* _recorderFilePath;
 }
 
 -(NSData*) audioData {
+    
+    if ([self previousDuration] <= 0.0f) {
+        return nil;
+    }
+                                
 	NSURL *url = [NSURL fileURLWithPath: _recorderFilePath];
-	NSError *err = nil;
+	NSError *err = nil; 
 	NSData *audioData = [NSData dataWithContentsOfFile:[url path] options: 0 error:&err];
 	if(!audioData) {
 		NSLog(@"audio data: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
