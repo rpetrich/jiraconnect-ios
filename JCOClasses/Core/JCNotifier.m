@@ -3,7 +3,6 @@
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
-//  Copyright 2010 Atlassian . All rights reserved.
 //
 
 #import "JCNotifier.h"
@@ -31,16 +30,14 @@
 		_button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[_button setFrame:CGRectMake(0, 440, 320, 40)];	
 		[_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
-		
-		
-		[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(notify:) userInfo:nil repeats:NO];
-	}
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:@"JCODidReceiveIssueCommentsNotification" object:nil];
+    }
 	return self;
 }
 
 - (void) notify:(NSTimer*) timer {
 	// check notifications
-    
+
     //hack -> for now always show that there is 1 notification
 	if ([JCIssueStore instance].newIssueCount > 0) {					
 		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCIssueStore instance].newIssueCount];
@@ -71,7 +68,10 @@
 		[UIView commitAnimations];
 			
 		[_view addSubview:_button];	
-	}
+	} else {
+        NSLog(@"No notices to display");
+        
+    }
 }
 
 - (void)displayNotifications:(id)sender {

@@ -18,7 +18,7 @@
 
 // When set to 1, ASIFormDataRequests will print information about the request body to the console
 #ifndef DEBUG_FORM_DATA_REQUEST
-	#define DEBUG_FORM_DATA_REQUEST 1
+	#define DEBUG_FORM_DATA_REQUEST 0
 #endif
 
 // When set to 1, ASIHTTPRequests will print information about bandwidth throttling to the console

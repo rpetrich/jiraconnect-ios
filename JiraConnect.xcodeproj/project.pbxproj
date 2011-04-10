@@ -167,6 +167,7 @@
 		8D5064081281179800B3E1A0 /* JCNotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCNotificationViewController.xib; sourceTree = "<group>"; };
 		8D50640F1281189B00B3E1A0 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
 		8D5064101281189B00B3E1A0 /* CrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporter.m; sourceTree = "<group>"; };
+		C01FCF5008A954540054247C /* JCOPayloadDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOPayloadDataSource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +323,7 @@
 		8D50635612810CB600B3E1A0 /* JCOClasses */ = {
 			isa = PBXGroup;
 			children = (
+				C01FCF5008A954540054247C /* JCOPayloadDataSource.h */,
 				8D2FA87312824FF800828713 /* Resources */,
 				8D5063C91281157B00B3E1A0 /* JCO.h */,
 				8D5063CA1281157B00B3E1A0 /* JCO.m */,

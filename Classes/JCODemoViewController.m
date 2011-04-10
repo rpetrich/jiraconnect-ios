@@ -28,6 +28,8 @@
 
 #import "JCODemoViewController.h"
 #import "JCO.h"
+#import "JCOPayloadDataSource.h"
+#import "JCOPayloadDataSource.h"
 
 @implementation JCODemoViewController
 
@@ -36,8 +38,9 @@
 
 - (IBAction) triggerFeedback {
 	NSLog(@"FEEEDBACK");
-	UIViewController* controller = [[JCO instance] viewController];
-	
+	JCOViewController* controller = [[JCO instance] viewController];
+    controller.payloadDataSource = self;
+
 	[self presentModalViewController:controller animated:YES];
 }
 
@@ -46,6 +49,10 @@
 	NSLog(@"Trigger crash!");
 	/* Trigger a crash */
 	CFRelease(NULL);
+}
+
+- (NSDictionary *)payloadFor:(NSString *)issueTitle {
+    return [NSDictionary dictionaryWithObject:@"CUSTOM VALUE" forKey:@"CUSTOM KEY"];
 }
 
 
@@ -61,6 +68,7 @@
 
 
 - (void)dealloc {
+    self.triggerButtonCrash, self.triggerButtonFeedback, self.triggerButtonNotifications = nil;
     [super dealloc];
 }
 

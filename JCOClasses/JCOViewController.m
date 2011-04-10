@@ -3,13 +3,13 @@
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 23/09/10.
-//  Copyright 2010 Nick Pellow. All rights reserved.
 //
 
 #import "JCOViewController.h"
 #import "JCO.h"
 #import "JSON.h"
 #import "JCORecorder.h"
+#import "JCOPayloadDataSource.h"
 
 @interface JCOViewController()
 
@@ -73,7 +73,7 @@ NSTimer* _timer;
 
 -(void) updateProgress:(NSTimer*)theTimer {
     float currentDuration = [_recorder currentDuration];
-	float progress = (float) (currentDuration/_recorder.recordTime);
+	float progress = (currentDuration/_recorder.recordTime);
 	self.progressView.progress = progress;	
 	[self setVoiceButtonTitleWithDuration:currentDuration];
 }
@@ -113,9 +113,9 @@ NSTimer* _timer;
 - (IBAction) sendFeedback {
 
 	self.transport.delegate = self;
-	NSLog(@"Sending feedback...%@, %@, %@", [screenshotButton currentBackgroundImage], self.subjectField.text, self.descriptionField.text);
-
-	[self.transport send:self.subjectField.text description:self.descriptionField.text screenshot:_image andVoiceData:[_recorder audioData]]; 
+    NSDictionary * payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
+    NSLog(@"Payload: %@", payloadData);
+    [self.transport send:self.subjectField.text description:self.descriptionField.text screenshot:_image andVoiceData:[_recorder audioData]];
 	
 }
 
@@ -128,7 +128,6 @@ NSTimer* _timer;
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-	NSLog(@"Picked Media: %@", info);
 	UIImage* origImg = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
 	[self dismissModalViewControllerAnimated:YES];
 	[self.screenshotButton setBackgroundImage:origImg forState:UIControlStateNormal];
@@ -140,7 +139,6 @@ NSTimer* _timer;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-	NSLog(@"Picker Cancelled");
 	[self dismissModalViewControllerAnimated:YES];
 }
 #pragma mark end
@@ -177,12 +175,21 @@ NSTimer* _timer;
 
 
 @synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker;
-@synthesize transport=_transport;
+@synthesize transport=_transport, payloadDataSource=_payloadDataSource;
 
 - (void)dealloc {
 	[_image release];_image = nil;
     [_recorder release];_recorder = nil;
-    self.transport = nil;
+    self.transport,
+    self.sendButton,
+    self.imagePicker,
+    self.voiceButton,
+    self.progressView,
+    self.subjectField,
+    self.countdownView,
+    self.screenshotButton,
+    self.descriptionField,
+    self.payloadDataSource = nil;
     [super dealloc];
 }
 

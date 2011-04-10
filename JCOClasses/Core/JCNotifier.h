@@ -3,7 +3,6 @@
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
-//  Copyright 2010 Atlassian . All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

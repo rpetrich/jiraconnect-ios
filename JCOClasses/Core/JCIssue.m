@@ -3,7 +3,6 @@
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
-//  Copyright 2011 Atlassian. All rights reserved.
 //
 
 #import "JCIssue.h"
@@ -66,13 +65,14 @@
                 NSDate* date = [NSDate dateWithTimeIntervalSince1970:[msSinceEpoch longLongValue]/1000];
                 JCComment* comment = [[JCComment alloc] initWithAuthor:author body:body date:date];
                 [array addObject:comment];
+                [comment release];
             }
             self.comments = array;
             [array release];
         }
     }
     
-    NSLog(@"self = %@", self);
+    NSLog(@"\t received issue  %@, %@", self.key, self.title);
     
 	return self;
 }

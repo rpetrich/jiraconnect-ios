@@ -3,7 +3,6 @@
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 21/09/10.
-//  Copyright 2010 Nick Pellow. All rights reserved.
 //
 
 #import "JCO.h"
@@ -47,7 +46,9 @@ JCOCrashSender* _crashSender;
 
 	self.url = [NSURL URLWithString:withUrl];
 
-	[_pinger sendPing:self.url];
+    _pinger.baseUrl = self.url;
+    [_pinger start];
+
 //	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReports) userInfo:nil repeats:YES];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	

@@ -3,7 +3,6 @@
 //  JiraConnect
 //
 //  Created by Nick Pellow on 4/11/10.
-//  Copyright 2010 Atlassian . All rights reserved.
 //
 
 #import "JCOTransport.h"
@@ -27,9 +26,6 @@
 	NSDictionary* metaData = [[JCO instance] getMetaData];
 	[params addEntriesFromDictionary:metaData];
 	
-	
-	NSLog(@"App Data is :%@", params);
-	
 	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
 	
 	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
@@ -38,19 +34,17 @@
 	[upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
 	NSLog(@"About to send: %@ to: %@", [params JSONRepresentation], url);	
 	
-	if (screenshot != nil) // take a screenshot of the movie to upload as well.
+	if (screenshot != nil) 
 	{
 		NSData* imgData = UIImagePNGRepresentation(screenshot);	
 		[upRequest setData:imgData withFileName:@"jiraconnect-screenshot.png" andContentType:@"image/png" forKey:@"screenshot"];
 		
 	}
-	NSLog(@"voiceData: %@", voiceData);
-	if (voiceData != nil) // also attach a recording
+	if (voiceData != nil)
 	{
+        NSLog(@"voiceData length: %d", [voiceData length]);
 		[upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
 	}
-	
-	NSLog(@"POST DATA: \n%@", upRequest);
 	
 	[upRequest setDelegate:self];
 	[upRequest setTimeOutSeconds:15];
@@ -66,9 +60,6 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-	
-    //TODO: check for an issue key.
-	NSLog(@"Response: %@", [request responseString]);
 	NSLog(@"Headers: %@	", [request responseHeaders]);
 
 	NSLog(@"Got issue key: %@", [request responseString]);

@@ -3,7 +3,6 @@
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
-//  Copyright 2011 Atlassian. All rights reserved.
 //
 
 #import "JCComment.h"
