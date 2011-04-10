@@ -7,19 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JCNotifications.h"
 #import "JCONotificationsViewController.h"
 
 @interface JCNotifier : NSObject {
 	UIView* _view;
-	JCNotifications* _notifications;
 	UINavigationController* _viewController;
 	UIToolbar* _toolbar;
 	UILabel* _label;
 	UIButton* _button;
 }
 
-- (id) initWithView:(UIView*)parentView notifications:(JCNotifications*)notifications;
+- (id)initWithView:(UIView *)parentView;
 - (void)displayNotifications:(id)sender;
 
 @end

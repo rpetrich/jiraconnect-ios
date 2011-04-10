@@ -7,13 +7,11 @@
 //
 
 #import "JCCommentViewController.h"
-#import "JCComment.h"
 #import "JCMessageCell.h"
 
 @implementation JCCommentViewController
 
-@synthesize tableView = _tableView;
-@synthesize issue = _issue;
+@synthesize tableView = _tableView, issue = _issue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,8 +24,7 @@
 
 - (void)dealloc
 {
-    [_tableView release];
-    [_issue release];
+    self.tableView, self.issue = nil;
     [super dealloc];
 }
 
@@ -125,10 +122,7 @@
     {
         JCComment* comment = [self.issue.comments objectAtIndex:indexPath.row];
         
-        //NSString* commentData = [NSString stringWithFormat:@"Author: %@\nComment: %@", comment.author, comment.body];
-        
-        //cell.textLabel.text = commentData;
-        
+
         messageCell.title.text = comment.author;
         messageCell.body.text = comment.body;
     }

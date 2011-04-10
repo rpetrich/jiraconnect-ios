@@ -20,7 +20,6 @@
 @implementation JCOViewController
 
 UIImage* _image;
-
 JCORecorder* _recorder;
 NSTimer* _timer;
 
@@ -41,7 +40,6 @@ NSTimer* _timer;
 }
 
 - (void)viewDidUnload {
-    [super viewDidUnload];
     // Release any retained subviews of the main view.
 	self.voiceButton, 
 	self.sendButton, 
@@ -53,9 +51,8 @@ NSTimer* _timer;
 	self.imagePicker = nil;
 	[_transport release]; _transport = nil;
 	[_recorder release]; _recorder = nil;
-        NSLog(@"View Did unload!! %@", self);
-
-	
+    [super viewDidUnload];
+    NSLog(@"View Did UNload!!");
 }
 
 - (IBAction) dismiss {
@@ -183,10 +180,10 @@ NSTimer* _timer;
 @synthesize transport=_transport;
 
 - (void)dealloc {
-    [super dealloc];
 	[_image release];_image = nil;
-	[_transport release];_transport = nil;
     [_recorder release];_recorder = nil;
+    self.transport = nil;
+    [super dealloc];
 }
 
 

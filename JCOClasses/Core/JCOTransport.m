@@ -70,11 +70,8 @@
     //TODO: check for an issue key.
 	NSLog(@"Response: %@", [request responseString]);
 	NSLog(@"Headers: %@	", [request responseHeaders]);
-	NSString* location = [[request responseHeaders] objectForKey:@"Location"];
-	NSLog(@"LOCATION: %@", location);
-	NSArray *components = [location	componentsSeparatedByString:@"/"];
-	NSString* issueKey = [components lastObject];
-	NSLog(@"Got issue key: %@", issueKey);
+
+	NSLog(@"Got issue key: %@", [request responseString]);
     
     NSString* msg = [NSString stringWithFormat:@"Your feedback has been received. Thank you, for the common good."];
 	NSLog(@"requestSuccess: %@", msg);
@@ -109,8 +106,8 @@
 @synthesize delegate=_delegate;
 
 - (void) dealloc {
-	[super dealloc];
-	[_delegate release]; _delegate = nil;
+    self.delegate = nil;
+    [super dealloc];
 }
 
 @end

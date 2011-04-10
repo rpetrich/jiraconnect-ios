@@ -14,13 +14,10 @@
 
 	AVAudioRecorder* _recorder;
 	float recordTime;
-	NSDate* _startTime;
-
 }
 
 @property (nonatomic, retain) AVAudioRecorder* recorder;
-@property (assign) float recordTime;
-@property (nonatomic, retain) NSDate* startTime;
+@property (assign) float recordTime; // maximum voice record time in seconds
 
 
 -(void) start;

@@ -16,7 +16,7 @@
     NSString* _title;
     NSString* _description;
     NSArray* _comments;
-    BOOL hasUpdates;
+    BOOL _hasUpdates;
 }
 
 @property (nonatomic, retain) NSString* key;

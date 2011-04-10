@@ -11,19 +11,10 @@
 
 @implementation JCIssue
 
-@synthesize key = _key;
-@synthesize status = _status;
-@synthesize title = _title;
-@synthesize description = _description;
-@synthesize comments = _comments;
-@synthesize hasUpdates;
+@synthesize key = _key, status = _status, title = _title, description = _description, comments = _comments, hasUpdates = _hasUpdates;
 
 - (void) dealloc {
-	[_key release];
-    [_status release];
-    [_title release];
-    [_description release];
-    [_comments release];
+    self.key, self.status, self.title, self.description, self.comments = nil;
 	[super dealloc];
 }
 

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface JCONotificationTableCell : UITableViewCell {
 
     UILabel* _dateLabel;

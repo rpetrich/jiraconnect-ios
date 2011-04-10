@@ -9,8 +9,6 @@
 #import "JCONotificationsViewController.h"
 #import "JCONotificationTableCell.h"
 #import "JCCommentViewController.h"
-#import "JCComment.h"
-#import "JCIssue.h"
 
 static NSString *cellIdentifier = @"CommentCell";
 
@@ -56,9 +54,9 @@ NSDateFormatter *_dateFormatter;
 
 - (void)dealloc
 {
-    [_data release];_data = nil;  
+    self.data = nil;
+    self.headers = nil;
     [_dateFormatter release];_dateFormatter = nil;
-    [_headers release];_headers = nil;
     [super dealloc];
 }
 
@@ -88,7 +86,7 @@ NSDateFormatter *_dateFormatter;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [_data release];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

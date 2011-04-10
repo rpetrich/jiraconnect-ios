@@ -11,8 +11,6 @@
 
 @implementation JCONotificationTableCell
 
-@synthesize dateLabel=_dateLabel, titleLabel=_titleLabel, detailsLabel=_detailsLabell, statusLabel=_statusLabel;
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -29,12 +27,11 @@
     // Configure the view for the selected state
 }
 
+@synthesize dateLabel=_dateLabel, titleLabel=_titleLabel, detailsLabel=_detailsLabell, statusLabel=_statusLabel;
+
 - (void)dealloc
 {
-    _dateLabel = nil;
-    _titleLabel = nil;
-    _detailsLabel = nil;
-    _statusLabel = nil;
+    self.dateLabel, self.titleLabel, self.detailsLabel, self.statusLabel = nil;
     [super dealloc];
 }
 

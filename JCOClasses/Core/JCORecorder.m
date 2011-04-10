@@ -17,7 +17,7 @@ NSString* _recorderFilePath;
 -(id)init {
 	if ((self = [super init])) {
 		
-		self.recordTime = 1;
+		self.recordTime = 10;
 		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.caf", DOCUMENTS_FOLDER] retain];
 		
 		// delete the previous recording.
@@ -92,12 +92,10 @@ NSString* _recorderFilePath;
         return;
 	}
 	[self.recorder recordForDuration:self.recordTime];
-	self.startTime = [NSDate date];
 }
 
 -(void) stop {	
 	[self.recorder stop];
-	_startTime = nil;
 	NSLog(@"Saved audio data to: %@", _recorderFilePath);
 }
 
@@ -137,13 +135,12 @@ NSString* _recorderFilePath;
     [[NSFileManager defaultManager] removeItemAtPath:_recorderFilePath error:nil];
 }
 
-@synthesize recorder=_recorder, startTime=_startTime, recordTime;
+@synthesize recorder=_recorder, recordTime;
 
 - (void) dealloc {
-	[super dealloc];
-	[_recorder release]; _recorder = nil;
+    self.recorder = nil;
 	[_recorderFilePath release]; _recorderFilePath = nil;
-	[_startTime release]; _startTime = nil;
+    [super dealloc];
 }	
 
 @end

@@ -1,4 +1,4 @@
-//
+    //
 //  JCIssueStore.m
 //  JiraConnect
 //
@@ -11,7 +11,6 @@
 
 @implementation JCIssueStore
 
-@synthesize oldIssues = _oldIssues;
 
 +(JCIssueStore*) instance {
 	static JCIssueStore *singleton = nil;
@@ -22,14 +21,9 @@
 	return singleton;
 }
 
-- (void) dealloc {
-    [_oldIssues release];
-	[super dealloc];
-}
-
 - (id) init {
 	if ((self = [super init])) {
-        self.oldIssues = [NSArray array];
+        self.issues = [NSArray array];
 	}
 	return self;
 }
@@ -57,10 +51,19 @@
         [issue release];
     }
     
-    self.oldIssues = tempOld;
+    self.issues = tempOld;
+    self.newIssueCount = [updated count];
     
     [tempOld release];    
 }
+
+@synthesize issues = _issues, newIssueCount = _newIssueCount;
+
+- (void) dealloc {
+    self.issues = nil;
+	[super dealloc];
+}
+
 
 
 @end

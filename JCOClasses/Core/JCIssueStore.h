@@ -11,10 +11,13 @@
 
 @interface JCIssueStore : NSObject {
     // array of JCIssues 
-    NSArray* _oldIssues;
+    NSArray* _issues;
+    int _newIssueCount;
 }
 
-@property (nonatomic, retain) NSArray* oldIssues;
+@property (nonatomic, retain) NSArray* issues;
+@property (assign, nonatomic) int newIssueCount;
+
 
 - (void) updateWithData:(NSDictionary*)data;
 + (JCIssueStore*) instance;

@@ -14,9 +14,7 @@
 @synthesize author = _author, body = _body, date = _date;
 
 - (void) dealloc {
-	[_author release];
-    [_body release];
-    [_date release];
+    self.author, self.body, self.date = nil;
 	[super dealloc];
 }
 

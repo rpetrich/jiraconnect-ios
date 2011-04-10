@@ -8,16 +8,8 @@
 
 #import "JCO.h"
 #import "JCPing.h"
-#import "JCOViewController.h"
-#import "JCLocation.h"
 #import "JCNotifier.h"
-#import "JCNotifications.h"
 #import "JCOCrashSender.h"
-
-#import "CrashReporter.h"
-#import "JSON.h"
-#import <objc/runtime.h> 
-#import <objc/message.h>
 
 
 @implementation JCO
@@ -26,21 +18,8 @@
 
 JCPing* _pinger;
 JCNotifier* _notifier;
-JCNotifications* _notifications;
 JCOViewController* _jcController;
-JCLocation* _location;
 JCOCrashSender* _crashSender;
-
--(void) dealloc {
-	[_url release]; _url = nil;
-	[_pinger release]; _pinger = nil;
-	[_notifier release]; _notifier = nil;
-	[_notifications release]; _notifications = nil;
-	[_jcController release]; _jcController = nil;
-	[_location release]; _location = nil;
-	[_crashSender release]; _location = nil;
-	[super dealloc];
-}
 
 +(JCO*) instance {
 	static JCO *singleton = nil;
@@ -53,11 +32,9 @@ JCOCrashSender* _crashSender;
 
 - (id)init {
 	if ((self = [super init])) {
-		_notifications = [[[JCNotifications alloc] init] retain];
-		_location = [[[JCLocation alloc] init] retain];
-		_pinger = [[[JCPing alloc] initWithLocator:_location notifications:_notifications] retain];
+		_pinger = [[[JCPing alloc] init] retain];
 		UIView* window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present our replies dialog.
-		_notifier = [[[JCNotifier alloc] initWithView:window notifications:_notifications] retain];
+		_notifier = [[[JCNotifier alloc] initWithView:window] retain];
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
 		
@@ -88,7 +65,7 @@ JCOCrashSender* _crashSender;
 -(NSDictionary*) getMetaData {
 	UIDevice* device = [UIDevice currentDevice];
 	NSDictionary* appMetaData = [[NSBundle mainBundle] infoDictionary];
-	NSMutableDictionary* info = [[[NSMutableDictionary alloc] initWithCapacity:20] autorelease];
+	NSMutableDictionary* info = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
 	
 	// add device data
 	[info setObject:[device uniqueIdentifier] forKey:@"udid"];
@@ -102,11 +79,17 @@ JCOCrashSender* _crashSender;
 	[info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
 	[info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
 	
-	// location data
-	[info setObject:[NSString stringWithFormat:@"%f", [_location lat]] forKey:@"latitude"];
-	[info setObject:[NSString stringWithFormat:@"%f", [_location lon]] forKey:@"longitude"];
 	return info;
-	
 }
+
+-(void) dealloc {
+	[_url release]; _url = nil;
+	[_pinger release]; _pinger = nil;
+	[_notifier release]; _notifier = nil;
+	[_jcController release]; _jcController = nil;
+	[_crashSender release]; _crashSender = nil;
+	[super dealloc];
+}
+
 
 @end

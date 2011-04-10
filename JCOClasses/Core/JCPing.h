@@ -7,17 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
-#import "JSON.h"
-#import "JCNotifications.h"
-#import "JCLocation.h"
 
 @interface JCPing : NSObject {
-	JCLocation* _location;
-	JCNotifications* _notifications;
+
 }
 
-- (id)initWithLocator:(JCLocation*) locator notifications:(JCNotifications*)notes;
 - (void) sendPing:(NSURL*)baseUrl;
 
 @end

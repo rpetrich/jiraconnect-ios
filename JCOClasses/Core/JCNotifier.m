@@ -7,30 +7,17 @@
 //
 
 #import "JCNotifier.h"
-#import "JCONotificationsViewController.h"
-#import "JCO.h"
 #import "JCIssueStore.h"
 
 @implementation JCNotifier
 
-- (void) dealloc {
-	[_view release]; _view = nil;
-	[_notifications release]; _notifications = nil;
-	[_viewController release]; _viewController = nil;
-	[_label release]; _label = nil;
-	[_toolbar release]; _toolbar = nil;
-	[_button release]; _button = nil;
-	[super dealloc];
-}
-
-- (id) initWithView:(UIView*)parentView notifications:(JCNotifications*)notifications {
+- (id)initWithView:(UIView *)parentView {
 	if ((self = [super init])) {
         
         NSLog(@"ParentView: %@", parentView);
         
 		_view = [parentView retain];
-		_notifications = [notifications retain];        
-		
+
 		_toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
 		[_toolbar setBarStyle:UIBarStyleBlack];
 		[_toolbar setTranslucent:YES];
@@ -55,15 +42,15 @@
 	// check notifications
     
     //hack -> for now always show that there is 1 notification
-	if ([[JCIssueStore instance] oldIssues] > 0 || true) {					
-		_label.text = [NSString stringWithFormat:@"%d new notification from developer", 1];
+	if ([JCIssueStore instance].newIssueCount > 0) {					
+		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCIssueStore instance].newIssueCount];
 		
         JCONotificationsViewController* tableViewController = [[JCONotificationsViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];
 		[tableViewController loadView];        
         
         NSArray* data;
         NSArray* headers;
-        data = [NSArray arrayWithObjects:[[JCIssueStore instance] oldIssues], nil];
+        data = [NSArray arrayWithObjects:[[JCIssueStore instance] issues], nil];
         headers = [NSArray arrayWithObjects:@"Feedback",  nil];
         
 		[tableViewController setData:data];
@@ -100,6 +87,15 @@
 	[_button removeFromSuperview];
 	[_toolbar removeFromSuperview];
 }
-	
+
+- (void) dealloc {
+
+	[_view release]; _view = nil;
+	[_viewController release]; _viewController = nil;
+	[_label release]; _label = nil;
+	[_toolbar release]; _toolbar = nil;
+	[_button release]; _button = nil;
+	[super dealloc];
+}
 
 @end
