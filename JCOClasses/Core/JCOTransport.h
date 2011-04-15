@@ -23,9 +23,6 @@
 
 @property(nonatomic, retain) id <JCOTransportDelegate> delegate;
 
-- (void)send:(NSString *)title
-        description:(NSString *)description
-        screenshot:(UIImage *)screenshot
-        andVoiceData:(NSData *)voice;
+- (void)send:(NSString *)subject description:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
 
 @end

@@ -23,8 +23,12 @@
 	CFRelease(NULL);
 }
 
+- (NSDictionary *)customFieldsFor:(NSString *)issueTitle {
+    return [NSDictionary dictionaryWithObject:@"custom field value." forKey:@"customer"];
+}
+
 - (NSDictionary *)payloadFor:(NSString *)issueTitle {
-    return [NSDictionary dictionaryWithObject:@"CUSTOM VALUE" forKey:@"CUSTOM KEY"];
+    return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
 }
 
 

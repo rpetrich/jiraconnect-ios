@@ -113,9 +113,22 @@ NSTimer* _timer;
 - (IBAction) sendFeedback {
 
 	self.transport.delegate = self;
-    NSDictionary * payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
-    NSLog(@"Payload: %@", payloadData);
-    [self.transport send:self.subjectField.text description:self.descriptionField.text screenshot:_image andVoiceData:[_recorder audioData]];
+    NSDictionary * payloadData = nil;
+    NSDictionary * customFields = nil;
+
+    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
+        payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
+    }
+    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)]) {
+        customFields = [self.payloadDataSource customFieldsFor:self.subjectField.text];
+    }
+
+    [self.transport send:self.subjectField.text
+             description:self.descriptionField.text
+              screenshot:_image
+               voiceData:[_recorder audioData]
+                 payload:payloadData
+                  fields:customFields];
 	
 }
 

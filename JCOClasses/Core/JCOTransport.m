@@ -13,9 +13,14 @@
 @implementation JCOTransport
 
 
--(void) send:(NSString*)subject description:(NSString*)description  screenshot:(UIImage*)screenshot  andVoiceData:(NSData*)voiceData
-{
-	NSLog(@"Sending feedback... %@, %@", subject, description);
+- (void)send:(NSString *)subject
+        description:(NSString *)description
+        screenshot:(UIImage *)screenshot
+        voiceData:(NSData *)voiceData
+        payload:(NSDictionary *)payloadData
+        fields:(NSDictionary *)customFields {
+    
+	NSLog(@"Sending feedback... %@, %@ %@", subject, description, payloadData, customFields);
 	
 	// issue creation url is:
 	// curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/reallife/1.0/jirarl/upload?location=blah&pid=10000&issuetype=1&summary=testing123&reporter=admin"
@@ -45,7 +50,20 @@
         NSLog(@"voiceData length: %d", [voiceData length]);
 		[upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
 	}
-	
+
+    if (payloadData != nil)
+    {
+        NSData *json = [[payloadData JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+        [upRequest setData:json withFileName:@"payload.txt" andContentType:@"plain/text" forKey:@"payload"];
+    }
+    
+    if (customFields != nil)
+    {
+        NSData *json = [[customFields JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+        [upRequest setData:json withFileName:@"customfields.json" andContentType:@"application/json" forKey:@"customfields"];
+    }
+
+
 	[upRequest setDelegate:self];
 	[upRequest setTimeOutSeconds:15];
 	[upRequest startAsynchronous];
