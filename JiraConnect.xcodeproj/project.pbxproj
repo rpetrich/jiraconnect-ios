@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01A2159C133F3B43001C80B5 /* JCONotificationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */; };
 		01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2159D133F440B001C80B5 /* JCONotificationCell.xib */; };
+		01A830A1135BEBC70067BF7E /* writeareply.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 01A830A0135BEBC70067BF7E /* writeareply.jpg */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -73,6 +74,7 @@
 		01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationTableCell.h; sourceTree = "<group>"; };
 		01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationTableCell.m; sourceTree = "<group>"; };
 		01A2159D133F440B001C80B5 /* JCONotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCONotificationCell.xib; sourceTree = "<group>"; };
+		01A830A0135BEBC70067BF7E /* writeareply.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = writeareply.jpg; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		8D2FA87312824FF800828713 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01A830A0135BEBC70067BF7E /* writeareply.jpg */,
 				8D2FAB391283A08200828713 /* button_Record-OnAir.png */,
 				8D2FAB0012838AB600828713 /* button_Capture_active.png */,
 				8D2FAB0112838AB600828713 /* button_Capture.png */,
@@ -489,6 +492,7 @@
 				72040232133223C60002B9C7 /* JCONotificationsViewController.xib in Resources */,
 				720402421332CFB10002B9C7 /* JCMessageCell.xib in Resources */,
 				01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */,
+				01A830A1135BEBC70067BF7E /* writeareply.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

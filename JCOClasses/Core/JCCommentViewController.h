@@ -10,10 +10,17 @@
 
 @interface JCCommentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* _tableView;
+    IBOutlet UIButton*_replyButton;
     JCIssue* _issue;
+
 }
 
-@property (nonatomic, retain) UITableView* tableView;
+- (IBAction) didTouchReply:(UITextField*)sender;
+
+@property (nonatomic, retain) IBOutlet UITableView* tableView;
+@property (nonatomic, retain) IBOutlet UIButton* replyButton;
 @property (nonatomic, retain) JCIssue* issue;
+
+
 
 @end

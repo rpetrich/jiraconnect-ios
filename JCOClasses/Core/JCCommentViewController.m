@@ -7,10 +7,12 @@
 
 #import "JCCommentViewController.h"
 #import "JCMessageCell.h"
+#import "JCOViewController.h"
+
 
 @implementation JCCommentViewController
 
-@synthesize tableView = _tableView, issue = _issue;
+@synthesize tableView = _tableView, replyButton = _replyButton, issue = _issue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,7 +25,7 @@
 
 - (void)dealloc
 {
-    self.tableView, self.issue = nil;
+    self.tableView, self.issue, self.replyButton = nil;
     [super dealloc];
 }
 
@@ -143,5 +145,20 @@
     
     return cell;
 }
+
+- (void) didTouchReply:(id)sender {
+
+    JCOViewController * feedbackController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
+    feedbackController.replyToIssue = self.issue;
+
+    [self presentModalViewController:feedbackController animated:YES];
+    [feedbackController release];
+
+    feedbackController.subjectField.text = self.issue.title;
+    feedbackController.subjectField.enabled = NO;
+    feedbackController.subjectField.textColor = [UIColor grayColor];
+
+}
+
 
 @end

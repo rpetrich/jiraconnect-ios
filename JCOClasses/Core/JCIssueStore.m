@@ -29,6 +29,8 @@
 
 - (void) updateWithData:(NSDictionary*)data {    
     NSArray* updated = [data objectForKey:@"updatedIssuesWithComments"];
+    // here only for testing!
+//    NSArray* updated = [data objectForKey:@"oldIssuesWithComments"];
     NSArray* old = [data objectForKey:@"oldIssuesWithComments"];
     
     NSMutableArray* tempOld = [[NSMutableArray alloc] initWithCapacity:[old count] + [updated count]];

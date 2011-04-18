@@ -6,8 +6,6 @@
 //
 
 #import "JCOViewController.h"
-#import "JCO.h"
-#import "JSON.h"
 #import "JCORecorder.h"
 #import "JCOPayloadDataSource.h"
 
@@ -19,16 +17,14 @@
 
 @implementation JCOViewController
 
-UIImage* _image;
-JCORecorder* _recorder;
 NSTimer* _timer;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.transport = [[JCOTransport alloc] init];
-	_recorder = [[[JCORecorder alloc] init] retain]; 
-	_recorder.recorder.delegate = self;
+	self.recorder = [[JCORecorder alloc] init];
+	self.recorder.recorder.delegate = self;
 	self.countdownView.layer.cornerRadius = 7.0;
 
     NSLog(@"View Did load!! %@", self);
@@ -37,22 +33,6 @@ NSTimer* _timer;
 - (void) viewDidAppear:(BOOL)animated {
     [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
 
-}
-
-- (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-	self.voiceButton, 
-	self.sendButton, 
-	self.screenshotButton, 
-	self.descriptionField, 
-	self.descriptionField, 
-	self.countdownView,
-	self.progressView,
-	self.imagePicker = nil;
-	[_transport release]; _transport = nil;
-	[_recorder release]; _recorder = nil;
-    [super viewDidUnload];
-    NSLog(@"View Did UNload!!");
 }
 
 - (IBAction) dismiss {
@@ -123,12 +103,22 @@ NSTimer* _timer;
         customFields = [self.payloadDataSource customFieldsFor:self.subjectField.text];
     }
 
-    [self.transport send:self.subjectField.text
-             description:self.descriptionField.text
-              screenshot:_image
-               voiceData:[_recorder audioData]
-                 payload:payloadData
-                  fields:customFields];
+    if (self.replyToIssue) {
+        [self.transport sendReply:self.replyToIssue
+                 description:self.descriptionField.text
+                  screenshot:_image
+                   voiceData:[_recorder audioData]
+                     payload:payloadData
+                      fields:customFields];
+
+    } else {
+        [self.transport send:self.subjectField.text
+                 description:self.descriptionField.text
+                  screenshot:_image
+                   voiceData:[_recorder audioData]
+                     payload:payloadData
+                      fields:customFields];
+    }
 	
 }
 
@@ -145,9 +135,7 @@ NSTimer* _timer;
 	[self dismissModalViewControllerAnimated:YES];
 	[self.screenshotButton setBackgroundImage:origImg forState:UIControlStateNormal];
 	[self.screenshotButton setTitle:nil forState:UIControlStateNormal];
-	_image = origImg;
-	[_image retain];
-	
+	self.image = origImg;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -186,19 +174,19 @@ NSTimer* _timer;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 @synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker;
-@synthesize transport=_transport, payloadDataSource=_payloadDataSource;
+@synthesize transport=_transport, payloadDataSource=_payloadDataSource, image=_image, recorder=_recorder, replyToIssue=_replyToIssue;
 
 - (void)dealloc {
-	[_image release];_image = nil;
-    [_recorder release];_recorder = nil;
+    self.image,
+    self.recorder,
     self.transport,
     self.sendButton,
     self.imagePicker,
     self.voiceButton,
     self.progressView,
     self.subjectField,
+    self.replyToIssue,
     self.countdownView,
     self.screenshotButton,
     self.descriptionField,
@@ -206,5 +194,24 @@ NSTimer* _timer;
     [super dealloc];
 }
 
+// TODO: DRY this up.
+- (void)viewDidUnload {
+    // Release any retained subviews of the main view.
+    self.image,
+    self.recorder,
+    self.transport,
+    self.sendButton,
+    self.imagePicker,
+    self.voiceButton,
+    self.progressView,
+    self.subjectField,
+    self.replyToIssue,
+    self.countdownView,
+    self.screenshotButton,
+    self.descriptionField,
+    self.payloadDataSource = nil;
+    [super viewDidUnload];
+    NSLog(@"View Did UNload!!");
+}
 
 @end

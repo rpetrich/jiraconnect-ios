@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @protocol JCOPayloadDataSource;
+@class JCORecorder;
 
 @interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate> {
 
@@ -26,7 +27,10 @@
 	IBOutlet UIImagePickerController* imagePicker;
 	JCOTransport* _transport;
     <JCOPayloadDataSource> _payloadDataSource;
-	
+    UIImage* _image;
+    JCORecorder* _recorder;
+    JCIssue * _replyToIssue;
+
 	
 }
 @property (retain, nonatomic) IBOutlet UIButton* sendButton;
@@ -42,6 +46,10 @@
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
 @property (retain, nonatomic) IBOutlet JCOTransport* transport;
 @property (retain, nonatomic) IBOutlet id<JCOPayloadDataSource> payloadDataSource;
+@property (retain, nonatomic) UIImage* image;
+@property (retain, nonatomic) JCORecorder* recorder;
+// if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
+@property (retain, nonatomic) JCIssue * replyToIssue;
 
 - (IBAction) sendFeedback;
 - (IBAction) addScreenshot;

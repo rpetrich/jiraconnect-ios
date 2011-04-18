@@ -162,9 +162,12 @@ NSDateFormatter *_dateFormatter;
     JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
     
     detailViewController.issue = issue;
-    
+
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
+
+    issue.hasUpdates = NO;  // once the user has tapped, the issue is no longer unread.
+    [tableView reloadData]; // redraw the table.
     
 }
 
