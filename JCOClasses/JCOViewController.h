@@ -11,6 +11,8 @@
 
 @protocol JCOPayloadDataSource;
 @class JCORecorder;
+@class JCOIssueTransport;
+@class JCOReplyTransport;
 
 @interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate> {
 
@@ -25,7 +27,8 @@
 	IBOutlet UIView* countdownView;
 	
 	IBOutlet UIImagePickerController* imagePicker;
-	JCOTransport* _transport;
+	JCOIssueTransport*_issueTransport;
+	JCOReplyTransport* _replyTransport;
     <JCOPayloadDataSource> _payloadDataSource;
     UIImage* _image;
     JCORecorder* _recorder;
@@ -42,10 +45,11 @@
 @property (retain, nonatomic) IBOutlet UIView* countdownView;
 @property (retain, nonatomic) IBOutlet UIProgressView* progressView;
 
-
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
-@property (retain, nonatomic) IBOutlet JCOTransport* transport;
-@property (retain, nonatomic) IBOutlet id<JCOPayloadDataSource> payloadDataSource;
+
+@property (retain, nonatomic) JCOIssueTransport* issueTransport;
+@property (retain, nonatomic) JCOReplyTransport* replyTransport;
+@property (retain, nonatomic) id<JCOPayloadDataSource> payloadDataSource;
 @property (retain, nonatomic) UIImage* image;
 @property (retain, nonatomic) JCORecorder* recorder;
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.

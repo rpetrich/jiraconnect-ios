@@ -18,13 +18,14 @@
 }
 
 - (void)sendPingDelayed {
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(sendPing) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(sendPing) userInfo:nil repeats:NO];
 }
 
 - (void)sendPing {
 
     NSLog(@"baseUrl = %@", [self.baseUrl absoluteString]);
 
+    // TODO: make JCONNECT a var
     NSString *resourceUrl = [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=JCONNECT&udid=%@", [[[JCO instance] getMetaData] objectForKey:@"udid"]];
 
     NSLog(@"resourceUrl = %@", resourceUrl);
@@ -57,7 +58,7 @@
     }
 
 /*
-'{"updatedIssuesWithComments":[],"oldIssuesWithComments":[{"key":"JCONNECT-2","status":"Open","comments":[]},{"key":"JCONNECT-1","status":"Open","title":"test","description":"Hello","comments":[{"username":"admin","text":"Hello dude"}]}]}'
+'{"updatedIssuesWithComments":[],"oldIssuesWithComments":[{"key":"JCONNECT-2","status":"Open","comments":[]},{"key":"JCONNECT-1","status":"Open","title":"test","description":"Hello","comments":[{"systemuser":true,"username":"admin","text":"Hello dude"}]}]}'
 */
 
     NSDictionary *data = [responseString JSONValue];

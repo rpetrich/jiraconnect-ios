@@ -39,7 +39,8 @@
 	// check notifications
 
     //hack -> for now always show that there is 1 notification
-	if ([JCIssueStore instance].newIssueCount > 0) {					
+//	if ([JCIssueStore instance].newIssueCount > 0) {
+	if ([JCIssueStore instance].issues) {
 		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCIssueStore instance].newIssueCount];
 		
         JCONotificationsViewController* tableViewController = [[JCONotificationsViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];

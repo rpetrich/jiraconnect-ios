@@ -8,6 +8,7 @@
 @protocol JCOPayloadDataSource<NSObject>
 
 @optional
+
 -(NSDictionary *) payloadFor:(NSString *) issueTitle;
 -(NSDictionary *) customFieldsFor:(NSString *) issueTitle;
 

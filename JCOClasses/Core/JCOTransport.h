@@ -8,9 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-
-@class JCIssue;
-
+#import "JCIssue.h"
 
 @protocol JCOTransportDelegate <NSObject>
 
@@ -25,8 +23,6 @@
 
 @property(nonatomic, retain) id <JCOTransportDelegate> delegate;
 
-- (void)send:(NSString *)subject description:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
-- (void)sendReply:(JCIssue*)originalIssue description:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
-
+- (void)populateCommonFields:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields url:(NSURL *)url upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
 
 @end

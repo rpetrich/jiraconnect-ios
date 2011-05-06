@@ -6,11 +6,11 @@
 //
 
 #import "JCIssue.h"
-#import "JCComment.h"
 
 @implementation JCIssue
 
-@synthesize key = _key, status = _status, title = _title, description = _description, comments = _comments, hasUpdates = _hasUpdates;
+@synthesize key = _key, status = _status, title = _title, description = _description,
+            comments = _comments, hasUpdates = _hasUpdates;
 
 - (void) dealloc {
     self.key, self.status, self.title, self.description, self.comments = nil;
@@ -63,7 +63,8 @@
                 }
                 NSNumber* msSinceEpoch = [data objectForKey:@"date"];
                 NSDate* date = [NSDate dateWithTimeIntervalSince1970:[msSinceEpoch longLongValue]/1000];
-                JCComment* comment = [[JCComment alloc] initWithAuthor:author body:body date:date];
+                NSNumber* value = (NSNumber*)[data objectForKey:@"systemUser"];
+                JCComment* comment = [[JCComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
                 [array addObject:comment];
                 [comment release];
             }
@@ -75,10 +76,6 @@
     NSLog(@"\t received issue  %@, %@", self.key, self.title);
     
 	return self;
-}
-
-- (NSString*) asString {
-    return [NSString stringWithFormat:@"key: %@, status %@, title: %@, description: %@", _key, _status, _title, _description];
 }
 
 @end

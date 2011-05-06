@@ -14,7 +14,7 @@
     NSString* _status;
     NSString* _title;
     NSString* _description;
-    NSArray* _comments;
+    NSMutableArray* _comments;
     BOOL _hasUpdates;
 }
 
@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSString* status;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* description;
-@property (nonatomic, retain) NSArray* comments;
+@property (nonatomic, retain) NSMutableArray* comments;
 @property (nonatomic, assign) BOOL hasUpdates;
 
 - (id) initWithDictionary:(NSDictionary*)map;

@@ -7,8 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "JCIssue.h"
+#import "JCOTransport.h"
 
-@interface JCCommentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@protocol JCOTransportDelegate;
+
+@interface JCCommentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, JCOTransportDelegate> {
     IBOutlet UITableView* _tableView;
     IBOutlet UIButton*_replyButton;
     JCIssue* _issue;

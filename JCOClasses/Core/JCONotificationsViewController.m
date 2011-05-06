@@ -9,7 +9,7 @@
 #import "JCONotificationTableCell.h"
 #import "JCCommentViewController.h"
 
-static NSString *cellIdentifier = @"CommentCell";
+static NSString *cellId = @"CommentCell";
 
 @implementation JCONotificationsViewController
 
@@ -29,7 +29,7 @@ NSDateFormatter *_dateFormatter;
     _dateFormatter = [[[NSDateFormatter alloc] init] retain];
     [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    
+
     return controller;
 }
 
@@ -133,7 +133,7 @@ NSDateFormatter *_dateFormatter;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    JCONotificationTableCell* cell = (JCONotificationTableCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    JCONotificationTableCell* cell = (JCONotificationTableCell*)[tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == NULL) {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"JCONotificationCell" owner:self options:nil];
         cell = [topLevelObjects objectAtIndex:0];

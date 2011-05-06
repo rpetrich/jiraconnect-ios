@@ -8,6 +8,9 @@
 #import "JCOViewController.h"
 #import "JCORecorder.h"
 #import "JCOPayloadDataSource.h"
+#import "JCComment.h"
+#import "JCOIssueTransport.h"
+#import "JCOReplyTransport.h"
 
 @interface JCOViewController()
 
@@ -22,7 +25,8 @@ NSTimer* _timer;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.transport = [[JCOTransport alloc] init];
+	self.issueTransport = [[JCOIssueTransport alloc] init];
+	self.replyTransport = [[JCOReplyTransport alloc] init];
 	self.recorder = [[JCORecorder alloc] init];
 	self.recorder.recorder.delegate = self;
 	self.countdownView.layer.cornerRadius = 7.0;
@@ -92,7 +96,7 @@ NSTimer* _timer;
 
 - (IBAction) sendFeedback {
 
-	self.transport.delegate = self;
+	self.issueTransport.delegate = self;
     NSDictionary * payloadData = nil;
     NSDictionary * customFields = nil;
 
@@ -104,15 +108,14 @@ NSTimer* _timer;
     }
 
     if (self.replyToIssue) {
-        [self.transport sendReply:self.replyToIssue
+        [self.replyTransport sendReply:self.replyToIssue
                  description:self.descriptionField.text
                   screenshot:_image
                    voiceData:[_recorder audioData]
                      payload:payloadData
                       fields:customFields];
-
     } else {
-        [self.transport send:self.subjectField.text
+        [self.issueTransport send:self.subjectField.text
                  description:self.descriptionField.text
                   screenshot:_image
                    voiceData:[_recorder audioData]
@@ -124,6 +127,7 @@ NSTimer* _timer;
 
 -(void) transportDidFinish {
 
+    //TODO: error handling and reporting!
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -175,12 +179,11 @@ NSTimer* _timer;
 }
 
 @synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker;
-@synthesize transport=_transport, payloadDataSource=_payloadDataSource, image=_image, recorder=_recorder, replyToIssue=_replyToIssue;
+@synthesize issueTransport = _issueTransport, replyTransport=_replyTransport, payloadDataSource=_payloadDataSource, image=_image, recorder=_recorder, replyToIssue=_replyToIssue;
 
 - (void)dealloc {
     self.image,
     self.recorder,
-    self.transport,
     self.sendButton,
     self.imagePicker,
     self.voiceButton,
@@ -188,6 +191,8 @@ NSTimer* _timer;
     self.subjectField,
     self.replyToIssue,
     self.countdownView,
+    self.issueTransport,
+    self.replyTransport,
     self.screenshotButton,
     self.descriptionField,
     self.payloadDataSource = nil;
@@ -199,7 +204,6 @@ NSTimer* _timer;
     // Release any retained subviews of the main view.
     self.image,
     self.recorder,
-    self.transport,
     self.sendButton,
     self.imagePicker,
     self.voiceButton,
@@ -207,6 +211,8 @@ NSTimer* _timer;
     self.subjectField,
     self.replyToIssue,
     self.countdownView,
+    self.issueTransport,
+    self.replyTransport,
     self.screenshotButton,
     self.descriptionField,
     self.payloadDataSource = nil;
