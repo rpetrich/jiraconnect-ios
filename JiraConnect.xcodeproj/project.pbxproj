@@ -67,8 +67,6 @@
 		8D5063CB1281157B00B3E1A0 /* JCO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */; };
 		8D5063ED128116BF00B3E1A0 /* JCOPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5063E8128116BF00B3E1A0 /* JCOPing.m */; };
 		8D5063EF128116BF00B3E1A0 /* JCONotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5063EC128116BF00B3E1A0 /* JCONotifier.m */; };
-		8D5064091281179800B3E1A0 /* JCONotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5064071281179800B3E1A0 /* JCONotificationViewController.m */; };
-		8D50640A1281179800B3E1A0 /* JCONotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D5064081281179800B3E1A0 /* JCONotificationViewController.xib */; };
 		8D5064111281189B00B3E1A0 /* CrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5064101281189B00B3E1A0 /* CrashReporter.m */; };
 		C01FCF5008A954540054247E /* JCOIssueTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A954540054247D /* JCOIssueTransport.m */; };
 		C01FCF5008A9545400542481 /* JCOReplyTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542480 /* JCOReplyTransport.m */; };
@@ -171,9 +169,6 @@
 		8D5063E8128116BF00B3E1A0 /* JCOPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOPing.m; sourceTree = "<group>"; };
 		8D5063EB128116BF00B3E1A0 /* JCONotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotifier.h; sourceTree = "<group>"; };
 		8D5063EC128116BF00B3E1A0 /* JCONotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotifier.m; sourceTree = "<group>"; };
-		8D5064061281179800B3E1A0 /* JCONotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationViewController.h; sourceTree = "<group>"; };
-		8D5064071281179800B3E1A0 /* JCONotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationViewController.m; sourceTree = "<group>"; };
-		8D5064081281179800B3E1A0 /* JCONotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCONotificationViewController.xib; sourceTree = "<group>"; };
 		8D50640F1281189B00B3E1A0 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
 		8D5064101281189B00B3E1A0 /* CrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporter.m; sourceTree = "<group>"; };
 		C01FCF5008A954540054247C /* JCOPayloadDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOPayloadDataSource.h; sourceTree = "<group>"; };
@@ -296,9 +291,6 @@
 				7204022E133223C40002B9C7 /* JCOIssuesViewController.h */,
 				7204022F133223C50002B9C7 /* JCOIssuesViewController.m */,
 				72040230133223C50002B9C7 /* JCOIssuesViewController.xib */,
-				8D5064061281179800B3E1A0 /* JCONotificationViewController.h */,
-				8D5064071281179800B3E1A0 /* JCONotificationViewController.m */,
-				8D5064081281179800B3E1A0 /* JCONotificationViewController.xib */,
 				01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */,
 				01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */,
 				01A2159D133F440B001C80B5 /* JCONotificationCell.xib */,
@@ -498,7 +490,6 @@
 				8D5063C4128114E600B3E1A0 /* JiraConnect-Info.plist in Resources */,
 				8D5063C6128114E600B3E1A0 /* MainWindow.xib in Resources */,
 				8D5063C81281154300B3E1A0 /* feedback-v2.png in Resources */,
-				8D50640A1281179800B3E1A0 /* JCONotificationViewController.xib in Resources */,
 				8D2FA7961281327500828713 /* JCODemoViewController.xib in Resources */,
 				8D2FA79B1281395400828713 /* charles_320x480.png in Resources */,
 				8D2FA8D11282565400828713 /* reply_bg.png in Resources */,
@@ -544,7 +535,6 @@
 				8D5063CB1281157B00B3E1A0 /* JCO.m in Sources */,
 				8D5063ED128116BF00B3E1A0 /* JCOPing.m in Sources */,
 				8D5063EF128116BF00B3E1A0 /* JCONotifier.m in Sources */,
-				8D5064091281179800B3E1A0 /* JCONotificationViewController.m in Sources */,
 				8D5064111281189B00B3E1A0 /* CrashReporter.m in Sources */,
 				8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */,
 				8D2FA81E1282351900828713 /* JCOTransport.m in Sources */,

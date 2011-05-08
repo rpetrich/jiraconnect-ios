@@ -43,7 +43,7 @@
 	if ([JCOIssueStore instance].issues) {
 		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCOIssueStore instance].newIssueCount];
 		
-        JCOIssuesViewController * tableViewController = [[JCOIssuesViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];
+        JCOIssuesViewController * tableViewController = [[JCOIssuesViewController alloc] initWithNibName:@"JCOIssuesViewController" bundle:nil];
 		[tableViewController loadView];        
         
         NSArray* data;

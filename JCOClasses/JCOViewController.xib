@@ -694,14 +694,6 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">JCOTransport</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/JCOTransport.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">JCOViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -762,7 +754,6 @@
 							<string>screenshotButton</string>
 							<string>sendButton</string>
 							<string>subjectField</string>
-							<string>transport</string>
 							<string>voiceButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -775,7 +766,6 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UITextField</string>
-							<string>JCOTransport</string>
 							<string>UIButton</string>
 						</object>
 					</object>
@@ -791,7 +781,6 @@
 							<string>screenshotButton</string>
 							<string>sendButton</string>
 							<string>subjectField</string>
-							<string>transport</string>
 							<string>voiceButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -827,10 +816,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">subjectField</string>
 								<string key="candidateClassName">UITextField</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">transport</string>
-								<string key="candidateClassName">JCOTransport</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">voiceButton</string>
