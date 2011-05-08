@@ -11,7 +11,7 @@
 
 @implementation JCOReplyTransport
 
-- (void)sendReply:(JCIssue *)originalIssue
+- (void)sendReply:(JCOIssue *)originalIssue
         description:(NSString *)description
         screenshot:(UIImage *)screenshot
         voiceData:(NSData *)voiceData
@@ -34,7 +34,7 @@
     [upRequest startAsynchronous];
 
     // TODO: consider doing this only if request is succesful. Else, remove last comment on FAIL?
-    JCComment* comment = [[JCComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date]];
+    JCOComment * comment = [[JCOComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date]];
     [originalIssue.comments addObject:comment];
     [comment release];
 }

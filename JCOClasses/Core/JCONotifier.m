@@ -1,14 +1,14 @@
 //
-//  JCNotifier.m
+//  JCONotifier.m
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
 //
 
-#import "JCNotifier.h"
-#import "JCIssueStore.h"
+#import "JCONotifier.h"
+#import "JCOIssueStore.h"
 
-@implementation JCNotifier
+@implementation JCONotifier
 
 - (id)initWithView:(UIView *)parentView {
 	if ((self = [super init])) {
@@ -40,15 +40,15 @@
 
     //hack -> for now always show that there is 1 notification
 //	if ([JCIssueStore instance].newIssueCount > 0) {
-	if ([JCIssueStore instance].issues) {
-		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCIssueStore instance].newIssueCount];
+	if ([JCOIssueStore instance].issues) {
+		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCOIssueStore instance].newIssueCount];
 		
-        JCONotificationsViewController* tableViewController = [[JCONotificationsViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];
+        JCOIssuesViewController * tableViewController = [[JCOIssuesViewController alloc] initWithNibName:@"JCONotificationsViewController" bundle:nil];
 		[tableViewController loadView];        
         
         NSArray* data;
         NSArray* headers;
-        data = [NSArray arrayWithObjects:[[JCIssueStore instance] issues], nil];
+        data = [NSArray arrayWithObjects:[[JCOIssueStore instance] issues], nil];
         headers = [NSArray arrayWithObjects:@"Feedback",  nil];
         
 		[tableViewController setData:data];

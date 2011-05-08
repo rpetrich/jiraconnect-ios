@@ -8,7 +8,7 @@
 #import "JCOViewController.h"
 #import "JCORecorder.h"
 #import "JCOPayloadDataSource.h"
-#import "JCComment.h"
+#import "Core/JCOComment.h"
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
 

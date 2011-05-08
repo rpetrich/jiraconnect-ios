@@ -1,14 +1,14 @@
 //
-//  JCNotifier.h
+//  JCONotifier.h
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
 //
 
 #import <Foundation/Foundation.h>
-#import "JCONotificationsViewController.h"
+#import "JCOIssuesViewController.h"
 
-@interface JCNotifier : NSObject {
+@interface JCONotifier : NSObject {
 	UIView* _view;
 	UINavigationController* _viewController;
 	UIToolbar* _toolbar;

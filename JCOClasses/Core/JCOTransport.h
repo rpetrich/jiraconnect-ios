@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-#import "JCIssue.h"
+#import "JCOIssue.h"
 
 @protocol JCOTransportDelegate <NSObject>
 

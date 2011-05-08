@@ -1,5 +1,5 @@
 //
-//  JCPing.m
+//  JCOPing.m
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 23/09/10.
@@ -7,11 +7,11 @@
 
 #import "ASIHTTPRequest.h"
 #import "JSON.h"
-#import "JCPing.h"
+#import "JCOPing.h"
 #import "JCO.h"
-#import "JCIssueStore.h"
+#import "JCOIssueStore.h"
 
-@implementation JCPing
+@implementation JCOPing
 
 - (void)start {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendPingDelayed) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -62,7 +62,7 @@
 */
 
     NSDictionary *data = [responseString JSONValue];
-    [[JCIssueStore instance] updateWithData:data];
+    [[JCOIssueStore instance] updateWithData:data];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"JCODidReceiveIssueCommentsNotification" object:self]; // TODO use a constant for this.
 }
 

@@ -1,5 +1,5 @@
 //
-//  JCIssueStore.h
+//  JCOIssueStore.h
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface JCIssueStore : NSObject {
+@interface JCOIssueStore : NSObject {
     // array of JCIssues 
     NSArray* _issues;
     int _newIssueCount;
@@ -19,6 +19,6 @@
 
 
 - (void) updateWithData:(NSDictionary*)data;
-+ (JCIssueStore*) instance;
++ (JCOIssueStore *) instance;
 
 @end

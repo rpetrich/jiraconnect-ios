@@ -6,8 +6,8 @@
 //
 
 #import "JCO.h"
-#import "JCPing.h"
-#import "JCNotifier.h"
+#import "Core/JCOPing.h"
+#import "Core/JCONotifier.h"
 #import "JCOCrashSender.h"
 
 
@@ -15,8 +15,8 @@
 
 @synthesize url=_url;
 
-JCPing* _pinger;
-JCNotifier* _notifier;
+JCOPing * _pinger;
+JCONotifier * _notifier;
 JCOViewController* _jcController;
 JCOCrashSender* _crashSender;
 
@@ -31,9 +31,9 @@ JCOCrashSender* _crashSender;
 
 - (id)init {
 	if ((self = [super init])) {
-		_pinger = [[[JCPing alloc] init] retain];
+		_pinger = [[[JCOPing alloc] init] retain];
 		UIView* window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present our replies dialog.
-		_notifier = [[[JCNotifier alloc] initWithView:window] retain];
+		_notifier = [[[JCONotifier alloc] initWithView:window] retain];
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
 		

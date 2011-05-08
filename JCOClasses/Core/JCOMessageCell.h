@@ -1,5 +1,5 @@
 //
-//  JCMessageCell.h
+//  JCOMessageCell.h
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 18/03/11.
@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface JCMessageCell : UITableViewCell {
+@interface JCOMessageCell : UITableViewCell {
     UILabel* _title;
     UILabel* _body;
     UIView* _bgview;

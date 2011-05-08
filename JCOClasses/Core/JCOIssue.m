@@ -1,13 +1,13 @@
 //
-//  JCIssue.m
+//  JCOIssue.m
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
 //
 
-#import "JCIssue.h"
+#import "JCOIssue.h"
 
-@implementation JCIssue
+@implementation JCOIssue
 
 @synthesize key = _key, status = _status, title = _title, description = _description,
             comments = _comments, hasUpdates = _hasUpdates;
@@ -17,8 +17,8 @@
 	[super dealloc];
 }
 
-- (JCComment*) latestComment {
-    return [self.comments count] > 0 ? ((JCComment*)[self.comments lastObject]) : nil;
+- (JCOComment *) latestComment {
+    return [self.comments count] > 0 ? ((JCOComment *)[self.comments lastObject]) : nil;
 }
 
 - (id) initWithDictionary:(NSDictionary*)map {
@@ -64,7 +64,7 @@
                 NSNumber* msSinceEpoch = [data objectForKey:@"date"];
                 NSDate* date = [NSDate dateWithTimeIntervalSince1970:[msSinceEpoch longLongValue]/1000];
                 NSNumber* value = (NSNumber*)[data objectForKey:@"systemUser"];
-                JCComment* comment = [[JCComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
+                JCOComment * comment = [[JCOComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
                 [array addObject:comment];
                 [comment release];
             }

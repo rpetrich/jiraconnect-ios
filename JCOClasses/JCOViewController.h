@@ -32,7 +32,7 @@
     <JCOPayloadDataSource> _payloadDataSource;
     UIImage* _image;
     JCORecorder* _recorder;
-    JCIssue * _replyToIssue;
+    JCOIssue * _replyToIssue;
 
 	
 }
@@ -53,7 +53,7 @@
 @property (retain, nonatomic) UIImage* image;
 @property (retain, nonatomic) JCORecorder* recorder;
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
-@property (retain, nonatomic) JCIssue * replyToIssue;
+@property (retain, nonatomic) JCOIssue * replyToIssue;
 
 - (IBAction) sendFeedback;
 - (IBAction) addScreenshot;

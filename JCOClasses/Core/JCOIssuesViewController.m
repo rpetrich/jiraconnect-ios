@@ -1,17 +1,17 @@
 //
-//  JCONotificationsViewController.m
+//  JCOIssuesViewController.m
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 17/03/11.
 //
 
-#import "JCONotificationsViewController.h"
+#import "JCOIssuesViewController.h"
 #import "JCONotificationTableCell.h"
-#import "JCCommentViewController.h"
+#import "JCOIssueViewController.h"
 
 static NSString *cellId = @"CommentCell";
 
-@implementation JCONotificationsViewController
+@implementation JCOIssuesViewController
 
 @synthesize data=_data, headers=_headers;
 
@@ -141,8 +141,8 @@ NSDateFormatter *_dateFormatter;
 
     NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
     
-    JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
-    JCComment* latestComment = [issue latestComment];
+    JCOIssue * issue = [sectionData objectAtIndex:indexPath.row];
+    JCOComment * latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description ;
     cell.titleLabel.text = [issue title];
     cell.dateLabel.text = [_dateFormatter stringFromDate: latestComment.date]; 
@@ -156,10 +156,10 @@ NSDateFormatter *_dateFormatter;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    JCCommentViewController *detailViewController = [[JCCommentViewController alloc] initWithNibName: @"JCCommentViewController" bundle:nil];
+    JCOIssueViewController *detailViewController = [[JCOIssueViewController alloc] initWithNibName: @"JCOIssueViewController" bundle:nil];
     
     NSArray* sectionData = [self.data objectAtIndex:indexPath.section];
-    JCIssue* issue = [sectionData objectAtIndex:indexPath.row];
+    JCOIssue * issue = [sectionData objectAtIndex:indexPath.row];
     
     detailViewController.issue = issue;
 

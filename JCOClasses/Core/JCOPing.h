@@ -1,5 +1,5 @@
 //
-//  JCPing.h
+//  JCOPing.h
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 23/09/10.
@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JCPing : NSObject {
+@interface JCOPing : NSObject {
 
     NSURL *_baseUrl;
 }

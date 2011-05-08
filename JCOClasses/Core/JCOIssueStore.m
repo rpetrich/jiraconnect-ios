@@ -1,21 +1,21 @@
     //
-//  JCIssueStore.m
+//  JCOIssueStore.m
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
 //
 
-#import "JCIssueStore.h"
-#import "JCIssue.h"
+#import "JCOIssueStore.h"
+#import "JCOIssue.h"
 
-@implementation JCIssueStore
+@implementation JCOIssueStore
 
 
-+(JCIssueStore*) instance {
-	static JCIssueStore *singleton = nil;
++(JCOIssueStore *) instance {
+	static JCOIssueStore *singleton = nil;
 	
 	if (singleton == nil) {
-		singleton = [[JCIssueStore alloc] init];
+		singleton = [[JCOIssueStore alloc] init];
 	}
 	return singleton;
 }
@@ -37,7 +37,7 @@
     
     for (NSDictionary* dict in updated)
     {
-        JCIssue* issue = [[JCIssue alloc] initWithDictionary:dict];
+        JCOIssue * issue = [[JCOIssue alloc] initWithDictionary:dict];
 
         issue.hasUpdates = YES;
         [tempOld addObject:issue];
@@ -46,7 +46,7 @@
     
     for (NSDictionary* dict in old)
     {
-        JCIssue* issue = [[JCIssue alloc] initWithDictionary:dict];
+        JCOIssue * issue = [[JCOIssue alloc] initWithDictionary:dict];
         [tempOld addObject:issue];
         [issue release];
     }

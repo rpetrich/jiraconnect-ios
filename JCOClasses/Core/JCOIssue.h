@@ -1,15 +1,15 @@
 //
-//  JCIssue.h
+//  JCOIssue.h
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
 //
 
 #import <Foundation/Foundation.h>
-#import "JCComment.h"
+#import "JCOComment.h"
 
 
-@interface JCIssue : NSObject {
+@interface JCOIssue : NSObject {
     NSString* _key;
     NSString* _status;
     NSString* _title;
@@ -26,6 +26,6 @@
 @property (nonatomic, assign) BOOL hasUpdates;
 
 - (id) initWithDictionary:(NSDictionary*)map;
-- (JCComment*) latestComment;
+- (JCOComment *) latestComment;
 
 @end

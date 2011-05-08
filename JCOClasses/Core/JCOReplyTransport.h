@@ -8,12 +8,12 @@
 #import <Foundation/Foundation.h>
 
 @class JCOTransport;
-@class JCIssue;
+@class JCOIssue;
 
 
 @interface JCOReplyTransport : JCOTransport {
 
 }
-- (void)sendReply:(JCIssue*)originalIssue description:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
+- (void)sendReply:(JCOIssue *)originalIssue description:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
 
 @end

@@ -1,14 +1,14 @@
 //
-//  JCMessageCell.m
+//  JCOMessageCell.m
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 18/03/11.
 //
 
-#import "JCMessageCell.h"
+#import "JCOMessageCell.h"
 
 
-@implementation JCMessageCell
+@implementation JCOMessageCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

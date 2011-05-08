@@ -1,5 +1,5 @@
 //
-//  JCComment.h
+//  JCOComment.h
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface JCComment : NSObject {
+@interface JCOComment : NSObject {
     NSString* _author;
     BOOL _systemUser;
     NSString* _body;

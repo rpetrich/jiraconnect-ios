@@ -1,14 +1,14 @@
 //
-//  JCComment.m
+//  JCOComment.m
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 17/03/11.
 //
 
-#import "JCComment.h"
+#import "JCOComment.h"
 
 
-@implementation JCComment
+@implementation JCOComment
 
 @synthesize author = _author, systemUser = _systemUser, body = _body, date = _date;
 

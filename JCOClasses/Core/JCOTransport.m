@@ -8,8 +8,8 @@
 #import "JCOTransport.h"
 #import "JSON.h"
 #import "JCO.h"
-#import "JCIssue.h"
-#import "JCIssue.h"
+#import "JCOIssue.h"
+#import "JCOIssue.h"
 
 
 @implementation JCOTransport

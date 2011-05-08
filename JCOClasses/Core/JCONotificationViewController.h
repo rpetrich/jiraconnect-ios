@@ -1,5 +1,5 @@
 //
-//  JCNotificationViewController.h
+//  JCONotificationViewController.h
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JCNotificationViewController : UIViewController {
+@interface JCONotificationViewController : UIViewController {
 	UITextView* _textView;
 }
 

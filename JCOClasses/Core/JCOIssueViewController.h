@@ -1,20 +1,20 @@
 //
-//  JCCommentViewController.h
+//  JCOIssueViewController.h
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 17/03/11.
 //
 
 #import <UIKit/UIKit.h>
-#import "JCIssue.h"
+#import "JCOIssue.h"
 #import "JCOTransport.h"
 
 @protocol JCOTransportDelegate;
 
-@interface JCCommentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, JCOTransportDelegate> {
+@interface JCOIssueViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, JCOTransportDelegate> {
     IBOutlet UITableView* _tableView;
     IBOutlet UIButton*_replyButton;
-    JCIssue* _issue;
+    JCOIssue * _issue;
 
 }
 
@@ -22,7 +22,7 @@
 
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
 @property (nonatomic, retain) IBOutlet UIButton* replyButton;
-@property (nonatomic, retain) JCIssue* issue;
+@property (nonatomic, retain) JCOIssue * issue;
 
 
 

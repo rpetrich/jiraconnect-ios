@@ -1,14 +1,14 @@
 //
-//  JCNotificationViewController.m
+//  JCONotificationViewController.m
 //  JiraConnect
 //
 //  Created by Shihab Hamid on 23/09/10.
 //
 
-#import "JCNotificationViewController.h"
+#import "JCONotificationViewController.h"
 #import "JCO.h"
 
-@implementation JCNotificationViewController
+@implementation JCONotificationViewController
 
 @synthesize textView=_textView;
 
