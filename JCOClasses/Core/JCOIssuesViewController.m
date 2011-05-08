@@ -25,11 +25,9 @@ NSDateFormatter *_dateFormatter;
                                                                                            target:self 
                                                                                            action:@selector(cancel:)] autorelease]; 
     self.title = @"Your Feedback";
-    
     _dateFormatter = [[[NSDateFormatter alloc] init] retain];
-    [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-
+    [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     return controller;
 }
 
@@ -49,16 +47,6 @@ NSDateFormatter *_dateFormatter;
     NSLog(@"View did cancel:");    
 }
 
-
-
-- (void)dealloc
-{
-    self.data = nil;
-    self.headers = nil;
-    [_dateFormatter release];_dateFormatter = nil;
-    [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -72,45 +60,15 @@ NSDateFormatter *_dateFormatter;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
- 
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -130,6 +88,10 @@ NSDateFormatter *_dateFormatter;
     return [self.headers objectAtIndex:section];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -146,7 +108,7 @@ NSDateFormatter *_dateFormatter;
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description ;
     cell.titleLabel.text = [issue title];
     cell.dateLabel.text = [_dateFormatter stringFromDate: latestComment.date]; 
-    cell.statusLabel.hidden = ! issue.hasUpdates;
+    cell.statusLabel.hidden =! issue.hasUpdates;
     return cell;
 }
 
@@ -169,6 +131,14 @@ NSDateFormatter *_dateFormatter;
     issue.hasUpdates = NO;  // once the user has tapped, the issue is no longer unread.
     [tableView reloadData]; // redraw the table.
     
+}
+
+- (void)dealloc
+{
+    self.data = nil;
+    self.headers = nil;
+    [_dateFormatter release];_dateFormatter = nil;
+    [super dealloc];
 }
 
 @end

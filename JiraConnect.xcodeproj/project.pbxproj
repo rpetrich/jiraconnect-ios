@@ -11,7 +11,8 @@
 		015429BF1371855600E59619 /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 015429BD1371855600E59619 /* Balloon_2.png */; };
 		01A2159C133F3B43001C80B5 /* JCONotificationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */; };
 		01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2159D133F440B001C80B5 /* JCONotificationCell.xib */; };
-		01A830A1135BEBC70067BF7E /* writeareply.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 01A830A0135BEBC70067BF7E /* writeareply.jpg */; };
+		01AC88821376703B000453A1 /* bluedot.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88811376703B000453A1 /* bluedot.png */; };
+		01AC888A1376A6C1000453A1 /* writeareply.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88891376A6C1000453A1 /* writeareply.png */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -79,7 +80,8 @@
 		01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationTableCell.h; sourceTree = "<group>"; };
 		01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationTableCell.m; sourceTree = "<group>"; };
 		01A2159D133F440B001C80B5 /* JCONotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCONotificationCell.xib; sourceTree = "<group>"; };
-		01A830A0135BEBC70067BF7E /* writeareply.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = writeareply.jpg; sourceTree = "<group>"; };
+		01AC88811376703B000453A1 /* bluedot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluedot.png; sourceTree = "<group>"; };
+		01AC88891376A6C1000453A1 /* writeareply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeareply.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -287,10 +289,7 @@
 		72040235133224CD0002B9C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				720402431332D75C0002B9C7 /* Comment */,
-				7204022E133223C40002B9C7 /* JCOIssuesViewController.h */,
-				7204022F133223C50002B9C7 /* JCOIssuesViewController.m */,
-				72040230133223C50002B9C7 /* JCOIssuesViewController.xib */,
+				720402431332D75C0002B9C7 /* Issues */,
 				01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */,
 				01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */,
 				01A2159D133F440B001C80B5 /* JCONotificationCell.xib */,
@@ -298,9 +297,12 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		720402431332D75C0002B9C7 /* Comment */ = {
+		720402431332D75C0002B9C7 /* Issues */ = {
 			isa = PBXGroup;
 			children = (
+				7204022E133223C40002B9C7 /* JCOIssuesViewController.h */,
+				7204022F133223C50002B9C7 /* JCOIssuesViewController.m */,
+				72040230133223C50002B9C7 /* JCOIssuesViewController.xib */,
 				C01FCF5008A9545400542485 /* JCOMessageBubble.h */,
 				C01FCF5008A9545400542483 /* JCOMessageBubble.m */,
 				720402291332237A0002B9C7 /* JCOIssueViewController.h */,
@@ -310,15 +312,16 @@
 				7204023F1332CF5A0002B9C7 /* JCOMessageCell.m */,
 				720402411332CFB10002B9C7 /* JCOMessageCell.xib */,
 			);
-			name = Comment;
+			name = Issues;
 			sourceTree = "<group>";
 		};
 		8D2FA87312824FF800828713 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01AC88891376A6C1000453A1 /* writeareply.png */,
+				01AC88811376703B000453A1 /* bluedot.png */,
 				015429BC1371855600E59619 /* Balloon_1.png */,
 				015429BD1371855600E59619 /* Balloon_2.png */,
-				01A830A0135BEBC70067BF7E /* writeareply.jpg */,
 				8D2FAB391283A08200828713 /* button_Record-OnAir.png */,
 				8D2FAB0012838AB600828713 /* button_Capture_active.png */,
 				8D2FAB0112838AB600828713 /* button_Capture.png */,
@@ -504,9 +507,10 @@
 				72040232133223C60002B9C7 /* JCOIssuesViewController.xib in Resources */,
 				720402421332CFB10002B9C7 /* JCOMessageCell.xib in Resources */,
 				01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */,
-				01A830A1135BEBC70067BF7E /* writeareply.jpg in Resources */,
 				015429BE1371855600E59619 /* Balloon_1.png in Resources */,
 				015429BF1371855600E59619 /* Balloon_2.png in Resources */,
+				01AC88821376703B000453A1 /* bluedot.png in Resources */,
+				01AC888A1376A6C1000453A1 /* writeareply.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
