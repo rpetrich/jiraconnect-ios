@@ -6,7 +6,7 @@
 //
 
 #import "JCOIssuesViewController.h"
-#import "JCONotificationTableCell.h"
+#import "JCOIssuePreviewCell.h"
 #import "JCOIssueViewController.h"
 
 static NSString *cellId = @"CommentCell";
@@ -95,9 +95,9 @@ NSDateFormatter *_dateFormatter;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    JCONotificationTableCell* cell = (JCONotificationTableCell*)[tableView dequeueReusableCellWithIdentifier:cellId];
+    JCOIssuePreviewCell * cell = (JCOIssuePreviewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == NULL) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"JCONotificationCell" owner:self options:nil];
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"JCOIssuePreviewCell" owner:self options:nil];
         cell = [topLevelObjects objectAtIndex:0];
     }
 
@@ -107,7 +107,8 @@ NSDateFormatter *_dateFormatter;
     JCOComment * latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description ;
     cell.titleLabel.text = [issue title];
-    cell.dateLabel.text = [_dateFormatter stringFromDate: latestComment.date]; 
+    NSDate *date = latestComment.date != nil ? latestComment.date : issue.lastUpdated;
+    cell.dateLabel.text = [_dateFormatter stringFromDate:date];
     cell.statusLabel.hidden =! issue.hasUpdates;
     return cell;
 }

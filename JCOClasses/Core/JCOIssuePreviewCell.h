@@ -1,5 +1,5 @@
 //
-//  JCONotificationTableCell.h
+//  JCOIssuePreviewCell.h
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 27/03/11.
@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JCONotificationTableCell : UITableViewCell {
+@interface JCOIssuePreviewCell : UITableViewCell {
 
     UILabel* _dateLabel;
     UILabel* _titleLabel;

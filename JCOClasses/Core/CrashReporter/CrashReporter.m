@@ -28,7 +28,6 @@
  */
 
 #import <CrashReporter/CrashReporter.h>
-#import <SystemConfiguration/SystemConfiguration.h>
 #import "CrashReporter.h"
 
 #define USER_AGENT @"CrashReportSender/1.0"

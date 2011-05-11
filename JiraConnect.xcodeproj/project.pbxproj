@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		015429BE1371855600E59619 /* Balloon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 015429BC1371855600E59619 /* Balloon_1.png */; };
 		015429BF1371855600E59619 /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 015429BD1371855600E59619 /* Balloon_2.png */; };
-		01A2159C133F3B43001C80B5 /* JCONotificationTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */; };
-		01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2159D133F440B001C80B5 /* JCONotificationCell.xib */; };
+		01A2159C133F3B43001C80B5 /* JCOIssuePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2159B133F3B41001C80B5 /* JCOIssuePreviewCell.m */; };
+		01A2159E133F440D001C80B5 /* JCOIssuePreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2159D133F440B001C80B5 /* JCOIssuePreviewCell.xib */; };
 		01AC88821376703B000453A1 /* bluedot.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88811376703B000453A1 /* bluedot.png */; };
 		01AC888A1376A6C1000453A1 /* writeareply.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88891376A6C1000453A1 /* writeareply.png */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
@@ -77,9 +77,9 @@
 /* Begin PBXFileReference section */
 		015429BC1371855600E59619 /* Balloon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_1.png; sourceTree = "<group>"; };
 		015429BD1371855600E59619 /* Balloon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_2.png; sourceTree = "<group>"; };
-		01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotificationTableCell.h; sourceTree = "<group>"; };
-		01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotificationTableCell.m; sourceTree = "<group>"; };
-		01A2159D133F440B001C80B5 /* JCONotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCONotificationCell.xib; sourceTree = "<group>"; };
+		01A2159A133F3B41001C80B5 /* JCOIssuePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssuePreviewCell.h; sourceTree = "<group>"; };
+		01A2159B133F3B41001C80B5 /* JCOIssuePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssuePreviewCell.m; sourceTree = "<group>"; };
+		01A2159D133F440B001C80B5 /* JCOIssuePreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOIssuePreviewCell.xib; sourceTree = "<group>"; };
 		01AC88811376703B000453A1 /* bluedot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluedot.png; sourceTree = "<group>"; };
 		01AC88891376A6C1000453A1 /* writeareply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeareply.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -290,9 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				720402431332D75C0002B9C7 /* Issues */,
-				01A2159A133F3B41001C80B5 /* JCONotificationTableCell.h */,
-				01A2159B133F3B41001C80B5 /* JCONotificationTableCell.m */,
-				01A2159D133F440B001C80B5 /* JCONotificationCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -300,6 +297,9 @@
 		720402431332D75C0002B9C7 /* Issues */ = {
 			isa = PBXGroup;
 			children = (
+				01A2159A133F3B41001C80B5 /* JCOIssuePreviewCell.h */,
+				01A2159B133F3B41001C80B5 /* JCOIssuePreviewCell.m */,
+				01A2159D133F440B001C80B5 /* JCOIssuePreviewCell.xib */,
 				7204022E133223C40002B9C7 /* JCOIssuesViewController.h */,
 				7204022F133223C50002B9C7 /* JCOIssuesViewController.m */,
 				72040230133223C50002B9C7 /* JCOIssuesViewController.xib */,
@@ -506,7 +506,7 @@
 				7204022D1332237E0002B9C7 /* JCOIssueViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCOIssuesViewController.xib in Resources */,
 				720402421332CFB10002B9C7 /* JCOMessageCell.xib in Resources */,
-				01A2159E133F440D001C80B5 /* JCONotificationCell.xib in Resources */,
+				01A2159E133F440D001C80B5 /* JCOIssuePreviewCell.xib in Resources */,
 				015429BE1371855600E59619 /* Balloon_1.png in Resources */,
 				015429BF1371855600E59619 /* Balloon_2.png in Resources */,
 				01AC88821376703B000453A1 /* bluedot.png in Resources */,
@@ -550,7 +550,7 @@
 				7204022C1332237E0002B9C7 /* JCOIssueViewController.m in Sources */,
 				72040231133223C60002B9C7 /* JCOIssuesViewController.m in Sources */,
 				720402401332CF5A0002B9C7 /* JCOMessageCell.m in Sources */,
-				01A2159C133F3B43001C80B5 /* JCONotificationTableCell.m in Sources */,
+				01A2159C133F3B43001C80B5 /* JCOIssuePreviewCell.m in Sources */,
 				C01FCF5008A954540054247E /* JCOIssueTransport.m in Sources */,
 				C01FCF5008A9545400542481 /* JCOReplyTransport.m in Sources */,
 				C01FCF5008A9545400542484 /* JCOMessageBubble.m in Sources */,

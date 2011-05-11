@@ -31,6 +31,7 @@
     [params setObject:subject forKey:@"summary"];
     [self populateCommonFields:description screenshot:screenshot voiceData:voiceData payloadData:payloadData customFields:customFields url:url upRequest:upRequest params:params];
     [upRequest setDelegate:self];
+    [upRequest setShouldAttemptPersistentConnection:NO];
     [upRequest setTimeOutSeconds:15];
     [upRequest startAsynchronous];
 }

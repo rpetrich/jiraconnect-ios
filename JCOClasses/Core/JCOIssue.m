@@ -10,10 +10,10 @@
 @implementation JCOIssue
 
 @synthesize key = _key, status = _status, title = _title, description = _description,
-            comments = _comments, hasUpdates = _hasUpdates;
+            comments = _comments, hasUpdates = _hasUpdates, lastUpdated = _lastUpdated;
 
 - (void) dealloc {
-    self.key, self.status, self.title, self.description, self.comments = nil;
+    self.key, self.status, self.title, self.description, self.comments, self.lastUpdated= nil;
 	[super dealloc];
 }
 
@@ -26,7 +26,9 @@
 		self.key = [map objectForKey:@"key"];
         self.status = [map objectForKey:@"status"];
         self.title = [map objectForKey:@"title"];
-        self.description = [map objectForKey:@"description"];    
+        self.description = [map objectForKey:@"description"];
+        NSNumber* msLastUpdated = [map objectForKey:@"lastUpdated"];
+        self.lastUpdated = [NSDate dateWithTimeIntervalSince1970:[msLastUpdated longLongValue]/1000];
         
         if (!self.key)
         {

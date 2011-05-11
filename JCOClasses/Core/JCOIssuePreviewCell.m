@@ -1,14 +1,14 @@
 //
-//  JCONotificationTableCell.m
+//  JCOIssuePreviewCell.m
 //  JiraConnect
 //
 //  Created by Nicholas Pellow on 27/03/11.
 //
 
-#import "JCONotificationTableCell.h"
+#import "JCOIssuePreviewCell.h"
 
 
-@implementation JCONotificationTableCell
+@implementation JCOIssuePreviewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

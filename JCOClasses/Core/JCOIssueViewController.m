@@ -189,7 +189,7 @@ static float detailLabelHeight = 21.0f;
     feedbackController.replyTransport.delegate = self;
     feedbackController.subjectField.text = self.issue.title;
     feedbackController.subjectField.enabled = NO;
-    feedbackController.subjectField.textColor = [UIColor grayColor];
+    feedbackController.subjectField.textColor = [UIColor blackColor];
     [feedbackController release];
 
 }
