@@ -187,7 +187,7 @@ static float detailLabelHeight = 21.0f;
     [self presentModalViewController:feedbackController animated:YES];
     feedbackController.replyToIssue = self.issue;
     feedbackController.replyTransport.delegate = self;
-    feedbackController.subjectField.text = self.issue.title;
+    feedbackController.subjectField.text = [@"RE: " stringByAppendingString:self.issue.title];
     feedbackController.subjectField.enabled = NO;
     feedbackController.subjectField.textColor = [UIColor blackColor];
     [feedbackController release];

@@ -137,8 +137,28 @@ NSTimer* _timer;
 {
 	UIImage* origImg = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
 	[self dismissModalViewControllerAnimated:YES];
-	[self.screenshotButton setBackgroundImage:origImg forState:UIControlStateNormal];
-	[self.screenshotButton setTitle:nil forState:UIControlStateNormal];
+    [self.screenshotButton setAutoresizesSubviews:NO];
+
+    CGFloat newWidth = self.screenshotButton.frame.size.width;
+
+    CGFloat ratio = origImg.size.height/origImg.size.width;
+    NSLog(@"ratio = %f", ratio);
+
+    CGFloat newHeight = ratio * self.screenshotButton.frame.size.height;
+    NSLog(@"newWidth = %f, newHeight = %f", newWidth, newHeight);
+    NSLog(@"butWidth = %f, butHeight = %f", self.screenshotButton.frame.size.width, self.screenshotButton.frame.size.height);
+
+
+    CGSize size = CGSizeMake(newWidth, newHeight);
+    UIGraphicsBeginImageContext(size);
+    [origImg drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.screenshotButton setBackgroundImage:newImage forState:UIControlStateNormal];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:newImage];
+    [self.screenshotButton addSubview:imgView];
+    [imgView release];
+    [self.screenshotButton setTitle:nil forState:UIControlStateNormal];
 	self.image = origImg;
 }
 
