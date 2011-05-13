@@ -140,11 +140,17 @@ NSTimer *_timer;
     [self.screenshotButton setAutoresizesSubviews:NO];
 
     CGSize size = self.screenshotButton.frame.size;
-    UIImage *newImage = [origImg resizedImage:size interpolationQuality:kCGInterpolationHigh];
-    UIImage *roundImage = [newImage roundedCornerImage:5 borderSize:0];
 
-    [self.screenshotButton setBackgroundImage:roundImage forState:UIControlStateNormal];
-    [self.screenshotButton setBackgroundImage:roundImage forState:UIControlStateHighlighted];
+    UIImage *newImage = [origImg thumbnailImage:(int)size.width
+                              transparentBorder:0
+                                   cornerRadius:5
+                           interpolationQuality:kCGInterpolationHigh];
+
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:newImage];
+    imgView.tag = 20;
+    [[self.screenshotButton viewWithTag:20] removeFromSuperview];// remove previous image, if any?
+    [self.screenshotButton addSubview:imgView];
+    [imgView release];
     [self.screenshotButton setTitle:nil forState:UIControlStateNormal];
     self.image = origImg;
 }
