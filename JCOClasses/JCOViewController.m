@@ -8,97 +8,97 @@
 #import "JCOViewController.h"
 #import "JCORecorder.h"
 #import "JCOPayloadDataSource.h"
-#import "Core/JCOComment.h"
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
+#import "UIImage+Resize.h"
 
-@interface JCOViewController()
+@interface JCOViewController ()
 
--(void) setVoiceButtonTitleWithDuration:(float)duration;
+- (void)setVoiceButtonTitleWithDuration:(float)duration;
 
 @end
 
 @implementation JCOViewController
 
-NSTimer* _timer;
+NSTimer *_timer;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.issueTransport = [[JCOIssueTransport alloc] init];
-	self.replyTransport = [[JCOReplyTransport alloc] init];
-	self.recorder = [[JCORecorder alloc] init];
-	self.recorder.recorder.delegate = self;
-	self.countdownView.layer.cornerRadius = 7.0;
+    self.issueTransport = [[JCOIssueTransport alloc] init];
+    self.replyTransport = [[JCOReplyTransport alloc] init];
+    self.recorder = [[JCORecorder alloc] init];
+    self.recorder.recorder.delegate = self;
+    self.countdownView.layer.cornerRadius = 7.0;
 
     NSLog(@"View Did load!! %@", self);
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
 
 }
 
-- (IBAction) dismiss {
-	[self dismissModalViewControllerAnimated:YES];
+- (IBAction)dismiss {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
--(IBAction) addScreenshot {
-	[self presentModalViewController:imagePicker animated:YES];
+- (IBAction)addScreenshot {
+    [self presentModalViewController:imagePicker animated:YES];
 }
 
--(void) setVoiceButtonTitleWithDuration:(float)duration {
+- (void)setVoiceButtonTitleWithDuration:(float)duration {
 
-	NSString* durationStr = [NSString stringWithFormat:@"%.2f\"", duration];
-	[self.voiceButton  setTitle:durationStr forState:UIControlStateNormal];
-	[self.voiceButton  setTitle:durationStr forState:UIControlStateSelected];
-	[self.voiceButton  setTitle:durationStr forState:UIControlStateHighlighted];
+    NSString *durationStr = [NSString stringWithFormat:@"%.2f\"", duration];
+    [self.voiceButton setTitle:durationStr forState:UIControlStateNormal];
+    [self.voiceButton setTitle:durationStr forState:UIControlStateSelected];
+    [self.voiceButton setTitle:durationStr forState:UIControlStateHighlighted];
 }
 
--(void) updateProgress:(NSTimer*)theTimer {
+- (void)updateProgress:(NSTimer *)theTimer {
     float currentDuration = [_recorder currentDuration];
-	float progress = (currentDuration/_recorder.recordTime);
-	self.progressView.progress = progress;	
-	[self setVoiceButtonTitleWithDuration:currentDuration];
+    float progress = (currentDuration / _recorder.recordTime);
+    self.progressView.progress = progress;
+    [self setVoiceButtonTitleWithDuration:currentDuration];
 }
 
--(void) hideAudioProgress {
-	self.countdownView.hidden = YES; 
-	self.progressView.progress = 0;
-	[self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record.png"] forState:UIControlStateNormal];
-	[_timer invalidate];
+- (void)hideAudioProgress {
+    self.countdownView.hidden = YES;
+    self.progressView.progress = 0;
+    [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record.png"] forState:UIControlStateNormal];
+    [_timer invalidate];
 }
 
-- (IBAction) addVoice {
-	
-	if (_recorder.recorder.recording) {
-		
-		[_recorder stop];
-		// update the label
-		[self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
+- (IBAction)addVoice {
 
-	} else {
-		[_recorder start];
+    if (_recorder.recorder.recording) {
+
+        [_recorder stop];
+        // update the label
+        [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
+
+    } else {
+        [_recorder start];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
-		self.progressView.progress = 0;
+        self.progressView.progress = 0;
 
-		self.countdownView.hidden = NO;
-		[self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record-OnAir.png"] forState:UIControlStateNormal];
-	}
+        self.countdownView.hidden = NO;
+        [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record-OnAir.png"] forState:UIControlStateNormal];
+    }
 }
 
 
--(void) audioRecorderDidFinishRecording:(AVAudioRecorder*)recorder successfully:(BOOL)success {
-	[self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
-	[self hideAudioProgress];
-	
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success {
+    [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
+    [self hideAudioProgress];
+
 }
 
-- (IBAction) sendFeedback {
+- (IBAction)sendFeedback {
 
-	self.issueTransport.delegate = self;
-    NSDictionary * payloadData = nil;
-    NSDictionary * customFields = nil;
+    self.issueTransport.delegate = self;
+    NSDictionary *payloadData = nil;
+    NSDictionary *customFields = nil;
 
     if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
         payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
@@ -109,69 +109,85 @@ NSTimer* _timer;
 
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue
-                 description:self.descriptionField.text
-                  screenshot:_image
-                   voiceData:[_recorder audioData]
-                     payload:payloadData
-                      fields:customFields];
+                           description:self.descriptionField.text
+                            screenshot:_image
+                             voiceData:[_recorder audioData]
+                               payload:payloadData
+                                fields:customFields];
     } else {
         [self.issueTransport send:self.subjectField.text
-                 description:self.descriptionField.text
-                  screenshot:_image
-                   voiceData:[_recorder audioData]
-                     payload:payloadData
-                      fields:customFields];
+                      description:self.descriptionField.text
+                       screenshot:_image
+                        voiceData:[_recorder audioData]
+                          payload:payloadData
+                           fields:customFields];
     }
-	
+
 }
 
--(void) transportDidFinish {
+- (void)transportDidFinish {
 
     //TODO: error handling and reporting!
-	[self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
+// Resizes the image according to the given content mode, taking into account the image's orientation
+- (UIImage *)resizeImage:(UIImage *)image
+             withContentMode:(UIViewContentMode)contentMode
+                      bounds:(CGSize)bounds {
+    CGFloat horizontalRatio = bounds.width / image.size.width;
+    CGFloat verticalRatio = bounds.height / image.size.height;
+    CGFloat ratio;
+
+    switch (contentMode) {
+        case UIViewContentModeScaleAspectFill:
+            ratio = MAX(horizontalRatio, verticalRatio);
+            break;
+
+        case UIViewContentModeScaleAspectFit:
+            ratio = MIN(horizontalRatio, verticalRatio);
+            break;
+
+        default:
+            [NSException raise:NSInvalidArgumentException format:@"Unsupported content mode: %d", contentMode];
+    }
+
+    CGSize newSize = CGSizeMake(image.size.width * ratio, image.size.height * ratio);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 #pragma mark UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-	UIImage* origImg = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
-	[self dismissModalViewControllerAnimated:YES];
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self dismissModalViewControllerAnimated:YES];
     [self.screenshotButton setAutoresizesSubviews:NO];
 
-    CGFloat newWidth = self.screenshotButton.frame.size.width;
+    CGSize size = self.screenshotButton.frame.size;
+    UIImage *newImage = [self resizeImage:origImg withContentMode:UIViewContentModeScaleAspectFill bounds:size];
 
-    CGFloat ratio = origImg.size.height/origImg.size.width;
-    NSLog(@"ratio = %f", ratio);
-
-    CGFloat newHeight = ratio * self.screenshotButton.frame.size.height;
-    NSLog(@"newWidth = %f, newHeight = %f", newWidth, newHeight);
-    NSLog(@"butWidth = %f, butHeight = %f", self.screenshotButton.frame.size.width, self.screenshotButton.frame.size.height);
-
-
-    CGSize size = CGSizeMake(newWidth, newHeight);
-    UIGraphicsBeginImageContext(size);
-    [origImg drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     [self.screenshotButton setBackgroundImage:newImage forState:UIControlStateNormal];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:newImage];
     [self.screenshotButton addSubview:imgView];
     [imgView release];
     [self.screenshotButton setTitle:nil forState:UIControlStateNormal];
-	self.image = origImg;
+    self.image = origImg;
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-	[self dismissModalViewControllerAnimated:YES];
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissModalViewControllerAnimated:YES];
 }
 #pragma mark end
 
 #pragma mark UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
-	return YES;
+    [textField resignFirstResponder];
+    return YES;
 }
 #pragma mark end
 
@@ -181,12 +197,12 @@ NSTimer* _timer;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-	
-	if([text isEqualToString:@"\n"]) {
-		[textView resignFirstResponder];
-		return NO;
-	}
-	return YES;
+
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 
 
@@ -199,23 +215,23 @@ NSTimer* _timer;
 }
 
 @synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker;
-@synthesize issueTransport = _issueTransport, replyTransport=_replyTransport, payloadDataSource=_payloadDataSource, image=_image, recorder=_recorder, replyToIssue=_replyToIssue;
+@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, image = _image, recorder = _recorder, replyToIssue = _replyToIssue;
 
 - (void)dealloc {
     self.image,
-    self.recorder,
-    self.sendButton,
-    self.imagePicker,
-    self.voiceButton,
-    self.progressView,
-    self.subjectField,
-    self.replyToIssue,
-    self.countdownView,
-    self.issueTransport,
-    self.replyTransport,
-    self.screenshotButton,
-    self.descriptionField,
-    self.payloadDataSource = nil;
+            self.recorder,
+            self.sendButton,
+            self.imagePicker,
+            self.voiceButton,
+            self.progressView,
+            self.subjectField,
+            self.replyToIssue,
+            self.countdownView,
+            self.issueTransport,
+            self.replyTransport,
+            self.screenshotButton,
+            self.descriptionField,
+            self.payloadDataSource = nil;
     [super dealloc];
 }
 
@@ -223,19 +239,19 @@ NSTimer* _timer;
 - (void)viewDidUnload {
     // Release any retained subviews of the main view.
     self.image,
-    self.recorder,
-    self.sendButton,
-    self.imagePicker,
-    self.voiceButton,
-    self.progressView,
-    self.subjectField,
-    self.replyToIssue,
-    self.countdownView,
-    self.issueTransport,
-    self.replyTransport,
-    self.screenshotButton,
-    self.descriptionField,
-    self.payloadDataSource = nil;
+            self.recorder,
+            self.sendButton,
+            self.imagePicker,
+            self.voiceButton,
+            self.progressView,
+            self.subjectField,
+            self.replyToIssue,
+            self.countdownView,
+            self.issueTransport,
+            self.replyTransport,
+            self.screenshotButton,
+            self.descriptionField,
+            self.payloadDataSource = nil;
     [super viewDidUnload];
     NSLog(@"View Did UNload!!");
 }
