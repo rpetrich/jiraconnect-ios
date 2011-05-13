@@ -11,6 +11,8 @@
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
 #import "UIImage+Resize.h"
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Alpha.h"
 
 @interface JCOViewController ()
 
@@ -131,36 +133,6 @@ NSTimer *_timer;
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
-// Resizes the image according to the given content mode, taking into account the image's orientation
-- (UIImage *)resizeImage:(UIImage *)image
-             withContentMode:(UIViewContentMode)contentMode
-                      bounds:(CGSize)bounds {
-    CGFloat horizontalRatio = bounds.width / image.size.width;
-    CGFloat verticalRatio = bounds.height / image.size.height;
-    CGFloat ratio;
-
-    switch (contentMode) {
-        case UIViewContentModeScaleAspectFill:
-            ratio = MAX(horizontalRatio, verticalRatio);
-            break;
-
-        case UIViewContentModeScaleAspectFit:
-            ratio = MIN(horizontalRatio, verticalRatio);
-            break;
-
-        default:
-            [NSException raise:NSInvalidArgumentException format:@"Unsupported content mode: %d", contentMode];
-    }
-
-    CGSize newSize = CGSizeMake(image.size.width * ratio, image.size.height * ratio);
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
@@ -168,12 +140,11 @@ NSTimer *_timer;
     [self.screenshotButton setAutoresizesSubviews:NO];
 
     CGSize size = self.screenshotButton.frame.size;
-    UIImage *newImage = [self resizeImage:origImg withContentMode:UIViewContentModeScaleAspectFill bounds:size];
+    UIImage *newImage = [origImg resizedImage:size interpolationQuality:kCGInterpolationHigh];
+    UIImage *roundImage = [newImage roundedCornerImage:5 borderSize:0];
 
-    [self.screenshotButton setBackgroundImage:newImage forState:UIControlStateNormal];
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:newImage];
-    [self.screenshotButton addSubview:imgView];
-    [imgView release];
+    [self.screenshotButton setBackgroundImage:roundImage forState:UIControlStateNormal];
+    [self.screenshotButton setBackgroundImage:roundImage forState:UIControlStateHighlighted];
     [self.screenshotButton setTitle:nil forState:UIControlStateNormal];
     self.image = origImg;
 }
