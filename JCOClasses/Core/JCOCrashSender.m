@@ -8,47 +8,78 @@
 #import "JCOCrashSender.h"
 #import "CrashReporter.h"
 #import "JCO.h"
-#import "JSON.h"
+#import "JCOCrashTransport.h"
+
+#define kJiraConnectAutoSubmitCrashes @"JiraConnectAutoSubmitCras"
 
 @implementation JCOCrashSender
 
-BOOL _sending = NO;
+JCOCrashTransport *_transport;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        _transport = [[JCOCrashTransport alloc] init];
+        _transport.delegate = self;
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [_transport release];
+    [super dealloc];
+}
+
+
+-(void)sendCrashReportsAfterAsking {
+
+    if (![[CrashReporter sharedCrashReporter] hasPendingCrashReport]) {
+        return;
+    }
+
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kAutomaticallySendCrashReports]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
+                                                            message:NSLocalizedString(@"CrashDataFoundDescription", @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                                  otherButtonTitles:NSLocalizedString(@"Yes", @""), NSLocalizedString(@"Always", @""), nil];
+        [alertView show];
+        [alertView release];
+    } else {
+      [self sendCrashReports];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [[CrashReporter sharedCrashReporter] cleanCrashReports];
+            break;
+        case 1:
+            [self sendCrashReports];
+            break;
+        case 2:
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAutomaticallySendCrashReports];
+            [self sendCrashReports];
+            break;
+    }
+}
+
 
 -(void) sendCrashReports {
-	NSLog(@"Sending crash reports...");
-	NSLog(@"PENDING CRASH REPORTS? %d", [[[CrashReporter sharedCrashReportSender] crashReports] count]);
-	
-	if (![[CrashReporter sharedCrashReportSender] hasPendingCrashReport]) {
-		return;
-	}
-	_sending = YES;
-	NSArray* reports = [[CrashReporter sharedCrashReportSender] crashReports]; 
-	
-	NSURL* url = [NSURL URLWithString:@"rest/jconnect/latest/crash" relativeToURL:[JCO instance].url];
-	
-	ASIFormDataRequest* upRequest = [ASIFormDataRequest requestWithURL:url];
-	for (NSMutableDictionary* report in reports) {
-		[report addEntriesFromDictionary:[[JCO instance] getMetaData]];
-		NSData* jsonData = [[report JSONRepresentation]	dataUsingEncoding:NSUTF8StringEncoding];
-		[upRequest setData:jsonData withFileName:@"crash.json" andContentType:@"application/json" forKey:@"issue"];	
-	}
-	upRequest.delegate = self;
-	upRequest.timeOutSeconds = 3;
-	[upRequest startAsynchronous];	
+
+	NSArray* reports = [[CrashReporter sharedCrashReporter] crashReports];
+
+
+	for (NSString* report in reports) {
+        [_transport send:@"Crash report" description:report crashReport:report];
+    }
+
 }
 
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-	_sending = NO;
-	[[CrashReporter sharedCrashReportSender] cleanCrashReports];
+- (void)transportDidFinish {
+    [[CrashReporter sharedCrashReporter] cleanCrashReports];
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-	// TODO: possibly purge here too?
-	_sending = NO;
-	NSLog(@"Uploading crash reports failed. ");
-}	
 
 @end

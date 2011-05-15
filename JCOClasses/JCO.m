@@ -49,7 +49,8 @@ JCOCrashSender* _crashSender;
     _pinger.baseUrl = self.url;
     [_pinger start];
 
-//	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReports) userInfo:nil repeats:YES];
+    // TODO: fire this when network becomes active
+	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReportsAfterAsking) userInfo:nil repeats:NO];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }

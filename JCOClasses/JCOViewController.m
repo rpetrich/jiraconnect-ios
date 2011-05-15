@@ -11,8 +11,6 @@
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
 #import "UIImage+Resize.h"
-#import "UIImage+RoundedCorner.h"
-#import "UIImage+Alpha.h"
 
 @interface JCOViewController ()
 
@@ -124,6 +122,11 @@ NSTimer *_timer;
                           payload:payloadData
                            fields:customFields];
     }
+    self.descriptionField.text = nil;
+    self.subjectField.text = nil;
+    [self setVoiceButtonTitleWithDuration:0.0];
+    // TODO: also reset _recorder
+    [[self.screenshotButton viewWithTag:20] removeFromSuperview];
 
 }
 

@@ -43,7 +43,7 @@
 
 @implementation CrashReporter
 
-+ (CrashReporter *)sharedCrashReportSender
++ (CrashReporter *)sharedCrashReporter
 {
 	static CrashReporter *crashReportSender = nil;
 	
@@ -61,7 +61,6 @@
 	if ( self != nil)
 	{
 		_amountCrashes = 0;
-		_crashIdenticalCurrentVersion = YES;
 		
 		NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:kCrashReportAnalyzerStarted];
 		if (testValue == nil)
@@ -107,6 +106,9 @@
 			// Enable the Crash Reporter
 			if (![crashReporter enableCrashReporterAndReturnError: &error])
 				NSLog(@"Warning: Could not enable crash reporter: %@", error);
+
+            NSLog(@"Crash reporter enabled.");
+            
 		}
 	}
 	return self;
@@ -123,7 +125,7 @@
 
 - (BOOL)hasPendingCrashReport
 {
-	NSLog(@"crashReportActivated: %d", _crashReportActivated);
+
 	if (_crashReportActivated)
 	{
 		NSFileManager *fm = [NSFileManager defaultManager];
@@ -192,23 +194,7 @@
 			
 			NSString *crashLogString = [self _crashLogStringForReport:report];
 
-			
-			if ([report.applicationInfo.applicationVersion compare:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]] != NSOrderedSame)
-			{
-				_crashIdenticalCurrentVersion = NO;
-			}
-			
-			NSMutableDictionary* crashDataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-												  report.applicationInfo.applicationIdentifier, @"appId",
-												  [[UIDevice currentDevice] systemVersion], @"systemVersion",
-												  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], @"senderVersion", 
-												  report.applicationInfo.applicationVersion, @"appVersion",
-												  crashLogString, @"crashLog",
-												  nil];
-			
-			NSLog(@"CrashLogStringLen: %d, ProtoBufLen: %d", [crashLogString length], [crashData length]);
-			
-			[crashReports addObject:crashDataDict];
+			[crashReports addObject:crashLogString];
 		}
 	}
 	return crashReports;
@@ -217,7 +203,7 @@
 
 - (NSString *)_crashLogStringForReport:(PLCrashReport *)report
 {
-	NSMutableString *xmlString = [NSMutableString string];
+	NSMutableString *reportString = [NSMutableString string];
 
 	/* Header */
     boolean_t lp64;
@@ -260,10 +246,7 @@
             lp64 = false;
 			break;
 	}
-	
-	[xmlString appendString:@"Incident Identifier: [TODO]\n"];
-	[xmlString appendString:@"CrashReporter Key:   [TODO]\n"];
-    
+	    
     /* Application and process info */
     {
         NSString *unknownString = @"???";
@@ -295,51 +278,51 @@
             parentProcessId = [[NSNumber numberWithUnsignedInteger: report.processInfo.parentProcessID] stringValue];
         }
         
-        [xmlString appendFormat: @"Process:         %@ [%@]\n", processName, processId];
-        [xmlString appendFormat: @"Path:            %@\n", processPath];
-        [xmlString appendFormat: @"Identifier:      %@\n", report.applicationInfo.applicationIdentifier];
-        [xmlString appendFormat: @"Version:         %@\n", report.applicationInfo.applicationVersion];
-        [xmlString appendFormat: @"Code Type:       %@\n", codeType];
-        [xmlString appendFormat: @"Parent Process:  %@ [%@]\n", parentProcessName, parentProcessId];
+        [reportString appendFormat: @"Process:         %@ [%@]\n", processName, processId];
+        [reportString appendFormat: @"Path:            %@\n", processPath];
+        [reportString appendFormat: @"Identifier:      %@\n", report.applicationInfo.applicationIdentifier];
+        [reportString appendFormat: @"Version:         %@\n", report.applicationInfo.applicationVersion];
+        [reportString appendFormat: @"Code Type:       %@\n", codeType];
+        [reportString appendFormat: @"Parent Process:  %@ [%@]\n", parentProcessName, parentProcessId];
     }
     
-	[xmlString appendString:@"\n"];
+	[reportString appendString:@"\n"];
 	
 	/* System info */
-	[xmlString appendFormat:@"Date/Time:       %s\n", [[report.systemInfo.timestamp description] UTF8String]];
-	[xmlString appendFormat:@"OS Version:      %s %s\n", osName, [report.systemInfo.operatingSystemVersion UTF8String]];
-	[xmlString appendString:@"Report Version:  104\n"];
+	[reportString appendFormat:@"Date/Time:       %s\n", [[report.systemInfo.timestamp description] UTF8String]];
+	[reportString appendFormat:@"OS Version:      %s %s\n", osName, [report.systemInfo.operatingSystemVersion UTF8String]];
+	[reportString appendString:@"Report Version:  104\n"];
 	
-	[xmlString appendString:@"\n"];
+	[reportString appendString:@"\n"];
 	
 	/* Exception code */
-	[xmlString appendFormat:@"Exception Type:  %s\n", [report.signalInfo.name UTF8String]];
-    [xmlString appendFormat:@"Exception Codes: %@ at 0x%" PRIx64 "\n", report.signalInfo.code, report.signalInfo.address];
+	[reportString appendFormat:@"Exception Type:  %s\n", [report.signalInfo.name UTF8String]];
+    [reportString appendFormat:@"Exception Codes: %@ at 0x%" PRIx64 "\n", report.signalInfo.code, report.signalInfo.address];
 
     for (PLCrashReportThreadInfo *thread in report.threads) {
         if (thread.crashed) {
-            [xmlString appendFormat: @"Crashed Thread:  %ld\n", (long) thread.threadNumber];
+            [reportString appendFormat: @"Crashed Thread:  %ld\n", (long) thread.threadNumber];
             break;
         }
     }
 	
-	[xmlString appendString:@"\n"];
+	[reportString appendString:@"\n"];
 	
     if (report.hasExceptionInfo) {
-        [xmlString appendString:@"Application Specific Information:\n"];
-        [xmlString appendFormat: @"*** Terminating app due to uncaught exception '%@', reason: '%@'\n",
+        [reportString appendString:@"Application Specific Information:\n"];
+        [reportString appendFormat: @"*** Terminating app due to uncaught exception '%@', reason: '%@'\n",
          report.exceptionInfo.exceptionName, report.exceptionInfo.exceptionReason];
-        [xmlString appendString:@"\n"];
+        [reportString appendString:@"\n"];
     }
     
 	/* Threads */
     PLCrashReportThreadInfo *crashed_thread = nil;
     for (PLCrashReportThreadInfo *thread in report.threads) {
         if (thread.crashed) {
-            [xmlString appendFormat: @"Thread %ld Crashed:\n", (long) thread.threadNumber];
+            [reportString appendFormat: @"Thread %ld Crashed:\n", (long) thread.threadNumber];
             crashed_thread = thread;
         } else {
-            [xmlString appendFormat: @"Thread %ld:\n", (long) thread.threadNumber];
+            [reportString appendFormat: @"Thread %ld:\n", (long) thread.threadNumber];
         }
         for (NSUInteger frame_idx = 0; frame_idx < [thread.stackFrames count]; frame_idx++) {
             PLCrashReportStackFrameInfo *frameInfo = [thread.stackFrames objectAtIndex: frame_idx];
@@ -358,15 +341,15 @@
                 pcOffset = frameInfo.instructionPointer - imageInfo.imageBaseAddress;
             }
             
-            [xmlString appendFormat: @"%-4ld%-36s0x%08" PRIx64 " 0x%" PRIx64 " + %" PRId64 "\n", 
+            [reportString appendFormat: @"%-4ld%-36s0x%08" PRIx64 " 0x%" PRIx64 " + %" PRId64 "\n", 
              (long) frame_idx, [imageName UTF8String], frameInfo.instructionPointer, baseAddress, pcOffset];
         }
-        [xmlString appendString: @"\n"];
+        [reportString appendString: @"\n"];
     }
     
     /* Registers */
     if (crashed_thread != nil) {
-        [xmlString appendFormat: @"Thread %ld crashed with %@ Thread State:\n", (long) crashed_thread.threadNumber, codeType];
+        [reportString appendFormat: @"Thread %ld crashed with %@ Thread State:\n", (long) crashed_thread.threadNumber, codeType];
         
         int regColumn = 1;
         for (PLCrashReportRegisterInfo *reg in crashed_thread.registers) {
@@ -378,21 +361,21 @@
             else
                 reg_fmt = @"%6s:\t0x%08" PRIx64 " ";
             
-            [xmlString appendFormat: reg_fmt, [reg.registerName UTF8String], reg.registerValue];
+            [reportString appendFormat: reg_fmt, [reg.registerName UTF8String], reg.registerValue];
             
             if (regColumn % 4 == 0)
-                [xmlString appendString: @"\n"];
+                [reportString appendString: @"\n"];
             regColumn++;
         }
         
         if (regColumn % 3 != 0)
-            [xmlString appendString: @"\n"];
+            [reportString appendString: @"\n"];
         
-        [xmlString appendString: @"\n"];
+        [reportString appendString: @"\n"];
     }
 	
 	/* Images */
-	[xmlString appendFormat:@"Binary Images:\n"];
+	[reportString appendFormat:@"Binary Images:\n"];
 
     for (PLCrashReportBinaryImageInfo *imageInfo in report.images) {
 		NSString *uuid;
@@ -413,7 +396,7 @@
 #endif
         
 		/* base_address - terminating_address file_name identifier (<version>) <uuid> file_path */
-		[xmlString appendFormat:@"0x%" PRIx64 " - 0x%" PRIx64 "  %@ %@ <%@> %@\n",
+		[reportString appendFormat:@"0x%" PRIx64 " - 0x%" PRIx64 "  %@ %@ <%@> %@\n",
 					 imageInfo.imageBaseAddress,
 					 imageInfo.imageBaseAddress + imageInfo.imageSize,
 					 [imageInfo.imageName lastPathComponent],
@@ -422,7 +405,7 @@
 					 imageInfo.imageName];
 	}
 	
-	return xmlString;
+	return reportString;
 }
 
 #pragma mark PLCrashReporter
@@ -456,7 +439,7 @@
 		
 		// We could send the report from here, but we'll just print out
 		// some debugging info instead
-		PLCrashReport *report = [[[PLCrashReport alloc] initWithData: [crashData retain] error: &error] autorelease];
+		PLCrashReport *report = [[[PLCrashReport alloc] initWithData: [crashData retain] error: &error] autorelease]; // we are crashing, so no need to release?
 		if (report == nil) {
 			NSLog(@"Could not parse crash report");
 			goto finish;

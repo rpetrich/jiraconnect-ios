@@ -74,9 +74,7 @@
             [array release];
         }
     }
-    
-    NSLog(@"\t received issue  %@, %@", self.key, self.title);
-    
+
 	return self;
 }
 

@@ -23,6 +23,6 @@
 
 @property(nonatomic, retain) id <JCOTransportDelegate> delegate;
 
-- (void)populateCommonFields:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields url:(NSURL *)url upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
+- (void)populateCommonFields:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
 
 @end

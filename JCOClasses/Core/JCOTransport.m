@@ -8,27 +8,27 @@
 #import "JCOTransport.h"
 #import "JSON.h"
 #import "JCO.h"
-#import "JCOIssue.h"
-#import "JCOIssue.h"
-
 
 @implementation JCOTransport
 
+- (void)populateCommonFields:(NSString *)description
+                  screenshot:(UIImage *)screenshot
+                   voiceData:(NSData *)voiceData
+                 payloadData:(NSDictionary *)payloadData
+                customFields:(NSDictionary *)customFields
+                   upRequest:(ASIFormDataRequest *)upRequest
+                      params:(NSMutableDictionary *)params {
 
-- (void)populateCommonFields:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields url:(NSURL *)url upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params {
     [params setObject:description forKey:@"description"];
     NSDictionary *metaData = [[JCO instance] getMetaData];
     [params addEntriesFromDictionary:metaData];
     NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
     [upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
-    NSLog(@"About to send: %@ to: %@", [params JSONRepresentation], url);
     if (screenshot != nil) {
         NSData *imgData = UIImagePNGRepresentation(screenshot);
         [upRequest setData:imgData withFileName:@"jiraconnect-screenshot.png" andContentType:@"image/png" forKey:@"screenshot"];
-
     }
     if (voiceData != nil) {
-        NSLog(@"voiceData length: %d", [voiceData length]);
         [upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
     }
     if (payloadData != nil) {

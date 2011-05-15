@@ -113,6 +113,7 @@
 						<string key="NSFrame">{{230, 369}, {78, 78}}</string>
 						<reference key="NSSuperview" ref="481240288"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
 							<string key="IBUIAccessibilityHint">Capture</string>
@@ -205,7 +206,7 @@
 					<object class="IBUIButton" id="803465325">
 						<reference key="NSNextResponder" ref="481240288"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{249, 16}, {53, 29}}</string>
+						<string key="NSFrame">{{249, 10}, {53, 29}}</string>
 						<reference key="NSSuperview" ref="481240288"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="478225681"/>
@@ -289,7 +290,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
+				<reference key="NSNextKeyView" ref="803465325"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC43MDU2NDUxNjEzIDAuNzM3OTAzMjI1OCAwLjc0NTk2Nzc0MTkAA</bytes>

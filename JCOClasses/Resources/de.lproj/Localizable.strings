@@ -1,0 +1,10 @@
+
+/* Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server */
+"CrashDataFoundDescription" = "Diese App ist bei der letzten Anwendung abgestürtzt. Ihr Feedback hilft uns, diese App zu verbessern. Crash-Bericht senden?";
+
+/* Title showing in the alert box when crash report data has been found */
+"CrashDataFoundTitle" = "Crash-Bericht";
+
+"Always" = "Immer";
+"No" = "Nein";
+"Yes" = "Ja";
