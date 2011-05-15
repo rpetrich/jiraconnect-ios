@@ -153,8 +153,8 @@ static float detailLabelHeight = 21.0f;
             issueCell.accessoryType = UITableViewCellAccessoryNone;
         }
 
-        NSString* issueData = [NSString stringWithFormat:@"Issue: %@\nStatus: %@\nDescription: %@", self.issue.title, self.issue.status, self.issue.description];
-        issueCell.title.text = self.issue.key;
+        NSString* issueData = [NSString stringWithFormat:@"Status: %@", self.issue.status];
+        issueCell.title.text = self.issue.title;
         issueCell.body.text = issueData;
 
         //Calculate the expected size based on the font and linebreak mode of your label

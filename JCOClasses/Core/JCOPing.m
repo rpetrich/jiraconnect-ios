@@ -25,8 +25,11 @@
 
     NSLog(@"baseUrl = %@", [self.baseUrl absoluteString]);
 
-    // TODO: make JCONNECT a var
-    NSString *resourceUrl = [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=JCONNECT&udid=%@", [[[JCO instance] getMetaData] objectForKey:@"udid"]];
+    NSDictionary *metaData = [[JCO instance] getMetaData];
+    NSString *project = [[JCO instance] getProjectName];
+    NSLog(@"project = %@", project);
+    
+    NSString *resourceUrl = [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=%@&udid=%@", project, [metaData objectForKey:@"udid"]];
 
     NSLog(@"resourceUrl = %@", resourceUrl);
 

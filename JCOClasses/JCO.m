@@ -19,6 +19,7 @@ JCOPing * _pinger;
 JCONotifier * _notifier;
 JCOViewController* _jcController;
 JCOCrashSender* _crashSender;
+id<JCOCustomDataSource> _customDataSource;
 
 +(JCO*) instance {
 	static JCO *singleton = nil;
@@ -42,12 +43,13 @@ JCOCrashSender* _crashSender;
 }
 
 
-- (void) configureJiraConnect:(NSString*) withUrl {
+- (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData {
 
 	self.url = [NSURL URLWithString:withUrl];
 
     _pinger.baseUrl = self.url;
     [_pinger start];
+    [self viewController].payloadDataSource = customData;
 
     // TODO: fire this when network becomes active
 	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReportsAfterAsking) userInfo:nil repeats:NO];
@@ -82,6 +84,13 @@ JCOCrashSender* _crashSender;
 	[info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
 	
 	return info;
+}
+
+- (NSString*) getProjectName {
+    if ([_customDataSource respondsToSelector:@selector(projectName)]) {
+        return [_customDataSource projectName];
+    }
+    return [[self getMetaData] objectForKey:@"appName"];
 }
 
 -(void) dealloc {

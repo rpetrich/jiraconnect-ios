@@ -17,9 +17,10 @@
 
 + (JCO*) instance;
 
-- (void) configureJiraConnect:(NSString*) withUrl;
+- (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData;
 - (JCOViewController*) viewController;
 - (void) displayNotifications;
 - (NSDictionary*) getMetaData;
+- (NSString*) getProjectName;
 
 @end

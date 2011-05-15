@@ -70,7 +70,6 @@ JCOCrashTransport *_transport;
 
 	NSArray* reports = [[CrashReporter sharedCrashReporter] crashReports];
 
-
 	for (NSString* report in reports) {
         [_transport send:@"Crash report" description:report crashReport:report];
     }

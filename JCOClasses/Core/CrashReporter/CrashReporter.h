@@ -37,11 +37,7 @@
 	BOOL _crashReportActivated;
     int _crashReportAnalyzerStarted;
 	NSString *_crashesDir;
-	
-	int _amountCrashes;
-	
 	NSMutableArray *_crashFiles;
-	
 }
 
 + (CrashReporter *)sharedCrashReporter;

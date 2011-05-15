@@ -18,13 +18,12 @@
         payload:(NSDictionary *)payloadData
         fields:(NSDictionary *)customFields {
 
+    // issue creation url is:
+    // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/<projectname>"
 
-    NSLog(@"Sending feedback... %@, %@ %@, %@", subject, description, payloadData, customFields);
-
-// issue creation url is:
-// curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/reallife/1.0/jirarl/upload?location=blah&pid=10000&issuetype=1&summary=testing123&reporter=admin"
-
-    NSURL *url = [NSURL URLWithString:@"rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
+    NSString *path = [@"rest/jconnect/latest/issue/" stringByAppendingString:[[JCO instance] getProjectName]];
+    NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
+    NSLog(@"Sending feedback to... %@", url);
 
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

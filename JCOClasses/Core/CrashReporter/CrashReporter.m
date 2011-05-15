@@ -60,7 +60,6 @@
 
 	if ( self != nil)
 	{
-		_amountCrashes = 0;
 		
 		NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:kCrashReportAnalyzerStarted];
 		if (testValue == nil)
@@ -149,7 +148,6 @@
 		
 		if ([_crashFiles count] > 0)
 		{
-			_amountCrashes = [_crashFiles count];
 			return YES;
 		}
 		else

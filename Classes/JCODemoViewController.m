@@ -1,7 +1,6 @@
 
 #import "JCODemoViewController.h"
 #import "JCO.h"
-#import "JCOPayloadDataSource.h"
 
 @implementation JCODemoViewController
 
@@ -9,16 +8,13 @@
 
 
 - (IBAction) triggerFeedback {
-	NSLog(@"FEEEDBACK");
 	JCOViewController* controller = [[JCO instance] viewController];
-    controller.payloadDataSource = self;
-
 	[self presentModalViewController:controller animated:YES];
 }
 
 - (IBAction) triggerCrash
 {
-	NSLog(@"Trigger crash!");
+	NSLog(@"Triggering crash!");
 	/* Trigger a crash */
 	CFRelease(NULL);
 }

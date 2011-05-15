@@ -13,9 +13,9 @@
 
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport {
 
-    NSLog(@"Sending crash report... %@", subject);
-
-    NSURL *url = [NSURL URLWithString:@"rest/jconnect/latest/issue" relativeToURL:[JCO instance].url];
+    NSString *path = [@"rest/jconnect/latest/issue/" stringByAppendingString:[[JCO instance] getProjectName]];
+    NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
+    NSLog(@"Sending crash report to... %@", url);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];
