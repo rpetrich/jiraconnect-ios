@@ -125,18 +125,18 @@ NSTimer *_timer;
                           payload:payloadData
                            fields:customFields];
     }
-    self.descriptionField.text = nil;
-    self.subjectField.text = nil;
-    [self setVoiceButtonTitleWithDuration:0.0];
-    // TODO: also reset _recorder
-    [[self.screenshotButton viewWithTag:20] removeFromSuperview];
-
 }
 
 - (void)transportDidFinish {
 
     //TODO: error handling and reporting!
     [self dismissModalViewControllerAnimated:YES];
+
+    self.descriptionField.text = @"";
+    self.subjectField.text = @"";
+    [self setVoiceButtonTitleWithDuration:0.0];
+    // TODO: also reset _recorder and set the text on the capture button
+    [[self.screenshotButton viewWithTag:20] removeFromSuperview];
 }
 
 #pragma mark UIImagePickerControllerDelegate

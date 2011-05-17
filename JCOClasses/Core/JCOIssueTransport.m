@@ -27,7 +27,9 @@
 
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:subject forKey:@"summary"];
+    if (subject) {
+        [params setObject:subject forKey:@"summary"];
+    }
     [self populateCommonFields:description screenshot:screenshot voiceData:voiceData payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
