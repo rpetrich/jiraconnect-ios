@@ -9,6 +9,8 @@
 #import "JCOViewController.h"
 #import "CrashReporter.h"
 
+@class JCONavigationController;
+
 @interface JCO : NSObject {
 	NSURL* _url;	
 }
@@ -18,7 +20,7 @@
 + (JCO*) instance;
 
 - (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData;
-- (JCOViewController*) viewController;
+- (UIViewController*) viewController;
 - (void) displayNotifications;
 - (NSDictionary*) getMetaData;
 - (NSString*) getProjectName;

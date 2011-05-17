@@ -54,31 +54,37 @@
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
-    NSLog(@"Headers: %@	", [request responseHeaders]);
-
-    NSLog(@"Got issue key: %@", [request responseString]);
-    if (request.responseStatusCode == 200) {
+    
+    NSLog(@"Response for %@ is %@", request.url,  [request responseString]);
+    if (request.responseStatusCode < 300) {
 
         NSString *msg = [NSString stringWithFormat:@"Your feedback has been received. Thank you, for the common good."];
-        NSLog(@"requestSuccess: %@", msg);
         [self alert:msg withTitle:@"Thank you" button:@"OK"];
         // alert the delegate!
         // TODO: also alert on FAIL...
         [self.delegate transportDidFinish];
 
     } else {
-        NSString *msg = [NSString stringWithFormat:@"There was an error submitting your feedback. Please try again soon."];
-        NSLog(@"requestFail: %d, %@", request.responseStatusCode, msg);
-        [self alert:msg withTitle:@"Submission Error" button:@"OK"];        
+        [self requestFailed:request];
     }
 
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     NSError *error = [request error];
-
-    NSString *msg = [NSString stringWithFormat:@"\n %@.\n Please try again later.", [error localizedDescription]];
-    NSLog(@"requestFailed: %@. URL: %@, response code: %d", msg, [request url], [request responseStatusCode]);
+    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:)]) {
+        [self.delegate transportDidFinishWithError:error];
+    }
+    NSString *msg = @"";
+    if (request.responseStatusCode >= 300) {
+        msg = [msg stringByAppendingFormat:@"Response code %d\n", request.responseStatusCode];
+    }
+    if ([error localizedDescription] != nil) {
+        msg = [msg stringByAppendingFormat:@"%@.\n", [error localizedDescription]];
+    }
+    msg = [msg stringByAppendingString:@"Please try again later."];
+    
+    NSLog(@"requestFailed: %@ URL: %@, response code: %d", msg, [request url], [request responseStatusCode]);
     [self alert:msg withTitle:@"Error submitting Feedback" button:@"OK"];
 }
 

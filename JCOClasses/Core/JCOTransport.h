@@ -14,6 +14,9 @@
 
 - (void)transportDidFinish;
 
+@optional
+- (void)transportDidFinishWithError:(NSError*)error;
+
 @end
 
 
@@ -24,5 +27,8 @@
 @property(nonatomic, retain) id <JCOTransportDelegate> delegate;
 
 - (void)populateCommonFields:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
+
+- (void)requestFailed:(ASIHTTPRequest *)request;
+
 
 @end

@@ -31,7 +31,10 @@ NSTimer *_timer;
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
 
-    NSLog(@"View Did load!! %@", self);
+    self.navigationItem.leftBarButtonItem =
+            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                          target:self
+                                                          action:@selector(dismiss)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

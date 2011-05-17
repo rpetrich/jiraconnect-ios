@@ -1,6 +1,7 @@
 
-#import <UIKit/UIKit.h>@protocol JCOPayloadDataSource;
+#import <UIKit/UIKit.h>
 
+@protocol JCOPayloadDataSource;
 @protocol JCOCustomDataSource;
 
 @interface JCODemoViewController : UIViewController <JCOCustomDataSource> {

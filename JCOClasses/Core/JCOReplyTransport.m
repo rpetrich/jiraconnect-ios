@@ -31,7 +31,7 @@
     [upRequest setTimeOutSeconds:15];
     [upRequest startAsynchronous];
 
-    // TODO: consider doing this only if request is succesful. Else, remove last comment on FAIL?
+    // TODO: consider doing this only if request is successful. Else, remove last comment on FAIL?
     JCOComment * comment = [[JCOComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date]];
     [originalIssue.comments addObject:comment];
     [comment release];

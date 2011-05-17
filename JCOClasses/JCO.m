@@ -18,6 +18,7 @@
 JCOPing * _pinger;
 JCONotifier * _notifier;
 JCOViewController* _jcController;
+UINavigationController *_navController;
 JCOCrashSender* _crashSender;
 id<JCOCustomDataSource> _customDataSource;
 
@@ -37,8 +38,9 @@ id<JCOCustomDataSource> _customDataSource;
 		_notifier = [[[JCONotifier alloc] initWithView:window] retain];
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
-		
-	}
+        _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];
+
+    }
 	return self;
 }
 
@@ -49,7 +51,7 @@ id<JCOCustomDataSource> _customDataSource;
 
     _pinger.baseUrl = self.url;
     [_pinger start];
-    [self viewController].payloadDataSource = customData;
+    _jcController.payloadDataSource = customData;
 
     // TODO: fire this when network becomes active
 	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReportsAfterAsking) userInfo:nil repeats:NO];
@@ -58,8 +60,8 @@ id<JCOCustomDataSource> _customDataSource;
 }
 
 
--(JCOViewController*) viewController {
-	return _jcController;
+-(UIViewController*) viewController {
+	return _navController;
 }
 
 -(void) displayNotifications {
@@ -98,6 +100,7 @@ id<JCOCustomDataSource> _customDataSource;
 	[_pinger release]; _pinger = nil;
 	[_notifier release]; _notifier = nil;
 	[_jcController release]; _jcController = nil;
+	[_navController release]; _navController = nil;
 	[_crashSender release]; _crashSender = nil;
 	[super dealloc];
 }

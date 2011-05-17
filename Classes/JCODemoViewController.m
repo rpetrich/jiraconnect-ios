@@ -8,7 +8,7 @@
 
 
 - (IBAction) triggerFeedback {
-	JCOViewController* controller = [[JCO instance] viewController];
+	UIViewController* controller = [[JCO instance] viewController];
 	[self presentModalViewController:controller animated:YES];
 }
 
