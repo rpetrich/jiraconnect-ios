@@ -8,12 +8,13 @@
 #import "JCOIssuesViewController.h"
 #import "JCOIssuePreviewCell.h"
 #import "JCOIssueViewController.h"
+#import "JCO.h"
 
 static NSString *cellId = @"CommentCell";
 
 @implementation JCOIssuesViewController
 
-@synthesize data=_data, headers=_headers;
+@synthesize data=_data;
 
 NSDateFormatter *_dateFormatter;
 
@@ -23,12 +24,19 @@ NSDateFormatter *_dateFormatter;
     
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                            target:self 
-                                                                                           action:@selector(cancel:)] autorelease]; 
+                                                                                           action:@selector(cancel:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                           target:self
+                                                                                           action:@selector(compose:)] autorelease];
     self.title = @"Your Feedback";
     _dateFormatter = [[[NSDateFormatter alloc] init] retain];
     [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     return controller;
+}
+
+-(void) compose:(UIBarItem*)arg {
+    [self presentModalViewController:[JCO instance].viewController animated:YES];
 }
 
 -(void) cancel:(UIBarItem*)arg {
@@ -84,9 +92,6 @@ NSDateFormatter *_dateFormatter;
     return [[self.data objectAtIndex:section] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.headers objectAtIndex:section];
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 70;
@@ -137,7 +142,6 @@ NSDateFormatter *_dateFormatter;
 - (void)dealloc
 {
     self.data = nil;
-    self.headers = nil;
     [_dateFormatter release];_dateFormatter = nil;
     [super dealloc];
 }

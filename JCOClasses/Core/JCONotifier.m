@@ -49,10 +49,8 @@
         NSArray* data;
         NSArray* headers;
         data = [NSArray arrayWithObjects:[[JCOIssueStore instance] issues], nil];
-        headers = [NSArray arrayWithObjects:@"Feedback",  nil];
         
 		[tableViewController setData:data];
-        [tableViewController setHeaders:headers];
         
         _viewController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
 

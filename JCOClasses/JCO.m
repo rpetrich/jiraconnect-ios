@@ -39,6 +39,8 @@ id<JCOCustomDataSource> _customDataSource;
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
         _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];
+        [_navController.navigationBar setBarStyle:UIBarStyleBlack];
+        _navController.navigationBar.translucent = YES;
 
     }
 	return self;

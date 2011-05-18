@@ -12,6 +12,14 @@
 #import "JCOReplyTransport.h"
 #import "UIImage+Resize.h"
 
+@implementation JCOToolbar
+
+- (void)drawRect:(CGRect)rect {
+    UIImage *image = [UIImage imageNamed:@"buttonbase.png"];
+    [image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+}
+@end
+
 @interface JCOViewController ()
 
 - (void)setVoiceButtonTitleWithDuration:(float)duration;
@@ -30,16 +38,32 @@ NSTimer *_timer;
     self.recorder = [[JCORecorder alloc] init];
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
-
-    self.navigationItem.leftBarButtonItem =
+    self.descriptionField.layer.cornerRadius = 7.0;
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    self.navigationItem.rightBarButtonItem =
             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                           target:self
                                                           action:@selector(dismiss)];
+    self.navigationItem.title = @"Report Issue";
+
+    self.dock.backgroundColor = [UIColor clearColor];
+    self.dock.segmentedControlStyle = UISegmentedControlStyleBar;
+    self.dock.tintColor = [UIColor whiteColor];
+    [self.dock setWidth:299 forSegmentAtIndex:0];
+
+    self.images = [NSMutableArray arrayWithCapacity:2];
+    self.bar.items = nil;
+    self.bar.autoresizesSubviews = YES;
+    self.bar.layer.cornerRadius = 5.0;
+    CGRect frame = self.bar.frame;
+    self.bar.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 60);
+
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
-
 }
 
 - (IBAction)dismiss {
@@ -145,22 +169,52 @@ NSTimer *_timer;
     [self dismissModalViewControllerAnimated:YES];
     [self.screenshotButton setAutoresizesSubviews:NO];
 
-    CGSize size = self.screenshotButton.frame.size;
+    CGSize  size = CGSizeMake(40, self.bar.frame.size.height);
+    UIImage *newImage = [origImg resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                                                      bounds:size
+                                        interpolationQuality:kCGInterpolationHigh];
 
-    UIImage *newImage = [origImg thumbnailImage:(int)size.width
-                              transparentBorder:0
-                                   cornerRadius:5
-                           interpolationQuality:kCGInterpolationHigh];
+    [self.bar setClipsToBounds:YES];
 
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:newImage];
-    imgView.tag = 20;
-    [[self.screenshotButton viewWithTag:20] removeFromSuperview];// remove previous image, if any?
-    [self.screenshotButton addSubview:imgView];
-    [imgView release];
-    [self.screenshotButton setTitle:nil forState:UIControlStateNormal];
+    CGRect buttonFrame = CGRectMake(0, 0, newImage.size.width, newImage.size.height);
+    UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
+    [button setImage:newImage forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(itemTouch:) forControlEvents:UIControlEventTouchUpInside];
+    button.imageView.layer.cornerRadius = 5.0;
+
+    UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    button.tag = [self.images count];
+
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.bar.items];
+    [buttonItems addObject:buttonItem];
+    [self.bar setItems:buttonItems];
+
+    [self.images addObject:origImg];
+
     self.image = origImg;
+    [buttonItem release];
+    [button release];
+
 }
 
+-(void) itemTouch:(UIButton *)touch {
+    // delete that button, both from the bar, and the images array
+    NSUInteger index = (u_int )touch.tag;
+
+    [self.images removeObjectAtIndex:index];
+
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.bar.items];
+    [buttonItems removeObjectAtIndex:index];
+
+    // re-tag all buttons...
+    for (int i = 0; i < [buttonItems count]; i++) {
+        UIBarButtonItem* buttonItem = (UIBarButtonItem *)[buttonItems objectAtIndex:i];
+        buttonItem.customView.tag = i;
+    }
+
+    [self.bar setItems:buttonItems animated:YES];
+
+}
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissModalViewControllerAnimated:YES];
@@ -197,11 +251,24 @@ NSTimer *_timer;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker;
-@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, image = _image, recorder = _recorder, replyToIssue = _replyToIssue;
+@synthesize sendButton, voiceButton, screenshotButton,
+descriptionField, subjectField, countdownView, progressView,
+imagePicker, dock, bar;
+
+@synthesize issueTransport = _issueTransport,
+            replyTransport = _replyTransport,
+            payloadDataSource = _payloadDataSource,
+            image = _image,
+            images = _images,
+            recorder = _recorder,
+            replyToIssue = _replyToIssue;
+
 
 - (void)dealloc {
-    self.image,
+    self.bar,
+            self.dock,
+            self.image,
+            self.images,
             self.recorder,
             self.sendButton,
             self.imagePicker,
@@ -215,13 +282,16 @@ NSTimer *_timer;
             self.screenshotButton,
             self.descriptionField,
             self.payloadDataSource = nil;
+    
     [super dealloc];
 }
 
 // TODO: DRY this up.
 - (void)viewDidUnload {
     // Release any retained subviews of the main view.
-    self.image,
+    self.bar,
+            self.dock,
+            self.image,
             self.recorder,
             self.sendButton,
             self.imagePicker,
@@ -236,7 +306,6 @@ NSTimer *_timer;
             self.descriptionField,
             self.payloadDataSource = nil;
     [super viewDidUnload];
-    NSLog(@"View Did UNload!!");
 }
 
 @end
