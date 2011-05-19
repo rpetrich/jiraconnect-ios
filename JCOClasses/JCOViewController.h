@@ -27,7 +27,6 @@
 	IBOutlet UIButton* screenshotButton;
 	IBOutlet UITextView* descriptionField;
 	IBOutlet UITextField* subjectField;
-    IBOutlet UISegmentedControl* dock;
     IBOutlet UIToolbar* bar;
 
 	IBOutlet UILabel* countdownTimer;
@@ -38,7 +37,6 @@
 	JCOIssueTransport*_issueTransport;
 	JCOReplyTransport* _replyTransport;
     <JCOCustomDataSource> _payloadDataSource;
-    UIImage* _image;
     NSMutableArray *_images;
     JCORecorder* _recorder;
     JCOIssue * _replyToIssue;
@@ -50,7 +48,6 @@
 @property (retain, nonatomic) IBOutlet UIButton* screenshotButton;
 @property (retain, nonatomic) IBOutlet UITextView* descriptionField;
 @property (retain, nonatomic) IBOutlet UITextField* subjectField;
-@property (retain, nonatomic) IBOutlet UISegmentedControl* dock;
 @property (retain, nonatomic) IBOutlet UIToolbar* bar;
 
 @property (retain, nonatomic) IBOutlet UIView* countdownView;
@@ -61,7 +58,6 @@
 @property (retain, nonatomic) JCOIssueTransport* issueTransport;
 @property (retain, nonatomic) JCOReplyTransport* replyTransport;
 @property (retain, nonatomic) id<JCOCustomDataSource> payloadDataSource;
-@property (retain, nonatomic) UIImage* image;
 @property (retain, nonatomic) NSMutableArray* images;
 @property (retain, nonatomic) JCORecorder* recorder;
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.

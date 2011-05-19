@@ -12,7 +12,7 @@
 @implementation JCOTransport
 
 - (void)populateCommonFields:(NSString *)description
-                  screenshot:(UIImage *)screenshot
+                      images:(NSArray *)images
                    voiceData:(NSData *)voiceData
                  payloadData:(NSDictionary *)payloadData
                 customFields:(NSDictionary *)customFields
@@ -24,9 +24,13 @@
     [params addEntriesFromDictionary:metaData];
     NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
     [upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
-    if (screenshot != nil) {
-        NSData *imgData = UIImagePNGRepresentation(screenshot);
-        [upRequest setData:imgData withFileName:@"jiraconnect-screenshot.png" andContentType:@"image/png" forKey:@"screenshot"];
+    if (images != nil) {
+        for (int i = 0; i < [images count]; i++) {
+            NSData *imgData = UIImagePNGRepresentation([images objectAtIndex:i]);
+            NSString *filename = [@"jiraconnect-screenshot" stringByAppendingFormat:@"-%d.png", i];
+            NSString *key = [@"screenshot" stringByAppendingFormat:@"-%d", i];
+            [upRequest setData:imgData withFileName:filename andContentType:@"image/png" forKey:key];
+        }
     }
     if (voiceData != nil) {
         [upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];

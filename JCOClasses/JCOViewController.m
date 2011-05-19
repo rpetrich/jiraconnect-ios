@@ -41,25 +41,18 @@ NSTimer *_timer;
     self.descriptionField.layer.cornerRadius = 7.0;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    self.navigationItem.rightBarButtonItem =
+    self.navigationItem.leftBarButtonItem =
             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                           target:self
                                                           action:@selector(dismiss)];
     self.navigationItem.title = @"Report Issue";
-
-    self.dock.backgroundColor = [UIColor clearColor];
-    self.dock.segmentedControlStyle = UISegmentedControlStyleBar;
-    self.dock.tintColor = [UIColor whiteColor];
-    [self.dock setWidth:299 forSegmentAtIndex:0];
 
     self.images = [NSMutableArray arrayWithCapacity:2];
     self.bar.items = nil;
     self.bar.autoresizesSubviews = YES;
     self.bar.layer.cornerRadius = 5.0;
     CGRect frame = self.bar.frame;
-    self.bar.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 60);
-
-
+    self.bar.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 80);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -92,7 +85,8 @@ NSTimer *_timer;
 - (void)hideAudioProgress {
     self.countdownView.hidden = YES;
     self.progressView.progress = 0;
-    [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record.png"] forState:UIControlStateNormal];
+    [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_record.png"] forState:UIControlStateNormal];
+    [[self.voiceButton viewWithTag:2] removeFromSuperview];
     [_timer invalidate];
 }
 
@@ -110,7 +104,24 @@ NSTimer *_timer;
         self.progressView.progress = 0;
 
         self.countdownView.hidden = NO;
-        [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_Record-OnAir.png"] forState:UIControlStateNormal];
+        // TODO get at least one more image to make this ani smoother
+        UIImage *activeImg = [UIImage imageNamed:@"icon_record_active.png"];
+        UIImage *pulseImg = [UIImage imageNamed:@"icon_record_pulse.png"];
+
+        self.voiceButton.imageView.image = activeImg;
+        UIImageView *imgView = [[UIImageView alloc] initWithImage:activeImg];
+        imgView.animationImages = [NSArray arrayWithObjects:activeImg, pulseImg, nil];
+        imgView.animationDuration = 1;
+
+
+        CGRect buttFrame = self.voiceButton.frame;
+        float x = (buttFrame.size.width/2.0f) - (activeImg.size.width/2.0f) - 1;
+        imgView.tag = 2;
+        [imgView startAnimating];
+
+        imgView.frame = CGRectMake(x, 5, activeImg.size.width, activeImg.size.height);
+        [self.voiceButton addSubview:imgView];
+        [imgView release];
     }
 }
 
@@ -137,14 +148,14 @@ NSTimer *_timer;
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue
                            description:self.descriptionField.text
-                            screenshot:_image
+                            images:self.images
                              voiceData:[_recorder audioData]
                                payload:payloadData
                                 fields:customFields];
     } else {
         [self.issueTransport send:self.subjectField.text
                       description:self.descriptionField.text
-                       screenshot:_image
+                       images:self.images
                         voiceData:[_recorder audioData]
                           payload:payloadData
                            fields:customFields];
@@ -161,6 +172,8 @@ NSTimer *_timer;
     [self setVoiceButtonTitleWithDuration:0.0];
     // TODO: also reset _recorder and set the text on the capture button
     [[self.screenshotButton viewWithTag:20] removeFromSuperview];
+    [self.images removeAllObjects];
+    [self.bar setItems:nil];
 }
 
 #pragma mark UIImagePickerControllerDelegate
@@ -191,7 +204,6 @@ NSTimer *_timer;
 
     [self.images addObject:origImg];
 
-    self.image = origImg;
     [buttonItem release];
     [button release];
 
@@ -253,12 +265,11 @@ NSTimer *_timer;
 
 @synthesize sendButton, voiceButton, screenshotButton,
 descriptionField, subjectField, countdownView, progressView,
-imagePicker, dock, bar;
+imagePicker, bar;
 
 @synthesize issueTransport = _issueTransport,
             replyTransport = _replyTransport,
             payloadDataSource = _payloadDataSource,
-            image = _image,
             images = _images,
             recorder = _recorder,
             replyToIssue = _replyToIssue;
@@ -266,8 +277,6 @@ imagePicker, dock, bar;
 
 - (void)dealloc {
     self.bar,
-            self.dock,
-            self.image,
             self.images,
             self.recorder,
             self.sendButton,
@@ -290,8 +299,6 @@ imagePicker, dock, bar;
 - (void)viewDidUnload {
     // Release any retained subviews of the main view.
     self.bar,
-            self.dock,
-            self.image,
             self.recorder,
             self.sendButton,
             self.imagePicker,

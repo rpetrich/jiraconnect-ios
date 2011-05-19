@@ -14,6 +14,6 @@
 @interface JCOReplyTransport : JCOTransport {
 
 }
-- (void)sendReply:(JCOIssue *)originalIssue description:(NSString *)description screenshot:(UIImage *)screenshot voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
+- (void)sendReply:(JCOIssue *)originalIssue description:(NSString *)description images:(NSArray *)images voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
 
 @end

@@ -20,7 +20,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];
     [params setObject:@"Crash" forKey:@"type"]; // this is used, if there is an issueType in JIRA named 'Crash'.
-    [self populateCommonFields:description screenshot:nil voiceData:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
+    [self populateCommonFields:description images:nil voiceData:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     [upRequest setData:crashData withFileName:@"crash.txt" andContentType:@"text/plain" forKey:@"crash"];
     [upRequest setDelegate:self];

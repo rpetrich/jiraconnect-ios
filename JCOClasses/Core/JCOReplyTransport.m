@@ -13,7 +13,7 @@
 
 - (void)sendReply:(JCOIssue *)originalIssue
         description:(NSString *)description
-        screenshot:(UIImage *)screenshot
+        images:(NSArray *)images
         voiceData:(NSData *)voiceData
         payload:(NSDictionary *)payloadData
         fields:(NSDictionary *)customFields {
@@ -24,7 +24,7 @@
     
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [self populateCommonFields:description screenshot:screenshot voiceData:voiceData payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
+    [self populateCommonFields:description images:images voiceData:voiceData payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
