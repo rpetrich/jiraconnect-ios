@@ -52,7 +52,7 @@ NSTimer *_timer;
     self.bar.autoresizesSubviews = YES;
     self.bar.layer.cornerRadius = 5.0;
     CGRect frame = self.bar.frame;
-    self.bar.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 80);
+    self.bar.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 70);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -110,9 +110,17 @@ NSTimer *_timer;
 
         self.voiceButton.imageView.image = activeImg;
         UIImageView *imgView = [[UIImageView alloc] initWithImage:activeImg];
-        imgView.animationImages = [NSArray arrayWithObjects:activeImg, pulseImg, nil];
-        imgView.animationDuration = 1;
 
+        NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:8];
+        for (int i = 1; i < 9; i++) {
+            NSString *sprintName = [@"icon_record_" stringByAppendingFormat:@"%d.png", i];
+            UIImage *img = [UIImage imageNamed:sprintName];
+            [sprites addObject:img];
+        }
+
+        imgView.animationImages = sprites;
+        imgView.animationDuration = 0.85f;
+        
 
         CGRect buttFrame = self.voiceButton.frame;
         float x = (buttFrame.size.width/2.0f) - (activeImg.size.width/2.0f) - 1;
@@ -121,6 +129,7 @@ NSTimer *_timer;
 
         imgView.frame = CGRectMake(x, 5, activeImg.size.width, activeImg.size.height);
         [self.voiceButton addSubview:imgView];
+        [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_blank.png"] forState:UIControlStateNormal];
         [imgView release];
     }
 }

@@ -10,6 +10,7 @@
 #import "JCOViewController.h"
 #import "JCOReplyTransport.h"
 #import "JCOMessageBubble.h"
+#import "JCO.h"
 
 static UIFont *font;
 
@@ -183,14 +184,20 @@ static float detailLabelHeight = 21.0f;
 
 - (void) didTouchReply:(id)sender {
 
-    JCOViewController *feedbackController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
-    [self presentModalViewController:feedbackController animated:YES];
+    //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
+    JCOViewController* feedbackController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
+    UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:feedbackController] retain];
+    [navController.navigationBar setBarStyle:UIBarStyleBlack];
+    navController.navigationBar.translucent = YES;
+
+	[self presentModalViewController:navController animated:YES];
+
     feedbackController.replyToIssue = self.issue;
     feedbackController.replyTransport.delegate = self;
     feedbackController.subjectField.text = [@"RE: " stringByAppendingString:self.issue.title];
     feedbackController.subjectField.enabled = NO;
-    feedbackController.subjectField.textColor = [UIColor blackColor];
     [feedbackController release];
+    [navController release];
 
 }
 

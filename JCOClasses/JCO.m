@@ -38,7 +38,7 @@ id<JCOCustomDataSource> _customDataSource;
 		_notifier = [[[JCONotifier alloc] initWithView:window] retain];
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
-        _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];
+        _navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] retain];
         [_navController.navigationBar setBarStyle:UIBarStyleBlack];
         _navController.navigationBar.translucent = YES;
 
@@ -64,6 +64,21 @@ id<JCOCustomDataSource> _customDataSource;
 
 -(UIViewController*) viewController {
 	return _navController;
+}
+
+/**
+* Returns the actual JCOViewController.
+* Its best to use viewController
+*/
+-(JCOViewController*) jcoViewController {
+
+    for (UIViewController * controller in _navController.viewControllers) {
+        NSLog(@"controller = %@", controller);
+        if (controller == _jcController) {
+            return (JCOViewController *)controller;
+        }
+    }
+    return nil;
 }
 
 -(void) displayNotifications {

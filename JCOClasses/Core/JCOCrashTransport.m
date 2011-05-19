@@ -31,6 +31,7 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
     if (request.responseStatusCode < 300) {
+        NSLog(@"Crash sent: %@", [request responseString]);
         [self.delegate transportDidFinish];
     } else {
         [self requestFailed:request];
