@@ -39,9 +39,7 @@ id<JCOCustomDataSource> _customDataSource;
 		_crashSender = [[[JCOCrashSender alloc] init] retain];
 		_jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
         _navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] retain];
-        [_navController.navigationBar setBarStyle:UIBarStyleBlack];
         _navController.navigationBar.translucent = YES;
-
     }
 	return self;
 }
@@ -49,6 +47,7 @@ id<JCOCustomDataSource> _customDataSource;
 
 - (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData {
 
+    [CrashReporter enableCrashReporter];
 	self.url = [NSURL URLWithString:withUrl];
 
     _pinger.baseUrl = self.url;
@@ -56,6 +55,7 @@ id<JCOCustomDataSource> _customDataSource;
     _jcController.payloadDataSource = customData;
 
     // TODO: fire this when network becomes active
+
 	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReportsAfterAsking) userInfo:nil repeats:NO];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	

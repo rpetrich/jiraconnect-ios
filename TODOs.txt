@@ -2,4 +2,4 @@
 * Link to iTunesConnect in JIRA view issue. to the users UDID
 * Add custom fields; lat+lng and create these in JIRA
 * support multiple voice recordings
-* 
+* UI indication when networking... especially for long requests.

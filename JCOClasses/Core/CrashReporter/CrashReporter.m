@@ -34,6 +34,7 @@
 
 @interface CrashReporter ()
 
+static CrashReporter *crashReportSender = nil;
 
 - (void)handleCrashReport;
 
@@ -41,16 +42,22 @@
 
 @end
 
+
 @implementation CrashReporter
 
++ (void) enableCrashReporter {
+
+    if (crashReportSender == nil) {
+        crashReportSender = [[CrashReporter alloc] init];
+    }
+}
+
+/**
+* If Crash Reports are enabled, this will return the sharedCrashReporter instance.
+* Else, it returns nil.
+*/
 + (CrashReporter *)sharedCrashReporter
 {
-	static CrashReporter *crashReportSender = nil;
-	
-	if (crashReportSender == nil) {
-		crashReportSender = [[CrashReporter alloc] init];
-	}
-	
 	return crashReportSender;
 }
 
@@ -182,11 +189,13 @@
 	for (int i=0; i < [_crashFiles count]; i++)
 	{
 		NSString *filename = [_crashesDir stringByAppendingPathComponent:[_crashFiles objectAtIndex:i]];
-		NSData *crashData = [NSData dataWithContentsOfFile:filename];
+        NSLog(@"filename = %@", filename);
+        
+                NSData *crashData = [NSData dataWithContentsOfFile:filename];
 		
 		if ([crashData length] > 0)
 		{
-			// crashData here is simply a protobuf!
+			// crashData here is simply a protobuf! could also attach that?
 
 			PLCrashReport *report = [[[PLCrashReport alloc] initWithData:crashData error:&error] autorelease];
 			

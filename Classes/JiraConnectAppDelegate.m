@@ -23,9 +23,8 @@
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 
-    // NOTE: JCO must be configured after the keyWindow is made (note: needs trailing slash for some reason)
-	[[JCO instance] configureJiraConnect:@"http://172.20.7.40:2990/jira/" customData:viewController];
-//	[[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
+    // NOTE: JCO must be configured after the keyWindow is made (note: needs trailing slash)
+	[[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
 
     return YES;
 }

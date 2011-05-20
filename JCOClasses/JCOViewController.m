@@ -270,6 +270,7 @@ NSTimer *_timer;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//    return YES;
 }
 
 @synthesize sendButton, voiceButton, screenshotButton,

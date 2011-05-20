@@ -46,9 +46,7 @@
         JCOIssuesViewController * tableViewController = [[JCOIssuesViewController alloc] initWithNibName:@"JCOIssuesViewController" bundle:nil];
 		[tableViewController loadView];        
         
-        NSArray* data;
-        NSArray* headers;
-        data = [NSArray arrayWithObjects:[[JCOIssueStore instance] issues], nil];
+        NSArray* data = [NSArray arrayWithObjects:[[JCOIssueStore instance] issues], nil];
         
 		[tableViewController setData:data];
         

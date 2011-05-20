@@ -9,7 +9,6 @@
 #import "JCOViewController.h"
 #import "CrashReporter.h"
 
-@class JCONavigationController;
 
 @interface JCO : NSObject {
 	NSURL* _url;	

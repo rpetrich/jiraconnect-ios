@@ -40,10 +40,11 @@
 	NSMutableArray *_crashFiles;
 }
 
-+ (CrashReporter *)sharedCrashReporter;
++ (CrashReporter *) sharedCrashReporter;
++ (void) enableCrashReporter;
 
 - (BOOL) hasPendingCrashReport;
-- (NSArray*)crashReports;
+- (NSArray*) crashReports;
 - (void) cleanCrashReports;
 
 

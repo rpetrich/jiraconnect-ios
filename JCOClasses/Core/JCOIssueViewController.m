@@ -10,7 +10,6 @@
 #import "JCOViewController.h"
 #import "JCOReplyTransport.h"
 #import "JCOMessageBubble.h"
-#import "JCO.h"
 
 static UIFont *font;
 
@@ -20,6 +19,8 @@ static UIFont *font;
 static float detailLabelHeight = 21.0f;
 
 @synthesize tableView = _tableView, replyButton = _replyButton, issue = _issue;
+@synthesize comments = _comments;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +33,7 @@ static float detailLabelHeight = 21.0f;
 
 - (void)dealloc
 {
-    self.tableView, self.issue, self.replyButton = nil;
+    self.tableView, self.issue, self.comments, self.replyButton = nil;
     [super dealloc];
 }
 
@@ -40,9 +41,27 @@ static float detailLabelHeight = 21.0f;
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
+
+- (void)setIssue:(JCOIssue *)issue {
+    if (_issue != issue) {
+        [_issue release];
+        _issue = [issue retain];
+
+        // the first comment will be a dummy object to store the description of the issue
+          // TODO: need to get the date created from JIRA
+        JCOComment *description = [[JCOComment alloc] initWithAuthor:@"Author"
+                systemUser:YES body:self.issue.description date:self.issue.lastUpdated];
+        NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
+        [commentData addObjectsFromArray:issue.comments];
+        self.comments = commentData;
+        [description release];
+    }
+}
+
+
+
 
 #pragma mark - View lifecycle
 
@@ -52,8 +71,8 @@ static float detailLabelHeight = 21.0f;
     self.tableView.backgroundColor = [UIColor colorWithRed:219.0/255.0 green:226.0/255.0 blue:237.0/255.0 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor clearColor];
-    if ([self.issue.comments count] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.issue.comments count] -1 inSection:1];
+    if ([self.comments count] > 0) {
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] -1 inSection:1];
         [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 
@@ -82,26 +101,12 @@ static float detailLabelHeight = 21.0f;
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        return @"Issue Summary";
-    }
-    else
-    {
-        return @"Comments";
-    }
+    return nil; // no headings
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return [[self.issue comments] count];
-    }
+    return (section == 0) ? 1 : [self.comments count];
 }
 
 -(CGSize)sizeForComment:(JCOComment *) comment font:(UIFont *)font {
@@ -114,7 +119,7 @@ static float detailLabelHeight = 21.0f;
         return issueCell.frame.size.height;
 
     } else {
-        JCOComment *comment = [self.issue.comments objectAtIndex:indexPath.row];
+        JCOComment *comment = [self.comments objectAtIndex:indexPath.row];
         CGFloat height = [self sizeForComment:comment font:font].height;
         return height + 15.0f + detailLabelHeight;
     }
@@ -169,14 +174,14 @@ static float detailLabelHeight = 21.0f;
         newFrame.size.height = expectedLabelSize.height;
         issueCell.body.frame = newFrame;
 
-        issueCell.frame = CGRectMake(0, 0, 320, 44 + expectedLabelSize.height);
+        issueCell.frame = CGRectMake(0, 0, tableView.frame.size.width, 44 + expectedLabelSize.height);
         issueCell.bgview.frame = issueCell.bounds;
         return issueCell;
 
     }
     else
     {
-        JCOComment *comment = [self.issue.comments objectAtIndex:indexPath.row];
+        JCOComment *comment = [self.comments objectAtIndex:indexPath.row];
         UITableViewCell *messageCell = [self getBubbleCell:tableView forMessage:comment];
         return messageCell;
     }
@@ -187,7 +192,6 @@ static float detailLabelHeight = 21.0f;
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
     JCOViewController* feedbackController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
     UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:feedbackController] retain];
-    [navController.navigationBar setBarStyle:UIBarStyleBlack];
     navController.navigationBar.translucent = YES;
 
 	[self presentModalViewController:navController animated:YES];
@@ -204,8 +208,8 @@ static float detailLabelHeight = 21.0f;
 - (void)transportDidFinish {
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
-    if ([self.issue.comments count] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.issue.comments count] -1 inSection:1];
+    if ([self.comments count] > 0) {
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] -1 inSection:1];
         [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }

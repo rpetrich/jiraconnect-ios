@@ -68,12 +68,16 @@ JCOCrashTransport *_transport;
 
 -(void) sendCrashReports {
 
-	NSArray* reports = [[CrashReporter sharedCrashReporter] crashReports];
+    if ([CrashReporter sharedCrashReporter] == nil) {
+        return;
+    }
 
+	NSArray* reports = [[CrashReporter sharedCrashReporter] crashReports];
+    
 	for (NSString* report in reports) {
-        u_int toIndex = [report length] > 1000 ? 1000 : [report length];
+        u_int toIndex = [report length] > 500 ? 500 : [report length];
         [_transport send:@"Crash report"
-             description:[[report substringToIndex:toIndex] stringByAppendingString:@"...(truncated)"]
+             description:[[report substringToIndex:toIndex] stringByAppendingString:@"...\n(truncated)"]
              crashReport:report];
     }
 
