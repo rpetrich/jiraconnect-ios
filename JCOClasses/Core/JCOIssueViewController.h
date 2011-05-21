@@ -11,9 +11,10 @@
 
 @protocol JCOTransportDelegate;
 
-@interface JCOIssueViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, JCOTransportDelegate> {
+@interface JCOIssueViewController : UIViewController
+        <UITableViewDelegate, UITableViewDataSource, JCOTransportDelegate> {
     IBOutlet UITableView* _tableView;
-    IBOutlet UIButton*_replyButton;
+    IBOutlet UIButton* _replyButton;
     JCOIssue * _issue;
     NSArray * _comments;
 }
@@ -24,7 +25,6 @@
 @property (nonatomic, retain) IBOutlet UIButton* replyButton;
 @property (nonatomic, retain) JCOIssue * issue;
 @property (nonatomic, retain) NSArray * comments;
-
 
 
 @end

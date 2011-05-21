@@ -55,6 +55,7 @@ float detailLabelHeight;
 
 
 - (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font {
+    // TODO: un hardcode these sizes..
    CGSize  size = [string sizeWithFont:font constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
 
     UIImage * balloon;

@@ -54,7 +54,7 @@
 
     NSString *responseString = [request responseString];
 
-    NSLog(@"ping response: '%@'", responseString);
+//    NSLog(@"ping response: '%@'", responseString);
 
     if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""]) {
         return;

@@ -9,16 +9,16 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
-#define kAutomaticallySendCrashReports @"AutomaticallySendCrashReports"		// flags if the crashreporter should automatically send crashes without asking the user again
-
 @protocol JCOTransportDelegate;
 
+// flags if the crashreporter should automatically send crashes without asking the user again
+#define kAutomaticallySendCrashReports @"AutomaticallySendCrashReports"
 
 @interface JCOCrashSender : NSObject <JCOTransportDelegate, UIAlertViewDelegate> {
 
 }
 
--(void) sendCrashReportsAfterAsking;
+-(void) promptThenMaybeSendCrashReports;
 -(void) sendCrashReports;
 
 @end

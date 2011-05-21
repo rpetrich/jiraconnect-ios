@@ -9,6 +9,7 @@
 #import "CrashReporter.h"
 #import "JCO.h"
 #import "JCOCrashTransport.h"
+#import "JCOTransport.h"
 
 #define kJiraConnectAutoSubmitCrashes @"JiraConnectAutoSubmitCras"
 
@@ -31,18 +32,21 @@ JCOCrashTransport *_transport;
 }
 
 
--(void)sendCrashReportsAfterAsking {
+-(void)promptThenMaybeSendCrashReports {
 
     if (![[CrashReporter sharedCrashReporter] hasPendingCrashReport]) {
         return;
     }
 
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kAutomaticallySendCrashReports]) {
+        NSString* description = NSLocalizedString(@"CrashDataFoundDescription", @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server");
+
+
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
-                                                            message:NSLocalizedString(@"CrashDataFoundDescription", @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server")
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"No", @"")
-                                                  otherButtonTitles:NSLocalizedString(@"Yes", @""), NSLocalizedString(@"Always", @""), nil];
+                                                            message:[NSString stringWithFormat:description, [[JCO instance] getProjectName]]
+                                                                    delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"No", @"No")
+                                                  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), NSLocalizedString(@"Always", @"Always"), nil];
         [alertView show];
         [alertView release];
     } else {

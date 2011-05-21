@@ -23,5 +23,6 @@
 - (void) displayNotifications;
 - (NSDictionary*) getMetaData;
 - (NSString*) getProjectName;
+- (NSString *) getAppName;
 
 @end

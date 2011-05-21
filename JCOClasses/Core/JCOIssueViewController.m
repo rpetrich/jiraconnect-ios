@@ -8,8 +8,8 @@
 #import "JCOIssueViewController.h"
 #import "JCOMessageCell.h"
 #import "JCOViewController.h"
-#import "JCOReplyTransport.h"
 #import "JCOMessageBubble.h"
+#import "JCOReplyTransport.h"
 
 static UIFont *font;
 
@@ -21,12 +21,12 @@ static float detailLabelHeight = 21.0f;
 @synthesize tableView = _tableView, replyButton = _replyButton, issue = _issue;
 @synthesize comments = _comments;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         font = [UIFont systemFontOfSize:14.0];
+        self.replyButton.layer.cornerRadius = 7.0f;
     }
     return self;
 }
@@ -39,28 +39,29 @@ static float detailLabelHeight = 21.0f;
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)setUpCommentDataFor:(JCOIssue *)issue {
+// the first comment will be a dummy object to store the description of the issue
+    // TODO: need to get the date created from JIRA
+    JCOComment *description = [[JCOComment alloc] initWithAuthor:@"Author"
+                systemUser:YES body:self.issue.description date:self.issue.lastUpdated];
+    NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
+    [commentData addObjectsFromArray:issue.comments];
+    self.comments = commentData;
+    [description release];
 }
 
 - (void)setIssue:(JCOIssue *)issue {
     if (_issue != issue) {
         [_issue release];
         _issue = [issue retain];
+        [self setUpCommentDataFor:issue];
 
-        // the first comment will be a dummy object to store the description of the issue
-          // TODO: need to get the date created from JIRA
-        JCOComment *description = [[JCOComment alloc] initWithAuthor:@"Author"
-                systemUser:YES body:self.issue.description date:self.issue.lastUpdated];
-        NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
-        [commentData addObjectsFromArray:issue.comments];
-        self.comments = commentData;
-        [description release];
     }
 }
-
-
 
 
 #pragma mark - View lifecycle
@@ -75,7 +76,6 @@ static float detailLabelHeight = 21.0f;
         NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] -1 inSection:1];
         [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
-
 }
 
 - (void)viewDidUnload
@@ -190,22 +190,29 @@ static float detailLabelHeight = 21.0f;
 - (void) didTouchReply:(id)sender {
 
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
-    JCOViewController* feedbackController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
-    UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:feedbackController] retain];
+    JCOViewController* feedbackController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:feedbackController];
     navController.navigationBar.translucent = YES;
 
 	[self presentModalViewController:navController animated:YES];
 
     feedbackController.replyToIssue = self.issue;
     feedbackController.replyTransport.delegate = self;
-    feedbackController.subjectField.text = [@"RE: " stringByAppendingString:self.issue.title];
-    feedbackController.subjectField.enabled = NO;
+    feedbackController.subjectField.hidden = YES;
+    CGRect subjFrame = feedbackController.subjectField.frame;
+    CGRect descFrame = feedbackController.descriptionField.frame;
+    CGRect newDescFrame = CGRectMake(subjFrame.origin.x, subjFrame.origin.y,
+                                     subjFrame.size.width, subjFrame.size.height + descFrame.size.height + 10);
+    feedbackController.descriptionField.frame = newDescFrame;
+    feedbackController.navigationItem.title = @"Reply";
+
     [feedbackController release];
     [navController release];
 
 }
 
 - (void)transportDidFinish {
+    [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
     if ([self.comments count] > 0) {

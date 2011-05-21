@@ -68,8 +68,9 @@ NSString* _recorderFilePath;
 		
 		//prepare to record
 		[recorder prepareToRecord];
-		recorder.meteringEnabled = YES;	
+		recorder.meteringEnabled = YES;
 		self.recorder = recorder;
+        [recorder release];
 	}
 	return self;
 	
@@ -99,16 +100,14 @@ NSString* _recorderFilePath;
 }
 
 -(float) currentDuration {
-	return self.recorder.currentTime;
+	return (float)self.recorder.currentTime;
 }
 
 -(float) previousDuration {
 
     AVAudioPlayer* player = [[[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil] autorelease];
     player.volume = 1;
-    NSLog(@"Player Url: %@ and data: %@, %f", player.url, player.data, player.duration);
-    
-    return player.duration;
+    return (float)player.duration;
 
 }
 
@@ -130,7 +129,6 @@ NSString* _recorderFilePath;
 
 // deletes any cached audio files
 -(void) cleanUp {
-    NSLog(@"cleaning up...");
     [[NSFileManager defaultManager] removeItemAtPath:_recorderFilePath error:nil];
 }
 

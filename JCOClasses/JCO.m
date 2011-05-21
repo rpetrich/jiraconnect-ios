@@ -56,7 +56,7 @@ id<JCOCustomDataSource> _customDataSource;
 
     // TODO: fire this when network becomes active
 
-	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(sendCrashReportsAfterAsking) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
 	
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
 }
@@ -105,11 +105,15 @@ id<JCOCustomDataSource> _customDataSource;
 	return info;
 }
 
+- (NSString *) getAppName {
+    return [[self getMetaData] objectForKey:@"appName"];
+}
+
 - (NSString*) getProjectName {
     if ([_customDataSource respondsToSelector:@selector(projectName)]) {
         return [_customDataSource projectName];
     }
-    return [[self getMetaData] objectForKey:@"appName"];
+    return [self getAppName];
 }
 
 -(void) dealloc {
