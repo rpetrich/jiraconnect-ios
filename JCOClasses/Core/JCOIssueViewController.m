@@ -21,8 +21,7 @@ static float detailLabelHeight = 21.0f;
 @synthesize tableView = _tableView, replyButton = _replyButton, issue = _issue;
 @synthesize comments = _comments;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         font = [UIFont systemFontOfSize:14.0];
@@ -31,23 +30,22 @@ static float detailLabelHeight = 21.0f;
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     self.tableView, self.issue, self.comments, self.replyButton = nil;
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)setUpCommentDataFor:(JCOIssue *)issue {
-// the first comment will be a dummy object to store the description of the issue
-    // TODO: need to get the date created from JIRA
+    // the first comment is a dummy comment obj that stores the description of the issue
     JCOComment *description = [[JCOComment alloc] initWithAuthor:@"Author"
-                systemUser:YES body:self.issue.description date:self.issue.lastUpdated];
+                                                      systemUser:YES
+                                                            body:self.issue.description
+                                                            date:self.issue.dateCreated];
     NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
     [commentData addObjectsFromArray:issue.comments];
     self.comments = commentData;
@@ -66,50 +64,44 @@ static float detailLabelHeight = 21.0f;
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor colorWithRed:219.0/255.0 green:226.0/255.0 blue:237.0/255.0 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor colorWithRed:219.0 / 255.0 green:226.0 / 255.0 blue:237.0 / 255.0 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor clearColor];
     if ([self.comments count] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] -1 inSection:1];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
         [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return YES;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 2;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return nil; // no headings
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return (section == 0) ? 1 : [self.comments count];
 }
 
--(CGSize)sizeForComment:(JCOComment *) comment font:(UIFont *)font {
+- (CGSize)sizeForComment:(JCOComment *)comment font:(UIFont *)font {
     return [comment.body sizeWithFont:font constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
 }
 
@@ -144,11 +136,9 @@ static float detailLabelHeight = 21.0f;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.section == 0)
-    {
+    if (indexPath.section == 0) {
         static NSString *cellIdentifier = @"JCOMessageCell";
         JCOMessageCell *issueCell = (JCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (issueCell == nil) {
@@ -159,15 +149,15 @@ static float detailLabelHeight = 21.0f;
             issueCell.accessoryType = UITableViewCellAccessoryNone;
         }
 
-        NSString* issueData = [NSString stringWithFormat:@"Status: %@", self.issue.status];
+        NSString *issueData = [NSString stringWithFormat:@"Status: %@", self.issue.status];
         issueCell.title.text = self.issue.title;
         issueCell.body.text = issueData;
 
         //Calculate the expected size based on the font and linebreak mode of your label
-        CGSize maximumLabelSize = CGSizeMake(296,9999);
+        CGSize maximumLabelSize = CGSizeMake(296, 9999);
         CGSize expectedLabelSize = [issueCell.body.text sizeWithFont:issueCell.body.font
-                                          constrainedToSize:maximumLabelSize
-                                              lineBreakMode:issueCell.body.lineBreakMode];
+                                                   constrainedToSize:maximumLabelSize
+                                                       lineBreakMode:issueCell.body.lineBreakMode];
 
         //adjust the label to the new height.
         CGRect newFrame = issueCell.body.frame;
@@ -179,22 +169,21 @@ static float detailLabelHeight = 21.0f;
         return issueCell;
 
     }
-    else
-    {
+    else {
         JCOComment *comment = [self.comments objectAtIndex:indexPath.row];
         UITableViewCell *messageCell = [self getBubbleCell:tableView forMessage:comment];
         return messageCell;
     }
 }
 
-- (void) didTouchReply:(id)sender {
+- (void)didTouchReply:(id)sender {
 
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
-    JCOViewController* feedbackController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:feedbackController];
+    JCOViewController *feedbackController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:feedbackController];
     navController.navigationBar.translucent = YES;
 
-	[self presentModalViewController:navController animated:YES];
+    [self presentModalViewController:navController animated:YES];
 
     feedbackController.replyToIssue = self.issue;
     feedbackController.replyTransport.delegate = self;
@@ -202,7 +191,7 @@ static float detailLabelHeight = 21.0f;
     CGRect subjFrame = feedbackController.subjectField.frame;
     CGRect descFrame = feedbackController.descriptionField.frame;
     CGRect newDescFrame = CGRectMake(subjFrame.origin.x, subjFrame.origin.y,
-                                     subjFrame.size.width, subjFrame.size.height + descFrame.size.height + 10);
+            subjFrame.size.width, subjFrame.size.height + descFrame.size.height + 10);
     feedbackController.descriptionField.frame = newDescFrame;
     feedbackController.navigationItem.title = @"Reply";
 
@@ -216,7 +205,7 @@ static float detailLabelHeight = 21.0f;
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
     if ([self.comments count] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] -1 inSection:1];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
         [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }

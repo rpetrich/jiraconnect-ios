@@ -10,16 +10,23 @@
 @implementation JCOIssue
 
 @synthesize key = _key, status = _status, title = _title, description = _description,
-            comments = _comments, hasUpdates = _hasUpdates, lastUpdated = _lastUpdated;
+            comments = _comments, hasUpdates = _hasUpdates, lastUpdated = _lastUpdated,
+            dateCreated = _dateCreated;
 
 - (void) dealloc {
     self.key, self.status, self.title, self.description, self.comments, self.lastUpdated= nil;
-	[super dealloc];
+    self.dateCreated = nil;
+    [super dealloc];
 }
 
 - (JCOComment *) latestComment {
     return [self.comments count] > 0 ? ((JCOComment *)[self.comments lastObject]) : nil;
 }
+
+-(NSDate *) dateFromNumber:(NSNumber *)number {
+    return [NSDate dateWithTimeIntervalSince1970:[number longLongValue]/1000];
+}
+
 
 - (id) initWithDictionary:(NSDictionary*)map {
 	if ((self = [super init])) {
@@ -27,9 +34,9 @@
         self.status = [map objectForKey:@"status"];
         self.title = [map objectForKey:@"title"];
         self.description = [map objectForKey:@"description"];
-        NSNumber* msLastUpdated = [map objectForKey:@"lastUpdated"];
-        self.lastUpdated = [NSDate dateWithTimeIntervalSince1970:[msLastUpdated longLongValue]/1000];
-        
+        self.dateCreated = [self dateFromNumber:[map objectForKey:@"dateCreated"]];
+        self.lastUpdated = [self dateFromNumber:[map objectForKey:@"lastUpdated"]];
+
         if (!self.key)
         {
             self.key = @"(no issue key)";

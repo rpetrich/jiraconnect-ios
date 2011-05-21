@@ -23,15 +23,12 @@
 
 - (void)sendPing {
 
-    NSLog(@"baseUrl = %@", [self.baseUrl absoluteString]);
-
-    NSDictionary *metaData = [[JCO instance] getMetaData];
     NSString *project = [[JCO instance] getProjectName];
+    NSString *uuid = [[JCO instance] getUUID];
     NSLog(@"project = %@", project);
     
-    NSString *resourceUrl = [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=%@&udid=%@", project, [metaData objectForKey:@"udid"]];
-
-    NSLog(@"resourceUrl = %@", resourceUrl);
+    NSString *resourceUrl =
+            [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=%@&uuid=%@", project, uuid];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
     NSLog(@"Pinging...%@", url);

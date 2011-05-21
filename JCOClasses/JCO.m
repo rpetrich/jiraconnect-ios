@@ -47,6 +47,19 @@ id<JCOCustomDataSource> _customDataSource;
 
 - (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData {
 
+    // generate and store a UUID if none exists already
+
+    if ([self getUUID] == nil) {
+
+        NSString *uuid = nil;
+        CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
+        if (theUUID) {
+            uuid = NSMakeCollectable(CFUUIDCreateString(kCFAllocatorDefault, theUUID));
+            CFRelease(theUUID);
+            [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:kJIRAConnectUUID];
+        }
+    }
+
     [CrashReporter enableCrashReporter];
 	self.url = [NSURL URLWithString:withUrl];
 
@@ -92,21 +105,27 @@ id<JCOCustomDataSource> _customDataSource;
 	
 	// add device data
 	[info setObject:[device uniqueIdentifier] forKey:@"udid"];
+	[info setObject:[self getUUID] forKey:@"uuid"];
 	[info setObject:[device name] forKey:@"devName"];
 	[info setObject:[device systemName] forKey:@"systemName"];
 	[info setObject:[device systemVersion] forKey:@"systemVersion"];
 	[info setObject:[device model] forKey:@"model"];
-	
+
+
 	// app application data (we could make these two separate dicts but cbf atm)
 	[info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
 	[info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
 	[info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
-	
+
 	return info;
 }
 
 - (NSString *) getAppName {
     return [[self getMetaData] objectForKey:@"appName"];
+}
+
+- (NSString *) getUUID {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kJIRAConnectUUID];
 }
 
 - (NSString*) getProjectName {

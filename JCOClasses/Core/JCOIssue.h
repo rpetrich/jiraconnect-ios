@@ -15,10 +15,12 @@
     NSString* _title;
     NSString* _description;
     NSDate* _lastUpdated;
+    NSDate* _created;
     NSMutableArray* _comments;
     BOOL _hasUpdates;
 }
 
+@property (nonatomic, retain) NSDate *dateCreated;
 @property (nonatomic, retain) NSDate* lastUpdated;
 @property (nonatomic, retain) NSString* key;
 @property (nonatomic, retain) NSString* status;

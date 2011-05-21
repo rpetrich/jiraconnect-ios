@@ -20,7 +20,10 @@
 }
 
 - (NSDictionary *)customFieldsFor:(NSString *)issueTitle {
-    return [NSDictionary dictionaryWithObject:@"custom field value." forKey:@"customer"];
+    NSArray *objects = [NSArray arrayWithObjects:@"custom field value.", nil];
+    NSArray *keys = [NSArray arrayWithObjects:@"customer", nil];
+    return [NSDictionary dictionaryWithObjects:objects
+                                       forKeys:keys];
 }
 
 - (NSDictionary *)payloadFor:(NSString *)issueTitle {

@@ -9,6 +9,7 @@
 #import "JCOViewController.h"
 #import "CrashReporter.h"
 
+#define kJIRAConnectUUID @"JIRAConnectUUID"
 
 @interface JCO : NSObject {
 	NSURL* _url;	
@@ -24,5 +25,6 @@
 - (NSDictionary*) getMetaData;
 - (NSString*) getProjectName;
 - (NSString *) getAppName;
+- (NSString *) getUUID;
 
 @end
