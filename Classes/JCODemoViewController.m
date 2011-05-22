@@ -5,7 +5,17 @@
 @implementation JCODemoViewController
 
 @synthesize triggerButtonCrash, triggerButtonFeedback, triggerButtonNotifications;
+CLLocation *_currentLocation;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    if ([CLLocationManager locationServicesEnabled]) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+    }
+    NSLog(@"_locationManager: %@", _locationManager);
+}
 
 - (IBAction) triggerFeedback {
 	UIViewController* controller = [[JCO instance] viewController];
@@ -20,8 +30,18 @@
 }
 
 - (NSDictionary *)customFieldsFor:(NSString *)issueTitle {
-    NSArray *objects = [NSArray arrayWithObjects:@"custom field value.", nil];
-    NSArray *keys = [NSArray arrayWithObjects:@"customer", nil];
+    NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
+    NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
+    if (_currentLocation != nil) {
+        NSNumber *lat = [NSNumber numberWithDouble:_currentLocation.coordinate.latitude];
+        NSNumber *lng = [NSNumber numberWithDouble:_currentLocation.coordinate.longitude];
+        NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
+
+        [keys addObject:@"lat"]; [objects addObject:lat];
+        [keys addObject:@"lng"]; [objects addObject:lng];
+        [keys addObject:@"location"]; [objects addObject:locationString];
+    }
+    
     return [NSDictionary dictionaryWithObjects:objects
                                        forKeys:keys];
 }
@@ -30,21 +50,26 @@
     return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    [_currentLocation release];
+    _currentLocation = newLocation;
+    [_currentLocation retain];
+}
 
 - (IBAction) triggerDisplayNotifications {
-    NSLog(@"Trigger notifications");
     [[JCO instance] displayNotifications];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
-}
-
-
 - (void)dealloc {
     self.triggerButtonCrash, self.triggerButtonFeedback, self.triggerButtonNotifications = nil;
+    [_locationManager release];
     [super dealloc];
 }
+
+- (void)viewDidUnload {
+    [_locationManager release];
+    [super viewDidUnload];
+}
+
 
 @end

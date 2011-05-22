@@ -45,10 +45,8 @@ id<JCOCustomDataSource> _customDataSource;
 }
 
 
-- (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData {
-
+- (void)generateAndStoreUUID {
     // generate and store a UUID if none exists already
-
     if ([self getUUID] == nil) {
 
         NSString *uuid = nil;
@@ -59,6 +57,11 @@ id<JCOCustomDataSource> _customDataSource;
             [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:kJIRAConnectUUID];
         }
     }
+}
+
+- (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData {
+
+    [self generateAndStoreUUID];
 
     [CrashReporter enableCrashReporter];
 	self.url = [NSURL URLWithString:withUrl];
@@ -70,8 +73,8 @@ id<JCOCustomDataSource> _customDataSource;
     // TODO: fire this when network becomes active
 
 	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
-	
-	NSLog(@"JiraConnect is Configured with url: %@", withUrl);	
+
+	NSLog(@"JiraConnect is Configured with url: %@", withUrl);
 }
 
 
@@ -136,7 +139,7 @@ id<JCOCustomDataSource> _customDataSource;
 }
 
 -(void) dealloc {
-	[_url release]; _url = nil;
+	self.url = nil;
 	[_pinger release]; _pinger = nil;
 	[_notifier release]; _notifier = nil;
 	[_jcController release]; _jcController = nil;
@@ -144,6 +147,5 @@ id<JCOCustomDataSource> _customDataSource;
 	[_crashSender release]; _crashSender = nil;
 	[super dealloc];
 }
-
 
 @end

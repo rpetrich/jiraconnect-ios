@@ -264,7 +264,7 @@ NSTimer *_timer;
     
     [UIView beginAnimations:@"resize description" context:nil];
     float height = self.attachmentBar.top - (self.subjectField.bottom) - 20;
-    CGRect frame = CGRectMake(10, self.subjectField.bottom + 10, self.view.width -20, height);
+    CGRect frame = CGRectMake(10, self.subjectField.bottom + 10, self.view.width - 20, height);
     self.descriptionField.frame = frame;
     self.descriptionField.layer.cornerRadius = 7.0;
     NSRange range = {0, 0};
@@ -280,6 +280,7 @@ NSTimer *_timer;
                                                           action:@selector(dismissKeyboard)];
     [UIView beginAnimations:@"resize description" context:nil];
     [UIView setAnimationDuration:0.3];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     CGRect frame = CGRectMake(0, self.navigationController.toolbar.height, self.view.width, 200);
     self.descriptionField.frame = frame;
     self.descriptionField.layer.cornerRadius = 0;

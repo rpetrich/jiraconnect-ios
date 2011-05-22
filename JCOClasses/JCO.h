@@ -12,7 +12,7 @@
 #define kJIRAConnectUUID @"JIRAConnectUUID"
 
 @interface JCO : NSObject {
-	NSURL* _url;	
+	NSURL* _url;
 }
 
 @property (nonatomic, retain) NSURL* url;
