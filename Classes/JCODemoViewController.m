@@ -33,17 +33,16 @@ CLLocation *_currentLocation;
     NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
     NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
     if (_currentLocation != nil) {
-        NSNumber *lat = [NSNumber numberWithDouble:_currentLocation.coordinate.latitude];
-        NSNumber *lng = [NSNumber numberWithDouble:_currentLocation.coordinate.longitude];
-        NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
-
-        [keys addObject:@"lat"]; [objects addObject:lat];
-        [keys addObject:@"lng"]; [objects addObject:lng];
-        [keys addObject:@"location"]; [objects addObject:locationString];
+        @synchronized (self) {
+            NSNumber *lat = [NSNumber numberWithDouble:_currentLocation.coordinate.latitude];
+            NSNumber *lng = [NSNumber numberWithDouble:_currentLocation.coordinate.longitude];
+            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
+            [keys addObject:@"lat"]; [objects addObject:lat];
+            [keys addObject:@"lng"]; [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
+        }
     }
-    
-    return [NSDictionary dictionaryWithObjects:objects
-                                       forKeys:keys];
+    return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 }
 
 - (NSDictionary *)payloadFor:(NSString *)issueTitle {
@@ -51,9 +50,11 @@ CLLocation *_currentLocation;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    [_currentLocation release];
-    _currentLocation = newLocation;
-    [_currentLocation retain];
+    @synchronized (self) {
+        [_currentLocation release];
+        _currentLocation = newLocation;
+        [_currentLocation retain];
+    }
 }
 
 - (IBAction) triggerDisplayNotifications {
