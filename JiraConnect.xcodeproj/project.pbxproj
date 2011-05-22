@@ -52,6 +52,7 @@
 		01AC88821376703B000453A1 /* bluedot.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88811376703B000453A1 /* bluedot.png */; };
 		01AC888A1376A6C1000453A1 /* writeareply.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88891376A6C1000453A1 /* writeareply.png */; };
 		01C20DF213889AC70032D9BA /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20DF113889AC70032D9BA /* UIView+Additions.m */; };
+		01C20DFA1388A76B0032D9BA /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20DF91388A76B0032D9BA /* UILabel+VerticalAlign.m */; };
 		01CD0B6A137FE4EF00A6D749 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CD0B68137FE4EF00A6D749 /* Localizable.strings */; };
 		01CD0B72137FEFD600A6D749 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CD0B70137FEFD600A6D749 /* Localizable.strings */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
@@ -158,6 +159,8 @@
 		01AC88891376A6C1000453A1 /* writeareply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeareply.png; sourceTree = "<group>"; };
 		01C20DF013889AC70032D9BA /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
 		01C20DF113889AC70032D9BA /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
+		01C20DF81388A76B0032D9BA /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
+		01C20DF91388A76B0032D9BA /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		01CD0B69137FE4EF00A6D749 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		01CD0B71137FEFD600A6D749 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -292,6 +295,8 @@
 			children = (
 				01C20DF013889AC70032D9BA /* UIView+Additions.h */,
 				01C20DF113889AC70032D9BA /* UIView+Additions.m */,
+				01C20DF81388A76B0032D9BA /* UILabel+VerticalAlign.h */,
+				01C20DF91388A76B0032D9BA /* UILabel+VerticalAlign.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -766,6 +771,7 @@
 				8DF37229137CBA59001AD123 /* UIImage+RoundedCorner.m in Sources */,
 				C01FCF5008A9545400542487 /* JCOCrashTransport.m in Sources */,
 				01C20DF213889AC70032D9BA /* UIView+Additions.m in Sources */,
+				01C20DFA1388A76B0032D9BA /* UILabel+VerticalAlign.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,13 +51,12 @@ NSTimer *_timer;
     self.images = [NSMutableArray arrayWithCapacity:1];
     self.attachmentBar.items = nil;
     self.attachmentBar.autoresizesSubviews = YES;
-    
+
+    // layout views
     self.subjectField.top = [self.navigationController.toolbar height] + 10;
     self.descriptionField.top = self.subjectField.bottom + 10;
-
     self.attachmentBar.top = self.descriptionField.bottom + 10;
     self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - 10;
-
     self.activityIndicator.center = self.descriptionField.center;
 }
 
@@ -67,6 +66,10 @@ NSTimer *_timer;
 
 - (IBAction)dismiss {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)dismissKeyboard {
+    [self.descriptionField resignFirstResponder];
 }
 
 - (IBAction)addScreenshot {
@@ -257,17 +260,33 @@ NSTimer *_timer;
 
 #pragma mark UITextViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    self.navigationItem.rightBarButtonItem = nil;
+    
+    [UIView beginAnimations:@"resize description" context:nil];
+    float height = self.attachmentBar.top - (self.subjectField.bottom) - 20;
+    CGRect frame = CGRectMake(10, self.subjectField.bottom + 10, self.view.width -20, height);
+    self.descriptionField.frame = frame;
+    self.descriptionField.layer.cornerRadius = 7.0;
+    NSRange range = {0, 0};
+    [self.descriptionField scrollRangeToVisible:range];
+    [UIView commitAnimations];
 
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.navigationItem.rightBarButtonItem =
+            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                          target:self
+                                                          action:@selector(dismissKeyboard)];
+    [UIView beginAnimations:@"resize description" context:nil];
+    [UIView setAnimationDuration:0.3];
+    CGRect frame = CGRectMake(0, self.navigationController.toolbar.height, self.view.width, 200);
+    self.descriptionField.frame = frame;
+    self.descriptionField.layer.cornerRadius = 0;
+    [UIView commitAnimations];
 
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    return YES;
 }
+
 
 
 #pragma mark end

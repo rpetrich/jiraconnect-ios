@@ -9,6 +9,7 @@
 #import "JCOIssuePreviewCell.h"
 #import "JCOIssueViewController.h"
 #import "JCO.h"
+#import "UILabel+VerticalAlign.h"
 
 static NSString *cellId = @"CommentCell";
 
@@ -72,6 +73,7 @@ NSDateFormatter *_dateFormatter;
 
 - (void)viewDidUnload
 {
+    [_dateFormatter release];
     [super viewDidUnload];
 }
 
@@ -111,6 +113,7 @@ NSDateFormatter *_dateFormatter;
     JCOIssue * issue = [sectionData objectAtIndex:indexPath.row];
     JCOComment * latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description ;
+    [cell.detailsLabel alignTop];
     cell.titleLabel.text = [issue title];
     NSDate *date = latestComment.date != nil ? latestComment.date : issue.lastUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
