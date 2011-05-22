@@ -12,6 +12,7 @@
 #import "JCOReplyTransport.h"
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
+#import "JCOAttachmentItem.h"
 
 @implementation JCOToolbar
 
@@ -23,8 +24,8 @@
 
 @interface JCOViewController ()
 
-- (void)setVoiceButtonTitleWithDuration:(float)duration;
-
+-(void) setVoiceButtonTitleWithDuration:(float)duration;
+-(void) addAttachmentItem:(JCOAttachmentItem *)item withIcon:(UIImage *)icon;
 @end
 
 @implementation JCOViewController
@@ -48,7 +49,8 @@ NSTimer *_timer;
                                                           action:@selector(dismiss)];
     self.navigationItem.title = @"Report Issue";
 
-    self.images = [NSMutableArray arrayWithCapacity:1];
+    self.attachments = [NSMutableArray arrayWithCapacity:1];
+    self.attachmentBar.clipsToBounds = YES;
     self.attachmentBar.items = nil;
     self.attachmentBar.autoresizesSubviews = YES;
 
@@ -142,96 +144,85 @@ NSTimer *_timer;
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success {
     [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
     [self hideAudioProgress];
-}
 
-- (IBAction)sendFeedback {
 
-    self.issueTransport.delegate = self;
-    NSDictionary *payloadData = nil;
-    NSDictionary *customFields = nil;
+    JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"recording"
+                                                                       data:[_recorder audioData]
+                                                                       type:JCOAttachmentTypeRecording
+                                                                contentType:@"audio/x-caf"
+                                                                   filenameFormat:@"recording-%d.caf"];
 
-    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
-        payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
-    }
-    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)]) {
-        customFields = [self.payloadDataSource customFieldsFor:self.subjectField.text];
-    }
 
-    if (self.replyToIssue) {
-        [self.replyTransport sendReply:self.replyToIssue
-                           description:self.descriptionField.text
-                            images:self.images
-                             voiceData:[_recorder audioData]
-                               payload:payloadData
-                                fields:customFields];
-    } else {
-        [self.issueTransport send:self.subjectField.text
-                      description:self.descriptionField.text
-                       images:self.images
-                        voiceData:[_recorder audioData]
-                          payload:payloadData
-                           fields:customFields];
-    }
-    self.activityIndicator.hidesWhenStopped = TRUE;
-    [self.activityIndicator startAnimating];
-}
-
-- (void)transportDidFinish {
-
-    [self.activityIndicator stopAnimating];
-
-    [self dismissModalViewControllerAnimated:YES];
-
-    self.descriptionField.text = @"";
-    self.subjectField.text = @"";
-    [self setVoiceButtonTitleWithDuration:0.0];
-    [[self.screenshotButton viewWithTag:20] removeFromSuperview];
-    [self.images removeAllObjects];
-    [self.attachmentBar setItems:nil];
-}
-
-- (void)transportDidFinishWithError:(NSError*)error {
-    [self.activityIndicator stopAnimating];
+    UIImage *newImage = [UIImage imageNamed:@"icon_record_2.png"];
+    [self addAttachmentItem:attachment withIcon:newImage];
+    [attachment release];
 }
 
 #pragma mark UIImagePickerControllerDelegate
+- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon {
+
+    CGRect buttonFrame = CGRectMake(0, 0, icon.size.width, icon.size.height);
+    UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
+    [button setImage:icon forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(attachmentTapped:) forControlEvents:UIControlEventTouchUpInside];
+    button.imageView.layer.cornerRadius = 5.0;
+
+    UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    button.tag = [self.attachments count];
+
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
+    [buttonItems addObject:buttonItem];
+    [self.attachmentBar setItems:buttonItems];
+
+    [self.attachments addObject:attachment];
+
+    [buttonItem release];
+    [button release];
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
     [self dismissModalViewControllerAnimated:YES];
     [self.screenshotButton setAutoresizesSubviews:NO];
+
+
+    JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"screenshot"
+                                                                       data:UIImagePNGRepresentation(origImg)
+                                                                       type:JCOAttachmentTypeImage
+                                                                contentType:@"image/png"
+                                                             filenameFormat:@"screenshot-%d.png"];
 
     CGSize  size = CGSizeMake(40, self.attachmentBar.frame.size.height);
     UIImage *newImage = [origImg resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                                                       bounds:size
                                         interpolationQuality:kCGInterpolationHigh];
 
-    [self.attachmentBar setClipsToBounds:YES];
 
-    CGRect buttonFrame = CGRectMake(0, 0, newImage.size.width, newImage.size.height);
-    UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
-    [button setImage:newImage forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(itemTouch:) forControlEvents:UIControlEventTouchUpInside];
-    button.imageView.layer.cornerRadius = 5.0;
-
-    UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    button.tag = [self.images count];
-
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
-    [buttonItems addObject:buttonItem];
-    [self.attachmentBar setItems:buttonItems];
-
-    [self.images addObject:origImg];
-
-    [buttonItem release];
-    [button release];
+    [self addAttachmentItem:attachment withIcon:newImage];
+    [attachment release];
 
 }
 
--(void) itemTouch:(UIButton *)touch {
+-(void) attachmentTapped:(UIButton *)touch {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int )touch.tag;
 
-    [self.images removeObjectAtIndex:index];
+    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    if (attachment.type == JCOAttachmentTypeImage) {
+        UIViewController* sketchController = [[UIViewController alloc] init];
+        // get the original image:
+        UIImage *image = [[UIImage alloc] initWithData:attachment.data];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [image release];
+        imageView.size = [self.view size];
+
+        [sketchController.view addSubview:imageView];
+        [imageView release];
+        [self presentModalViewController:sketchController animated:YES];
+        [sketchController release];
+    } 
+
+    [self.attachments removeObjectAtIndex:index];
 
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
     [buttonItems removeObjectAtIndex:index];
@@ -288,7 +279,45 @@ NSTimer *_timer;
 
 }
 
+- (IBAction)sendFeedback {
 
+    self.issueTransport.delegate = self;
+    NSDictionary *payloadData = nil;
+    NSDictionary *customFields = nil;
+
+    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
+        payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
+    }
+    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)]) {
+        customFields = [self.payloadDataSource customFieldsFor:self.subjectField.text];
+    }
+
+    if (self.replyToIssue) {
+        [self.replyTransport sendReply:self.replyToIssue description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
+    } else {
+        [self.issueTransport send:self.subjectField.text description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
+    }
+    self.activityIndicator.hidesWhenStopped = TRUE;
+    [self.activityIndicator startAnimating];
+}
+
+- (void)transportDidFinish {
+
+    [self.activityIndicator stopAnimating];
+
+    [self dismissModalViewControllerAnimated:YES];
+
+    self.descriptionField.text = @"";
+    self.subjectField.text = @"";
+    [self setVoiceButtonTitleWithDuration:0.0];
+    [[self.screenshotButton viewWithTag:20] removeFromSuperview];
+    [self.attachments removeAllObjects];
+    [self.attachmentBar setItems:nil];
+}
+
+- (void)transportDidFinishWithError:(NSError*)error {
+    [self.activityIndicator stopAnimating];
+}
 
 #pragma mark end
 
@@ -304,7 +333,7 @@ NSTimer *_timer;
 @synthesize issueTransport = _issueTransport,
             replyTransport = _replyTransport,
             payloadDataSource = _payloadDataSource,
-            images = _images,
+            attachments = _attachments,
             recorder = _recorder,
             replyToIssue = _replyToIssue;
 

@@ -11,12 +11,7 @@
 
 @implementation JCOIssueTransport
 
-- (void)send:(NSString *)subject
-        description:(NSString *)description
-        images:(NSArray *)images
-        voiceData:(NSData *)voiceData
-        payload:(NSDictionary *)payloadData
-        fields:(NSDictionary *)customFields {
+- (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/<projectname>"
@@ -30,7 +25,7 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
-    [self populateCommonFields:description images:images voiceData:voiceData payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
+    [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
     [upRequest setTimeOutSeconds:15];

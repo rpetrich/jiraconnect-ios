@@ -12,6 +12,6 @@
 
 }
 
-- (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images voiceData:(NSData *)voiceData payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
+- (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
 
 @end

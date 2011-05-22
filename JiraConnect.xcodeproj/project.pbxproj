@@ -109,6 +109,7 @@
 		C01FCF5008A9545400542481 /* JCOReplyTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542480 /* JCOReplyTransport.m */; };
 		C01FCF5008A9545400542484 /* JCOMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542483 /* JCOMessageBubble.m */; };
 		C01FCF5008A9545400542487 /* JCOCrashTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542486 /* JCOCrashTransport.m */; };
+		C01FCF5008A954540054248A /* JCOAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542489 /* JCOAttachmentItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -260,6 +261,8 @@
 		C01FCF5008A9545400542485 /* JCOMessageBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMessageBubble.h; sourceTree = "<group>"; };
 		C01FCF5008A9545400542486 /* JCOCrashTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOCrashTransport.m; sourceTree = "<group>"; };
 		C01FCF5008A9545400542488 /* JCOCrashTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashTransport.h; sourceTree = "<group>"; };
+		C01FCF5008A9545400542489 /* JCOAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOAttachmentItem.m; sourceTree = "<group>"; };
+		C01FCF5008A954540054248B /* JCOAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOAttachmentItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +513,8 @@
 		8D50635612810CB600B3E1A0 /* JCOClasses */ = {
 			isa = PBXGroup;
 			children = (
+				C01FCF5008A954540054248B /* JCOAttachmentItem.h */,
+				C01FCF5008A9545400542489 /* JCOAttachmentItem.m */,
 				C01FCF5008A954540054247C /* JCOCustomDataSource.h */,
 				8D2FA87312824FF800828713 /* Resources */,
 				8D5063C91281157B00B3E1A0 /* JCO.h */,
@@ -772,6 +777,7 @@
 				C01FCF5008A9545400542487 /* JCOCrashTransport.m in Sources */,
 				01C20DF213889AC70032D9BA /* UIView+Additions.m in Sources */,
 				01C20DFA1388A76B0032D9BA /* UILabel+VerticalAlign.m in Sources */,
+				C01FCF5008A954540054248A /* JCOAttachmentItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

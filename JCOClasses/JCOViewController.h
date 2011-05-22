@@ -16,7 +16,6 @@
 
 @interface JCOToolbar : UIToolbar {
 
-    
 }
 @end
 
@@ -40,7 +39,7 @@
 	JCOIssueTransport*_issueTransport;
 	JCOReplyTransport* _replyTransport;
     <JCOCustomDataSource> _payloadDataSource;
-    NSMutableArray *_images;
+    NSMutableArray *_attachments;
     JCORecorder* _recorder;
     JCOIssue * _replyToIssue;
     
@@ -63,7 +62,7 @@
 @property (retain, nonatomic) JCOIssueTransport* issueTransport;
 @property (retain, nonatomic) JCOReplyTransport* replyTransport;
 @property (retain, nonatomic) id<JCOCustomDataSource> payloadDataSource;
-@property (retain, nonatomic) NSMutableArray* images;
+@property (retain, nonatomic) NSMutableArray* attachments; // an array of items to attach to the issue
 @property (retain, nonatomic) JCORecorder* recorder;
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
 @property (retain, nonatomic) JCOIssue * replyToIssue;

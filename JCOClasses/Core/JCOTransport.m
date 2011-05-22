@@ -8,32 +8,25 @@
 #import "JCOTransport.h"
 #import "JSON.h"
 #import "JCO.h"
+#import "JCOAttachmentItem.h"
 
 @implementation JCOTransport
 
-- (void)populateCommonFields:(NSString *)description
-                      images:(NSArray *)images
-                   voiceData:(NSData *)voiceData
-                 payloadData:(NSDictionary *)payloadData
-                customFields:(NSDictionary *)customFields
-                   upRequest:(ASIFormDataRequest *)upRequest
-                      params:(NSMutableDictionary *)params {
+- (void)populateCommonFields:(NSString *)description images:(NSArray *)attachments payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params {
 
     [params setObject:description forKey:@"description"];
     NSDictionary *metaData = [[JCO instance] getMetaData];
     [params addEntriesFromDictionary:metaData];
     NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
     [upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
-    if (images != nil) {
-        for (int i = 0; i < [images count]; i++) {
-            NSData *imgData = UIImagePNGRepresentation([images objectAtIndex:i]);
-            NSString *filename = [@"jiraconnect-screenshot" stringByAppendingFormat:@"-%d.png", i];
-            NSString *key = [@"screenshot" stringByAppendingFormat:@"-%d", i];
-            [upRequest setData:imgData withFileName:filename andContentType:@"image/png" forKey:key];
+
+    if (attachments != nil) {
+        for (int i = 0; i < [attachments count]; i++) {
+            JCOAttachmentItem *item = [attachments objectAtIndex:i];
+            NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
+            NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
+            [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:key];
         }
-    }
-    if (voiceData != nil) {
-        [upRequest setData:voiceData withFileName:@"voice-feedback.caf" andContentType:@"audio/x-caf" forKey:@"recording"];
     }
     if (payloadData != nil) {
         NSData *json = [[payloadData JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];

@@ -11,12 +11,7 @@
 
 @implementation JCOReplyTransport
 
-- (void)sendReply:(JCOIssue *)originalIssue
-        description:(NSString *)description
-        images:(NSArray *)images
-        voiceData:(NSData *)voiceData
-        payload:(NSDictionary *)payloadData
-        fields:(NSDictionary *)customFields {
+- (void)sendReply:(JCOIssue *)originalIssue description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
     NSString *path = [NSString stringWithFormat:@"rest/jconnect/latest/issue/comment/%@", originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
@@ -24,7 +19,7 @@
     
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [self populateCommonFields:description images:images voiceData:voiceData payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
+    [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
