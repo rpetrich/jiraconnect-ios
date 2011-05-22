@@ -11,6 +11,7 @@
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
 #import "UIImage+Resize.h"
+#import "Core/UIView+Additions.h"
 
 @implementation JCOToolbar
 
@@ -47,12 +48,17 @@ NSTimer *_timer;
                                                           action:@selector(dismiss)];
     self.navigationItem.title = @"Report Issue";
 
-    self.images = [NSMutableArray arrayWithCapacity:2];
-    self.bar.items = nil;
-    self.bar.autoresizesSubviews = YES;
-    self.bar.layer.cornerRadius = 5.0;
-    CGRect frame = self.bar.frame;
-    self.bar.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 70);
+    self.images = [NSMutableArray arrayWithCapacity:1];
+    self.attachmentBar.items = nil;
+    self.attachmentBar.autoresizesSubviews = YES;
+    
+    self.subjectField.top = [self.navigationController.toolbar height] + 10;
+    self.descriptionField.top = self.subjectField.bottom + 10;
+
+    self.attachmentBar.top = self.descriptionField.bottom + 10;
+    self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - 10;
+
+    self.activityIndicator.center = self.descriptionField.center;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -104,10 +110,7 @@ NSTimer *_timer;
         self.progressView.progress = 0;
 
         self.countdownView.hidden = NO;
-        // TODO get at least one more image to make this ani smoother
         UIImage *activeImg = [UIImage imageNamed:@"icon_record_active.png"];
-        UIImage *pulseImg = [UIImage imageNamed:@"icon_record_pulse.png"];
-
         self.voiceButton.imageView.image = activeImg;
         UIImageView *imgView = [[UIImageView alloc] initWithImage:activeImg];
 
@@ -117,7 +120,6 @@ NSTimer *_timer;
             UIImage *img = [UIImage imageNamed:sprintName];
             [sprites addObject:img];
         }
-
         imgView.animationImages = sprites;
         imgView.animationDuration = 0.85f;
         
@@ -134,11 +136,9 @@ NSTimer *_timer;
     }
 }
 
-
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success {
     [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
     [self hideAudioProgress];
-
 }
 
 - (IBAction)sendFeedback {
@@ -169,20 +169,26 @@ NSTimer *_timer;
                           payload:payloadData
                            fields:customFields];
     }
+    self.activityIndicator.hidesWhenStopped = TRUE;
+    [self.activityIndicator startAnimating];
 }
 
 - (void)transportDidFinish {
 
-    //TODO: error handling and reporting!
+    [self.activityIndicator stopAnimating];
+
     [self dismissModalViewControllerAnimated:YES];
 
     self.descriptionField.text = @"";
     self.subjectField.text = @"";
     [self setVoiceButtonTitleWithDuration:0.0];
-    // TODO: also reset _recorder and set the text on the capture button
     [[self.screenshotButton viewWithTag:20] removeFromSuperview];
     [self.images removeAllObjects];
-    [self.bar setItems:nil];
+    [self.attachmentBar setItems:nil];
+}
+
+- (void)transportDidFinishWithError:(NSError*)error {
+    [self.activityIndicator stopAnimating];
 }
 
 #pragma mark UIImagePickerControllerDelegate
@@ -191,12 +197,12 @@ NSTimer *_timer;
     [self dismissModalViewControllerAnimated:YES];
     [self.screenshotButton setAutoresizesSubviews:NO];
 
-    CGSize  size = CGSizeMake(40, self.bar.frame.size.height);
+    CGSize  size = CGSizeMake(40, self.attachmentBar.frame.size.height);
     UIImage *newImage = [origImg resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                                                       bounds:size
                                         interpolationQuality:kCGInterpolationHigh];
 
-    [self.bar setClipsToBounds:YES];
+    [self.attachmentBar setClipsToBounds:YES];
 
     CGRect buttonFrame = CGRectMake(0, 0, newImage.size.width, newImage.size.height);
     UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
@@ -207,9 +213,9 @@ NSTimer *_timer;
     UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     button.tag = [self.images count];
 
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.bar.items];
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
     [buttonItems addObject:buttonItem];
-    [self.bar setItems:buttonItems];
+    [self.attachmentBar setItems:buttonItems];
 
     [self.images addObject:origImg];
 
@@ -224,16 +230,16 @@ NSTimer *_timer;
 
     [self.images removeObjectAtIndex:index];
 
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.bar.items];
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
     [buttonItems removeObjectAtIndex:index];
 
     // re-tag all buttons...
     for (int i = 0; i < [buttonItems count]; i++) {
-        UIBarButtonItem* buttonItem = (UIBarButtonItem *)[buttonItems objectAtIndex:i];
+        UIBarButtonItem* buttonItem = (UIBarButtonItem *)[buttonItems objectAtIndex:(NSUInteger)i];
         buttonItem.customView.tag = i;
     }
 
-    [self.bar setItems:buttonItems animated:YES];
+    [self.attachmentBar setItems:buttonItems animated:YES];
 
 }
 
@@ -273,9 +279,7 @@ NSTimer *_timer;
 //    return YES;
 }
 
-@synthesize sendButton, voiceButton, screenshotButton,
-descriptionField, subjectField, countdownView, progressView,
-imagePicker, bar;
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar;
 
 @synthesize issueTransport = _issueTransport,
             replyTransport = _replyTransport,
@@ -285,10 +289,11 @@ imagePicker, bar;
             replyToIssue = _replyToIssue;
 
 
-- (void)dealloc {
-    self.bar,
-            self.images,
+- (void)releaseMembers {
+    // Release any retained subviews of the main view.
+    self.attachmentBar,
             self.recorder,
+            self.buttonBar,
             self.sendButton,
             self.imagePicker,
             self.voiceButton,
@@ -300,28 +305,17 @@ imagePicker, bar;
             self.replyTransport,
             self.screenshotButton,
             self.descriptionField,
+            self.activityIndicator,
             self.payloadDataSource = nil;
-    
+}
+
+- (void)dealloc {
+    [self releaseMembers];
     [super dealloc];
 }
 
-// TODO: DRY this up.
 - (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    self.bar,
-            self.recorder,
-            self.sendButton,
-            self.imagePicker,
-            self.voiceButton,
-            self.progressView,
-            self.subjectField,
-            self.replyToIssue,
-            self.countdownView,
-            self.issueTransport,
-            self.replyTransport,
-            self.screenshotButton,
-            self.descriptionField,
-            self.payloadDataSource = nil;
+    [self releaseMembers];
     [super viewDidUnload];
 }
 

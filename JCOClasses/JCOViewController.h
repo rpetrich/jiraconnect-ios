@@ -25,12 +25,15 @@
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;
 	IBOutlet UIButton* screenshotButton;
-	IBOutlet UITextView* descriptionField;
-	IBOutlet UITextField* subjectField;
-    IBOutlet UIToolbar* bar;
+
+    IBOutlet UITextField* subjectField;
+    IBOutlet UITextView* descriptionField;
+    IBOutlet UIToolbar* attachmentBar;
+    IBOutlet UIImageView* buttonBar;
 
 	IBOutlet UILabel* countdownTimer;
 	IBOutlet UIProgressView* progressView;
+	IBOutlet UIActivityIndicatorView* activityIndicator;
 	IBOutlet UIView* countdownView;
 	
 	IBOutlet UIImagePickerController* imagePicker;
@@ -48,10 +51,12 @@
 @property (retain, nonatomic) IBOutlet UIButton* screenshotButton;
 @property (retain, nonatomic) IBOutlet UITextView* descriptionField;
 @property (retain, nonatomic) IBOutlet UITextField* subjectField;
-@property (retain, nonatomic) IBOutlet UIToolbar* bar;
+@property (retain, nonatomic) IBOutlet UIToolbar* attachmentBar;
+@property (retain, nonatomic) IBOutlet UIImageView* buttonBar;
 
 @property (retain, nonatomic) IBOutlet UIView* countdownView;
 @property (retain, nonatomic) IBOutlet UIProgressView* progressView;
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
 
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
 

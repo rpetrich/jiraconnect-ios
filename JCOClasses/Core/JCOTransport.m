@@ -76,7 +76,9 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     NSError *error = [request error];
+    NSLog(@"request failed: %@", request);
     if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:)]) {
+        NSLog(@"invoking transportDidFinishWithError:");
         [self.delegate transportDidFinishWithError:error];
     }
     NSString *msg = @"";

@@ -39,7 +39,7 @@
 
 #pragma mark UIAlertViewDelelgate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"ISSUE: Did dismiss Alert with button index... %d", buttonIndex);
+    
 }
 
 

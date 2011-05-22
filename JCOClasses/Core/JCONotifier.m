@@ -13,8 +13,6 @@
 - (id)initWithView:(UIView *)parentView {
 	if ((self = [super init])) {
         
-        NSLog(@"ParentView: %@", parentView);
-        
 		_view = [parentView retain];
 
 		_toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
