@@ -52,8 +52,6 @@
 
         [tableViewController release];
 		
-        NSLog(@"View: %@", _view);		
-        
 		[_toolbar setFrame:CGRectMake(0, 520, 320, 40)];
 		[_view addSubview:_toolbar];
 
@@ -64,8 +62,7 @@
 			
 		[_view addSubview:_button];	
 	} else {
-        NSLog(@"No notices to display");
-        
+        // nothing to display...
     }
 }
 

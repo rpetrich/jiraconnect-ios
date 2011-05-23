@@ -96,7 +96,6 @@ NSString* _recorderFilePath;
 
 -(void) stop {	
 	[self.recorder stop];
-	NSLog(@"Saved audio data to: %@", _recorderFilePath);
 }
 
 -(float) currentDuration {

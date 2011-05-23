@@ -29,6 +29,12 @@
 		013C7AE213847DEB00295420 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 013C7AE113847DEB00295420 /* Icon.png */; };
 		013C7BAA1384B3C600295420 /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 013C7BA91384B3C600295420 /* Balloon_2.png */; };
 		015429BE1371855600E59619 /* Balloon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 015429BC1371855600E59619 /* Balloon_1.png */; };
+		017659F613894B9800ED392F /* JCOSketchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017659F313894B9800ED392F /* JCOSketchView.m */; };
+		017659F713894B9800ED392F /* JCOSketchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017659F513894B9800ED392F /* JCOSketchScrollView.m */; };
+		01765A0513894C7D00ED392F /* JCOSketch.m in Sources */ = {isa = PBXBuildFile; fileRef = 01765A0213894C7D00ED392F /* JCOSketch.m */; };
+		01765A0613894C7D00ED392F /* JCOLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 01765A0413894C7D00ED392F /* JCOLine.m */; };
+		01765A0D1389535F00ED392F /* JCOSketchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01765A0B1389535F00ED392F /* JCOSketchViewController.m */; };
+		01765A0E1389535F00ED392F /* JCOSketchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01765A0C1389535F00ED392F /* JCOSketchViewController.xib */; };
 		0199E5F71384CDA500B0E61E /* icon_record_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0199E5E71384CDA500B0E61E /* icon_record_1.png */; };
 		0199E5F81384CDA500B0E61E /* icon_record_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0199E5E81384CDA500B0E61E /* icon_record_1@2x.png */; };
 		0199E5F91384CDA500B0E61E /* icon_record_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0199E5E91384CDA500B0E61E /* icon_record_2.png */; };
@@ -135,6 +141,17 @@
 		013C7AE113847DEB00295420 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		013C7BA91384B3C600295420 /* Balloon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_2.png; sourceTree = "<group>"; };
 		015429BC1371855600E59619 /* Balloon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_1.png; sourceTree = "<group>"; };
+		017659F213894B9800ED392F /* JCOSketchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchView.h; sourceTree = "<group>"; };
+		017659F313894B9800ED392F /* JCOSketchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JCOSketchView.m; sourceTree = "<group>"; };
+		017659F413894B9800ED392F /* JCOSketchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchScrollView.h; sourceTree = "<group>"; };
+		017659F513894B9800ED392F /* JCOSketchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchScrollView.m; sourceTree = "<group>"; };
+		01765A0113894C7D00ED392F /* JCOSketch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketch.h; sourceTree = "<group>"; };
+		01765A0213894C7D00ED392F /* JCOSketch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketch.m; sourceTree = "<group>"; };
+		01765A0313894C7D00ED392F /* JCOLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOLine.h; sourceTree = "<group>"; };
+		01765A0413894C7D00ED392F /* JCOLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOLine.m; sourceTree = "<group>"; };
+		01765A0A1389535F00ED392F /* JCOSketchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchViewController.h; sourceTree = "<group>"; };
+		01765A0B1389535F00ED392F /* JCOSketchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchViewController.m; sourceTree = "<group>"; };
+		01765A0C1389535F00ED392F /* JCOSketchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOSketchViewController.xib; sourceTree = "<group>"; };
 		0199E5E71384CDA500B0E61E /* icon_record_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_record_1.png; path = ../../Resources/icon_record_1.png; sourceTree = "<group>"; };
 		0199E5E81384CDA500B0E61E /* icon_record_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_record_1@2x.png"; path = "../../Resources/icon_record_1@2x.png"; sourceTree = "<group>"; };
 		0199E5E91384CDA500B0E61E /* icon_record_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_record_2.png; path = ../../Resources/icon_record_2.png; sourceTree = "<group>"; };
@@ -261,8 +278,8 @@
 		C01FCF5008A9545400542485 /* JCOMessageBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMessageBubble.h; sourceTree = "<group>"; };
 		C01FCF5008A9545400542486 /* JCOCrashTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOCrashTransport.m; sourceTree = "<group>"; };
 		C01FCF5008A9545400542488 /* JCOCrashTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashTransport.h; sourceTree = "<group>"; };
-		C01FCF5008A9545400542489 /* JCOAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOAttachmentItem.m; sourceTree = "<group>"; };
-		C01FCF5008A954540054248B /* JCOAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOAttachmentItem.h; sourceTree = "<group>"; };
+		C01FCF5008A9545400542489 /* JCOAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCOAttachmentItem.m; path = ../JCOAttachmentItem.m; sourceTree = "<group>"; };
+		C01FCF5008A954540054248B /* JCOAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOAttachmentItem.h; path = ../JCOAttachmentItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +310,24 @@
 			name = onair;
 			sourceTree = "<group>";
 		};
+		017659EE13894B4B00ED392F /* Sketch */ = {
+			isa = PBXGroup;
+			children = (
+				017659F213894B9800ED392F /* JCOSketchView.h */,
+				017659F313894B9800ED392F /* JCOSketchView.m */,
+				017659F413894B9800ED392F /* JCOSketchScrollView.h */,
+				017659F513894B9800ED392F /* JCOSketchScrollView.m */,
+				01765A0113894C7D00ED392F /* JCOSketch.h */,
+				01765A0213894C7D00ED392F /* JCOSketch.m */,
+				01765A0313894C7D00ED392F /* JCOLine.h */,
+				01765A0413894C7D00ED392F /* JCOLine.m */,
+				01765A0A1389535F00ED392F /* JCOSketchViewController.h */,
+				01765A0B1389535F00ED392F /* JCOSketchViewController.m */,
+				01765A0C1389535F00ED392F /* JCOSketchViewController.xib */,
+			);
+			name = Sketch;
+			sourceTree = "<group>";
+		};
 		01C20DEF13889AAF0032D9BA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +351,8 @@
 		01C20DF413889AF80032D9BA /* Transport */ = {
 			isa = PBXGroup;
 			children = (
+				C01FCF5008A954540054248B /* JCOAttachmentItem.h */,
+				C01FCF5008A9545400542489 /* JCOAttachmentItem.m */,
 				8D2FA81C1282351900828713 /* JCOTransport.h */,
 				8D2FA81D1282351900828713 /* JCOTransport.m */,
 				C01FCF5008A9545400542488 /* JCOCrashTransport.h */,
@@ -434,6 +471,7 @@
 		72040235133224CD0002B9C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				017659EE13894B4B00ED392F /* Sketch */,
 				720402431332D75C0002B9C7 /* Issues */,
 			);
 			name = View;
@@ -513,15 +551,13 @@
 		8D50635612810CB600B3E1A0 /* JCOClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C01FCF5008A954540054248B /* JCOAttachmentItem.h */,
-				C01FCF5008A9545400542489 /* JCOAttachmentItem.m */,
 				C01FCF5008A954540054247C /* JCOCustomDataSource.h */,
-				8D2FA87312824FF800828713 /* Resources */,
 				8D5063C91281157B00B3E1A0 /* JCO.h */,
 				8D5063CA1281157B00B3E1A0 /* JCO.m */,
 				8D5063B31281123500B3E1A0 /* JCOViewController.h */,
 				8D5063B41281123500B3E1A0 /* JCOViewController.m */,
 				8D5063B51281123500B3E1A0 /* JCOViewController.xib */,
+				8D2FA87312824FF800828713 /* Resources */,
 				8D5063D01281165700B3E1A0 /* Core */,
 				8D50635712810E6C00B3E1A0 /* Libraries */,
 			);
@@ -728,6 +764,7 @@
 				0199E6061384CDA500B0E61E /* icon_record_8@2x.png in Resources */,
 				0199E6091384D00F00B0E61E /* buton_blank.png in Resources */,
 				0199E60A1384D00F00B0E61E /* button_blank@2x.png in Resources */,
+				01765A0E1389535F00ED392F /* JCOSketchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +815,11 @@
 				01C20DF213889AC70032D9BA /* UIView+Additions.m in Sources */,
 				01C20DFA1388A76B0032D9BA /* UILabel+VerticalAlign.m in Sources */,
 				C01FCF5008A954540054248A /* JCOAttachmentItem.m in Sources */,
+				017659F613894B9800ED392F /* JCOSketchView.m in Sources */,
+				017659F713894B9800ED392F /* JCOSketchScrollView.m in Sources */,
+				01765A0513894C7D00ED392F /* JCOSketch.m in Sources */,
+				01765A0613894C7D00ED392F /* JCOLine.m in Sources */,
+				01765A0D1389535F00ED392F /* JCOSketchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

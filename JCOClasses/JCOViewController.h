@@ -13,13 +13,14 @@
 @class JCORecorder;
 @class JCOIssueTransport;
 @class JCOReplyTransport;
+@protocol JCOSketchViewControllerDelegate;
 
 @interface JCOToolbar : UIToolbar {
 
 }
 @end
 
-@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate> {
+@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JCOSketchViewControllerDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;

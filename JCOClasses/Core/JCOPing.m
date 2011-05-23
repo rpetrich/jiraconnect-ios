@@ -25,7 +25,6 @@
 
     NSString *project = [[JCO instance] getProjectName];
     NSString *uuid = [[JCO instance] getUUID];
-    NSLog(@"project = %@", project);
     
     NSString *resourceUrl =
             [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=%@&uuid=%@", project, uuid];

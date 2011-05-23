@@ -82,21 +82,6 @@ id<JCOCustomDataSource> _customDataSource;
 	return _navController;
 }
 
-/**
-* Returns the actual JCOViewController.
-* Its best to use viewController
-*/
--(JCOViewController*) jcoViewController {
-
-    for (UIViewController * controller in _navController.viewControllers) {
-        NSLog(@"controller = %@", controller);
-        if (controller == _jcController) {
-            return (JCOViewController *)controller;
-        }
-    }
-    return nil;
-}
-
 -(void) displayNotifications {
     [_notifier displayNotifications:nil];
 }

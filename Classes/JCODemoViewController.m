@@ -14,7 +14,6 @@ CLLocation *_currentLocation;
         _locationManager.delegate = self;
         [_locationManager startUpdatingLocation];
     }
-    NSLog(@"_locationManager: %@", _locationManager);
 }
 
 - (IBAction) triggerFeedback {

@@ -15,7 +15,6 @@
 
     NSString *path = [NSString stringWithFormat:@"rest/jconnect/latest/issue/comment/%@", originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
-    NSLog(@"Adding comment via: %@", path);
     
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -34,8 +33,7 @@
 
 #pragma mark UIAlertViewDelelgate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"REPLY: Did dismiss Alert with button index... %d, %@", buttonIndex, self.delegate);
-    // dismis modal dialog. refresh table data.
+    // dismiss modal dialog. 
 
 }
 

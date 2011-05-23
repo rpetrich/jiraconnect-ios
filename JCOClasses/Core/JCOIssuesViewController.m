@@ -52,10 +52,6 @@ NSDateFormatter *_dateFormatter;
 	[UIView commitAnimations];
 }
 
--(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    NSLog(@"View did cancel:");    
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.

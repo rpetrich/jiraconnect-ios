@@ -13,6 +13,8 @@
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
 #import "JCOAttachmentItem.h"
+#import "JCOSketchViewController.h"
+#import "JCOSketchViewController.h"
 
 @implementation JCOToolbar
 
@@ -180,12 +182,8 @@ NSTimer *_timer;
     [button release];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    [self dismissModalViewControllerAnimated:YES];
-    [self.screenshotButton setAutoresizesSubviews:NO];
-
-
+- (void)addImageAttachmentItem:(UIImage *)origImg
+{
     JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"screenshot"
                                                                        data:UIImagePNGRepresentation(origImg)
                                                                        type:JCOAttachmentTypeImage
@@ -200,6 +198,15 @@ NSTimer *_timer;
 
     [self addAttachmentItem:attachment withIcon:newImage];
     [attachment release];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self dismissModalViewControllerAnimated:YES];
+    [self.screenshotButton setAutoresizesSubviews:NO];
+
+    [self addImageAttachmentItem:origImg];
+
 
 }
 
@@ -209,37 +216,74 @@ NSTimer *_timer;
 
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
     if (attachment.type == JCOAttachmentTypeImage) {
-        UIViewController* sketchController = [[UIViewController alloc] init];
+        JCOSketchViewController *sketchViewController = [[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil];
         // get the original image:
         UIImage *image = [[UIImage alloc] initWithData:attachment.data];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+
+        [self presentModalViewController:sketchViewController animated:YES];
+        sketchViewController.sketchView.size= image.size;
+        sketchViewController.sketchView.image = image;
+        [sketchViewController.scrollView addSubview:sketchViewController.sketchView];
+        sketchViewController.delegate = self;
         [image release];
-        imageView.size = [self.view size];
 
-        [sketchController.view addSubview:imageView];
-        [imageView release];
-        [self presentModalViewController:sketchController animated:YES];
-        [sketchController release];
-    } 
+        [sketchViewController release];
+    } else {
+        NSLog(@"TODO: play in AudioPlayer?");
+        //TODO or wait for a long press, then delete?
+    }
+}
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissModalViewControllerAnimated:YES];
+}
+#pragma mark end
+
+#pragma mark JCOSketchViewControllerDelegate
+
+- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)id
+{
+    [self dismissModalViewControllerAnimated:YES];
+    NSUInteger index = [id unsignedIntegerValue];
+    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    attachment.data = UIImagePNGRepresentation(image);
+
+    // also update the icon in the toolbar
+    CGSize  size = CGSizeMake(40, self.attachmentBar.frame.size.height);
+    UIImage *iconImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                                                      bounds:size
+                                        interpolationQuality:kCGInterpolationHigh];
+    UIBarButtonItem* item = [self.attachmentBar.items objectAtIndex:index];
+    ((UIButton*)item.customView).imageView.image = iconImage;
+}
+
+- (void)sketchControllerDidCancel:(UIViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)id
+{
+    [self dismissModalViewControllerAnimated:YES];
+
+    NSUInteger index = [id unsignedIntegerValue];
     [self.attachments removeObjectAtIndex:index];
 
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
     [buttonItems removeObjectAtIndex:index];
 
     // re-tag all buttons...
-    for (int i = 0; i < [buttonItems count]; i++) {
-        UIBarButtonItem* buttonItem = (UIBarButtonItem *)[buttonItems objectAtIndex:(NSUInteger)i];
+    for (int i = 0; i < [buttonItems count]; i++)
+    {
+        UIBarButtonItem *buttonItem = (UIBarButtonItem *)[buttonItems objectAtIndex:(NSUInteger)i];
         buttonItem.customView.tag = i;
     }
 
     [self.attachmentBar setItems:buttonItems animated:YES];
-
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self dismissModalViewControllerAnimated:YES];
-}
+
+
 #pragma mark end
 
 #pragma mark UITextFieldDelegate
