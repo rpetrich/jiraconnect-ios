@@ -60,9 +60,16 @@
 '{"updatedIssuesWithComments":[],"oldIssuesWithComments":[{"key":"JCONNECT-2","status":"Open","comments":[]},{"key":"JCONNECT-1","status":"Open","title":"test","description":"Hello","comments":[{"systemuser":true,"username":"admin","text":"Hello dude"}]}]}'
 */
 
-    NSDictionary *data = [responseString JSONValue];
-    [[JCOIssueStore instance] updateWithData:data];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"JCODidReceiveIssueCommentsNotification" object:self]; // TODO use a constant for this.
+    if (request.responseStatusCode < 300)
+    {
+        NSDictionary *data = [responseString JSONValue];
+        [[JCOIssueStore instance] updateWithData:data];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"JCODidReceiveIssueCommentsNotification" object:self]; // TODO use a constant for this.
+    }
+    else
+    {
+        NSLog(@"Error request comments and issues: %@", responseString);
+    }
 }
 
 @synthesize baseUrl = _baseUrl;

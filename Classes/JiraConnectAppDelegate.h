@@ -7,15 +7,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class JCODemoViewController;
+@class AngryNerdsViewController;
 
 @interface JiraConnectAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    JCODemoViewController *viewController;
+    AngryNerdsViewController *viewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet JCODemoViewController *viewController;
+@property (nonatomic, retain) IBOutlet AngryNerdsViewController *viewController;
 
 @end
 

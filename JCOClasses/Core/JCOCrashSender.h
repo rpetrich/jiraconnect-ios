@@ -8,8 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-
-@protocol JCOTransportDelegate;
+#import "JCOTransport.h"
 
 // flags if the crashreporter should automatically send crashes without asking the user again
 #define kAutomaticallySendCrashReports @"AutomaticallySendCrashReports"

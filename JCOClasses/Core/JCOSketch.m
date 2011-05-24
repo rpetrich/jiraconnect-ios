@@ -1,6 +1,5 @@
 
 #import "JCOSketch.h"
-#import <QuartzCore/QuartzCore.h>
 
 #define kAnimationKey @"transitionViewAnimation"
 
@@ -35,8 +34,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 		NSScanner *theScanner = [NSScanner scannerWithString:colorRGB];
 		uint colorVal;
 		[theScanner scanHexInt:&colorVal];
-	
-		UIColor* color = UIColorFromRGB(colorVal);
 	}
 
 	// Scan for "x,y" - need to ignore the comma,

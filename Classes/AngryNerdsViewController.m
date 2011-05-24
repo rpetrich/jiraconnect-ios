@@ -1,8 +1,8 @@
 
-#import "JCODemoViewController.h"
+#import "AngryNerdsViewController.h"
 #import "JCO.h"
 
-@implementation JCODemoViewController
+@implementation AngryNerdsViewController
 
 @synthesize triggerButtonCrash, triggerButtonFeedback, triggerButtonNotifications;
 CLLocation *_currentLocation;

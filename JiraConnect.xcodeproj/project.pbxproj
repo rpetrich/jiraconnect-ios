@@ -77,8 +77,8 @@
 		72F3F0221331D40900FBF320 /* JCOComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F0211331D40800FBF320 /* JCOComment.m */; };
 		8D2FA70312812F2B00828713 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA70212812F2B00828713 /* CrashReporter.framework */; };
 		8D2FA78512812FB600828713 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA78412812FB600828713 /* CoreLocation.framework */; };
-		8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA7931281326100828713 /* JCODemoViewController.m */; };
-		8D2FA7961281327500828713 /* JCODemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA7951281327500828713 /* JCODemoViewController.xib */; };
+		8D2FA7941281326100828713 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA7931281326100828713 /* AngryNerdsViewController.m */; };
+		8D2FA7961281327500828713 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA7951281327500828713 /* AngryNerdsViewController.xib */; };
 		8D2FA79B1281395400828713 /* charles_320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA79A1281395400828713 /* charles_320x480.png */; };
 		8D2FA81E1282351900828713 /* JCOTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA81D1282351900828713 /* JCOTransport.m */; };
 		8D2FA9031282614A00828713 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA9021282614A00828713 /* AVFoundation.framework */; };
@@ -116,6 +116,7 @@
 		C01FCF5008A9545400542484 /* JCOMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542483 /* JCOMessageBubble.m */; };
 		C01FCF5008A9545400542487 /* JCOCrashTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542486 /* JCOCrashTransport.m */; };
 		C01FCF5008A954540054248A /* JCOAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542489 /* JCOAttachmentItem.m */; };
+		C01FCF5008A954540054248D /* JCOSketchContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A954540054248C /* JCOSketchContainerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,9 +207,9 @@
 		72F3F0211331D40800FBF320 /* JCOComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOComment.m; sourceTree = "<group>"; };
 		8D2FA70212812F2B00828713 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = Resources/CrashReporter.framework; sourceTree = "<group>"; };
 		8D2FA78412812FB600828713 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		8D2FA7921281326100828713 /* JCODemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCODemoViewController.h; sourceTree = "<group>"; };
-		8D2FA7931281326100828713 /* JCODemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCODemoViewController.m; sourceTree = "<group>"; };
-		8D2FA7951281327500828713 /* JCODemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCODemoViewController.xib; sourceTree = "<group>"; };
+		8D2FA7921281326100828713 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsViewController.h; sourceTree = "<group>"; };
+		8D2FA7931281326100828713 /* AngryNerdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsViewController.m; sourceTree = "<group>"; };
+		8D2FA7951281327500828713 /* AngryNerdsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AngryNerdsViewController.xib; sourceTree = "<group>"; };
 		8D2FA79A1281395400828713 /* charles_320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_320x480.png; sourceTree = "<group>"; };
 		8D2FA81C1282351900828713 /* JCOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOTransport.h; sourceTree = "<group>"; };
 		8D2FA81D1282351900828713 /* JCOTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOTransport.m; sourceTree = "<group>"; };
@@ -280,6 +281,9 @@
 		C01FCF5008A9545400542488 /* JCOCrashTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashTransport.h; sourceTree = "<group>"; };
 		C01FCF5008A9545400542489 /* JCOAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCOAttachmentItem.m; path = ../JCOAttachmentItem.m; sourceTree = "<group>"; };
 		C01FCF5008A954540054248B /* JCOAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOAttachmentItem.h; path = ../JCOAttachmentItem.h; sourceTree = "<group>"; };
+		C01FCF5008A954540054248C /* JCOSketchContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchContainerView.m; sourceTree = "<group>"; };
+		C01FCF5008A954540054248E /* JCOSketchContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchContainerView.h; sourceTree = "<group>"; };
+		C01FCF5008A954540054248F /* JCOSketchViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +317,9 @@
 		017659EE13894B4B00ED392F /* Sketch */ = {
 			isa = PBXGroup;
 			children = (
+				C01FCF5008A954540054248F /* JCOSketchViewControllerDelegate.h */,
+				C01FCF5008A954540054248E /* JCOSketchContainerView.h */,
+				C01FCF5008A954540054248C /* JCOSketchContainerView.m */,
 				017659F213894B9800ED392F /* JCOSketchView.h */,
 				017659F313894B9800ED392F /* JCOSketchView.m */,
 				017659F413894B9800ED392F /* JCOSketchScrollView.h */,
@@ -386,9 +393,9 @@
 		080E96DDFE201D6D7F000001 /* ExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				8D2FA7921281326100828713 /* JCODemoViewController.h */,
-				8D2FA7931281326100828713 /* JCODemoViewController.m */,
-				8D2FA7951281327500828713 /* JCODemoViewController.xib */,
+				8D2FA7921281326100828713 /* AngryNerdsViewController.h */,
+				8D2FA7931281326100828713 /* AngryNerdsViewController.m */,
+				8D2FA7951281327500828713 /* AngryNerdsViewController.xib */,
 				1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */,
 				1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */,
 			);
@@ -480,6 +487,8 @@
 		720402431332D75C0002B9C7 /* Issues */ = {
 			isa = PBXGroup;
 			children = (
+				8D5063EB128116BF00B3E1A0 /* JCONotifier.h */,
+				8D5063EC128116BF00B3E1A0 /* JCONotifier.m */,
 				01A2159A133F3B41001C80B5 /* JCOIssuePreviewCell.h */,
 				01A2159B133F3B41001C80B5 /* JCOIssuePreviewCell.m */,
 				01A2159D133F440B001C80B5 /* JCOIssuePreviewCell.xib */,
@@ -626,8 +635,6 @@
 				01C20DEF13889AAF0032D9BA /* Categories */,
 				72040235133224CD0002B9C7 /* View */,
 				720402341332248E0002B9C7 /* Model */,
-				8D5063EB128116BF00B3E1A0 /* JCONotifier.h */,
-				8D5063EC128116BF00B3E1A0 /* JCONotifier.m */,
 				8D2FA96412826BB100828713 /* JCORecorder.h */,
 				8D2FA96512826BB100828713 /* JCORecorder.m */,
 			);
@@ -714,7 +721,7 @@
 				8D5063B71281123500B3E1A0 /* JCOViewController.xib in Resources */,
 				8D5063C4128114E600B3E1A0 /* JiraConnect-Info.plist in Resources */,
 				8D5063C6128114E600B3E1A0 /* MainWindow.xib in Resources */,
-				8D2FA7961281327500828713 /* JCODemoViewController.xib in Resources */,
+				8D2FA7961281327500828713 /* AngryNerdsViewController.xib in Resources */,
 				8D2FA79B1281395400828713 /* charles_320x480.png in Resources */,
 				7204022D1332237E0002B9C7 /* JCOIssueViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCOIssuesViewController.xib in Resources */,
@@ -794,7 +801,7 @@
 				8D5063ED128116BF00B3E1A0 /* JCOPing.m in Sources */,
 				8D5063EF128116BF00B3E1A0 /* JCONotifier.m in Sources */,
 				8D5064111281189B00B3E1A0 /* CrashReporter.m in Sources */,
-				8D2FA7941281326100828713 /* JCODemoViewController.m in Sources */,
+				8D2FA7941281326100828713 /* AngryNerdsViewController.m in Sources */,
 				8D2FA81E1282351900828713 /* JCOTransport.m in Sources */,
 				8D2FA96612826BB100828713 /* JCORecorder.m in Sources */,
 				8D2FAC3C1283DAA000828713 /* JCOCrashSender.m in Sources */,
@@ -820,6 +827,7 @@
 				01765A0513894C7D00ED392F /* JCOSketch.m in Sources */,
 				01765A0613894C7D00ED392F /* JCOLine.m in Sources */,
 				01765A0D1389535F00ED392F /* JCOSketchViewController.m in Sources */,
+				C01FCF5008A954540054248D /* JCOSketchContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

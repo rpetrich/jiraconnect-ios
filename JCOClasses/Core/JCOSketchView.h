@@ -6,11 +6,9 @@
 @interface JCOSketchView : UIView {
 
 	JCOSketch *_sketch;
-    UIImage *_image;
 }
 
 @property (nonatomic, retain) JCOSketch *sketch;
-@property (nonatomic, retain) UIImage *image;
 
 @end
 

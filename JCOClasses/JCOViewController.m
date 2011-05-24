@@ -14,7 +14,6 @@
 #import "Core/UIView+Additions.h"
 #import "JCOAttachmentItem.h"
 #import "JCOSketchViewController.h"
-#import "JCOSketchViewController.h"
 
 @implementation JCOToolbar
 
@@ -160,7 +159,6 @@ NSTimer *_timer;
     [attachment release];
 }
 
-#pragma mark UIImagePickerControllerDelegate
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon {
 
     CGRect buttonFrame = CGRectMake(0, 0, icon.size.width, icon.size.height);
@@ -200,38 +198,41 @@ NSTimer *_timer;
     [attachment release];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    [self dismissModalViewControllerAnimated:YES];
-    [self.screenshotButton setAutoresizesSubviews:NO];
-
-    [self addImageAttachmentItem:origImg];
-
-
-}
-
 -(void) attachmentTapped:(UIButton *)touch {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int )touch.tag;
 
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
     if (attachment.type == JCOAttachmentTypeImage) {
-        JCOSketchViewController *sketchViewController = [[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil];
-        // get the original image:
-        UIImage *image = [[UIImage alloc] initWithData:attachment.data];
-
-        [self presentModalViewController:sketchViewController animated:YES];
-        sketchViewController.sketchView.size= image.size;
-        sketchViewController.sketchView.image = image;
-        [sketchViewController.scrollView addSubview:sketchViewController.sketchView];
+        JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
+        // get the original image, wire it up to the sketch controller
+        sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
+        sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:index]; // set this image's id. just the index in the array
         sketchViewController.delegate = self;
-        [image release];
-
-        [sketchViewController release];
+        [self presentModalViewController:sketchViewController animated:YES];
     } else {
         NSLog(@"TODO: play in AudioPlayer?");
         //TODO or wait for a long press, then delete?
     }
+}
+
+#pragma mark UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self dismissModalViewControllerAnimated:YES];
+    [self.screenshotButton setAutoresizesSubviews:NO];
+    UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    NSLog(@"1. width: %f, height: %f", origImg.size.width, origImg.size.height);
+    if (origImg.size.height > self.view.height) {
+        // resize image... its too huge!
+        CGSize size = origImg.size;
+        float ratio = self.view.height/size.height;
+        CGSize smallerSize = CGSizeMake(ratio*size.width, ratio*size.height);
+        origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationHigh];
+    }
+    NSLog(@"2. width: %f, height: %f", origImg.size.width, origImg.size.height);
+//    [origImg resizedImage:<#(CGSize)newSize#> interpolationQuality:<#(CGInterpolationQuality)quality#>]
+
+    [self addImageAttachmentItem:origImg];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -241,10 +242,10 @@ NSTimer *_timer;
 
 #pragma mark JCOSketchViewControllerDelegate
 
-- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)id
+- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
     [self dismissModalViewControllerAnimated:YES];
-    NSUInteger index = [id unsignedIntegerValue];
+    NSUInteger index = [imageId unsignedIntegerValue];
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
     attachment.data = UIImagePNGRepresentation(image);
 
@@ -262,11 +263,11 @@ NSTimer *_timer;
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)id
+- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)imageId
 {
     [self dismissModalViewControllerAnimated:YES];
 
-    NSUInteger index = [id unsignedIntegerValue];
+    NSUInteger index = [imageId unsignedIntegerValue];
     [self.attachments removeObjectAtIndex:index];
 
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];

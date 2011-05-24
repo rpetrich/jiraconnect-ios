@@ -6,14 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JCOTransport.h"
 #import <AVFoundation/AVFoundation.h>
+#import "JCOTransport.h"
+#import "JCOCustomDataSource.h"
+#import "JCORecorder.h"
+#import "JCOIssueTransport.h"
+#import "JCOReplyTransport.h"
+#import "JCOSketchViewControllerDelegate.h"
 
-@protocol JCOCustomDataSource;
-@class JCORecorder;
-@class JCOIssueTransport;
-@class JCOReplyTransport;
-@protocol JCOSketchViewControllerDelegate;
 
 @interface JCOToolbar : UIToolbar {
 

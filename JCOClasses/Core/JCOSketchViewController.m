@@ -1,10 +1,15 @@
 
 #import "JCOSketchViewController.h"
+#import "JCOSketchContainerView.h"
+#import "JCOSketchContainerView.h"
+#import "JCOSketchViewControllerDelegate.h"
 #define kAnimationKey @"transitionViewAnimation"
 
 @implementation JCOSketchViewController
 
-@synthesize scrollView = _scrollView, sketchView = _sketchView, sketch = _sketch, delegate=_delegate;
+@synthesize scrollView = _scrollView, delegate=_delegate, imageId = _imageId;
+@synthesize image = _image, mainView = _mainView;
+
 
 - (void)viewDidLoad
 {
@@ -13,31 +18,35 @@
 	[self.scrollView setCanCancelContentTouches:NO];
 	self.scrollView.clipsToBounds = YES;	// default is NO, we want to restrict drawing within our scrollview
 	self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	self.scrollView.maximumZoomScale = 8.0;
+	self.scrollView.maximumZoomScale = 4.0;
 	self.scrollView.minimumZoomScale = 0.5;
 	self.scrollView.delaysContentTouches = YES;
+    self.scrollView.scrollEnabled = YES;
+    
+	// make sketchView proportional to image
+	double scale = 1.0;
+	CGSize sketchSize = CGSizeMake((CGFloat)(scale * self.image.size.width), (CGFloat)(scale * self.image.size.height));
+    JCOSketchView* sketchView = [[[JCOSketchView alloc] initWithFrame:CGRectMake(0, 0, sketchSize.width, sketchSize.height)] autorelease];
+    sketchView.backgroundColor = [UIColor clearColor];
 
-	// make sketchView proportional to scrollView
-	double scale = 2.0;
-	CGSize sketchSize = CGSizeMake((CGFloat)(scale * self.scrollView.frame.size.width), (CGFloat)(scale * self.scrollView.frame.size.height));
-	self.sketchView.frame = CGRectMake(0, 0, sketchSize.width, sketchSize.height);
+    JCOSketch* sketch = [[[JCOSketch alloc] init] autorelease];
+    sketchView.sketch = sketch;
 
-	[self.scrollView setScrollEnabled:NO];
-
-    self.sketch = [[JCOSketch alloc] init];
-    self.sketchView.sketch = self.sketch;
-	[self.view addSubview:self.sketchView];
+    JCOSketchContainerView* container = [[[JCOSketchContainerView alloc] initWithFrame:sketchView.frame] autorelease];
+    container.sketch = sketch;
+    container.sketchView = sketchView;
+    self.mainView = container;
+    [self.mainView addSubview:[[[UIImageView alloc] initWithImage:self.image] autorelease]];
+    [self.mainView addSubview:sketchView];
+    [self.scrollView addSubview:self.mainView];
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
-
 	[self.scrollView setZoomScale:1.0 animated:NO];
 	[self.scrollView setScrollEnabled:NO];
 	[self.scrollView setContentOffset:CGPointMake(0, 0)];
-
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
-
 }
 
 #pragma mark UIScrollViewDelegate
@@ -58,74 +67,61 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scView
 {
-	return self.sketchView;
+    // this needs to be wrapped.
+	return self.mainView;
 }
 #pragma mark end
 
-- (void)clearSketch
-{
-    [self.sketch clear];
-    self.sketch = nil;
-    [self.sketchView setNeedsDisplay];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
+    return YES;
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.delegate, self.image, self.scrollView, self.mainView, self.imageId = nil; // properties take care of releasing
 }
 
 - (void) dealloc
 {
-	self.delegate, self.sketch, self.scrollView, self.sketchView = nil; // properties take care of releasing
+    self.delegate, self.image, self.scrollView, self.mainView, self.imageId = nil; // properties take care of releasing
     [super dealloc];
 }
 
-- (void)setImage:(UIImage *)image
-{
-    self.sketchView.image = image;
-}
-
-
 - (void)redoAction:(id)sender
 {
-	[self.sketch redo];
-	[self.sketchView setNeedsDisplay];
+	[self.mainView.sketch redo];
+	[self.mainView.sketchView setNeedsDisplay];
 }
 
 - (void)undoAction:(id)sender
 {
-	[self.sketch undo];
-	[self.sketchView setNeedsDisplay];
+	[self.mainView.sketch undo];
+	[self.mainView.sketchView setNeedsDisplay];
 }
 
-- (IBAction)cancelAction:(id)sender
+- (IBAction)deleteAction:(id)sender
 {
-    [self.delegate sketchControllerDidCancel:self];
+    [self.delegate sketchController:self didDeleteImageWithId:self.imageId];
 }
 
 - (IBAction)doneAction:(id)sender
 {
     UIImage *image = [self createImageScaledBy:1];
-    [self.delegate sketchController:self didFinishSketchingImage:image withId:nil];
+    [self.delegate sketchController:self didFinishSketchingImage:image withId:self.imageId];
 }
 
 -(UIImage*) createImageScaledBy:(float) dx
 {
-	CGRect rect = self.sketchView.bounds;
+	CGRect rect = self.mainView.bounds;
 	UIGraphicsBeginImageContext(rect.size);
 	CGContextScaleCTM(UIGraphicsGetCurrentContext(), dx, dx);
 	CGContextSetRGBFillColor(UIGraphicsGetCurrentContext(), 0, 0, 0, 1);
 	CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
-	JCOSketchView * sqView = self.sketchView;
-	[sqView.image drawInRect:rect];
-	[sqView drawRect:rect];
+	[self.image drawInRect:rect];
+	[self.mainView.sketchView drawRect:rect];
 
 	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();

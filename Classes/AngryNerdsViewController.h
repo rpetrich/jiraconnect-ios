@@ -2,10 +2,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@protocol JCOPayloadDataSource;
-@protocol JCOCustomDataSource;
+#import "JCOCustomDataSource.h"
 
-@interface JCODemoViewController : UIViewController <JCOCustomDataSource, CLLocationManagerDelegate> {
+@interface AngryNerdsViewController : UIViewController <JCOCustomDataSource, CLLocationManagerDelegate> {
 	IBOutlet UIButton *triggerButtonCrash;
 	IBOutlet UIButton *triggerButtonFeedback;	
     IBOutlet UIButton *triggerButtonNotifications;

@@ -6,7 +6,7 @@
 //
 
 #import "JiraConnectAppDelegate.h"
-#import "JCODemoViewController.h"
+#import "AngryNerdsViewController.h"
 #import "JCO.h"
 
 @implementation JiraConnectAppDelegate
@@ -24,7 +24,8 @@
     [window makeKeyAndVisible];
 
     // NOTE: JCO must be configured after the keyWindow is made (note: needs trailing slash)
-	[[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
+//	[[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
+	[[JCO instance] configureJiraConnect:@"http://10.1.1.7 :2990/jira/" customData:viewController];
 
     return YES;
 }

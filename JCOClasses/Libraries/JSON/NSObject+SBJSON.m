@@ -40,5 +40,4 @@
     [jsonWriter release];
     return json;
 }
-
 @end

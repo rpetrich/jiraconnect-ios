@@ -55,6 +55,7 @@ id<JCOCustomDataSource> _customDataSource;
             uuid = NSMakeCollectable(CFUUIDCreateString(kCFAllocatorDefault, theUUID));
             CFRelease(theUUID);
             [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:kJIRAConnectUUID];
+            CFRelease(uuid);
         }
     }
 }
