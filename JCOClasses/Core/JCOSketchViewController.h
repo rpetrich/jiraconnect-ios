@@ -14,6 +14,7 @@
 
     <JCOSketchViewControllerDelegate> _delegate;
 	IBOutlet JCOSketchScrollView* _scrollView;
+    IBOutlet UIToolbar* _toolbar;
     NSNumber* _imageId;
     UIImage * _image;
     JCOSketchContainerView* _mainView;
@@ -24,6 +25,8 @@
 @property (nonatomic, retain) id<JCOSketchViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSNumber* imageId;
 @property (nonatomic, retain) UIImage* image;
+
+@property (nonatomic, retain) IBOutlet UIToolbar* toolbar;
 
 -(UIImage*) createImageScaledBy:(float) dx;
 

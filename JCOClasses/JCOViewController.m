@@ -165,7 +165,14 @@ NSTimer *_timer;
     UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
     [button setImage:icon forState:UIControlStateNormal];
     [button addTarget:self action:@selector(attachmentTapped:) forControlEvents:UIControlEventTouchUpInside];
+
     button.imageView.layer.cornerRadius = 5.0;
+    button.titleLabel.frame = CGRectMake(0, button.height - 12, [button width], 15);
+    button.titleLabel.hidden = NO;
+    NSLog(@"button title = %@", button.titleLabel);
+    button.backgroundColor = [UIColor redColor];
+
+    button.titleLabel.text = @"test";
 
     UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     button.tag = [self.attachments count];
@@ -218,20 +225,20 @@ NSTimer *_timer;
 
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
     [self dismissModalViewControllerAnimated:YES];
+    
     [self.screenshotButton setAutoresizesSubviews:NO];
     UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
-    NSLog(@"1. width: %f, height: %f", origImg.size.width, origImg.size.height);
+
     if (origImg.size.height > self.view.height) {
         // resize image... its too huge!
         CGSize size = origImg.size;
         float ratio = self.view.height/size.height;
         CGSize smallerSize = CGSizeMake(ratio*size.width, ratio*size.height);
-        origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationHigh];
+        origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
     }
-    NSLog(@"2. width: %f, height: %f", origImg.size.width, origImg.size.height);
-//    [origImg resizedImage:<#(CGSize)newSize#> interpolationQuality:<#(CGInterpolationQuality)quality#>]
-
+    
     [self addImageAttachmentItem:origImg];
 }
 

@@ -1,21 +1,23 @@
 
 #import "JCOSketchViewController.h"
-#import "JCOSketchContainerView.h"
-#import "JCOSketchContainerView.h"
-#import "JCOSketchViewControllerDelegate.h"
 #define kAnimationKey @"transitionViewAnimation"
 
 @implementation JCOSketchViewController
 
 @synthesize scrollView = _scrollView, delegate=_delegate, imageId = _imageId;
-@synthesize image = _image, mainView = _mainView;
-
+@synthesize image = _image, mainView = _mainView, toolbar=_toolbar;
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    UIBarButtonItem* done  = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)] autorelease];
+    UIBarButtonItem* undo  = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(undoAction:)] autorelease];
+    UIBarButtonItem* redo  = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRedo target:self action:@selector(redoAction:)] autorelease];
+    UIBarButtonItem* trash = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAction:)] autorelease];
+    UIBarButtonItem* space = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    [self.toolbar setItems:[NSArray arrayWithObjects:trash, space, undo, redo, done, nil]];
 
-	[self.scrollView setCanCancelContentTouches:NO];
+    [self.scrollView setCanCancelContentTouches:NO];
 	self.scrollView.clipsToBounds = YES;	// default is NO, we want to restrict drawing within our scrollview
 	self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
 	self.scrollView.maximumZoomScale = 4.0;
@@ -82,11 +84,13 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.delegate, self.image, self.scrollView, self.mainView, self.imageId = nil; // properties take care of releasing
+    self.toolbar = nil;
 }
 
 - (void) dealloc
 {
     self.delegate, self.image, self.scrollView, self.mainView, self.imageId = nil; // properties take care of releasing
+    self.toolbar = nil;
     [super dealloc];
 }
 
