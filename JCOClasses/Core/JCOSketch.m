@@ -82,11 +82,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
         CGPoint firstPoint = [firstValue CGPointValue];
         [visitor visitLineAt:firstPoint];
 
-        for (NSValue *val in points)
+        if ([points count] > 1) // don't draw single points.
         {
-            CGPoint point = [val CGPointValue];
-            [visitor visitPoint:point];
+
+            for (NSValue *val in points)
+            {
+                CGPoint point = [val CGPointValue];
+                [visitor visitPoint:point];
+            }
         }
+
     }
 }
 

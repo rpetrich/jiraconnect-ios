@@ -39,11 +39,11 @@ UITouch *_touch;
 
     CGPoint point = [_touch locationInView:self];
     UITouch *touch = [touches anyObject];
+   
     if (touch.tapCount == 1)
     {
         [self enableScrolling:NO];
-
-        //TODO: probably don't want to add a new line if there are more than 1 touch.
+        //TODO: probably don't want to add a new line if there is more than 1 touch. This is currently handled in the Sketch.visitPoints
         [self.sketch startLineAt:point];
         return;
     }

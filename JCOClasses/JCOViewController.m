@@ -25,7 +25,7 @@
 
 @interface JCOViewController ()
 
-NSUInteger currentAttachmentItemIndex = 0;
+
 - (void)setVoiceButtonTitleWithDuration:(float)duration;
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
 
@@ -34,6 +34,7 @@ NSUInteger currentAttachmentItemIndex = 0;
 @implementation JCOViewController
 
 NSTimer *_timer;
+NSUInteger currentAttachmentItemIndex = 0;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -188,12 +189,12 @@ NSTimer *_timer;
         [button setTitle:title forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:12.0];
         button.titleLabel.textAlignment = UITextAlignmentCenter;
-        [button setTitleEdgeInsets: UIEdgeInsetsMake(0.0, -icon.size.width, -25.0, -5.0)];
-
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(  0.0, -icon.size.width, -25.0, -5.0)];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(-20.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
         button.titleLabel.hidden = NO;
     }
     [button setImage:icon forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(-20.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
+
 
     UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
 
@@ -426,14 +427,14 @@ NSTimer *_timer;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
 
-
-- (void)releaseMembers {
-    // Release any retained subviews of the main view.
+- (void)dealloc {
+// Release any retained subviews of the main view.
     self.attachmentBar,
             self.recorder,
             self.buttonBar,
             self.sendButton,
             self.imagePicker,
+            self.attachments,
             self.voiceButton,
             self.progressView,
             self.subjectField,
@@ -445,15 +446,29 @@ NSTimer *_timer;
             self.descriptionField,
             self.activityIndicator,
             self.payloadDataSource = nil;
-}
 
-- (void)dealloc {
-    [self releaseMembers];
     [super dealloc];
 }
 
 - (void)viewDidUnload {
-    [self releaseMembers];
+    // Release any retained subviews of the main view.
+    self.attachmentBar,
+            self.recorder,
+            self.buttonBar,
+            self.sendButton,
+            self.imagePicker,
+            self.attachments,
+            self.voiceButton,
+            self.progressView,
+            self.subjectField,
+            self.replyToIssue,
+            self.countdownView,
+            self.issueTransport,
+            self.replyTransport,
+            self.screenshotButton,
+            self.descriptionField,
+            self.activityIndicator,
+            self.payloadDataSource = nil;
     [super viewDidUnload];
 }
 
