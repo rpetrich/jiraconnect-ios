@@ -1,9 +1,4 @@
-//
-//  JCORecorder.h
-//  JiraConnect
-//
-//  Created by Nick Pellow on 4/11/10.
-//
+
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>

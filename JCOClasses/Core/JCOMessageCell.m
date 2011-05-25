@@ -1,9 +1,4 @@
-//
-//  JCOMessageCell.m
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 18/03/11.
-//
+
 
 #import "JCOMessageCell.h"
 

@@ -1,9 +1,3 @@
-//
-//  JCOPing.m
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 23/09/10.
-//
 
 #import "ASIHTTPRequest.h"
 #import "JSON.h"

@@ -1,9 +1,3 @@
-//
-//  JCOCrashSender.m
-//  JiraConnect
-//
-//  Created by Nick Pellow on 5/11/10.
-//
 
 #import "JCOCrashSender.h"
 #import "CrashReporter.h"

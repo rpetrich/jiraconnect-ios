@@ -1,9 +1,3 @@
-//
-//  JCOTransport.m
-//  JiraConnect
-//
-//  Created by Nick Pellow on 4/11/10.
-//
 
 #import "JCOTransport.h"
 #import "JSON.h"

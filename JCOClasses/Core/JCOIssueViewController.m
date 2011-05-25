@@ -1,9 +1,3 @@
-//
-//  JCOIssueViewController.m
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 17/03/11.
-//
 
 #import "JCOIssueViewController.h"
 #import "JCOMessageCell.h"

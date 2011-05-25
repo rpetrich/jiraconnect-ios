@@ -1,9 +1,3 @@
-//
-//  JCOIssuePreviewCell.m
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 27/03/11.
-//
 
 #import "JCOIssuePreviewCell.h"
 

@@ -1,9 +1,3 @@
-//
-//  JCOMessageCell.h
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 18/03/11.
-//
 
 #import <UIKit/UIKit.h>
 

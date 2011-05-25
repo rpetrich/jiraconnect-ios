@@ -1,9 +1,3 @@
-//
-//  JCO.m
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 21/09/10.
-//
 
 #import "JCO.h"
 #import "Core/JCOPing.h"

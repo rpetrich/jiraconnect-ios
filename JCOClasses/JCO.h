@@ -1,9 +1,3 @@
-//
-//  JCO.h
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 21/09/10.
-//
 
 #import <Foundation/Foundation.h>
 #import "JCOViewController.h"

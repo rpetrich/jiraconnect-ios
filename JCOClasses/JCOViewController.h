@@ -1,9 +1,3 @@
-//
-//  JCCreateViewController.h
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 23/09/10.
-//
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>

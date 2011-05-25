@@ -1,9 +1,3 @@
-//
-//  JiraConnectAppDelegate.m
-//  JiraConnect
-//
-//  Created by Nick Pellow on 3/11/10.
-//
 
 #import "JiraConnectAppDelegate.h"
 #import "AngryNerdsViewController.h"
@@ -24,6 +18,12 @@
     [window makeKeyAndVisible];
 
     // NOTE: JCO must be configured after the keyWindow is made (note: needs trailing slash)
+    /*
+        To configure JIRAConnect:
+        1. call 	[[JCO instance] configureJiraConnect:@"url to your JIRA instance" customData:any custom data source];
+        2. You can then present [JCO instance].viewController from anywhere in your app
+        3. Be sure that your JIRA instance has the JIRAConnect plugin installed and configured for your project.
+     */
 	[[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
 
 

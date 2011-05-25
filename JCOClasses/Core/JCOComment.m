@@ -1,9 +1,3 @@
-//
-//  JCOComment.m
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 17/03/11.
-//
 
 #import "JCOComment.h"
 

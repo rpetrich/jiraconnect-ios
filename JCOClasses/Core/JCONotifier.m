@@ -1,9 +1,3 @@
-//
-//  JCONotifier.m
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 23/09/10.
-//
 
 #import "JCONotifier.h"
 #import "JCOIssueStore.h"

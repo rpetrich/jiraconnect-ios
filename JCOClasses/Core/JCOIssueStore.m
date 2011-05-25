@@ -1,9 +1,3 @@
-    //
-//  JCOIssueStore.m
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 17/03/11.
-//
 
 #import "JCOIssueStore.h"
 #import "JCOIssue.h"

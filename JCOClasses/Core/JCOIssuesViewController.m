@@ -1,9 +1,4 @@
-//
-//  JCOIssuesViewController.m
-//  JiraConnect
-//
-//  Created by Nicholas Pellow on 17/03/11.
-//
+
 
 #import "JCOIssuesViewController.h"
 #import "JCOIssuePreviewCell.h"

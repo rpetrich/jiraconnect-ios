@@ -1,9 +1,3 @@
-//
-//  JCOComment.h
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 17/03/11.
-//
 
 #import <Foundation/Foundation.h>
 

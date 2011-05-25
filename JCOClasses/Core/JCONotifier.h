@@ -1,9 +1,4 @@
-//
-//  JCONotifier.h
-//  JiraConnect
-//
-//  Created by Shihab Hamid on 23/09/10.
-//
+
 
 #import <Foundation/Foundation.h>
 #import "JCOIssuesViewController.h"

@@ -1,10 +1,3 @@
-//
-//  main.m
-//  JiraConnect
-//
-//  Created by Nick Pellow on 3/11/10.
-//  Copyright 2010 Atlassian . All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 
