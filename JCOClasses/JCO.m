@@ -69,10 +69,11 @@ id<JCOCustomDataSource> _customDataSource;
 
     _pinger.baseUrl = self.url;
     [_pinger start];
-    _jcController.payloadDataSource = customData;
 
-    // TODO: fire this when network becomes active
+    _customDataSource = customData;
+    _jcController.payloadDataSource = _customDataSource;
 
+    // TODO: firing this when network becomes active would be better
 	[NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
 
 	NSLog(@"JiraConnect is Configured with url: %@", withUrl);

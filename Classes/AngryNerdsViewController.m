@@ -28,6 +28,12 @@ CLLocation *_currentLocation;
 	CFRelease(NULL);
 }
 
+#pragma mark JCOCustomDataSource
+
+-(NSString *)projectName {
+    return @"AngryNerds";
+}
+
 - (NSDictionary *)customFieldsFor:(NSString *)issueTitle {
     NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
     NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
@@ -47,6 +53,8 @@ CLLocation *_currentLocation;
 - (NSDictionary *)payloadFor:(NSString *)issueTitle {
     return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
 }
+
+#pragma end
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     @synchronized (self) {

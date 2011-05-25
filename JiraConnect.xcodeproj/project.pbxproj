@@ -237,7 +237,7 @@
 		01C20DF113889AC70032D9BA /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		01C20DF81388A76B0032D9BA /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
 		01C20DF91388A76B0032D9BA /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
-		01CD0B69137FE4EF00A6D749 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		01CD0B69137FE4EF00A6D749 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		01CD0B71137FEFD600A6D749 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		01CF1DE3131D01C500A94A3A /* UserServiceFuncTest.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = UserServiceFuncTest.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/crucible/functest/spi/UserServiceFuncTest.java"; sourceTree = "<absolute>"; };
 		01CF1DE5131D01C500A94A3A /* UserServiceFuncTest.java */ = {isa = PBXFileReference; name = UserServiceFuncTest.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/crucible/functest/spi/UserServiceFuncTest.java"; sourceTree = "<absolute>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1364, 1547}}"; sepNavSelRange = "{711, 627}"; sepNavVisRange = "{0, 2210}"; sepNavWindowFrame = "{{61, 132}, {1423, 849}}"; }; };
@@ -1120,7 +1120,7 @@
 		01CD0B68137FE4EF00A6D749 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				01CD0B69137FE4EF00A6D749 /* en */,
+				01CD0B69137FE4EF00A6D749 /* Localizable.strings */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
