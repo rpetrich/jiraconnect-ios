@@ -36,6 +36,6 @@
     // dismiss modal dialog. 
 
 }
-
+#pragma end
 
 @end

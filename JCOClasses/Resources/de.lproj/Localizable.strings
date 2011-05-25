@@ -8,3 +8,6 @@
 "Always" = "Immer";
 "No" = "Nein";
 "Yes" = "Ja";
+
+"AlertBeforeDeletingRecording" = "Möchten Sie dies Aufnahme löschen?";
+"RemoveRecording" = "Aufnahme Löschen";

@@ -25,8 +25,10 @@
 
 @interface JCOViewController ()
 
--(void) setVoiceButtonTitleWithDuration:(float)duration;
--(void) addAttachmentItem:(JCOAttachmentItem *)item withIcon:(UIImage *)icon;
+NSUInteger currentAttachmentItemIndex = 0;
+- (void)setVoiceButtonTitleWithDuration:(float)duration;
+- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
+
 @end
 
 @implementation JCOViewController
@@ -36,18 +38,18 @@ NSTimer *_timer;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.issueTransport = [[JCOIssueTransport alloc] init];
-    self.replyTransport = [[JCOReplyTransport alloc] init];
-    self.recorder = [[JCORecorder alloc] init];
+    self.issueTransport = [[[JCOIssueTransport alloc] init] autorelease];
+    self.replyTransport = [[[JCOReplyTransport alloc] init] autorelease];
+    self.recorder = [[[JCORecorder alloc] init] autorelease];
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
     self.descriptionField.layer.cornerRadius = 7.0;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
+
     self.navigationItem.leftBarButtonItem =
-            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                          target:self
-                                                          action:@selector(dismiss)];
+            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                      target:self
+                                                                      action:@selector(dismiss)] autorelease];
     self.navigationItem.title = @"Report Issue";
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
@@ -61,6 +63,12 @@ NSTimer *_timer;
     self.attachmentBar.top = self.descriptionField.bottom + 10;
     self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - 10;
     self.activityIndicator.center = self.descriptionField.center;
+
+    // align the button titles nicer
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 5, 0);
+    self.screenshotButton.titleEdgeInsets = insets;
+    self.voiceButton.titleEdgeInsets = insets;
+    self.sendButton.titleEdgeInsets = insets;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -81,10 +89,11 @@ NSTimer *_timer;
 
 - (void)setVoiceButtonTitleWithDuration:(float)duration {
 
-    NSString *durationStr = [NSString stringWithFormat:@"%.2f\"", duration];
-    [self.voiceButton setTitle:durationStr forState:UIControlStateNormal];
-    [self.voiceButton setTitle:durationStr forState:UIControlStateSelected];
-    [self.voiceButton setTitle:durationStr forState:UIControlStateHighlighted];
+    // no-op for now. this needs some more thought
+//    NSString *durationStr = [NSString stringWithFormat:@"%.2f\"", duration];
+//    [self.voiceButton setTitle:durationStr forState:UIControlStateNormal];
+//    [self.voiceButton setTitle:durationStr forState:UIControlStateSelected];
+//    [self.voiceButton setTitle:durationStr forState:UIControlStateHighlighted];
 }
 
 - (void)updateProgress:(NSTimer *)theTimer {
@@ -104,13 +113,15 @@ NSTimer *_timer;
 
 - (IBAction)addVoice {
 
-    if (_recorder.recorder.recording) {
+    if (_recorder.recorder.recording)
+    {
 
         [_recorder stop];
         // update the label
         [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
 
-    } else {
+    } else
+    {
         [_recorder start];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
         self.progressView.progress = 0;
@@ -121,17 +132,18 @@ NSTimer *_timer;
         UIImageView *imgView = [[UIImageView alloc] initWithImage:activeImg];
 
         NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:8];
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 9; i++)
+        {
             NSString *sprintName = [@"icon_record_" stringByAppendingFormat:@"%d.png", i];
             UIImage *img = [UIImage imageNamed:sprintName];
             [sprites addObject:img];
         }
         imgView.animationImages = sprites;
         imgView.animationDuration = 0.85f;
-        
+
 
         CGRect buttFrame = self.voiceButton.frame;
-        float x = (buttFrame.size.width/2.0f) - (activeImg.size.width/2.0f) - 1;
+        float x = (buttFrame.size.width / 2.0f) - (activeImg.size.width / 2.0f) - 1;
         imgView.tag = 2;
         [imgView startAnimating];
 
@@ -143,7 +155,8 @@ NSTimer *_timer;
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success {
-    [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
+    float duration = [_recorder previousDuration];
+    [self setVoiceButtonTitleWithDuration:duration];
     [self hideAudioProgress];
 
 
@@ -151,94 +164,137 @@ NSTimer *_timer;
                                                                        data:[_recorder audioData]
                                                                        type:JCOAttachmentTypeRecording
                                                                 contentType:@"audio/x-caf"
-                                                                   filenameFormat:@"recording-%d.caf"];
+                                                             filenameFormat:@"recording-%d.caf"];
 
 
     UIImage *newImage = [UIImage imageNamed:@"icon_record_2.png"];
-    [self addAttachmentItem:attachment withIcon:newImage];
+    [self addAttachmentItem:attachment withIcon:newImage title:[NSString stringWithFormat:@"%.2f\"", duration]];
     [attachment release];
 }
 
-- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon {
+- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title {
 
     CGRect buttonFrame = CGRectMake(0, 0, icon.size.width, icon.size.height);
-    UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
-    [button setImage:icon forState:UIControlStateNormal];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = buttonFrame;
+
+
     [button addTarget:self action:@selector(attachmentTapped:) forControlEvents:UIControlEventTouchUpInside];
-
     button.imageView.layer.cornerRadius = 5.0;
-    button.titleLabel.frame = CGRectMake(0, button.height - 12, [button width], 15);
-    button.titleLabel.hidden = NO;
-    NSLog(@"button title = %@", button.titleLabel);
-    button.backgroundColor = [UIColor redColor];
 
-    button.titleLabel.text = @"test";
+    if (title)
+    {
+        button.titleLabel.textColor = [UIColor whiteColor];
+        [button setTitle:title forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        button.titleLabel.textAlignment = UITextAlignmentCenter;
+        [button setTitleEdgeInsets: UIEdgeInsetsMake(0.0, -icon.size.width, -25.0, -5.0)];
 
-    UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        button.titleLabel.hidden = NO;
+    }
+    [button setImage:icon forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(-20.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
+
+    UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+
     button.tag = [self.attachments count];
 
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
     [buttonItems addObject:buttonItem];
     [self.attachmentBar setItems:buttonItems];
-
     [self.attachments addObject:attachment];
 
-    [buttonItem release];
-    [button release];
 }
 
-- (void)addImageAttachmentItem:(UIImage *)origImg
-{
+- (void)addImageAttachmentItem:(UIImage *)origImg {
     JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"screenshot"
                                                                        data:UIImagePNGRepresentation(origImg)
                                                                        type:JCOAttachmentTypeImage
                                                                 contentType:@"image/png"
                                                              filenameFormat:@"screenshot-%d.png"];
 
-    CGSize  size = CGSizeMake(40, self.attachmentBar.frame.size.height);
+    CGSize size = CGSizeMake(40, self.attachmentBar.frame.size.height);
     UIImage *newImage = [origImg resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                                                       bounds:size
                                         interpolationQuality:kCGInterpolationHigh];
 
 
-    [self addAttachmentItem:attachment withIcon:newImage];
+    [self addAttachmentItem:attachment withIcon:newImage title:nil];
     [attachment release];
 }
 
--(void) attachmentTapped:(UIButton *)touch {
+- (void)removeAttachmentItemAtIndex:(NSUInteger)index {
+
+    [self.attachments removeObjectAtIndex:index];
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
+    [buttonItems removeObjectAtIndex:index];
+    // re-tag all buttons... with their new index
+    for (int i = 0; i < [buttonItems count]; i++)
+    {
+        UIBarButtonItem *buttonItem = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
+        buttonItem.customView.tag = i;
+    }
+
+    [self.attachmentBar setItems:buttonItems animated:YES];
+}
+
+- (void)attachmentTapped:(UIButton *)touch {
     // delete that button, both from the bar, and the images array
-    NSUInteger index = (u_int )touch.tag;
+    NSUInteger index = (u_int) touch.tag;
 
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
-    if (attachment.type == JCOAttachmentTypeImage) {
+    if (attachment.type == JCOAttachmentTypeImage)
+    {
         JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
         // get the original image, wire it up to the sketch controller
         sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
         sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:index]; // set this image's id. just the index in the array
         sketchViewController.delegate = self;
         [self presentModalViewController:sketchViewController animated:YES];
-    } else {
-        NSLog(@"TODO: play in AudioPlayer?");
-        //TODO or wait for a long press, then delete?
+    } else
+    {
+        UIAlertView* view =
+                [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RemoveRecording", @"Remove recording title")
+                                           message:NSLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
+                                          delegate:self
+                                 cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                 otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
+        currentAttachmentItemIndex = index;
+        [view show];
+        [view release];
+
     }
 }
+
+#pragma mark UIAlertViewDelelgate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // dismiss modal dialog.
+    if (buttonIndex == 1) {
+        [self removeAttachmentItemAtIndex:currentAttachmentItemIndex];
+    }
+    currentAttachmentItemIndex = 0;
+}
+
+
+#pragma end
 
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
     [self dismissModalViewControllerAnimated:YES];
-    
-    [self.screenshotButton setAutoresizesSubviews:NO];
-    UIImage *origImg = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
 
-    if (origImg.size.height > self.view.height) {
+    [self.screenshotButton setAutoresizesSubviews:NO];
+    UIImage *origImg = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
+
+    if (origImg.size.height > self.view.height)
+    {
         // resize image... its too huge!
         CGSize size = origImg.size;
-        float ratio = self.view.height/size.height;
-        CGSize smallerSize = CGSizeMake(ratio*size.width, ratio*size.height);
+        float ratio = self.view.height / size.height;
+        CGSize smallerSize = CGSizeMake(ratio * size.width, ratio * size.height);
         origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
     }
-    
+
     [self addImageAttachmentItem:origImg];
 }
 
@@ -249,47 +305,29 @@ NSTimer *_timer;
 
 #pragma mark JCOSketchViewControllerDelegate
 
-- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
-{
+- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId {
     [self dismissModalViewControllerAnimated:YES];
     NSUInteger index = [imageId unsignedIntegerValue];
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
     attachment.data = UIImagePNGRepresentation(image);
 
     // also update the icon in the toolbar
-    CGSize  size = CGSizeMake(40, self.attachmentBar.frame.size.height);
+    CGSize size = CGSizeMake(40, self.attachmentBar.frame.size.height);
     UIImage *iconImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                                                      bounds:size
-                                        interpolationQuality:kCGInterpolationHigh];
-    UIBarButtonItem* item = [self.attachmentBar.items objectAtIndex:index];
-    ((UIButton*)item.customView).imageView.image = iconImage;
+                                                     bounds:size
+                                       interpolationQuality:kCGInterpolationHigh];
+    UIBarButtonItem *item = [self.attachmentBar.items objectAtIndex:index];
+    ((UIButton *) item.customView).imageView.image = iconImage;
 }
 
-- (void)sketchControllerDidCancel:(UIViewController *)controller
-{
+- (void)sketchControllerDidCancel:(UIViewController *)controller {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)imageId
-{
+- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)imageId {
     [self dismissModalViewControllerAnimated:YES];
-
-    NSUInteger index = [imageId unsignedIntegerValue];
-    [self.attachments removeObjectAtIndex:index];
-
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
-    [buttonItems removeObjectAtIndex:index];
-
-    // re-tag all buttons...
-    for (int i = 0; i < [buttonItems count]; i++)
-    {
-        UIBarButtonItem *buttonItem = (UIBarButtonItem *)[buttonItems objectAtIndex:(NSUInteger)i];
-        buttonItem.customView.tag = i;
-    }
-
-    [self.attachmentBar setItems:buttonItems animated:YES];
+    [self removeAttachmentItemAtIndex:[imageId unsignedIntegerValue]];
 }
-
 
 
 #pragma mark end
@@ -304,7 +342,7 @@ NSTimer *_timer;
 #pragma mark UITextViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.navigationItem.rightBarButtonItem = nil;
-    
+
     [UIView beginAnimations:@"resize description" context:nil];
     float height = self.attachmentBar.top - (self.subjectField.bottom) - 20;
     CGRect frame = CGRectMake(10, self.subjectField.bottom + 10, self.view.width - 20, height);
@@ -318,9 +356,9 @@ NSTimer *_timer;
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     self.navigationItem.rightBarButtonItem =
-            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                          target:self
-                                                          action:@selector(dismissKeyboard)];
+            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                           target:self
+                                                           action:@selector(dismissKeyboard)] autorelease];
     [UIView beginAnimations:@"resize description" context:nil];
     [UIView setAnimationDuration:0.3];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -337,16 +375,20 @@ NSTimer *_timer;
     NSDictionary *payloadData = nil;
     NSDictionary *customFields = nil;
 
-    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
+    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)])
+    {
         payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
     }
-    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)]) {
+    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)])
+    {
         customFields = [self.payloadDataSource customFieldsFor:self.subjectField.text];
     }
 
-    if (self.replyToIssue) {
+    if (self.replyToIssue)
+    {
         [self.replyTransport sendReply:self.replyToIssue description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
-    } else {
+    } else
+    {
         [self.issueTransport send:self.subjectField.text description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
     }
     self.activityIndicator.hidesWhenStopped = TRUE;
@@ -367,7 +409,7 @@ NSTimer *_timer;
     [self.attachmentBar setItems:nil];
 }
 
-- (void)transportDidFinishWithError:(NSError*)error {
+- (void)transportDidFinishWithError:(NSError *)error {
     [self.activityIndicator stopAnimating];
 }
 
@@ -382,12 +424,7 @@ NSTimer *_timer;
 
 @synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar;
 
-@synthesize issueTransport = _issueTransport,
-            replyTransport = _replyTransport,
-            payloadDataSource = _payloadDataSource,
-            attachments = _attachments,
-            recorder = _recorder,
-            replyToIssue = _replyToIssue;
+@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
 
 
 - (void)releaseMembers {
