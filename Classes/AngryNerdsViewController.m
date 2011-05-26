@@ -1,4 +1,3 @@
-
 #import "AngryNerdsViewController.h"
 #import "JCO.h"
 
@@ -10,27 +9,29 @@ CLLocation *_currentLocation;
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([CLLocationManager locationServicesEnabled]) {
-        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager = [[[CLLocationManager alloc] init] retain];
         _locationManager.delegate = self;
         [_locationManager startUpdatingLocation];
+        NSLog(@"started updating location manager = %@", _locationManager );
+
+
     }
 }
 
-- (IBAction) triggerFeedback {
-	UIViewController* controller = [[JCO instance] viewController];
-	[self presentModalViewController:controller animated:YES];
+- (IBAction)triggerFeedback {
+    UIViewController *controller = [[JCO instance] viewController];
+    [self presentModalViewController:controller animated:YES];
 }
 
-- (IBAction) triggerCrash
-{
-	NSLog(@"Triggering crash!");
-	/* Trigger a crash. NB: if run from XCode, the sigquit handler wont be called to store crash data. */
-	CFRelease(NULL);
+- (IBAction)triggerCrash {
+    NSLog(@"Triggering crash!");
+    /* Trigger a crash. NB: if run from XCode, the sigquit handler wont be called to store crash data. */
+    CFRelease(NULL);
 }
 
 #pragma mark JCOCustomDataSource
 
--(NSString *)projectName {
+- (NSString *)projectName {
     return @"AngryNerds";
 }
 
@@ -64,7 +65,12 @@ CLLocation *_currentLocation;
     }
 }
 
-- (IBAction) triggerDisplayNotifications {
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"location did fail... with error: %@", [error localizedDescription]);
+}
+
+
+- (IBAction)triggerDisplayNotifications {
     [[JCO instance] displayNotifications];
 }
 
