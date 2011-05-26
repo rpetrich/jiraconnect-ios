@@ -278,8 +278,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
-									<integer>10</integer>
+									<integer>7</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -320,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>JCOTransport.m</string>
+								<string>JCOViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -328,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>JCOTransport.m</string>
+										<string>JCOViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8DF37220137CB26A001AD123</string>
+										<string>8DF3723213809D20001AD123</string>
 										<key>history</key>
 										<array>
 											<string>8D506421128118C200B3E1A0</string>
@@ -370,13 +369,19 @@
 											<string>8D02C51113284CAD00E80B0E</string>
 											<string>8D02C51213284CAD00E80B0E</string>
 											<string>8D02C52213286EAD00E80B0E</string>
-											<string>8D02C52313286EAD00E80B0E</string>
 											<string>8D02C52413286EAD00E80B0E</string>
 											<string>8D02C52513286EAD00E80B0E</string>
 											<string>8D02C52613286EAD00E80B0E</string>
 											<string>8D02C52713286EAD00E80B0E</string>
 											<string>8D02C52813286EAD00E80B0E</string>
-											<string>8DC085F913287B3600F3F7CB</string>
+											<string>8DF3722A13809D1F001AD123</string>
+											<string>8DF3722B13809D1F001AD123</string>
+											<string>8DF3722C13809D1F001AD123</string>
+											<string>8DF3722D13809D1F001AD123</string>
+											<string>8DF3722E13809D1F001AD123</string>
+											<string>8DF3722F13809D1F001AD123</string>
+											<string>8DF3723013809D1F001AD123</string>
+											<string>8D02C52313286EAD00E80B0E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

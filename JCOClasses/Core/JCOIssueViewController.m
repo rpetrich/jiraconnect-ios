@@ -63,10 +63,6 @@ static float detailLabelHeight = 21.0f;
     self.tableView.backgroundColor = [UIColor colorWithRed:219.0 / 255.0 green:226.0 / 255.0 blue:237.0 / 255.0 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor clearColor];
-    if ([self.comments count] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
-        [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    }
 }
 
 - (void)viewDidUnload {
@@ -198,7 +194,7 @@ static float detailLabelHeight = 21.0f;
     [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
-    if ([self.comments count] > 0) {
+    if ([self.comments count] > 0 && [self.tableView numberOfRowsInSection:1] > 0) {
         NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
         [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }

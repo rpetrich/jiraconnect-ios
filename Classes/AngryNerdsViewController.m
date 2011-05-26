@@ -24,7 +24,7 @@ CLLocation *_currentLocation;
 - (IBAction) triggerCrash
 {
 	NSLog(@"Triggering crash!");
-	/* Trigger a crash */
+	/* Trigger a crash. NB: if run from XCode, the sigquit handler wont be called to store crash data. */
 	CFRelease(NULL);
 }
 
