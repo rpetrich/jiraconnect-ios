@@ -47,6 +47,15 @@ CLLocation *_currentLocation;
             [keys addObject:@"lng"]; [objects addObject:lng];
             [keys addObject:@"location"]; [objects addObject:locationString];
         }
+    } else {
+        // DUMMY just for the demo.... 37.331689, -122.030731
+         NSNumber *lat = [NSNumber numberWithDouble:37.331689];
+            NSNumber *lng = [NSNumber numberWithDouble:-122.030731];
+            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
+            [keys addObject:@"lat"]; [objects addObject:lat];
+            [keys addObject:@"lng"]; [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
+
     }
     return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 }
