@@ -20,7 +20,7 @@
     [self.scrollView setCanCancelContentTouches:NO];
 	self.scrollView.clipsToBounds = YES;	// default is NO, we want to restrict drawing within our scrollview
 	self.scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	self.scrollView.maximumZoomScale = 4.0;
+	self.scrollView.maximumZoomScale = 8.0;
 	self.scrollView.minimumZoomScale = 0.5;
 	self.scrollView.delaysContentTouches = YES;
     self.scrollView.scrollEnabled = YES;
@@ -76,7 +76,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return YES;
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 - (void)viewDidUnload

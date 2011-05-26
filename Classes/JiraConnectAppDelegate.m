@@ -23,8 +23,8 @@
         2. You can then present [JCO instance].viewController from anywhere in your app
         3. Be sure that your JIRA instance has the JIRAConnect plugin installed and configured for your project.
      */
-//    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
-    [[JCO instance] configureJiraConnect:@"http://astra.sydney.atlassian.com:2990/jira/" customData:viewController];
+    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
+//    [[JCO instance] configureJiraConnect:@"http://astra.sydney.atlassian.com:2990/jira/" customData:viewController];
 
 
     return YES;

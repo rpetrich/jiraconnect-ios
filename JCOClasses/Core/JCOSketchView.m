@@ -15,7 +15,7 @@
     SketchRenderer *renderer = [[SketchRenderer alloc] initWithContext:context];
     [self.sketch visitPoints:renderer];
     [[UIColor colorWithRed:255/250 green:34.0/255.0 blue:27.0/255.0 alpha:0.8] setStroke];
-    CGContextSetLineWidth(context, 10.0f);
+    CGContextSetLineWidth(context, 2.0f);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextDrawPath(context, kCGPathStroke);
     CGContextRestoreGState(context);

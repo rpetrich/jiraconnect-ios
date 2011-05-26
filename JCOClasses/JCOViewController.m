@@ -1,13 +1,10 @@
 
 #import "JCOViewController.h"
-#import "JCORecorder.h"
-#import "JCOCustomDataSource.h"
-#import "JCOIssueTransport.h"
-#import "JCOReplyTransport.h"
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
 #import "JCOAttachmentItem.h"
 #import "JCOSketchViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation JCOToolbar
 
@@ -20,7 +17,6 @@
 @interface JCOViewController ()
 
 
-- (void)setVoiceButtonTitleWithDuration:(float)duration;
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
 
 @end
@@ -67,7 +63,7 @@ NSUInteger currentAttachmentItemIndex = 0;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
+
 }
 
 - (IBAction)dismiss {
@@ -82,20 +78,10 @@ NSUInteger currentAttachmentItemIndex = 0;
     [self presentModalViewController:imagePicker animated:YES];
 }
 
-- (void)setVoiceButtonTitleWithDuration:(float)duration {
-
-    // no-op for now. this needs some more thought
-//    NSString *durationStr = [NSString stringWithFormat:@"%.2f\"", duration];
-//    [self.voiceButton setTitle:durationStr forState:UIControlStateNormal];
-//    [self.voiceButton setTitle:durationStr forState:UIControlStateSelected];
-//    [self.voiceButton setTitle:durationStr forState:UIControlStateHighlighted];
-}
-
 - (void)updateProgress:(NSTimer *)theTimer {
     float currentDuration = [_recorder currentDuration];
     float progress = (currentDuration / _recorder.recordTime);
     self.progressView.progress = progress;
-    [self setVoiceButtonTitleWithDuration:currentDuration];
 }
 
 - (void)hideAudioProgress {
@@ -110,10 +96,7 @@ NSUInteger currentAttachmentItemIndex = 0;
 
     if (_recorder.recorder.recording)
     {
-
         [_recorder stop];
-        // update the label
-        [self setVoiceButtonTitleWithDuration:[_recorder previousDuration]];
 
     } else
     {
@@ -151,7 +134,6 @@ NSUInteger currentAttachmentItemIndex = 0;
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success {
     float duration = [_recorder previousDuration];
-    [self setVoiceButtonTitleWithDuration:duration];
     [self hideAudioProgress];
 
 
@@ -173,19 +155,27 @@ NSUInteger currentAttachmentItemIndex = 0;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = buttonFrame;
 
-
     [button addTarget:self action:@selector(attachmentTapped:) forControlEvents:UIControlEventTouchUpInside];
     button.imageView.layer.cornerRadius = 5.0;
 
     if (title)
     {
+        UIFont* font = [UIFont systemFontOfSize:12.0];
+        CGSize size = [title sizeWithFont:font];
         button.titleLabel.textColor = [UIColor whiteColor];
         [button setTitle:title forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        button.titleLabel.font = font;
         button.titleLabel.textAlignment = UITextAlignmentCenter;
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(  0.0, -icon.size.width, -25.0, -5.0)];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(-20.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(  0.0, -icon.size.width, -35.0, -4.0)];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(-10.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
         button.titleLabel.hidden = NO;
+
+        [button.layer setBorderWidth:1.0f];
+        [button.layer setBorderColor:[[UIColor grayColor] CGColor]];
+        button.layer.cornerRadius = 5.0f;
+        button.height += size.height;
+        button.width = size.width + 5;
+
     }
     [button setImage:icon forState:UIControlStateNormal];
 
@@ -398,7 +388,6 @@ NSUInteger currentAttachmentItemIndex = 0;
 
     self.descriptionField.text = @"";
     self.subjectField.text = @"";
-    [self setVoiceButtonTitleWithDuration:0.0];
     [[self.screenshotButton viewWithTag:20] removeFromSuperview];
     [self.attachments removeAllObjects];
     [self.attachmentBar setItems:nil];
