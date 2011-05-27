@@ -30,11 +30,12 @@
 
 - (void) notify:(NSTimer*) timer {
 	// check notifications
-
-    //hack -> for now always show that there is 1 notification
 	if ([JCOIssueStore instance].newIssueCount > 0) {
 //	if ([JCOIssueStore instance].issues) {
-		_label.text = [NSString stringWithFormat:@"%d new notification from developer", [JCOIssueStore instance].newIssueCount];
+
+        int count = [JCOIssueStore instance].newIssueCount;
+        NSString* pluralSuffix = count != 1 ? @"s" : @"";
+		_label.text = [NSString stringWithFormat:@"%d new notification%@ from developer", count, pluralSuffix];
 		
         JCOIssuesViewController * tableViewController = [[JCOIssuesViewController alloc] initWithNibName:@"JCOIssuesViewController" bundle:nil];
 		[tableViewController loadView];        

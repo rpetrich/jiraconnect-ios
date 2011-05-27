@@ -45,6 +45,7 @@
     NSString *responseString = [request responseString];
 
     if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""]) {
+        NSLog(@"Invalid, empty response from JIRA: %@", responseString);
         return;
     }
 
@@ -66,6 +67,7 @@
         // sinceMillis is the server's time
         NSNumber *sinceMillis = [data valueForKey:@"sinceMillis"];
         [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJCOLastSuccessfulPingTime];
+        NSLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
     }
     else
     {
