@@ -31,7 +31,7 @@ CLLocation *_currentLocation;
 
 #pragma mark JCOCustomDataSource
 
-- (NSString *)projectName {
+- (NSString *)project {
     return @"AngryNerds";
 }
 

@@ -37,7 +37,7 @@ JCOCrashTransport *_transport;
 
 
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
-                                                            message:[NSString stringWithFormat:description, [[JCO instance] getProjectName]]
+                                                            message:[NSString stringWithFormat:description, [[JCO instance] getAppName]]
                                                                     delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"No", @"No")
                                                   otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), NSLocalizedString(@"Always", @"Always"), nil];

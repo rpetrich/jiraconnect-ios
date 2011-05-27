@@ -13,7 +13,7 @@
 
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport {
 
-    NSString *path = [@"rest/jconnect/latest/issue/" stringByAppendingString:[[JCO instance] getProjectName]];
+    NSString *path = [kJCOTransportCreateIssuePath stringByAppendingFormat:@"?project=%@", [[JCO instance] getProject]];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
     NSLog(@"Sending crash report to... %@", url);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];

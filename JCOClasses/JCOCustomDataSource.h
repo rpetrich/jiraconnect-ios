@@ -22,7 +22,8 @@
 
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.
+* This value can be either the JIRA Project's name, _or_ its Project Key. e.g. JRA
 */
--(NSString *) projectName;
+-(NSString *)project;
 
 @end

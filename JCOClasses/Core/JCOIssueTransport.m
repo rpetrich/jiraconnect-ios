@@ -14,10 +14,11 @@
 - (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
     // issue creation url is:
-    // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/<projectname>"
+    // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
+    NSString *urlPath = [NSString stringWithFormat:kJCOTransportCreateIssuePath, [[JCO instance] getProject]];
+    NSURL *url = [NSURL URLWithString:urlPath
+                        relativeToURL:[JCO instance].url];
 
-    NSString *path = [@"rest/jconnect/latest/issue/" stringByAppendingString:[[JCO instance] getProjectName]];
-    NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
     NSLog(@"Sending feedback to... %@", url);
 
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
@@ -25,6 +26,7 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
+
     [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];

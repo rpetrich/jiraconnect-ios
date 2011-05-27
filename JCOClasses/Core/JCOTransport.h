@@ -4,6 +4,10 @@
 #import "ASIFormDataRequest.h"
 #import "JCOIssue.h"
 
+#define kJCOTransportCreateIssuePath   @"rest/jconnect/latest/issue/create/?project=%@"
+#define kJCOTransportCreateCommentPath @"rest/jconnect/latest/issue/comment/%@"
+#define kJCOTransportNotificationsPath @"rest/jconnect/latest/issue/issues?project=%@&uuid=%@&sinceMillis=%@"
+
 @protocol JCOTransportDelegate <NSObject>
 
 - (void)transportDidFinish;

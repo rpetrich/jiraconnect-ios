@@ -1,6 +1,7 @@
 
 #import "JCONotifier.h"
 #import "JCOIssueStore.h"
+#import "JCO.h"
 
 @implementation JCONotifier
 
@@ -22,7 +23,7 @@
 		_button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[_button setFrame:CGRectMake(0, 440, 320, 40)];	
 		[_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:@"JCODidReceiveIssueCommentsNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJCOReceivedCommentsNotification object:nil];
     }
 	return self;
 }

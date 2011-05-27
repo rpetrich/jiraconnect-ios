@@ -112,9 +112,9 @@ id<JCOCustomDataSource> _customDataSource;
     return [[NSUserDefaults standardUserDefaults] stringForKey:kJIRAConnectUUID];
 }
 
-- (NSString*) getProjectName {
-    if ([_customDataSource respondsToSelector:@selector(projectName)]) {
-        return [_customDataSource projectName];
+- (NSString *)getProject {
+    if ([_customDataSource respondsToSelector:@selector(project)]) {
+        return [_customDataSource project];
     }
     return [self getAppName];
 }

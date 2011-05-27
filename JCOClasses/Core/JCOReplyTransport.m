@@ -13,7 +13,7 @@
 
 - (void)sendReply:(JCOIssue *)originalIssue description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
-    NSString *path = [NSString stringWithFormat:@"rest/jconnect/latest/issue/comment/%@", originalIssue.key];
+    NSString *path = [NSString stringWithFormat:kJCOTransportCreateCommentPath, originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
     
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];

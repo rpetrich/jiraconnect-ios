@@ -3,7 +3,9 @@
 #import "JCOViewController.h"
 #import "CrashReporter.h"
 
-#define kJIRAConnectUUID @"JIRAConnectUUID"
+#define kJIRAConnectUUID @"kJIRAConnectUUID"
+#define kJCOReceivedCommentsNotification @"kJCOReceivedCommentsNotification"
+#define kJCOLastSuccessfulPingTime @"kJCOLastSuccessfulPingTime"
 
 @interface JCO : NSObject {
 	NSURL* _url;
@@ -17,7 +19,7 @@
 - (UIViewController*) viewController;
 - (void) displayNotifications;
 - (NSDictionary*) getMetaData;
-- (NSString*) getProjectName;
+- (NSString *) getProject;
 - (NSString *) getAppName;
 - (NSString *) getUUID;
 

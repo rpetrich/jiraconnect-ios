@@ -5,6 +5,7 @@
 #import "JCO.h"
 #import "JCOIssueStore.h"
 
+
 @implementation JCOPing
 
 - (void)start {
@@ -17,18 +18,17 @@
 
 - (void)sendPing {
 
-    NSString *project = [[JCO instance] getProjectName];
+    NSString *project = [[JCO instance] getProject];
     NSString *uuid = [[JCO instance] getUUID];
-    
-    NSString *resourceUrl =
-            [NSString stringWithFormat:@"rest/jconnect/latest/issue/withcomments?project=%@&uuid=%@", project, uuid];
+    NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJCOLastSuccessfulPingTime];
+    NSString *resourceUrl = [NSString stringWithFormat:kJCOTransportNotificationsPath, project, uuid, lastPingTime];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
     NSLog(@"Pinging...%@", url);
 
-// send ping
-
+    // send ping
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    
     [request setDelegate:self];
     [request startAsynchronous];
 }
@@ -44,21 +44,28 @@
 
     NSString *responseString = [request responseString];
 
-//    NSLog(@"ping response: '%@'", responseString);
-
     if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""]) {
         return;
     }
 
-/*
-'{"updatedIssuesWithComments":[],"oldIssuesWithComments":[{"key":"JCONNECT-2","status":"Open","comments":[]},{"key":"JCONNECT-1","status":"Open","title":"test","description":"Hello","comments":[{"systemuser":true,"username":"admin","text":"Hello dude"}]}]}'
-*/
-
+    /*
+    { "sinceMillis" : 23456
+      "updatedIssuesWithComments":[],
+      "oldIssuesWithComments":[
+         {"key":"JCONNECT-2","status":"Open","comments":[]},
+         {"key":"JCONNECT-1","status":"Open","title":"test","description":"Hello",
+                "comments":[{"systemuser":true,"username":"admin","text":"Hello dude"}]}]
+     }
+    */
     if (request.responseStatusCode < 300)
     {
         NSDictionary *data = [responseString JSONValue];
         [[JCOIssueStore instance] updateWithData:data];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"JCODidReceiveIssueCommentsNotification" object:self]; // TODO use a constant for this.
+        [[NSNotificationCenter defaultCenter] postNotificationName:kJCOReceivedCommentsNotification object:self]; // TODO use a constant for this.
+        // update the timestamp since we last requested comments.
+        // sinceMillis is the server's time
+        NSNumber *sinceMillis = [data valueForKey:@"sinceMillis"];
+        [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJCOLastSuccessfulPingTime];
     }
     else
     {

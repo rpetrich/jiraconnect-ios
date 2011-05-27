@@ -19,7 +19,7 @@
 - (IBAction) triggerFeedback;
 - (IBAction) triggerDisplayNotifications;
 
-- (NSString *) projectName;
+- (NSString *)project;
 
 @end
 

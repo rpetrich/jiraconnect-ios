@@ -166,7 +166,7 @@ NSUInteger currentAttachmentItemIndex = 0;
         [button setTitle:title forState:UIControlStateNormal];
         button.titleLabel.font = font;
         button.titleLabel.textAlignment = UITextAlignmentCenter;
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(  0.0, -icon.size.width, -35.0, -4.0)];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(-4.0, -icon.size.width, -35.0, -4.0)];
         [button setImageEdgeInsets:UIEdgeInsetsMake(-10.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
         button.titleLabel.hidden = NO;
 
