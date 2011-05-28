@@ -35,6 +35,8 @@ NSDateFormatter *_dateFormatter;
 
 - (void)cancel:(UIBarItem *)arg {
 
+    [self dismissModalViewControllerAnimated:YES];
+
     // Dismiss the entire notification view, the same way it gets displayed... TODO: is there a cleaner to do this?
     [UIView beginAnimations:@"animateView" context:nil];
     [UIView setAnimationDuration:0.4];

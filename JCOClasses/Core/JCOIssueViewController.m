@@ -29,9 +29,35 @@ static float detailLabelHeight = 21.0f;
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+- (void)scrollToLastComment
+{
+    if ([self.comments count] > 0 && [self.tableView numberOfRowsInSection:1] > 0) {
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
+        [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.backgroundColor = [UIColor colorWithRed:219.0 / 255.0 green:226.0 / 255.0 blue:237.0 / 255.0 alpha:1.0];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorColor = [UIColor clearColor];
+    [self scrollToLastComment];
+}
+
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return YES;
 }
 
 - (void)setUpCommentDataFor:(JCOIssue *)issue {
@@ -53,27 +79,6 @@ static float detailLabelHeight = 21.0f;
         [self setUpCommentDataFor:issue];
 
     }
-}
-
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor colorWithRed:219.0 / 255.0 green:226.0 / 255.0 blue:237.0 / 255.0 alpha:1.0];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.separatorColor = [UIColor clearColor];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return YES;
 }
 
 #pragma mark - Table view data source
@@ -190,14 +195,12 @@ static float detailLabelHeight = 21.0f;
 
 }
 
+
 - (void)transportDidFinish {
     [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
-    if ([self.comments count] > 0 && [self.tableView numberOfRowsInSection:1] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
-        [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
+    [self scrollToLastComment];
 }
 
 
