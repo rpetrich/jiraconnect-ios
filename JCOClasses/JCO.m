@@ -58,11 +58,10 @@ id <JCOCustomDataSource> _customDataSource;
 
 - (void)configureJiraConnect:(NSString *)withUrl customData:(id <JCOCustomDataSource>)customData
 {
-
+    self.url = [NSURL URLWithString:withUrl];
     [self generateAndStoreUUID];
 
     [CrashReporter enableCrashReporter];
-    self.url = [NSURL URLWithString:withUrl];
 
     _pinger.baseUrl = self.url;
     [_pinger start];

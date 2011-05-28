@@ -1,9 +1,11 @@
 #import "AngryNerdsViewController.h"
 #import "JCO.h"
+#import "UIView+Additions.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AngryNerdsViewController
 
-@synthesize triggerButtonCrash, triggerButtonFeedback, triggerButtonNotifications;
+@synthesize nerd = _nerd, nerdsView = _nerdsView;
 CLLocation *_currentLocation;
 
 - (void)viewDidLoad
@@ -14,6 +16,15 @@ CLLocation *_currentLocation;
         _locationManager.delegate = self;
         [_locationManager startUpdatingLocation];
     }
+    NSMutableArray *nerds = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"frontend_blink.png"]];
+    for (int i = 0; i < 20; i++) {
+        [nerds addObject:[UIImage imageNamed:@"frontend.png"]];
+    }
+
+    [self.nerdsView setAnimationImages:nerds];
+    [self.nerdsView setAnimationDuration:5];
+    [self.nerdsView startAnimating];
+
 }
 
 - (IBAction)triggerFeedback
@@ -45,25 +56,10 @@ CLLocation *_currentLocation;
             NSNumber *lat = [NSNumber numberWithDouble:_currentLocation.coordinate.latitude];
             NSNumber *lng = [NSNumber numberWithDouble:_currentLocation.coordinate.longitude];
             NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
-            [keys addObject:@"lat"];
-            [objects addObject:lat];
-            [keys addObject:@"lng"];
-            [objects addObject:lng];
-            [keys addObject:@"location"];
-            [objects addObject:locationString];
+            [keys addObject:@"lat"];      [objects addObject:lat];
+            [keys addObject:@"lng"];      [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
         }
-    } else {
-        // DUMMY just for the demo.... 37.331689, -122.030731
-        NSNumber *lat = [NSNumber numberWithDouble:37.331689];
-        NSNumber *lng = [NSNumber numberWithDouble:-122.030731];
-        NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
-        [keys addObject:@"lat"];
-        [objects addObject:lat];
-        [keys addObject:@"lng"];
-        [objects addObject:lng];
-        [keys addObject:@"location"];
-        [objects addObject:locationString];
-
     }
     return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 }
@@ -94,11 +90,66 @@ CLLocation *_currentLocation;
     [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
 }
 
+- (void)jiggleNerd
+{
+    
+    // Create the animation's path.
+    CGPathRef path = NULL;
+    CGMutablePathRef mutablepath = CGPathCreateMutable();
+    CGPathMoveToPoint(mutablepath, NULL, self.nerdsView.center.x + 10, self.nerdsView.center.y);
+    CGPathAddLineToPoint(mutablepath, NULL, self.nerdsView.center.x - 10, self.nerdsView.center.y);
+    CGPathAddLineToPoint(mutablepath, NULL, self.nerdsView.center.x, self.nerdsView.center.y);
+    CGPathAddLineToPoint(mutablepath, NULL, self.nerdsView.center.x + 10, self.nerdsView.center.y);
+    CGPathAddArc(mutablepath, NULL, self.nerdsView.center.x, self.nerdsView.center.y, 5, 0, M_2_PI, YES);
 
+    path = CGPathCreateCopy(mutablepath);
+    CGPathRelease(mutablepath);
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    animation.delegate = self;
+    animation.path = path;
+    animation.speed = 3.0;
+    animation.repeatCount = 5;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    animation.delegate = self;
+    [self.nerdsView.layer addAnimation:animation forKey:@"rotationAnimation"];
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    [UIView animateWithDuration:0.7 animations:^{
+        self.view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        NSLog(@"Crashing...");
+        CFRelease(NULL);
+    }];
+}
+
+- (IBAction)bounceNerd
+{
+
+    UIViewAnimationOptions opts = UIViewAnimationOptionCurveEaseOut;
+    [UIView animateWithDuration:0.2
+                          delay:0 options:opts
+                       animations:^{
+                           self.nerdsView.top -= 100;
+                       } completion:^(BOOL finished) {
+
+        [UIView animateWithDuration:0.2
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             self.nerdsView.top += 100;
+                         }
+                         completion:^(BOOL fini) {
+                             [self jiggleNerd];
+                         }];
+    }];
+
+}
 
 - (void)dealloc
 {
-    self.triggerButtonCrash, self.triggerButtonFeedback, self.triggerButtonNotifications = nil;
+    self.nerd, self.nerdsView = nil;
     [_locationManager release];
     [super dealloc];
 }

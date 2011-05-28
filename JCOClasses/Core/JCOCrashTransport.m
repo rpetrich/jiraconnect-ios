@@ -13,9 +13,9 @@
 
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport {
 
-    NSString *path = [kJCOTransportCreateIssuePath stringByAppendingFormat:@"?project=%@", [[JCO instance] getProject]];
+    NSString *path = [NSString stringWithFormat:kJCOTransportCreateIssuePath, [[JCO instance] getProject]];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
-    NSLog(@"Sending crash report to... %@", url);
+    NSLog(@"Sending crash report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];

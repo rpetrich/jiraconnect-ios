@@ -21,10 +21,11 @@
     NSString *project = [[JCO instance] getProject];
     NSString *uuid = [[JCO instance] getUUID];
     NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJCOLastSuccessfulPingTime];
+    lastPingTime = lastPingTime ? lastPingTime : [NSNumber numberWithInt:0];
     NSString *resourceUrl = [NSString stringWithFormat:kJCOTransportNotificationsPath, project, uuid, lastPingTime];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
-    NSLog(@"Pinging...%@", url);
+    NSLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -34,30 +35,14 @@
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
-/*
-     {"ping-response":
-     {"issue-updates":
-     [{"issue-update":
-     {"issueKey":"JRA-1330","message":"JRA-1330 has been closed: Won't fix"}}
-     ]}}
-     */
 
     NSString *responseString = [request responseString];
-
+    
     if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""]) {
         NSLog(@"Invalid, empty response from JIRA: %@", responseString);
         return;
     }
 
-    /*
-    { "sinceMillis" : 23456
-      "updatedIssuesWithComments":[],
-      "oldIssuesWithComments":[
-         {"key":"JCONNECT-2","status":"Open","comments":[]},
-         {"key":"JCONNECT-1","status":"Open","title":"test","description":"Hello",
-                "comments":[{"systemuser":true,"username":"admin","text":"Hello dude"}]}]
-     }
-    */
     if (request.responseStatusCode < 300)
     {
         NSDictionary *data = [responseString JSONValue];

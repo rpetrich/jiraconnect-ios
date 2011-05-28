@@ -6,7 +6,7 @@
 
 #define kJCOTransportCreateIssuePath   @"rest/jconnect/latest/issue/create/?project=%@"
 #define kJCOTransportCreateCommentPath @"rest/jconnect/latest/issue/comment/%@"
-#define kJCOTransportNotificationsPath @"rest/jconnect/latest/issue/issues?project=%@&uuid=%@&sinceMillis=%@"
+#define kJCOTransportNotificationsPath @"rest/jconnect/latest/issue/updates?project=%@&uuid=%@&sinceMillis=%@"
 
 @protocol JCOTransportDelegate <NSObject>
 

@@ -47,7 +47,7 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
     
-    NSLog(@"Response for %@ is %@", request.url,  [request responseString]);
+    NSLog(@"Response '%@' for %@", request.responseString, request.url.absoluteURL);
     if (request.responseStatusCode < 300) {
 
         NSString *msg = [NSString stringWithFormat:@"Your feedback has been received. Thank you, for the common good."];
@@ -76,7 +76,7 @@
     }
     msg = [msg stringByAppendingString:@"Please try again later."];
     
-    NSLog(@"requestFailed: %@ URL: %@, response code: %d", msg, [request url], [request responseStatusCode]);
+    NSLog(@"requestFailed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
     [self alert:msg withTitle:@"Error submitting Feedback" button:@"OK"];
 }
 

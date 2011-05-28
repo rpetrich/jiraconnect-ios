@@ -15,7 +15,7 @@
 
     NSString *path = [NSString stringWithFormat:kJCOTransportCreateCommentPath, originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
-    
+    NSLog(@"Sending reply report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
