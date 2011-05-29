@@ -25,6 +25,7 @@
 
 NSTimer *_timer;
 NSUInteger currentAttachmentItemIndex = 0;
+CGRect descriptionFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,10 +59,12 @@ NSUInteger currentAttachmentItemIndex = 0;
     self.attachmentBar.items = nil;
     self.attachmentBar.autoresizesSubviews = YES;
 
-    self.subjectField.top = [self.navigationController.toolbar height] + 10;
-    self.descriptionField.top = self.subjectField.bottom + 10;
-    self.attachmentBar.top = self.descriptionField.bottom + 10;
-    self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - 10;
+    float descriptionFieldInset = 15;
+    self.descriptionField.top = 44 + descriptionFieldInset;
+    self.descriptionField.width = self.view.width - (descriptionFieldInset * 2.0);
+    descriptionFrame = self.descriptionField.frame;
+    self.attachmentBar.top = self.descriptionField.bottom + descriptionFieldInset;
+    self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - descriptionFieldInset;
     self.activityIndicator.center = self.descriptionField.center;
 
     // align the button titles nicer
@@ -340,12 +343,11 @@ NSUInteger currentAttachmentItemIndex = 0;
 #pragma mark UITextViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.navigationItem.rightBarButtonItem = nil;
+
 
     [UIView beginAnimations:@"resize description" context:nil];
-    float height = self.attachmentBar.top - (self.subjectField.bottom) - 20;
-    CGRect frame = CGRectMake(10, self.subjectField.bottom + 10, self.view.width - 20, height);
-    self.descriptionField.frame = frame;
+    self.navigationItem.rightBarButtonItem = nil;
+    self.descriptionField.frame = descriptionFrame;
     self.descriptionField.layer.cornerRadius = 7.0;
     NSRange range = {0, 0};
     [self.descriptionField scrollRangeToVisible:range];
@@ -377,16 +379,25 @@ NSUInteger currentAttachmentItemIndex = 0;
     NSDictionary *customFields = nil;
 
     if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
-        payloadData = [self.payloadDataSource payloadFor:self.subjectField.text];
+        payloadData = [self.payloadDataSource payloadFor:self.descriptionField.text];
     }
     if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)]) {
-        customFields = [self.payloadDataSource customFieldsFor:self.subjectField.text];
+        customFields = [self.payloadDataSource customFieldsFor:self.descriptionField.text];
     }
 
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
     } else {
-        [self.issueTransport send:self.subjectField.text description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
+        // use the first 100 chars of the description as the issue titlle
+        NSString *description = self.descriptionField.text;
+        u_int  length = 80;
+        u_int toIndex = [description length] > length ? length : [description length];
+        NSString *truncationMarker = [description length] > length ? @"..." : @"";
+        [self.issueTransport send:[[description substringToIndex:toIndex] stringByAppendingString:truncationMarker]
+                      description:self.descriptionField.text
+                           images:self.attachments
+                          payload:payloadData
+                           fields:customFields];
     }
     self.activityIndicator.hidesWhenStopped = TRUE;
     [self.activityIndicator startAnimating];
@@ -400,7 +411,6 @@ NSUInteger currentAttachmentItemIndex = 0;
     [self dismissModalViewControllerAnimated:YES];
 
     self.descriptionField.text = @"";
-    self.subjectField.text = @"";
     [[self.screenshotButton viewWithTag:20] removeFromSuperview];
     [self.attachments removeAllObjects];
     [self.attachmentBar setItems:nil];
@@ -421,7 +431,7 @@ NSUInteger currentAttachmentItemIndex = 0;
 //    return YES;
 }
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, subjectField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar;
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
 
@@ -436,7 +446,6 @@ NSUInteger currentAttachmentItemIndex = 0;
             self.attachments,
             self.voiceButton,
             self.progressView,
-            self.subjectField,
             self.replyToIssue,
             self.countdownView,
             self.issueTransport,
@@ -460,7 +469,6 @@ NSUInteger currentAttachmentItemIndex = 0;
             self.attachments,
             self.voiceButton,
             self.progressView,
-            self.subjectField,
             self.replyToIssue,
             self.countdownView,
             self.issueTransport,

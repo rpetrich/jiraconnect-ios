@@ -20,7 +20,6 @@
 	IBOutlet UIButton* voiceButton;
 	IBOutlet UIButton* screenshotButton;
 
-    IBOutlet UITextField* subjectField;
     IBOutlet UITextView* descriptionField;
     IBOutlet UIToolbar* attachmentBar;
     IBOutlet UIImageView* buttonBar;
@@ -44,7 +43,6 @@
 @property (retain, nonatomic) IBOutlet UIButton* voiceButton;
 @property (retain, nonatomic) IBOutlet UIButton* screenshotButton;
 @property (retain, nonatomic) IBOutlet UITextView* descriptionField;
-@property (retain, nonatomic) IBOutlet UITextField* subjectField;
 @property (retain, nonatomic) IBOutlet UIToolbar* attachmentBar;
 @property (retain, nonatomic) IBOutlet UIImageView* buttonBar;
 

@@ -182,12 +182,6 @@ static float detailLabelHeight = 21.0f;
 
     feedbackController.replyToIssue = self.issue;
     feedbackController.replyTransport.delegate = self;
-    feedbackController.subjectField.hidden = YES;
-    CGRect subjFrame = feedbackController.subjectField.frame;
-    CGRect descFrame = feedbackController.descriptionField.frame;
-    CGRect newDescFrame = CGRectMake(subjFrame.origin.x, subjFrame.origin.y,
-            subjFrame.size.width, subjFrame.size.height + descFrame.size.height + 10);
-    feedbackController.descriptionField.frame = newDescFrame;
     feedbackController.navigationItem.title = @"Reply";
 
     [feedbackController release];

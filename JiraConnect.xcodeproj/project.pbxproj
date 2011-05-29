@@ -6,25 +6,6 @@
 	objectVersion = 45;
 	objects = {
 
-/* Begin PBXBookmark section */
-		018B9352129CFE0C00E06949 /* PBXBookmark */ = {
-			isa = PBXBookmark;
-			fRef = 8D2FA79A1281395400828713 /* charles_320x480.png */;
-		};
-		018B9357129CFE0C00E06949 /* PBXBookmark */ = {
-			isa = PBXBookmark;
-			fRef = 8D2FA8D01282565400828713;
-		};
-		018B9359129CFE0C00E06949 /* PBXBookmark */ = {
-			isa = PBXBookmark;
-			fRef = 8D5063C71281154300B3E1A0;
-		};
-		01CF1DDF131D01C500A94A3A /* PBXBookmark */ = {
-			isa = PBXBookmark;
-			fRef = 8D5063C71281154300B3E1A0;
-		};
-/* End PBXBookmark section */
-
 /* Begin PBXBuildFile section */
 		013C7AC91382815F00295420 /* button_capture.png in Resources */ = {isa = PBXBuildFile; fileRef = 013C7ABB1382815F00295420 /* button_capture.png */; };
 		013C7ACA1382815F00295420 /* button_capture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013C7ABC1382815F00295420 /* button_capture@2x.png */; };
@@ -144,44 +125,6 @@
 		C01FCF5008A954540054248D /* JCOSketchContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A954540054248C /* JCOSketchContainerView.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCodeSenseManager section */
-		016634C91281618100287BB9 /* Code sense */ = {
-			isa = PBXCodeSenseManager;
-			indexTemplatePath = "";
-		};
-/* End PBXCodeSenseManager section */
-
-/* Begin PBXExecutable section */
-		016634B61281617900287BB9 /* JiraConnect */ = {
-			isa = PBXExecutable;
-			activeArgIndices = (
-			);
-			argumentStrings = (
-			);
-			autoAttachOnCrash = 1;
-			breakpointsEnabled = 0;
-			configStateDict = {
-			};
-			customDataFormattersEnabled = 1;
-			dataTipCustomDataFormattersEnabled = 1;
-			dataTipShowTypeColumn = 1;
-			dataTipSortType = 0;
-			debuggerPlugin = GDBDebugging;
-			disassemblyDisplayState = 0;
-			dylibVariantSuffix = "";
-			enableDebugStr = 1;
-			environmentEntries = (
-			);
-			executableSystemSymbolLevel = 0;
-			executableUserSymbolLevel = 0;
-			libgmallocEnabled = 0;
-			name = JiraConnect;
-			showTypeColumn = 0;
-			sourceDirectories = (
-			);
-		};
-/* End PBXExecutable section */
-
 /* Begin PBXFileReference section */
 		013C7ABB1382815F00295420 /* button_capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_capture.png; sourceTree = "<group>"; };
 		013C7ABC1382815F00295420 /* button_capture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_capture@2x.png"; sourceTree = "<group>"; };
@@ -251,12 +194,6 @@
 		01CB106F1390F34D00F79FBB /* bgGame1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgGame1x.png; sourceTree = "<group>"; };
 		01CD0B69137FE4EF00A6D749 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		01CD0B71137FEFD600A6D749 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
-		01CF1DE3131D01C500A94A3A /* UserServiceFuncTest.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = UserServiceFuncTest.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/crucible/functest/spi/UserServiceFuncTest.java"; sourceTree = "<absolute>"; };
-		01CF1DE5131D01C500A94A3A /* UserServiceFuncTest.java */ = {isa = PBXFileReference; name = UserServiceFuncTest.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/crucible/functest/spi/UserServiceFuncTest.java"; sourceTree = "<absolute>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1364, 1547}}"; sepNavSelRange = "{711, 627}"; sepNavVisRange = "{0, 2210}"; sepNavWindowFrame = "{{61, 132}, {1423, 849}}"; }; };
-		01CF1DE9131D01C500A94A3A /* DashboardPage.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = DashboardPage.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/fisheye/pages/DashboardPage.java"; sourceTree = "<absolute>"; };
-		01CF1DEB131D01C500A94A3A /* DashboardPage.java */ = {isa = PBXFileReference; name = DashboardPage.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/fisheye/pages/DashboardPage.java"; sourceTree = "<absolute>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1364, 721}}"; sepNavSelRange = "{235, 799}"; sepNavVisRange = "{0, 1034}"; sepNavWindowFrame = "{{38, 153}, {1423, 849}}"; }; };
-		01CF1DEF131D01C500A94A3A /* ReviewFuncTest.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; name = ReviewFuncTest.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/fisheye/functest/review/ReviewFuncTest.java"; sourceTree = "<absolute>"; uiCtxt = {sepNavWindowFrame = "{{15, 174}, {1423, 849}}"; }; };
-		01CF1DF1131D01C500A94A3A /* ReviewFuncTest.java */ = {isa = PBXFileReference; name = ReviewFuncTest.java; path = "/Users/nick/work/FE-default/test/plugins/fisheye/fecru-functest-plugin/src/main/java/com/atlassian/fisheye/functest/review/ReviewFuncTest.java"; sourceTree = "<absolute>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1364, 1794}}"; sepNavSelRange = "{810, 653}"; sepNavVisRange = "{0, 2193}"; }; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -282,15 +219,15 @@
 		72F3F0211331D40800FBF320 /* JCOComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOComment.m; sourceTree = "<group>"; };
 		8D2FA70212812F2B00828713 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = Resources/CrashReporter.framework; sourceTree = "<group>"; };
 		8D2FA78412812FB600828713 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		8D2FA7921281326100828713 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsViewController.h; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 598}}"; sepNavSelRange = "{0, 0}"; sepNavVisRange = "{0, 1714}"; }; };
+		8D2FA7921281326100828713 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsViewController.h; sourceTree = "<group>"; };
 		8D2FA7931281326100828713 /* AngryNerdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsViewController.m; sourceTree = "<group>"; };
 		8D2FA7951281327500828713 /* AngryNerdsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AngryNerdsViewController.xib; sourceTree = "<group>"; };
-		8D2FA79A1281395400828713 /* charles_320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_320x480.png; sourceTree = "<group>"; uiCtxt = {sepNavWindowFrame = "{{15, 174}, {1423, 849}}"; }; };
+		8D2FA79A1281395400828713 /* charles_320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_320x480.png; sourceTree = "<group>"; };
 		8D2FA81C1282351900828713 /* JCOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOTransport.h; sourceTree = "<group>"; };
 		8D2FA81D1282351900828713 /* JCOTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOTransport.m; sourceTree = "<group>"; };
 		8D2FA9021282614A00828713 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		8D2FA96412826BB100828713 /* JCORecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCORecorder.h; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 517}}"; sepNavSelRange = "{220, 11}"; sepNavVisRange = "{0, 478}"; }; };
-		8D2FA96512826BB100828713 /* JCORecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCORecorder.m; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 1638}}"; sepNavSelRange = "{3044, 0}"; sepNavVisRange = "{2508, 1024}"; }; };
+		8D2FA96412826BB100828713 /* JCORecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCORecorder.h; sourceTree = "<group>"; };
+		8D2FA96512826BB100828713 /* JCORecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCORecorder.m; sourceTree = "<group>"; };
 		8D2FAC3A1283DAA000828713 /* JCOCrashSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashSender.h; sourceTree = "<group>"; };
 		8D2FAC3B1283DAA000828713 /* JCOCrashSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOCrashSender.m; sourceTree = "<group>"; };
 		8D50637212810ED300B3E1A0 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -311,7 +248,7 @@
 		8D50638112810ED300B3E1A0 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
 		8D50638212810ED300B3E1A0 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		8D50638312810ED300B3E1A0 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
-		8D50638D12810F9B00B3E1A0 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 3016}}"; sepNavSelRange = "{0, 0}"; sepNavVisRange = "{0, 1870}"; }; };
+		8D50638D12810F9B00B3E1A0 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		8D50638E12810F9B00B3E1A0 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		8D50638F12810F9B00B3E1A0 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		8D50639012810F9B00B3E1A0 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
@@ -326,13 +263,13 @@
 		8D5063A11281111D00B3E1A0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8D5063A31281111D00B3E1A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8D5063A51281111D00B3E1A0 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
-		8D5063B31281123500B3E1A0 /* JCOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOViewController.h; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 598}}"; sepNavSelRange = "{238, 0}"; sepNavVisRange = "{0, 1212}"; }; };
-		8D5063B41281123500B3E1A0 /* JCOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOViewController.m; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 2223}}"; sepNavSelRange = "{1817, 4}"; sepNavVisRange = "{1442, 945}"; }; };
+		8D5063B31281123500B3E1A0 /* JCOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOViewController.h; sourceTree = "<group>"; };
+		8D5063B41281123500B3E1A0 /* JCOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOViewController.m; sourceTree = "<group>"; };
 		8D5063B51281123500B3E1A0 /* JCOViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCOViewController.xib; sourceTree = "<group>"; };
 		8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
 		8D5063C3128114E600B3E1A0 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		8D5063C91281157B00B3E1A0 /* JCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCO.h; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 503}}"; sepNavSelRange = "{0, 0}"; sepNavVisRange = "{0, 531}"; }; };
-		8D5063CA1281157B00B3E1A0 /* JCO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCO.m; sourceTree = "<group>"; uiCtxt = {sepNavIntBoundsRect = "{{0, 0}, {1149, 1456}}"; sepNavSelRange = "{0, 0}"; sepNavVisRange = "{0, 823}"; }; };
+		8D5063C91281157B00B3E1A0 /* JCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCO.h; sourceTree = "<group>"; };
+		8D5063CA1281157B00B3E1A0 /* JCO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCO.m; sourceTree = "<group>"; };
 		8D5063E7128116BF00B3E1A0 /* JCOPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOPing.h; sourceTree = "<group>"; };
 		8D5063E8128116BF00B3E1A0 /* JCOPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOPing.m; sourceTree = "<group>"; };
 		8D5063EB128116BF00B3E1A0 /* JCONotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotifier.h; sourceTree = "<group>"; };
@@ -751,7 +688,6 @@
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* JiraConnect */ = {
 			isa = PBXNativeTarget;
-			activeExec = 0;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "JiraConnect" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
@@ -761,9 +697,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			executables = (
-				016634B61281617900287BB9 /* JiraConnect */,
 			);
 			name = JiraConnect;
 			productName = JiraConnect;
@@ -775,20 +708,12 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			activeBuildConfigurationName = Debug;
-			activeExecutable = 016634B61281617900287BB9 /* JiraConnect */;
-			activeSDKPreference = iphonesimulator4.2;
-			activeTarget = 1D6058900D05DD3D006BFB54 /* JiraConnect */;
 			attributes = {
 				ORGANIZATIONNAME = Atlassian;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JiraConnect" */;
-			codeSenseManager = 016634C91281618100287BB9 /* Code sense */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
-			executables = (
-				016634B61281617900287BB9 /* JiraConnect */,
-			);
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -799,82 +724,11 @@
 				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
-			perUserDictionary = {
-				PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
-					PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
-					PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
-					PBXFileTableDataSourceColumnWidthsKey = (
-						20,
-						971,
-						20,
-						48,
-						43,
-						43,
-						20,
-					);
-					PBXFileTableDataSourceColumnsKey = (
-						PBXFileDataSource_FiletypeID,
-						PBXFileDataSource_Filename_ColumnID,
-						PBXFileDataSource_Built_ColumnID,
-						PBXFileDataSource_ObjectSize_ColumnID,
-						PBXFileDataSource_Errors_ColumnID,
-						PBXFileDataSource_Warnings_ColumnID,
-						PBXFileDataSource_Target_ColumnID,
-					);
-				};
-				PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
-					PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
-					PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
-					PBXFileTableDataSourceColumnWidthsKey = (
-						20,
-						931,
-						60,
-						20,
-						48.16259765625,
-						43,
-						43,
-					);
-					PBXFileTableDataSourceColumnsKey = (
-						PBXFileDataSource_FiletypeID,
-						PBXFileDataSource_Filename_ColumnID,
-						PBXTargetDataSource_PrimaryAttribute,
-						PBXFileDataSource_Built_ColumnID,
-						PBXFileDataSource_ObjectSize_ColumnID,
-						PBXFileDataSource_Errors_ColumnID,
-						PBXFileDataSource_Warnings_ColumnID,
-					);
-				};
-				PBXPerProjectTemplateStateSaveDate = 320664593;
-				PBXWorkspaceStateSaveDate = 320664593;
-			};
-			perUserProjectItems = {
-				018B9350129CFE0C00E06949 = 018B9350129CFE0C00E06949 /* PBXTextBookmark */;
-				018B9351129CFE0C00E06949 = 018B9351129CFE0C00E06949 /* PlistBookmark */;
-				018B9352129CFE0C00E06949 = 018B9352129CFE0C00E06949 /* PBXBookmark */;
-				018B9353129CFE0C00E06949 = 018B9353129CFE0C00E06949 /* PBXTextBookmark */;
-				018B9354129CFE0C00E06949 = 018B9354129CFE0C00E06949 /* PBXTextBookmark */;
-				018B9355129CFE0C00E06949 = 018B9355129CFE0C00E06949 /* PBXTextBookmark */;
-				018B9356129CFE0C00E06949 = 018B9356129CFE0C00E06949 /* PBXTextBookmark */;
-				018B9357129CFE0C00E06949 = 018B9357129CFE0C00E06949 /* PBXBookmark */;
-				018B9359129CFE0C00E06949 = 018B9359129CFE0C00E06949 /* PBXBookmark */;
-				01CDCF1312835EBA004E38B9 = 01CDCF1312835EBA004E38B9 /* PBXTextBookmark */;
-				01CDCF241283FFAE004E38B9 = 01CDCF241283FFAE004E38B9 /* PBXTextBookmark */;
-				01CF1DDF131D01C500A94A3A = 01CF1DDF131D01C500A94A3A /* PBXBookmark */;
-				01CF1DE2131D01C500A94A3A = 01CF1DE2131D01C500A94A3A /* PBXTextBookmark */;
-				01CF1DE4131D01C500A94A3A = 01CF1DE4131D01C500A94A3A /* PBXTextBookmark */;
-				01CF1DE8131D01C500A94A3A = 01CF1DE8131D01C500A94A3A /* PBXTextBookmark */;
-				01CF1DEA131D01C500A94A3A = 01CF1DEA131D01C500A94A3A /* PBXTextBookmark */;
-				01CF1DEE131D01C500A94A3A = 01CF1DEE131D01C500A94A3A /* PBXTextBookmark */;
-				01CF1DF0131D01C500A94A3A = 01CF1DF0131D01C500A94A3A /* PBXTextBookmark */;
-			};
 			projectDirPath = "";
 			projectRoot = "";
-			sourceControlManager = 016634C81281618100287BB9 /* Source Control */;
 			targets = (
 				1D6058900D05DD3D006BFB54 /* JiraConnect */,
 			);
-			userBuildSettings = {
-			};
 		};
 /* End PBXProject section */
 
@@ -947,19 +801,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXSourceControlManager section */
-		016634C81281618100287BB9 /* Source Control */ = {
-			isa = PBXSourceControlManager;
-			fallbackIsa = XCSourceControlManager;
-			isSCMEnabled = 0;
-			scmConfiguration = {
-				repositoryNamesForRoots = {
-					"" = "";
-				};
-			};
-		};
-/* End PBXSourceControlManager section */
-
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1016,130 +857,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTextBookmark section */
-		018B9350129CFE0C00E06949 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D2FA96512826BB100828713 /* JCORecorder.m */;
-			name = "JCORecorder.m: 99";
-			rLen = 0;
-			rLoc = 3044;
-			rType = 0;
-			vrLen = 1024;
-			vrLoc = 2508;
-		};
-		018B9353129CFE0C00E06949 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D5063C91281157B00B3E1A0 /* JCO.h */;
-			name = "JCO.h: 1";
-			rLen = 0;
-			rLoc = 0;
-			rType = 0;
-			vrLen = 531;
-			vrLoc = 0;
-		};
-		018B9354129CFE0C00E06949 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D5063B41281123500B3E1A0 /* JCOViewController.m */;
-			name = "JCOViewController.m: 77";
-			rLen = 4;
-			rLoc = 1817;
-			rType = 0;
-			vrLen = 945;
-			vrLoc = 1442;
-		};
-		018B9355129CFE0C00E06949 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D5063B31281123500B3E1A0 /* JCOViewController.h */;
-			name = "JCOViewController.h: 11";
-			rLen = 0;
-			rLoc = 238;
-			rType = 0;
-			vrLen = 1212;
-			vrLoc = 0;
-		};
-		018B9356129CFE0C00E06949 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D5063CA1281157B00B3E1A0 /* JCO.m */;
-			name = "JCO.m: 1";
-			rLen = 0;
-			rLoc = 0;
-			rType = 0;
-			vrLen = 823;
-			vrLoc = 0;
-		};
-		01CDCF1312835EBA004E38B9 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D50638D12810F9B00B3E1A0 /* SBJsonWriter.m */;
-			name = "SBJsonWriter.m: 1";
-			rLen = 0;
-			rLoc = 0;
-			rType = 0;
-			vrLen = 1870;
-			vrLoc = 0;
-		};
-		01CDCF241283FFAE004E38B9 /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 8D2FA96412826BB100828713 /* JCORecorder.h */;
-			name = "JCORecorder.h: 13";
-			rLen = 11;
-			rLoc = 220;
-			rType = 0;
-			vrLen = 478;
-			vrLoc = 0;
-		};
-		01CF1DE2131D01C500A94A3A /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 01CF1DE3131D01C500A94A3A /* UserServiceFuncTest.java */;
-			rLen = 0;
-			rLoc = 9223372036854775807;
-			rType = 0;
-		};
-		01CF1DE4131D01C500A94A3A /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 01CF1DE5131D01C500A94A3A /* UserServiceFuncTest.java */;
-			name = "UserServiceFuncTest.java: 18";
-			rLen = 627;
-			rLoc = 711;
-			rType = 0;
-			vrLen = 2210;
-			vrLoc = 0;
-		};
-		01CF1DE8131D01C500A94A3A /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 01CF1DE9131D01C500A94A3A /* DashboardPage.java */;
-			rLen = 0;
-			rLoc = 9223372036854775807;
-			rType = 0;
-		};
-		01CF1DEA131D01C500A94A3A /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 01CF1DEB131D01C500A94A3A /* DashboardPage.java */;
-			name = "DashboardPage.java: 9";
-			rLen = 799;
-			rLoc = 235;
-			rType = 0;
-			vrLen = 1034;
-			vrLoc = 0;
-		};
-		01CF1DEE131D01C500A94A3A /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 01CF1DEF131D01C500A94A3A /* ReviewFuncTest.java */;
-			rLen = 0;
-			rLoc = 9223372036854775807;
-			rType = 0;
-		};
-		01CF1DF0131D01C500A94A3A /* PBXTextBookmark */ = {
-			isa = PBXTextBookmark;
-			fRef = 01CF1DF1131D01C500A94A3A /* ReviewFuncTest.java */;
-			name = "ReviewFuncTest.java: 20";
-			rLen = 653;
-			rLoc = 810;
-			rType = 0;
-			vrLen = 2193;
-			vrLoc = 0;
-		};
-/* End PBXTextBookmark section */
-
 /* Begin PBXVariantGroup section */
 		01CD0B68137FE4EF00A6D749 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -1159,20 +876,6 @@
 		};
 /* End PBXVariantGroup section */
 
-/* Begin PlistBookmark section */
-		018B9351129CFE0C00E06949 /* PlistBookmark */ = {
-			isa = PlistBookmark;
-			fRef = 8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */;
-			fallbackIsa = PBXBookmark;
-			isK = 0;
-			kPath = (
-			);
-			name = "/Users/nick/work/JCONNECT/ios/JiraConnect/Resources/JiraConnect-Info.plist";
-			rLen = 0;
-			rLoc = 9223372036854775808;
-		};
-/* End PlistBookmark section */
-
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1181,9 +884,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/Volumes/PLCrashReporter-1.0/iPhone Framework\"",
 					"\"$(SRCROOT)/Resources\"",
-					"\"$(SRCROOT)/../JiraConnect-FEDEX\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1204,9 +905,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"/Volumes/PLCrashReporter-1.0/iPhone Framework\"",
 					"\"$(SRCROOT)/Resources\"",
-					"\"$(SRCROOT)/../JiraConnect-FEDEX\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JiraConnect_Prefix.pch;
