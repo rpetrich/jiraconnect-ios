@@ -1,5 +1,0 @@
-* gesture recognizers: shake to raise bug, tripple tap?
-* Link to iTunesConnect in JIRA view issue. to the users UDID
-* Add custom fields; lat+lng and create these in JIRA
-* support multiple voice recordings
-* support for annotations on images.
