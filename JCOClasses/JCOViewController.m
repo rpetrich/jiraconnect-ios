@@ -51,7 +51,7 @@ NSUInteger currentAttachmentItemIndex = 0;
             [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                            target:self
                                                            action:@selector(dismiss)] autorelease];
-    self.navigationItem.title = @"Report Issue";
+    self.navigationItem.title = NSLocalizedString(@"Feedback", "Title of the feedback controller");
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.attachmentBar.clipsToBounds = YES;

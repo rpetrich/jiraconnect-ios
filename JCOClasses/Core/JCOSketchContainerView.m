@@ -4,10 +4,7 @@
 //  To change this template use File | Settings | File Templates.
 //
 
-
 #import "JCOSketchContainerView.h"
-#import "JCOSketchView.h"
-
 
 @implementation JCOSketchContainerView
 UITouch *_touch;
@@ -25,7 +22,6 @@ UITouch *_touch;
 - (void)enableScrolling:(BOOL)enabled
 {
     UIView *view = self.superview;
-    
     if ([view respondsToSelector:@selector(setScrollEnabled:)]) {
         [(UIScrollView *)view setScrollEnabled:enabled];
     }

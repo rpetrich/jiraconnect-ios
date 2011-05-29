@@ -24,7 +24,6 @@ CLLocation *_currentLocation;
     [self.nerdsView setAnimationImages:nerds];
     [self.nerdsView setAnimationDuration:5];
     [self.nerdsView startAnimating];
-
 }
 
 - (IBAction)triggerFeedback
@@ -90,9 +89,40 @@ CLLocation *_currentLocation;
     [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
 }
 
+// allow shake gesture to trigger Feedback
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self resignFirstResponder];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    [self triggerFeedback];
+}
+
+- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+
+}
+
 - (void)jiggleNerd
 {
-    
+
     // Create the animation's path.
     CGPathRef path = NULL;
     CGMutablePathRef mutablepath = CGPathCreateMutable();
