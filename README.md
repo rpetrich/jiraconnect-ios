@@ -45,6 +45,12 @@ To use JIRAConnect in your App:
     You will also need to add
         #import "JCO.h"
     at the top of this file.
+1. The JIRA you configured above, will need to have:
+  * the jconnect-plugin installed
+  * a project named either the same as
+    ** the XCode Project,
+    ** the value returned by your [id<JCOCustomDataSource> project] method. This can be the project key in JIRA, or the project's name.
+  
 
 1. Provide a trigger mechanism to allow users invoke the Submit Feedback view:
 This will often go on an 'About' or 'Info' view. The UIViewController returned by JCO viewController is designed to be presented modally.
@@ -74,7 +80,6 @@ feedback view, and the history view.
     {
         [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
     }
-
 
 Third party Package - License - Copyright / Creator
 ===================================================
