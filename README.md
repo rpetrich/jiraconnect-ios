@@ -7,7 +7,6 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 * **User or Tester Feedback** views for allowing users or testers to create a bug report within your app.
 * **2-way Communication with Users** thank your users or testers for providing feedback on your App!
 
-
 ![Report Issue Screen](screenshots/report-issue.png) ![Crash Report Dialog](screenshots/crash-report.png) ![2-Way Communications](screenshots/replies-view.png)
 
 Getting Started
