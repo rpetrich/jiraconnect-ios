@@ -32,7 +32,7 @@
 	IBOutlet UIImagePickerController* imagePicker;
 	JCOIssueTransport*_issueTransport;
 	JCOReplyTransport* _replyTransport;
-    <JCOCustomDataSource> _payloadDataSource;
+    id<JCOCustomDataSource> _payloadDataSource;
     NSMutableArray *_attachments;
     JCORecorder* _recorder;
     JCOIssue * _replyToIssue;
