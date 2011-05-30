@@ -1,12 +1,9 @@
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
-
 #import "JCOCustomDataSource.h"
 
-@interface AngryNerdsViewController : UIViewController <JCOCustomDataSource, CLLocationManagerDelegate> {
+@interface AngryNerdsViewController : UIViewController <JCOCustomDataSource> {
 
-    CLLocationManager *_locationManager;
     IBOutlet UIButton* _nerd;
     IBOutlet UIImageView* _nerdsView;
 }

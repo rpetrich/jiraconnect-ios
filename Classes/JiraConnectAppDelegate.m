@@ -19,15 +19,15 @@
     // NOTE: JCO must be configured after the keyWindow is made (note: needs trailing slash)
     /*
         To configure JIRAConnect:
-        1. call 	[[JCO instance] configureJiraConnect:@"url to your JIRA instance" customData:<AnyCustomDataSource>];
+        1. call 	[[JCO instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
         2. You can then present [JCO instance].viewController from anywhere in your app
         3. Be sure that your JIRA instance has the JIRAConnect plugin installed and has a project with the same name as either:
            * your Application Bundle Name
            * the same value as returned by your [JCOCustomDataSource projectName]
      */
-//    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customData:viewController];
+    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
 
-    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
+//    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
 
     return YES;
 }

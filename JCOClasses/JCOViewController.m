@@ -5,6 +5,7 @@
 #import "JCOSketchViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 @implementation JCOToolbar
 
 - (void)drawRect:(CGRect)rect
@@ -17,13 +18,10 @@
 @interface JCOViewController()
 - (void)internalRelease;
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
+@property(nonatomic, retain) CLLocation *currentLocation;
 @end
 
 @implementation JCOViewController
-
-NSTimer *_timer;
-NSUInteger currentAttachmentItemIndex = 0;
-CGRect descriptionFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +30,6 @@ CGRect descriptionFrame;
         self.issueTransport = [[[JCOIssueTransport alloc] init] autorelease];
         self.replyTransport = [[[JCOReplyTransport alloc] init] autorelease];
         self.recorder = [[[JCORecorder alloc] init] autorelease];
-
     }
     return self;
 }
@@ -40,6 +37,18 @@ CGRect descriptionFrame;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    sendLocationData = NO;
+    if ([self.payloadDataSource respondsToSelector:@selector(locationEnabled)]) {
+        sendLocationData = [[self payloadDataSource] locationEnabled];
+    }
+    
+    if (sendLocationData && [CLLocationManager locationServicesEnabled]) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+    }
+    
     // layout views
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
@@ -375,15 +384,34 @@ CGRect descriptionFrame;
 
     self.issueTransport.delegate = self;
     NSDictionary *payloadData = nil;
-    NSDictionary *customFields = nil;
+    NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
 
     if ([self.payloadDataSource respondsToSelector:@selector(payload)]) {
-        payloadData = [self.payloadDataSource payload];
+        payloadData = [[self.payloadDataSource payload] retain];
     }
     if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {
-        customFields = [self.payloadDataSource customFields];
+        [customFields addEntriesFromDictionary:[self.payloadDataSource customFields]];
     }
 
+
+    if (sendLocationData && [self currentLocation]) {
+        NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
+        NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
+        @synchronized (self) {
+            NSNumber *lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+            NSNumber *lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
+            [keys addObject:@"lat"];      [objects addObject:lat];
+            [keys addObject:@"lng"];      [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
+        }        
+        // Merge the location into the existing customFields.
+        NSDictionary *dict = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+        [customFields addEntriesFromDictionary:dict];
+        [dict release];
+    }
+
+    
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
     } else {
@@ -400,6 +428,9 @@ CGRect descriptionFrame;
     }
     self.activityIndicator.hidesWhenStopped = TRUE;
     [self.activityIndicator startAnimating];
+    
+    [payloadData release];
+    [customFields release];
 }
 
 - (void)transportDidFinish
@@ -430,7 +461,16 @@ CGRect descriptionFrame;
 //    return YES;
 }
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar;
+#pragma mark -
+#pragma mark CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{    
+    @synchronized (self) {
+        [self setCurrentLocation: newLocation];
+    }
+}
+
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar, currentLocation;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
 
@@ -464,7 +504,8 @@ CGRect descriptionFrame;
     self.screenshotButton = nil;
     self.descriptionField = nil;
     self.activityIndicator = nil;
-    self.payloadDataSource = nil;    
+    self.payloadDataSource = nil; 
+    self.currentLocation = nil;
 }
 
 @end

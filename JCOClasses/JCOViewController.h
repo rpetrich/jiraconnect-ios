@@ -7,14 +7,15 @@
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
 #import "JCOSketchViewControllerDelegate.h"
-
+#import <CoreLocation/CoreLocation.h>
 
 @interface JCOToolbar : UIToolbar {
 
 }
 @end
 
-@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JCOSketchViewControllerDelegate, UIAlertViewDelegate> {
+@interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JCOSketchViewControllerDelegate, UIAlertViewDelegate,
+    CLLocationManagerDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;
@@ -37,7 +38,13 @@
     JCORecorder* _recorder;
     JCOIssue * _replyToIssue;
     
-
+    @private
+    NSTimer *_timer;
+    NSUInteger currentAttachmentItemIndex;
+    CGRect descriptionFrame;
+    CLLocation *currentLocation;
+    CLLocationManager *_locationManager;
+    BOOL sendLocationData;
 }
 @property (retain, nonatomic) IBOutlet UIButton* sendButton;
 @property (retain, nonatomic) IBOutlet UIButton* voiceButton;

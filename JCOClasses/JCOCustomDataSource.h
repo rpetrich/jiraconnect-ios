@@ -26,4 +26,9 @@
 */
 -(NSString *)project;
 
+/**
+ * If YES the location data (lat/lng) will be sent as a part of the issue, this is disabled by default.
+ */
+-(BOOL) locationEnabled;
+
 @end
