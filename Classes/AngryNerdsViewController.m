@@ -30,7 +30,9 @@
 {
     NSLog(@"Triggering crash!");
     /* Trigger a crash. NB: if run from XCode, the sigquit handler wont be called to store crash data. */
+#ifndef __clang_analyzer__
     CFRelease(NULL);
+#endif
 }
 
 #pragma mark JCOCustomDataSource
@@ -123,7 +125,9 @@
         self.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         NSLog(@"Crashing...");
+#ifndef __clang_analyzer__
         CFRelease(NULL);
+#endif
     }];
 }
 
