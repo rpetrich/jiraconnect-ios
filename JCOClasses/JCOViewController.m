@@ -478,7 +478,7 @@
 #pragma mark -
 #pragma mark CRVActivityViewDelegate
 -(void) userDidCancelActivity {
-    //    [[self issueTransport] cancel];
+    [[self issueTransport] cancel];
 }
 
 #pragma mark -

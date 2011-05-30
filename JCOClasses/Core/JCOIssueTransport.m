@@ -8,8 +8,13 @@
 #import "JCOIssueTransport.h"
 #import "JCO.h"
 
+@interface JCOIssueTransport()
+@property(nonatomic, retain) ASIFormDataRequest *createIssueRequest;
+@end
 
 @implementation JCOIssueTransport
+
+@synthesize createIssueRequest;
 
 - (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
@@ -22,6 +27,7 @@
     NSLog(@"Sending feedback to:    %@", url.absoluteString);
 
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
+    [self setCreateIssueRequest:upRequest];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (subject) {
         [params setObject:subject forKey:@"summary"];
@@ -34,10 +40,19 @@
     [upRequest startAsynchronous];
 }
 
+-(void) cancel {
+    [[self createIssueRequest] cancel];
+}
+
 #pragma mark UIAlertViewDelelgate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
 }
 
+
+-(void) dealloc {
+    [createIssueRequest release];
+    [super dealloc];
+}
 
 @end
