@@ -14,11 +14,9 @@
 }
 @end
 
-@interface JCOViewController ()
-
-
+@interface JCOViewController(PrivateMethods)
+- (void)internalRelease;
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
-
 @end
 
 @implementation JCOViewController
@@ -438,47 +436,35 @@ CGRect descriptionFrame;
 
 - (void)dealloc
 {
-// Release any retained subviews of the main view.
-    self.attachmentBar,
-            self.recorder,
-            self.buttonBar,
-            self.sendButton,
-            self.imagePicker,
-            self.attachments,
-            self.voiceButton,
-            self.progressView,
-            self.replyToIssue,
-            self.countdownView,
-            self.issueTransport,
-            self.replyTransport,
-            self.screenshotButton,
-            self.descriptionField,
-            self.activityIndicator,
-            self.payloadDataSource = nil;
-
+    // Release any retained subviews of the main view.
+    [self internalRelease];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     // Release any retained subviews of the main view.
-    self.attachmentBar,
-            self.recorder,
-            self.buttonBar,
-            self.sendButton,
-            self.imagePicker,
-            self.attachments,
-            self.voiceButton,
-            self.progressView,
-            self.replyToIssue,
-            self.countdownView,
-            self.issueTransport,
-            self.replyTransport,
-            self.screenshotButton,
-            self.descriptionField,
-            self.activityIndicator,
-            self.payloadDataSource = nil;
+    [self internalRelease];
     [super viewDidUnload];
+}
+
+-(void) internalRelease {
+    self.attachmentBar = nil;
+    self.recorder = nil;
+    self.buttonBar = nil;
+    self.sendButton = nil;
+    self.imagePicker = nil;
+    self.attachments = nil;
+    self.voiceButton = nil;
+    self.progressView = nil;
+    self.replyToIssue = nil;
+    self.countdownView = nil;
+    self.issueTransport = nil;
+    self.replyTransport = nil;
+    self.screenshotButton = nil;
+    self.descriptionField = nil;
+    self.activityIndicator = nil;
+    self.payloadDataSource = nil;    
 }
 
 @end
