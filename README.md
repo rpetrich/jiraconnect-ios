@@ -41,7 +41,7 @@ To use JIRAConnect in your App:
 
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 method, add the following line:
-    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customData:nil];
+    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:nil];
 
 1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
 

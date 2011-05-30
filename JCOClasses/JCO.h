@@ -23,7 +23,7 @@
 * If custom data is required to be attached to each crash and issue report, then provide a JCOCustomDatSource. If
 * no custom data is required, then pass in nil.
 */
-- (void) configureJiraConnect:(NSString*) withUrl customData:(id<JCOCustomDataSource>)customData;
+- (void) configureJiraConnect:(NSString*) withUrl customDataSource:(id<JCOCustomDataSource>)customDataSource;
 
 /**
 * Retrieves the main viewController for JIRAConnect. This controller holds the 'create issue' view.

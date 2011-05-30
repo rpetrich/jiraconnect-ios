@@ -56,7 +56,7 @@ id <JCOCustomDataSource> _customDataSource;
     }
 }
 
-- (void)configureJiraConnect:(NSString *)withUrl customData:(id <JCOCustomDataSource>)customData
+- (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JCOCustomDataSource>)customDataSource
 {
     self.url = [NSURL URLWithString:withUrl];
     [self generateAndStoreUUID];
@@ -66,7 +66,7 @@ id <JCOCustomDataSource> _customDataSource;
     _pinger.baseUrl = self.url;
     [_pinger start];
 
-    _customDataSource = customData;
+    _customDataSource = customDataSource;
     _jcController.payloadDataSource = _customDataSource;
 
     // TODO: firing this when network becomes active would be better

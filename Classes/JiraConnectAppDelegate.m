@@ -27,7 +27,7 @@
      */
 //    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customData:viewController];
 
-    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customData:viewController];
+    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
 
     return YES;
 }
