@@ -5,50 +5,47 @@
 //
 #import "JCOMessageBubble.h"
 
+@interface JCOMessageBubble()
+@property (nonatomic, retain) UIImageView *bubble;
+
+@end
+
 @implementation JCOMessageBubble
 
-@synthesize bubble = _bubble;
-@synthesize detailLabel = _detailLabel;
-@synthesize label = _label;
-
-float detailLabelHeight;
+@synthesize bubble, detailLabel, label;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifierComment detailHeight:(float)detailHeight {
 
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifierComment])) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.bubble = [[UIImageView alloc] initWithFrame:CGRectZero];
+        bubble = [[UIImageView alloc] initWithFrame:CGRectZero];
 
         detailLabelHeight = detailHeight;
 
-        self.label = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.label.tag = 2;
-        self.label.numberOfLines = 0;
-        self.label.lineBreakMode = UILineBreakModeWordWrap;
-        self.label.backgroundColor = [UIColor clearColor];
+        label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.tag = 2;
+        label.numberOfLines = 0;
+        label.lineBreakMode = UILineBreakModeWordWrap;
+        label.backgroundColor = [UIColor clearColor];
 
-        self.detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, detailLabelHeight)];
-        self.detailLabel.tag = 3;
-        self.detailLabel.numberOfLines = 1;
-        self.detailLabel.lineBreakMode = UILineBreakModeClip;
-        self.detailLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
-        self.detailLabel.textColor = [UIColor darkGrayColor];
+        detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, detailLabelHeight)];
+        detailLabel.tag = 3;
+        detailLabel.numberOfLines = 1;
+        detailLabel.lineBreakMode = UILineBreakModeClip;
+        detailLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
+        detailLabel.textColor = [UIColor darkGrayColor];
 
-        self.detailLabel.backgroundColor = [UIColor clearColor];
-        self.detailLabel.textAlignment = UITextAlignmentCenter;
+        detailLabel.backgroundColor = [UIColor clearColor];
+        detailLabel.textAlignment = UITextAlignmentCenter;
 
         UIView *message = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        [message addSubview:self.detailLabel];
-        [message addSubview:self.bubble];
-        [message addSubview:self.label];
+        [message addSubview:detailLabel];
+        [message addSubview:bubble];
+        [message addSubview:label];
 
         [self.contentView addSubview:message];
 
-        [self.bubble release];
         [message release];
-        [self.detailLabel release];
-        [self.label release];
-
     }
     return self;
 }
@@ -81,9 +78,9 @@ float detailLabelHeight;
 }
 
 - (void)dealloc {
-    [_bubble release];
-    [_detailLabel release];
-    [_label release];
+    [bubble release];
+    [detailLabel release];
+    [label release];
     [super dealloc];
 }
 

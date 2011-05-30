@@ -10,12 +10,13 @@
 
 @interface JCOMessageBubble : UITableViewCell {
     
-    UIImageView *_bubble;
-    UILabel *_label;
-    UILabel *_detailLabel;
+    @private
+    UIImageView *bubble;
+    UILabel *label;
+    UILabel *detailLabel;
+    float detailLabelHeight;
 }
 
-@property (nonatomic, retain) UIImageView *bubble;
 @property (nonatomic, retain) UILabel *label;
 @property (nonatomic, retain) UILabel *detailLabel;
 

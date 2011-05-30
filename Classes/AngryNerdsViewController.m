@@ -114,6 +114,7 @@
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     animation.delegate = self;
     [self.nerdsView.layer addAnimation:animation forKey:@"rotationAnimation"];
+    CGPathRelease(path);
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
