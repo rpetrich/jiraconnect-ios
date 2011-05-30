@@ -15,7 +15,7 @@ Getting Started
 To install JIRAConnect into your current project:
 -------------------------------------------------
 
-1. <pre>git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios</pre>
+1. <tt>git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios</tt>
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JCOClasses directory to your project.
 1. Select the project (top most) element in the file/groups tree
@@ -35,25 +35,26 @@ To install JIRAConnect into your current project:
 
 To use JIRAConnect in your App:
 -------------------------------
-1. In your App's AppDelegate.m, at the *end* of the
+1. Import the JCO.h header file into your ApplicationDelegate
+    #import "JCO.h"
+1. Configure the [JCO instance] at the *end* of the ApplicationDelegate.m like so:
 
-    <pre>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions </pre>
-    method, add the following line:
-    <pre>[[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customData:nil];</pre>
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+method, add the following line:
+    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customData:nil];
 
-1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to. You will also need to add
-    <pre>#import "JCO.h"</pre>
-    at the top of this file.
+1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
+
 1. The JIRA URL you configured above, will need to have:
   * the jconnect-plugin installed
   * a project named either the same as
     ** the XCode Project,
-    ** the value returned by your [id<JCOCustomDataSource> project] method. This can be the project key in JIRA, or the project's name.
+    ** the value returned by your [id&lt;JCOCustomDataSource&gt; project] method. This can be the project key in JIRA, or the project's name.
 
 1. Provide a trigger mechanism to allow users invoke the Submit Feedback view. This typically goes on the 'About' or 'Info' view.
 The UIViewController returned by JCO viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
-<pre>
+
     #import "JCO.h"
 
     - (void)viewDidLoad
@@ -77,7 +78,7 @@ If your info ViewController is in a UINavigationController stack, then you can u
     {
         [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
     }
-</pre>
+
 
 Third party Package - License - Copyright / Creator
 ===================================================
