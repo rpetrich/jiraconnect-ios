@@ -66,6 +66,7 @@ CGRect descriptionFrame;
     self.attachmentBar.top = self.descriptionField.bottom + descriptionFieldInset;
     self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - descriptionFieldInset;
     self.activityIndicator.center = self.descriptionField.center;
+    
 
     // align the button titles nicer
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 5, 0);
