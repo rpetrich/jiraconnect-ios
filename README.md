@@ -36,12 +36,17 @@ To install JIRAConnect into your current project:
 To use JIRAConnect in your App:
 -------------------------------
 1. Import the JCO.h header file into your ApplicationDelegate
-    #import "JCO.h"
+
+    \#import "JCO.h"
+
 1. Configure the [JCO instance] at the *end* of the ApplicationDelegate.m like so:
 
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+
+    \- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 method, add the following line:
+
     [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:nil];
+
 
 1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
 
@@ -55,30 +60,32 @@ method, add the following line:
 The UIViewController returned by JCO viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
 
-    #import "JCO.h"
 
-    - (void)viewDidLoad
-    {
-        self.navigationItem.rightBarButtonItem =
-        [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                       target:self
-                                                       action:@selector(showFeedback)] autorelease];
-        self.navigationItem.leftBarButtonItem =
-        [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                       target:self
-                                                       action:@selector(showPastFeedback)] autorelease];
-    }
+<pre>
+#import "JCO.h"
 
-    -(void) showFeedback
-    {
-        [self presentModalViewController:[[JCO instance] viewController] animated:YES];
-    }
+- (void)viewDidLoad
+{
+    self.navigationItem.rightBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                   target:self
+                                                   action:@selector(showFeedback)] autorelease];
+    self.navigationItem.leftBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                                   target:self
+                                                   action:@selector(showPastFeedback)] autorelease];
+}
 
-    -(void) showPastFeedback
-    {
-        [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
-    }
+-(void) showFeedback
+{
+    [self presentModalViewController:[[JCO instance] viewController] animated:YES];
+}
 
+-(void) showPastFeedback
+{
+    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+}
+</pre>
 
 Third party Package - License - Copyright / Creator
 ===================================================
