@@ -46,7 +46,7 @@ CLLocation *_currentLocation;
     return @"AngryNerds";
 }
 
-- (NSDictionary *)customFieldsFor
+- (NSDictionary *)customFields
 {
     NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
     NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
@@ -63,7 +63,7 @@ CLLocation *_currentLocation;
     return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 }
 
-- (NSDictionary *)payloadFor
+- (NSDictionary *)payload
 {
     return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
 }

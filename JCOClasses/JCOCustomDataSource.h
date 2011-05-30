@@ -12,13 +12,13 @@
 /**
 * Return a dictionary that will be serialized to json and attached to any feedback created by the user.
 */
--(NSDictionary *) payloadFor;
+-(NSDictionary *) payload;
 
 /**
 * A dictionary containing any specialized custom fields (keyed by custom field name) 
 * to be set on any JIRAs created by JIRA Connect.
 */
--(NSDictionary *) customFieldsFor;
+-(NSDictionary *) customFields;
 
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.

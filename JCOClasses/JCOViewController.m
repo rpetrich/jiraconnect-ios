@@ -379,11 +379,11 @@ CGRect descriptionFrame;
     NSDictionary *payloadData = nil;
     NSDictionary *customFields = nil;
 
-    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor)]) {
-        payloadData = [self.payloadDataSource payloadFor];
+    if ([self.payloadDataSource respondsToSelector:@selector(payload)]) {
+        payloadData = [self.payloadDataSource payload];
     }
-    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor)]) {
-        customFields = [self.payloadDataSource customFieldsFor];
+    if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {
+        customFields = [self.payloadDataSource customFields];
     }
 
     if (self.replyToIssue) {
