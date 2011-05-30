@@ -14,7 +14,7 @@
 }
 @end
 
-@interface JCOViewController(PrivateMethods)
+@interface JCOViewController()
 - (void)internalRelease;
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
 @end
