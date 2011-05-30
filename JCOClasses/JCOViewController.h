@@ -8,6 +8,7 @@
 #import "JCOReplyTransport.h"
 #import "JCOSketchViewControllerDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import "CRVActivityView.h"
 
 @interface JCOToolbar : UIToolbar {
 
@@ -15,7 +16,7 @@
 @end
 
 @interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JCOSketchViewControllerDelegate, UIAlertViewDelegate,
-    CLLocationManagerDelegate> {
+    CLLocationManagerDelegate, CRVActivityViewDelegate> {
 
 	IBOutlet UIButton* sendButton;
 	IBOutlet UIButton* voiceButton;
@@ -27,7 +28,6 @@
 
 	IBOutlet UILabel* countdownTimer;
 	IBOutlet UIProgressView* progressView;
-	IBOutlet UIActivityIndicatorView* activityIndicator;
 	IBOutlet UIView* countdownView;
 	
 	IBOutlet UIImagePickerController* imagePicker;
@@ -45,6 +45,7 @@
     CLLocation *currentLocation;
     CLLocationManager *_locationManager;
     BOOL sendLocationData;
+    CRVActivityView *activityView;
 }
 @property (retain, nonatomic) IBOutlet UIButton* sendButton;
 @property (retain, nonatomic) IBOutlet UIButton* voiceButton;
@@ -55,7 +56,6 @@
 
 @property (retain, nonatomic) IBOutlet UIView* countdownView;
 @property (retain, nonatomic) IBOutlet UIProgressView* progressView;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
 
 @property (retain, nonatomic) IBOutlet UIImagePickerController* imagePicker;
 

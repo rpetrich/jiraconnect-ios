@@ -19,6 +19,7 @@
 - (void)internalRelease;
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
 @property(nonatomic, retain) CLLocation *currentLocation;
+@property(nonatomic, retain) CRVActivityView *activityView;
 @end
 
 @implementation JCOViewController
@@ -61,6 +62,7 @@
                                                            action:@selector(dismiss)] autorelease];
     self.navigationItem.title = NSLocalizedString(@"Feedback", "Title of the feedback controller");
 
+    
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.attachmentBar.clipsToBounds = YES;
     self.attachmentBar.items = nil;
@@ -72,7 +74,6 @@
     descriptionFrame = self.descriptionField.frame;
     self.attachmentBar.top = self.descriptionField.bottom + descriptionFieldInset;
     self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - descriptionFieldInset;
-    self.activityIndicator.center = self.descriptionField.center;
     
 
     // align the button titles nicer
@@ -381,6 +382,13 @@
 
 - (IBAction)sendFeedback
 {
+    
+    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view]];
+    [av setText:NSLocalizedString(@"Sending...", @"")];
+	[av startAnimating];
+	[av setDelegate:self];
+	[self setActivityView: av];
+	[av release];
 
     self.issueTransport.delegate = self;
     NSDictionary *payloadData = nil;
@@ -426,18 +434,14 @@
                           payload:payloadData
                            fields:customFields];
     }
-    self.activityIndicator.hidesWhenStopped = TRUE;
-    [self.activityIndicator startAnimating];
     
     [payloadData release];
     [customFields release];
 }
 
 - (void)transportDidFinish
-{
-
-    [self.activityIndicator stopAnimating];
-
+{    
+    [[self activityView] stopAnimating];
     [self dismissModalViewControllerAnimated:YES];
 
     self.descriptionField.text = @"";
@@ -448,7 +452,7 @@
 
 - (void)transportDidFinishWithError:(NSError *)error
 {
-    [self.activityIndicator stopAnimating];
+	[[self activityView] stopAnimating];
 }
 
 #pragma mark end
@@ -470,7 +474,17 @@
     }
 }
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar, currentLocation;
+
+#pragma mark -
+#pragma mark CRVActivityViewDelegate
+-(void) userDidCancelActivity {
+    //    [[self issueTransport] cancel];
+}
+
+#pragma mark -
+#pragma mark Memory Managment
+
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, buttonBar, currentLocation, activityView;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
 
@@ -503,9 +517,9 @@
     self.replyTransport = nil;
     self.screenshotButton = nil;
     self.descriptionField = nil;
-    self.activityIndicator = nil;
     self.payloadDataSource = nil; 
     self.currentLocation = nil;
+    self.activityView = nil;
 }
 
 @end
