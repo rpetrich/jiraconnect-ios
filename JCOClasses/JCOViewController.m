@@ -405,18 +405,15 @@
 
 
     if (sendLocationData && [self currentLocation]) {
-        NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
-        NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
+        NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
+        NSMutableArray *keys =    [NSMutableArray arrayWithCapacity:3];
         @synchronized (self) {
             NSNumber *lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
             NSNumber *lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
             NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
-            [keys addObject:@"lat"];
-            [objects addObject:lat];
-            [keys addObject:@"lng"];
-            [objects addObject:lng];
-            [keys addObject:@"location"];
-            [objects addObject:locationString];
+            [keys addObject:@"lat"];      [objects addObject:lat];
+            [keys addObject:@"lng"];      [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
         }
         // Merge the location into the existing customFields.
         NSDictionary *dict = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
