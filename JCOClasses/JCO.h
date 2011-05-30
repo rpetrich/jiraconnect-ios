@@ -3,14 +3,21 @@
 #import "JCOViewController.h"
 #import "CrashReporter.h"
 
-@class JCOIssuesViewController;
+@class JCOIssuesViewController, JCOPing, JCONotifier, JCONotifier, JCOCrashSender;
 
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
 #define kJCOReceivedCommentsNotification @"kJCOReceivedCommentsNotification"
 #define kJCOLastSuccessfulPingTime @"kJCOLastSuccessfulPingTime"
 
 @interface JCO : NSObject {
+    @private
 	NSURL* _url;
+    JCOPing *_pinger;
+    JCONotifier *_notifier;
+    JCOViewController *_jcController;
+    UINavigationController *_navController;
+    JCOCrashSender *_crashSender;
+    id <JCOCustomDataSource> _customDataSource;    
 }
 
 @property (nonatomic, retain) NSURL* url;
