@@ -295,7 +295,7 @@ static NSString *permanentCacheFolder = @"PermanentStore";
 		[[self accessLock] unlock];
 		return;
 	}
-	NSString *path;
+	NSString *path = nil;
 	if (storagePolicy == ASICacheForSessionDurationCacheStoragePolicy) {
 		path = [[self storagePath] stringByAppendingPathComponent:sessionCacheFolder];
 	} else if (storagePolicy == ASICachePermanentlyCacheStoragePolicy) {
