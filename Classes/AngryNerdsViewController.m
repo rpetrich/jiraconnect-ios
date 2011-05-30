@@ -6,16 +6,10 @@
 @implementation AngryNerdsViewController
 
 @synthesize nerd = _nerd, nerdsView = _nerdsView;
-CLLocation *_currentLocation;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([CLLocationManager locationServicesEnabled]) {
-        _locationManager = [[[CLLocationManager alloc] init] retain];
-        _locationManager.delegate = self;
-        [_locationManager startUpdatingLocation];
-    }
     NSMutableArray *nerds = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"frontend_blink.png"]];
     for (int i = 0; i < 20; i++) {
         [nerds addObject:[UIImage imageNamed:@"frontend.png"]];
@@ -36,7 +30,9 @@ CLLocation *_currentLocation;
 {
     NSLog(@"Triggering crash!");
     /* Trigger a crash. NB: if run from XCode, the sigquit handler wont be called to store crash data. */
+#ifndef __clang_analyzer__
     CFRelease(NULL);
+#endif
 }
 
 #pragma mark JCOCustomDataSource
@@ -46,43 +42,21 @@ CLLocation *_currentLocation;
     return @"AngryNerds";
 }
 
-- (NSDictionary *)customFieldsFor:(NSString *)issueTitle
+- (NSDictionary *)customFields
 {
-    NSMutableArray *objects = [NSMutableArray arrayWithObjects:@"custom field value.", nil];
-    NSMutableArray *keys = [NSMutableArray arrayWithObjects:@"customer", nil];
-    if (_currentLocation != nil) {
-        @synchronized (self) {
-            NSNumber *lat = [NSNumber numberWithDouble:_currentLocation.coordinate.latitude];
-            NSNumber *lng = [NSNumber numberWithDouble:_currentLocation.coordinate.longitude];
-            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
-            [keys addObject:@"lat"];      [objects addObject:lat];
-            [keys addObject:@"lng"];      [objects addObject:lng];
-            [keys addObject:@"location"]; [objects addObject:locationString];
-        }
-    }
-    return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
 }
 
-- (NSDictionary *)payloadFor:(NSString *)issueTitle
+- (NSDictionary *)payload
 {
     return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
 }
 
+-(BOOL) locationEnabled {
+    return YES;
+}
+
 #pragma end
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    @synchronized (self) {
-        [_currentLocation release];
-        _currentLocation = newLocation;
-        [_currentLocation retain];
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-
-}
 
 - (IBAction)triggerDisplayNotifications
 {
@@ -142,6 +116,7 @@ CLLocation *_currentLocation;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     animation.delegate = self;
     [self.nerdsView.layer addAnimation:animation forKey:@"rotationAnimation"];
+    CGPathRelease(path);
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
@@ -150,7 +125,9 @@ CLLocation *_currentLocation;
         self.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         NSLog(@"Crashing...");
+#ifndef __clang_analyzer__
         CFRelease(NULL);
+#endif
     }];
 }
 
@@ -179,14 +156,13 @@ CLLocation *_currentLocation;
 
 - (void)dealloc
 {
-    self.nerd, self.nerdsView = nil;
-    [_locationManager release];
+    self.nerd = nil;
+    self.nerdsView = nil;
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
-    [_locationManager release];
     [super viewDidUnload];
 }
 

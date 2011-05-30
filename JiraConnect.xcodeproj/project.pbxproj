@@ -123,6 +123,8 @@
 		C01FCF5008A9545400542487 /* JCOCrashTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542486 /* JCOCrashTransport.m */; };
 		C01FCF5008A954540054248A /* JCOAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A9545400542489 /* JCOAttachmentItem.m */; };
 		C01FCF5008A954540054248D /* JCOSketchContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A954540054248C /* JCOSketchContainerView.m */; };
+		F87C631613936FD90035EC21 /* CRVActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87C631513936FD90035EC21 /* CRVActivityView.m */; };
+		F87C63181393780F0035EC21 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = F87C63171393780F0035EC21 /* cancel.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -296,6 +298,9 @@
 		C01FCF5008A954540054248C /* JCOSketchContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchContainerView.m; sourceTree = "<group>"; };
 		C01FCF5008A954540054248E /* JCOSketchContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchContainerView.h; sourceTree = "<group>"; };
 		C01FCF5008A954540054248F /* JCOSketchViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchViewControllerDelegate.h; sourceTree = "<group>"; };
+		F87C631413936FD90035EC21 /* CRVActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRVActivityView.h; sourceTree = "<group>"; };
+		F87C631513936FD90035EC21 /* CRVActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRVActivityView.m; sourceTree = "<group>"; };
+		F87C63171393780F0035EC21 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,6 +534,7 @@
 		8D2FA87312824FF800828713 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F87C63171393780F0035EC21 /* cancel.png */,
 				0199E6071384D00E00B0E61E /* buton_blank.png */,
 				0199E6081384D00F00B0E61E /* button_blank@2x.png */,
 				013C7BAD1384C81E00295420 /* onair */,
@@ -595,6 +601,7 @@
 		8D50635712810E6C00B3E1A0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F87C631313936FB30035EC21 /* Sprocket */,
 				8DF3721F137CB242001AD123 /* UIImageCategories */,
 				8D50640E1281183A00B3E1A0 /* CrashReporter */,
 				8D50638B12810F6F00B3E1A0 /* JSON */,
@@ -681,6 +688,15 @@
 				8DF37226137CBA59001AD123 /* UIImage+RoundedCorner.m */,
 			);
 			name = UIImageCategories;
+			sourceTree = "<group>";
+		};
+		F87C631313936FB30035EC21 /* Sprocket */ = {
+			isa = PBXGroup;
+			children = (
+				F87C631413936FD90035EC21 /* CRVActivityView.h */,
+				F87C631513936FD90035EC21 /* CRVActivityView.m */,
+			);
+			name = Sprocket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -796,6 +812,7 @@
 				01CB10701390F34D00F79FBB /* aeron.png in Resources */,
 				01CB10711390F34D00F79FBB /* bgGame1.png in Resources */,
 				01CB10721390F34D00F79FBB /* bgGame1x.png in Resources */,
+				F87C63181393780F0035EC21 /* cancel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,6 +869,7 @@
 				01765A0613894C7D00ED392F /* JCOLine.m in Sources */,
 				01765A0D1389535F00ED392F /* JCOSketchViewController.m in Sources */,
 				C01FCF5008A954540054248D /* JCOSketchContainerView.m in Sources */,
+				F87C631613936FD90035EC21 /* CRVActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,7 +909,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JiraConnect_Prefix.pch;
 				INFOPLIST_FILE = "JiraConnect-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = JiraConnect;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -910,7 +928,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JiraConnect_Prefix.pch;
 				INFOPLIST_FILE = "JiraConnect-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = JiraConnect;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -926,6 +944,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};
@@ -939,6 +958,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				SDKROOT = iphoneos;

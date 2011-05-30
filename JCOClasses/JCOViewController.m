@@ -5,6 +5,7 @@
 #import "JCOSketchViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 @implementation JCOToolbar
 
 - (void)drawRect:(CGRect)rect
@@ -15,17 +16,15 @@
 @end
 
 @interface JCOViewController ()
-
+- (void)internalRelease;
 
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
 
+@property(nonatomic, retain) CLLocation *currentLocation;
+@property(nonatomic, retain) CRVActivityView *activityView;
 @end
 
 @implementation JCOViewController
-
-NSTimer *_timer;
-NSUInteger currentAttachmentItemIndex = 0;
-CGRect descriptionFrame;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +33,6 @@ CGRect descriptionFrame;
         self.issueTransport = [[[JCOIssueTransport alloc] init] autorelease];
         self.replyTransport = [[[JCOReplyTransport alloc] init] autorelease];
         self.recorder = [[[JCORecorder alloc] init] autorelease];
-
     }
     return self;
 }
@@ -42,6 +40,18 @@ CGRect descriptionFrame;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    sendLocationData = NO;
+    if ([self.payloadDataSource respondsToSelector:@selector(locationEnabled)]) {
+        sendLocationData = [[self payloadDataSource] locationEnabled];
+    }
+
+    if (sendLocationData && [CLLocationManager locationServicesEnabled]) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+    }
+
     // layout views
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
@@ -54,6 +64,7 @@ CGRect descriptionFrame;
                                                            action:@selector(dismiss)] autorelease];
     self.navigationItem.title = NSLocalizedString(@"Feedback", "Title of the feedback controller");
 
+
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.attachmentBar.clipsToBounds = YES;
     self.attachmentBar.items = nil;
@@ -65,8 +76,7 @@ CGRect descriptionFrame;
     descriptionFrame = self.descriptionField.frame;
     self.attachmentBar.top = self.descriptionField.bottom + descriptionFieldInset;
     self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - descriptionFieldInset;
-    self.activityIndicator.center = self.descriptionField.center;
-    
+
 
     // align the button titles nicer
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 5, 0);
@@ -375,23 +385,49 @@ CGRect descriptionFrame;
 - (IBAction)sendFeedback
 {
 
+    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view]];
+    [av setText:NSLocalizedString(@"Sending...", @"")];
+    [av startAnimating];
+    [av setDelegate:self];
+    [self setActivityView:av];
+    [av release];
+
     self.issueTransport.delegate = self;
     NSDictionary *payloadData = nil;
-    NSDictionary *customFields = nil;
+    NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
 
-    if ([self.payloadDataSource respondsToSelector:@selector(payloadFor:)]) {
-        payloadData = [self.payloadDataSource payloadFor:self.descriptionField.text];
+    if ([self.payloadDataSource respondsToSelector:@selector(payload)]) {
+        payloadData = [[self.payloadDataSource payload] retain];
     }
-    if ([self.payloadDataSource respondsToSelector:@selector(customFieldsFor:)]) {
-        customFields = [self.payloadDataSource customFieldsFor:self.descriptionField.text];
+    if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {
+        [customFields addEntriesFromDictionary:[self.payloadDataSource customFields]];
     }
+
+
+    if (sendLocationData && [self currentLocation]) {
+        NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
+        NSMutableArray *keys =    [NSMutableArray arrayWithCapacity:3];
+        @synchronized (self) {
+            NSNumber *lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+            NSNumber *lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
+            [keys addObject:@"lat"];      [objects addObject:lat];
+            [keys addObject:@"lng"];      [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
+        }
+        // Merge the location into the existing customFields.
+        NSDictionary *dict = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+        [customFields addEntriesFromDictionary:dict];
+        [dict release];
+    }
+
 
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
     } else {
         // use the first 100 chars of the description as the issue titlle
         NSString *description = self.descriptionField.text;
-        u_int  length = 80;
+        u_int length = 80;
         u_int toIndex = [description length] > length ? length : [description length];
         NSString *truncationMarker = [description length] > length ? @"..." : @"";
         [self.issueTransport send:[[description substringToIndex:toIndex] stringByAppendingString:truncationMarker]
@@ -400,15 +436,14 @@ CGRect descriptionFrame;
                           payload:payloadData
                            fields:customFields];
     }
-    self.activityIndicator.hidesWhenStopped = TRUE;
-    [self.activityIndicator startAnimating];
+
+    [payloadData release];
+    [customFields release];
 }
 
 - (void)transportDidFinish
 {
-
-    [self.activityIndicator stopAnimating];
-
+    [[self activityView] stopAnimating];
     [self dismissModalViewControllerAnimated:YES];
 
     self.descriptionField.text = @"";
@@ -419,7 +454,7 @@ CGRect descriptionFrame;
 
 - (void)transportDidFinishWithError:(NSError *)error
 {
-    [self.activityIndicator stopAnimating];
+    [[self activityView] stopAnimating];
 }
 
 #pragma mark end
@@ -432,53 +467,66 @@ CGRect descriptionFrame;
 //    return YES;
 }
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, activityIndicator, buttonBar;
+#pragma mark -
+#pragma mark CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    @synchronized (self) {
+        [self setCurrentLocation:newLocation];
+    }
+}
+
+
+#pragma mark -
+#pragma mark CRVActivityViewDelegate
+- (void)userDidCancelActivity
+{
+    [[self issueTransport] cancel];
+}
+
+#pragma mark -
+#pragma mark Memory Managment
+
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, buttonBar, currentLocation, activityView;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
 
 - (void)dealloc
 {
-// Release any retained subviews of the main view.
-    self.attachmentBar,
-            self.recorder,
-            self.buttonBar,
-            self.sendButton,
-            self.imagePicker,
-            self.attachments,
-            self.voiceButton,
-            self.progressView,
-            self.replyToIssue,
-            self.countdownView,
-            self.issueTransport,
-            self.replyTransport,
-            self.screenshotButton,
-            self.descriptionField,
-            self.activityIndicator,
-            self.payloadDataSource = nil;
-
+    // Release any retained subviews of the main view.
+    [self internalRelease];
     [super dealloc];
 }
 
 - (void)viewDidUnload
 {
     // Release any retained subviews of the main view.
-    self.attachmentBar,
-            self.recorder,
-            self.buttonBar,
-            self.sendButton,
-            self.imagePicker,
-            self.attachments,
-            self.voiceButton,
-            self.progressView,
-            self.replyToIssue,
-            self.countdownView,
-            self.issueTransport,
-            self.replyTransport,
-            self.screenshotButton,
-            self.descriptionField,
-            self.activityIndicator,
-            self.payloadDataSource = nil;
+    [self internalRelease];
     [super viewDidUnload];
+}
+
+- (void)internalRelease
+{
+    if (_locationManager) {
+        [_locationManager release];
+    }
+    self.attachmentBar = nil;
+    self.recorder = nil;
+    self.buttonBar = nil;
+    self.sendButton = nil;
+    self.imagePicker = nil;
+    self.attachments = nil;
+    self.voiceButton = nil;
+    self.progressView = nil;
+    self.replyToIssue = nil;
+    self.countdownView = nil;
+    self.issueTransport = nil;
+    self.replyTransport = nil;
+    self.screenshotButton = nil;
+    self.descriptionField = nil;
+    self.payloadDataSource = nil;
+    self.currentLocation = nil;
+    self.activityView = nil;
 }
 
 @end

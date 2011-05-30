@@ -7,7 +7,7 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 * **User or Tester Feedback** views for allowing users or testers to create a bug report within your app.
 * **2-way Communication with Users** thank your users or testers for providing feedback on your App!
 
-![Report Issue Screen](http://atlassian.github.com/jiraconnect-ios/screenshots/report-issue.png) ![Crash Report Dialog](http://atlassian.github.com/jiraconnect-ios/screenshots/crash-report.png) ![2-Way Communications](http://atlassian.github.com/jiraconnect-ios/screenshots/replies-view.png)
+![Report Issue Screen](http://atlassian.github.com/jiraconnect-ios/screenshots/small/report-issue.png) ![Crash Report Dialog](http://atlassian.github.com/jiraconnect-ios/screenshots/small/crash-report.png) ![2-Way Communications](http://atlassian.github.com/jiraconnect-ios/screenshots/small/replies-view.png)
 
 Getting Started
 ===============
@@ -15,7 +15,7 @@ Getting Started
 To install JIRAConnect into your current project:
 -------------------------------------------------
 
-1. <tt>git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios</tt>
+1. `git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios`
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JCOClasses directory to your project.
 1. Select the project (top most) element in the file/groups tree
@@ -28,7 +28,7 @@ To install JIRAConnect into your current project:
     * AVFoundation
     * CoreLocation
     * libz1.2.3
-1. Add the Resources/CrashReporter.framework to your project's frameworks: **+** --> **'Add Other'**
+1. Add the `Resources/CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
 1. Browse to jiraconnect-ios then **Resources** --> **CrashReporter.framework**
 1. Click **'Open'**
 1. Try compiling your App, and ensure there are no errors.
@@ -36,49 +36,55 @@ To install JIRAConnect into your current project:
 To use JIRAConnect in your App:
 -------------------------------
 1. Import the JCO.h header file into your ApplicationDelegate
-    #import "JCO.h"
+
+        #import "JCO.h"
+
 1. Configure the [JCO instance] at the *end* of the ApplicationDelegate.m like so:
 
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+
+    `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
 method, add the following line:
-    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customData:nil];
+
+        [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:nil];
 
 1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
 
 1. The JIRA URL you configured above, will need to have:
-  * the jconnect-plugin installed
-  * a project named either the same as
-    ** the XCode Project,
-    ** the value returned by your [id&lt;JCOCustomDataSource&gt; project] method. This can be the project key in JIRA, or the project's name.
+    * the jconnect-plugin installed
+    * a project named either the same as
+        * the XCode Project,
+        * or the value returned by your [id&lt;JCOCustomDataSource&gt; project] method. This can be the project key in JIRA, or the project's name.
 
 1. Provide a trigger mechanism to allow users invoke the Submit Feedback view. This typically goes on the 'About' or 'Info' view.
 The UIViewController returned by JCO viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
 
-    #import "JCO.h"
 
-    - (void)viewDidLoad
-    {
-        self.navigationItem.rightBarButtonItem =
-        [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                       target:self
-                                                       action:@selector(showFeedback)] autorelease];
-        self.navigationItem.leftBarButtonItem =
-        [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                       target:self
-                                                       action:@selector(showPastFeedback)] autorelease];
-    }
+<pre>
+#import "JCO.h"
 
-    -(void) showFeedback
-    {
-        [self presentModalViewController:[[JCO instance] viewController] animated:YES];
-    }
+- (void)viewDidLoad
+{
+    self.navigationItem.rightBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                   target:self
+                                                   action:@selector(showFeedback)] autorelease];
+    self.navigationItem.leftBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                                   target:self
+                                                   action:@selector(showPastFeedback)] autorelease];
+}
 
-    -(void) showPastFeedback
-    {
-        [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
-    }
+-(void) showFeedback
+{
+    [self presentModalViewController:[[JCO instance] viewController] animated:YES];
+}
 
+-(void) showPastFeedback
+{
+    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+}
+</pre>
 
 Third party Package - License - Copyright / Creator
 ===================================================

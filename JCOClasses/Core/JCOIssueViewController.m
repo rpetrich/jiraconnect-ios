@@ -25,7 +25,10 @@ static float detailLabelHeight = 21.0f;
 }
 
 - (void)dealloc {
-    self.tableView, self.issue, self.comments, self.replyButton = nil;
+    self.tableView = nil;
+    self.issue = nil;
+    self.comments = nil;
+    self.replyButton = nil;
     [super dealloc];
 }
 

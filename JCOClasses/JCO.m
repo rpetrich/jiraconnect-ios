@@ -8,13 +8,6 @@
 
 @synthesize url = _url;
 
-JCOPing *_pinger;
-JCONotifier *_notifier;
-JCOViewController *_jcController;
-UINavigationController *_navController;
-JCOCrashSender *_crashSender;
-id <JCOCustomDataSource> _customDataSource;
-
 + (JCO *)instance
 {
     static JCO *singleton = nil;
@@ -28,12 +21,12 @@ id <JCOCustomDataSource> _customDataSource;
 - (id)init
 {
     if ((self = [super init])) {
-        _pinger = [[[JCOPing alloc] init] retain];
+        _pinger = [[JCOPing alloc] init];
         UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
         _notifier = [[[JCONotifier alloc] initWithView:window] retain];
-        _crashSender = [[[JCOCrashSender alloc] init] retain];
-        _jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] retain];
-        _navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] retain];
+        _crashSender = [[JCOCrashSender alloc] init];
+        _jcController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
+        _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];
         _navController.navigationBar.translucent = YES;
     }
     return self;
@@ -56,7 +49,7 @@ id <JCOCustomDataSource> _customDataSource;
     }
 }
 
-- (void)configureJiraConnect:(NSString *)withUrl customData:(id <JCOCustomDataSource>)customData
+- (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JCOCustomDataSource>)customDataSource
 {
     self.url = [NSURL URLWithString:withUrl];
     [self generateAndStoreUUID];
@@ -66,7 +59,7 @@ id <JCOCustomDataSource> _customDataSource;
     _pinger.baseUrl = self.url;
     [_pinger start];
 
-    _customDataSource = customData;
+    _customDataSource = customDataSource;
     _jcController.payloadDataSource = _customDataSource;
 
     // TODO: firing this when network becomes active would be better
