@@ -4,6 +4,7 @@
 #import "JCOPing.h"
 #import "JCO.h"
 #import "JCOIssueStore.h"
+#import "ASIDownloadCache.h"
 
 
 @implementation JCOPing
@@ -28,8 +29,10 @@
     NSLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
+    request.secondsToCache = 60 * 24 * 7; // cache for a week?
+    [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+
     [request setDelegate:self];
     [request startAsynchronous];
 }

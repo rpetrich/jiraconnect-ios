@@ -67,6 +67,7 @@
 		01CB10721390F34D00F79FBB /* bgGame1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CB106F1390F34D00F79FBB /* bgGame1x.png */; };
 		01CD0B6A137FE4EF00A6D749 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CD0B68137FE4EF00A6D749 /* Localizable.strings */; };
 		01CD0B72137FEFD600A6D749 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CD0B70137FEFD600A6D749 /* Localizable.strings */; };
+		01D980C7139469C50080B67B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D980C6139469C50080B67B /* Default.png */; };
 		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -85,7 +86,6 @@
 		8D2FA78512812FB600828713 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA78412812FB600828713 /* CoreLocation.framework */; };
 		8D2FA7941281326100828713 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA7931281326100828713 /* AngryNerdsViewController.m */; };
 		8D2FA7961281327500828713 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA7951281327500828713 /* AngryNerdsViewController.xib */; };
-		8D2FA79B1281395400828713 /* charles_320x480.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D2FA79A1281395400828713 /* charles_320x480.png */; };
 		8D2FA81E1282351900828713 /* JCOTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA81D1282351900828713 /* JCOTransport.m */; };
 		8D2FA9031282614A00828713 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2FA9021282614A00828713 /* AVFoundation.framework */; };
 		8D2FA96612826BB100828713 /* JCORecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2FA96512826BB100828713 /* JCORecorder.m */; };
@@ -196,6 +196,7 @@
 		01CB106F1390F34D00F79FBB /* bgGame1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgGame1x.png; sourceTree = "<group>"; };
 		01CD0B69137FE4EF00A6D749 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		01CD0B71137FEFD600A6D749 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
+		01D980C6139469C50080B67B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
@@ -224,7 +225,6 @@
 		8D2FA7921281326100828713 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsViewController.h; sourceTree = "<group>"; };
 		8D2FA7931281326100828713 /* AngryNerdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsViewController.m; sourceTree = "<group>"; };
 		8D2FA7951281327500828713 /* AngryNerdsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AngryNerdsViewController.xib; sourceTree = "<group>"; };
-		8D2FA79A1281395400828713 /* charles_320x480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charles_320x480.png; sourceTree = "<group>"; };
 		8D2FA81C1282351900828713 /* JCOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOTransport.h; sourceTree = "<group>"; };
 		8D2FA81D1282351900828713 /* JCOTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOTransport.m; sourceTree = "<group>"; };
 		8D2FA9021282614A00828713 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -455,6 +455,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01D980C6139469C50080B67B /* Default.png */,
 				01CB106D1390F34D00F79FBB /* aeron.png */,
 				01CB106E1390F34D00F79FBB /* bgGame1.png */,
 				01CB106F1390F34D00F79FBB /* bgGame1x.png */,
@@ -462,7 +463,6 @@
 				01CB106A1390F1E800F79FBB /* frontend.png */,
 				013C7AE113847DEB00295420 /* Icon.png */,
 				013C7AD71383E29B00295420 /* angrynerds.png */,
-				8D2FA79A1281395400828713 /* charles_320x480.png */,
 				8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */,
 				8D5063C3128114E600B3E1A0 /* MainWindow.xib */,
 			);
@@ -757,7 +757,6 @@
 				8D5063C4128114E600B3E1A0 /* JiraConnect-Info.plist in Resources */,
 				8D5063C6128114E600B3E1A0 /* MainWindow.xib in Resources */,
 				8D2FA7961281327500828713 /* AngryNerdsViewController.xib in Resources */,
-				8D2FA79B1281395400828713 /* charles_320x480.png in Resources */,
 				7204022D1332237E0002B9C7 /* JCOIssueViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCOIssuesViewController.xib in Resources */,
 				720402421332CFB10002B9C7 /* JCOMessageCell.xib in Resources */,
@@ -813,6 +812,7 @@
 				01CB10711390F34D00F79FBB /* bgGame1.png in Resources */,
 				01CB10721390F34D00F79FBB /* bgGame1x.png in Resources */,
 				F87C63181393780F0035EC21 /* cancel.png in Resources */,
+				01D980C7139469C50080B67B /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
