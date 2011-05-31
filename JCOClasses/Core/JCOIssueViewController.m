@@ -3,7 +3,6 @@
 #import "JCOMessageCell.h"
 #import "JCOViewController.h"
 #import "JCOMessageBubble.h"
-#import "JCOReplyTransport.h"
 
 static UIFont *font;
 
@@ -14,6 +13,8 @@ static float detailLabelHeight = 21.0f;
 
 @synthesize tableView = _tableView, replyButton = _replyButton, issue = _issue;
 @synthesize comments = _comments;
+@synthesize feedbackController = _feedbackController;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,10 +26,11 @@ static float detailLabelHeight = 21.0f;
 }
 
 - (void)dealloc {
-    self.tableView = nil;
     self.issue = nil;
     self.comments = nil;
+    self.tableView = nil;
     self.replyButton = nil;
+    self.feedbackController = nil;
     [super dealloc];
 }
 
@@ -177,27 +179,32 @@ static float detailLabelHeight = 21.0f;
 - (void)didTouchReply:(id)sender {
 
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
-    JCOViewController *feedbackController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:feedbackController];
+    self.feedbackController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] autorelease];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
     navController.navigationBar.translucent = YES;
 
     [self presentModalViewController:navController animated:YES];
 
-    feedbackController.replyToIssue = self.issue;
-    feedbackController.replyTransport.delegate = self;
-    feedbackController.navigationItem.title = @"Reply";
+    self.feedbackController.replyToIssue = self.issue;
+    self.feedbackController.replyTransport.delegate = self;
+    self.feedbackController.navigationItem.title = @"Reply";
 
-    [feedbackController release];
     [navController release];
 
 }
 
 
 - (void)transportDidFinish {
+    
+    [self.feedbackController dismissActivity];
     [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
     [self scrollToLastComment];
+}
+
+- (void)transportDidFinishWithError:(NSError *)error {
+    [self.feedbackController dismissActivity];
 }
 
 

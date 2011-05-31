@@ -428,7 +428,11 @@
 
 
     if (self.replyToIssue) {
-        [self.replyTransport sendReply:self.replyToIssue description:self.descriptionField.text images:self.attachments payload:payloadData fields:customFields];
+        [self.replyTransport sendReply:self.replyToIssue
+                           description:self.descriptionField.text
+                                images:self.attachments
+                               payload:payloadData
+                                fields:customFields];
     } else {
         // use the first 100 chars of the description as the issue titlle
         NSString *description = self.descriptionField.text;
@@ -446,9 +450,14 @@
     [customFields release];
 }
 
-- (void)transportDidFinish
+-(void) dismissActivity
 {
     [[self activityView] stopAnimating];
+}
+
+- (void)transportDidFinish
+{
+    [self dismissActivity];
     [self dismissModalViewControllerAnimated:YES];
 
     self.descriptionField.text = @"";
@@ -459,7 +468,7 @@
 
 - (void)transportDidFinishWithError:(NSError *)error
 {
-    [[self activityView] stopAnimating];
+    [self dismissActivity];
 }
 
 #pragma mark end
