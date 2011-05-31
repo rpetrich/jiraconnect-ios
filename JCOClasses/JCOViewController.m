@@ -54,9 +54,12 @@
         [_locationManager startUpdatingLocation];
 
         //TODO: remove this. just for testing location in the simulator.
+#if TARGET_IPHONE_SIMULATOR
         // -33.871088, 151.203665
-        [currentLocation release];
-        currentLocation = [[[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665] retain];
+        CLLocation *fixed = [[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665];
+        [self setCurrentLocation: fixed];
+        [fixed release];
+#endif
     }
 
     // layout views
@@ -434,7 +437,6 @@
         [customFields addEntriesFromDictionary:dict];
         [dict release];
     }
-
 
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue
