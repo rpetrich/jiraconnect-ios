@@ -69,7 +69,7 @@
 		01CD0B6A137FE4EF00A6D749 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CD0B68137FE4EF00A6D749 /* Localizable.strings */; };
 		01CD0B72137FEFD600A6D749 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CD0B70137FEFD600A6D749 /* Localizable.strings */; };
 		01D980C7139469C50080B67B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D980C6139469C50080B67B /* Default.png */; };
-		1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */; };
+		1D3623260D0F684500981E51 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AngryNerdsAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -199,8 +199,8 @@
 		01CD0B71137FEFD600A6D749 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		01D980C6139469C50080B67B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnectAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JiraConnectAppDelegate.m; sourceTree = "<group>"; };
+		1D3623240D0F684500981E51 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* JiraConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -436,8 +436,8 @@
 				8D2FA7921281326100828713 /* AngryNerdsViewController.h */,
 				8D2FA7931281326100828713 /* AngryNerdsViewController.m */,
 				8D2FA7951281327500828713 /* AngryNerdsViewController.xib */,
-				1D3623240D0F684500981E51 /* JiraConnectAppDelegate.h */,
-				1D3623250D0F684500981E51 /* JiraConnectAppDelegate.m */,
+				1D3623240D0F684500981E51 /* AngryNerdsAppDelegate.h */,
+				1D3623250D0F684500981E51 /* AngryNerdsAppDelegate.m */,
 			);
 			name = ExampleApp;
 			path = Classes;
@@ -454,7 +454,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				0169B8EC1395A30800A351F7 /* CrashReporter.framework */,
 				8D50635612810CB600B3E1A0 /* JCOClasses */,
 				080E96DDFE201D6D7F000001 /* ExampleApp */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -494,6 +493,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0169B8EC1395A30800A351F7 /* CrashReporter.framework */,
 				017E834E139106CC00490CD5 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -824,7 +824,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* JiraConnectAppDelegate.m in Sources */,
+				1D3623260D0F684500981E51 /* AngryNerdsAppDelegate.m in Sources */,
 				8D50638412810ED300B3E1A0 /* Reachability.m in Sources */,
 				8D50638512810ED300B3E1A0 /* ASINetworkQueue.m in Sources */,
 				8D50638612810ED300B3E1A0 /* ASIInputStream.m in Sources */,

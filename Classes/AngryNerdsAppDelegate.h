@@ -3,7 +3,7 @@
 
 #import "AngryNerdsViewController.h"
 
-@interface JiraConnectAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AngryNerdsAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     AngryNerdsViewController *viewController;
 }

@@ -1,7 +1,7 @@
-#import "JiraConnectAppDelegate.h"
+#import "AngryNerdsAppDelegate.h"
 #import "JCO.h"
 
-@implementation JiraConnectAppDelegate
+@implementation AngryNerdsAppDelegate
 
 @synthesize window;
 @synthesize viewController;
