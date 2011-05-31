@@ -1,5 +1,4 @@
 #import "JiraConnectAppDelegate.h"
-#import "AngryNerdsViewController.h"
 #import "JCO.h"
 
 @implementation JiraConnectAppDelegate

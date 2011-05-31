@@ -50,6 +50,11 @@
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         [_locationManager startUpdatingLocation];
+
+        //TODO: remove this. just for testing location in the simulator.
+        // -33.871088, 151.203665
+        [currentLocation release];
+        currentLocation = [[[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665] retain];
     }
 
     // layout views
