@@ -86,6 +86,11 @@ If your info ViewController is in a UINavigationController stack, then you can u
 }
 </pre>
 
+Issue tracking
+==============
+
+Use http://connect.onjira.com/browse/CONNECT to raise any issue with the JIRAConnect library.
+
 Third party Package - License - Copyright / Creator
 ===================================================
 
