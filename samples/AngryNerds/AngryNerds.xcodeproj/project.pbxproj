@@ -124,9 +124,9 @@
 		0169BC271395F1CA00A351F7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC1C1395F1CA00A351F7 /* Default.png */; };
 		0169BC281395F1CA00A351F7 /* frontend.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC1D1395F1CA00A351F7 /* frontend.png */; };
 		0169BC291395F1CA00A351F7 /* frontend_blink.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC1E1395F1CA00A351F7 /* frontend_blink.png */; };
-		0169BC2A1395F1CA00A351F7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC1F1395F1CA00A351F7 /* Icon.png */; };
 		0169BC2B1395F1CA00A351F7 /* JiraConnect-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */; };
 		0169BC2C1395F1CA00A351F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC211395F1CA00A351F7 /* MainWindow.xib */; };
+		01C33DB31395F36E00D47D66 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C33DB21395F36E00D47D66 /* Icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -304,9 +304,9 @@
 		0169BC1C1395F1CA00A351F7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0169BC1D1395F1CA00A351F7 /* frontend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontend.png; sourceTree = "<group>"; };
 		0169BC1E1395F1CA00A351F7 /* frontend_blink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontend_blink.png; sourceTree = "<group>"; };
-		0169BC1F1395F1CA00A351F7 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
 		0169BC211395F1CA00A351F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		01C33DB21395F36E00D47D66 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +384,7 @@
 		0169B9551395A77900A351F7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01C33DB21395F36E00D47D66 /* Icon.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -599,7 +600,6 @@
 				0169BC1C1395F1CA00A351F7 /* Default.png */,
 				0169BC1D1395F1CA00A351F7 /* frontend.png */,
 				0169BC1E1395F1CA00A351F7 /* frontend_blink.png */,
-				0169BC1F1395F1CA00A351F7 /* Icon.png */,
 				0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */,
 				0169BC211395F1CA00A351F7 /* MainWindow.xib */,
 				0169B9561395A77900A351F7 /* AngryNerds-Info.plist */,
@@ -721,9 +721,9 @@
 				0169BC271395F1CA00A351F7 /* Default.png in Resources */,
 				0169BC281395F1CA00A351F7 /* frontend.png in Resources */,
 				0169BC291395F1CA00A351F7 /* frontend_blink.png in Resources */,
-				0169BC2A1395F1CA00A351F7 /* Icon.png in Resources */,
 				0169BC2B1395F1CA00A351F7 /* JiraConnect-Info.plist in Resources */,
 				0169BC2C1395F1CA00A351F7 /* MainWindow.xib in Resources */,
+				01C33DB31395F36E00D47D66 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

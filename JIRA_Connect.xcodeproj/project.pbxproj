@@ -201,11 +201,11 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* JiraConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* JIRA_Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JIRA_Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* JiraConnect_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiraConnect_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* JIRA_Connect_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; path = JIRA_Connect_Prefix.pch; sourceTree = "<group>"; };
 		720402291332237A0002B9C7 /* JCOIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssueViewController.h; sourceTree = "<group>"; };
 		7204022A1332237A0002B9C7 /* JCOIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssueViewController.m; sourceTree = "<group>"; };
 		7204022B1332237C0002B9C7 /* JCOIssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOIssueViewController.xib; sourceTree = "<group>"; };
@@ -447,7 +447,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* JiraConnect.app */,
+				1D6058910D05DD3D006BFB54 /* JIRA_Connect.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -468,7 +468,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* JiraConnect_Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* JIRA_Connect_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -702,9 +702,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* JiraConnect */ = {
+		1D6058900D05DD3D006BFB54 /* JIRA_Connect */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "JiraConnect" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "JIRA_Connect" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -714,9 +714,9 @@
 			);
 			dependencies = (
 			);
-			name = JiraConnect;
+			name = JIRA_Connect;
 			productName = JiraConnect;
-			productReference = 1D6058910D05DD3D006BFB54 /* JiraConnect.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* JIRA_Connect.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -727,7 +727,7 @@
 			attributes = {
 				ORGANIZATIONNAME = Atlassian;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JiraConnect" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JIRA_Connect" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -743,7 +743,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* JiraConnect */,
+				1D6058900D05DD3D006BFB54 /* JIRA_Connect */,
 			);
 		};
 /* End PBXProject section */
@@ -908,10 +908,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = JiraConnect_Prefix.pch;
+				GCC_PREFIX_HEADER = JIRA_Connect_Prefix.pch;
 				INFOPLIST_FILE = "JiraConnect-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = JiraConnect;
+				PRODUCT_NAME = JIRA_Connect;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -928,10 +928,10 @@
 					"\"$(SRCROOT)/JCOClasses/Libraries\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = JiraConnect_Prefix.pch;
+				GCC_PREFIX_HEADER = JIRA_Connect_Prefix.pch;
 				INFOPLIST_FILE = "JiraConnect-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = JiraConnect;
+				PRODUCT_NAME = JIRA_Connect;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -970,7 +970,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "JiraConnect" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "JIRA_Connect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -979,7 +979,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JiraConnect" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JIRA_Connect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
