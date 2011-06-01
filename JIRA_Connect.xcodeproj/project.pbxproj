@@ -110,7 +110,6 @@
 		72040231133223C60002B9C7 /* JCOIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7204022F133223C50002B9C7 /* JCOIssuesViewController.m */; };
 		72040232133223C60002B9C7 /* JCOIssuesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72040230133223C50002B9C7 /* JCOIssuesViewController.xib */; };
 		720402401332CF5A0002B9C7 /* JCOMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7204023F1332CF5A0002B9C7 /* JCOMessageCell.m */; };
-		720402421332CFB10002B9C7 /* JCOMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 720402411332CFB10002B9C7 /* JCOMessageCell.xib */; };
 		72F3F01C1331D34A00FBF320 /* JCOIssueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F01B1331D34900FBF320 /* JCOIssueStore.m */; };
 		72F3F01F1331D3F000FBF320 /* JCOIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F01E1331D3EF00FBF320 /* JCOIssue.m */; };
 		72F3F0221331D40900FBF320 /* JCOComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F3F0211331D40800FBF320 /* JCOComment.m */; };
@@ -379,7 +378,6 @@
 		72040230133223C50002B9C7 /* JCOIssuesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOIssuesViewController.xib; sourceTree = "<group>"; };
 		7204023E1332CF590002B9C7 /* JCOMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMessageCell.h; sourceTree = "<group>"; };
 		7204023F1332CF5A0002B9C7 /* JCOMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOMessageCell.m; sourceTree = "<group>"; };
-		720402411332CFB10002B9C7 /* JCOMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOMessageCell.xib; sourceTree = "<group>"; };
 		72F3F01A1331D34900FBF320 /* JCOIssueStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssueStore.h; sourceTree = "<group>"; };
 		72F3F01B1331D34900FBF320 /* JCOIssueStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssueStore.m; sourceTree = "<group>"; };
 		72F3F01D1331D3EF00FBF320 /* JCOIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssue.h; sourceTree = "<group>"; };
@@ -721,7 +719,6 @@
 				7204022B1332237C0002B9C7 /* JCOIssueViewController.xib */,
 				7204023E1332CF590002B9C7 /* JCOMessageCell.h */,
 				7204023F1332CF5A0002B9C7 /* JCOMessageCell.m */,
-				720402411332CFB10002B9C7 /* JCOMessageCell.xib */,
 			);
 			name = Issues;
 			sourceTree = "<group>";
@@ -1055,7 +1052,6 @@
 				8D2FA7961281327500828713 /* AngryNerdsViewController.xib in Resources */,
 				7204022D1332237E0002B9C7 /* JCOIssueViewController.xib in Resources */,
 				72040232133223C60002B9C7 /* JCOIssuesViewController.xib in Resources */,
-				720402421332CFB10002B9C7 /* JCOMessageCell.xib in Resources */,
 				01A2159E133F440D001C80B5 /* JCOIssuePreviewCell.xib in Resources */,
 				015429BE1371855600E59619 /* Balloon_1.png in Resources */,
 				01AC88821376703B000453A1 /* bluedot.png in Resources */,
