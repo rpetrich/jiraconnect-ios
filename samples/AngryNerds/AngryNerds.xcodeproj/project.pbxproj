@@ -39,7 +39,6 @@
 		0169BBB41395F09900A351F7 /* JCOLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB291395F09800A351F7 /* JCOLine.m */; };
 		0169BBB51395F09900A351F7 /* JCOMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB2B1395F09800A351F7 /* JCOMessageBubble.m */; };
 		0169BBB61395F09900A351F7 /* JCOMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB2D1395F09800A351F7 /* JCOMessageCell.m */; };
-		0169BBB71395F09900A351F7 /* JCOMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB2E1395F09800A351F7 /* JCOMessageCell.xib */; };
 		0169BBB81395F09900A351F7 /* JCONotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB301395F09800A351F7 /* JCONotifier.m */; };
 		0169BBB91395F09900A351F7 /* JCOPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB321395F09800A351F7 /* JCOPing.m */; };
 		0169BBBA1395F09900A351F7 /* JCORecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB341395F09800A351F7 /* JCORecorder.m */; };
@@ -180,7 +179,6 @@
 		0169BB2B1395F09800A351F7 /* JCOMessageBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOMessageBubble.m; sourceTree = "<group>"; };
 		0169BB2C1395F09800A351F7 /* JCOMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMessageCell.h; sourceTree = "<group>"; };
 		0169BB2D1395F09800A351F7 /* JCOMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOMessageCell.m; sourceTree = "<group>"; };
-		0169BB2E1395F09800A351F7 /* JCOMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOMessageCell.xib; sourceTree = "<group>"; };
 		0169BB2F1395F09800A351F7 /* JCONotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotifier.h; sourceTree = "<group>"; };
 		0169BB301395F09800A351F7 /* JCONotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotifier.m; sourceTree = "<group>"; };
 		0169BB311395F09800A351F7 /* JCOPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOPing.h; sourceTree = "<group>"; };
@@ -439,7 +437,6 @@
 				0169BB2B1395F09800A351F7 /* JCOMessageBubble.m */,
 				0169BB2C1395F09800A351F7 /* JCOMessageCell.h */,
 				0169BB2D1395F09800A351F7 /* JCOMessageCell.m */,
-				0169BB2E1395F09800A351F7 /* JCOMessageCell.xib */,
 				0169BB2F1395F09800A351F7 /* JCONotifier.h */,
 				0169BB301395F09800A351F7 /* JCONotifier.m */,
 				0169BB311395F09800A351F7 /* JCOPing.h */,
@@ -668,7 +665,6 @@
 				0169BBAD1395F09900A351F7 /* JCOIssuePreviewCell.xib in Resources */,
 				0169BBB01395F09900A351F7 /* JCOIssuesViewController.xib in Resources */,
 				0169BBB31395F09900A351F7 /* JCOIssueViewController.xib in Resources */,
-				0169BBB71395F09900A351F7 /* JCOMessageCell.xib in Resources */,
 				0169BBC11395F09900A351F7 /* JCOSketchViewController.xib in Resources */,
 				0169BBC81395F09900A351F7 /* JCOViewController.xib in Resources */,
 				0169BBDA1395F09900A351F7 /* Balloon_1.png in Resources */,
