@@ -5,7 +5,7 @@
 #import "JCOMessageBubble.h"
 
 static UIFont *font;
-
+static UIFont* titleFont;
 
 @implementation JCOIssueViewController
 
@@ -20,6 +20,7 @@ static float detailLabelHeight = 21.0f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         font = [UIFont systemFontOfSize:14.0];
+        titleFont = [UIFont boldSystemFontOfSize:14.0];
         self.replyButton.layer.cornerRadius = 7.0f;
     }
     return self;
@@ -107,8 +108,11 @@ static float detailLabelHeight = 21.0f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        UITableViewCell *issueCell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return issueCell.frame.size.height;
+
+        CGSize size = [self.issue.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
+        return size.height + 20;
+
+
 
     } else {
         JCOComment *comment = [self.comments objectAtIndex:indexPath.row];
@@ -143,29 +147,20 @@ static float detailLabelHeight = 21.0f;
         JCOMessageCell *issueCell = (JCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (issueCell == nil) {
             // Load the top-level objects from the custom cell XIB.
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-            issueCell = [topLevelObjects objectAtIndex:0];
+            issueCell = [[[JCOMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+            CGSize size = [self.issue.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
+            issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
+            issueCell.title.font = titleFont;
+            issueCell.title.textColor = [UIColor colorWithRed:17/255.0f green:76/255.0f blue:147/255.0f alpha:1.0];
+            [issueCell addSubview:issueCell.title];
             issueCell.accessoryType = UITableViewCellAccessoryNone;
         }
 
-        NSString *issueData = [NSString stringWithFormat:@"Status: %@", self.issue.status];
         issueCell.title.text = self.issue.title;
-        issueCell.body.text = issueData;
 
-        //Calculate the expected size based on the font and linebreak mode of your label
-        CGSize maximumLabelSize = CGSizeMake(296, 9999);
-        CGSize expectedLabelSize = [issueCell.body.text sizeWithFont:issueCell.body.font
-                                                   constrainedToSize:maximumLabelSize
-                                                       lineBreakMode:issueCell.body.lineBreakMode];
+//        NSString *issueData = [NSString stringWithFormat:@"Status: %@", self.issue.status];
+//        issueCell.body.text = issueData;
 
-        //adjust the label to the new height.
-        CGRect newFrame = issueCell.body.frame;
-        newFrame.size.height = expectedLabelSize.height;
-        issueCell.body.frame = newFrame;
-
-        issueCell.frame = CGRectMake(0, 0, tableView.frame.size.width, 44 + expectedLabelSize.height);
-        issueCell.bgview.frame = issueCell.bounds;
         return issueCell;
 
     }
