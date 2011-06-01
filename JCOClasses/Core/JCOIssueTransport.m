@@ -27,7 +27,6 @@
                         relativeToURL:[JCO instance].url];
 
     NSLog(@"Sending feedback to:    %@", url.absoluteString);
-
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     [self setCreateIssueRequest:upRequest];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
