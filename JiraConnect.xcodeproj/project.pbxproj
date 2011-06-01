@@ -269,7 +269,7 @@
 		8D5063B41281123500B3E1A0 /* JCOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOViewController.m; sourceTree = "<group>"; };
 		8D5063B51281123500B3E1A0 /* JCOViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCOViewController.xib; sourceTree = "<group>"; };
 		8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
-		8D5063C3128114E600B3E1A0 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		8D5063C3128114E600B3E1A0 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ../Resources/MainWindow.xib; sourceTree = "<group>"; };
 		8D5063C91281157B00B3E1A0 /* JCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCO.h; sourceTree = "<group>"; };
 		8D5063CA1281157B00B3E1A0 /* JCO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCO.m; sourceTree = "<group>"; };
 		8D5063E7128116BF00B3E1A0 /* JCOPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOPing.h; sourceTree = "<group>"; };
@@ -438,6 +438,7 @@
 				8D2FA7951281327500828713 /* AngryNerdsViewController.xib */,
 				1D3623240D0F684500981E51 /* AngryNerdsAppDelegate.h */,
 				1D3623250D0F684500981E51 /* AngryNerdsAppDelegate.m */,
+				8D5063C3128114E600B3E1A0 /* MainWindow.xib */,
 			);
 			name = ExampleApp;
 			path = Classes;
@@ -485,7 +486,6 @@
 				013C7AE113847DEB00295420 /* Icon.png */,
 				013C7AD71383E29B00295420 /* angrynerds.png */,
 				8D5063C1128114E600B3E1A0 /* JiraConnect-Info.plist */,
-				8D5063C3128114E600B3E1A0 /* MainWindow.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
