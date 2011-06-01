@@ -90,4 +90,37 @@
 }
 
 
++ (CFStringRef)newEncodedValue:(CFStringRef)value {
+    return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+            value,
+            NULL,
+            (CFStringRef) @";/?:@&=+$,",
+            kCFStringEncodingUTF8);
+}
+
+
++ (NSMutableString *)encodeParameters:(NSDictionary *)parameters {
+    NSMutableString *params = nil;
+    if (parameters != nil) {
+        params = [[NSMutableString alloc] init];
+        for (id key in parameters) {
+            NSString *encodedKey = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            CFStringRef value = (CFStringRef) [[parameters objectForKey:key] copy];
+
+            // Escape even the "reserved" characters for URLs
+            // as defined in http://www.ietf.org/rfc/rfc2396.txt
+            CFStringRef encodedValue = [self newEncodedValue:value];
+
+            [params appendFormat:@"%@=%@&", encodedKey, encodedValue];
+
+            CFRelease(value);
+            CFRelease(encodedValue);
+        }
+        [params deleteCharactersInRange:NSMakeRange([params length] - 1, 1)];
+    }
+    return [params autorelease];
+
+}
+
+
 @end

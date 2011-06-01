@@ -23,7 +23,7 @@
     if ((self = [super init])) {
         _pinger = [[JCOPing alloc] init];
         UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
-        _notifier = [[[JCONotifier alloc] initWithView:window] retain];
+        _notifier = [[JCONotifier alloc] initWithView:window];
         _crashSender = [[JCOCrashSender alloc] init];
         _jcController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
         _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];

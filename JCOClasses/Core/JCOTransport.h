@@ -4,9 +4,9 @@
 #import "ASIFormDataRequest.h"
 #import "JCOIssue.h"
 
-#define kJCOTransportCreateIssuePath   @"rest/jconnect/latest/issue/create/?project=%@"
+#define kJCOTransportCreateIssuePath   @"rest/jconnect/latest/issue/create?%@"
 #define kJCOTransportCreateCommentPath @"rest/jconnect/latest/issue/comment/%@"
-#define kJCOTransportNotificationsPath @"rest/jconnect/latest/issue/updates?project=%@&uuid=%@&sinceMillis=%@"
+#define kJCOTransportNotificationsPath @"rest/jconnect/latest/issue/updates?%@"
 
 @protocol JCOTransportDelegate <NSObject>
 
@@ -27,6 +27,8 @@
 - (void)populateCommonFields:(NSString *)description images:(NSArray *)attachments payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
 
 - (void)requestFailed:(ASIHTTPRequest *)request;
+
++ (NSMutableString *)encodeParameters:(NSDictionary *)parameters;
 
 
 @end

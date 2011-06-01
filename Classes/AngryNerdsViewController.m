@@ -39,7 +39,7 @@
 
 - (NSString *)project
 {
-    return @"AngryNerds";
+    return @"Angry Nerds";
 }
 
 - (NSDictionary *)customFields

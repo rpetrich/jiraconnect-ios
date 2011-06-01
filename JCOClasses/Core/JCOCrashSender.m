@@ -33,11 +33,12 @@ JCOCrashTransport *_transport;
     }
 
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kAutomaticallySendCrashReports]) {
-        NSString* description = NSLocalizedString(@"CrashDataFoundDescription", @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server");
+        NSString* description = NSLocalizedString(@"CrashDataFoundDescription",
+        @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server");
 
 
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
-                                                            message:[NSString stringWithFormat:description, [[JCO instance] getAppName]]
+                                                            message:[NSString stringWithFormat:description, [[JCO instance] getProject]]
                                                                     delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"No", @"No")
                                                   otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), NSLocalizedString(@"Always", @"Always"), nil];

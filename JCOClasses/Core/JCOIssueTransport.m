@@ -20,7 +20,9 @@
 
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
-    NSString *urlPath = [NSString stringWithFormat:kJCOTransportCreateIssuePath, [[JCO instance] getProject]];
+    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JCO instance] getProject] forKey:@"project"];
+    NSString *queryString = [JCOTransport encodeParameters:queryParams];
+    NSString *urlPath = [NSString stringWithFormat:kJCOTransportCreateIssuePath, queryString];
     NSURL *url = [NSURL URLWithString:urlPath
                         relativeToURL:[JCO instance].url];
 

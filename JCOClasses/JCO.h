@@ -11,7 +11,7 @@
 
 @interface JCO : NSObject {
     @private
-	NSURL* _url;
+    NSURL* _url;
     JCOPing *_pinger;
     JCONotifier *_notifier;
     JCOViewController *_jcController;

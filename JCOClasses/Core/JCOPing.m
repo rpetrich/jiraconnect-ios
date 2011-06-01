@@ -23,13 +23,20 @@
     NSString *uuid = [[JCO instance] getUUID];
     NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJCOLastSuccessfulPingTime];
     lastPingTime = lastPingTime ? lastPingTime : [NSNumber numberWithInt:0];
-    NSString *resourceUrl = [NSString stringWithFormat:kJCOTransportNotificationsPath, project, uuid, lastPingTime];
+
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:project forKey:@"project"];
+    [params setObject:uuid forKey:@"uuid"];
+    [params setValue:[lastPingTime stringValue] forKey:@"sinceMillis"];
+    NSString * queryString = [JCOTransport encodeParameters:params];
+    NSString *resourceUrl = [NSString stringWithFormat:kJCOTransportNotificationsPath, queryString];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
     NSLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
+    
     request.secondsToCache = 60 * 24 * 7; // cache for a week?
     [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
 
