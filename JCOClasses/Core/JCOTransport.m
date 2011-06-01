@@ -50,8 +50,9 @@
     NSLog(@"Response '%@' for %@", request.responseString, request.url.absoluteURL);
     if (request.responseStatusCode < 300) {
 
-        NSString *msg = [NSString stringWithFormat:@"Your feedback has been received. Thank you, for the common good."];
-        [self alert:msg withTitle:@"Thank you" button:@"OK"];
+        NSString *thankyouMsg = NSLocalizedString(@"JCOFeedbackReceived", @"Thank you message on successful feedback submission");
+        NSString *msg = [NSString stringWithFormat:thankyouMsg, [[JCO instance] getProject]];
+        [self alert:msg withTitle:@"Thank You" button:@"OK"];
         // alert the delegate!
         // TODO: also alert on FAIL...
         [self.delegate transportDidFinish];
