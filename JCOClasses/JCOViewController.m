@@ -1,3 +1,4 @@
+#import "Macros.h"
 #import "JCOViewController.h"
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
@@ -72,7 +73,7 @@
             [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                            target:self
                                                            action:@selector(dismiss)] autorelease];
-    self.navigationItem.title = NSLocalizedString(@"Feedback", "Title of the feedback controller");
+    self.navigationItem.title = JCOLocalizedString(@"Feedback", "Title of the feedback controller");
 
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
@@ -280,8 +281,8 @@
         [self presentModalViewController:sketchViewController animated:YES];
     } else {
         UIAlertView *view =
-                [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RemoveRecording", @"Remove recording title") message:NSLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
-                                 cancelButtonTitle:NSLocalizedString(@"No", @"") otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
+                [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
+                                 cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
         currentAttachmentItemIndex = index;
         [view show];
         [view release];
@@ -403,7 +404,7 @@
 {
 
     CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view]];
-    [av setText:NSLocalizedString(@"Sending...", @"")];
+    [av setText:JCOLocalizedString(@"Sending...", @"")];
     [av startAnimating];
     [av setDelegate:self];
     [self setActivityView:av];

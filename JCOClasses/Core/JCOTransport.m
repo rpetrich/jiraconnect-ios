@@ -1,4 +1,4 @@
-
+#import "Macros.h"
 #import "JCOTransport.h"
 #import "JSON.h"
 #import "JCO.h"
@@ -50,7 +50,7 @@
     NSLog(@"Response '%@' for %@", request.responseString, request.url.absoluteURL);
     if (request.responseStatusCode < 300) {
 
-        NSString *thankyouMsg = NSLocalizedString(@"JCOFeedbackReceived", @"Thank you message on successful feedback submission");
+        NSString *thankyouMsg = JCOLocalizedString(@"JCOFeedbackReceived", @"Thank you message on successful feedback submission");
         NSString *msg = [NSString stringWithFormat:thankyouMsg, [[JCO instance] getProject]];
         [self alert:msg withTitle:@"Thank You" button:@"OK"];
         // alert the delegate!
