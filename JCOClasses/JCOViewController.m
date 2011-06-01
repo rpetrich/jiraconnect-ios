@@ -20,6 +20,8 @@
 
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
 
+- (BOOL)shouldTrackLocation;
+
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) CRVActivityView *activityView;
 @end
@@ -46,15 +48,18 @@
         sendLocationData = [[self payloadDataSource] locationEnabled];
     }
 
-    if (sendLocationData && [CLLocationManager locationServicesEnabled]) {
+    if ([self shouldTrackLocation]) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         [_locationManager startUpdatingLocation];
 
         //TODO: remove this. just for testing location in the simulator.
+#if TARGET_IPHONE_SIMULATOR
         // -33.871088, 151.203665
-        [currentLocation release];
-        currentLocation = [[[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665] retain];
+        CLLocation *fixed = [[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665];
+        [self setCurrentLocation: fixed];
+        [fixed release];
+#endif
     }
 
     // layout views
@@ -90,6 +95,13 @@
     self.sendButton.titleEdgeInsets = insets;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [_locationManager startUpdatingLocation];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [_locationManager stopUpdatingLocation];
+}
 
 - (IBAction)dismiss
 {
@@ -409,7 +421,7 @@
     }
 
 
-    if (sendLocationData && [self currentLocation]) {
+    if ([self shouldTrackLocation] && [self currentLocation]) {
         NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
         NSMutableArray *keys =    [NSMutableArray arrayWithCapacity:3];
         @synchronized (self) {
@@ -425,7 +437,6 @@
         [customFields addEntriesFromDictionary:dict];
         [dict release];
     }
-
 
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue
@@ -499,6 +510,12 @@
 }
 
 #pragma mark -
+#pragma mark Private Methods
+- (BOOL)shouldTrackLocation {
+    return sendLocationData && [CLLocationManager locationServicesEnabled];
+}
+
+#pragma mark -
 #pragma mark Memory Managment
 
 @synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, buttonBar, currentLocation, activityView;
@@ -521,9 +538,7 @@
 
 - (void)internalRelease
 {
-    if (_locationManager) {
-        [_locationManager release];
-    }
+    [_locationManager release];
     self.attachmentBar = nil;
     self.recorder = nil;
     self.buttonBar = nil;
