@@ -12,10 +12,6 @@
 		0169B9531395A77900A351F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0169B9521395A77900A351F7 /* CoreGraphics.framework */; };
 		0169B9591395A77900A351F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0169B9571395A77900A351F7 /* InfoPlist.strings */; };
 		0169B95C1395A77900A351F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169B95B1395A77900A351F7 /* main.m */; };
-		0169B9731395A79D00A351F7 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169B96F1395A79D00A351F7 /* AngryNerdsViewController.m */; };
-		0169B9741395A79D00A351F7 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169B9701395A79D00A351F7 /* AngryNerdsViewController.xib */; };
-		0169B9751395A79D00A351F7 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169B9721395A79D00A351F7 /* AngryNerdsAppDelegate.m */; };
-		0169B9771395A7AF00A351F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169B9761395A7AF00A351F7 /* MainWindow.xib */; };
 		0169BAE11395A8EC00A351F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0169BAE01395A8EB00A351F7 /* QuartzCore.framework */; };
 		0169BAE31395A8FB00A351F7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0169BAE21395A8FB00A351F7 /* MobileCoreServices.framework */; };
 		0169BAE51395A90400A351F7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0169BAE41395A90400A351F7 /* CFNetwork.framework */; };
@@ -87,7 +83,6 @@
 		0169BBE51395F09900A351F7 /* buttonbase.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB861395F09800A351F7 /* buttonbase.png */; };
 		0169BBE61395F09900A351F7 /* buttonbase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB871395F09800A351F7 /* buttonbase@2x.png */; };
 		0169BBE71395F09900A351F7 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB881395F09800A351F7 /* cancel.png */; };
-		0169BBE81395F09900A351F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB891395F09800A351F7 /* Localizable.strings */; };
 		0169BBE91395F09900A351F7 /* icon_capture.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB8C1395F09800A351F7 /* icon_capture.png */; };
 		0169BBEA1395F09900A351F7 /* icon_capture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB8D1395F09800A351F7 /* icon_capture@2x.png */; };
 		0169BBEB1395F09900A351F7 /* icon_record.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BB8E1395F09800A351F7 /* icon_record.png */; };
@@ -126,10 +121,15 @@
 		0169BC2B1395F1CA00A351F7 /* JiraConnect-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */; };
 		0169BC2C1395F1CA00A351F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC211395F1CA00A351F7 /* MainWindow.xib */; };
 		01C33DB31395F36E00D47D66 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C33DB21395F36E00D47D66 /* Icon.png */; };
+		8DE9D9AB1397472D00EED5F3 /* JCOLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9A61397472D00EED5F3 /* JCOLocalizable.strings */; };
+		8DE9D9AC1397472D00EED5F3 /* JCOLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9A91397472D00EED5F3 /* JCOLocalizable.strings */; };
+		8DE9D9B3139747B000EED5F3 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9D9AF139747B000EED5F3 /* AngryNerdsAppDelegate.m */; };
+		8DE9D9B4139747B000EED5F3 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9D9B1139747B000EED5F3 /* AngryNerdsViewController.m */; };
+		8DE9D9B5139747B000EED5F3 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9B2139747B000EED5F3 /* AngryNerdsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0169B94A1395A77900A351F7 /* AngryNerds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AngryNerds.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0169B94A1395A77900A351F7 /* Angry Nerds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Angry Nerds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0169B94E1395A77900A351F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0169B9501395A77900A351F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0169B9521395A77900A351F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,12 +137,6 @@
 		0169B9581395A77900A351F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0169B95A1395A77900A351F7 /* AngryNerds-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AngryNerds-Prefix.pch"; path = "../samples/AngryNerds/Classes/AngryNerds-Prefix.pch"; sourceTree = "<group>"; };
 		0169B95B1395A77900A351F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../samples/AngryNerds/Classes/main.m; sourceTree = "<group>"; };
-		0169B96E1395A79D00A351F7 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsViewController.h; sourceTree = "<group>"; };
-		0169B96F1395A79D00A351F7 /* AngryNerdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsViewController.m; sourceTree = "<group>"; };
-		0169B9701395A79D00A351F7 /* AngryNerdsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AngryNerdsViewController.xib; sourceTree = "<group>"; };
-		0169B9711395A79D00A351F7 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
-		0169B9721395A79D00A351F7 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
-		0169B9761395A7AF00A351F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		0169BAE01395A8EB00A351F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0169BAE21395A8FB00A351F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0169BAE41395A90400A351F7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -265,8 +259,6 @@
 		0169BB861395F09800A351F7 /* buttonbase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonbase.png; sourceTree = "<group>"; };
 		0169BB871395F09800A351F7 /* buttonbase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonbase@2x.png"; sourceTree = "<group>"; };
 		0169BB881395F09800A351F7 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		0169BB8A1395F09800A351F7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0169BB8B1395F09800A351F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0169BB8C1395F09800A351F7 /* icon_capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_capture.png; sourceTree = "<group>"; };
 		0169BB8D1395F09800A351F7 /* icon_capture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_capture@2x.png"; sourceTree = "<group>"; };
 		0169BB8E1395F09800A351F7 /* icon_record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_record.png; sourceTree = "<group>"; };
@@ -305,6 +297,14 @@
 		0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
 		0169BC211395F1CA00A351F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		01C33DB21395F36E00D47D66 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8DE9D9A71397472D00EED5F3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = JCOLocalizable.strings; sourceTree = "<group>"; };
+		8DE9D9AA1397472D00EED5F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JCOLocalizable.strings; sourceTree = "<group>"; };
+		8DE9D9AE139747B000EED5F3 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsAppDelegate.h; path = ../../../Classes/AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
+		8DE9D9AF139747B000EED5F3 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AngryNerdsAppDelegate.m; path = ../../../Classes/AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
+		8DE9D9B0139747B000EED5F3 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsViewController.h; path = ../../../Classes/AngryNerdsViewController.h; sourceTree = "<group>"; };
+		8DE9D9B1139747B000EED5F3 /* AngryNerdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AngryNerdsViewController.m; path = ../../../Classes/AngryNerdsViewController.m; sourceTree = "<group>"; };
+		8DE9D9B2139747B000EED5F3 /* AngryNerdsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AngryNerdsViewController.xib; path = ../../../Classes/AngryNerdsViewController.xib; sourceTree = "<group>"; };
+		8DE9D9B61397484900EED5F3 /* JCOMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMacros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,7 +343,7 @@
 		0169B94B1395A77900A351F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0169B94A1395A77900A351F7 /* AngryNerds.app */,
+				0169B94A1395A77900A351F7 /* Angry Nerds.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -368,12 +368,11 @@
 		0169B9541395A77900A351F7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				0169B9761395A7AF00A351F7 /* MainWindow.xib */,
-				0169B96E1395A79D00A351F7 /* AngryNerdsViewController.h */,
-				0169B96F1395A79D00A351F7 /* AngryNerdsViewController.m */,
-				0169B9701395A79D00A351F7 /* AngryNerdsViewController.xib */,
-				0169B9711395A79D00A351F7 /* AngryNerdsAppDelegate.h */,
-				0169B9721395A79D00A351F7 /* AngryNerdsAppDelegate.m */,
+				8DE9D9AE139747B000EED5F3 /* AngryNerdsAppDelegate.h */,
+				8DE9D9AF139747B000EED5F3 /* AngryNerdsAppDelegate.m */,
+				8DE9D9B0139747B000EED5F3 /* AngryNerdsViewController.h */,
+				8DE9D9B1139747B000EED5F3 /* AngryNerdsViewController.m */,
+				8DE9D9B2139747B000EED5F3 /* AngryNerdsViewController.xib */,
 				0169B9551395A77900A351F7 /* Supporting Files */,
 			);
 			path = Classes;
@@ -390,6 +389,7 @@
 		0169BB0E1395F09800A351F7 /* JCOClasses */ = {
 			isa = PBXGroup;
 			children = (
+				8DE9D9B61397484900EED5F3 /* JCOMacros.h */,
 				0169BB0F1395F09800A351F7 /* Core */,
 				0169BB491395F09800A351F7 /* JCO.h */,
 				0169BB4A1395F09800A351F7 /* JCO.m */,
@@ -540,6 +540,8 @@
 		0169BB7A1395F09800A351F7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8DE9D9A51397472D00EED5F3 /* de.lproj */,
+				8DE9D9A81397472D00EED5F3 /* en.lproj */,
 				0169BB7B1395F09800A351F7 /* Balloon_1.png */,
 				0169BB7C1395F09800A351F7 /* Balloon_2.png */,
 				0169BB7D1395F09800A351F7 /* bluedot.png */,
@@ -554,7 +556,6 @@
 				0169BB861395F09800A351F7 /* buttonbase.png */,
 				0169BB871395F09800A351F7 /* buttonbase@2x.png */,
 				0169BB881395F09800A351F7 /* cancel.png */,
-				0169BB891395F09800A351F7 /* Localizable.strings */,
 				0169BB8C1395F09800A351F7 /* icon_capture.png */,
 				0169BB8D1395F09800A351F7 /* icon_capture@2x.png */,
 				0169BB8E1395F09800A351F7 /* icon_record.png */,
@@ -608,6 +609,22 @@
 			path = ../../Resources;
 			sourceTree = "<group>";
 		};
+		8DE9D9A51397472D00EED5F3 /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8DE9D9A61397472D00EED5F3 /* JCOLocalizable.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
+		8DE9D9A81397472D00EED5F3 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8DE9D9A91397472D00EED5F3 /* JCOLocalizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -625,7 +642,7 @@
 			);
 			name = AngryNerds;
 			productName = AngryNerds;
-			productReference = 0169B94A1395A77900A351F7 /* AngryNerds.app */;
+			productReference = 0169B94A1395A77900A351F7 /* Angry Nerds.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -660,8 +677,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0169B9591395A77900A351F7 /* InfoPlist.strings in Resources */,
-				0169B9741395A79D00A351F7 /* AngryNerdsViewController.xib in Resources */,
-				0169B9771395A7AF00A351F7 /* MainWindow.xib in Resources */,
 				0169BBAD1395F09900A351F7 /* JCOIssuePreviewCell.xib in Resources */,
 				0169BBB01395F09900A351F7 /* JCOIssuesViewController.xib in Resources */,
 				0169BBB31395F09900A351F7 /* JCOIssueViewController.xib in Resources */,
@@ -681,7 +696,6 @@
 				0169BBE51395F09900A351F7 /* buttonbase.png in Resources */,
 				0169BBE61395F09900A351F7 /* buttonbase@2x.png in Resources */,
 				0169BBE71395F09900A351F7 /* cancel.png in Resources */,
-				0169BBE81395F09900A351F7 /* Localizable.strings in Resources */,
 				0169BBE91395F09900A351F7 /* icon_capture.png in Resources */,
 				0169BBEA1395F09900A351F7 /* icon_capture@2x.png in Resources */,
 				0169BBEB1395F09900A351F7 /* icon_record.png in Resources */,
@@ -720,6 +734,9 @@
 				0169BC2B1395F1CA00A351F7 /* JiraConnect-Info.plist in Resources */,
 				0169BC2C1395F1CA00A351F7 /* MainWindow.xib in Resources */,
 				01C33DB31395F36E00D47D66 /* Icon.png in Resources */,
+				8DE9D9AB1397472D00EED5F3 /* JCOLocalizable.strings in Resources */,
+				8DE9D9AC1397472D00EED5F3 /* JCOLocalizable.strings in Resources */,
+				8DE9D9B5139747B000EED5F3 /* AngryNerdsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,8 +748,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0169B95C1395A77900A351F7 /* main.m in Sources */,
-				0169B9731395A79D00A351F7 /* AngryNerdsViewController.m in Sources */,
-				0169B9751395A79D00A351F7 /* AngryNerdsAppDelegate.m in Sources */,
 				0169BBA71395F09900A351F7 /* CrashReporter.m in Sources */,
 				0169BBA81395F09900A351F7 /* JCOComment.m in Sources */,
 				0169BBA91395F09900A351F7 /* JCOCrashSender.m in Sources */,
@@ -777,6 +792,8 @@
 				0169BBD71395F09900A351F7 /* UIImage+Alpha.m in Sources */,
 				0169BBD81395F09900A351F7 /* UIImage+Resize.m in Sources */,
 				0169BBD91395F09900A351F7 /* UIImage+RoundedCorner.m in Sources */,
+				8DE9D9B3139747B000EED5F3 /* AngryNerdsAppDelegate.m in Sources */,
+				8DE9D9B4139747B000EED5F3 /* AngryNerdsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,13 +809,20 @@
 			path = ../samples/AngryNerds/Classes;
 			sourceTree = "<group>";
 		};
-		0169BB891395F09800A351F7 /* Localizable.strings */ = {
+		8DE9D9A61397472D00EED5F3 /* JCOLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0169BB8A1395F09800A351F7 /* de */,
-				0169BB8B1395F09800A351F7 /* en */,
+				8DE9D9A71397472D00EED5F3 /* de */,
 			);
-			name = Localizable.strings;
+			name = JCOLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		8DE9D9A91397472D00EED5F3 /* JCOLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DE9D9AA1397472D00EED5F3 /* en */,
+			);
+			name = JCOLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -850,7 +874,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/AngryNerds-Prefix.pch";
 				INFOPLIST_FILE = "Classes/AngryNerds-Info.plist";
-				PRODUCT_NAME = AngryNerds;
+				PRODUCT_NAME = "Angry Nerds";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -868,7 +892,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/AngryNerds-Prefix.pch";
 				INFOPLIST_FILE = "Classes/AngryNerds-Info.plist";
-				PRODUCT_NAME = AngryNerds;
+				PRODUCT_NAME = "Angry Nerds";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
