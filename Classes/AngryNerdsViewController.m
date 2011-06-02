@@ -25,7 +25,6 @@
 -(void) hideSplash:(NSTimer*) timer
 {
     self.splashView.hidden = YES;
-    NSLog(@"hiding splash");
 }
 
 - (IBAction)triggerFeedback

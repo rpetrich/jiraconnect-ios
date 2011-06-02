@@ -203,20 +203,20 @@
 
     if (title) {
         UIFont *font = [UIFont systemFontOfSize:12.0];
-        CGSize size = [title sizeWithFont:font];
         button.titleLabel.textColor = [UIColor whiteColor];
         [button setTitle:title forState:UIControlStateNormal];
         button.titleLabel.font = font;
         button.titleLabel.textAlignment = UITextAlignmentCenter;
         [button setTitleEdgeInsets:UIEdgeInsetsMake(-4.0, -icon.size.width, -35.0, -4.0)];
-        [button setImageEdgeInsets:UIEdgeInsetsMake(-10.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)]; // Right inset is the negative of text bounds width.
+        // Right inset is the negative of text bounds width.
+        [button setImageEdgeInsets:UIEdgeInsetsMake(-10.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)];
         button.titleLabel.hidden = NO;
 
         [button.layer setBorderWidth:1.0f];
-        [button.layer setBorderColor:[[UIColor grayColor] CGColor]];
+        [button.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
         button.layer.cornerRadius = 5.0f;
-        button.height += size.height;
-        button.width = size.width + 5;
+        button.height = 60;
+        button.width = 40;
 
     }
     [button setImage:icon forState:UIControlStateNormal];
