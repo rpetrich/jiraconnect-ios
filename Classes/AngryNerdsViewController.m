@@ -5,11 +5,12 @@
 
 @implementation AngryNerdsViewController
 
-@synthesize nerd = _nerd, nerdsView = _nerdsView;
+@synthesize nerd = _nerd, nerdsView = _nerdsView, splashView = _splashView;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(hideSplash:) userInfo:nil repeats:NO];
     NSMutableArray *nerds = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"frontend_blink.png"]];
     for (int i = 0; i < 20; i++) {
         [nerds addObject:[UIImage imageNamed:@"frontend.png"]];
@@ -18,6 +19,13 @@
     [self.nerdsView setAnimationImages:nerds];
     [self.nerdsView setAnimationDuration:5];
     [self.nerdsView startAnimating];
+
+}
+
+-(void) hideSplash:(NSTimer*) timer
+{
+    self.splashView.hidden = YES;
+    NSLog(@"hiding splash");
 }
 
 - (IBAction)triggerFeedback
@@ -158,6 +166,7 @@
 {
     self.nerd = nil;
     self.nerdsView = nil;
+    self.splashView = nil;
     [super dealloc];
 }
 

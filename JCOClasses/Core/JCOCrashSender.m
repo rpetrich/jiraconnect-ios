@@ -1,4 +1,4 @@
-#import "Macros.h"
+#import "JCOMacros.h"
 #import "JCOCrashSender.h"
 #import "CrashReporter.h"
 #import "JCO.h"

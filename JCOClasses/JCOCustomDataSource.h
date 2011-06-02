@@ -19,6 +19,7 @@
 /**
 * A dictionary containing any specialized custom fields (keyed by custom field name) 
 * to be set on any JIRAs created by JIRA Connect.
+* NB: custom field names should be *all* lower case.
 */
 -(NSDictionary *) customFields;
 

@@ -1,5 +1,5 @@
 //
-//  Macros.h
+//  JCOMacros.h
 //  JIRA_Connect
 //
 //  Created by Stefan Saasen on 01.06.11.

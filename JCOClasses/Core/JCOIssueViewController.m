@@ -146,7 +146,7 @@ static float detailLabelHeight = 21.0f;
         static NSString *cellIdentifier = @"JCOMessageCell";
         JCOMessageCell *issueCell = (JCOMessageCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (issueCell == nil) {
-            // Load the top-level objects from the custom cell XIB.
+
             issueCell = [[[JCOMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
             CGSize size = [self.issue.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
             issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
