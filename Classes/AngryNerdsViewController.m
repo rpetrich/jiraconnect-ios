@@ -10,8 +10,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //TODO make this 3.0f
-    [NSTimer scheduledTimerWithTimeInterval:0.0f target:self selector:@selector(hideSplash:) userInfo:nil repeats:NO];
+    
+    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(hideSplash:) userInfo:nil repeats:NO];
     NSMutableArray *nerds = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"frontend_blink.png"]];
     for (int i = 0; i < 20; i++) {
         [nerds addObject:[UIImage imageNamed:@"frontend.png"]];

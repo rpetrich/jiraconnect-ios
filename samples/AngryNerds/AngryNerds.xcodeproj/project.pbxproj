@@ -122,6 +122,12 @@
 		0169BC2C1395F1CA00A351F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC211395F1CA00A351F7 /* MainWindow.xib */; };
 		01A33B631397B243004A2E25 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A33B621397B243004A2E25 /* Default@2x.png */; };
 		01C33DB31395F36E00D47D66 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C33DB21395F36E00D47D66 /* Icon.png */; };
+		8D470BC31398CD5100AA80A8 /* bevel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D470BBF1398CD5100AA80A8 /* bevel.png */; };
+		8D470BC41398CD5100AA80A8 /* bevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D470BC01398CD5100AA80A8 /* bevel@2x.png */; };
+		8D470BC51398CD5100AA80A8 /* button_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D470BC11398CD5100AA80A8 /* button_base.png */; };
+		8D470BC61398CD5100AA80A8 /* button_base@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D470BC21398CD5100AA80A8 /* button_base@2x.png */; };
+		8D99508F1398C53900BADC87 /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D99508D1398C53900BADC87 /* feedback.png */; };
+		8D9950901398C53900BADC87 /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D99508E1398C53900BADC87 /* feedback@2x.png */; };
 		8DE9D9AB1397472D00EED5F3 /* JCOLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9A61397472D00EED5F3 /* JCOLocalizable.strings */; };
 		8DE9D9AC1397472D00EED5F3 /* JCOLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9A91397472D00EED5F3 /* JCOLocalizable.strings */; };
 		8DE9D9B3139747B000EED5F3 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE9D9AF139747B000EED5F3 /* AngryNerdsAppDelegate.m */; };
@@ -299,6 +305,12 @@
 		0169BC211395F1CA00A351F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		01A33B621397B243004A2E25 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		01C33DB21395F36E00D47D66 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8D470BBF1398CD5100AA80A8 /* bevel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bevel.png; sourceTree = "<group>"; };
+		8D470BC01398CD5100AA80A8 /* bevel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bevel@2x.png"; sourceTree = "<group>"; };
+		8D470BC11398CD5100AA80A8 /* button_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_base.png; sourceTree = "<group>"; };
+		8D470BC21398CD5100AA80A8 /* button_base@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_base@2x.png"; sourceTree = "<group>"; };
+		8D99508D1398C53900BADC87 /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feedback.png; path = ../../../../../Dropbox/JIRAConnect/images/feedback.png; sourceTree = "<group>"; };
+		8D99508E1398C53900BADC87 /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedback@2x.png"; path = "../../../../../Dropbox/JIRAConnect/images/feedback@2x.png"; sourceTree = "<group>"; };
 		8DE9D9A71397472D00EED5F3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = JCOLocalizable.strings; sourceTree = "<group>"; };
 		8DE9D9AA1397472D00EED5F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JCOLocalizable.strings; sourceTree = "<group>"; };
 		8DE9D9AE139747B000EED5F3 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsAppDelegate.h; path = ../../../Classes/AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
@@ -383,6 +395,8 @@
 		0169B9551395A77900A351F7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D99508D1398C53900BADC87 /* feedback.png */,
+				8D99508E1398C53900BADC87 /* feedback@2x.png */,
 				01C33DB21395F36E00D47D66 /* Icon.png */,
 			);
 			name = "Supporting Files";
@@ -544,6 +558,10 @@
 			children = (
 				8DE9D9A51397472D00EED5F3 /* de.lproj */,
 				8DE9D9A81397472D00EED5F3 /* en.lproj */,
+				8D470BBF1398CD5100AA80A8 /* bevel.png */,
+				8D470BC01398CD5100AA80A8 /* bevel@2x.png */,
+				8D470BC11398CD5100AA80A8 /* button_base.png */,
+				8D470BC21398CD5100AA80A8 /* button_base@2x.png */,
 				0169BB7B1395F09800A351F7 /* Balloon_1.png */,
 				0169BB7C1395F09800A351F7 /* Balloon_2.png */,
 				0169BB7D1395F09800A351F7 /* bluedot.png */,
@@ -741,6 +759,12 @@
 				8DE9D9AC1397472D00EED5F3 /* JCOLocalizable.strings in Resources */,
 				8DE9D9B5139747B000EED5F3 /* AngryNerdsViewController.xib in Resources */,
 				01A33B631397B243004A2E25 /* Default@2x.png in Resources */,
+				8D99508F1398C53900BADC87 /* feedback.png in Resources */,
+				8D9950901398C53900BADC87 /* feedback@2x.png in Resources */,
+				8D470BC31398CD5100AA80A8 /* bevel.png in Resources */,
+				8D470BC41398CD5100AA80A8 /* bevel@2x.png in Resources */,
+				8D470BC51398CD5100AA80A8 /* button_base.png in Resources */,
+				8D470BC61398CD5100AA80A8 /* button_base@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
