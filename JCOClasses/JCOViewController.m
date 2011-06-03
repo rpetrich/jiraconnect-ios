@@ -541,13 +541,11 @@
     // Release any retained subviews of the main view.
     [self internalRelease];
     [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-
 }
 
 - (void)internalRelease
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_locationManager release];
     [_voiceButton release];
     [toolbarItems release];
