@@ -15,7 +15,7 @@
 
 - (BOOL)shouldTrackLocation;
 
-NSArray* toolbarItems;
+NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) CRVActivityView *activityView;
@@ -65,8 +65,7 @@ NSArray* toolbarItems;
     // layout views
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-
+    
     self.navigationItem.leftBarButtonItem =
             [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                            target:self
@@ -265,7 +264,7 @@ NSArray* toolbarItems;
     [button setImage:icon forState:UIControlStateNormal];
     
     UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
-    button.tag = [self.attachments count];
+    button.tag = [self.toolbar.items count];
 
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
     [buttonItems addObject:buttonItem];
@@ -295,7 +294,7 @@ NSArray* toolbarItems;
 
     [self.attachments removeObjectAtIndex:index];
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems removeObjectAtIndex:index + 2];
+    [buttonItems removeObjectAtIndex:index + [toolbarItems count]]; // TODO: fix this pullava
     // re-tag all buttons... with their new index. indexed from 2, due to icons...
     for (int i = 0; i < [buttonItems count]; i++) {
         UIBarButtonItem *buttonItem = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
@@ -309,29 +308,32 @@ NSArray* toolbarItems;
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
-    NSLog(@"tapped attachment index = %lu, count = %lu", index, [self.attachments count]);
+    NSUInteger attachmentIndex = index - [toolbarItems count];
+    NSLog(@"tapped image index = %lu, count = %lu", index, [self.attachments count]);
 
-    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
     sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
-    sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:index]; // set this image's id. just the index in the array
+    sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:attachmentIndex]; // set this image's id. just the index in the array
     sketchViewController.delegate = self;
     [self presentModalViewController:sketchViewController animated:YES];
+    currentAttachmentItemIndex = index;
 }
 
 - (void)voiceAttachmentTapped:(UIButton *)touch
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
-    NSLog(@"tapped attachment index = %lu, count = %lu", index, [self.attachments count]);
+    NSUInteger attachmentIndex = index - [toolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
+    NSLog(@"tapped voice attachmentIndex index = %lu, count = %lu", attachmentIndex, [self.attachments count]);
     
-    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
 
     UIAlertView *view =
             [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
                              cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
-    currentAttachmentItemIndex = index;
+    currentAttachmentItemIndex = attachmentIndex;
     [view show];
     [view release];
 
@@ -378,12 +380,11 @@ NSArray* toolbarItems;
     attachment.data = UIImagePNGRepresentation(image);
 
     // also update the icon in the toolbar
-    CGSize size = CGSizeMake(40, self.toolbar.frame.size.height);
-    UIImage *iconImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                                                     bounds:size
-                                       interpolationQuality:kCGInterpolationHigh];
-    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:index];
-    ((UIButton *) item.customView).imageView.image = iconImage;
+    UIImage * iconImg =
+            [image thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
+
+    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:index + [toolbarItems count]];
+    ((UIButton *) item.customView).imageView.image = iconImg;
 }
 
 - (void)sketchControllerDidCancel:(UIViewController *)controller
@@ -411,6 +412,7 @@ NSArray* toolbarItems;
 - (IBAction)sendFeedback
 {
 	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
+    //TODO: uncomment this for production...
 //    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
 //    [av setText:JCOLocalizedString(@"Sending...", @"")];
 //    [av startAnimating];
