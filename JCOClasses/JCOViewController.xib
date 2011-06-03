@@ -134,10 +134,7 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1068701691"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC40MTg0NzgyNjA5IDAuNDE4NDc4MjYwOSAwLjQxODQ3ODI2MDkAA</bytes>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="463050577"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -260,6 +257,7 @@
 							<reference ref="197009698"/>
 						</object>
 						<reference key="parent" ref="0"/>
+						<string key="objectName">View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
@@ -421,40 +419,36 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>accessoryView</string>
 							<string>countdownTimer</string>
 							<string>countdownView</string>
 							<string>descriptionField</string>
 							<string>imagePicker</string>
 							<string>progressView</string>
+							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIToolbar</string>
 							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UITextView</string>
 							<string>UIImagePickerController</string>
 							<string>UIProgressView</string>
+							<string>UIToolbar</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>accessoryView</string>
 							<string>countdownTimer</string>
 							<string>countdownView</string>
 							<string>descriptionField</string>
 							<string>imagePicker</string>
 							<string>progressView</string>
+							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">accessoryView</string>
-								<string key="candidateClassName">UIToolbar</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">countdownTimer</string>
 								<string key="candidateClassName">UILabel</string>
@@ -474,6 +468,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressView</string>
 								<string key="candidateClassName">UIProgressView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">toolbar</string>
+								<string key="candidateClassName">UIToolbar</string>
 							</object>
 						</object>
 					</object>

@@ -104,8 +104,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void) viewWillAppear:(BOOL)animated {
     [self.descriptionField becomeFirstResponder];
     [_locationManager startUpdatingLocation];
-    
-
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
