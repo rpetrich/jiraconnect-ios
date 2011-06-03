@@ -15,13 +15,14 @@
 
 - (BOOL)shouldTrackLocation;
 
-NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) CRVActivityView *activityView;
 @end
 
 @implementation JCOViewController
+
+NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -288,8 +289,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)removeAttachmentItemAtIndex:(NSUInteger)index
 {
 
-    NSLog(@"removing attachment: index = %lu count = %lu", index, [self.attachments count]);
-
     [self.attachments removeObjectAtIndex:index];
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
     [buttonItems removeObjectAtIndex:index + [toolbarItems count]]; // TODO: fix this pullava
@@ -307,8 +306,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
     NSUInteger attachmentIndex = index - [toolbarItems count];
-    NSLog(@"tapped image index = %lu, count = %lu", index, [self.attachments count]);
-
+  
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
@@ -323,11 +321,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
-    NSUInteger attachmentIndex = index - [toolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
-    NSLog(@"tapped voice attachmentIndex index = %lu, count = %lu", attachmentIndex, [self.attachments count]);
-    
-    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
-
+    NSUInteger attachmentIndex = index - [toolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method.
     UIAlertView *view =
             [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
                              cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
