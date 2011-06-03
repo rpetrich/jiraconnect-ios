@@ -16,6 +16,7 @@
     UIBarButtonItem* trash = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAction:)] autorelease];
     UIBarButtonItem* space = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
     [self.toolbar setItems:[NSArray arrayWithObjects:trash, space, undo, redo, done, nil]];
+    self.toolbar.barStyle = UIBarStyleBlack;
 
     [self.scrollView setCanCancelContentTouches:NO];
 	self.scrollView.clipsToBounds = YES;	// default is NO, we want to restrict drawing within our scrollview
