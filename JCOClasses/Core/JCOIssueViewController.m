@@ -177,6 +177,7 @@ static float detailLabelHeight = 21.0f;
     self.feedbackController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] autorelease];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
     navController.navigationBar.translucent = YES;
+    navController.navigationBar.barStyle = UIBarStyleBlack;
 
     [self presentModalViewController:navController animated:YES];
 

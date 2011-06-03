@@ -14,19 +14,20 @@ NSDateFormatter *_dateFormatter;
 
 - (id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle {
 
-    id controller = [super initWithNibName:name bundle:bundle];
-
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                           target:self
-                                                                                           action:@selector(cancel:)] autorelease];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                                                            target:self
-                                                                                            action:@selector(compose:)] autorelease];
-    self.title = @"Your Feedback";
-    _dateFormatter = [[[NSDateFormatter alloc] init] retain];
-    [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    return controller;
+    self = [super initWithNibName:name bundle:bundle];
+    if (self) {
+        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                               target:self
+                                                                                               action:@selector(cancel:)] autorelease];
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                                target:self
+                                                                                                action:@selector(compose:)] autorelease];
+        self.title = @"Your Feedback";
+        _dateFormatter = [[[NSDateFormatter alloc] init] retain];
+        [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    }
+    return self;
 }
 
 - (void)compose:(UIBarItem *)arg {

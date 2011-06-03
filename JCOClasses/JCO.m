@@ -28,6 +28,7 @@
         _jcController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
         _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];
         _navController.navigationBar.translucent = YES;
+        _navController.navigationBar.tintColor = [UIColor blackColor];
     }
     return self;
 }

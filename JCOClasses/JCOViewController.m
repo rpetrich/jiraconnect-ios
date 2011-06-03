@@ -80,7 +80,6 @@ NSArray* toolbarItems;
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
 
-
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.toolbar.clipsToBounds = YES;
     self.toolbar.items = nil;
