@@ -410,13 +410,13 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (IBAction)sendFeedback
 {
 	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
-    //TODO: uncomment this for production...
-//    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
-//    [av setText:JCOLocalizedString(@"Sending...", @"")];
-//    [av startAnimating];
-//    [av setDelegate:self];
-//    [self setActivityView:av];
-//    [av release];
+
+    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
+    [av setText:JCOLocalizedString(@"Sending...", @"")];
+    [av startAnimating];
+    [av setDelegate:self];
+    [self setActivityView:av];
+    [av release];
 
     self.issueTransport.delegate = self;
     NSDictionary *payloadData = nil;
