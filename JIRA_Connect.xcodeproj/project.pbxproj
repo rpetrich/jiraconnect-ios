@@ -61,7 +61,6 @@
 		01AC888A1376A6C1000453A1 /* writeareply.png in Resources */ = {isa = PBXBuildFile; fileRef = 01AC88891376A6C1000453A1 /* writeareply.png */; };
 		01C20DF213889AC70032D9BA /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20DF113889AC70032D9BA /* UIView+Additions.m */; };
 		01C20DFA1388A76B0032D9BA /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20DF91388A76B0032D9BA /* UILabel+VerticalAlign.m */; };
-		01C3312E1399042000D34F38 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C3312D1399042000D34F38 /* Default@2x.png */; };
 		01CB106B1390F1E800F79FBB /* frontend_blink.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CB10691390F1E800F79FBB /* frontend_blink.png */; };
 		01CB106C1390F1E800F79FBB /* frontend.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CB106A1390F1E800F79FBB /* frontend.png */; };
 		01CB10701390F34D00F79FBB /* aeron.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CB106D1390F34D00F79FBB /* aeron.png */; };
@@ -129,6 +128,7 @@
 		C01FCF5008A954540054248D /* JCOSketchContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01FCF5008A954540054248C /* JCOSketchContainerView.m */; };
 		F87C631613936FD90035EC21 /* CRVActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = F87C631513936FD90035EC21 /* CRVActivityView.m */; };
 		F87C63181393780F0035EC21 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = F87C63171393780F0035EC21 /* cancel.png */; };
+		F8C1EE27139908D000F1D4C8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C1EE26139908D000F1D4C8 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -194,7 +194,6 @@
 		01C20DF113889AC70032D9BA /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		01C20DF81388A76B0032D9BA /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
 		01C20DF91388A76B0032D9BA /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
-		01C3312D1399042000D34F38 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../../Dropbox/JIRAConnect/images/Default@2x.png"; sourceTree = "<group>"; };
 		01CB10691390F1E800F79FBB /* frontend_blink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontend_blink.png; sourceTree = "<group>"; };
 		01CB106A1390F1E800F79FBB /* frontend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontend.png; sourceTree = "<group>"; };
 		01CB106D1390F34D00F79FBB /* aeron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aeron.png; sourceTree = "<group>"; };
@@ -310,6 +309,7 @@
 		F87C631413936FD90035EC21 /* CRVActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRVActivityView.h; sourceTree = "<group>"; };
 		F87C631513936FD90035EC21 /* CRVActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRVActivityView.m; sourceTree = "<group>"; };
 		F87C63171393780F0035EC21 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		F8C1EE26139908D000F1D4C8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,7 +486,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				01C3312D1399042000D34F38 /* Default@2x.png */,
+				F8C1EE26139908D000F1D4C8 /* Default@2x.png */,
 				01D980C6139469C50080B67B /* Default.png */,
 				01CB106D1390F34D00F79FBB /* aeron.png */,
 				01CB106E1390F34D00F79FBB /* bgGame1.png */,
@@ -830,7 +830,7 @@
 				01DAD07D13987AB10062B11F /* bevel@2x.png in Resources */,
 				01DAD07E13987AB10062B11F /* button_base.png in Resources */,
 				01DAD07F13987AB10062B11F /* button_base@2x.png in Resources */,
-				01C3312E1399042000D34F38 /* Default@2x.png in Resources */,
+				F8C1EE27139908D000F1D4C8 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
