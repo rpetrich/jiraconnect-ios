@@ -25,9 +25,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.issueTransport = [[[JCOIssueTransport alloc] init] autorelease];
-        self.replyTransport = [[[JCOReplyTransport alloc] init] autorelease];
-        self.recorder = [[[JCORecorder alloc] init] autorelease];
+        _issueTransport = [[JCOIssueTransport alloc] init];
+        _replyTransport = [[JCOReplyTransport alloc] init];
+        _recorder = [[JCORecorder alloc] init];
     }
     return self;
 }
