@@ -9,28 +9,20 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CRVActivityView.h"
 
-@interface JCOToolbar : UIToolbar {
-
-}
-@end
 
 @interface JCOViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JCOSketchViewControllerDelegate, UIAlertViewDelegate,
         CLLocationManagerDelegate, CRVActivityViewDelegate> {
 
-    IBOutlet UIButton *sendButton;
-    IBOutlet UIButton *voiceButton;
-    IBOutlet UIButton *screenshotButton;
-
     IBOutlet UITextView *descriptionField;
-    IBOutlet UIImageView *buttonBar;
 
     IBOutlet UILabel *countdownTimer;
     IBOutlet UIProgressView *progressView;
     IBOutlet UIView *countdownView;
+    
 
     IBOutlet UIImagePickerController *imagePicker;
 
-    IBOutlet UIToolbar* accessoryView;
+    IBOutlet UIToolbar* toolbar;
 
     JCOIssueTransport *_issueTransport;
     JCOReplyTransport *_replyTransport;
@@ -47,18 +39,15 @@
     CLLocationManager *_locationManager;
     BOOL sendLocationData;
     CRVActivityView *activityView;
+    UIImageView *_voiceButton;
 }
-@property(retain, nonatomic) IBOutlet UIButton *sendButton;
-@property(retain, nonatomic) IBOutlet UIButton *voiceButton;
-@property(retain, nonatomic) IBOutlet UIButton *screenshotButton;
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
-@property(retain, nonatomic) IBOutlet UIImageView *buttonBar;
 
 @property(retain, nonatomic) IBOutlet UIView *countdownView;
 @property(retain, nonatomic) IBOutlet UIProgressView *progressView;
 
 @property(retain, nonatomic) IBOutlet UIImagePickerController *imagePicker;
-@property(retain, nonatomic) IBOutlet UIToolbar* accessoryView;;
+@property(retain, nonatomic) IBOutlet UIToolbar *toolbar;;
 
 @property(retain, nonatomic) JCOIssueTransport *issueTransport;
 @property(retain, nonatomic) JCOReplyTransport *replyTransport;
@@ -69,6 +58,7 @@
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
 @property(retain, nonatomic) JCOIssue *replyToIssue;
 
+@property(retain, nonatomic) UIImageView *voiceButton;
 
 - (IBAction)sendFeedback;
 

@@ -422,28 +422,20 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>accessoryView</string>
-							<string>buttonBar</string>
 							<string>countdownTimer</string>
 							<string>countdownView</string>
 							<string>descriptionField</string>
 							<string>imagePicker</string>
 							<string>progressView</string>
-							<string>screenshotButton</string>
-							<string>sendButton</string>
-							<string>voiceButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIToolbar</string>
-							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UITextView</string>
 							<string>UIImagePickerController</string>
 							<string>UIProgressView</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -451,25 +443,17 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>accessoryView</string>
-							<string>buttonBar</string>
 							<string>countdownTimer</string>
 							<string>countdownView</string>
 							<string>descriptionField</string>
 							<string>imagePicker</string>
 							<string>progressView</string>
-							<string>screenshotButton</string>
-							<string>sendButton</string>
-							<string>voiceButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">accessoryView</string>
 								<string key="candidateClassName">UIToolbar</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">buttonBar</string>
-								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">countdownTimer</string>
@@ -490,18 +474,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressView</string>
 								<string key="candidateClassName">UIProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">screenshotButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">sendButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">voiceButton</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 						</object>
 					</object>

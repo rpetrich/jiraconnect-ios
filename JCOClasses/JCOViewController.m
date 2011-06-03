@@ -9,9 +9,13 @@
 @interface JCOViewController ()
 - (void)internalRelease;
 
+- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action;
+
 - (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
 
 - (BOOL)shouldTrackLocation;
+
+NSArray* toolbarItems;
 
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) CRVActivityView *activityView;
@@ -78,26 +82,32 @@
 
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
-    self.accessoryView.clipsToBounds = YES;
-    self.accessoryView.items = nil;
-    self.accessoryView.autoresizesSubviews = YES;
+    self.toolbar.clipsToBounds = YES;
+    self.toolbar.items = nil;
+    self.toolbar.autoresizesSubviews = YES;
 
     float descriptionFieldInset = 15;
     self.descriptionField.top = 44 + descriptionFieldInset;
     self.descriptionField.width = self.view.width - (descriptionFieldInset * 2.0);
     descriptionFrame = self.descriptionField.frame;
-    
 
-    // align the button titles nicer
-    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 5, 0);
-    self.screenshotButton.titleEdgeInsets = insets;
-    self.voiceButton.titleEdgeInsets = insets;
-    self.sendButton.titleEdgeInsets = insets;
+    self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
+    [self.toolbar setBarStyle:UIBarStyleBlackOpaque];
+
+    UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture.png" action:@selector(addScreenshot)];
+    UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record.png" action:@selector(addVoice)];
+    UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                            target:nil action:nil] autorelease];
+    toolbarItems = [[NSArray arrayWithObjects:screenshotButton, recordButton, spaceButton, nil] retain];
+    self.toolbar.items = toolbarItems;
+    self.descriptionField.inputAccessoryView = self.toolbar;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [self.descriptionField becomeFirstResponder];
     [_locationManager startUpdatingLocation];
+    
+
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -163,24 +173,7 @@
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
-
-    if (self.descriptionField.inputAccessoryView == nil) {
-        UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
-        [toolbar setBarStyle:UIBarStyleBlackOpaque];
-        self.accessoryView = toolbar;
-
-
-        UIBarButtonItem *screenshots = [self barButtonFor:@"icon_capture.png" action:@selector(addScreenshot)];
-        UIBarButtonItem *voice = [self barButtonFor:@"icon_record.png" action:@selector(addVoice)];
-        UIBarButtonItem *space = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                               target:nil
-                                                                               action:nil] autorelease];
-        self.accessoryView.items = [NSArray arrayWithObjects:screenshots, voice, space, nil];
-        self.descriptionField.inputAccessoryView = self.accessoryView;
-        // After setting the accessory view for the text view, we no longer need a reference to the accessory view.
-//        self.accessoryView = nil;
-    }
-
+    
     return YES;
 }
 
@@ -212,8 +205,6 @@
 {
     self.countdownView.hidden = YES;
     self.progressView.progress = 0;
-    [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_record.png"] forState:UIControlStateNormal];
-    [[self.voiceButton viewWithTag:2] removeFromSuperview];
     [_timer invalidate];
 }
 
@@ -229,37 +220,25 @@
         self.progressView.progress = 0;
 
         self.countdownView.hidden = NO;
-        UIImage *activeImg = [UIImage imageNamed:@"icon_record_active.png"];
-        self.voiceButton.imageView.image = activeImg;
-        UIImageView *imgView = [[UIImageView alloc] initWithImage:activeImg];
 
-        NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:8];
-        for (int i = 1; i < 9; i++) {
-            NSString *sprintName = [@"icon_record_" stringByAppendingFormat:@"%d.png", i];
-            UIImage *img = [UIImage imageNamed:sprintName];
-            [sprites addObject:img];
-        }
-        imgView.animationImages = sprites;
-        imgView.animationDuration = 0.85f;
-
-
-        CGRect buttFrame = self.voiceButton.frame;
-        float x = (buttFrame.size.width / 2.0f) - (activeImg.size.width / 2.0f) - 1;
-        imgView.tag = 2;
-        [imgView startAnimating];
-
-        imgView.frame = CGRectMake(x, 5, activeImg.size.width, activeImg.size.height);
-        [self.voiceButton addSubview:imgView];
-        [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"button_blank.png"] forState:UIControlStateNormal];
-        [imgView release];
+        // TODO: animate recording ?
+//        NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:8];
+//        for (int i = 1; i < 9; i++) {
+//            NSString *sprintName = [@"icon_record_" stringByAppendingFormat:@"%d.png", i];
+//            UIImage *img = [UIImage imageNamed:sprintName];
+//            [sprites addObject:img];
+//        }
+//        self.voiceButton.animationImages = sprites;
+//        self.voiceButton.animationDuration = 0.85f;
+//
+//        [self.voiceButton startAnimating];
     }
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success
 {
-    float duration = [_recorder previousDuration];
-    [self hideAudioProgress];
 
+    [self hideAudioProgress];
 
     JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"recording"
                                                                        data:[_recorder audioData]
@@ -287,11 +266,11 @@
     [button setImage:icon forState:UIControlStateNormal];
     
     UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
-    button.tag = [self.attachments count] + 3;
+    button.tag = [self.attachments count];
 
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.accessoryView.items];
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
     [buttonItems addObject:buttonItem];
-    [self.accessoryView setItems:buttonItems];
+    [self.toolbar setItems:buttonItems];
     [self.attachments addObject:attachment];
 }
 
@@ -316,7 +295,7 @@
     NSLog(@"removing attachment: index = %lu count = %lu", index, [self.attachments count]);
 
     [self.attachments removeObjectAtIndex:index];
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.accessoryView.items];
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
     [buttonItems removeObjectAtIndex:index + 2];
     // re-tag all buttons... with their new index. indexed from 2, due to icons...
     for (int i = 0; i < [buttonItems count]; i++) {
@@ -324,7 +303,7 @@
         buttonItem.customView.tag = i;
     }
 
-    [self.accessoryView setItems:buttonItems animated:YES];
+    [self.toolbar setItems:buttonItems animated:YES];
 }
 
 - (void)imageAttachmentTapped:(UIButton *)touch
@@ -379,7 +358,6 @@
 
     [self dismissModalViewControllerAnimated:YES];
 
-    [self.screenshotButton setAutoresizesSubviews:NO];
     UIImage *origImg = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
 
     [self addImageAttachmentItem:origImg];
@@ -401,11 +379,11 @@
     attachment.data = UIImagePNGRepresentation(image);
 
     // also update the icon in the toolbar
-    CGSize size = CGSizeMake(40, self.accessoryView.frame.size.height);
+    CGSize size = CGSizeMake(40, self.toolbar.frame.size.height);
     UIImage *iconImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                                                      bounds:size
                                        interpolationQuality:kCGInterpolationHigh];
-    UIBarButtonItem *item = [self.accessoryView.items objectAtIndex:index];
+    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:index];
     ((UIButton *) item.customView).imageView.image = iconImage;
 }
 
@@ -504,9 +482,8 @@
     [self dismissModalViewControllerAnimated:YES];
 
     self.descriptionField.text = @"";
-    [[self.screenshotButton viewWithTag:20] removeFromSuperview];
     [self.attachments removeAllObjects];
-    [self.accessoryView setItems:nil];
+    [self.toolbar setItems:toolbarItems];
 }
 
 - (void)transportDidFinishWithError:(NSError *)error
@@ -550,10 +527,11 @@
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, buttonBar, currentLocation, activityView;
+@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, activityView;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
-@synthesize accessoryView;
+@synthesize toolbar;
+@synthesize voiceButton = _voiceButton;
 
 
 - (void)dealloc
@@ -576,19 +554,17 @@
 - (void)internalRelease
 {
     [_locationManager release];
-    self.accessoryView = nil;
+    [_voiceButton release];
+    [toolbarItems release];
+    self.toolbar = nil;
     self.recorder = nil;
-    self.buttonBar = nil;
-    self.sendButton = nil;
     self.imagePicker = nil;
     self.attachments = nil;
-    self.voiceButton = nil;
     self.progressView = nil;
     self.replyToIssue = nil;
     self.countdownView = nil;
     self.issueTransport = nil;
     self.replyTransport = nil;
-    self.screenshotButton = nil;
     self.descriptionField = nil;
     self.payloadDataSource = nil;
     self.currentLocation = nil;
