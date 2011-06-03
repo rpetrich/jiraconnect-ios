@@ -18,9 +18,11 @@
     {
         for (int i = 0; i < [attachments count]; i++) {
             JCOAttachmentItem *item = [attachments objectAtIndex:i];
-            NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
-            NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
-            [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:key];
+            if (item != nil) {
+                NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
+                NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
+                [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:key];
+            }
         }
     }
     if (payloadData != nil) {

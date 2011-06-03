@@ -120,6 +120,7 @@
 		0169BC291395F1CA00A351F7 /* frontend_blink.png in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC1E1395F1CA00A351F7 /* frontend_blink.png */; };
 		0169BC2B1395F1CA00A351F7 /* JiraConnect-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */; };
 		0169BC2C1395F1CA00A351F7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0169BC211395F1CA00A351F7 /* MainWindow.xib */; };
+		01A33B631397B243004A2E25 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A33B621397B243004A2E25 /* Default@2x.png */; };
 		01C33DB31395F36E00D47D66 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C33DB21395F36E00D47D66 /* Icon.png */; };
 		8DE9D9AB1397472D00EED5F3 /* JCOLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9A61397472D00EED5F3 /* JCOLocalizable.strings */; };
 		8DE9D9AC1397472D00EED5F3 /* JCOLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DE9D9A91397472D00EED5F3 /* JCOLocalizable.strings */; };
@@ -296,6 +297,7 @@
 		0169BC1E1395F1CA00A351F7 /* frontend_blink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontend_blink.png; sourceTree = "<group>"; };
 		0169BC201395F1CA00A351F7 /* JiraConnect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JiraConnect-Info.plist"; sourceTree = "<group>"; };
 		0169BC211395F1CA00A351F7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		01A33B621397B243004A2E25 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		01C33DB21395F36E00D47D66 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8DE9D9A71397472D00EED5F3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = JCOLocalizable.strings; sourceTree = "<group>"; };
 		8DE9D9AA1397472D00EED5F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JCOLocalizable.strings; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 		0169BC161395F1CA00A351F7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01A33B621397B243004A2E25 /* Default@2x.png */,
 				0169BC171395F1CA00A351F7 /* aeron.png */,
 				0169BC181395F1CA00A351F7 /* angrynerds.png */,
 				0169BC191395F1CA00A351F7 /* bgGame1.png */,
@@ -737,6 +740,7 @@
 				8DE9D9AB1397472D00EED5F3 /* JCOLocalizable.strings in Resources */,
 				8DE9D9AC1397472D00EED5F3 /* JCOLocalizable.strings in Resources */,
 				8DE9D9B5139747B000EED5F3 /* AngryNerdsViewController.xib in Resources */,
+				01A33B631397B243004A2E25 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

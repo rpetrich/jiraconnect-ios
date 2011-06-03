@@ -22,7 +22,6 @@
     IBOutlet UIButton *screenshotButton;
 
     IBOutlet UITextView *descriptionField;
-    IBOutlet UIToolbar *attachmentBar;
     IBOutlet UIImageView *buttonBar;
 
     IBOutlet UILabel *countdownTimer;
@@ -30,6 +29,9 @@
     IBOutlet UIView *countdownView;
 
     IBOutlet UIImagePickerController *imagePicker;
+
+    IBOutlet UIToolbar* accessoryView;
+
     JCOIssueTransport *_issueTransport;
     JCOReplyTransport *_replyTransport;
     id <JCOCustomDataSource> _payloadDataSource;
@@ -50,13 +52,13 @@
 @property(retain, nonatomic) IBOutlet UIButton *voiceButton;
 @property(retain, nonatomic) IBOutlet UIButton *screenshotButton;
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
-@property(retain, nonatomic) IBOutlet UIToolbar *attachmentBar;
 @property(retain, nonatomic) IBOutlet UIImageView *buttonBar;
 
 @property(retain, nonatomic) IBOutlet UIView *countdownView;
 @property(retain, nonatomic) IBOutlet UIProgressView *progressView;
 
 @property(retain, nonatomic) IBOutlet UIImagePickerController *imagePicker;
+@property(retain, nonatomic) IBOutlet UIToolbar* accessoryView;;
 
 @property(retain, nonatomic) JCOIssueTransport *issueTransport;
 @property(retain, nonatomic) JCOReplyTransport *replyTransport;

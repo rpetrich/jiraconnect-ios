@@ -6,20 +6,10 @@
 #import "JCOSketchViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-
-@implementation JCOToolbar
-
-- (void)drawRect:(CGRect)rect
-{
-    UIImage *image = [UIImage imageNamed:@"buttonbase.png"];
-    [image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-}
-@end
-
 @interface JCOViewController ()
 - (void)internalRelease;
 
-- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title;
+- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
 
 - (BOOL)shouldTrackLocation;
 
@@ -40,9 +30,14 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+        // Observe keyboard hide and show notifications to resize the text view appropriately.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     sendLocationData = NO;
     if ([self.payloadDataSource respondsToSelector:@selector(locationEnabled)]) {
@@ -66,7 +61,6 @@
     // layout views
     self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
-    self.descriptionField.layer.cornerRadius = 7.0;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     self.navigationItem.leftBarButtonItem =
@@ -76,18 +70,23 @@
     self.navigationItem.title = JCOLocalizedString(@"Feedback", "Title of the feedback controller");
 
 
+    self.navigationItem.rightBarButtonItem =
+            [[[UIBarButtonItem alloc] initWithTitle:@"Send"
+                                              style:UIBarButtonItemStyleDone
+                                             target:self
+                                             action:@selector(sendFeedback)] autorelease];
+
+
     self.attachments = [NSMutableArray arrayWithCapacity:1];
-    self.attachmentBar.clipsToBounds = YES;
-    self.attachmentBar.items = nil;
-    self.attachmentBar.autoresizesSubviews = YES;
+    self.accessoryView.clipsToBounds = YES;
+    self.accessoryView.items = nil;
+    self.accessoryView.autoresizesSubviews = YES;
 
     float descriptionFieldInset = 15;
     self.descriptionField.top = 44 + descriptionFieldInset;
     self.descriptionField.width = self.view.width - (descriptionFieldInset * 2.0);
     descriptionFrame = self.descriptionField.frame;
-    self.attachmentBar.top = self.descriptionField.bottom + descriptionFieldInset;
-    self.attachmentBar.height = self.buttonBar.top - self.descriptionField.bottom - descriptionFieldInset;
-
+    
 
     // align the button titles nicer
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 5, 0);
@@ -97,12 +96,95 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [self.descriptionField becomeFirstResponder];
     [_locationManager startUpdatingLocation];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     [_locationManager stopUpdatingLocation];
 }
+
+
+#pragma mark UITextViewDelegate
+
+- (void)keyboardWillShow:(NSNotification*)notification
+{
+   /*
+     Reduce the size of the text view so that it's not obscured by the keyboard.
+     Animate the resize so that it's in sync with the appearance of the keyboard.
+     */
+
+    NSDictionary *userInfo = [notification userInfo];
+
+    // Get the origin of the keyboard when it's displayed.
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+
+    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system. The bottom of the text view's frame should align with the top of the keyboard's final position.
+    CGRect keyboardRect = [aValue CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+
+    CGFloat keyboardTop = keyboardRect.origin.y;
+    CGRect newTextViewFrame = self.view.bounds;
+    newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y - 40;
+    newTextViewFrame.origin.y = 44; // TODO: un-hardcode this
+
+    // Get the duration of the animation.
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+
+    // Animate the resize of the text view's frame in sync with the keyboard's appearance.
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration];
+
+    self.descriptionField.frame = newTextViewFrame;
+
+    [UIView commitAnimations];
+
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification
+{
+
+}
+
+- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action
+{
+    UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
+    [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [customView setBackgroundImage:[UIImage imageNamed:@"button_base.png"] forState:UIControlStateNormal];
+    UIImage *icon = [UIImage imageNamed:iconNamed];
+    CGRect frame = CGRectMake(0, 0, 40, 30);
+    [customView setImage:icon forState:UIControlStateNormal];
+    customView.frame = frame;
+    UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
+
+    return barItem;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
+
+    if (self.descriptionField.inputAccessoryView == nil) {
+        UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
+        [toolbar setBarStyle:UIBarStyleBlackOpaque];
+        self.accessoryView = toolbar;
+
+
+        UIBarButtonItem *screenshots = [self barButtonFor:@"icon_capture.png" action:@selector(addScreenshot)];
+        UIBarButtonItem *voice = [self barButtonFor:@"icon_record.png" action:@selector(addVoice)];
+        UIBarButtonItem *space = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                               target:nil
+                                                                               action:nil] autorelease];
+        self.accessoryView.items = [NSArray arrayWithObjects:screenshots, voice, space, nil];
+        self.descriptionField.inputAccessoryView = self.accessoryView;
+        // After setting the accessory view for the text view, we no longer need a reference to the accessory view.
+//        self.accessoryView = nil;
+    }
+
+    return YES;
+}
+
+#pragma mark end
 
 - (IBAction)dismiss
 {
@@ -187,50 +269,30 @@
 
 
     UIImage *newImage = [UIImage imageNamed:@"icon_record_2.png"];
-    [self addAttachmentItem:attachment withIcon:newImage title:[NSString stringWithFormat:@"%.2f\"", duration]];
+    [self addAttachmentItem:attachment withIcon:newImage action:@selector(voiceAttachmentTapped:)];
     [attachment release];
 }
 
-- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon title:(NSString *)title
+- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
 {
-
-    CGRect buttonFrame = CGRectMake(0, 0, icon.size.width, icon.size.height);
+    CGRect buttonFrame = CGRectMake(0, 0, 30, 30);
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = buttonFrame;
+    
+    [button setBackgroundImage:[UIImage imageNamed:@"button_base.png"] forState:UIControlStateNormal];
 
-    [button addTarget:self action:@selector(attachmentTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     button.imageView.layer.cornerRadius = 5.0;
 
-    if (title) {
-        UIFont *font = [UIFont systemFontOfSize:12.0];
-        button.titleLabel.textColor = [UIColor whiteColor];
-        [button setTitle:title forState:UIControlStateNormal];
-        button.titleLabel.font = font;
-        button.titleLabel.textAlignment = UITextAlignmentCenter;
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(-4.0, -icon.size.width, -35.0, -4.0)];
-        // Right inset is the negative of text bounds width.
-        [button setImageEdgeInsets:UIEdgeInsetsMake(-10.0, 0.0, 0.0, -button.titleLabel.bounds.size.width)];
-        button.titleLabel.hidden = NO;
-
-        [button.layer setBorderWidth:1.0f];
-        [button.layer setBorderColor:[[UIColor darkGrayColor] CGColor]];
-        button.layer.cornerRadius = 5.0f;
-        button.height = 60;
-        button.width = 40;
-
-    }
     [button setImage:icon forState:UIControlStateNormal];
-
-
+    
     UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+    button.tag = [self.attachments count] + 3;
 
-    button.tag = [self.attachments count];
-
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.accessoryView.items];
     [buttonItems addObject:buttonItem];
-    [self.attachmentBar setItems:buttonItems];
+    [self.accessoryView setItems:buttonItems];
     [self.attachments addObject:attachment];
-
 }
 
 - (void)addImageAttachmentItem:(UIImage *)origImg
@@ -241,53 +303,61 @@
                                                                 contentType:@"image/png"
                                                              filenameFormat:@"screenshot-%d.png"];
 
-    CGSize size = CGSizeMake(40, self.attachmentBar.frame.size.height);
-    UIImage *newImage = [origImg resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                                                      bounds:size
-                                        interpolationQuality:kCGInterpolationHigh];
-
-
-    [self addAttachmentItem:attachment withIcon:newImage title:nil];
+    
+    UIImage * iconImg =
+            [origImg thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
+    [self addAttachmentItem:attachment withIcon:iconImg action:@selector(imageAttachmentTapped:)];
     [attachment release];
 }
 
 - (void)removeAttachmentItemAtIndex:(NSUInteger)index
 {
 
+    NSLog(@"removing attachment: index = %lu count = %lu", index, [self.attachments count]);
+
     [self.attachments removeObjectAtIndex:index];
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.attachmentBar.items];
-    [buttonItems removeObjectAtIndex:index];
-    // re-tag all buttons... with their new index
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.accessoryView.items];
+    [buttonItems removeObjectAtIndex:index + 2];
+    // re-tag all buttons... with their new index. indexed from 2, due to icons...
     for (int i = 0; i < [buttonItems count]; i++) {
         UIBarButtonItem *buttonItem = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
         buttonItem.customView.tag = i;
     }
 
-    [self.attachmentBar setItems:buttonItems animated:YES];
+    [self.accessoryView setItems:buttonItems animated:YES];
 }
 
-- (void)attachmentTapped:(UIButton *)touch
+- (void)imageAttachmentTapped:(UIButton *)touch
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
+    NSLog(@"tapped attachment index = %lu, count = %lu", index, [self.attachments count]);
 
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
-    if (attachment.type == JCOAttachmentTypeImage) {
-        JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
-        // get the original image, wire it up to the sketch controller
-        sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
-        sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:index]; // set this image's id. just the index in the array
-        sketchViewController.delegate = self;
-        [self presentModalViewController:sketchViewController animated:YES];
-    } else {
-        UIAlertView *view =
-                [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
-                                 cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
-        currentAttachmentItemIndex = index;
-        [view show];
-        [view release];
+    JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
+    // get the original image, wire it up to the sketch controller
+    sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
+    sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:index]; // set this image's id. just the index in the array
+    sketchViewController.delegate = self;
+    [self presentModalViewController:sketchViewController animated:YES];
+}
 
-    }
+- (void)voiceAttachmentTapped:(UIButton *)touch
+{
+    // delete that button, both from the bar, and the images array
+    NSUInteger index = (u_int) touch.tag;
+    NSLog(@"tapped attachment index = %lu, count = %lu", index, [self.attachments count]);
+    
+    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+
+    UIAlertView *view =
+            [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
+                             cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
+    currentAttachmentItemIndex = index;
+    [view show];
+    [view release];
+
+
 }
 
 #pragma mark UIAlertViewDelelgate
@@ -312,14 +382,6 @@
     [self.screenshotButton setAutoresizesSubviews:NO];
     UIImage *origImg = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
 
-    if (origImg.size.height > self.view.height) {
-        // resize image... its too huge!
-        CGSize size = origImg.size;
-        float ratio = self.view.height / size.height;
-        CGSize smallerSize = CGSizeMake(ratio * size.width, ratio * size.height);
-        origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
-    }
-
     [self addImageAttachmentItem:origImg];
 }
 
@@ -339,11 +401,11 @@
     attachment.data = UIImagePNGRepresentation(image);
 
     // also update the icon in the toolbar
-    CGSize size = CGSizeMake(40, self.attachmentBar.frame.size.height);
+    CGSize size = CGSizeMake(40, self.accessoryView.frame.size.height);
     UIImage *iconImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
                                                      bounds:size
                                        interpolationQuality:kCGInterpolationHigh];
-    UIBarButtonItem *item = [self.attachmentBar.items objectAtIndex:index];
+    UIBarButtonItem *item = [self.accessoryView.items objectAtIndex:index];
     ((UIButton *) item.customView).imageView.image = iconImage;
 }
 
@@ -369,41 +431,10 @@
 }
 #pragma mark end
 
-#pragma mark UITextViewDelegate
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-
-
-    [UIView beginAnimations:@"resize description" context:nil];
-    self.navigationItem.rightBarButtonItem = nil;
-    self.descriptionField.frame = descriptionFrame;
-    self.descriptionField.layer.cornerRadius = 7.0;
-    NSRange range = {0, 0};
-    [self.descriptionField scrollRangeToVisible:range];
-    [UIView commitAnimations];
-
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    self.navigationItem.rightBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                           target:self
-                                                           action:@selector(dismissKeyboard)] autorelease];
-    [UIView beginAnimations:@"resize description" context:nil];
-    [UIView setAnimationDuration:0.3];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    CGRect frame = CGRectMake(0, self.navigationController.toolbar.height, self.view.width, 200);
-    self.descriptionField.frame = frame;
-    self.descriptionField.layer.cornerRadius = 0;
-    [UIView commitAnimations];
-
-}
-
 - (IBAction)sendFeedback
 {
-
-    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view]];
+	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
+    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
     [av setText:JCOLocalizedString(@"Sending...", @"")];
     [av startAnimating];
     [av setDelegate:self];
@@ -475,7 +506,7 @@
     self.descriptionField.text = @"";
     [[self.screenshotButton viewWithTag:20] removeFromSuperview];
     [self.attachments removeAllObjects];
-    [self.attachmentBar setItems:nil];
+    [self.accessoryView setItems:nil];
 }
 
 - (void)transportDidFinishWithError:(NSError *)error
@@ -519,9 +550,11 @@
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, attachmentBar, buttonBar, currentLocation, activityView;
+@synthesize sendButton, voiceButton, screenshotButton, descriptionField, countdownView, progressView, imagePicker, buttonBar, currentLocation, activityView;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
+@synthesize accessoryView;
+
 
 - (void)dealloc
 {
@@ -535,12 +568,15 @@
     // Release any retained subviews of the main view.
     [self internalRelease];
     [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 - (void)internalRelease
 {
     [_locationManager release];
-    self.attachmentBar = nil;
+    self.accessoryView = nil;
     self.recorder = nil;
     self.buttonBar = nil;
     self.sendButton = nil;

@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0169B9491395A77900A351F7"
-               BuildableName = "AngryNerds.app"
+               BuildableName = "Angry Nerds.app"
                BlueprintName = "AngryNerds"
                ReferencedContainer = "container:AngryNerds.xcodeproj">
             </BuildableReference>
@@ -41,7 +41,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0169B9491395A77900A351F7"
-            BuildableName = "AngryNerds.app"
+            BuildableName = "Angry Nerds.app"
             BlueprintName = "AngryNerds"
             ReferencedContainer = "container:AngryNerds.xcodeproj">
          </BuildableReference>
@@ -60,7 +60,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0169B9491395A77900A351F7"
-            BuildableName = "AngryNerds.app"
+            BuildableName = "Angry Nerds.app"
             BlueprintName = "AngryNerds"
             ReferencedContainer = "container:AngryNerds.xcodeproj">
          </BuildableReference>
