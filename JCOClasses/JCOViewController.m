@@ -15,7 +15,6 @@
 
 - (BOOL)shouldTrackLocation;
 
-
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) CRVActivityView *activityView;
 @end
@@ -28,9 +27,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.issueTransport = [[[JCOIssueTransport alloc] init] autorelease];
-        self.replyTransport = [[[JCOReplyTransport alloc] init] autorelease];
-        self.recorder = [[[JCORecorder alloc] init] autorelease];
+        _issueTransport = [[JCOIssueTransport alloc] init];
+        _replyTransport = [[JCOReplyTransport alloc] init];
+        _recorder = [[JCORecorder alloc] init];
     }
     return self;
 }
@@ -306,7 +305,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
     NSUInteger attachmentIndex = index - [toolbarItems count];
-  
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
@@ -321,7 +319,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
-    NSUInteger attachmentIndex = index - [toolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method.
+    NSUInteger attachmentIndex = index - [toolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
     UIAlertView *view =
             [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
                              cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
@@ -539,13 +537,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // Release any retained subviews of the main view.
     [self internalRelease];
     [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-
 }
 
 - (void)internalRelease
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_locationManager release];
     [_voiceButton release];
     [toolbarItems release];
