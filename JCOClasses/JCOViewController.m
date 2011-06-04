@@ -92,11 +92,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
     [self.toolbar setBarStyle:UIBarStyleBlackOpaque];
 
-    UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture.png" action:@selector(addScreenshot)];
-    UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record.png" action:@selector(addVoice)];
+    UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
+    UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
     UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:nil action:nil] autorelease];
     toolbarItems = [[NSArray arrayWithObjects:screenshotButton, recordButton, spaceButton, nil] retain];
+    self.voiceButton = recordButton;
     self.toolbar.items = toolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
 }
@@ -158,9 +159,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
     [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [customView setBackgroundImage:[UIImage imageNamed:@"button_base.png"] forState:UIControlStateNormal];
+    [customView setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
     UIImage *icon = [UIImage imageNamed:iconNamed];
-    CGRect frame = CGRectMake(0, 0, 40, 30);
+    CGRect frame = CGRectMake(0, 0, 41, 31);
     [customView setImage:icon forState:UIControlStateNormal];
     customView.frame = frame;
     UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
@@ -201,6 +202,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self.countdownView.hidden = YES;
     self.progressView.progress = 0;
+    UIButton *voiceButton = (UIButton *) self.voiceButton.customView;
+    [voiceButton.imageView stopAnimating];
+    voiceButton.imageView.animationImages = nil;
     [_timer invalidate];
 }
 
@@ -217,17 +221,18 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
         self.countdownView.hidden = NO;
 
-        // TODO: animate recording ?
-//        NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:8];
-//        for (int i = 1; i < 9; i++) {
-//            NSString *sprintName = [@"icon_record_" stringByAppendingFormat:@"%d.png", i];
-//            UIImage *img = [UIImage imageNamed:sprintName];
-//            [sprites addObject:img];
-//        }
-//        self.voiceButton.animationImages = sprites;
-//        self.voiceButton.animationDuration = 0.85f;
-//
-//        [self.voiceButton startAnimating];
+        // start animating the voice button...
+        NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:8];
+        for (int i = 1; i < 9; i++) {
+            NSString *sprintName = [@"icon_record_" stringByAppendingFormat:@"%d", i];
+            UIImage *img = [UIImage imageNamed:sprintName];
+            [sprites addObject:img];
+        }
+        UIButton * customView = (UIButton *)self.voiceButton.customView;
+        customView.imageView.animationImages = sprites;
+        customView.imageView.animationDuration = 0.85f;
+        [customView.imageView startAnimating];
+
     }
 }
 
@@ -254,7 +259,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = buttonFrame;
     
-    [button setBackgroundImage:[UIImage imageNamed:@"button_base.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
 
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     button.imageView.layer.cornerRadius = 5.0;
@@ -350,6 +355,14 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [self dismissModalViewControllerAnimated:YES];
 
     UIImage *origImg = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
+
+      if (origImg.size.height > self.view.height) {
+        // resize image... its too huge! (only meant to be screenshots, not photos..)
+        CGSize size = origImg.size;
+        float ratio = self.view.height / size.height;
+        CGSize smallerSize = CGSizeMake(ratio * size.width, ratio * size.height);
+        origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
+    }
 
     [self addImageAttachmentItem:origImg];
 }
@@ -543,8 +556,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_locationManager release];
-    [_voiceButton release];
     [toolbarItems release];
+    self.voiceButton = nil;
     self.toolbar = nil;
     self.recorder = nil;
     self.imagePicker = nil;

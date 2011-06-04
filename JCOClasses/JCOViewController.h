@@ -39,7 +39,7 @@
     CLLocationManager *_locationManager;
     BOOL sendLocationData;
     CRVActivityView *activityView;
-    UIImageView *_voiceButton;
+    UIBarButtonItem *_voiceButton;
     NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
@@ -59,7 +59,7 @@
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
 @property(retain, nonatomic) JCOIssue *replyToIssue;
 
-@property(retain, nonatomic) UIImageView *voiceButton;
+@property(retain, nonatomic) UIBarButtonItem *voiceButton;
 
 - (IBAction)sendFeedback;
 
