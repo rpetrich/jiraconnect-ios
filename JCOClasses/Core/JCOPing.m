@@ -36,9 +36,10 @@
 
     // send ping
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
-    
-    request.secondsToCache = 60 * 24 * 7; // cache for a week?
-    [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
+    [request setTimeOutSeconds:60];
+
+//    request.secondsToCache = 60 * 24 * 7; // cache for a week?
+//    [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
 
     [request setDelegate:self];
     [request startAsynchronous];
