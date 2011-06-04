@@ -248,7 +248,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                                                              filenameFormat:@"recording-%d.caf"];
 
 
-    UIImage *newImage = [UIImage imageNamed:@"icon_record_2.png"];
+    UIImage *newImage = [UIImage imageNamed:@"icon_record_2"];
     [self addAttachmentItem:attachment withIcon:newImage action:@selector(voiceAttachmentTapped:)];
     [attachment release];
 }

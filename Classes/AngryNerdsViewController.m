@@ -14,7 +14,7 @@
     [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(hideSplash:) userInfo:nil repeats:NO];
     NSMutableArray *nerds = [NSMutableArray arrayWithObject:[UIImage imageNamed:@"frontend_blink"]];
     for (int i = 0; i < 20; i++) {
-        [nerds addObject:[UIImage imageNamed:@"frontend.png"]];
+        [nerds addObject:[UIImage imageNamed:@"frontend"]];
     }
 
     [self.nerdsView setAnimationImages:nerds];

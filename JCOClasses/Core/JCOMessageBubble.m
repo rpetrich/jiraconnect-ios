@@ -62,13 +62,13 @@
         CGRect frame = CGRectMake(320.0f - (size.width + 48.0f), balloonY, size.width + 28.0f, size.height + 12.0f);
         self.bubble.frame = frame;
         self.bubble.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-        balloon = [[UIImage imageNamed:@"Balloon_1.png"] stretchableImageWithLeftCapWidth:20.0f topCapHeight:15.0f];
+        balloon = [[UIImage imageNamed:@"Balloon_1"] stretchableImageWithLeftCapWidth:20.0f topCapHeight:15.0f];
         self.label.frame = CGRectMake(frame.origin.x + 12.0f, labelY - 2.0f, size.width + 5.0f, size.height);
 
     } else {
         self.bubble.frame = CGRectMake(0.0f, balloonY, size.width + 28.0f, size.height + 12.0f);
         self.bubble.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
-        balloon = [[UIImage imageNamed:@"Balloon_2.png"] stretchableImageWithLeftCapWidth:25.0f topCapHeight:15.0f];
+        balloon = [[UIImage imageNamed:@"Balloon_2"] stretchableImageWithLeftCapWidth:25.0f topCapHeight:15.0f];
         self.label.frame = CGRectMake(20.0f, labelY - 2.0f, size.width + 5, size.height);
     }
 
