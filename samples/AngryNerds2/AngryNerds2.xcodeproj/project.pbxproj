@@ -906,6 +906,7 @@
 				01E90ADA139AE741002CA0D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
