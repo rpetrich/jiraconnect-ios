@@ -17,7 +17,7 @@ To install JIRAConnect into your current project:
 
 1. `git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios`
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
-1. Browse to the **jiraconnect-ios** clone directory, and add the entire JCOClasses directory to your project.
+1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JCOClasses directory to your project.
 1. Select the project (top most) element in the file/groups tree
 1. Click **'Build Phases'** --> Expand **'Link Binary with Libraries'** --> **+**
 1. add the following frameworks:
@@ -28,8 +28,8 @@ To install JIRAConnect into your current project:
     * AVFoundation
     * CoreLocation
     * libz1.2.3
-1. Add the `Resources/CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
-1. Browse to jiraconnect-ios then **Resources** --> **CrashReporter.framework**
+1. Add the `CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
+1. Browse to jiraconnect-ios then **JIRAConnect/JCOClasses/Libraries/** --> **CrashReporter.framework**
 1. Click **'Open'**
 1. Try compiling your App, and ensure there are no errors.
 
