@@ -18,6 +18,13 @@
 
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifierComment])) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        // this is a work-around for self.backgroundColor = [UIColor clearColor]; appearing black on iOS < 4.3 .
+        UIView *transparentBackground = [[UIView alloc] initWithFrame:CGRectZero];
+        transparentBackground.backgroundColor = [UIColor clearColor];
+        self.backgroundView = transparentBackground;
+        [transparentBackground release];
+
         bubble = [[UIImageView alloc] initWithFrame:CGRectZero];
 
         detailLabelHeight = detailHeight;
@@ -28,7 +35,7 @@
         label.lineBreakMode = UILineBreakModeWordWrap;
         label.backgroundColor = [UIColor clearColor];
 
-        detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, detailLabelHeight)];
+        detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, detailLabelHeight)];
         detailLabel.tag = 3;
         detailLabel.numberOfLines = 1;
         detailLabel.lineBreakMode = UILineBreakModeClip;
@@ -74,7 +81,6 @@
 
     self.bubble.image = balloon;
     self.label.text = string;
-    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)dealloc {

@@ -48,7 +48,7 @@ static float detailLabelHeight = 21.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor colorWithRed:219.0 / 255.0 green:226.0 / 255.0 blue:237.0 / 255.0 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor colorWithRed:219.0f / 255.0f green:226.0f / 255.0 blue:237.0f / 255.0 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor clearColor];
     [self scrollToLastComment];
@@ -158,16 +158,12 @@ static float detailLabelHeight = 21.0f;
 
         issueCell.title.text = self.issue.title;
 
-//        NSString *issueData = [NSString stringWithFormat:@"Status: %@", self.issue.status];
-//        issueCell.body.text = issueData;
-
         return issueCell;
 
     }
     else {
         JCOComment *comment = [self.comments objectAtIndex:indexPath.row];
-        UITableViewCell *messageCell = [self getBubbleCell:tableView forMessage:comment];
-        return messageCell;
+        return [self getBubbleCell:tableView forMessage:comment];
     }
 }
 

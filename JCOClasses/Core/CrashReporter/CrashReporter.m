@@ -29,8 +29,7 @@
 
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporter.h"
-
-#define USER_AGENT @"CrashReportSender/1.0"
+#import "JCO.h"
 
 @interface CrashReporter ()
 
@@ -290,6 +289,18 @@ static CrashReporter *crashReportSender = nil;
             /* Parent Process ID */
             parentProcessId = [[NSNumber numberWithUnsignedInteger:report.processInfo.parentProcessID] stringValue];
         }
+
+        NSString *uuid = nil;
+        CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
+        if (theUUID) {
+            uuid = NSMakeCollectable(CFUUIDCreateString(kCFAllocatorDefault, theUUID));
+            CFRelease(theUUID);
+        }
+        
+        [reportString appendFormat:@"Incident Identifier: %@\n", uuid];
+        CFRelease(uuid);
+        [reportString appendFormat:@"CrashReporter Key:   %@\n", [[JCO instance] getUUID]];
+        [reportString appendFormat:@"Hardware Model:       %@,%@\n", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
 
         [reportString appendFormat:@"Process:         %@ [%@]\n", processName, processId];
         [reportString appendFormat:@"Path:            %@\n", processPath];
