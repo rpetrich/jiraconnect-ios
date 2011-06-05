@@ -40,7 +40,7 @@
     BOOL sendLocationData;
     CRVActivityView *activityView;
     UIBarButtonItem *_voiceButton;
-    NSArray* toolbarItems; // holds the first 3 system toolbar items.
+    NSArray *systemToolbarItems; // holds the first 3 system toolbar items.
 }
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
 

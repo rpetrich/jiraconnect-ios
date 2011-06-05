@@ -96,9 +96,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
     UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:nil action:nil] autorelease];
-    toolbarItems = [[NSArray arrayWithObjects:screenshotButton, recordButton, spaceButton, nil] retain];
+    systemToolbarItems = [[NSArray arrayWithObjects:screenshotButton, recordButton, spaceButton, nil] retain];
     self.voiceButton = recordButton;
-    self.toolbar.items = toolbarItems;
+    self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
 }
 
@@ -295,7 +295,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     [self.attachments removeObjectAtIndex:index];
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems removeObjectAtIndex:index + [toolbarItems count]]; // TODO: fix this pullava
+    [buttonItems removeObjectAtIndex:index + [systemToolbarItems count]]; // TODO: fix this pullava
     // re-tag all buttons... with their new index. indexed from 2, due to icons...
     for (int i = 0; i < [buttonItems count]; i++) {
         UIBarButtonItem *buttonItem = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
@@ -309,7 +309,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
-    NSUInteger attachmentIndex = index - [toolbarItems count];
+    NSUInteger attachmentIndex = index - [systemToolbarItems count];
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
@@ -324,7 +324,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // delete that button, both from the bar, and the images array
     NSUInteger index = (u_int) touch.tag;
-    NSUInteger attachmentIndex = index - [toolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
+    NSUInteger attachmentIndex = index - [systemToolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
     UIAlertView *view =
             [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
                              cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
@@ -386,7 +386,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIImage * iconImg =
             [image thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
 
-    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:index + [toolbarItems count]];
+    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:index + [systemToolbarItems count]];
     ((UIButton *) item.customView).imageView.image = iconImg;
 }
 
@@ -487,7 +487,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
-    [self.toolbar setItems:toolbarItems];
+    [self.toolbar setItems:systemToolbarItems];
 }
 
 - (void)transportDidFinishWithError:(NSError *)error
@@ -556,7 +556,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_locationManager release];
-    [toolbarItems release];
+    [systemToolbarItems release];
     self.voiceButton = nil;
     self.toolbar = nil;
     self.recorder = nil;
