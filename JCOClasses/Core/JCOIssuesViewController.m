@@ -3,6 +3,7 @@
 #import "JCOIssueViewController.h"
 #import "JCO.h"
 #import "UILabel+VerticalAlign.h"
+#import "JCOMacros.h"
 
 static NSString *cellId = @"CommentCell";
 
@@ -22,7 +23,8 @@ NSDateFormatter *_dateFormatter;
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                                 target:self
                                                                                                 action:@selector(compose:)] autorelease];
-        self.title = @"Your Feedback";
+
+        self.title = JCOLocalizedString(@"Your Feedback", @"Title of list of previous messages");
         _dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];

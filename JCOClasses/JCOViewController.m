@@ -67,14 +67,16 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.countdownView.layer.cornerRadius = 7.0;
     
     self.navigationItem.leftBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                           target:self
-                                                           action:@selector(dismiss)] autorelease];
+            [[[UIBarButtonItem alloc] initWithTitle:JCOLocalizedString(@"Close", @"Close navigation item")
+                                              style:UIBarButtonItemStyleBordered
+                                             target:self
+                                             action:@selector(dismiss)] autorelease];
+    
     self.navigationItem.title = JCOLocalizedString(@"Feedback", "Title of the feedback controller");
 
 
     self.navigationItem.rightBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithTitle:@"Send"
+            [[[UIBarButtonItem alloc] initWithTitle:JCOLocalizedString(@"Send", @"Close navigation item")
                                               style:UIBarButtonItemStyleDone
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
@@ -326,8 +328,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSUInteger index = (u_int) touch.tag;
     NSUInteger attachmentIndex = index - [systemToolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
     UIAlertView *view =
-            [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title") message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.") delegate:self
-                             cancelButtonTitle:JCOLocalizedString(@"No", @"") otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
+            [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title")
+                                 message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
+                                 delegate:self
+                             cancelButtonTitle:JCOLocalizedString(@"No", @"")
+                             otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
     currentAttachmentItemIndex = attachmentIndex;
     [view show];
     [view release];
