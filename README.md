@@ -15,7 +15,7 @@ Getting Started
 To install JIRAConnect into your current project:
 -------------------------------------------------
 
-1. `git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios`
+1. `hg clone ssh://hg@bitbucket.org/atlassian/jiraconnect-ios`
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JCOClasses directory to your project.
 1. Select the project (top most) element in the file/groups tree
