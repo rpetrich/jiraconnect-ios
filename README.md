@@ -7,7 +7,7 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 * **User or Tester Feedback** views for allowing users or testers to create a bug report within your app.
 * **2-way Communication with Users** thank your users or testers for providing feedback on your App!
 
-![Report Issue Screen](http://atlassian.github.com/jiraconnect-ios/screenshots/small/report-issue.png) ![Crash Report Dialog](http://atlassian.github.com/jiraconnect-ios/screenshots/small/crash-report.png) ![2-Way Communications](http://atlassian.github.com/jiraconnect-ios/screenshots/small/replies-view.png)
+![Report Issue Screen](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_report-issue.png) ![Crash Report Dialog](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_crash-report.png) ![2-Way Communications](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_replies-view.png)
 
 Getting Started
 ===============
