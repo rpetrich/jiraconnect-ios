@@ -7,7 +7,7 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 * **User or Tester Feedback** views for allowing users or testers to create a bug report within your app.
 * **2-way Communication with Users** thank your users or testers for providing feedback on your App!
 
-![Report Issue Screen](http://atlassian.github.com/jiraconnect-ios/screenshots/small/report-issue.png) ![Crash Report Dialog](http://atlassian.github.com/jiraconnect-ios/screenshots/small/crash-report.png) ![2-Way Communications](http://atlassian.github.com/jiraconnect-ios/screenshots/small/replies-view.png)
+![Report Issue Screen](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_report-issue.png) ![Crash Report Dialog](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_crash-report.png) ![2-Way Communications](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_replies-view.png)
 
 Getting Started
 ===============
@@ -15,9 +15,9 @@ Getting Started
 To install JIRAConnect into your current project:
 -------------------------------------------------
 
-1. `git clone git@github.com:atlassian/jiraconnect-ios.git jiraconnect-ios`
+1. `hg clone ssh://hg@bitbucket.org/atlassian/jiraconnect-ios`
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
-1. Browse to the **jiraconnect-ios** clone directory, and add the entire JCOClasses directory to your project.
+1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JCOClasses directory to your project.
 1. Select the project (top most) element in the file/groups tree
 1. Click **'Build Phases'** --> Expand **'Link Binary with Libraries'** --> **+**
 1. add the following frameworks:
@@ -28,8 +28,8 @@ To install JIRAConnect into your current project:
     * AVFoundation
     * CoreLocation
     * libz1.2.3
-1. Add the `Resources/CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
-1. Browse to jiraconnect-ios then **Resources** --> **CrashReporter.framework**
+1. Add the `CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
+1. Browse to jiraconnect-ios then **JIRAConnect/JCOClasses/Libraries/** --> **CrashReporter.framework**
 1. Click **'Open'**
 1. Try compiling your App, and ensure there are no errors.
 

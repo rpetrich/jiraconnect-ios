@@ -11,8 +11,6 @@ static NSString *cellId = @"CommentCell";
 
 @synthesize data = _data;
 
-NSDateFormatter *_dateFormatter;
-
 - (id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle {
 
     self = [super initWithNibName:name bundle:bundle];
@@ -25,7 +23,7 @@ NSDateFormatter *_dateFormatter;
                                                                                                 action:@selector(compose:)] autorelease];
 
         self.title = JCOLocalizedString(@"Your Feedback", @"Title of list of previous messages");
-        _dateFormatter = [[[NSDateFormatter alloc] init] retain];
+        _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     }

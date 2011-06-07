@@ -29,8 +29,8 @@ UIButton *_button;
 
         self.issuesViewController = [[[JCOIssuesViewController alloc] initWithNibName:@"JCOIssuesViewController" bundle:nil] autorelease];
 
-        self.viewController = [[[UINavigationController alloc] initWithRootViewController:self.issuesViewController] autorelease];
-        self.viewController.navigationBar.barStyle = UIBarStyleBlack;
+        _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
+        _viewController.navigationBar.barStyle = UIBarStyleBlack;
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJCOReceivedCommentsNotification object:nil];
 
@@ -86,7 +86,7 @@ UIButton *_button;
 
 - (void)dealloc {
 
-    self.view, self.viewController, self.issuesViewController = nil;
+    self.view = nil, self.viewController = nil, self.issuesViewController = nil;
     [_label release];
     _label = nil;
     [_toolbar release];
