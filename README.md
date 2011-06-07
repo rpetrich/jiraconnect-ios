@@ -1,5 +1,5 @@
-JIRAConnect for iOS
-===================
+JIRA Mobile Connect for iOS (alpha)
+===========================
 
 JIRAConnect is an iOS library that can be embedded into any iOS App to provide following extra functionality:
 
@@ -12,7 +12,7 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 Getting Started
 ===============
 
-To install JIRAConnect into your current project:
+To install JIRA Mobile Connect into your current project:
 -------------------------------------------------
 
 1. `hg clone ssh://hg@bitbucket.org/atlassian/jiraconnect-ios`
@@ -85,12 +85,17 @@ If your info ViewController is in a UINavigationController stack, then you can u
 }
 </pre>
 
+JIRA Plugin
+===========
+You will need access to a JIRA instance with the [JIRA Mobile Connect Plugin](https://bitbucket.org/atlassian/jiraconnect-jiraplugin) installed.
+
+Alternatively, for a limited time, you can use the NERDS project at http://connect.onjira.com .
+
+
 Issue tracking
 ==============
 
 Use http://connect.onjira.com/browse/CONNECT to raise any issue with the JIRA Mobile Connect library for testing.
-Also - install and configure the [JIRA Mobile Connect Plugin](https://bitbucket.org/atlassian/jiraconnect-jiraplugin) in your own running JIRA instance.
-
 
 
 Third party Package - License - Copyright / Creator
