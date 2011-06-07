@@ -87,7 +87,7 @@ If your info ViewController is in a UINavigationController stack, then you can u
 
 JIRA Plugin
 ===========
-You will need access to a JIRA instance with the [JIRA Mobile Connect Plugin](https://bitbucket.org/atlassian/jiraconnect-jiraplugin) installed.
+You will need access to a JIRA instance with the [JIRA Mobile Connect Plugin](https://plugins.atlassian.com/plugin/details/322837) installed.
 
 Alternatively, for a limited time, you can use the NERDS project at http://connect.onjira.com .
 
