@@ -59,7 +59,6 @@ method, add the following line:
 The UIViewController returned by JCO viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
 
-
 <pre>
 #import "JCO.h"
 
@@ -89,7 +88,10 @@ If your info ViewController is in a UINavigationController stack, then you can u
 Issue tracking
 ==============
 
-Use http://connect.onjira.com/browse/CONNECT to raise any issue with the JIRAConnect library.
+Use http://connect.onjira.com/browse/CONNECT to raise any issue with the JIRA Mobile Connect library for testing.
+Also - install and configure the [JIRA Mobile Connect Plugin](https://bitbucket.org/atlassian/jiraconnect-jiraplugin) in your own running JIRA instance.
+
+
 
 Third party Package - License - Copyright / Creator
 ===================================================
