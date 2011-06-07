@@ -27,9 +27,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _issueTransport = [[JCOIssueTransport alloc] init];
-        _replyTransport = [[JCOReplyTransport alloc] init];
-        _recorder = [[JCORecorder alloc] init];
+        _issueTransport = [[[JCOIssueTransport alloc] init] retain];
+        _replyTransport = [[[JCOReplyTransport alloc] init] retain];
+        _recorder = [[[JCORecorder alloc] init] retain];
     }
     return self;
 }
@@ -38,7 +38,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
         // Observe keyboard hide and show notifications to resize the text view appropriately.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -49,7 +48,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
 
     if ([self shouldTrackLocation]) {
-        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager = [[[CLLocationManager alloc] init] retain];
         _locationManager.delegate = self;
         [_locationManager startUpdatingLocation];
 
@@ -102,6 +101,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.voiceButton = recordButton;
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -419,6 +419,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (IBAction)sendFeedback
 {
+
 	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
 
     CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
@@ -547,6 +548,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // Release any retained subviews of the main view.
     [self internalRelease];
+    // these ivars are retained in init
+    self.issueTransport = nil;
+    self.replyTransport = nil;
+    self.recorder = nil;
     [super dealloc];
 }
 
@@ -560,18 +565,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)internalRelease
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_locationManager release];
+    if(_locationManager) {
+      [_locationManager release];
+    }
     [systemToolbarItems release];
     self.voiceButton = nil;
     self.toolbar = nil;
-    self.recorder = nil;
     self.imagePicker = nil;
     self.attachments = nil;
     self.progressView = nil;
     self.replyToIssue = nil;
     self.countdownView = nil;
-    self.issueTransport = nil;
-    self.replyTransport = nil;
     self.descriptionField = nil;
     self.payloadDataSource = nil;
     self.currentLocation = nil;
