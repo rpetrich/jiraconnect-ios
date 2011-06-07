@@ -23,7 +23,7 @@ static NSString *cellId = @"CommentCell";
                                                                                                 action:@selector(compose:)] autorelease];
 
         self.title = JCOLocalizedString(@"Your Feedback", @"Title of list of previous messages");
-        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     }
@@ -62,7 +62,6 @@ static NSString *cellId = @"CommentCell";
 }
 
 - (void)viewDidUnload {
-    [_dateFormatter release];
     [super viewDidUnload];
 }
 
