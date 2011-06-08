@@ -16,7 +16,8 @@ To install JIRA Mobile Connect into your current project:
 -------------------------------------------------
 
 1. `hg clone ssh://hg@bitbucket.org/atlassian/jiraconnect-ios` or download the
-   latest release: https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip
+   latest release:
+   [https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip](https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip)
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JCOClasses directory to your project.
 1. Select the project (top most) element in the file/groups tree
