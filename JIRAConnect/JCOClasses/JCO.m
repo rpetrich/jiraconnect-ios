@@ -3,10 +3,27 @@
 #import "Core/JCONotifier.h"
 #import "JCOCrashSender.h"
 
+@interface JCO()
+
+@property (nonatomic, retain) JCOPing* _pinger;
+@property (nonatomic, retain) JCONotifier* _notifier;
+@property (nonatomic, retain) JCOViewController* _jcController;
+@property (nonatomic, retain) UINavigationController* _navController;
+@property (nonatomic, retain) JCOCrashSender *_crashSender;
+@property (nonatomic, assign) id <JCOCustomDataSource> _customDataSource;
+
+@end
+
 
 @implementation JCO
 
 @synthesize url = _url;
+@synthesize _pinger;
+@synthesize _notifier;
+@synthesize _jcController;
+@synthesize _navController;
+@synthesize _crashSender;
+@synthesize _customDataSource;
 
 + (JCO *)instance
 {
@@ -21,15 +38,26 @@
 - (id)init
 {
     if ((self = [super init])) {
-        _pinger = [[JCOPing alloc] init];
+        self._pinger = [[[JCOPing alloc] init] autorelease ];
         UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
-        _notifier = [[JCONotifier alloc] initWithView:window];
-        _crashSender = [[JCOCrashSender alloc] init];
-        _jcController = [[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil];
-        _navController = [[UINavigationController alloc] initWithRootViewController:_jcController];
+        self._notifier = [[[JCONotifier alloc] initWithView:window] autorelease ];
+        self._crashSender = [[[JCOCrashSender alloc] init] autorelease ];
+        self._jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] autorelease ];
+        self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
         _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    self.url = nil;
+    [_pinger release];
+    [_notifier release];
+    [_jcController release];
+    [_navController release];
+    [_crashSender release];
+    [super dealloc];
 }
 
 
@@ -121,20 +149,6 @@
     return [self getAppName];
 }
 
-- (void)dealloc
-{
-    self.url = nil;
-    [_pinger release];
-    _pinger = nil;
-    [_notifier release];
-    _notifier = nil;
-    [_jcController release];
-    _jcController = nil;
-    [_navController release];
-    _navController = nil;
-    [_crashSender release];
-    _crashSender = nil;
-    [super dealloc];
-}
+
 
 @end
