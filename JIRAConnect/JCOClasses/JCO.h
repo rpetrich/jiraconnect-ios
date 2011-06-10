@@ -17,7 +17,7 @@
     JCOViewController *_jcController;
     UINavigationController *_navController;
     JCOCrashSender *_crashSender;
-    id <JCOCustomDataSource> _customDataSource;    
+    id <JCOCustomDataSource> _customDataSource;  
 }
 
 @property (nonatomic, retain) NSURL* url;

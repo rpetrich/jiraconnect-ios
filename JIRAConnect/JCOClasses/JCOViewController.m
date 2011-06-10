@@ -452,6 +452,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
             [keys addObject:@"lng"];      [objects addObject:lng];
             [keys addObject:@"location"]; [objects addObject:locationString];
         }
+
         // Merge the location into the existing customFields.
         NSDictionary *dict = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
         [customFields addEntriesFromDictionary:dict];
@@ -520,6 +521,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
 }
 
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+//    NSLog(@"Location failed with error: %@", [error localizedDescription]);
+}
 
 #pragma mark -
 #pragma mark CRVActivityViewDelegate
