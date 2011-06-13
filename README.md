@@ -9,6 +9,7 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 
 ![Report Issue Screen](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_report-issue.png) ![Crash Report Dialog](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_crash-report.png) ![2-Way Communications](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_replies-view.png)
 
+
 Getting Started
 ===============
 

@@ -30,6 +30,7 @@
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporter.h"
 #import "JCO.h"
+#import "sys/sysctl.h"
 
 @interface CrashReporter ()
 
@@ -209,6 +210,26 @@ static CrashReporter *crashReportSender = nil;
     return crashReports;
 }
 
+// taken from http://stackoverflow.com/questions/4857195/how-to-get-programmatically-ioss-alphanumeric-version-string
+- (NSString *)osVersionBuild {
+    int mib[2] = {CTL_KERN, KERN_OSVERSION};
+    u_int namelen = sizeof(mib) / sizeof(mib[0]);
+    size_t bufferSize = 0;
+
+    NSString *osBuildVersion = nil;
+
+    // Get the size for the buffer
+    sysctl(mib, namelen, NULL, &bufferSize, NULL, 0);
+
+    u_char buildBuffer[bufferSize];
+    int result = sysctl(mib, namelen, buildBuffer, &bufferSize, NULL, 0);
+
+    if (result >= 0) {
+        osBuildVersion = [[[NSString alloc] initWithBytes:buildBuffer length:bufferSize encoding:NSUTF8StringEncoding] autorelease];
+    }
+
+    return osBuildVersion;
+}
 
 - (NSString *)_crashLogStringForReport:(PLCrashReport *)report
 {
@@ -314,7 +335,8 @@ static CrashReporter *crashReportSender = nil;
 
     /* System info */
     [reportString appendFormat:@"Date/Time:       %s\n", [[report.systemInfo.timestamp description] UTF8String]];
-    [reportString appendFormat:@"OS Version:      %s %s\n", osName, [report.systemInfo.operatingSystemVersion UTF8String]];
+    // OS Version must match: /\s([0-9\.]+)\s+\((\w+)/ e.g. iPhone OS 4.3.3 (8J2)
+    [reportString appendFormat:@"OS Version:      %s %s (%@)\n", osName, [report.systemInfo.operatingSystemVersion UTF8String], [self osVersionBuild]];
     [reportString appendString:@"Report Version:  104\n"];
 
     [reportString appendString:@"\n"];

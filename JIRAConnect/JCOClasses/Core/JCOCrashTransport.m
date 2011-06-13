@@ -24,11 +24,21 @@
     [params setObject:@"Crash" forKey:@"type"]; // this is used, if there is an issueType in JIRA named 'Crash'.
     [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
-    [upRequest setData:crashData withFileName:@"crash.txt" andContentType:@"text/plain" forKey:@"crash"];
+    // 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm"];
+    // TODO: use the actual crash date for this file extension
+    // TODO: sanitize AppName for spaces, puntuation, etc..
+    NSString* filename = 
+        [[[JCO instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
+    [dateFormatter release];
+    
+    [upRequest setData:crashData withFileName:filename andContentType:@"text/plain" forKey:@"crash"];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
     [upRequest setTimeOutSeconds:15];
     [upRequest startAsynchronous];
+
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
