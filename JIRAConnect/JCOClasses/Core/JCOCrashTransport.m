@@ -1,3 +1,18 @@
+/**
+   Copyright 2011 Atlassian Software
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+**/
 //
 //  Created by nick on 13/05/11.
 //
@@ -24,11 +39,21 @@
     [params setObject:@"Crash" forKey:@"type"]; // this is used, if there is an issueType in JIRA named 'Crash'.
     [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
-    [upRequest setData:crashData withFileName:@"crash.txt" andContentType:@"text/plain" forKey:@"crash"];
+    // 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm"];
+    // TODO: use the actual crash date for this file extension
+    // TODO: sanitize AppName for spaces, puntuation, etc..
+    NSString* filename = 
+        [[[JCO instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
+    [dateFormatter release];
+    
+    [upRequest setData:crashData withFileName:filename andContentType:@"text/plain" forKey:@"crash"];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
     [upRequest setTimeOutSeconds:15];
     [upRequest startAsynchronous];
+
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
