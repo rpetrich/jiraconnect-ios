@@ -261,8 +261,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"recording"
                                                                        data:[_recorder audioData]
                                                                        type:JCOAttachmentTypeRecording
-                                                                contentType:@"audio/x-caf"
-                                                             filenameFormat:@"recording-%d.caf"];
+                                                                contentType:@"audio/aac"
+                                                             filenameFormat:@"recording-%d.aac"];
 
 
     UIImage *newImage = [UIImage imageNamed:@"icon_record_2"];

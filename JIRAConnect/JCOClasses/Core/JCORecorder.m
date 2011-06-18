@@ -26,8 +26,8 @@ NSString* _recorderFilePath;
 	if ((self = [super init])) {
 		
 		self.recordTime = 10;
-		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.caf", DOCUMENTS_FOLDER] retain];
-		
+		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.aac", DOCUMENTS_FOLDER] retain];
+
 		// delete the previous recording.
         [self cleanUp];
 		
@@ -47,14 +47,7 @@ NSString* _recorderFilePath;
 		
 		NSMutableDictionary* recordSetting = [[[NSMutableDictionary alloc] init] autorelease];
 		
-		[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-		[recordSetting setValue:[NSNumber numberWithFloat:22050] forKey:AVSampleRateKey]; 
-		[recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
-		
-		[recordSetting setValue :[NSNumber numberWithInt:8] forKey:AVLinearPCMBitDepthKey];
-		[recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
-		[recordSetting setValue :[NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
-		
+		[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
 		
 		// Create a recording file	
 		NSURL *url = [NSURL fileURLWithPath:_recorderFilePath];
