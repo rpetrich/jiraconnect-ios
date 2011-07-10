@@ -16,6 +16,7 @@
 
 #import "JCOIssueStore.h"
 #import "JCOIssue.h"
+#import "JCOComment.h"
 #import "FMDatabase.h"
 #import "JSON.h"
 
@@ -79,6 +80,21 @@ NSString* _jcoDbPath;
     }
     NSLog(@"No issue at index = %lu", index);
     return nil;
+}
+
+-(NSArray*) loadCommentsFor:(JCOIssue*) issue {
+
+    FMResultSet *res = [db executeQuery:
+                               @"SELECT "
+                                   "comments "
+                                "FROM issue WHERE key = ?",
+                           issue.key];
+    if ([res next]) {
+        return [[res stringForColumn:@"comments"] JSONValue];
+    }
+    NSLog(@"No Comments for issue %@", issue.key);
+    return nil;
+
 }
 
 -(BOOL) issueExists:(JCOIssue *)issue {

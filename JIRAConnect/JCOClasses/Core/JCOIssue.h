@@ -41,6 +41,7 @@
 @property (nonatomic, assign) BOOL hasUpdates;
 
 - (id) initWithDictionary:(NSDictionary*)map;
+- (void)addCommentsFrom:(NSArray *)commentDataArray;
 - (JCOComment *) latestComment;
 
 @end

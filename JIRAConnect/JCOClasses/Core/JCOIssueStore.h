@@ -27,6 +27,7 @@
 
 - (void) updateWithData:(NSDictionary*)data;
 - (JCOIssue *) initIssueAtIndex:(NSUInteger)index;
+- (NSArray *) loadCommentsFor:(JCOIssue*)issue;
 - (void) insertOrUpdateIssue:(JCOIssue *)issue withComments:(NSString *)commentJSON;
 + (JCOIssueStore *) instance;
 

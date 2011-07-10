@@ -128,8 +128,8 @@ static NSString *cellId = @"CommentCell";
     JCOIssueViewController *detailViewController = [[JCOIssueViewController alloc] initWithNibName:@"JCOIssueViewController" bundle:nil];
 
     JCOIssue *issue = [self.issueStore initIssueAtIndex:indexPath.row];
-
-    // TODO: when an issue is selected, also load all its comments from the issue store
+    [issue addCommentsFrom:[self.issueStore loadCommentsFor:issue]];
+    
     detailViewController.issue = issue;
 
     [self.navigationController pushViewController:detailViewController animated:YES];
