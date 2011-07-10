@@ -23,14 +23,16 @@
     NSString* _status;
     NSString* _title;
     NSString* _description;
-    NSDate* _lastUpdated;
-    NSDate* _created;
+    NSDate* _dateUpdated;
+    NSDate* _dateCreated;
     NSMutableArray* _comments;
     BOOL _hasUpdates;
 }
 
-@property (nonatomic, retain) NSDate *dateCreated;
-@property (nonatomic, retain) NSDate* lastUpdated;
+@property (nonatomic, retain) NSDate* dateCreated;
+@property (nonatomic, retain) NSDate* dateUpdated;
+@property (nonatomic) NSNumber* dateUpdatedLong;
+@property (nonatomic) NSNumber* dateCreatedLong;
 @property (nonatomic, retain) NSString* key;
 @property (nonatomic, retain) NSString* status;
 @property (nonatomic, retain) NSString* title;

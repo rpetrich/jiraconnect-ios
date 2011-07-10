@@ -24,7 +24,7 @@ static NSString *cellId = @"CommentCell";
 
 @implementation JCOIssuesViewController
 
-@synthesize data = _data;
+@synthesize issueStore = _issueStore;
 
 - (id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle {
 
@@ -87,11 +87,11 @@ static NSString *cellId = @"CommentCell";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.data count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.data objectAtIndex:section] count];
+    return [self.issueStore count];
 }
 
 
@@ -107,16 +107,16 @@ static NSString *cellId = @"CommentCell";
         cell = [topLevelObjects objectAtIndex:0];
     }
 
-    NSArray *sectionData = [self.data objectAtIndex:indexPath.section];
-
-    JCOIssue *issue = [sectionData objectAtIndex:indexPath.row];
+    JCOIssue *issue = [self.issueStore initIssueAtIndex:indexPath.row];
+        
     JCOComment *latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description;
     [cell.detailsLabel alignTop];
     cell.titleLabel.text = [issue title];
-    NSDate *date = latestComment.date != nil ? latestComment.date : issue.lastUpdated;
+    NSDate *date = latestComment.date != nil ? latestComment.date : issue.dateUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
     cell.statusLabel.hidden = !issue.hasUpdates;
+    [issue release];
     return cell;
 }
 
@@ -127,21 +127,22 @@ static NSString *cellId = @"CommentCell";
 
     JCOIssueViewController *detailViewController = [[JCOIssueViewController alloc] initWithNibName:@"JCOIssueViewController" bundle:nil];
 
-    NSArray *sectionData = [self.data objectAtIndex:indexPath.section];
-    JCOIssue *issue = [sectionData objectAtIndex:indexPath.row];
+    JCOIssue *issue = [self.issueStore initIssueAtIndex:indexPath.row];
 
+    // TODO: when an issue is selected, also load all its comments from the issue store
     detailViewController.issue = issue;
 
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
 
-    issue.hasUpdates = NO;  // once the user has tapped, the issue is no longer unread.
+    // TODO: mark issue has read.
+//    issue.hasUpdates = NO;  // once the user has tapped, the issue is no longer unread.
     [tableView reloadData]; // redraw the table.
-
+    [issue release];
 }
 
 - (void)dealloc {
-    self.data = nil;
+    self.issueStore = nil;
     [_dateFormatter release];
     _dateFormatter = nil;
     [super dealloc];

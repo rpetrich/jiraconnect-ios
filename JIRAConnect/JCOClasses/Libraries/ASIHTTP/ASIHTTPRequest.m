@@ -644,9 +644,12 @@ static NSOperationQueue *sharedQueue = nil;
 
 			// See if we should pull from the cache rather than fetching the data
 			if ([self cachePolicy] == ASIOnlyLoadIfNotCachedCachePolicy) {
+                NSLog(@"Seeing if we should pull data from the cache...");
 				if ([self useDataFromCache]) {
+                    NSLog(@"Cached data exists!");
 					return;
 				}
+                NSLog(@"no cached data exists");
 			} else if ([self cachePolicy] == ASIReloadIfDifferentCachePolicy) {
 
 				// Force a conditional GET if we have a cached version of this content already

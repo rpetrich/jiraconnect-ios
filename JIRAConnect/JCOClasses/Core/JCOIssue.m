@@ -19,11 +19,11 @@
 @implementation JCOIssue
 
 @synthesize key = _key, status = _status, title = _title, description = _description,
-            comments = _comments, hasUpdates = _hasUpdates, lastUpdated = _lastUpdated,
-            dateCreated = _dateCreated;
+            comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
+            dateCreated = _dateCreated, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
-    self.key, self.status, self.title, self.description, self.comments, self.lastUpdated= nil;
+    self.key, self.status, self.title, self.description, self.comments, self.dateUpdated = nil;
     self.dateCreated = nil;
     [super dealloc];
 }
@@ -32,20 +32,77 @@
     return [self.comments count] > 0 ? ((JCOComment *)[self.comments lastObject]) : nil;
 }
 
--(NSDate *) dateFromNumber:(NSNumber *)number {
-    return [NSDate dateWithTimeIntervalSince1970:[number longLongValue]/1000];
+- (NSNumber *)dateToMillisSince1970:(NSDate*) date
+{
+    return [NSNumber numberWithDouble:[date timeIntervalSince1970] * 1000];
 }
 
+-(NSDate *) dateFromMillisSince1970:(NSNumber *)number
+{
+    return [NSDate dateWithTimeIntervalSince1970:[number longLongValue] / 1000];
+}
 
-- (id) initWithDictionary:(NSDictionary*)map {
-	if ((self = [super init])) {
-		self.key = [map objectForKey:@"key"];
-        self.status = [map objectForKey:@"status"];
-        self.title = [map objectForKey:@"title"];
-        self.description = [map objectForKey:@"description"];
-        self.dateCreated = [self dateFromNumber:[map objectForKey:@"dateCreated"]];
-        self.lastUpdated = [self dateFromNumber:[map objectForKey:@"lastUpdated"]];
+- (NSNumber *) dateUpdatedLong
+{
+    return [self dateToMillisSince1970:self.dateUpdated];
+}
 
+- (NSNumber *) dateCreatedLong
+{
+    return [self dateToMillisSince1970:self.dateCreated];
+}
+
+- (void)addCommentsFrom:(NSArray *)commentDataArray
+{
+    if (commentDataArray)
+        {
+            NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:[commentDataArray count]];
+            for (NSDictionary* data in commentDataArray)
+            {
+                NSString* author = [data objectForKey:@"username"];
+                if (!author)
+                {
+                    author = @"(no author)";
+                }
+                NSString* body = [data objectForKey:@"text"];
+                if (!body)
+                {
+                    body = @"(no body)";
+                }
+                NSNumber* msSinceEpoch = [data objectForKey:@"date"];
+                NSDate* date =  [self dateFromMillisSince1970:msSinceEpoch];
+                NSNumber* value = (NSNumber*)[data objectForKey:@"systemUser"];
+                JCOComment * comment = [[JCOComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
+                [array addObject:comment];
+                [comment release];
+            }
+            self.comments = array;
+            [array release];
+        }
+}
+
+- (id) initWithDictionary:(NSDictionary*)map
+{
+
+    // FMDB will lowercase all column names, so take a copy and lowercase the keys
+
+    NSMutableDictionary *lowerMap = [[NSMutableDictionary alloc] initWithCapacity:[map count]];
+    [map enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [lowerMap setObject:obj forKey:[key lowercaseString]];
+    }];
+    if ((self = [super init])) {
+		self.key = [lowerMap objectForKey:@"key"];
+        self.status = [lowerMap objectForKey:@"status"];
+        self.title = [lowerMap objectForKey:@"title"];
+        self.description = [lowerMap objectForKey:@"description"];
+        NSNumber* hasUpdatesNum = [lowerMap objectForKey:@"hasupdates"];
+        self.hasUpdates = [hasUpdatesNum boolValue];
+
+        NSNumber *created = [lowerMap objectForKey:@"datecreated"];
+        NSNumber *updated = [lowerMap objectForKey:@"dateupdated"];
+        self.dateCreated = [self dateFromMillisSince1970:created];
+        self.dateUpdated = [self dateFromMillisSince1970:updated];
+        
         if (!self.key)
         {
             self.key = @"(no issue key)";
@@ -62,35 +119,8 @@
         {
             self.description = @"(no description)";
         }
-        
-        NSArray* commentDataArray = [map objectForKey:@"comments"];
-        if (commentDataArray)
-        {
-            NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:[commentDataArray count]];
-            for (NSDictionary* data in commentDataArray)
-            {
-                NSString* author = [data objectForKey:@"username"];
-                if (!author)
-                {
-                    author = @"(no author)";
-                }
-                NSString* body = [data objectForKey:@"text"];
-                if (!body)
-                {
-                    body = @"(no body)";
-                }
-                NSNumber* msSinceEpoch = [data objectForKey:@"date"];
-                NSDate* date = [NSDate dateWithTimeIntervalSince1970:[msSinceEpoch longLongValue]/1000];
-                NSNumber* value = (NSNumber*)[data objectForKey:@"systemUser"];
-                JCOComment * comment = [[JCOComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
-                [array addObject:comment];
-                [comment release];
-            }
-            self.comments = array;
-            [array release];
-        }
     }
-
+    [lowerMap release];
 	return self;
 }
 

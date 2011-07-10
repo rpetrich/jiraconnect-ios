@@ -53,9 +53,6 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
     [request setTimeOutSeconds:60];
 
-//    request.secondsToCache = 60 * 24 * 7; // cache for a week?
-//    [request setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
-
     [request setDelegate:self];
     [request startAsynchronous];
 }
@@ -63,21 +60,8 @@
 - (void)requestFinished:(ASIHTTPRequest *)request {
 
     NSString *responseString = [request responseString];
-//    NSLog(@"[[request responseHeaders] allKeys] = %@", [[request responseHeaders] allKeys]);
-//    NSLog(@"[[request responseHeaders] allValues] = %@", [[request responseHeaders] allValues]);
-//
-//    if (request.responseStatusCode == 304) {
-//        NSLog(@"NOT MODIFIED responseString = %@", responseString);
-//
-//        NSString *sinceMillisString = [request.responseHeaders valueForKey:@"Jconnect-Sincemillis"];
-//        double millis = [sinceMillisString doubleValue];
-//        NSNumber * sinceMillis = [NSNumber numberWithDouble:millis];
-//        [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJCOLastSuccessfulPingTime];
-//        NSLog(@"304 not_modified. Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:millis/1000]);
-//        return;
-//    }
-
-    if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""]) {
+    if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""])
+    {
         NSLog(@"Invalid, empty response from JIRA: %@", responseString);
         return;
     }
@@ -85,8 +69,9 @@
     if (request.responseStatusCode < 300)
     {
         NSDictionary *data = [responseString JSONValue];
+        
         [[JCOIssueStore instance] updateWithData:data];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kJCOReceivedCommentsNotification object:self]; // TODO use a constant for this.
+        [[NSNotificationCenter defaultCenter] postNotificationName:kJCOReceivedCommentsNotification object:self];
         // update the timestamp since we last requested comments.
         // sinceMillis is the server's time
         NSNumber *sinceMillis = [data valueForKey:@"sinceMillis"];

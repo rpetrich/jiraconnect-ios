@@ -15,16 +15,16 @@
 **/
 
 #import <UIKit/UIKit.h>
-
+#import "JCOIssueStore.h"
 
 @interface JCOIssuesViewController : UITableViewController {
-    // this is always an array of size 2, each element is an array of JCIssues
-    NSArray* _data;
+
+    JCOIssueStore* _issueStore;
     
     @private
     NSDateFormatter *_dateFormatter;
 }
 
-@property (retain, nonatomic) NSArray* data;
+@property (retain, nonatomic) JCOIssueStore* issueStore;
 
 @end

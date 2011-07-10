@@ -13,11 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-//
-//  Created by nick on 28/04/11.
-//
-//  To change this template use File | Settings | File Templates.
-//
 
 
 #import "JCOIssueTransport.h"

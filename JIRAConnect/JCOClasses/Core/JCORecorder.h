@@ -22,7 +22,7 @@
 @interface JCORecorder : NSObject {
 
 	AVAudioRecorder* _recorder;
-	float recordTime;
+	float _recordTime;
 }
 
 @property (nonatomic, retain) AVAudioRecorder* recorder;

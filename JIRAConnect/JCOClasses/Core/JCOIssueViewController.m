@@ -63,7 +63,7 @@ static float detailLabelHeight = 21.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor colorWithRed:219.0f / 255.0f green:226.0f / 255.0 blue:237.0f / 255.0 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor clearColor];
     [self scrollToLastComment];
@@ -201,7 +201,7 @@ static float detailLabelHeight = 21.0f;
 }
 
 
-- (void)transportDidFinish {
+- (void)transportDidFinish:(NSString *)response {
     
     [self.feedbackController dismissActivity];
     [self setUpCommentDataFor:self.issue];

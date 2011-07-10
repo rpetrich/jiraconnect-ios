@@ -32,9 +32,9 @@
 #import "JCO.h"
 #import "sys/sysctl.h"
 
-@interface CrashReporter ()
-
 static CrashReporter *crashReportSender = nil;
+
+@interface CrashReporter ()
 
 - (void)handleCrashReport;
 

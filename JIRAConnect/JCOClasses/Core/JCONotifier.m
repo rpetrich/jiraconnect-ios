@@ -55,8 +55,7 @@ UIButton *_button;
 
 - (void)populateIssuesViewController {
     [self.issuesViewController loadView];
-    NSArray *data = [NSArray arrayWithObjects:[[JCOIssueStore instance] issues], nil];
-    [self.issuesViewController setData:data];
+    [self.issuesViewController setIssueStore:[JCOIssueStore instance]];
 }
 
 - (void)notify:(NSTimer *)timer {

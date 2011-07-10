@@ -97,7 +97,7 @@ JCOCrashTransport *_transport;
 
 }
 
-- (void)transportDidFinish {
+- (void) transportDidFinish:(NSString *)response {
     [[CrashReporter sharedCrashReporter] cleanCrashReports];
 }
 

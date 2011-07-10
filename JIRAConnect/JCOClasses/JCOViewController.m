@@ -19,6 +19,8 @@
 #import "Core/UIView+Additions.h"
 #import "JCOAttachmentItem.h"
 #import "JCOSketchViewController.h"
+#import "JCOIssueStore.h"
+#import "JSON.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JCOViewController ()
@@ -481,7 +483,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                                payload:payloadData
                                 fields:customFields];
     } else {
-        // use the first 100 chars of the description as the issue titlle
+        // use the first 80 chars of the description as the issue title
         NSString *description = self.descriptionField.text;
         u_int length = 80;
         u_int toIndex = [description length] > length ? length : [description length];
@@ -502,7 +504,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [[self activityView] stopAnimating];
 }
 
-- (void)transportDidFinish
+- (void)transportDidFinish:(NSString *)response
 {
     [self dismissActivity];
     [self dismissModalViewControllerAnimated:YES];
@@ -510,6 +512,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
     [self.toolbar setItems:systemToolbarItems];
+
+    // response needs to be an Issue.json... so we can insert one here.
+    NSDictionary *responseDict = [response JSONValue];
+    JCOIssue *issue = [[JCOIssue alloc] initWithDictionary:responseDict];
+    [[JCOIssueStore instance] insertOrUpdateIssue:issue withComments:nil]; // newly created issues have no comments
+    [issue release];
 }
 
 - (void)transportDidFinishWithError:(NSError *)error

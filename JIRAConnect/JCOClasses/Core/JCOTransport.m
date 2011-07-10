@@ -71,9 +71,7 @@
         NSString *msg = [NSString stringWithFormat:thankyouMsg, [[JCO instance] getProject]];
         [self alert:msg withTitle:@"Thank You" button:@"OK"];
         // alert the delegate!
-        // TODO: also alert on FAIL...
-        [self.delegate transportDidFinish];
-
+        [self.delegate transportDidFinish:[request responseString]];
     } else {
         [self requestFailed:request];
     }

@@ -133,7 +133,7 @@ NSString* _recorderFilePath;
     [[NSFileManager defaultManager] removeItemAtPath:_recorderFilePath error:nil];
 }
 
-@synthesize recorder=_recorder, recordTime;
+@synthesize recorder=_recorder, recordTime=_recordTime;
 
 - (void) dealloc {
     self.recorder = nil;

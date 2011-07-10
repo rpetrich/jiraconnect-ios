@@ -15,19 +15,19 @@
 **/
 
 #import <Foundation/Foundation.h>
-
+#import "JCOIssue.h"
 
 @interface JCOIssueStore : NSObject {
-    // array of JCIssues 
-    NSArray* _issues;
     int _newIssueCount;
+    int _count; // the total issue count, including new and old issues
 }
 
-@property (nonatomic, retain) NSArray* issues;
 @property (assign, nonatomic) int newIssueCount;
-
+@property (assign, nonatomic) int count;
 
 - (void) updateWithData:(NSDictionary*)data;
+- (JCOIssue *) initIssueAtIndex:(NSUInteger)index;
+- (void) insertOrUpdateIssue:(JCOIssue *)issue withComments:(NSString *)commentJSON;
 + (JCOIssueStore *) instance;
 
 @end

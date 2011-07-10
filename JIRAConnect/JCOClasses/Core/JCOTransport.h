@@ -25,7 +25,7 @@
 
 @protocol JCOTransportDelegate <NSObject>
 
-- (void)transportDidFinish;
+- (void)transportDidFinish:(NSString *)response;
 
 @optional
 - (void)transportDidFinishWithError:(NSError*)error;
