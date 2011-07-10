@@ -55,6 +55,7 @@ NSString* _jcoDbPath;
                             "description TEXT, "
                             "dateCreated INTEGER, "
                             "dateUpdated INTEGER, "
+                            "dateDeleted INTEGER, "
                             "hasUpdates  INTEGER, "
                             "comments TEXT)"];
 
@@ -125,6 +126,14 @@ NSString* _jcoDbPath;
     if ([db hadError]) {
         NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
     }
+}
+
+-(void) markAsRead:(JCOIssue *)issue {
+    [db executeUpdate:
+            @"UPDATE issue "
+             "SET hasUpdates = 0 "
+             "WHERE key = ?", issue.key];
+    issue.hasUpdates = NO;
 }
 
 -(void) insertOrUpdateIssue:(JCOIssue *)issue withComments:(NSString *)commentJSON {

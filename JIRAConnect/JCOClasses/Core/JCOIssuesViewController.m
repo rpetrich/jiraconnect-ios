@@ -135,8 +135,7 @@ static NSString *cellId = @"CommentCell";
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
 
-    // TODO: mark issue has read.
-//    issue.hasUpdates = NO;  // once the user has tapped, the issue is no longer unread.
+    [self.issueStore markAsRead:issue];
     [tableView reloadData]; // redraw the table.
     [issue release];
 }

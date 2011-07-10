@@ -29,6 +29,7 @@
 - (JCOIssue *) initIssueAtIndex:(NSUInteger)index;
 - (NSArray *) loadCommentsFor:(JCOIssue*)issue;
 - (void) insertOrUpdateIssue:(JCOIssue *)issue withComments:(NSString *)commentJSON;
+-(void) markAsRead:(JCOIssue *)issue;
 + (JCOIssueStore *) instance;
 
 @end
