@@ -41,6 +41,8 @@ static NSString *cellId = @"CommentCell";
         _dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJCONewIssueCreated object:nil];
     }
     return self;
 }
@@ -120,6 +122,10 @@ static NSString *cellId = @"CommentCell";
     return cell;
 }
 
+-(void) refreshTable {
+    [self.tableView reloadData];
+}
+
 
 #pragma mark - Table view delegate
 
@@ -139,6 +145,7 @@ static NSString *cellId = @"CommentCell";
     [tableView reloadData]; // redraw the table.
     [issue release];
 }
+#pragma mark end
 
 - (void)dealloc {
     self.issueStore = nil;

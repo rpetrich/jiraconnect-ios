@@ -23,6 +23,7 @@
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
 #define kJCOReceivedCommentsNotification @"kJCOReceivedCommentsNotification"
 #define kJCOLastSuccessfulPingTime @"kJCOLastSuccessfulPingTime"
+#define kJCONewIssueCreated @"kJCONewIssueCreated"
 
 @interface JCO : NSObject {
     @private

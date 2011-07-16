@@ -13,6 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
+#import "JCO.h"
 #import "JCOMacros.h"
 #import "JCOViewController.h"
 #import "UIImage+Resize.h"
@@ -517,6 +518,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSDictionary *responseDict = [response JSONValue];
     JCOIssue *issue = [[JCOIssue alloc] initWithDictionary:responseDict];
     [[JCOIssueStore instance] insertOrUpdateIssue:issue withComments:nil]; // newly created issues have no comments
+    // anounce that an issue was added, so the JCOIssuesView can redraw
+
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJCONewIssueCreated object:nil]];
     [issue release];
 }
 
