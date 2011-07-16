@@ -19,7 +19,7 @@
 
 @implementation JCOComment
 
-@synthesize author = _author, systemUser = _systemUser, body = _body, date = _date;
+@synthesize author = _author, systemUser = _systemUser, body = _body, date = _date, dateLong;
 
 - (void) dealloc {
     self.author, self.body, self.date = nil;
@@ -34,6 +34,45 @@
         self.systemUser = p_sys;
 	}
 	return self;
+}
+
+
++ (NSNumber *)dateToMillisSince1970:(NSDate*) date
+{
+    return [NSNumber numberWithDouble:[date timeIntervalSince1970] * 1000];
+}
+
++ (NSDate *) dateFromMillisSince1970:(NSNumber *)number
+{
+    return [NSDate dateWithTimeIntervalSince1970:[number longLongValue] / 1000];
+}
+
+- (NSNumber *) dateLong
+{
+    return [JCOComment dateToMillisSince1970:self.date];
+}
+
+
++(JCOComment*) newCommentFromDict:(NSDictionary *)data {
+    // FMDB will lowercase all column names, so take a copy and lowercase the keys
+    NSMutableDictionary *lowerMap = [[NSMutableDictionary alloc] initWithCapacity:[data count]];
+    [data enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [lowerMap setObject:obj forKey:[key lowercaseString]];
+    }];
+
+    NSString *author = [lowerMap objectForKey:@"username"];
+    if (!author) {
+        author = @"(no author)";
+    }
+    NSString *body = [lowerMap objectForKey:@"text"];
+    if (!body) {
+        body = @"(no body)";
+    }
+    NSNumber *msSinceEpoch = [lowerMap objectForKey:@"date"];
+    NSDate *date = [JCOComment dateFromMillisSince1970:msSinceEpoch];
+    NSNumber *value = (NSNumber *) [lowerMap objectForKey:@"systemuser"];
+    [lowerMap release];
+    return [[JCOComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
 }
 
 @end

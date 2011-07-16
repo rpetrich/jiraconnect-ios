@@ -52,40 +52,10 @@
     return [self dateToMillisSince1970:self.dateCreated];
 }
 
-- (void)addCommentsFrom:(NSArray *)commentDataArray
-{
-    if (commentDataArray)
-        {
-            NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:[commentDataArray count]];
-            for (NSDictionary* data in commentDataArray)
-            {
-                NSString* author = [data objectForKey:@"username"];
-                if (!author)
-                {
-                    author = @"(no author)";
-                }
-                NSString* body = [data objectForKey:@"text"];
-                if (!body)
-                {
-                    body = @"(no body)";
-                }
-                NSNumber* msSinceEpoch = [data objectForKey:@"date"];
-                NSDate* date =  [self dateFromMillisSince1970:msSinceEpoch];
-                NSNumber* value = (NSNumber*)[data objectForKey:@"systemUser"];
-                JCOComment * comment = [[JCOComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
-                [array addObject:comment];
-                [comment release];
-            }
-            self.comments = array;
-            [array release];
-        }
-}
-
 - (id) initWithDictionary:(NSDictionary*)map
 {
 
     // FMDB will lowercase all column names, so take a copy and lowercase the keys
-
     NSMutableDictionary *lowerMap = [[NSMutableDictionary alloc] initWithCapacity:[map count]];
     [map enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [lowerMap setObject:obj forKey:[key lowercaseString]];

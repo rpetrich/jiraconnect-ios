@@ -517,7 +517,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // response needs to be an Issue.json... so we can insert one here.
     NSDictionary *responseDict = [response JSONValue];
     JCOIssue *issue = [[JCOIssue alloc] initWithDictionary:responseDict];
-    [[JCOIssueStore instance] insertOrUpdateIssue:issue withComments:nil]; // newly created issues have no comments
+    [[JCOIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
     // anounce that an issue was added, so the JCOIssuesView can redraw
 
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJCONewIssueCreated object:nil]];

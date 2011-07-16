@@ -18,6 +18,7 @@
 #import "JCOMessageCell.h"
 #import "JCOViewController.h"
 #import "JCOMessageBubble.h"
+#import "JCOIssueStore.h"
 
 static UIFont *font;
 static UIFont* titleFont;
@@ -195,15 +196,19 @@ static float detailLabelHeight = 21.0f;
     self.feedbackController.replyToIssue = self.issue;
     self.feedbackController.replyTransport.delegate = self;
     self.feedbackController.navigationItem.title = @"Reply";
-
     [navController release];
-
 }
-
 
 - (void)transportDidFinish:(NSString *)response {
     
     [self.feedbackController dismissActivity];
+    // insert comment in db
+    NSDictionary *commentDict = [response JSONValue];
+    // lower case
+    JCOComment *comment = [JCOComment newCommentFromDict:commentDict];
+    [[JCOIssueStore instance] insertComment:comment forIssue:self.issue];
+    [comment release];
+
     [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];

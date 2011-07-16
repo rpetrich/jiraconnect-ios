@@ -134,8 +134,8 @@ static NSString *cellId = @"CommentCell";
     JCOIssueViewController *detailViewController = [[JCOIssueViewController alloc] initWithNibName:@"JCOIssueViewController" bundle:nil];
 
     JCOIssue *issue = [self.issueStore initIssueAtIndex:indexPath.row];
-    [issue addCommentsFrom:[self.issueStore loadCommentsFor:issue]];
-    
+    issue.comments = [self.issueStore loadCommentsFor:issue];
+
     detailViewController.issue = issue;
 
     [self.navigationController pushViewController:detailViewController animated:YES];
