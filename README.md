@@ -63,31 +63,31 @@ method, add the following line:
 The UIViewController returned by JCO viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
 
-<pre>
-#import "JCO.h"
 
-- (void)viewDidLoad
-{
-    self.navigationItem.rightBarButtonItem =
-    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                   target:self
-                                                   action:@selector(showFeedback)] autorelease];
-    self.navigationItem.leftBarButtonItem =
-    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                   target:self
-                                                   action:@selector(showPastFeedback)] autorelease];
-}
+        #import "JCO.h"
 
--(void) showFeedback
-{
-    [self presentModalViewController:[[JCO instance] viewController] animated:YES];
-}
+        - (void)viewDidLoad
+        {
+            self.navigationItem.rightBarButtonItem =
+            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                           target:self
+                                                           action:@selector(showFeedback)] autorelease];
+            self.navigationItem.leftBarButtonItem =
+            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                                           target:self
+                                                           action:@selector(showPastFeedback)] autorelease];
+        }
 
--(void) showPastFeedback
-{
-    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
-}
-</pre>
+        -(void) showFeedback
+        {
+            [self presentModalViewController:[[JCO instance] viewController] animated:YES];
+        }
+
+        -(void) showPastFeedback
+        {
+            [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+        }
+
 
 JIRA Plugin
 ===========
