@@ -208,7 +208,7 @@ NSString* _jcoDbPath;
     NSArray* issues = [data objectForKey:@"issuesWithComments"];
 
     // no issues are sent when there are no updates.
-    if (!issues) {
+    if (!issues || [issues count] == 0) {
         // so no need to create the schema
         return;
     }
