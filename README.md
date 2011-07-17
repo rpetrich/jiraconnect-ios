@@ -115,3 +115,5 @@ crash-reporter              Copyright &copy; 2009 Andreas Linde & Kent Sutherlan
 
 UIImageCategories           Created by [Trevor Harmon.](http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/)
 
+FMDB                MIT     Copyright &copy; 2008 [Flying Meat Inc.](http://github.com/ccgus/fmdb)
+
