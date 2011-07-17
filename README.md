@@ -31,6 +31,7 @@ To install JIRA Mobile Connect into your current project:
     * AVFoundation
     * CoreLocation
     * libz1.2.3
+    * libsqlite3
 1. Add the `CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
 1. Browse to jiraconnect-ios then **JIRAConnect/JCOClasses/Libraries/** --> **CrashReporter.framework**
 1. Click **'Open'**
