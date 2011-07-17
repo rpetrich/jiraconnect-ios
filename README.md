@@ -99,7 +99,7 @@ Alternatively, for a limited time, you can use the NERDS project at http://conne
 Issue tracking
 ==============
 
-Use http://connect.onjira.com/browse/CONNECT to raise any issue with the JIRA Mobile Connect library for testing.
+Use [http://connect.onjira.com/browse/CONNECT](http://connect.onjira.com/browse/CONNECT) to raise any issue with the JIRA Mobile Connect library for testing.
 
 
 Third party Package - License - Copyright / Creator
