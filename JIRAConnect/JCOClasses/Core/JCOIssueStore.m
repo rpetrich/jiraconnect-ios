@@ -42,10 +42,9 @@ NSString* _jcoDbPath;
         // db init code...
         db = [FMDatabase databaseWithPath:_jcoDbPath];
         [db retain];
-        // create schema
+        // create schema, preserving existing
         [self createSchema:NO];
         [db open]; // TODO: check return value, and throw exception if false.
-
         NSLog(@"JCO databasePath = %@", _jcoDbPath);
     }
 	return self;
