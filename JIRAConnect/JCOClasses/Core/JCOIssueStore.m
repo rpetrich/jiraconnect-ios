@@ -43,36 +43,41 @@ NSString* _jcoDbPath;
         db = [FMDatabase databaseWithPath:_jcoDbPath];
         [db retain];
         // create schema
-
+        [self createSchema:NO];
         [db open]; // TODO: check return value, and throw exception if false.
 
         NSLog(@"JCO databasePath = %@", _jcoDbPath);
-
-        // for now - always get all the data from JIRA. store it in the local db.
-        [db executeUpdate:@"DROP table if exists ISSUE"];
-        [db executeUpdate:@"CREATE table if not exists ISSUE "
-                            "(id INTEGER PRIMARY KEY ASC autoincrement, "
-                            "key TEXT, "
-                            "status TEXT, "
-                            "title TEXT, "
-                            "description TEXT, "
-                            "dateCreated INTEGER, "
-                            "dateUpdated INTEGER, "
-                            "dateDeleted INTEGER, "
-                            "hasUpdates  INTEGER, "
-                            "comments TEXT)"];
-
-        [db executeUpdate:@"DROP table if exists COMMENT"];
-        [db executeUpdate:@"CREATE table if not exists COMMENT "
-                            "(id INTEGER PRIMARY KEY ASC autoincrement, "
-                            "issuekey TEXT, "
-                            "username TEXT, "
-                            "systemuser INTEGER, "
-                            "text TEXT, "
-                            "date INTEGER) "];
-
     }
 	return self;
+}
+
+-(void) createSchema:(BOOL)dropExisting
+{
+// for now - always get all the data from JIRA. store it in the local db.
+    if (dropExisting) {
+        [db executeUpdate:@"DROP table if exists ISSUE"];
+        [db executeUpdate:@"DROP table if exists COMMENT"];
+    }
+    [db executeUpdate:@"CREATE table if not exists ISSUE "
+                        "(id INTEGER PRIMARY KEY ASC autoincrement, "
+                        "key TEXT, "
+                        "status TEXT, "
+                        "title TEXT, "
+                        "description TEXT, "
+                        "dateCreated INTEGER, "
+                        "dateUpdated INTEGER, "
+                        "dateDeleted INTEGER, "
+                        "hasUpdates  INTEGER, "
+                        "comments TEXT)"];
+
+
+    [db executeUpdate:@"CREATE table if not exists COMMENT "
+                        "(id INTEGER PRIMARY KEY ASC autoincrement, "
+                        "issuekey TEXT, "
+                        "username TEXT, "
+                        "systemuser INTEGER, "
+                        "text TEXT, "
+                        "date INTEGER) "];
 }
 
 - (JCOIssue *) initIssueAtIndex:(NSUInteger)index {
@@ -180,9 +185,35 @@ NSString* _jcoDbPath;
     }
 }
 
+-(int) count {
+    FMResultSet *res = [db executeQuery:
+                        @"SELECT "
+                        "count(*) as count from ISSUE"];
+    [res next];
+    NSNumber* count = (NSNumber*)[res objectForColumnName:@"count"];
+    return [count intValue];
+}
+
+-(int)newIssueCount {
+    FMResultSet *res = [db executeQuery:
+                        @"SELECT "
+                        "count(*) from ISSUE where hasUpdates = 1"];
+    [res next];
+    NSNumber* countNum = (NSNumber*)[res objectForColumnIndex:0];
+    return [countNum intValue];
+}
+
 - (void) updateWithData:(NSDictionary*)data {
 
     NSArray* issues = [data objectForKey:@"issuesWithComments"];
+
+    // no issues are sent when there are no updates.
+    if (!issues) {
+        // so no need to create the schema
+        return;
+    }
+    // when there is an update - the database gets re-populated
+    [self createSchema:YES];
     int numNewIssues = 0;
     [db beginTransaction];
     for (NSDictionary* dict in issues)
@@ -204,13 +235,9 @@ NSString* _jcoDbPath;
         [issue release];
     }
     [db commit];
-
-    self.newIssueCount = numNewIssues;
-    self.count = [issues count];
-
 }
 
-@synthesize newIssueCount = _newIssueCount, count = _count;
+@synthesize newIssueCount, count;
 
 - (void) dealloc {
     [db release];

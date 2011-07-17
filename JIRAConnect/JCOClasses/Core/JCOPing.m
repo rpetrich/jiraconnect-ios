@@ -69,7 +69,7 @@
     if (request.responseStatusCode < 300)
     {
         NSDictionary *data = [responseString JSONValue];
-        
+
         [[JCOIssueStore instance] updateWithData:data];
         [[NSNotificationCenter defaultCenter] postNotificationName:kJCOReceivedCommentsNotification object:self];
         // update the timestamp since we last requested comments.

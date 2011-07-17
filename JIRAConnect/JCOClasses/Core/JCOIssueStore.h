@@ -25,6 +25,7 @@
 @property (assign, nonatomic) int newIssueCount;
 @property (assign, nonatomic) int count;
 
+- (void) createSchema:(BOOL)dropExisting;
 - (void) updateWithData:(NSDictionary*)data;
 - (JCOIssue *) initIssueAtIndex:(NSUInteger)index;
 - (NSArray *) loadCommentsFor:(JCOIssue*)issue;

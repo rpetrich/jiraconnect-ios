@@ -114,7 +114,7 @@ static NSString *cellId = @"CommentCell";
     JCOComment *latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description;
     [cell.detailsLabel alignTop];
-    cell.titleLabel.text = [issue title];
+    cell.titleLabel.text = issue.title;
     NSDate *date = latestComment.date != nil ? latestComment.date : issue.dateUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
     cell.statusLabel.hidden = !issue.hasUpdates;

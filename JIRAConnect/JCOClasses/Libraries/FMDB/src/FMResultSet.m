@@ -69,6 +69,7 @@
         [columnNameToIndexMap setObject:[NSNumber numberWithInt:columnIdx]
                                  forKey:[[NSString stringWithUTF8String:sqlite3_column_name(statement.statement, columnIdx)] lowercaseString]];
     }
+
     columnNamesSetup = YES;
 }
 
@@ -350,7 +351,7 @@
         //default to a string for everything else
         returnValue = [self stringForColumnIndex:columnIdx];
     }
-    
+
     if (returnValue == nil) {
         returnValue = [NSNull null];
     }
