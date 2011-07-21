@@ -23,7 +23,12 @@
             dateCreated = _dateCreated, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
-    self.key, self.status, self.title, self.description, self.comments, self.dateUpdated = nil;
+    self.key = nil;
+    self.status = nil;
+    self.title = nil;
+    self.description = nil;
+    self.comments = nil;
+    self.dateUpdated = nil;
     self.dateCreated = nil;
     [super dealloc];
 }

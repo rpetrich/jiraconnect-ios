@@ -19,6 +19,7 @@
 #import "JCOViewController.h"
 #import "JCOMessageBubble.h"
 #import "JCOIssueStore.h"
+#import "JSON.h"
 
 static UIFont *font;
 static UIFont* titleFont;

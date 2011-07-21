@@ -99,7 +99,7 @@ NSString* _jcoDbPath;
     return nil;
 }
 
-- (NSArray*) loadCommentsFor:(JCOIssue*) issue {
+- (NSMutableArray*) loadCommentsFor:(JCOIssue*) issue {
 
     FMResultSet *res = [db executeQuery:
                                @"SELECT "

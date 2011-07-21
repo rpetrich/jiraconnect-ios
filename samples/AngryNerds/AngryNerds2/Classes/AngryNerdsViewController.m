@@ -65,6 +65,17 @@
     return YES;
 }
 
+- (BOOL)photosEnabled
+{
+    return YES;
+}
+
+- (BOOL)voiceEnabled
+{
+    return YES;
+}
+
+
 #pragma end
 
 - (IBAction)triggerDisplayNotifications

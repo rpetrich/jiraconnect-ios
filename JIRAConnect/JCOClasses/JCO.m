@@ -164,6 +164,15 @@
     return [self getAppName];
 }
 
+- (NSString *)isPhotosEnabled {
+    return ([_customDataSource respondsToSelector:@selector(photosEnabled)]) ?
+           ([_customDataSource photosEnabled]) : YES; // defaults to YES
+}
 
+
+- (NSString *)isVoiceEnabled {
+    return ([_customDataSource respondsToSelector:@selector(voiceEnabled)]) ?
+           ([_customDataSource voiceEnabled]) : YES; // defaults to YES
+}
 
 @end

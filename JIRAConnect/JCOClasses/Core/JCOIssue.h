@@ -31,8 +31,8 @@
 
 @property (nonatomic, retain) NSDate* dateCreated;
 @property (nonatomic, retain) NSDate* dateUpdated;
-@property (nonatomic) NSNumber* dateUpdatedLong;
-@property (nonatomic) NSNumber* dateCreatedLong;
+@property (nonatomic, assign) NSNumber* dateUpdatedLong;
+@property (nonatomic, assign) NSNumber* dateCreatedLong;
 @property (nonatomic, retain) NSString* key;
 @property (nonatomic, retain) NSString* status;
 @property (nonatomic, retain) NSString* title;
@@ -41,7 +41,6 @@
 @property (nonatomic, assign) BOOL hasUpdates;
 
 - (id) initWithDictionary:(NSDictionary*)map;
-- (void)addCommentsFrom:(NSArray *)commentDataArray;
 - (JCOComment *) latestComment;
 
 @end

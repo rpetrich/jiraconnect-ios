@@ -63,4 +63,7 @@
 - (NSString *) getAppName;
 - (NSString *) getUUID;
 
+- (NSString *) isPhotosEnabled;
+- (NSString *) isVoiceEnabled;
+
 @end

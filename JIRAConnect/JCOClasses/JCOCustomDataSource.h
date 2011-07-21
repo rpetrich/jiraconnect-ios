@@ -43,4 +43,15 @@
  */
 -(BOOL) locationEnabled;
 
+/**
+ * If YES users will be able to submit voice recordings with their feedback, this is YES by default.
+ */
+-(BOOL) voiceEnabled;
+
+/**
+ * If YES users will be able to submit screenshots/photos with their feedback, this is YES by default.
+ */
+-(BOOL) photosEnabled;
+
+
 @end

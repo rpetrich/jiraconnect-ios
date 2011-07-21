@@ -115,7 +115,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
     UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:nil action:nil] autorelease];
-    systemToolbarItems = [[NSArray arrayWithObjects:screenshotButton, recordButton, spaceButton, nil] retain];
+    NSMutableArray* toolbarItems = [NSMutableArray arrayWithCapacity:3];
+    if ([[JCO instance] isPhotosEnabled]) {
+        [toolbarItems addObject:screenshotButton];
+    }
+    if ([[JCO instance] isVoiceEnabled]) {
+        [toolbarItems addObject:recordButton];
+    }
+
+    [toolbarItems addObject:spaceButton];
+
+    systemToolbarItems = [[NSArray arrayWithArray:toolbarItems] retain];
     self.voiceButton = recordButton;
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
