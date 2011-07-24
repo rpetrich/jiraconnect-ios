@@ -97,6 +97,11 @@ e.g. the following will present the issue inbox programatically:
             [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
         }
 
+Integration Notes
+=================
+
+* The notification view that slides up when a notification is received, is added to the application's keyWindow.
+
 JIRA Plugin
 ===========
 You will need access to a JIRA instance with the [JIRA Mobile Connect Plugin](https://plugins.atlassian.com/plugin/details/322837) installed.
