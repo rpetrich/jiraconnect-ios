@@ -89,6 +89,13 @@ If your info ViewController is in a UINavigationController stack, then you can u
             [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
         }
 
+1. If you would like your users to access their issue 'inbox' anytime, then you can do so by presenting the JCOIssuesViewController.
+e.g. the following will present the issue inbox programatically:
+
+        - (IBAction)triggerDisplayNotifications
+        {
+            [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+        }
 
 JIRA Plugin
 ===========
