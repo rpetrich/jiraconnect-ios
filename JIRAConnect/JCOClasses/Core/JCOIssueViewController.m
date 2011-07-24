@@ -55,8 +55,8 @@ static float detailLabelHeight = 21.0f;
 - (void)scrollToLastComment
 {
     if ([self.comments count] > 0 && [self.tableView numberOfRowsInSection:1] > 0) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
-        [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:[self.comments count] - 1 inSection:1];
+        [self.tableView scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
@@ -119,8 +119,8 @@ static float detailLabelHeight = 21.0f;
     return (section == 0) ? 1 : [self.comments count];
 }
 
-- (CGSize)sizeForComment:(JCOComment *)comment font:(UIFont *)font {
-    return [comment.body sizeWithFont:font constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
+- (CGSize)sizeForComment:(JCOComment *)comment font:(UIFont *)commentFont {
+    return [comment.body sizeWithFont:commentFont constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

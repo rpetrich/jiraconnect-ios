@@ -115,17 +115,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
     UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:nil action:nil] autorelease];
-    NSMutableArray* toolbarItems = [NSMutableArray arrayWithCapacity:3];
+    NSMutableArray* items = [NSMutableArray arrayWithCapacity:3];
     if ([[JCO instance] isPhotosEnabled]) {
-        [toolbarItems addObject:screenshotButton];
+        [items addObject:screenshotButton];
     }
     if ([[JCO instance] isVoiceEnabled]) {
-        [toolbarItems addObject:recordButton];
+        [items addObject:recordButton];
     }
 
-    [toolbarItems addObject:spaceButton];
+    [items addObject:spaceButton];
 
-    systemToolbarItems = [[NSArray arrayWithArray:toolbarItems] retain];
+    systemToolbarItems = [[NSArray arrayWithArray:items] retain];
     self.voiceButton = recordButton;
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
@@ -320,12 +320,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [attachment release];
 }
 
-- (void)removeAttachmentItemAtIndex:(NSUInteger)index
+- (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex
 {
 
-    [self.attachments removeObjectAtIndex:index];
+    [self.attachments removeObjectAtIndex:attachmentIndex];
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems removeObjectAtIndex:index + [systemToolbarItems count]]; // TODO: fix this pullava
+    [buttonItems removeObjectAtIndex:attachmentIndex + [systemToolbarItems count]]; // TODO: fix this pullava
     // re-tag all buttons... with their new index. indexed from 2, due to icons...
     for (int i = 0; i < [buttonItems count]; i++) {
         UIBarButtonItem *buttonItem = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
@@ -338,8 +338,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)imageAttachmentTapped:(UIButton *)touch
 {
     // delete that button, both from the bar, and the images array
-    NSUInteger index = (u_int) touch.tag;
-    NSUInteger attachmentIndex = index - [systemToolbarItems count];
+    NSUInteger touchIndex = (u_int) touch.tag;
+    NSUInteger attachmentIndex = touchIndex - [systemToolbarItems count];
     JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
@@ -347,14 +347,14 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:attachmentIndex]; // set this image's id. just the index in the array
     sketchViewController.delegate = self;
     [self presentModalViewController:sketchViewController animated:YES];
-    currentAttachmentItemIndex = index;
+    currentAttachmentItemIndex = touchIndex;
 }
 
 - (void)voiceAttachmentTapped:(UIButton *)touch
 {
     // delete that button, both from the bar, and the images array
-    NSUInteger index = (u_int) touch.tag;
-    NSUInteger attachmentIndex = index - [systemToolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
+    NSUInteger tapIndex = (u_int) touch.tag;
+    NSUInteger attachmentIndex = tapIndex - [systemToolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
     UIAlertView *view =
             [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title")
                                  message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
@@ -411,15 +411,15 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
     [self dismissModalViewControllerAnimated:YES];
-    NSUInteger index = [imageId unsignedIntegerValue];
-    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    NSUInteger imgIndex = [imageId unsignedIntegerValue];
+    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:imgIndex];
     attachment.data = UIImagePNGRepresentation(image);
 
     // also update the icon in the toolbar
     UIImage * iconImg =
             [image thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
 
-    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:index + [systemToolbarItems count]];
+    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:imgIndex + [systemToolbarItems count]];
     ((UIButton *) item.customView).imageView.image = iconImg;
 }
 

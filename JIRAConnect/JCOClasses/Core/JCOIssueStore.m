@@ -79,7 +79,7 @@ NSString* _jcoDbPath;
                         "date INTEGER) "];
 }
 
-- (JCOIssue *) initIssueAtIndex:(NSUInteger)index {
+- (JCOIssue *) initIssueAtIndex:(NSUInteger)issueIndex {
     // each column must match the JSON field JIRA returns for an issue entity
     FMResultSet *res = [db executeQuery:
                                @"SELECT "
@@ -90,12 +90,12 @@ NSString* _jcoDbPath;
                                    "dateCreated, "
                                    "hasUpdates "
                                 "FROM issue ORDER BY dateUpdated desc LIMIT 1 OFFSET ?",
-                           [NSNumber numberWithUnsignedInt:index]];
+                           [NSNumber numberWithUnsignedInt:issueIndex]];
     if ([res next]) {
         NSDictionary *dictionary = [res resultDict];
         return [[JCOIssue alloc] initWithDictionary:dictionary];
     }
-    NSLog(@"No issue at index = %lu", index);
+    NSLog(@"No issue at index = %lu", issueIndex);
     return nil;
 }
 
