@@ -48,13 +48,24 @@
 
 - (NSString *)project
 {
-    return @"Angry Nerds";
+    return @"Very Angry Nerds";
 }
 
 - (NSDictionary *)customFields
 {
     return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
 }
+
+- (NSString *)jiraIssueTypeNameFor:(JCOIssueType)type
+{
+    if (type == JCOIssueTypeCrash) {
+        return @"crash";
+    } else if (type == JCOIssueTypeFeedback) {
+        return @"improvement";
+    }
+    return nil;
+}
+
 
 - (NSDictionary *)payload
 {

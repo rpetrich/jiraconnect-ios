@@ -16,6 +16,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+  JCOIssueTypeCrash,
+  JCOIssueTypeFeedback
+} JCOIssueType;
+
 @protocol JCOCustomDataSource <NSObject>
 
 @optional
@@ -31,6 +36,13 @@
 * NB: custom field names should be *all* lower case.
 */
 -(NSDictionary *) customFields;
+
+/**
+* Return the name of the issue type in JIRA, for a given JMCIssueType.
+* If there is an issue type of the same in the JIRA server, then it will be used
+* as the issue type.
+*/
+-(NSString *)jiraIssueTypeNameFor:(JCOIssueType) type;
 
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.

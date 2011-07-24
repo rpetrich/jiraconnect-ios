@@ -65,5 +65,6 @@
 
 - (BOOL) isPhotosEnabled;
 - (BOOL) isVoiceEnabled;
+- (NSString*) issueTypeNameFor:(JCOIssueType )type useDefault:(NSString *)defaultType;
 
 @end

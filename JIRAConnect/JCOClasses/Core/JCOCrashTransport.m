@@ -36,7 +36,8 @@
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];
-    [params setObject:@"Crash" forKey:@"type"]; // this is used, if there is an issueType in JIRA named 'Crash'.
+    NSString *typeName = [[JCO instance] issueTypeNameFor:JCOIssueTypeCrash useDefault:@"Crash"];
+    [params setObject:typeName forKey:@"type"];
     [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     // 

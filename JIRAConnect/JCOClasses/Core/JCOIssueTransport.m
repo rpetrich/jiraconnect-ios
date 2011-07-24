@@ -43,7 +43,8 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
-
+    NSString *typeName = [[JCO instance] issueTypeNameFor:JCOIssueTypeFeedback useDefault:@"Bug"];
+    [params setObject:typeName forKey:@"type"];
     [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
