@@ -90,6 +90,7 @@ If your info ViewController is in a UINavigationController stack, then you can u
         }
 
 1. If you would like your users to access their issue 'inbox' anytime, then you can do so by presenting the JCOIssuesViewController.
+
 e.g. the following will present the issue inbox programatically:
 
         - (IBAction)triggerDisplayNotifications
@@ -98,7 +99,7 @@ e.g. the following will present the issue inbox programatically:
         }
 
 Integration Notes
-=================
+-----------------
 
 * The notification view that slides up when a notification is received, is added to the application's keyWindow.
 
