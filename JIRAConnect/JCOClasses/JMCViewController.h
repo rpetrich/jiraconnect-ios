@@ -15,17 +15,17 @@
 **/
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "JCOTransport.h"
+#import "Core/JMCTransport.h"
 #import "JMCCustomDataSource.h"
-#import "JCORecorder.h"
-#import "JCOIssueTransport.h"
-#import "JCOReplyTransport.h"
-#import "JCOSketchViewControllerDelegate.h"
+#import "Core/JMCRecorder.h"
+#import "Core/JMCIssueTransport.h"
+#import "Core/JMCReplyTransport.h"
+#import "Core/JMCSketchViewControllerDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import "CRVActivityView.h"
 
 
-@interface JMCViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JCOSketchViewControllerDelegate, UIAlertViewDelegate,
+@interface JMCViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JMCSketchViewControllerDelegate, UIAlertViewDelegate,
         CLLocationManagerDelegate, CRVActivityViewDelegate> {
 
     IBOutlet UITextView *descriptionField;
@@ -39,12 +39,12 @@
 
     IBOutlet UIToolbar* toolbar;
 
-    JCOIssueTransport *_issueTransport;
-    JCOReplyTransport *_replyTransport;
+    JMCIssueTransport *_issueTransport;
+    JMCReplyTransport *_replyTransport;
     id <JMCCustomDataSource> _payloadDataSource;
     NSMutableArray *_attachments;
-    JCORecorder *_recorder;
-    JCOIssue *_replyToIssue;
+    JMCRecorder *_recorder;
+    JMCIssue *_replyToIssue;
 
 @private
     NSTimer *_timer;
@@ -65,14 +65,14 @@
 @property(retain, nonatomic) IBOutlet UIImagePickerController *imagePicker;
 @property(retain, nonatomic) IBOutlet UIToolbar *toolbar;;
 
-@property(retain, nonatomic) JCOIssueTransport *issueTransport;
-@property(retain, nonatomic) JCOReplyTransport *replyTransport;
+@property(retain, nonatomic) JMCIssueTransport *issueTransport;
+@property(retain, nonatomic) JMCReplyTransport *replyTransport;
 @property(retain, nonatomic) id <JMCCustomDataSource> payloadDataSource;
 @property(retain, nonatomic) NSMutableArray *attachments;
 // an array of items to attach to the issue
-@property(retain, nonatomic) JCORecorder *recorder;
+@property(retain, nonatomic) JMCRecorder *recorder;
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
-@property(retain, nonatomic) JCOIssue *replyToIssue;
+@property(retain, nonatomic) JMCIssue *replyToIssue;
 
 @property(retain, nonatomic) UIBarButtonItem *voiceButton;
 

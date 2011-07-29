@@ -14,17 +14,17 @@
    limitations under the License.
 **/
 #import "JMC.h"
-#import "Core/JCOPing.h"
-#import "Core/JCONotifier.h"
-#import "JCOCrashSender.h"
+#import "Core/JMCPing.h"
+#import "Core/JMCNotifier.h"
+#import "Core/JMCCrashSender.h"
 
 @interface JMC ()
 
-@property (nonatomic, retain) JCOPing* _pinger;
-@property (nonatomic, retain) JCONotifier* _notifier;
+@property (nonatomic, retain) JMCPing * _pinger;
+@property (nonatomic, retain) JMCNotifier * _notifier;
 @property (nonatomic, retain) JMCViewController * _jcController;
 @property (nonatomic, retain) UINavigationController* _navController;
-@property (nonatomic, retain) JCOCrashSender *_crashSender;
+@property (nonatomic, retain) JMCCrashSender *_crashSender;
 @property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
 
 @end
@@ -53,10 +53,10 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self._pinger = [[[JCOPing alloc] init] autorelease ];
+        self._pinger = [[[JMCPing alloc] init] autorelease ];
         UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
-        self._notifier = [[[JCONotifier alloc] initWithView:window] autorelease ];
-        self._crashSender = [[[JCOCrashSender alloc] init] autorelease ];
+        self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
+        self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
         self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
         _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;

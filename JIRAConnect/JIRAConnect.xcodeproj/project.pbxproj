@@ -21,51 +21,51 @@
 		018F39AB13AE069800CD64F9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F39A313AE069800CD64F9 /* FMResultSet.m */; };
 		F89A9874139B585700D09DFF /* CrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97D9139B585700D09DFF /* CrashReporter.h */; };
 		F89A9875139B585700D09DFF /* CrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97DA139B585700D09DFF /* CrashReporter.m */; };
-		F89A9876139B585700D09DFF /* JCOComment.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97DB139B585700D09DFF /* JCOComment.h */; };
-		F89A9877139B585700D09DFF /* JCOComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97DC139B585700D09DFF /* JCOComment.m */; };
-		F89A9878139B585700D09DFF /* JCOCrashSender.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97DD139B585700D09DFF /* JCOCrashSender.h */; };
-		F89A9879139B585700D09DFF /* JCOCrashSender.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97DE139B585700D09DFF /* JCOCrashSender.m */; };
-		F89A987A139B585700D09DFF /* JCOCrashTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97DF139B585700D09DFF /* JCOCrashTransport.h */; };
-		F89A987B139B585700D09DFF /* JCOCrashTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E0139B585700D09DFF /* JCOCrashTransport.m */; };
-		F89A987C139B585700D09DFF /* JCOIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E1139B585700D09DFF /* JCOIssue.h */; };
-		F89A987D139B585700D09DFF /* JCOIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E2139B585700D09DFF /* JCOIssue.m */; };
-		F89A987E139B585700D09DFF /* JCOIssuePreviewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E3139B585700D09DFF /* JCOIssuePreviewCell.h */; };
-		F89A987F139B585700D09DFF /* JCOIssuePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E4139B585700D09DFF /* JCOIssuePreviewCell.m */; };
-		F89A9880139B585700D09DFF /* JCOIssueStore.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E6139B585700D09DFF /* JCOIssueStore.h */; };
-		F89A9881139B585700D09DFF /* JCOIssueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E7139B585700D09DFF /* JCOIssueStore.m */; };
-		F89A9882139B585700D09DFF /* JCOIssuesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E8139B585700D09DFF /* JCOIssuesViewController.h */; };
-		F89A9883139B585700D09DFF /* JCOIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E9139B585700D09DFF /* JCOIssuesViewController.m */; };
-		F89A9884139B585700D09DFF /* JCOIssueTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97EB139B585700D09DFF /* JCOIssueTransport.h */; };
-		F89A9885139B585700D09DFF /* JCOIssueTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97EC139B585700D09DFF /* JCOIssueTransport.m */; };
-		F89A9886139B585700D09DFF /* JCOIssueViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97ED139B585700D09DFF /* JCOIssueViewController.h */; };
-		F89A9887139B585700D09DFF /* JCOIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97EE139B585700D09DFF /* JCOIssueViewController.m */; };
-		F89A9888139B585700D09DFF /* JCOLine.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F0139B585700D09DFF /* JCOLine.h */; };
-		F89A9889139B585700D09DFF /* JCOLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F1139B585700D09DFF /* JCOLine.m */; };
-		F89A988A139B585700D09DFF /* JCOMessageBubble.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F2139B585700D09DFF /* JCOMessageBubble.h */; };
-		F89A988B139B585700D09DFF /* JCOMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F3139B585700D09DFF /* JCOMessageBubble.m */; };
-		F89A988C139B585700D09DFF /* JCOMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F4139B585700D09DFF /* JCOMessageCell.h */; };
-		F89A988D139B585700D09DFF /* JCOMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F5139B585700D09DFF /* JCOMessageCell.m */; };
-		F89A988E139B585700D09DFF /* JCONotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F6139B585700D09DFF /* JCONotifier.h */; };
-		F89A988F139B585700D09DFF /* JCONotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F7139B585700D09DFF /* JCONotifier.m */; };
-		F89A9890139B585700D09DFF /* JCOPing.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F8139B585700D09DFF /* JCOPing.h */; };
-		F89A9891139B585700D09DFF /* JCOPing.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F9139B585700D09DFF /* JCOPing.m */; };
-		F89A9892139B585700D09DFF /* JCORecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97FA139B585700D09DFF /* JCORecorder.h */; };
-		F89A9893139B585700D09DFF /* JCORecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97FB139B585700D09DFF /* JCORecorder.m */; };
-		F89A9894139B585700D09DFF /* JCOReplyTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97FC139B585700D09DFF /* JCOReplyTransport.h */; };
-		F89A9895139B585700D09DFF /* JCOReplyTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97FD139B585700D09DFF /* JCOReplyTransport.m */; };
-		F89A9896139B585700D09DFF /* JCOSketch.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97FE139B585700D09DFF /* JCOSketch.h */; };
-		F89A9897139B585700D09DFF /* JCOSketch.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97FF139B585700D09DFF /* JCOSketch.m */; };
-		F89A9898139B585700D09DFF /* JCOSketchContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9800139B585700D09DFF /* JCOSketchContainerView.h */; };
-		F89A9899139B585700D09DFF /* JCOSketchContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9801139B585700D09DFF /* JCOSketchContainerView.m */; };
-		F89A989A139B585700D09DFF /* JCOSketchScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9802139B585700D09DFF /* JCOSketchScrollView.h */; };
-		F89A989B139B585700D09DFF /* JCOSketchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9803139B585700D09DFF /* JCOSketchScrollView.m */; };
-		F89A989C139B585700D09DFF /* JCOSketchView.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9804139B585700D09DFF /* JCOSketchView.h */; };
-		F89A989D139B585700D09DFF /* JCOSketchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9805139B585700D09DFF /* JCOSketchView.m */; };
-		F89A989E139B585700D09DFF /* JCOSketchViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9806139B585700D09DFF /* JCOSketchViewController.h */; };
-		F89A989F139B585700D09DFF /* JCOSketchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9807139B585700D09DFF /* JCOSketchViewController.m */; };
-		F89A98A0139B585700D09DFF /* JCOSketchViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9809139B585700D09DFF /* JCOSketchViewControllerDelegate.h */; };
-		F89A98A1139B585700D09DFF /* JCOTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A980A139B585700D09DFF /* JCOTransport.h */; };
-		F89A98A2139B585700D09DFF /* JCOTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A980B139B585700D09DFF /* JCOTransport.m */; };
+		F89A9876139B585700D09DFF /* JMCComment.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97DB139B585700D09DFF /* JMCComment.h */; };
+		F89A9877139B585700D09DFF /* JMCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97DC139B585700D09DFF /* JMCComment.m */; };
+		F89A9878139B585700D09DFF /* JMCCrashSender.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97DD139B585700D09DFF /* JMCCrashSender.h */; };
+		F89A9879139B585700D09DFF /* JMCCrashSender.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97DE139B585700D09DFF /* JMCCrashSender.m */; };
+		F89A987A139B585700D09DFF /* JMCCrashTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97DF139B585700D09DFF /* JMCCrashTransport.h */; };
+		F89A987B139B585700D09DFF /* JMCCrashTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E0139B585700D09DFF /* JMCCrashTransport.m */; };
+		F89A987C139B585700D09DFF /* JMCIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E1139B585700D09DFF /* JMCIssue.h */; };
+		F89A987D139B585700D09DFF /* JMCIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E2139B585700D09DFF /* JMCIssue.m */; };
+		F89A987E139B585700D09DFF /* JMCIssuePreviewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E3139B585700D09DFF /* JMCIssuePreviewCell.h */; };
+		F89A987F139B585700D09DFF /* JMCIssuePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E4139B585700D09DFF /* JMCIssuePreviewCell.m */; };
+		F89A9880139B585700D09DFF /* JMCIssueStore.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E6139B585700D09DFF /* JMCIssueStore.h */; };
+		F89A9881139B585700D09DFF /* JMCIssueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E7139B585700D09DFF /* JMCIssueStore.m */; };
+		F89A9882139B585700D09DFF /* JMCIssuesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97E8139B585700D09DFF /* JMCIssuesViewController.h */; };
+		F89A9883139B585700D09DFF /* JMCIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97E9139B585700D09DFF /* JMCIssuesViewController.m */; };
+		F89A9884139B585700D09DFF /* JMCIssueTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97EB139B585700D09DFF /* JMCIssueTransport.h */; };
+		F89A9885139B585700D09DFF /* JMCIssueTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97EC139B585700D09DFF /* JMCIssueTransport.m */; };
+		F89A9886139B585700D09DFF /* JMCIssueViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97ED139B585700D09DFF /* JMCIssueViewController.h */; };
+		F89A9887139B585700D09DFF /* JMCIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97EE139B585700D09DFF /* JMCIssueViewController.m */; };
+		F89A9888139B585700D09DFF /* JMCLine.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F0139B585700D09DFF /* JMCLine.h */; };
+		F89A9889139B585700D09DFF /* JMCLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F1139B585700D09DFF /* JMCLine.m */; };
+		F89A988A139B585700D09DFF /* JMCMessageBubble.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F2139B585700D09DFF /* JMCMessageBubble.h */; };
+		F89A988B139B585700D09DFF /* JMCMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F3139B585700D09DFF /* JMCMessageBubble.m */; };
+		F89A988C139B585700D09DFF /* JMCMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F4139B585700D09DFF /* JMCMessageCell.h */; };
+		F89A988D139B585700D09DFF /* JMCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F5139B585700D09DFF /* JMCMessageCell.m */; };
+		F89A988E139B585700D09DFF /* JMCNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F6139B585700D09DFF /* JMCNotifier.h */; };
+		F89A988F139B585700D09DFF /* JMCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F7139B585700D09DFF /* JMCNotifier.m */; };
+		F89A9890139B585700D09DFF /* JMCPing.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97F8139B585700D09DFF /* JMCPing.h */; };
+		F89A9891139B585700D09DFF /* JMCPing.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97F9139B585700D09DFF /* JMCPing.m */; };
+		F89A9892139B585700D09DFF /* JMCRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97FA139B585700D09DFF /* JMCRecorder.h */; };
+		F89A9893139B585700D09DFF /* JMCRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97FB139B585700D09DFF /* JMCRecorder.m */; };
+		F89A9894139B585700D09DFF /* JMCReplyTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97FC139B585700D09DFF /* JMCReplyTransport.h */; };
+		F89A9895139B585700D09DFF /* JMCReplyTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97FD139B585700D09DFF /* JMCReplyTransport.m */; };
+		F89A9896139B585700D09DFF /* JMCSketch.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97FE139B585700D09DFF /* JMCSketch.h */; };
+		F89A9897139B585700D09DFF /* JMCSketch.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A97FF139B585700D09DFF /* JMCSketch.m */; };
+		F89A9898139B585700D09DFF /* JMCSketchContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9800139B585700D09DFF /* JMCSketchContainerView.h */; };
+		F89A9899139B585700D09DFF /* JMCSketchContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9801139B585700D09DFF /* JMCSketchContainerView.m */; };
+		F89A989A139B585700D09DFF /* JMCSketchScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9802139B585700D09DFF /* JMCSketchScrollView.h */; };
+		F89A989B139B585700D09DFF /* JMCSketchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9803139B585700D09DFF /* JMCSketchScrollView.m */; };
+		F89A989C139B585700D09DFF /* JMCSketchView.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9804139B585700D09DFF /* JMCSketchView.h */; };
+		F89A989D139B585700D09DFF /* JMCSketchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9805139B585700D09DFF /* JMCSketchView.m */; };
+		F89A989E139B585700D09DFF /* JMCSketchViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9806139B585700D09DFF /* JMCSketchViewController.h */; };
+		F89A989F139B585700D09DFF /* JMCSketchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9807139B585700D09DFF /* JMCSketchViewController.m */; };
+		F89A98A0139B585700D09DFF /* JMCSketchViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9809139B585700D09DFF /* JMCSketchViewControllerDelegate.h */; };
+		F89A98A1139B585700D09DFF /* JMCTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A980A139B585700D09DFF /* JMCTransport.h */; };
+		F89A98A2139B585700D09DFF /* JMCTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A980B139B585700D09DFF /* JMCTransport.m */; };
 		F89A98A3139B585700D09DFF /* UILabel+VerticalAlign.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A980C139B585700D09DFF /* UILabel+VerticalAlign.h */; };
 		F89A98A4139B585700D09DFF /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A980D139B585700D09DFF /* UILabel+VerticalAlign.m */; };
 		F89A98A5139B585700D09DFF /* UIView+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A980E139B585700D09DFF /* UIView+Additions.h */; };
@@ -144,55 +144,55 @@
 		018F39A313AE069800CD64F9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		F89A97D9139B585700D09DFF /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
 		F89A97DA139B585700D09DFF /* CrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporter.m; sourceTree = "<group>"; };
-		F89A97DB139B585700D09DFF /* JCOComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOComment.h; sourceTree = "<group>"; };
-		F89A97DC139B585700D09DFF /* JCOComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOComment.m; sourceTree = "<group>"; };
-		F89A97DD139B585700D09DFF /* JCOCrashSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashSender.h; sourceTree = "<group>"; };
-		F89A97DE139B585700D09DFF /* JCOCrashSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOCrashSender.m; sourceTree = "<group>"; };
-		F89A97DF139B585700D09DFF /* JCOCrashTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOCrashTransport.h; sourceTree = "<group>"; };
-		F89A97E0139B585700D09DFF /* JCOCrashTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOCrashTransport.m; sourceTree = "<group>"; };
-		F89A97E1139B585700D09DFF /* JCOIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssue.h; sourceTree = "<group>"; };
-		F89A97E2139B585700D09DFF /* JCOIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssue.m; sourceTree = "<group>"; };
-		F89A97E3139B585700D09DFF /* JCOIssuePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssuePreviewCell.h; sourceTree = "<group>"; };
-		F89A97E4139B585700D09DFF /* JCOIssuePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssuePreviewCell.m; sourceTree = "<group>"; };
-		F89A97E5139B585700D09DFF /* JCOIssuePreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOIssuePreviewCell.xib; sourceTree = "<group>"; };
-		F89A97E6139B585700D09DFF /* JCOIssueStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssueStore.h; sourceTree = "<group>"; };
-		F89A97E7139B585700D09DFF /* JCOIssueStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssueStore.m; sourceTree = "<group>"; };
-		F89A97E8139B585700D09DFF /* JCOIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssuesViewController.h; sourceTree = "<group>"; };
-		F89A97E9139B585700D09DFF /* JCOIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssuesViewController.m; sourceTree = "<group>"; };
-		F89A97EA139B585700D09DFF /* JCOIssuesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOIssuesViewController.xib; sourceTree = "<group>"; };
-		F89A97EB139B585700D09DFF /* JCOIssueTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssueTransport.h; sourceTree = "<group>"; };
-		F89A97EC139B585700D09DFF /* JCOIssueTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssueTransport.m; sourceTree = "<group>"; };
-		F89A97ED139B585700D09DFF /* JCOIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOIssueViewController.h; sourceTree = "<group>"; };
-		F89A97EE139B585700D09DFF /* JCOIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOIssueViewController.m; sourceTree = "<group>"; };
-		F89A97EF139B585700D09DFF /* JCOIssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOIssueViewController.xib; sourceTree = "<group>"; };
-		F89A97F0139B585700D09DFF /* JCOLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOLine.h; sourceTree = "<group>"; };
-		F89A97F1139B585700D09DFF /* JCOLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOLine.m; sourceTree = "<group>"; };
-		F89A97F2139B585700D09DFF /* JCOMessageBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMessageBubble.h; sourceTree = "<group>"; };
-		F89A97F3139B585700D09DFF /* JCOMessageBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOMessageBubble.m; sourceTree = "<group>"; };
-		F89A97F4139B585700D09DFF /* JCOMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOMessageCell.h; sourceTree = "<group>"; };
-		F89A97F5139B585700D09DFF /* JCOMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOMessageCell.m; sourceTree = "<group>"; };
-		F89A97F6139B585700D09DFF /* JCONotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCONotifier.h; sourceTree = "<group>"; };
-		F89A97F7139B585700D09DFF /* JCONotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCONotifier.m; sourceTree = "<group>"; };
-		F89A97F8139B585700D09DFF /* JCOPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOPing.h; sourceTree = "<group>"; };
-		F89A97F9139B585700D09DFF /* JCOPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOPing.m; sourceTree = "<group>"; };
-		F89A97FA139B585700D09DFF /* JCORecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCORecorder.h; sourceTree = "<group>"; };
-		F89A97FB139B585700D09DFF /* JCORecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCORecorder.m; sourceTree = "<group>"; };
-		F89A97FC139B585700D09DFF /* JCOReplyTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOReplyTransport.h; sourceTree = "<group>"; };
-		F89A97FD139B585700D09DFF /* JCOReplyTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOReplyTransport.m; sourceTree = "<group>"; };
-		F89A97FE139B585700D09DFF /* JCOSketch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketch.h; sourceTree = "<group>"; };
-		F89A97FF139B585700D09DFF /* JCOSketch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketch.m; sourceTree = "<group>"; };
-		F89A9800139B585700D09DFF /* JCOSketchContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchContainerView.h; sourceTree = "<group>"; };
-		F89A9801139B585700D09DFF /* JCOSketchContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchContainerView.m; sourceTree = "<group>"; };
-		F89A9802139B585700D09DFF /* JCOSketchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchScrollView.h; sourceTree = "<group>"; };
-		F89A9803139B585700D09DFF /* JCOSketchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchScrollView.m; sourceTree = "<group>"; };
-		F89A9804139B585700D09DFF /* JCOSketchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchView.h; sourceTree = "<group>"; };
-		F89A9805139B585700D09DFF /* JCOSketchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchView.m; sourceTree = "<group>"; };
-		F89A9806139B585700D09DFF /* JCOSketchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchViewController.h; sourceTree = "<group>"; };
-		F89A9807139B585700D09DFF /* JCOSketchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOSketchViewController.m; sourceTree = "<group>"; };
-		F89A9808139B585700D09DFF /* JCOSketchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCOSketchViewController.xib; sourceTree = "<group>"; };
-		F89A9809139B585700D09DFF /* JCOSketchViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOSketchViewControllerDelegate.h; sourceTree = "<group>"; };
-		F89A980A139B585700D09DFF /* JCOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCOTransport.h; sourceTree = "<group>"; };
-		F89A980B139B585700D09DFF /* JCOTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCOTransport.m; sourceTree = "<group>"; };
+		F89A97DB139B585700D09DFF /* JMCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCComment.h; sourceTree = "<group>"; };
+		F89A97DC139B585700D09DFF /* JMCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCComment.m; sourceTree = "<group>"; };
+		F89A97DD139B585700D09DFF /* JMCCrashSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCCrashSender.h; sourceTree = "<group>"; };
+		F89A97DE139B585700D09DFF /* JMCCrashSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCCrashSender.m; sourceTree = "<group>"; };
+		F89A97DF139B585700D09DFF /* JMCCrashTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCCrashTransport.h; sourceTree = "<group>"; };
+		F89A97E0139B585700D09DFF /* JMCCrashTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCCrashTransport.m; sourceTree = "<group>"; };
+		F89A97E1139B585700D09DFF /* JMCIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssue.h; sourceTree = "<group>"; };
+		F89A97E2139B585700D09DFF /* JMCIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssue.m; sourceTree = "<group>"; };
+		F89A97E3139B585700D09DFF /* JMCIssuePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssuePreviewCell.h; sourceTree = "<group>"; };
+		F89A97E4139B585700D09DFF /* JMCIssuePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssuePreviewCell.m; sourceTree = "<group>"; };
+		F89A97E5139B585700D09DFF /* JMCIssuePreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCIssuePreviewCell.xib; sourceTree = "<group>"; };
+		F89A97E6139B585700D09DFF /* JMCIssueStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssueStore.h; sourceTree = "<group>"; };
+		F89A97E7139B585700D09DFF /* JMCIssueStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssueStore.m; sourceTree = "<group>"; };
+		F89A97E8139B585700D09DFF /* JMCIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssuesViewController.h; sourceTree = "<group>"; };
+		F89A97E9139B585700D09DFF /* JMCIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssuesViewController.m; sourceTree = "<group>"; };
+		F89A97EA139B585700D09DFF /* JMCIssuesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCIssuesViewController.xib; sourceTree = "<group>"; };
+		F89A97EB139B585700D09DFF /* JMCIssueTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssueTransport.h; sourceTree = "<group>"; };
+		F89A97EC139B585700D09DFF /* JMCIssueTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssueTransport.m; sourceTree = "<group>"; };
+		F89A97ED139B585700D09DFF /* JMCIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssueViewController.h; sourceTree = "<group>"; };
+		F89A97EE139B585700D09DFF /* JMCIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssueViewController.m; sourceTree = "<group>"; };
+		F89A97EF139B585700D09DFF /* JMCIssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCIssueViewController.xib; sourceTree = "<group>"; };
+		F89A97F0139B585700D09DFF /* JMCLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCLine.h; sourceTree = "<group>"; };
+		F89A97F1139B585700D09DFF /* JMCLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCLine.m; sourceTree = "<group>"; };
+		F89A97F2139B585700D09DFF /* JMCMessageBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMessageBubble.h; sourceTree = "<group>"; };
+		F89A97F3139B585700D09DFF /* JMCMessageBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCMessageBubble.m; sourceTree = "<group>"; };
+		F89A97F4139B585700D09DFF /* JMCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMessageCell.h; sourceTree = "<group>"; };
+		F89A97F5139B585700D09DFF /* JMCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCMessageCell.m; sourceTree = "<group>"; };
+		F89A97F6139B585700D09DFF /* JMCNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCNotifier.h; sourceTree = "<group>"; };
+		F89A97F7139B585700D09DFF /* JMCNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCNotifier.m; sourceTree = "<group>"; };
+		F89A97F8139B585700D09DFF /* JMCPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCPing.h; sourceTree = "<group>"; };
+		F89A97F9139B585700D09DFF /* JMCPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCPing.m; sourceTree = "<group>"; };
+		F89A97FA139B585700D09DFF /* JMCRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCRecorder.h; sourceTree = "<group>"; };
+		F89A97FB139B585700D09DFF /* JMCRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCRecorder.m; sourceTree = "<group>"; };
+		F89A97FC139B585700D09DFF /* JMCReplyTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCReplyTransport.h; sourceTree = "<group>"; };
+		F89A97FD139B585700D09DFF /* JMCReplyTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCReplyTransport.m; sourceTree = "<group>"; };
+		F89A97FE139B585700D09DFF /* JMCSketch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketch.h; sourceTree = "<group>"; };
+		F89A97FF139B585700D09DFF /* JMCSketch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCSketch.m; sourceTree = "<group>"; };
+		F89A9800139B585700D09DFF /* JMCSketchContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchContainerView.h; sourceTree = "<group>"; };
+		F89A9801139B585700D09DFF /* JMCSketchContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCSketchContainerView.m; sourceTree = "<group>"; };
+		F89A9802139B585700D09DFF /* JMCSketchScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchScrollView.h; sourceTree = "<group>"; };
+		F89A9803139B585700D09DFF /* JMCSketchScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCSketchScrollView.m; sourceTree = "<group>"; };
+		F89A9804139B585700D09DFF /* JMCSketchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchView.h; sourceTree = "<group>"; };
+		F89A9805139B585700D09DFF /* JMCSketchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCSketchView.m; sourceTree = "<group>"; };
+		F89A9806139B585700D09DFF /* JMCSketchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchViewController.h; sourceTree = "<group>"; };
+		F89A9807139B585700D09DFF /* JMCSketchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCSketchViewController.m; sourceTree = "<group>"; };
+		F89A9808139B585700D09DFF /* JMCSketchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCSketchViewController.xib; sourceTree = "<group>"; };
+		F89A9809139B585700D09DFF /* JMCSketchViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchViewControllerDelegate.h; sourceTree = "<group>"; };
+		F89A980A139B585700D09DFF /* JMCTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCTransport.h; sourceTree = "<group>"; };
+		F89A980B139B585700D09DFF /* JMCTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransport.m; sourceTree = "<group>"; };
 		F89A980C139B585700D09DFF /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
 		F89A980D139B585700D09DFF /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		F89A980E139B585700D09DFF /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
@@ -263,8 +263,8 @@
 		F89A9853139B585700D09DFF /* buttonbase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonbase.png; sourceTree = "<group>"; };
 		F89A9854139B585700D09DFF /* buttonbase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonbase@2x.png"; sourceTree = "<group>"; };
 		F89A9855139B585700D09DFF /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		F89A9857139B585700D09DFF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/JCOLocalizable.strings; sourceTree = "<group>"; };
-		F89A9858139B585700D09DFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JCOLocalizable.strings; sourceTree = "<group>"; };
+		F89A9857139B585700D09DFF /* JMCLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = JMCLocalizable.strings; path = de.lproj/JMCLocalizable.strings; sourceTree = "<group>"; };
+		F89A9858139B585700D09DFF /* JMCLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = JMCLocalizable.strings; path = en.lproj/JMCLocalizable.strings; sourceTree = "<group>"; };
 		F89A9859139B585700D09DFF /* icon_capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_capture.png; sourceTree = "<group>"; };
 		F89A985A139B585700D09DFF /* icon_capture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_capture@2x.png"; sourceTree = "<group>"; };
 		F89A985B139B585700D09DFF /* icon_record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_record.png; sourceTree = "<group>"; };
@@ -403,55 +403,55 @@
 			isa = PBXGroup;
 			children = (
 				F89A97D8139B585700D09DFF /* CrashReporter */,
-				F89A97DB139B585700D09DFF /* JCOComment.h */,
-				F89A97DC139B585700D09DFF /* JCOComment.m */,
-				F89A97DD139B585700D09DFF /* JCOCrashSender.h */,
-				F89A97DE139B585700D09DFF /* JCOCrashSender.m */,
-				F89A97DF139B585700D09DFF /* JCOCrashTransport.h */,
-				F89A97E0139B585700D09DFF /* JCOCrashTransport.m */,
-				F89A97E1139B585700D09DFF /* JCOIssue.h */,
-				F89A97E2139B585700D09DFF /* JCOIssue.m */,
-				F89A97E3139B585700D09DFF /* JCOIssuePreviewCell.h */,
-				F89A97E4139B585700D09DFF /* JCOIssuePreviewCell.m */,
-				F89A97E5139B585700D09DFF /* JCOIssuePreviewCell.xib */,
-				F89A97E6139B585700D09DFF /* JCOIssueStore.h */,
-				F89A97E7139B585700D09DFF /* JCOIssueStore.m */,
-				F89A97E8139B585700D09DFF /* JCOIssuesViewController.h */,
-				F89A97E9139B585700D09DFF /* JCOIssuesViewController.m */,
-				F89A97EA139B585700D09DFF /* JCOIssuesViewController.xib */,
-				F89A97EB139B585700D09DFF /* JCOIssueTransport.h */,
-				F89A97EC139B585700D09DFF /* JCOIssueTransport.m */,
-				F89A97ED139B585700D09DFF /* JCOIssueViewController.h */,
-				F89A97EE139B585700D09DFF /* JCOIssueViewController.m */,
-				F89A97EF139B585700D09DFF /* JCOIssueViewController.xib */,
-				F89A97F0139B585700D09DFF /* JCOLine.h */,
-				F89A97F1139B585700D09DFF /* JCOLine.m */,
-				F89A97F2139B585700D09DFF /* JCOMessageBubble.h */,
-				F89A97F3139B585700D09DFF /* JCOMessageBubble.m */,
-				F89A97F4139B585700D09DFF /* JCOMessageCell.h */,
-				F89A97F5139B585700D09DFF /* JCOMessageCell.m */,
-				F89A97F6139B585700D09DFF /* JCONotifier.h */,
-				F89A97F7139B585700D09DFF /* JCONotifier.m */,
-				F89A97F8139B585700D09DFF /* JCOPing.h */,
-				F89A97F9139B585700D09DFF /* JCOPing.m */,
-				F89A97FA139B585700D09DFF /* JCORecorder.h */,
-				F89A97FB139B585700D09DFF /* JCORecorder.m */,
-				F89A97FC139B585700D09DFF /* JCOReplyTransport.h */,
-				F89A97FD139B585700D09DFF /* JCOReplyTransport.m */,
-				F89A97FE139B585700D09DFF /* JCOSketch.h */,
-				F89A97FF139B585700D09DFF /* JCOSketch.m */,
-				F89A9800139B585700D09DFF /* JCOSketchContainerView.h */,
-				F89A9801139B585700D09DFF /* JCOSketchContainerView.m */,
-				F89A9802139B585700D09DFF /* JCOSketchScrollView.h */,
-				F89A9803139B585700D09DFF /* JCOSketchScrollView.m */,
-				F89A9804139B585700D09DFF /* JCOSketchView.h */,
-				F89A9805139B585700D09DFF /* JCOSketchView.m */,
-				F89A9806139B585700D09DFF /* JCOSketchViewController.h */,
-				F89A9807139B585700D09DFF /* JCOSketchViewController.m */,
-				F89A9808139B585700D09DFF /* JCOSketchViewController.xib */,
-				F89A9809139B585700D09DFF /* JCOSketchViewControllerDelegate.h */,
-				F89A980A139B585700D09DFF /* JCOTransport.h */,
-				F89A980B139B585700D09DFF /* JCOTransport.m */,
+				F89A97DB139B585700D09DFF /* JMCComment.h */,
+				F89A97DC139B585700D09DFF /* JMCComment.m */,
+				F89A97DD139B585700D09DFF /* JMCCrashSender.h */,
+				F89A97DE139B585700D09DFF /* JMCCrashSender.m */,
+				F89A97DF139B585700D09DFF /* JMCCrashTransport.h */,
+				F89A97E0139B585700D09DFF /* JMCCrashTransport.m */,
+				F89A97E1139B585700D09DFF /* JMCIssue.h */,
+				F89A97E2139B585700D09DFF /* JMCIssue.m */,
+				F89A97E3139B585700D09DFF /* JMCIssuePreviewCell.h */,
+				F89A97E4139B585700D09DFF /* JMCIssuePreviewCell.m */,
+				F89A97E5139B585700D09DFF /* JMCIssuePreviewCell.xib */,
+				F89A97E6139B585700D09DFF /* JMCIssueStore.h */,
+				F89A97E7139B585700D09DFF /* JMCIssueStore.m */,
+				F89A97E8139B585700D09DFF /* JMCIssuesViewController.h */,
+				F89A97E9139B585700D09DFF /* JMCIssuesViewController.m */,
+				F89A97EA139B585700D09DFF /* JMCIssuesViewController.xib */,
+				F89A97EB139B585700D09DFF /* JMCIssueTransport.h */,
+				F89A97EC139B585700D09DFF /* JMCIssueTransport.m */,
+				F89A97ED139B585700D09DFF /* JMCIssueViewController.h */,
+				F89A97EE139B585700D09DFF /* JMCIssueViewController.m */,
+				F89A97EF139B585700D09DFF /* JMCIssueViewController.xib */,
+				F89A97F0139B585700D09DFF /* JMCLine.h */,
+				F89A97F1139B585700D09DFF /* JMCLine.m */,
+				F89A97F2139B585700D09DFF /* JMCMessageBubble.h */,
+				F89A97F3139B585700D09DFF /* JMCMessageBubble.m */,
+				F89A97F4139B585700D09DFF /* JMCMessageCell.h */,
+				F89A97F5139B585700D09DFF /* JMCMessageCell.m */,
+				F89A97F6139B585700D09DFF /* JMCNotifier.h */,
+				F89A97F7139B585700D09DFF /* JMCNotifier.m */,
+				F89A97F8139B585700D09DFF /* JMCPing.h */,
+				F89A97F9139B585700D09DFF /* JMCPing.m */,
+				F89A97FA139B585700D09DFF /* JMCRecorder.h */,
+				F89A97FB139B585700D09DFF /* JMCRecorder.m */,
+				F89A97FC139B585700D09DFF /* JMCReplyTransport.h */,
+				F89A97FD139B585700D09DFF /* JMCReplyTransport.m */,
+				F89A97FE139B585700D09DFF /* JMCSketch.h */,
+				F89A97FF139B585700D09DFF /* JMCSketch.m */,
+				F89A9800139B585700D09DFF /* JMCSketchContainerView.h */,
+				F89A9801139B585700D09DFF /* JMCSketchContainerView.m */,
+				F89A9802139B585700D09DFF /* JMCSketchScrollView.h */,
+				F89A9803139B585700D09DFF /* JMCSketchScrollView.m */,
+				F89A9804139B585700D09DFF /* JMCSketchView.h */,
+				F89A9805139B585700D09DFF /* JMCSketchView.m */,
+				F89A9806139B585700D09DFF /* JMCSketchViewController.h */,
+				F89A9807139B585700D09DFF /* JMCSketchViewController.m */,
+				F89A9808139B585700D09DFF /* JMCSketchViewController.xib */,
+				F89A9809139B585700D09DFF /* JMCSketchViewControllerDelegate.h */,
+				F89A980A139B585700D09DFF /* JMCTransport.h */,
+				F89A980B139B585700D09DFF /* JMCTransport.m */,
 				F89A980C139B585700D09DFF /* UILabel+VerticalAlign.h */,
 				F89A980D139B585700D09DFF /* UILabel+VerticalAlign.m */,
 				F89A980E139B585700D09DFF /* UIView+Additions.h */,
@@ -655,29 +655,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				F89A9874139B585700D09DFF /* CrashReporter.h in Headers */,
-				F89A9876139B585700D09DFF /* JCOComment.h in Headers */,
-				F89A9878139B585700D09DFF /* JCOCrashSender.h in Headers */,
-				F89A987A139B585700D09DFF /* JCOCrashTransport.h in Headers */,
-				F89A987C139B585700D09DFF /* JCOIssue.h in Headers */,
-				F89A987E139B585700D09DFF /* JCOIssuePreviewCell.h in Headers */,
-				F89A9880139B585700D09DFF /* JCOIssueStore.h in Headers */,
-				F89A9882139B585700D09DFF /* JCOIssuesViewController.h in Headers */,
-				F89A9884139B585700D09DFF /* JCOIssueTransport.h in Headers */,
-				F89A9886139B585700D09DFF /* JCOIssueViewController.h in Headers */,
-				F89A9888139B585700D09DFF /* JCOLine.h in Headers */,
-				F89A988A139B585700D09DFF /* JCOMessageBubble.h in Headers */,
-				F89A988C139B585700D09DFF /* JCOMessageCell.h in Headers */,
-				F89A988E139B585700D09DFF /* JCONotifier.h in Headers */,
-				F89A9890139B585700D09DFF /* JCOPing.h in Headers */,
-				F89A9892139B585700D09DFF /* JCORecorder.h in Headers */,
-				F89A9894139B585700D09DFF /* JCOReplyTransport.h in Headers */,
-				F89A9896139B585700D09DFF /* JCOSketch.h in Headers */,
-				F89A9898139B585700D09DFF /* JCOSketchContainerView.h in Headers */,
-				F89A989A139B585700D09DFF /* JCOSketchScrollView.h in Headers */,
-				F89A989C139B585700D09DFF /* JCOSketchView.h in Headers */,
-				F89A989E139B585700D09DFF /* JCOSketchViewController.h in Headers */,
-				F89A98A0139B585700D09DFF /* JCOSketchViewControllerDelegate.h in Headers */,
-				F89A98A1139B585700D09DFF /* JCOTransport.h in Headers */,
+				F89A9876139B585700D09DFF /* JMCComment.h in Headers */,
+				F89A9878139B585700D09DFF /* JMCCrashSender.h in Headers */,
+				F89A987A139B585700D09DFF /* JMCCrashTransport.h in Headers */,
+				F89A987C139B585700D09DFF /* JMCIssue.h in Headers */,
+				F89A987E139B585700D09DFF /* JMCIssuePreviewCell.h in Headers */,
+				F89A9880139B585700D09DFF /* JMCIssueStore.h in Headers */,
+				F89A9882139B585700D09DFF /* JMCIssuesViewController.h in Headers */,
+				F89A9884139B585700D09DFF /* JMCIssueTransport.h in Headers */,
+				F89A9886139B585700D09DFF /* JMCIssueViewController.h in Headers */,
+				F89A9888139B585700D09DFF /* JMCLine.h in Headers */,
+				F89A988A139B585700D09DFF /* JMCMessageBubble.h in Headers */,
+				F89A988C139B585700D09DFF /* JMCMessageCell.h in Headers */,
+				F89A988E139B585700D09DFF /* JMCNotifier.h in Headers */,
+				F89A9890139B585700D09DFF /* JMCPing.h in Headers */,
+				F89A9892139B585700D09DFF /* JMCRecorder.h in Headers */,
+				F89A9894139B585700D09DFF /* JMCReplyTransport.h in Headers */,
+				F89A9896139B585700D09DFF /* JMCSketch.h in Headers */,
+				F89A9898139B585700D09DFF /* JMCSketchContainerView.h in Headers */,
+				F89A989A139B585700D09DFF /* JMCSketchScrollView.h in Headers */,
+				F89A989C139B585700D09DFF /* JMCSketchView.h in Headers */,
+				F89A989E139B585700D09DFF /* JMCSketchViewController.h in Headers */,
+				F89A98A0139B585700D09DFF /* JMCSketchViewControllerDelegate.h in Headers */,
+				F89A98A1139B585700D09DFF /* JMCTransport.h in Headers */,
 				F89A98A3139B585700D09DFF /* UILabel+VerticalAlign.h in Headers */,
 				F89A98A5139B585700D09DFF /* UIView+Additions.h in Headers */,
 				F89A98A7139B585700D09DFF /* JMC.h in Headers */,
@@ -819,28 +819,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				F89A9875139B585700D09DFF /* CrashReporter.m in Sources */,
-				F89A9877139B585700D09DFF /* JCOComment.m in Sources */,
-				F89A9879139B585700D09DFF /* JCOCrashSender.m in Sources */,
-				F89A987B139B585700D09DFF /* JCOCrashTransport.m in Sources */,
-				F89A987D139B585700D09DFF /* JCOIssue.m in Sources */,
-				F89A987F139B585700D09DFF /* JCOIssuePreviewCell.m in Sources */,
-				F89A9881139B585700D09DFF /* JCOIssueStore.m in Sources */,
-				F89A9883139B585700D09DFF /* JCOIssuesViewController.m in Sources */,
-				F89A9885139B585700D09DFF /* JCOIssueTransport.m in Sources */,
-				F89A9887139B585700D09DFF /* JCOIssueViewController.m in Sources */,
-				F89A9889139B585700D09DFF /* JCOLine.m in Sources */,
-				F89A988B139B585700D09DFF /* JCOMessageBubble.m in Sources */,
-				F89A988D139B585700D09DFF /* JCOMessageCell.m in Sources */,
-				F89A988F139B585700D09DFF /* JCONotifier.m in Sources */,
-				F89A9891139B585700D09DFF /* JCOPing.m in Sources */,
-				F89A9893139B585700D09DFF /* JCORecorder.m in Sources */,
-				F89A9895139B585700D09DFF /* JCOReplyTransport.m in Sources */,
-				F89A9897139B585700D09DFF /* JCOSketch.m in Sources */,
-				F89A9899139B585700D09DFF /* JCOSketchContainerView.m in Sources */,
-				F89A989B139B585700D09DFF /* JCOSketchScrollView.m in Sources */,
-				F89A989D139B585700D09DFF /* JCOSketchView.m in Sources */,
-				F89A989F139B585700D09DFF /* JCOSketchViewController.m in Sources */,
-				F89A98A2139B585700D09DFF /* JCOTransport.m in Sources */,
+				F89A9877139B585700D09DFF /* JMCComment.m in Sources */,
+				F89A9879139B585700D09DFF /* JMCCrashSender.m in Sources */,
+				F89A987B139B585700D09DFF /* JMCCrashTransport.m in Sources */,
+				F89A987D139B585700D09DFF /* JMCIssue.m in Sources */,
+				F89A987F139B585700D09DFF /* JMCIssuePreviewCell.m in Sources */,
+				F89A9881139B585700D09DFF /* JMCIssueStore.m in Sources */,
+				F89A9883139B585700D09DFF /* JMCIssuesViewController.m in Sources */,
+				F89A9885139B585700D09DFF /* JMCIssueTransport.m in Sources */,
+				F89A9887139B585700D09DFF /* JMCIssueViewController.m in Sources */,
+				F89A9889139B585700D09DFF /* JMCLine.m in Sources */,
+				F89A988B139B585700D09DFF /* JMCMessageBubble.m in Sources */,
+				F89A988D139B585700D09DFF /* JMCMessageCell.m in Sources */,
+				F89A988F139B585700D09DFF /* JMCNotifier.m in Sources */,
+				F89A9891139B585700D09DFF /* JMCPing.m in Sources */,
+				F89A9893139B585700D09DFF /* JMCRecorder.m in Sources */,
+				F89A9895139B585700D09DFF /* JMCReplyTransport.m in Sources */,
+				F89A9897139B585700D09DFF /* JMCSketch.m in Sources */,
+				F89A9899139B585700D09DFF /* JMCSketchContainerView.m in Sources */,
+				F89A989B139B585700D09DFF /* JMCSketchScrollView.m in Sources */,
+				F89A989D139B585700D09DFF /* JMCSketchView.m in Sources */,
+				F89A989F139B585700D09DFF /* JMCSketchViewController.m in Sources */,
+				F89A98A2139B585700D09DFF /* JMCTransport.m in Sources */,
 				F89A98A4139B585700D09DFF /* UILabel+VerticalAlign.m in Sources */,
 				F89A98A6139B585700D09DFF /* UIView+Additions.m in Sources */,
 				F89A98A8139B585700D09DFF /* JMC.m in Sources */,
@@ -882,8 +882,8 @@
 		F89A9856139B585700D09DFF /* JCOLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F89A9857139B585700D09DFF /* de */,
-				F89A9858139B585700D09DFF /* en */,
+				F89A9857139B585700D09DFF /* JMCLocalizable.strings */,
+				F89A9858139B585700D09DFF /* JMCLocalizable.strings */,
 			);
 			name = JCOLocalizable.strings;
 			sourceTree = "<group>";

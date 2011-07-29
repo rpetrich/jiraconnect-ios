@@ -19,8 +19,8 @@
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
 #import "JMCAttachmentItem.h"
-#import "JCOSketchViewController.h"
-#import "JCOIssueStore.h"
+#import "Core/JMCSketchViewController.h"
+#import "Core/JMCIssueStore.h"
 #import "JSON.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -45,9 +45,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _issueTransport = [[[JCOIssueTransport alloc] init] retain];
-        _replyTransport = [[[JCOReplyTransport alloc] init] retain];
-        _recorder = [[[JCORecorder alloc] init] retain];
+        _issueTransport = [[[JMCIssueTransport alloc] init] retain];
+        _replyTransport = [[[JMCReplyTransport alloc] init] retain];
+        _recorder = [[[JMCRecorder alloc] init] retain];
     }
     return self;
 }
@@ -341,7 +341,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSUInteger touchIndex = (u_int) touch.tag;
     NSUInteger attachmentIndex = touchIndex - [systemToolbarItems count];
     JMCAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
-    JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
+    JMCSketchViewController *sketchViewController = [[[JMCSketchViewController alloc] initWithNibName:@"JMCSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
     sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
     sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:attachmentIndex]; // set this image's id. just the index in the array
@@ -526,8 +526,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     // response needs to be an Issue.json... so we can insert one here.
     NSDictionary *responseDict = [response JSONValue];
-    JCOIssue *issue = [[JCOIssue alloc] initWithDictionary:responseDict];
-    [[JCOIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
+    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
+    [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
     // anounce that an issue was added, so the JCOIssuesView can redraw
 
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJCONewIssueCreated object:nil]];

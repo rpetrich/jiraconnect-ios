@@ -18,7 +18,7 @@
 #import "JMCViewController.h"
 #import "CrashReporter.h"
 
-@class JCOIssuesViewController, JCOPing, JCONotifier, JCONotifier, JCOCrashSender;
+@class JMCIssuesViewController, JMCPing, JMCNotifier, JMCNotifier, JMCCrashSender;
 
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
 #define kJCOReceivedCommentsNotification @"kJCOReceivedCommentsNotification"
@@ -28,11 +28,11 @@
 @interface JMC : NSObject {
     @private
     NSURL* _url;
-    JCOPing *_pinger;
-    JCONotifier *_notifier;
+    JMCPing *_pinger;
+    JMCNotifier *_notifier;
     JMCViewController *_jcController;
     UINavigationController *_navController;
-    JCOCrashSender *_crashSender;
+    JMCCrashSender *_crashSender;
     id <JMCCustomDataSource> _customDataSource;  
 }
 
