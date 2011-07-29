@@ -21,7 +21,7 @@ typedef enum {
   JCOIssueTypeFeedback
 } JCOIssueType;
 
-@protocol JCOCustomDataSource <NSObject>
+@protocol JMCCustomDataSource <NSObject>
 
 @optional
 

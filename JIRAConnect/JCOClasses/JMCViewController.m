@@ -14,8 +14,8 @@
    limitations under the License.
 **/
 #import "JMC.h"
-#import "JCOMacros.h"
-#import "JCOViewController.h"
+#import "JMCMacros.h"
+#import "JMCViewController.h"
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
 #import "JMCAttachmentItem.h"
@@ -24,7 +24,7 @@
 #import "JSON.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface JCOViewController ()
+@interface JMCViewController ()
 - (void)internalRelease;
 
 - (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action;
@@ -37,7 +37,7 @@
 @property(nonatomic, retain) CRVActivityView *activityView;
 @end
 
-@implementation JCOViewController
+@implementation JMCViewController
 
 NSArray* toolbarItems; // holds the first 3 system toolbar items.
 

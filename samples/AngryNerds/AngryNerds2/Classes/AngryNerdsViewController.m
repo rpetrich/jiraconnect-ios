@@ -1,5 +1,5 @@
 #import "AngryNerdsViewController.h"
-#import "JCO.h"
+#import "JMC.h"
 #import "UIView+Additions.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -30,7 +30,7 @@
 
 - (IBAction)triggerFeedback
 {
-    UIViewController *controller = [[JCO instance] viewController];
+    UIViewController *controller = [[JMC instance] viewController];
 
     [self presentModalViewController:controller animated:YES];
 }
@@ -91,7 +91,7 @@
 
 - (IBAction)triggerDisplayNotifications
 {
-    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+    [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
 }
 
 // allow shake gesture to trigger Feedback

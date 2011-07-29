@@ -1,5 +1,5 @@
 #import "AngryNerdsAppDelegate.h"
-#import "JCO.h"
+#import "JMC.h"
 
 @implementation AngryNerdsAppDelegate
 
@@ -26,7 +26,7 @@
      */
 
 //    [[JCO instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
-    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
+    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
 
     return YES;
 }
