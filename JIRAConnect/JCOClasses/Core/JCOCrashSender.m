@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-#import "JCOMacros.h"
+#import "../JMCMacros.h"
 #import "JCOCrashSender.h"
 #import "CrashReporter.h"
 #import "../JMC.h"

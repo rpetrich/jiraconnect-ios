@@ -15,7 +15,7 @@
 **/
 
 #import <Foundation/Foundation.h>
-#import "JCOViewController.h"
+#import "JMCViewController.h"
 #import "CrashReporter.h"
 
 @class JCOIssuesViewController, JCOPing, JCONotifier, JCONotifier, JCOCrashSender;
@@ -30,7 +30,7 @@
     NSURL* _url;
     JCOPing *_pinger;
     JCONotifier *_notifier;
-    JCOViewController *_jcController;
+    JMCViewController *_jcController;
     UINavigationController *_navController;
     JCOCrashSender *_crashSender;
     id <JMCCustomDataSource> _customDataSource;  

@@ -20,7 +20,7 @@
 #import "JCOTransport.h"
 
 @protocol JCOTransportDelegate;
-@class JCOViewController;
+@class JMCViewController;
 
 @interface JCOIssueViewController : UIViewController
         <UITableViewDelegate, UITableViewDataSource, JCOTransportDelegate> {
@@ -29,7 +29,7 @@
     JCOIssue * _issue;
     NSArray * _comments;
 @private
-    JCOViewController *_feedbackController;
+    JMCViewController *_feedbackController;
 }
 
 - (IBAction) didTouchReply:(UITextField*)sender;
@@ -38,5 +38,5 @@
 @property (nonatomic, retain) IBOutlet UIButton* replyButton;
 @property (nonatomic, retain) JCOIssue * issue;
 @property (nonatomic, retain) NSArray * comments;
-@property (nonatomic, retain) JCOViewController * feedbackController;
+@property (nonatomic, retain) JMCViewController * feedbackController;
 @end

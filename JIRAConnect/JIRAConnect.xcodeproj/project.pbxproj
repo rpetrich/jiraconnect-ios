@@ -75,9 +75,9 @@
 		F89A98A9139B585700D09DFF /* JMCAttachmentItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9812139B585700D09DFF /* JMCAttachmentItem.h */; };
 		F89A98AA139B585700D09DFF /* JMCAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9813139B585700D09DFF /* JMCAttachmentItem.m */; };
 		F89A98AB139B585700D09DFF /* JMCCustomDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9814139B585700D09DFF /* JMCCustomDataSource.h */; };
-		F89A98AC139B585700D09DFF /* JCOMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9815139B585700D09DFF /* JCOMacros.h */; };
-		F89A98AD139B585700D09DFF /* JCOViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9816139B585700D09DFF /* JCOViewController.h */; };
-		F89A98AE139B585700D09DFF /* JCOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9817139B585700D09DFF /* JCOViewController.m */; };
+		F89A98AC139B585700D09DFF /* JMCMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9815139B585700D09DFF /* JMCMacros.h */; };
+		F89A98AD139B585700D09DFF /* JMCViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9816139B585700D09DFF /* JMCViewController.h */; };
+		F89A98AE139B585700D09DFF /* JMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9817139B585700D09DFF /* JMCViewController.m */; };
 		F89A98AF139B585700D09DFF /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A981C139B585700D09DFF /* ASIAuthenticationDialog.h */; };
 		F89A98B0139B585700D09DFF /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A981D139B585700D09DFF /* ASIAuthenticationDialog.m */; };
 		F89A98B1139B585700D09DFF /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A981E139B585700D09DFF /* ASICacheDelegate.h */; };
@@ -202,10 +202,10 @@
 		F89A9812139B585700D09DFF /* JMCAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCAttachmentItem.h; path = JCOClasses/JMCAttachmentItem.h; sourceTree = SOURCE_ROOT; };
 		F89A9813139B585700D09DFF /* JMCAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMCAttachmentItem.m; path = JCOClasses/JMCAttachmentItem.m; sourceTree = SOURCE_ROOT; };
 		F89A9814139B585700D09DFF /* JMCCustomDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCCustomDataSource.h; path = JCOClasses/JMCCustomDataSource.h; sourceTree = SOURCE_ROOT; };
-		F89A9815139B585700D09DFF /* JCOMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOMacros.h; path = JCOClasses/JCOMacros.h; sourceTree = SOURCE_ROOT; };
-		F89A9816139B585700D09DFF /* JCOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOViewController.h; path = JCOClasses/JCOViewController.h; sourceTree = SOURCE_ROOT; };
-		F89A9817139B585700D09DFF /* JCOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCOViewController.m; path = JCOClasses/JCOViewController.m; sourceTree = SOURCE_ROOT; };
-		F89A9818139B585700D09DFF /* JCOViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JCOViewController.xib; path = JCOClasses/JCOViewController.xib; sourceTree = SOURCE_ROOT; };
+		F89A9815139B585700D09DFF /* JMCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCMacros.h; path = JCOClasses/JMCMacros.h; sourceTree = SOURCE_ROOT; };
+		F89A9816139B585700D09DFF /* JMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCViewController.h; path = JCOClasses/JMCViewController.h; sourceTree = SOURCE_ROOT; };
+		F89A9817139B585700D09DFF /* JMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMCViewController.m; path = JCOClasses/JMCViewController.m; sourceTree = SOURCE_ROOT; };
+		F89A9818139B585700D09DFF /* JMCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JMCViewController.xib; path = JCOClasses/JMCViewController.xib; sourceTree = SOURCE_ROOT; };
 		F89A9819139B585700D09DFF /* JiraConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JiraConnectViewController.xib; path = JCOClasses/JiraConnectViewController.xib; sourceTree = SOURCE_ROOT; };
 		F89A981C139B585700D09DFF /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		F89A981D139B585700D09DFF /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
@@ -388,10 +388,10 @@
 				F89A9812139B585700D09DFF /* JMCAttachmentItem.h */,
 				F89A9813139B585700D09DFF /* JMCAttachmentItem.m */,
 				F89A9814139B585700D09DFF /* JMCCustomDataSource.h */,
-				F89A9815139B585700D09DFF /* JCOMacros.h */,
-				F89A9816139B585700D09DFF /* JCOViewController.h */,
-				F89A9817139B585700D09DFF /* JCOViewController.m */,
-				F89A9818139B585700D09DFF /* JCOViewController.xib */,
+				F89A9815139B585700D09DFF /* JMCMacros.h */,
+				F89A9816139B585700D09DFF /* JMCViewController.h */,
+				F89A9817139B585700D09DFF /* JMCViewController.m */,
+				F89A9818139B585700D09DFF /* JMCViewController.xib */,
 				F89A9819139B585700D09DFF /* JiraConnectViewController.xib */,
 				F89A981A139B585700D09DFF /* Libraries */,
 				F89A9843139B585700D09DFF /* Resources */,
@@ -683,8 +683,8 @@
 				F89A98A7139B585700D09DFF /* JMC.h in Headers */,
 				F89A98A9139B585700D09DFF /* JMCAttachmentItem.h in Headers */,
 				F89A98AB139B585700D09DFF /* JMCCustomDataSource.h in Headers */,
-				F89A98AC139B585700D09DFF /* JCOMacros.h in Headers */,
-				F89A98AD139B585700D09DFF /* JCOViewController.h in Headers */,
+				F89A98AC139B585700D09DFF /* JMCMacros.h in Headers */,
+				F89A98AD139B585700D09DFF /* JMCViewController.h in Headers */,
 				F89A98AF139B585700D09DFF /* ASIAuthenticationDialog.h in Headers */,
 				F89A98B1139B585700D09DFF /* ASICacheDelegate.h in Headers */,
 				F89A98B2139B585700D09DFF /* ASIDownloadCache.h in Headers */,
@@ -845,7 +845,7 @@
 				F89A98A6139B585700D09DFF /* UIView+Additions.m in Sources */,
 				F89A98A8139B585700D09DFF /* JMC.m in Sources */,
 				F89A98AA139B585700D09DFF /* JMCAttachmentItem.m in Sources */,
-				F89A98AE139B585700D09DFF /* JCOViewController.m in Sources */,
+				F89A98AE139B585700D09DFF /* JMCViewController.m in Sources */,
 				F89A98B0139B585700D09DFF /* ASIAuthenticationDialog.m in Sources */,
 				F89A98B3139B585700D09DFF /* ASIDownloadCache.m in Sources */,
 				F89A98B5139B585700D09DFF /* ASIFormDataRequest.m in Sources */,

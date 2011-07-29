@@ -16,7 +16,7 @@
 
 #import "JCOIssueViewController.h"
 #import "JCOMessageCell.h"
-#import "JCOViewController.h"
+#import "../JMCViewController.h"
 #import "JCOMessageBubble.h"
 #import "JCOIssueStore.h"
 #import "JSON.h"
@@ -187,7 +187,7 @@ static float detailLabelHeight = 21.0f;
 - (void)didTouchReply:(id)sender {
 
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
-    self.feedbackController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] autorelease];
+    self.feedbackController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
     navController.navigationBar.translucent = YES;
     navController.navigationBar.barStyle = UIBarStyleBlack;

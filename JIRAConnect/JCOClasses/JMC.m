@@ -22,7 +22,7 @@
 
 @property (nonatomic, retain) JCOPing* _pinger;
 @property (nonatomic, retain) JCONotifier* _notifier;
-@property (nonatomic, retain) JCOViewController* _jcController;
+@property (nonatomic, retain) JMCViewController * _jcController;
 @property (nonatomic, retain) UINavigationController* _navController;
 @property (nonatomic, retain) JCOCrashSender *_crashSender;
 @property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
@@ -57,7 +57,7 @@
         UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
         self._notifier = [[[JCONotifier alloc] initWithView:window] autorelease ];
         self._crashSender = [[[JCOCrashSender alloc] init] autorelease ];
-        self._jcController = [[[JCOViewController alloc] initWithNibName:@"JCOViewController" bundle:nil] autorelease ];
+        self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
         self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
         _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     }

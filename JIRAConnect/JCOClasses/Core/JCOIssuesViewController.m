@@ -18,7 +18,7 @@
 #import "JCOIssueViewController.h"
 #import "../JMC.h"
 #import "UILabel+VerticalAlign.h"
-#import "JCOMacros.h"
+#import "../JMCMacros.h"
 
 static NSString *cellId = @"CommentCell";
 
