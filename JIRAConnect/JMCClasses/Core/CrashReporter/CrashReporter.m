@@ -29,7 +29,7 @@
 
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporter.h"
-#import "../../JMC.h"
+#import "JMC.h"
 #import "sys/sysctl.h"
 
 static CrashReporter *crashReportSender = nil;

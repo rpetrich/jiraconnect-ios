@@ -16,7 +16,7 @@
 #import "../JMCMacros.h"
 #import "JMCCrashSender.h"
 #import "CrashReporter.h"
-#import "../JMC.h"
+#import "JMC.h"
 #import "JMCCrashTransport.h"
 #import "JMCTransport.h"
 

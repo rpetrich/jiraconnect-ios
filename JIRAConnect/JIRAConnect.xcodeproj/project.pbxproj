@@ -128,6 +128,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013DA29413E3058F00103C46 /* button_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_base.png; sourceTree = "<group>"; };
+		013DA29513E3058F00103C46 /* button_base@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_base@2x.png"; sourceTree = "<group>"; };
+		013DA2A113E307E700103C46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JCOLocalizable.strings; sourceTree = "<group>"; };
+		013DA2A413E307E700103C46 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = JCOLocalizable.strings; sourceTree = "<group>"; };
 		014C7EE913E1938C00A9415A /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		014C7EEF13E1938C00A9415A /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LogicTests-Info.plist"; sourceTree = "<group>"; };
 		014C7EF113E1938C00A9415A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -248,8 +252,6 @@
 		0161F1BC13E2C98E0048DD76 /* Balloon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_2.png; sourceTree = "<group>"; };
 		0161F1BF13E2C98E0048DD76 /* bluedot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluedot.png; sourceTree = "<group>"; };
 		0161F1CC13E2C98E0048DD76 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		0161F1CE13E2C98E0048DD76 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/JMCLocalizable.strings; sourceTree = "<group>"; };
-		0161F1CF13E2C98E0048DD76 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JMCLocalizable.strings; sourceTree = "<group>"; };
 		0161F1D013E2C98E0048DD76 /* icon_capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_capture.png; sourceTree = "<group>"; };
 		0161F1D113E2C98E0048DD76 /* icon_capture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_capture@2x.png"; sourceTree = "<group>"; };
 		0161F1D213E2C98E0048DD76 /* icon_record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_record.png; sourceTree = "<group>"; };
@@ -319,6 +321,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013DA29F13E307E700103C46 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				013DA2A013E307E700103C46 /* JCOLocalizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		013DA2A213E307E700103C46 /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				013DA2A313E307E700103C46 /* JCOLocalizable.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
 		014C7EED13E1938C00A9415A /* LogicTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,7 +534,10 @@
 		0161F1BA13E2C98E0048DD76 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0161F1CD13E2C98E0048DD76 /* JMCLocalizable.strings */,
+				013DA29F13E307E700103C46 /* en.lproj */,
+				013DA2A213E307E700103C46 /* de.lproj */,
+				013DA29413E3058F00103C46 /* button_base.png */,
+				013DA29513E3058F00103C46 /* button_base@2x.png */,
 				0161F1BB13E2C98E0048DD76 /* Balloon_1.png */,
 				0161F1BC13E2C98E0048DD76 /* Balloon_2.png */,
 				0161F1BF13E2C98E0048DD76 /* bluedot.png */,
@@ -826,21 +847,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		013DA2A013E307E700103C46 /* JCOLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				013DA2A113E307E700103C46 /* en */,
+			);
+			name = JCOLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		013DA2A313E307E700103C46 /* JCOLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				013DA2A413E307E700103C46 /* de */,
+			);
+			name = JCOLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		014C7EF013E1938C00A9415A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				014C7EF113E1938C00A9415A /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0161F1CD13E2C98E0048DD76 /* JMCLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0161F1CE13E2C98E0048DD76 /* de */,
-				0161F1CF13E2C98E0048DD76 /* en */,
-			);
-			name = JMCLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

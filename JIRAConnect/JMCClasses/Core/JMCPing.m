@@ -17,7 +17,7 @@
 #import "ASIHTTPRequest.h"
 #import "JSON.h"
 #import "JMCPing.h"
-#import "../JMC.h"
+#import "JMC.h"
 #import "JMCIssueStore.h"
 #import "ASIDownloadCache.h"
 

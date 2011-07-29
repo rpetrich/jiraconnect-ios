@@ -22,7 +22,7 @@
 
 #import "JMCTransport.h"
 #import "JMCReplyTransport.h"
-#import "../JMC.h"
+#import "JMC.h"
 
 @implementation JMCReplyTransport
 

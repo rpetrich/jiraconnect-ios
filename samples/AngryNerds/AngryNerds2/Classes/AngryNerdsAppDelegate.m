@@ -15,18 +15,18 @@
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 
-    // NOTE: JCO must be configured after the keyWindow is made (note: needs trailing slash)
+    // NOTE: JMC must be configured after the keyWindow is made (note: needs trailing slash)
     /*
         To configure JIRAConnect:
-        1. call 	[[JCO instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
-        2. You can then present [JCO instance].viewController from anywhere in your app
+        1. call 	[[JMC instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
+        2. You can then present [JMC instance].viewController from anywhere in your app
         3. Be sure that your JIRA instance has the JIRAConnect plugin installed and has a project with the same name as either:
            * your Application Bundle Name
-           * the same value as returned by your [JCOCustomDataSource projectName]
+           * the same value as returned by your [JMCCustomDataSource projectName]
      */
 
-//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
-    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
+    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
+//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
 
     return YES;
 }

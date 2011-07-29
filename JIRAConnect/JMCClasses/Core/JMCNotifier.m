@@ -15,7 +15,7 @@
 **/
 #import "JMCNotifier.h"
 #import "JMCIssueStore.h"
-#import "../JMC.h"
+#import "JMC.h"
 
 @implementation JMCNotifier
 

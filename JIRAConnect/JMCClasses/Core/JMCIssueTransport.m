@@ -16,7 +16,7 @@
 
 
 #import "JMCIssueTransport.h"
-#import "../JMC.h"
+#import "JMC.h"
 
 @interface JMCIssueTransport ()
 @property(nonatomic, retain) ASIFormDataRequest *createIssueRequest;

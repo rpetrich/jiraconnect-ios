@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-#import "../JMCMacros.h"
+#import "JMCMacros.h"
 #import "JMCTransport.h"
 #import "JSON.h"
-#import "../JMC.h"
-#import "../JMCAttachmentItem.h"
+#import "JMC.h"
+#import "JMCAttachmentItem.h"
 
 @implementation JMCTransport
 

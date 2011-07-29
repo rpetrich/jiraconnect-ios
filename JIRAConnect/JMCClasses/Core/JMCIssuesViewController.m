@@ -16,7 +16,7 @@
 #import "JMCIssuesViewController.h"
 #import "JMCIssuePreviewCell.h"
 #import "JMCIssueViewController.h"
-#import "../JMC.h"
+#import "JMC.h"
 #import "UILabel+VerticalAlign.h"
 #import "../JMCMacros.h"
 
