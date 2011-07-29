@@ -16,7 +16,7 @@
 #import "JCOIssuesViewController.h"
 #import "JCOIssuePreviewCell.h"
 #import "JCOIssueViewController.h"
-#import "JCO.h"
+#import "../JMC.h"
 #import "UILabel+VerticalAlign.h"
 #import "JCOMacros.h"
 
@@ -48,7 +48,7 @@ static NSString *cellId = @"CommentCell";
 }
 
 - (void)compose:(UIBarItem *)arg {
-    [self presentModalViewController:[JCO instance].viewController animated:YES];
+    [self presentModalViewController:[JMC instance].viewController animated:YES];
 }
 
 - (void)cancel:(UIBarItem *)arg {

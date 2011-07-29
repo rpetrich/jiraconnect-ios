@@ -15,7 +15,7 @@
 **/
 #import "JCONotifier.h"
 #import "JCOIssueStore.h"
-#import "JCO.h"
+#import "../JMC.h"
 
 @implementation JCONotifier
 

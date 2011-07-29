@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-#import "JCO.h"
+#import "JMC.h"
 #import "JCOMacros.h"
 #import "JCOViewController.h"
 #import "UIImage+Resize.h"
@@ -116,10 +116,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:nil action:nil] autorelease];
     NSMutableArray* items = [NSMutableArray arrayWithCapacity:3];
-    if ([[JCO instance] isPhotosEnabled]) {
+    if ([[JMC instance] isPhotosEnabled]) {
         [items addObject:screenshotButton];
     }
-    if ([[JCO instance] isVoiceEnabled]) {
+    if ([[JMC instance] isVoiceEnabled]) {
         [items addObject:recordButton];
     }
 

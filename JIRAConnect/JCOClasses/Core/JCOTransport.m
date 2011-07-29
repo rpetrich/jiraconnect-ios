@@ -16,7 +16,7 @@
 #import "JCOMacros.h"
 #import "JCOTransport.h"
 #import "JSON.h"
-#import "JCO.h"
+#import "../JMC.h"
 #import "JCOAttachmentItem.h"
 
 @implementation JCOTransport
@@ -24,7 +24,7 @@
 - (void)populateCommonFields:(NSString *)description images:(NSArray *)attachments payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params {
 
     [params setObject:description forKey:@"description"];
-    NSDictionary *metaData = [[JCO instance] getMetaData];
+    NSDictionary *metaData = [[JMC instance] getMetaData];
     [params addEntriesFromDictionary:metaData];
     NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
     [upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
@@ -68,7 +68,7 @@
     if (request.responseStatusCode < 300) {
 
         NSString *thankyouMsg = JCOLocalizedString(@"JCOFeedbackReceived", @"Thank you message on successful feedback submission");
-        NSString *msg = [NSString stringWithFormat:thankyouMsg, [[JCO instance] getProject]];
+        NSString *msg = [NSString stringWithFormat:thankyouMsg, [[JMC instance] getProject]];
         [self alert:msg withTitle:@"Thank You" button:@"OK"];
         // alert the delegate!
         [self.delegate transportDidFinish:[request responseString]];

@@ -29,7 +29,7 @@
 
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporter.h"
-#import "JCO.h"
+#import "../../JMC.h"
 #import "sys/sysctl.h"
 
 static CrashReporter *crashReportSender = nil;
@@ -320,7 +320,7 @@ static CrashReporter *crashReportSender = nil;
         
         [reportString appendFormat:@"Incident Identifier: %@\n", uuid];
         CFRelease(uuid);
-        [reportString appendFormat:@"CrashReporter Key:   %@\n", [[JCO instance] getUUID]];
+        [reportString appendFormat:@"CrashReporter Key:   %@\n", [[JMC instance] getUUID]];
         [reportString appendFormat:@"Hardware Model:       %@,%@\n", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
 
         [reportString appendFormat:@"Process:         %@ [%@]\n", processName, processId];

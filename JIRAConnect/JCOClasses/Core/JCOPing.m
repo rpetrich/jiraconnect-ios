@@ -17,7 +17,7 @@
 #import "ASIHTTPRequest.h"
 #import "JSON.h"
 #import "JCOPing.h"
-#import "JCO.h"
+#import "../JMC.h"
 #import "JCOIssueStore.h"
 #import "ASIDownloadCache.h"
 
@@ -34,8 +34,8 @@
 
 - (void)sendPing {
 
-    NSString *project = [[JCO instance] getProject];
-    NSString *uuid = [[JCO instance] getUUID];
+    NSString *project = [[JMC instance] getProject];
+    NSString *uuid = [[JMC instance] getUUID];
     NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJCOLastSuccessfulPingTime];
     lastPingTime = lastPingTime ? lastPingTime : [NSNumber numberWithInt:0];
 

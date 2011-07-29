@@ -16,7 +16,7 @@
 #import "JCOMacros.h"
 #import "JCOCrashSender.h"
 #import "CrashReporter.h"
-#import "JCO.h"
+#import "../JMC.h"
 #import "JCOCrashTransport.h"
 #import "JCOTransport.h"
 
@@ -53,7 +53,7 @@ JCOCrashTransport *_transport;
 
 
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
-                                                            message:[NSString stringWithFormat:description, [[JCO instance] getProject]]
+                                                            message:[NSString stringWithFormat:description, [[JMC instance] getProject]]
                                                                     delegate:self
                                                   cancelButtonTitle:JCOLocalizedString(@"No", @"No")
                                                   otherButtonTitles:JCOLocalizedString(@"Yes", @"Yes"), JCOLocalizedString(@"Always", @"Always"), nil];

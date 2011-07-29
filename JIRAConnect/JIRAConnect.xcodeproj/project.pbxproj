@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		018F39A413AE069800CD64F9 /* fmdb_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 018F399A13AE069800CD64F9 /* fmdb_Prefix.pch */; };
+		014C7EEA13E1938C00A9415A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
+		014C7EEB13E1938C00A9415A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
+		014C7EEC13E1938C00A9415A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DE139B58CE00D09DFF /* CoreGraphics.framework */; };
+		014C7EF213E1938C00A9415A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 014C7EF013E1938C00A9415A /* InfoPlist.strings */; };
+		014C7EF513E1938C00A9415A /* LogicTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 014C7EF413E1938C00A9415A /* LogicTests.h */; };
+		014C7EF713E1938C00A9415A /* LogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C7EF613E1938C00A9415A /* LogicTests.m */; };
 		018F39A513AE069800CD64F9 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 018F399D13AE069800CD64F9 /* FMDatabase.h */; };
 		018F39A613AE069800CD64F9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F399E13AE069800CD64F9 /* FMDatabase.m */; };
 		018F39A713AE069800CD64F9 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 018F399F13AE069800CD64F9 /* FMDatabaseAdditions.h */; };
 		018F39A813AE069800CD64F9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F39A013AE069800CD64F9 /* FMDatabaseAdditions.m */; };
-		018F39A913AE069800CD64F9 /* fmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F39A113AE069800CD64F9 /* fmdb.m */; };
 		018F39AA13AE069800CD64F9 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 018F39A213AE069800CD64F9 /* FMResultSet.h */; };
 		018F39AB13AE069800CD64F9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F39A313AE069800CD64F9 /* FMResultSet.m */; };
 		F89A9874139B585700D09DFF /* CrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A97D9139B585700D09DFF /* CrashReporter.h */; };
@@ -66,8 +70,8 @@
 		F89A98A4139B585700D09DFF /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A980D139B585700D09DFF /* UILabel+VerticalAlign.m */; };
 		F89A98A5139B585700D09DFF /* UIView+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A980E139B585700D09DFF /* UIView+Additions.h */; };
 		F89A98A6139B585700D09DFF /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A980F139B585700D09DFF /* UIView+Additions.m */; };
-		F89A98A7139B585700D09DFF /* JCO.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9810139B585700D09DFF /* JCO.h */; };
-		F89A98A8139B585700D09DFF /* JCO.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9811139B585700D09DFF /* JCO.m */; };
+		F89A98A7139B585700D09DFF /* JMC.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9810139B585700D09DFF /* JMC.h */; };
+		F89A98A8139B585700D09DFF /* JMC.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9811139B585700D09DFF /* JMC.m */; };
 		F89A98A9139B585700D09DFF /* JCOAttachmentItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9812139B585700D09DFF /* JCOAttachmentItem.h */; };
 		F89A98AA139B585700D09DFF /* JCOAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9813139B585700D09DFF /* JCOAttachmentItem.m */; };
 		F89A98AB139B585700D09DFF /* JCOCustomDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9814139B585700D09DFF /* JCOCustomDataSource.h */; };
@@ -124,16 +128,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		018F399713AE069800CD64F9 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		014C7EE913E1938C00A9415A /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		014C7EEF13E1938C00A9415A /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LogicTests-Info.plist"; sourceTree = "<group>"; };
+		014C7EF113E1938C00A9415A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		014C7EF313E1938C00A9415A /* LogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LogicTests-Prefix.pch"; sourceTree = "<group>"; };
+		014C7EF413E1938C00A9415A /* LogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogicTests.h; sourceTree = "<group>"; };
+		014C7EF613E1938C00A9415A /* LogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogicTests.m; sourceTree = "<group>"; };
 		018F399813AE069800CD64F9 /* CONTRIBUTORS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTORS.txt; sourceTree = "<group>"; };
-		018F399913AE069800CD64F9 /* fmdb.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = fmdb.1; sourceTree = "<group>"; };
-		018F399A13AE069800CD64F9 /* fmdb_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmdb_Prefix.pch; sourceTree = "<group>"; };
 		018F399B13AE069800CD64F9 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		018F399D13AE069800CD64F9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		018F399E13AE069800CD64F9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		018F399F13AE069800CD64F9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
 		018F39A013AE069800CD64F9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		018F39A113AE069800CD64F9 /* fmdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmdb.m; sourceTree = "<group>"; };
 		018F39A213AE069800CD64F9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		018F39A313AE069800CD64F9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		F89A97D9139B585700D09DFF /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
@@ -191,8 +197,8 @@
 		F89A980D139B585700D09DFF /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		F89A980E139B585700D09DFF /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
 		F89A980F139B585700D09DFF /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
-		F89A9810139B585700D09DFF /* JCO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCO.h; path = JCOClasses/JCO.h; sourceTree = SOURCE_ROOT; };
-		F89A9811139B585700D09DFF /* JCO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCO.m; path = JCOClasses/JCO.m; sourceTree = SOURCE_ROOT; };
+		F89A9810139B585700D09DFF /* JMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMC.h; path = JCOClasses/JMC.h; sourceTree = SOURCE_ROOT; };
+		F89A9811139B585700D09DFF /* JMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMC.m; path = JCOClasses/JMC.m; sourceTree = SOURCE_ROOT; };
 		F89A9812139B585700D09DFF /* JCOAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOAttachmentItem.h; path = JCOClasses/JCOAttachmentItem.h; sourceTree = SOURCE_ROOT; };
 		F89A9813139B585700D09DFF /* JCOAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCOAttachmentItem.m; path = JCOClasses/JCOAttachmentItem.m; sourceTree = SOURCE_ROOT; };
 		F89A9814139B585700D09DFF /* JCOCustomDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOCustomDataSource.h; path = JCOClasses/JCOCustomDataSource.h; sourceTree = SOURCE_ROOT; };
@@ -300,6 +306,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		014C7EE513E1938C00A9415A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				014C7EEA13E1938C00A9415A /* UIKit.framework in Frameworks */,
+				014C7EEB13E1938C00A9415A /* Foundation.framework in Frameworks */,
+				014C7EEC13E1938C00A9415A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F8B8055F139B57EC00EC5AD4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -320,13 +336,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		014C7EED13E1938C00A9415A /* LogicTests */ = {
+			isa = PBXGroup;
+			children = (
+				014C7EF413E1938C00A9415A /* LogicTests.h */,
+				014C7EF613E1938C00A9415A /* LogicTests.m */,
+				014C7EEE13E1938C00A9415A /* Supporting Files */,
+			);
+			path = LogicTests;
+			sourceTree = "<group>";
+		};
+		014C7EEE13E1938C00A9415A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				014C7EEF13E1938C00A9415A /* LogicTests-Info.plist */,
+				014C7EF013E1938C00A9415A /* InfoPlist.strings */,
+				014C7EF313E1938C00A9415A /* LogicTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		018F399613AE069800CD64F9 /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
-				018F399713AE069800CD64F9 /* .gitignore */,
 				018F399813AE069800CD64F9 /* CONTRIBUTORS.txt */,
-				018F399913AE069800CD64F9 /* fmdb.1 */,
-				018F399A13AE069800CD64F9 /* fmdb_Prefix.pch */,
 				018F399B13AE069800CD64F9 /* LICENSE.txt */,
 				018F399C13AE069800CD64F9 /* src */,
 			);
@@ -340,7 +373,6 @@
 				018F399E13AE069800CD64F9 /* FMDatabase.m */,
 				018F399F13AE069800CD64F9 /* FMDatabaseAdditions.h */,
 				018F39A013AE069800CD64F9 /* FMDatabaseAdditions.m */,
-				018F39A113AE069800CD64F9 /* fmdb.m */,
 				018F39A213AE069800CD64F9 /* FMResultSet.h */,
 				018F39A313AE069800CD64F9 /* FMResultSet.m */,
 			);
@@ -351,8 +383,8 @@
 			isa = PBXGroup;
 			children = (
 				F89A97D7139B585700D09DFF /* Core */,
-				F89A9810139B585700D09DFF /* JCO.h */,
-				F89A9811139B585700D09DFF /* JCO.m */,
+				F89A9810139B585700D09DFF /* JMC.h */,
+				F89A9811139B585700D09DFF /* JMC.m */,
 				F89A9812139B585700D09DFF /* JCOAttachmentItem.h */,
 				F89A9813139B585700D09DFF /* JCOAttachmentItem.m */,
 				F89A9814139B585700D09DFF /* JCOCustomDataSource.h */,
@@ -567,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				F8B80567139B57EC00EC5AD4 /* JIRAConnect */,
+				014C7EED13E1938C00A9415A /* LogicTests */,
 				F8B80564139B57EC00EC5AD4 /* Frameworks */,
 				F8B80563139B57EC00EC5AD4 /* Products */,
 			);
@@ -576,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				F8B80562139B57EC00EC5AD4 /* libJIRAConnect.a */,
+				014C7EE913E1938C00A9415A /* LogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -646,7 +680,7 @@
 				F89A98A1139B585700D09DFF /* JCOTransport.h in Headers */,
 				F89A98A3139B585700D09DFF /* UILabel+VerticalAlign.h in Headers */,
 				F89A98A5139B585700D09DFF /* UIView+Additions.h in Headers */,
-				F89A98A7139B585700D09DFF /* JCO.h in Headers */,
+				F89A98A7139B585700D09DFF /* JMC.h in Headers */,
 				F89A98A9139B585700D09DFF /* JCOAttachmentItem.h in Headers */,
 				F89A98AB139B585700D09DFF /* JCOCustomDataSource.h in Headers */,
 				F89A98AC139B585700D09DFF /* JCOMacros.h in Headers */,
@@ -672,7 +706,6 @@
 				F89A98CF139B585700D09DFF /* UIImage+Alpha.h in Headers */,
 				F89A98D1139B585700D09DFF /* UIImage+Resize.h in Headers */,
 				F89A98D3139B585700D09DFF /* UIImage+RoundedCorner.h in Headers */,
-				018F39A413AE069800CD64F9 /* fmdb_Prefix.pch in Headers */,
 				018F39A513AE069800CD64F9 /* FMDatabase.h in Headers */,
 				018F39A713AE069800CD64F9 /* FMDatabaseAdditions.h in Headers */,
 				018F39AA13AE069800CD64F9 /* FMResultSet.h in Headers */,
@@ -682,6 +715,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		014C7EE813E1938C00A9415A /* LogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 014C7EF813E1938C00A9415A /* Build configuration list for PBXNativeTarget "LogicTests" */;
+			buildPhases = (
+				014C7EE413E1938C00A9415A /* Sources */,
+				014C7EE513E1938C00A9415A /* Frameworks */,
+				014C7EE613E1938C00A9415A /* Resources */,
+				014C7EE713E1938C00A9415A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LogicTests;
+			productName = LogicTests;
+			productReference = 014C7EE913E1938C00A9415A /* LogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		F8B80561139B57EC00EC5AD4 /* JIRAConnect */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F8B8056C139B57EC00EC5AD4 /* Build configuration list for PBXNativeTarget "JIRAConnect" */;
@@ -721,11 +772,48 @@
 			projectRoot = "";
 			targets = (
 				F8B80561139B57EC00EC5AD4 /* JIRAConnect */,
+				014C7EE813E1938C00A9415A /* LogicTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		014C7EE613E1938C00A9415A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				014C7EF213E1938C00A9415A /* InfoPlist.strings in Resources */,
+				014C7EF513E1938C00A9415A /* LogicTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		014C7EE713E1938C00A9415A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		014C7EE413E1938C00A9415A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				014C7EF713E1938C00A9415A /* LogicTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F8B8055E139B57EC00EC5AD4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -755,7 +843,7 @@
 				F89A98A2139B585700D09DFF /* JCOTransport.m in Sources */,
 				F89A98A4139B585700D09DFF /* UILabel+VerticalAlign.m in Sources */,
 				F89A98A6139B585700D09DFF /* UIView+Additions.m in Sources */,
-				F89A98A8139B585700D09DFF /* JCO.m in Sources */,
+				F89A98A8139B585700D09DFF /* JMC.m in Sources */,
 				F89A98AA139B585700D09DFF /* JCOAttachmentItem.m in Sources */,
 				F89A98AE139B585700D09DFF /* JCOViewController.m in Sources */,
 				F89A98B0139B585700D09DFF /* ASIAuthenticationDialog.m in Sources */,
@@ -776,7 +864,6 @@
 				F89A98D4139B585700D09DFF /* UIImage+RoundedCorner.m in Sources */,
 				018F39A613AE069800CD64F9 /* FMDatabase.m in Sources */,
 				018F39A813AE069800CD64F9 /* FMDatabaseAdditions.m in Sources */,
-				018F39A913AE069800CD64F9 /* fmdb.m in Sources */,
 				018F39AB13AE069800CD64F9 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,6 +871,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		014C7EF013E1938C00A9415A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				014C7EF113E1938C00A9415A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		F89A9856139B585700D09DFF /* JCOLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -796,6 +891,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		014C7EF913E1938C00A9415A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LogicTests/LogicTests-Prefix.pch";
+				INFOPLIST_FILE = "LogicTests/LogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		014C7EFA13E1938C00A9415A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LogicTests/LogicTests-Prefix.pch";
+				INFOPLIST_FILE = "LogicTests/LogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		F8B8056A139B57EC00EC5AD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -860,6 +997,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		014C7EF813E1938C00A9415A /* Build configuration list for PBXNativeTarget "LogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				014C7EF913E1938C00A9415A /* Debug */,
+				014C7EFA13E1938C00A9415A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F8B8055C139B57EC00EC5AD4 /* Build configuration list for PBXProject "JIRAConnect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

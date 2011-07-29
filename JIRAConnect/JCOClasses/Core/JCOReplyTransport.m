@@ -22,14 +22,14 @@
 
 #import "JCOTransport.h"
 #import "JCOReplyTransport.h"
-#import "JCO.h"
+#import "../JMC.h"
 
 @implementation JCOReplyTransport
 
 - (void)sendReply:(JCOIssue *)originalIssue description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
     NSString *path = [NSString stringWithFormat:kJCOTransportCreateCommentPath, originalIssue.key];
-    NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
+    NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending reply report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

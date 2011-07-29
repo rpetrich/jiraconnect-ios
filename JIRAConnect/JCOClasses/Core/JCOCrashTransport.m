@@ -22,21 +22,21 @@
 
 #import "JCOTransport.h"
 #import "JCOCrashTransport.h"
-#import "JCO.h"
+#import "../JMC.h"
 
 @implementation JCOCrashTransport
 
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport {
 
-    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JCO instance] getProject] forKey:@"project"];
+    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
     NSString *queryString = [JCOTransport encodeParameters:queryParams];
     NSString *path = [NSString stringWithFormat:kJCOTransportCreateIssuePath, queryString];
-    NSURL *url = [NSURL URLWithString:path relativeToURL:[JCO instance].url];
+    NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending crash report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];
-    NSString *typeName = [[JCO instance] issueTypeNameFor:JCOIssueTypeCrash useDefault:@"Crash"];
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JCOIssueTypeCrash useDefault:@"Crash"];
     [params setObject:typeName forKey:@"type"];
     [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
@@ -46,7 +46,7 @@
     // TODO: use the actual crash date for this file extension
     // TODO: sanitize AppName for spaces, puntuation, etc..
     NSString* filename = 
-        [[[JCO instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
+        [[[JMC instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
     [dateFormatter release];
     
     [upRequest setData:crashData withFileName:filename andContentType:@"text/plain" forKey:@"crash"];

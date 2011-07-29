@@ -16,7 +16,7 @@
 
 
 #import "JCOIssueTransport.h"
-#import "JCO.h"
+#import "../JMC.h"
 
 @interface JCOIssueTransport()
 @property(nonatomic, retain) ASIFormDataRequest *createIssueRequest;
@@ -30,11 +30,11 @@
 
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
-    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JCO instance] getProject] forKey:@"project"];
+    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
     NSString *queryString = [JCOTransport encodeParameters:queryParams];
     NSString *urlPath = [NSString stringWithFormat:kJCOTransportCreateIssuePath, queryString];
     NSURL *url = [NSURL URLWithString:urlPath
-                        relativeToURL:[JCO instance].url];
+                        relativeToURL:[JMC instance].url];
 
     NSLog(@"Sending feedback to:    %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
@@ -43,7 +43,7 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
-    NSString *typeName = [[JCO instance] issueTypeNameFor:JCOIssueTypeFeedback useDefault:@"Bug"];
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JCOIssueTypeFeedback useDefault:@"Bug"];
     [params setObject:typeName forKey:@"type"];
     [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];
