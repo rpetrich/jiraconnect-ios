@@ -33,7 +33,7 @@
     JCOViewController *_jcController;
     UINavigationController *_navController;
     JCOCrashSender *_crashSender;
-    id <JCOCustomDataSource> _customDataSource;  
+    id <JMCCustomDataSource> _customDataSource;  
 }
 
 @property (nonatomic, retain) NSURL* url;
@@ -46,7 +46,7 @@
 * If custom data is required to be attached to each crash and issue report, then provide a JCOCustomDatSource. If
 * no custom data is required, then pass in nil.
 */
-- (void) configureJiraConnect:(NSString*) withUrl customDataSource:(id<JCOCustomDataSource>)customDataSource;
+- (void) configureJiraConnect:(NSString*) withUrl customDataSource:(id<JMCCustomDataSource>)customDataSource;
 
 /**
 * Retrieves the main viewController for JIRAConnect. This controller holds the 'create issue' view.

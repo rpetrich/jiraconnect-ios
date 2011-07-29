@@ -74,7 +74,7 @@
 		F89A98A8139B585700D09DFF /* JMC.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9811139B585700D09DFF /* JMC.m */; };
 		F89A98A9139B585700D09DFF /* JMCAttachmentItem.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9812139B585700D09DFF /* JMCAttachmentItem.h */; };
 		F89A98AA139B585700D09DFF /* JMCAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9813139B585700D09DFF /* JMCAttachmentItem.m */; };
-		F89A98AB139B585700D09DFF /* JCOCustomDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9814139B585700D09DFF /* JCOCustomDataSource.h */; };
+		F89A98AB139B585700D09DFF /* JMCCustomDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9814139B585700D09DFF /* JMCCustomDataSource.h */; };
 		F89A98AC139B585700D09DFF /* JCOMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9815139B585700D09DFF /* JCOMacros.h */; };
 		F89A98AD139B585700D09DFF /* JCOViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F89A9816139B585700D09DFF /* JCOViewController.h */; };
 		F89A98AE139B585700D09DFF /* JCOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89A9817139B585700D09DFF /* JCOViewController.m */; };
@@ -201,7 +201,7 @@
 		F89A9811139B585700D09DFF /* JMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMC.m; path = JCOClasses/JMC.m; sourceTree = SOURCE_ROOT; };
 		F89A9812139B585700D09DFF /* JMCAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCAttachmentItem.h; path = JCOClasses/JMCAttachmentItem.h; sourceTree = SOURCE_ROOT; };
 		F89A9813139B585700D09DFF /* JMCAttachmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMCAttachmentItem.m; path = JCOClasses/JMCAttachmentItem.m; sourceTree = SOURCE_ROOT; };
-		F89A9814139B585700D09DFF /* JCOCustomDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOCustomDataSource.h; path = JCOClasses/JCOCustomDataSource.h; sourceTree = SOURCE_ROOT; };
+		F89A9814139B585700D09DFF /* JMCCustomDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCCustomDataSource.h; path = JCOClasses/JMCCustomDataSource.h; sourceTree = SOURCE_ROOT; };
 		F89A9815139B585700D09DFF /* JCOMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOMacros.h; path = JCOClasses/JCOMacros.h; sourceTree = SOURCE_ROOT; };
 		F89A9816139B585700D09DFF /* JCOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JCOViewController.h; path = JCOClasses/JCOViewController.h; sourceTree = SOURCE_ROOT; };
 		F89A9817139B585700D09DFF /* JCOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JCOViewController.m; path = JCOClasses/JCOViewController.m; sourceTree = SOURCE_ROOT; };
@@ -387,7 +387,7 @@
 				F89A9811139B585700D09DFF /* JMC.m */,
 				F89A9812139B585700D09DFF /* JMCAttachmentItem.h */,
 				F89A9813139B585700D09DFF /* JMCAttachmentItem.m */,
-				F89A9814139B585700D09DFF /* JCOCustomDataSource.h */,
+				F89A9814139B585700D09DFF /* JMCCustomDataSource.h */,
 				F89A9815139B585700D09DFF /* JCOMacros.h */,
 				F89A9816139B585700D09DFF /* JCOViewController.h */,
 				F89A9817139B585700D09DFF /* JCOViewController.m */,
@@ -682,7 +682,7 @@
 				F89A98A5139B585700D09DFF /* UIView+Additions.h in Headers */,
 				F89A98A7139B585700D09DFF /* JMC.h in Headers */,
 				F89A98A9139B585700D09DFF /* JMCAttachmentItem.h in Headers */,
-				F89A98AB139B585700D09DFF /* JCOCustomDataSource.h in Headers */,
+				F89A98AB139B585700D09DFF /* JMCCustomDataSource.h in Headers */,
 				F89A98AC139B585700D09DFF /* JCOMacros.h in Headers */,
 				F89A98AD139B585700D09DFF /* JCOViewController.h in Headers */,
 				F89A98AF139B585700D09DFF /* ASIAuthenticationDialog.h in Headers */,

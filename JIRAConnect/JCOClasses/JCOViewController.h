@@ -16,7 +16,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "JCOTransport.h"
-#import "JCOCustomDataSource.h"
+#import "JMCCustomDataSource.h"
 #import "JCORecorder.h"
 #import "JCOIssueTransport.h"
 #import "JCOReplyTransport.h"
@@ -41,7 +41,7 @@
 
     JCOIssueTransport *_issueTransport;
     JCOReplyTransport *_replyTransport;
-    id <JCOCustomDataSource> _payloadDataSource;
+    id <JMCCustomDataSource> _payloadDataSource;
     NSMutableArray *_attachments;
     JCORecorder *_recorder;
     JCOIssue *_replyToIssue;
@@ -67,7 +67,7 @@
 
 @property(retain, nonatomic) JCOIssueTransport *issueTransport;
 @property(retain, nonatomic) JCOReplyTransport *replyTransport;
-@property(retain, nonatomic) id <JCOCustomDataSource> payloadDataSource;
+@property(retain, nonatomic) id <JMCCustomDataSource> payloadDataSource;
 @property(retain, nonatomic) NSMutableArray *attachments;
 // an array of items to attach to the issue
 @property(retain, nonatomic) JCORecorder *recorder;

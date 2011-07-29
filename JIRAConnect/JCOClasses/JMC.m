@@ -25,7 +25,7 @@
 @property (nonatomic, retain) JCOViewController* _jcController;
 @property (nonatomic, retain) UINavigationController* _navController;
 @property (nonatomic, retain) JCOCrashSender *_crashSender;
-@property (nonatomic, assign) id <JCOCustomDataSource> _customDataSource;
+@property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
 
 @end
 
@@ -92,7 +92,7 @@
     }
 }
 
-- (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JCOCustomDataSource>)customDataSource
+- (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
     self.url = [NSURL URLWithString:withUrl];
     [self generateAndStoreUUID];
