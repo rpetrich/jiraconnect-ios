@@ -45,7 +45,7 @@ NSString* _jcoDbPath;
         // create schema, preserving existing
         [self createSchema:NO];
         [db open]; // TODO: check return value, and throw exception if false.
-        NSLog(@"JCO databasePath = %@", _jcoDbPath);
+        NSLog(@"JMC databasePath = %@", _jcoDbPath);
     }
 	return self;
 }
