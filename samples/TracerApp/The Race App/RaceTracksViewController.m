@@ -13,7 +13,7 @@
 #import "Track.h"
 #import "MBProgressHUD.h"
 #import "TrackCreatorViewController.h"
-#import "JCO.h"
+#import "JMC.h"
 
 
 @implementation RaceTracksViewController
@@ -128,12 +128,12 @@
 
 -(void) showFeedback
 {
-    [self presentModalViewController:[[JCO instance] viewController] animated:YES];
+    [self presentModalViewController:[[JMC instance] viewController] animated:YES];
 }
 
 -(void) showPastFeedback
 {
-    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+    [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
 }
 
 
@@ -279,7 +279,7 @@
 
 - (IBAction)triggerFeedback
 {
-    UIViewController *controller = [[JCO instance] viewController];
+    UIViewController *controller = [[JMC instance] viewController];
     
     [self presentModalViewController:controller animated:YES];
 }

@@ -16,7 +16,7 @@
 #import "GameCenterManager.h"
 
 #import "RaceApi.h"
-#import "JCO.h"
+#import "JMC.h"
 
 #define RACE_APP_FACEBOOK_APP_ID @"198763226840194"
 
@@ -79,7 +79,7 @@
 	self.window.rootViewController = raceTrackNavigationController;
 	[self.window makeKeyAndVisible];
     
-    [[JCO instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:nil];
+    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:nil];
     
     return YES;
 }
