@@ -1,8 +1,8 @@
 
 #import <UIKit/UIKit.h>
-#import "JCOCustomDataSource.h"
+#import "JMCCustomDataSource.h"
 
-@interface AngryNerdsViewController : UIViewController <JCOCustomDataSource> {
+@interface AngryNerdsViewController : UIViewController <JMCCustomDataSource> {
 
     IBOutlet UIButton* _nerd;
     IBOutlet UIImageView* _nerdsView;

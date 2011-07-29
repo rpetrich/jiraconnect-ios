@@ -1,0 +1,15 @@
+# pack-refs with: peeled 
+7987efd71634f18200fb6320d2edcd3a7d1fe35d refs/tags/server_api_v1
+^fd478502f76c0241455ae8c4a22c3b4e918ec107
+4a507c3b41b9f9d556603083579a633b251a2185 refs/tags/iOSDCSubmission
+^2b0581d7e81d9d1d080f994a098e7523ea15ec4d
+0a4a9e2df23a96cada6a8cd0c8935e14c2ed6d5f refs/remotes/origin/user-trace
+b28518c44906e88d8012fd2447861eadf53d87c3 refs/remotes/origin/track-thumbnails
+c2fac4bb7838192898b7d945250cbdfa788cabc0 refs/remotes/origin/track-creation
+fd478502f76c0241455ae8c4a22c3b4e918ec107 refs/remotes/origin/server
+4824261a7821984b971378755b76a70417c548a6 refs/remotes/origin/newapi
+79e35ce5d3c2180919d3faf5842eb92dbac36a02 refs/remotes/origin/midas-design-work
+2b0581d7e81d9d1d080f994a098e7523ea15ec4d refs/remotes/origin/master
+c5083aa591e8aef08160a78337dc89b9630ab9f7 refs/remotes/origin/gh-pages
+2b0581d7e81d9d1d080f994a098e7523ea15ec4d refs/remotes/origin/GameKit
+7ee01be1c8df3a753022ad0c2d22bc290cec2f12 refs/remotes/origin/FaceBookIntegration

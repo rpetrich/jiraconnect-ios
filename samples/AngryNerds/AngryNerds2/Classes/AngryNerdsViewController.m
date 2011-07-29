@@ -1,5 +1,5 @@
 #import "AngryNerdsViewController.h"
-#import "JCO.h"
+#import "JMC.h"
 #import "UIView+Additions.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -30,7 +30,7 @@
 
 - (IBAction)triggerFeedback
 {
-    UIViewController *controller = [[JCO instance] viewController];
+    UIViewController *controller = [[JMC instance] viewController];
 
     [self presentModalViewController:controller animated:YES];
 }
@@ -56,6 +56,17 @@
     return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
 }
 
+- (NSString *)jiraIssueTypeNameFor:(JCOIssueType)type
+{
+    if (type == JCOIssueTypeCrash) {
+        return @"crash";
+    } else if (type == JCOIssueTypeFeedback) {
+        return @"improvement";
+    }
+    return nil;
+}
+
+
 - (NSDictionary *)payload
 {
     return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
@@ -65,11 +76,22 @@
     return YES;
 }
 
+- (BOOL)photosEnabled
+{
+    return YES;
+}
+
+- (BOOL)voiceEnabled
+{
+    return YES;
+}
+
+
 #pragma end
 
 - (IBAction)triggerDisplayNotifications
 {
-    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+    [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
 }
 
 // allow shake gesture to trigger Feedback
