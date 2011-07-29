@@ -206,7 +206,6 @@
 		F89A9816139B585700D09DFF /* JMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMCViewController.h; path = JCOClasses/JMCViewController.h; sourceTree = SOURCE_ROOT; };
 		F89A9817139B585700D09DFF /* JMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMCViewController.m; path = JCOClasses/JMCViewController.m; sourceTree = SOURCE_ROOT; };
 		F89A9818139B585700D09DFF /* JMCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JMCViewController.xib; path = JCOClasses/JMCViewController.xib; sourceTree = SOURCE_ROOT; };
-		F89A9819139B585700D09DFF /* JiraConnectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JiraConnectViewController.xib; path = JCOClasses/JiraConnectViewController.xib; sourceTree = SOURCE_ROOT; };
 		F89A981C139B585700D09DFF /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		F89A981D139B585700D09DFF /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		F89A981E139B585700D09DFF /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -379,7 +378,7 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		F89A97D5139B584000D09DFF /* JCOClasses */ = {
+		F89A97D5139B584000D09DFF /* JMCClasses */ = {
 			isa = PBXGroup;
 			children = (
 				F89A97D7139B585700D09DFF /* Core */,
@@ -392,11 +391,10 @@
 				F89A9816139B585700D09DFF /* JMCViewController.h */,
 				F89A9817139B585700D09DFF /* JMCViewController.m */,
 				F89A9818139B585700D09DFF /* JMCViewController.xib */,
-				F89A9819139B585700D09DFF /* JiraConnectViewController.xib */,
 				F89A981A139B585700D09DFF /* Libraries */,
 				F89A9843139B585700D09DFF /* Resources */,
 			);
-			name = JCOClasses;
+			name = JMCClasses;
 			sourceTree = "<group>";
 		};
 		F89A97D7139B585700D09DFF /* Core */ = {
@@ -633,7 +631,7 @@
 		F8B80567139B57EC00EC5AD4 /* JIRAConnect */ = {
 			isa = PBXGroup;
 			children = (
-				F89A97D5139B584000D09DFF /* JCOClasses */,
+				F89A97D5139B584000D09DFF /* JMCClasses */,
 				F8B80568139B57EC00EC5AD4 /* Supporting Files */,
 			);
 			path = JIRAConnect;
@@ -1004,6 +1002,7 @@
 				014C7EFA13E1938C00A9415A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8B8055C139B57EC00EC5AD4 /* Build configuration list for PBXProject "JIRAConnect" */ = {
 			isa = XCConfigurationList;

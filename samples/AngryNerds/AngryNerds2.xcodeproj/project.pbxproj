@@ -357,7 +357,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0161EF0E13E2C0890048DD76 /* JCOClasses */ = {
+		0161EF0E13E2C0890048DD76 /* JMCClasses */ = {
 			isa = PBXGroup;
 			children = (
 				0161EF0F13E2C0890048DD76 /* Core */,
@@ -373,7 +373,7 @@
 				0161EF5113E2C0890048DD76 /* Libraries */,
 				0161EF8413E2C0890048DD76 /* Resources */,
 			);
-			name = JCOClasses;
+			name = JMCClasses;
 			path = ../../../JIRAConnect/JCOClasses;
 			sourceTree = "<group>";
 		};
@@ -650,7 +650,7 @@
 		01E90AC1139AE741002CA0D9 /* AngryNerds2 */ = {
 			isa = PBXGroup;
 			children = (
-				0161EF0E13E2C0890048DD76 /* JCOClasses */,
+				0161EF0E13E2C0890048DD76 /* JMCClasses */,
 				F8B80538139B572500EC5AD4 /* Classes */,
 				01E90AC2139AE741002CA0D9 /* Supporting Files */,
 			);
