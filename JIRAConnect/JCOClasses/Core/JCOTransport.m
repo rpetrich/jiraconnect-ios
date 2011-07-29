@@ -17,7 +17,7 @@
 #import "JCOTransport.h"
 #import "JSON.h"
 #import "../JMC.h"
-#import "JCOAttachmentItem.h"
+#import "../JMCAttachmentItem.h"
 
 @implementation JCOTransport
 
@@ -32,7 +32,7 @@
     if(attachments != nil);
     {
         for (int i = 0; i < [attachments count]; i++) {
-            JCOAttachmentItem *item = [attachments objectAtIndex:i];
+            JMCAttachmentItem *item = [attachments objectAtIndex:i];
             if (item != nil) {
                 NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
                 NSString *key = [item.name stringByAppendingFormat:@"-%d", i];

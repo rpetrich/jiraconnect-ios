@@ -20,10 +20,10 @@
 //
 
 
-#import "JCOAttachmentItem.h"
+#import "JMCAttachmentItem.h"
 
 
-@implementation JCOAttachmentItem
+@implementation JMCAttachmentItem
 
 @synthesize filenameFormat;
 @synthesize contentType;

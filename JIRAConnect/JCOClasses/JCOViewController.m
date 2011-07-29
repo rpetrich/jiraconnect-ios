@@ -18,7 +18,7 @@
 #import "JCOViewController.h"
 #import "UIImage+Resize.h"
 #import "Core/UIView+Additions.h"
-#import "JCOAttachmentItem.h"
+#import "JMCAttachmentItem.h"
 #import "JCOSketchViewController.h"
 #import "JCOIssueStore.h"
 #import "JSON.h"
@@ -29,7 +29,7 @@
 
 - (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action;
 
-- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
+- (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
 
 - (BOOL)shouldTrackLocation;
 
@@ -271,7 +271,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     [self hideAudioProgress];
 
-    JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"recording"
+    JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"recording"
                                                                        data:[_recorder audioData]
                                                                        type:JCOAttachmentTypeRecording
                                                                 contentType:@"audio/aac"
@@ -283,7 +283,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [attachment release];
 }
 
-- (void)addAttachmentItem:(JCOAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
+- (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
 {
     CGRect buttonFrame = CGRectMake(0, 0, 30, 30);
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -307,7 +307,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (void)addImageAttachmentItem:(UIImage *)origImg
 {
-    JCOAttachmentItem *attachment = [[JCOAttachmentItem alloc] initWithName:@"screenshot"
+    JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"screenshot"
                                                                        data:UIImagePNGRepresentation(origImg)
                                                                        type:JCOAttachmentTypeImage
                                                                 contentType:@"image/png"
@@ -340,7 +340,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // delete that button, both from the bar, and the images array
     NSUInteger touchIndex = (u_int) touch.tag;
     NSUInteger attachmentIndex = touchIndex - [systemToolbarItems count];
-    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
+    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JCOSketchViewController *sketchViewController = [[[JCOSketchViewController alloc] initWithNibName:@"JCOSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
     sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
@@ -412,7 +412,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     [self dismissModalViewControllerAnimated:YES];
     NSUInteger imgIndex = [imageId unsignedIntegerValue];
-    JCOAttachmentItem *attachment = [self.attachments objectAtIndex:imgIndex];
+    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:imgIndex];
     attachment.data = UIImagePNGRepresentation(image);
 
     // also update the icon in the toolbar

@@ -25,7 +25,7 @@
 #define kJCOLastSuccessfulPingTime @"kJCOLastSuccessfulPingTime"
 #define kJCONewIssueCreated @"kJCONewIssueCreated"
 
-@interface JCO : NSObject {
+@interface JMC : NSObject {
     @private
     NSURL* _url;
     JCOPing *_pinger;
@@ -38,7 +38,7 @@
 
 @property (nonatomic, retain) NSURL* url;
 
-+ (JCO*) instance;
++ (JMC *) instance;
 
 /**
 * This method setups JIRAConnect for a specific JIRA instance.

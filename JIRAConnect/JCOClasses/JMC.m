@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-#import "JCO.h"
+#import "JMC.h"
 #import "Core/JCOPing.h"
 #import "Core/JCONotifier.h"
 #import "JCOCrashSender.h"
 
-@interface JCO()
+@interface JMC ()
 
 @property (nonatomic, retain) JCOPing* _pinger;
 @property (nonatomic, retain) JCONotifier* _notifier;
@@ -30,7 +30,7 @@
 @end
 
 
-@implementation JCO
+@implementation JMC
 
 @synthesize url = _url;
 @synthesize _pinger;
@@ -40,12 +40,12 @@
 @synthesize _crashSender;
 @synthesize _customDataSource;
 
-+ (JCO *)instance
++ (JMC *)instance
 {
-    static JCO *singleton = nil;
+    static JMC *singleton = nil;
 
     if (singleton == nil) {
-        singleton = [[JCO alloc] init];
+        singleton = [[JMC alloc] init];
     }
     return singleton;
 }

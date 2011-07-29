@@ -27,7 +27,7 @@ typedef enum {
   JCOAttachmentTypeImage
 } JCOAttachmentType;
 
-@interface JCOAttachmentItem: NSObject {
+@interface JMCAttachmentItem : NSObject {
     NSString* name;
     NSString*filenameFormat;
     NSString* contentType;
