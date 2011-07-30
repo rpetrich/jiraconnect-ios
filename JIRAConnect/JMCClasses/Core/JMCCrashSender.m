@@ -13,12 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-#import "../JMCMacros.h"
+#import "JMCMacros.h"
 #import "JMCCrashSender.h"
 #import "CrashReporter.h"
 #import "JMC.h"
 #import "JMCCrashTransport.h"
 #import "JMCTransport.h"
+#import "JMCIssueStore.h"
+#import "JSON.h"
 
 #define kJiraConnectAutoSubmitCrashes @"JiraConnectAutoSubmitCras"
 
@@ -99,6 +101,15 @@ JMCCrashTransport *_transport;
 
 - (void) transportDidFinish:(NSString *)response {
     [[CrashReporter sharedCrashReporter] cleanCrashReports];
+    
+    // response needs to be an Issue.json... so we can insert one here.
+    NSDictionary *responseDict = [response JSONValue];
+    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
+    [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
+    // anounce that an issue was added, so the JCOIssuesView can redraw
+    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJCONewIssueCreated object:nil]];
+    [issue release];
 }
 
 

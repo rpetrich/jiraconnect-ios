@@ -368,13 +368,12 @@
 		0161F25313E2C9B60048DD76 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				01E3686B13E411200098709B /* Transport */,
 				0161F25413E2C9B60048DD76 /* CrashReporter */,
 				0161F25713E2C9B60048DD76 /* JMCComment.h */,
 				0161F25813E2C9B60048DD76 /* JMCComment.m */,
 				0161F25913E2C9B60048DD76 /* JMCCrashSender.h */,
 				0161F25A13E2C9B60048DD76 /* JMCCrashSender.m */,
-				0161F25B13E2C9B60048DD76 /* JMCCrashTransport.h */,
-				0161F25C13E2C9B60048DD76 /* JMCCrashTransport.m */,
 				0161F25D13E2C9B60048DD76 /* JMCIssue.h */,
 				0161F25E13E2C9B60048DD76 /* JMCIssue.m */,
 				0161F25F13E2C9B60048DD76 /* JMCIssuePreviewCell.h */,
@@ -385,8 +384,6 @@
 				0161F26413E2C9B60048DD76 /* JMCIssuesViewController.h */,
 				0161F26513E2C9B60048DD76 /* JMCIssuesViewController.m */,
 				0161F26613E2C9B60048DD76 /* JMCIssuesViewController.xib */,
-				0161F26713E2C9B60048DD76 /* JMCIssueTransport.h */,
-				0161F26813E2C9B60048DD76 /* JMCIssueTransport.m */,
 				0161F26913E2C9B60048DD76 /* JMCIssueViewController.h */,
 				0161F26A13E2C9B60048DD76 /* JMCIssueViewController.m */,
 				0161F26B13E2C9B60048DD76 /* JMCIssueViewController.xib */,
@@ -398,12 +395,8 @@
 				0161F27113E2C9B60048DD76 /* JMCMessageCell.m */,
 				0161F27213E2C9B60048DD76 /* JMCNotifier.h */,
 				0161F27313E2C9B60048DD76 /* JMCNotifier.m */,
-				0161F27413E2C9B60048DD76 /* JMCPing.h */,
-				0161F27513E2C9B60048DD76 /* JMCPing.m */,
 				0161F27613E2C9B60048DD76 /* JMCRecorder.h */,
 				0161F27713E2C9B60048DD76 /* JMCRecorder.m */,
-				0161F27813E2C9B60048DD76 /* JMCReplyTransport.h */,
-				0161F27913E2C9B60048DD76 /* JMCReplyTransport.m */,
 				0161F27A13E2C9B60048DD76 /* JMCSketch.h */,
 				0161F27B13E2C9B60048DD76 /* JMCSketch.m */,
 				0161F27C13E2C9B60048DD76 /* JMCSketchContainerView.h */,
@@ -416,8 +409,6 @@
 				0161F28313E2C9B60048DD76 /* JMCSketchViewController.m */,
 				0161F28413E2C9B60048DD76 /* JMCSketchViewController.xib */,
 				0161F28513E2C9B60048DD76 /* JMCSketchViewControllerDelegate.h */,
-				0161F28613E2C9B60048DD76 /* JMCTransport.h */,
-				0161F28713E2C9B60048DD76 /* JMCTransport.m */,
 				0161F28813E2C9B60048DD76 /* UILabel+VerticalAlign.h */,
 				0161F28913E2C9B60048DD76 /* UILabel+VerticalAlign.m */,
 				0161F28A13E2C9B60048DD76 /* UIView+Additions.h */,
@@ -558,6 +549,23 @@
 				0161F2F813E2C9B60048DD76 /* writeareply.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		01E3686B13E411200098709B /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				0161F25B13E2C9B60048DD76 /* JMCCrashTransport.h */,
+				0161F25C13E2C9B60048DD76 /* JMCCrashTransport.m */,
+				0161F26713E2C9B60048DD76 /* JMCIssueTransport.h */,
+				0161F26813E2C9B60048DD76 /* JMCIssueTransport.m */,
+				0161F27413E2C9B60048DD76 /* JMCPing.h */,
+				0161F27513E2C9B60048DD76 /* JMCPing.m */,
+				0161F27813E2C9B60048DD76 /* JMCReplyTransport.h */,
+				0161F27913E2C9B60048DD76 /* JMCReplyTransport.m */,
+				0161F28613E2C9B60048DD76 /* JMCTransport.h */,
+				0161F28713E2C9B60048DD76 /* JMCTransport.m */,
+			);
+			name = Transport;
 			sourceTree = "<group>";
 		};
 		01E90AAC139AE741002CA0D9 = {
