@@ -146,7 +146,7 @@ static CrashReporter *crashReportSender = nil;
 
             NSDirectoryEnumerator *dirEnum = [fm enumeratorAtPath:_crashesDir];
 
-            while (file = [dirEnum nextObject])
+            for(file in dirEnum)
             {
                 NSDictionary *fileAttributes = [fm attributesOfItemAtPath:[_crashesDir stringByAppendingPathComponent:file] error:&error];
                 if ([[fileAttributes objectForKey:NSFileSize] intValue] > 0)

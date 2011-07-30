@@ -92,12 +92,20 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    self.delegate, self.image, self.scrollView, self.mainView, self.imageId = nil; // properties take care of releasing
+    self.delegate = nil;
+    self.image = nil;
+    self.scrollView = nil; 
+    self.mainView = nil;
+    self.imageId = nil;
     self.toolbar = nil;
 }
 
 - (void)dealloc {
-    self.delegate, self.image, self.scrollView, self.mainView, self.imageId = nil; // properties take care of releasing
+    self.delegate = nil;
+    self.image = nil;
+    self.scrollView = nil; 
+    self.mainView = nil;
+    self.imageId = nil;
     self.toolbar = nil;
     [super dealloc];
 }

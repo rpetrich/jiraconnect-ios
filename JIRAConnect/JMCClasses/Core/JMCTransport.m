@@ -29,7 +29,7 @@
     NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
     [upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
     
-    if(attachments != nil);
+    if(attachments != nil)
     {
         for (int i = 0; i < [attachments count]; i++) {
             JMCAttachmentItem *item = [attachments objectAtIndex:i];

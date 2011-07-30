@@ -22,7 +22,9 @@
 @synthesize author = _author, systemUser = _systemUser, body = _body, date = _date, dateLong;
 
 - (void) dealloc {
-    self.author, self.body, self.date = nil;
+    self.author = nil;
+    self.body = nil;
+    self.date = nil;
 	[super dealloc];
 }
 

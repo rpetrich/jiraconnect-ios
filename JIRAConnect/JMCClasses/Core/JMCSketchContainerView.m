@@ -91,7 +91,8 @@ UITouch *_touch;
 
 - (void)dealloc
 {
-    self.sketch, self.sketchView = nil;
+    self.sketch = nil;
+    self.sketchView = nil;
     [super dealloc];
 }
 

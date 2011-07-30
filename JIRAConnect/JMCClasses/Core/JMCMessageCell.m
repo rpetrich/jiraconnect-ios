@@ -39,7 +39,9 @@
 
 - (void)dealloc
 {
-    self.title, self.body, self.bgview = nil;
+    self.title = nil;
+    self.body = nil;
+    self.bgview = nil;
     [super dealloc];
 }
 

@@ -95,7 +95,7 @@ NSString* _jcoDbPath;
         NSDictionary *dictionary = [res resultDict];
         return [[JMCIssue alloc] initWithDictionary:dictionary];
     }
-    NSLog(@"No issue at index = %lu", issueIndex);
+    NSLog(@"No issue at index = %u", issueIndex);
     return nil;
 }
 

@@ -39,7 +39,10 @@
 
 - (void)dealloc
 {
-    self.dateLabel, self.titleLabel, self.detailsLabel, self.statusLabel = nil;
+    self.dateLabel = nil;
+    self.titleLabel = nil;
+    self.detailsLabel = nil;
+    self.statusLabel = nil;
     [super dealloc];
 }
 

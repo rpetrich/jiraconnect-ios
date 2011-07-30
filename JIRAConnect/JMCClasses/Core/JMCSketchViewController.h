@@ -27,7 +27,7 @@
 	
 @private
 
-    <JMCSketchViewControllerDelegate> _delegate;
+    id<JMCSketchViewControllerDelegate> _delegate;
 	IBOutlet JMCSketchScrollView * _scrollView;
     IBOutlet UIToolbar* _toolbar;
     NSNumber* _imageId;

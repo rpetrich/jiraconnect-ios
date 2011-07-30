@@ -20,14 +20,6 @@
 
 @synthesize scrollOn;
 
-
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (void) setScrollEnabled:(BOOL)enabled
 {
 	[super setScrollEnabled:enabled];
