@@ -1,4 +1,4 @@
-JIRA Mobile Connect for iOS (alpha)
+JIRA Mobile Connect for iOS (beta)
 ===========================
 
 JIRAConnect is an iOS library that can be embedded into any iOS App to provide following extra functionality:
