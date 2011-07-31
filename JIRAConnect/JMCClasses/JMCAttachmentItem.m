@@ -32,7 +32,7 @@
 @synthesize type;
 
 
-- (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JCOAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat {
+- (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JMCAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat {
     self = [super init];
     if (self) {
         contentType = [aContentType retain];

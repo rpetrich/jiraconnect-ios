@@ -30,13 +30,13 @@
 
     NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
-    NSString *path = [NSString stringWithFormat:kJCOTransportCreateIssuePath, queryString];
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, queryString];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending crash report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];
-    NSString *typeName = [[JMC instance] issueTypeNameFor:JCOIssueTypeCrash useDefault:@"Crash"];
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
     [params setObject:typeName forKey:@"type"];
     [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];

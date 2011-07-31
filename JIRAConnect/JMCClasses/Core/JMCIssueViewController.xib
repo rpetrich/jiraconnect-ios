@@ -247,7 +247,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">JCOIssueViewController</string>
+					<string key="className">JMCIssueViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">didTouchReply:</string>
@@ -308,7 +308,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/JCOIssueViewController.h</string>
+						<string key="minorKey">./JMCClasses/JMCIssueViewController.h</string>
 					</object>
 				</object>
 			</object>

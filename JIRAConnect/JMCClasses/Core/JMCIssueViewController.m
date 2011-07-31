@@ -139,7 +139,7 @@ static float detailLabelHeight = 21.0f;
 }
 
 - (UITableViewCell *)getBubbleCell:(UITableView *)tableView forMessage:(JMCComment *)comment {
-    static NSString *cellIdentifierComment = @"JCOMessageCellComment";
+    static NSString *cellIdentifierComment = @"JMCMessageCellComment";
 
     JMCMessageBubble *messageCell = (JMCMessageBubble *)[tableView dequeueReusableCellWithIdentifier:cellIdentifierComment];
 
@@ -160,7 +160,7 @@ static float detailLabelHeight = 21.0f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.section == 0) {
-        static NSString *cellIdentifier = @"JCOMessageCell";
+        static NSString *cellIdentifier = @"JMCMessageCell";
         JMCMessageCell *issueCell = (JMCMessageCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (issueCell == nil) {
 

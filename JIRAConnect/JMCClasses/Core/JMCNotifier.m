@@ -47,7 +47,7 @@ UIButton *_button;
         _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
         _viewController.navigationBar.barStyle = UIBarStyleBlack;
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJCOReceivedCommentsNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJMCReceivedCommentsNotification object:nil];
 
     }
     return self;
@@ -61,7 +61,6 @@ UIButton *_button;
 - (void)notify:(NSTimer *)timer {
     // check notifications
     if ([JMCIssueStore instance].newIssueCount > 0) {
-//	if ([JCOIssueStore instance].issues) {
 
         int count = [JMCIssueStore instance].newIssueCount;
         NSString *pluralSuffix = count != 1 ? @"s" : @"";

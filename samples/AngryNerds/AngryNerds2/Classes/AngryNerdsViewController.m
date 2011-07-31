@@ -56,11 +56,11 @@
     return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
 }
 
-- (NSString *)jiraIssueTypeNameFor:(JCOIssueType)type
+- (NSString *)jiraIssueTypeNameFor:(JMCIssueType)type
 {
-    if (type == JCOIssueTypeCrash) {
+    if (type == JMCIssueTypeCrash) {
         return @"crash";
-    } else if (type == JCOIssueTypeFeedback) {
+    } else if (type == JMCIssueTypeFeedback) {
         return @"improvement";
     }
     return nil;

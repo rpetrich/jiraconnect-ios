@@ -37,12 +37,12 @@ static NSString *cellId = @"CommentCell";
                                                                                                 target:self
                                                                                                 action:@selector(compose:)] autorelease];
 
-        self.title = JCOLocalizedString(@"Your Feedback", @"Title of list of previous messages");
+        self.title = JMCLocalizedString(@"Your Feedback", @"Title of list of previous messages");
         _dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJCONewIssueCreated object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCNewIssueCreated object:nil];
     }
     return self;
 }

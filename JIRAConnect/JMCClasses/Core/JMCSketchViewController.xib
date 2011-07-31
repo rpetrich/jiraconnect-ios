@@ -226,15 +226,15 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">JCOSketchScrollView</string>
+					<string key="className">JMCSketchScrollView</string>
 					<string key="superclassName">UIScrollView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/JCOSketchScrollView.h</string>
+						<string key="minorKey">./JMCClasses/JMCSketchScrollView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">JCOSketchViewController</string>
+					<string key="className">JMCSketchViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -309,7 +309,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_scrollView</string>
-								<string key="candidateClassName">JCOSketchScrollView</string>
+								<string key="candidateClassName">JMCSketchScrollView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_toolbar</string>
@@ -323,7 +323,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/JCOSketchViewController.h</string>
+						<string key="minorKey">./JMCClasses/JMCSketchViewController.h</string>
 					</object>
 				</object>
 			</object>

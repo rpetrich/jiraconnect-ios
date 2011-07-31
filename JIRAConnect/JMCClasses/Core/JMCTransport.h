@@ -19,11 +19,11 @@
 #import "ASIFormDataRequest.h"
 #import "JMCIssue.h"
 
-#define kJCOTransportCreateIssuePath   @"rest/jconnect/latest/issue/create?%@"
-#define kJCOTransportCreateCommentPath @"rest/jconnect/latest/issue/comment/%@"
-#define kJCOTransportNotificationsPath @"rest/jconnect/latest/issue/updates?%@"
+#define kJMCTransportCreateIssuePath   @"rest/jconnect/latest/issue/create?%@"
+#define kJMCTransportCreateCommentPath @"rest/jconnect/latest/issue/comment/%@"
+#define kJMCTransportNotificationsPath @"rest/jconnect/latest/issue/updates?%@"
 
-@protocol JCOTransportDelegate <NSObject>
+@protocol JMCTransportDelegate <NSObject>
 
 - (void)transportDidFinish:(NSString *)response;
 
@@ -34,10 +34,10 @@
 
 
 @interface JMCTransport : NSObject <UIAlertViewDelegate> {
-    id <JCOTransportDelegate> _delegate;
+    id <JMCTransportDelegate> _delegate;
 }
 
-@property(nonatomic, retain) id <JCOTransportDelegate> delegate;
+@property(nonatomic, retain) id <JMCTransportDelegate> delegate;
 
 - (void)populateCommonFields:(NSString *)description images:(NSArray *)attachments payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
 

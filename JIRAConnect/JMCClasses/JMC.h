@@ -21,9 +21,9 @@
 @class JMCIssuesViewController, JMCPing, JMCNotifier, JMCNotifier, JMCCrashSender;
 
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
-#define kJCOReceivedCommentsNotification @"kJCOReceivedCommentsNotification"
-#define kJCOLastSuccessfulPingTime @"kJCOLastSuccessfulPingTime"
-#define kJCONewIssueCreated @"kJCONewIssueCreated"
+#define kJMCReceivedCommentsNotification @"kJMCReceivedCommentsNotification"
+#define kJMCLastSuccessfulPingTime @"kJMCLastSuccessfulPingTime"
+#define kJMCNewIssueCreated @"kJMCNewIssueCreated"
 
 @interface JMC : NSObject {
     @private
@@ -43,7 +43,7 @@
 /**
 * This method setups JIRAConnect for a specific JIRA instance.
 * Call this method from your AppDelelegate, directly after the call to [window makeKeyAndVisible];.
-* If custom data is required to be attached to each crash and issue report, then provide a JCOCustomDatSource. If
+* If custom data is required to be attached to each crash and issue report, then provide a JMCCustomDatSource. If
 * no custom data is required, then pass in nil.
 */
 - (void) configureJiraConnect:(NSString*) withUrl customDataSource:(id<JMCCustomDataSource>)customDataSource;
@@ -65,6 +65,6 @@
 
 - (BOOL) isPhotosEnabled;
 - (BOOL) isVoiceEnabled;
-- (NSString*) issueTypeNameFor:(JCOIssueType )type useDefault:(NSString *)defaultType;
+- (NSString*) issueTypeNameFor:(JMCIssueType)type useDefault:(NSString *)defaultType;
 
 @end

@@ -17,9 +17,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-  JCOIssueTypeCrash,
-  JCOIssueTypeFeedback
-} JCOIssueType;
+    JMCIssueTypeCrash,
+    JMCIssueTypeFeedback
+} JMCIssueType;
 
 @protocol JMCCustomDataSource <NSObject>
 
@@ -42,7 +42,7 @@ typedef enum {
 * If there is an issue type of the same in the JIRA server, then it will be used
 * as the issue type.
 */
--(NSString *)jiraIssueTypeNameFor:(JCOIssueType) type;
+-(NSString *)jiraIssueTypeNameFor:(JMCIssueType) type;
 
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.

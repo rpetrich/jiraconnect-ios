@@ -25,7 +25,7 @@
 #import "CRVActivityView.h"
 
 
-@interface JMCViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JCOTransportDelegate, AVAudioRecorderDelegate, JMCSketchViewControllerDelegate, UIAlertViewDelegate,
+@interface JMCViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JMCTransportDelegate, AVAudioRecorderDelegate, JMCSketchViewControllerDelegate, UIAlertViewDelegate,
         CLLocationManagerDelegate, CRVActivityViewDelegate> {
 
     IBOutlet UITextView *descriptionField;

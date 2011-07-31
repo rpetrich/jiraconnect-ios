@@ -36,7 +36,7 @@
 
     NSString *project = [[JMC instance] getProject];
     NSString *uuid = [[JMC instance] getUUID];
-    NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJCOLastSuccessfulPingTime];
+    NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJMCLastSuccessfulPingTime];
     lastPingTime = lastPingTime ? lastPingTime : [NSNumber numberWithInt:0];
 
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -44,7 +44,7 @@
     [params setObject:uuid forKey:@"uuid"];
     [params setValue:[lastPingTime stringValue] forKey:@"sinceMillis"];
     NSString * queryString = [JMCTransport encodeParameters:params];
-    NSString *resourceUrl = [NSString stringWithFormat:kJCOTransportNotificationsPath, queryString];
+    NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, queryString];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
     NSLog(@"Retrieving notifications via: %@", [url absoluteURL]);
@@ -71,11 +71,11 @@
         NSDictionary *data = [responseString JSONValue];
 
         [[JMCIssueStore instance] updateWithData:data];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kJCOReceivedCommentsNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kJMCReceivedCommentsNotification object:self];
         // update the timestamp since we last requested comments.
         // sinceMillis is the server's time
         NSNumber *sinceMillis = [data valueForKey:@"sinceMillis"];
-        [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJCOLastSuccessfulPingTime];
+        [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJMCLastSuccessfulPingTime];
         NSLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
     }
     else

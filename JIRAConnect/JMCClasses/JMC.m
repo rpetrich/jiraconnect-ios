@@ -175,7 +175,7 @@
            ([_customDataSource voiceEnabled]) : YES; // defaults to YES
 }
 
--(NSString*) issueTypeNameFor:(JCOIssueType )type useDefault:(NSString *)defaultType {
+-(NSString*) issueTypeNameFor:(JMCIssueType)type useDefault:(NSString *)defaultType {
     if (([_customDataSource respondsToSelector:@selector(jiraIssueTypeNameFor:)])) {
         NSString * typeName = [_customDataSource jiraIssueTypeNameFor:type];
         if (typeName != nil) {

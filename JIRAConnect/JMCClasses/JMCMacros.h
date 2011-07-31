@@ -21,5 +21,5 @@
 //  Copyright 2011 Atlassian. All rights reserved.
 //
 
-#define JCOLocalizedString(key, comment) \
-    [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:@"JCOLocalizable"]
+#define JMCLocalizedString(key, comment) \
+    [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:@"JMCLocalizable"]

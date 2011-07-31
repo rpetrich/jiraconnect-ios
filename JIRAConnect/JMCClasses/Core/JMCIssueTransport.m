@@ -32,7 +32,7 @@
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
     NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
-    NSString *urlPath = [NSString stringWithFormat:kJCOTransportCreateIssuePath, queryString];
+    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, queryString];
     NSURL *url = [NSURL URLWithString:urlPath
                         relativeToURL:[JMC instance].url];
 
@@ -43,7 +43,7 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
-    NSString *typeName = [[JMC instance] issueTypeNameFor:JCOIssueTypeFeedback useDefault:@"Bug"];
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
     [params setObject:typeName forKey:@"type"];
     [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];

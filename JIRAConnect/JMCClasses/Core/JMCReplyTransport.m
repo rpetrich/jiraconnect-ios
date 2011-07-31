@@ -28,7 +28,7 @@
 
 - (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
 
-    NSString *path = [NSString stringWithFormat:kJCOTransportCreateCommentPath, originalIssue.key];
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending reply report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];

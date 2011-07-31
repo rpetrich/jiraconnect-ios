@@ -84,16 +84,16 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.countdownView.layer.cornerRadius = 7.0;
     
     self.navigationItem.leftBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithTitle:JCOLocalizedString(@"Close", @"Close navigation item")
+            [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Close", @"Close navigation item")
                                               style:UIBarButtonItemStyleBordered
                                              target:self
                                              action:@selector(dismiss)] autorelease];
     
-    self.navigationItem.title = JCOLocalizedString(@"Feedback", "Title of the feedback controller");
+    self.navigationItem.title = JMCLocalizedString(@"Feedback", "Title of the feedback controller");
 
 
     self.navigationItem.rightBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithTitle:JCOLocalizedString(@"Send", @"Close navigation item")
+            [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Send", @"Close navigation item")
                                               style:UIBarButtonItemStyleDone
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
@@ -273,7 +273,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"recording"
                                                                        data:[_recorder audioData]
-                                                                       type:JCOAttachmentTypeRecording
+                                                                       type:JMCAttachmentTypeRecording
                                                                 contentType:@"audio/aac"
                                                              filenameFormat:@"recording-%d.aac"];
 
@@ -309,7 +309,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"screenshot"
                                                                        data:UIImagePNGRepresentation(origImg)
-                                                                       type:JCOAttachmentTypeImage
+                                                                       type:JMCAttachmentTypeImage
                                                                 contentType:@"image/png"
                                                              filenameFormat:@"screenshot-%d.png"];
 
@@ -356,11 +356,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSUInteger tapIndex = (u_int) touch.tag;
     NSUInteger attachmentIndex = tapIndex - [systemToolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
     UIAlertView *view =
-            [[UIAlertView alloc] initWithTitle:JCOLocalizedString(@"RemoveRecording", @"Remove recording title")
-                                 message:JCOLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
+            [[UIAlertView alloc] initWithTitle:JMCLocalizedString(@"RemoveRecording", @"Remove recording title")
+                                 message:JMCLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
                                  delegate:self
-                             cancelButtonTitle:JCOLocalizedString(@"No", @"")
-                             otherButtonTitles:JCOLocalizedString(@"Yes", @""), nil];
+                             cancelButtonTitle:JMCLocalizedString(@"No", @"")
+                             otherButtonTitles:JMCLocalizedString(@"Yes", @""), nil];
     currentAttachmentItemIndex = attachmentIndex;
     [view show];
     [view release];
@@ -406,7 +406,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 #pragma mark end
 
-#pragma mark JCOSketchViewControllerDelegate
+#pragma mark JMCSketchViewControllerDelegate
 
 - (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
@@ -451,7 +451,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
 
     CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
-    [av setText:JCOLocalizedString(@"Sending...", @"")];
+    [av setText:JMCLocalizedString(@"Sending...", @"")];
     [av startAnimating];
     [av setDelegate:self];
     [self setActivityView:av];
@@ -528,9 +528,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSDictionary *responseDict = [response JSONValue];
     JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
     [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
-    // anounce that an issue was added, so the JCOIssuesView can redraw
+    // anounce that an issue was added, so the JMCIssuesView can redraw
 
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJCONewIssueCreated object:nil]];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
     [issue release];
 }
 

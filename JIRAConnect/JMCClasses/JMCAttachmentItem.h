@@ -23,24 +23,24 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-  JCOAttachmentTypeRecording,
-  JCOAttachmentTypeImage
-} JCOAttachmentType;
+    JMCAttachmentTypeRecording,
+    JMCAttachmentTypeImage
+} JMCAttachmentType;
 
 @interface JMCAttachmentItem : NSObject {
     NSString* name;
     NSString*filenameFormat;
     NSString* contentType;
-    JCOAttachmentType type;
+    JMCAttachmentType type;
     NSData* data;
 }
 @property(nonatomic, retain) NSString *contentType;
 @property(nonatomic, retain) NSData *data;
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *filenameFormat;
-@property(nonatomic) JCOAttachmentType type;
+@property(nonatomic) JMCAttachmentType type;
 
-- (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JCOAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat;
+- (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JMCAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat;
 
 
 @end
