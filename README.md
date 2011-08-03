@@ -58,7 +58,7 @@ method, add the following line:
     * the jconnect-plugin installed
     * a project named either the same as
         * the XCode Project,
-        * or the value returned by your [id<JMCCustomDataSource> project] method. This can be the project key in JIRA, or the project's name.
+        * or the value returned by your [id JMCCustomDataSource project] method. This can be the project key in JIRA, or the project's name.
 
 1. Provide a trigger mechanism to allow users invoke the Submit Feedback view. This typically goes on the 'About' or 'Info' view.
 The UIViewController returned by JMC viewController is designed to be presented modally.
