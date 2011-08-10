@@ -23,23 +23,23 @@ To install JIRA Mobile Connect into your current project:
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JMCClasses directory to your project.
 1. If the project you are integrating contains any of the 3rd Party libaries listed at the bottom of this page, you shouldn't need to copy the equivalent library in JIRAConnect/JMCClasses/Libraries.
 1. Configure the project by selecting the project (top most) element in the file/groups tree
-    1. Click **'Build Phases'** --> Expand **'Link Binary with Libraries'** --> **+**
-    1. Add the built-in frameworks:
-        * CFNetwork
-        * SystemConfiguration
-        * MobileCoreServices
-        * CoreGraphics
-        * AVFoundation
-        * CoreLocation
-        * libz1.2.3
-        * libsqlite3
-    1. Add the `CrashReporter.framework` to your project's frameworks:
-        * **+** --> **'Add Other'**
-        * Browse to jiraconnect-ios then **JIRAConnect/JMCClasses/Libraries/** --> **CrashReporter.framework**
-        * Click **'Open'**
-    1. If you use automatic reference counting (ARC) you will need to disable it for the JIRA Mobile Connect code:
-        * In the **'Build Phases'** view, expand **'Compile Sources'**
-        * For all JMC source files, set '-fno-objc-arc' as the compiler flags
+1. Click **'Build Phases'** --> Expand **'Link Binary with Libraries'** --> **+**
+1. Add the built-in frameworks:
+    * CFNetwork
+    * SystemConfiguration
+    * MobileCoreServices
+    * CoreGraphics
+    * AVFoundation
+    * CoreLocation
+    * libz1.2.3
+    * libsqlite3
+1. Add the `CrashReporter.framework` to your project's frameworks:
+    * Click **+** --> **'Add Other'**
+    * Browse to jiraconnect-ios then **JIRAConnect/JMCClasses/Libraries/** --> **CrashReporter.framework**
+    * Click **'Open'**
+1. If you use automatic reference counting (ARC) you will need to disable it for the JIRA Mobile Connect code:
+    * In the **'Build Phases'** view, expand **'Compile Sources'**
+    * For all JMC source files, set '-fno-objc-arc' as the compiler flags
 1. Try compiling your App, and ensure there are no errors.
 
 To use JIRAConnect in your App:
