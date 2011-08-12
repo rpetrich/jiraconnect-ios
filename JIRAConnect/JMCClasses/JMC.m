@@ -138,7 +138,7 @@
     [info setObject:[device model] forKey:@"model"];
 
 
-    // app application data (we could make these two separate dicts but cbf atm)
+    // app application data 
     [info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
     [info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
     [info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
