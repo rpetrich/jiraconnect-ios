@@ -47,7 +47,7 @@ NSString* _recorderFilePath;
 		
 		AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 		NSError *err = nil;
-		[audioSession setCategory :AVAudioSessionCategoryRecord error:&err];
+		[audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
 		if(err){
 			NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
 			return nil;
