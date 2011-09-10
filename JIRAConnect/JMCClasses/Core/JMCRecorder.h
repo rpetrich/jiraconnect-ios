@@ -29,6 +29,9 @@
 @property (assign) float recordTime; // maximum voice record time in seconds
 
 
++(JMCRecorder*) instance;
++(BOOL)audioRecordingIsAvailable;
+
 -(void) start;
 -(void) stop;
 -(float) currentDuration;

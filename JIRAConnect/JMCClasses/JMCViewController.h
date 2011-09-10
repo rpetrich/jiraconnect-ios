@@ -43,7 +43,6 @@
     JMCReplyTransport *_replyTransport;
     id <JMCCustomDataSource> _payloadDataSource;
     NSMutableArray *_attachments;
-    JMCRecorder *_recorder;
     JMCIssue *_replyToIssue;
 
 @private
@@ -68,9 +67,9 @@
 @property(retain, nonatomic) JMCIssueTransport *issueTransport;
 @property(retain, nonatomic) JMCReplyTransport *replyTransport;
 @property(retain, nonatomic) id <JMCCustomDataSource> payloadDataSource;
-@property(retain, nonatomic) NSMutableArray *attachments;
+
 // an array of items to attach to the issue
-@property(retain, nonatomic) JMCRecorder *recorder;
+@property(retain, nonatomic) NSMutableArray *attachments;
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
 @property(retain, nonatomic) JMCIssue *replyToIssue;
 
