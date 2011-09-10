@@ -22,6 +22,20 @@
 
 NSString* _recorderFilePath;
 
++(JMCRecorder*) instance
+{
+    static JMCRecorder* singleton;
+    if (singleton == nil) {
+        singleton = [[[JMCRecorder alloc] init] retain];
+    }
+    return singleton;
+}
+
++(BOOL)audioRecordingIsAvailable {
+    AVAudioSession* session = [AVAudioSession sharedInstance];
+	return session.inputIsAvailable;
+}
+
 -(id)init {
 	if ((self = [super init])) {
 		
@@ -33,7 +47,7 @@ NSString* _recorderFilePath;
 		
 		AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 		NSError *err = nil;
-		[audioSession setCategory :AVAudioSessionCategoryRecord error:&err];
+		[audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
 		if(err){
 			NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
 			return nil;
@@ -74,25 +88,10 @@ NSString* _recorderFilePath;
 		self.recorder = recorder;
         [recorder release];
 	}
-	return self;
-	
+	return self;	
 }
 
 -(void) start {
-
-	AVAudioSession* session = [AVAudioSession sharedInstance];
-	BOOL audioHWAvailable =  session.inputIsAvailable;
-	if (! audioHWAvailable) {
-        UIAlertView *cantRecordAlert =
-        [[UIAlertView alloc] initWithTitle: @"Warning"
-								   message: @"Audio input hardware not available"
-								  delegate: nil
-						 cancelButtonTitle: @"OK"
-						 otherButtonTitles: nil];
-        [cantRecordAlert show];
-        [cantRecordAlert release]; 
-        return;
-	}
 	[self.recorder recordForDuration:self.recordTime];
 }
 

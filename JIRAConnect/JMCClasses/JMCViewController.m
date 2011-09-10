@@ -47,7 +47,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     if (self) {
         _issueTransport = [[[JMCIssueTransport alloc] init] retain];
         _replyTransport = [[[JMCReplyTransport alloc] init] retain];
-        _recorder = [[[JMCRecorder alloc] init] retain];
     }
     return self;
 }
@@ -80,7 +79,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
 
     // layout views
-    self.recorder.recorder.delegate = self;
     self.countdownView.layer.cornerRadius = 7.0;
     
     self.navigationItem.leftBarButtonItem =
@@ -223,8 +221,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (void)updateProgress:(NSTimer *)theTimer
 {
-    float currentDuration = [_recorder currentDuration];
-    float progress = (currentDuration / _recorder.recordTime);
+    JMCRecorder* recorder = [JMCRecorder instance];
+    float currentDuration = [recorder currentDuration];
+    float progress = (currentDuration / recorder.recordTime);
     self.progressView.progress = progress;
 }
 
@@ -240,12 +239,13 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (IBAction)addVoice
 {
-
-    if (_recorder.recorder.recording) {
-        [_recorder stop];
+    JMCRecorder* recorder = [JMCRecorder instance];
+    recorder.recorder.delegate = self;
+    if (recorder.recorder.recording) {
+        [recorder stop];
 
     } else {
-        [_recorder start];
+        [recorder start];
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
         self.progressView.progress = 0;
 
@@ -266,13 +266,13 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
 }
 
-- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)success
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)avRecorder successfully:(BOOL)success
 {
-
     [self hideAudioProgress];
 
+    JMCRecorder* recorder = [JMCRecorder instance];
     JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"recording"
-                                                                       data:[_recorder audioData]
+                                                                       data:[recorder audioData]
                                                                        type:JMCAttachmentTypeRecording
                                                                 contentType:@"audio/aac"
                                                              filenameFormat:@"recording-%d.aac"];
@@ -580,7 +580,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 @synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, activityView;
 
-@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, recorder = _recorder, replyToIssue = _replyToIssue;
+@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
 @synthesize voiceButton = _voiceButton;
 
@@ -592,7 +592,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // these ivars are retained in init
     self.issueTransport = nil;
     self.replyTransport = nil;
-    self.recorder = nil;
     [super dealloc];
 }
 

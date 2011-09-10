@@ -171,8 +171,9 @@
 
 
 - (BOOL)isVoiceEnabled {
-    return ([_customDataSource respondsToSelector:@selector(voiceEnabled)]) ?
-           ([_customDataSource voiceEnabled]) : YES; // defaults to YES
+    BOOL voiceEnabled = ([_customDataSource respondsToSelector:@selector(voiceEnabled)]) ?
+                        ([_customDataSource voiceEnabled]) : YES; // defaults to YES
+    return voiceEnabled && [JMCRecorder audioRecordingIsAvailable]; // only enabled if device supports audio input
 }
 
 -(NSString*) issueTypeNameFor:(JMCIssueType)type useDefault:(NSString *)defaultType {
