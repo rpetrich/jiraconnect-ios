@@ -212,24 +212,24 @@ static CrashReporter *crashReportSender = nil;
 
 // taken from http://stackoverflow.com/questions/4857195/how-to-get-programmatically-ioss-alphanumeric-version-string
 - (NSString *)osVersionBuild {
-    int mib[2] = {CTL_KERN, KERN_OSVERSION};
-    u_int namelen = sizeof(mib) / sizeof(mib[0]);
-    size_t bufferSize = 0;
+     int mib[2] = {CTL_KERN, KERN_OSVERSION};
+     size_t size = 0;
 
-    NSString *osBuildVersion = nil;
+     // Get the size for the buffer
+     sysctl(mib, 2, NULL, &size, NULL, 0);
 
-    // Get the size for the buffer
-    sysctl(mib, namelen, NULL, &bufferSize, NULL, 0);
+     char *answer = malloc(size);
+     int result = sysctl(mib, 2, answer, &size, NULL, 0);
 
-    u_char buildBuffer[bufferSize];
-    int result = sysctl(mib, namelen, buildBuffer, &bufferSize, NULL, 0);
-
+    NSString *versionStr;
     if (result >= 0) {
-        osBuildVersion = [[[NSString alloc] initWithBytes:buildBuffer length:bufferSize encoding:NSUTF8StringEncoding] autorelease];
+        versionStr = [NSString stringWithCString:answer encoding:NSUTF8StringEncoding];
+    } else {
+        versionStr = @"-";
     }
-
-    return osBuildVersion;
-}
+    free(answer);
+    return versionStr;
+ }
 
 - (NSString *)_crashLogStringForReport:(PLCrashReport *)report
 {
