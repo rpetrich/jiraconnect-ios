@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013A580A141C6F9C00B590E2 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 013A5809141C6F9C00B590E2 /* libz.1.2.5.dylib */; };
 		0140735B13AF35C3008A28C0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0140735A13AF35C3008A28C0 /* libsqlite3.dylib */; };
 		01A71C4D13E5B1E500EBD56E /* CrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A71BB813E5B1E400EBD56E /* CrashReporter.m */; };
 		01A71C4E13E5B1E500EBD56E /* JMCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A71BBA13E5B1E400EBD56E /* JMCComment.m */; };
@@ -17,7 +18,6 @@
 		01A71C5313E5B1E500EBD56E /* JMCIssuePreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A71BC313E5B1E400EBD56E /* JMCIssuePreviewCell.xib */; };
 		01A71C5413E5B1E500EBD56E /* JMCIssueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A71BC513E5B1E400EBD56E /* JMCIssueStore.m */; };
 		01A71C5513E5B1E500EBD56E /* JMCIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A71BC713E5B1E400EBD56E /* JMCIssuesViewController.m */; };
-		01A71C5613E5B1E500EBD56E /* JMCIssuesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A71BC813E5B1E400EBD56E /* JMCIssuesViewController.xib */; };
 		01A71C5713E5B1E500EBD56E /* JMCIssueTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A71BCA13E5B1E400EBD56E /* JMCIssueTransport.m */; };
 		01A71C5813E5B1E500EBD56E /* JMCIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A71BCC13E5B1E400EBD56E /* JMCIssueViewController.m */; };
 		01A71C5913E5B1E500EBD56E /* JMCIssueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A71BCD13E5B1E400EBD56E /* JMCIssueViewController.xib */; };
@@ -105,7 +105,6 @@
 		01E90BE7139AE950002CA0D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE6139AE950002CA0D9 /* SystemConfiguration.framework */; };
 		01E90BE9139AE956002CA0D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */; };
 		01E90BEC139AE964002CA0D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BEB139AE964002CA0D9 /* CoreLocation.framework */; };
-		01E90BEE139AE96A002CA0D9 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BED139AE96A002CA0D9 /* libz.1.2.3.dylib */; };
 		01E90BF8139AE9ED002CA0D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */; };
 		F810BC53139B7C6200D50844 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F810BC52139B7C6200D50844 /* CrashReporter.framework */; };
 		F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */; };
@@ -125,6 +124,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013A5809141C6F9C00B590E2 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		0140735A13AF35C3008A28C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		01A71BB713E5B1E400EBD56E /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
 		01A71BB813E5B1E400EBD56E /* CrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporter.m; sourceTree = "<group>"; };
@@ -143,7 +143,6 @@
 		01A71BC513E5B1E400EBD56E /* JMCIssueStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssueStore.m; sourceTree = "<group>"; };
 		01A71BC613E5B1E400EBD56E /* JMCIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssuesViewController.h; sourceTree = "<group>"; };
 		01A71BC713E5B1E400EBD56E /* JMCIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssuesViewController.m; sourceTree = "<group>"; };
-		01A71BC813E5B1E400EBD56E /* JMCIssuesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCIssuesViewController.xib; sourceTree = "<group>"; };
 		01A71BC913E5B1E400EBD56E /* JMCIssueTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssueTransport.h; sourceTree = "<group>"; };
 		01A71BCA13E5B1E400EBD56E /* JMCIssueTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssueTransport.m; sourceTree = "<group>"; };
 		01A71BCB13E5B1E400EBD56E /* JMCIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssueViewController.h; sourceTree = "<group>"; };
@@ -309,10 +308,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013A580A141C6F9C00B590E2 /* libz.1.2.5.dylib in Frameworks */,
 				0140735B13AF35C3008A28C0 /* libsqlite3.dylib in Frameworks */,
 				F810BC53139B7C6200D50844 /* CrashReporter.framework in Frameworks */,
 				01E90BF8139AE9ED002CA0D9 /* QuartzCore.framework in Frameworks */,
-				01E90BEE139AE96A002CA0D9 /* libz.1.2.3.dylib in Frameworks */,
 				01E90BEC139AE964002CA0D9 /* CoreLocation.framework in Frameworks */,
 				01E90AC0139AE741002CA0D9 /* CoreGraphics.framework in Frameworks */,
 				01E90BE9139AE956002CA0D9 /* MobileCoreServices.framework in Frameworks */,
@@ -367,7 +366,6 @@
 				01A71BC513E5B1E400EBD56E /* JMCIssueStore.m */,
 				01A71BC613E5B1E400EBD56E /* JMCIssuesViewController.h */,
 				01A71BC713E5B1E400EBD56E /* JMCIssuesViewController.m */,
-				01A71BC813E5B1E400EBD56E /* JMCIssuesViewController.xib */,
 				01A71BC913E5B1E400EBD56E /* JMCIssueTransport.h */,
 				01A71BCA13E5B1E400EBD56E /* JMCIssueTransport.m */,
 				01A71BCB13E5B1E400EBD56E /* JMCIssueViewController.h */,
@@ -545,6 +543,7 @@
 		01E90AAC139AE741002CA0D9 = {
 			isa = PBXGroup;
 			children = (
+				013A5809141C6F9C00B590E2 /* libz.1.2.5.dylib */,
 				01E90AC1139AE741002CA0D9 /* AngryNerds2 */,
 				01E90ABA139AE741002CA0D9 /* Frameworks */,
 				01E90AB8139AE741002CA0D9 /* Products */,
@@ -697,7 +696,6 @@
 				F8B80555139B574300EC5AD4 /* Icon.png in Resources */,
 				F8B80556139B574300EC5AD4 /* MainWindow.xib in Resources */,
 				01A71C5313E5B1E500EBD56E /* JMCIssuePreviewCell.xib in Resources */,
-				01A71C5613E5B1E500EBD56E /* JMCIssuesViewController.xib in Resources */,
 				01A71C5913E5B1E500EBD56E /* JMCIssueViewController.xib in Resources */,
 				01A71C6613E5B1E500EBD56E /* JMCSketchViewController.xib in Resources */,
 				01A71C6D13E5B1E500EBD56E /* JMCViewController.xib in Resources */,
@@ -872,7 +870,7 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "AngryNerds2/AngryNerds2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "Angry Nerds";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -893,7 +891,7 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "AngryNerds2/AngryNerds2-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "Angry Nerds";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

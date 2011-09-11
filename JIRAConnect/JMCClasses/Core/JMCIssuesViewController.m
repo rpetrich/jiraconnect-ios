@@ -26,9 +26,9 @@ static NSString *cellId = @"CommentCell";
 
 @synthesize issueStore = _issueStore;
 
-- (id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle {
+- (id)initWithStyle:(UITableViewStyle)style {
 
-    self = [super initWithNibName:name bundle:bundle];
+    self = [super initWithStyle:style];
     if (self) {
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                target:self

@@ -42,7 +42,10 @@ UIButton *_button;
         [_button setFrame:CGRectMake(0, 440, 320, 40)];
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 
-        self.issuesViewController = [[[JMCIssuesViewController alloc] initWithNibName:@"JMCIssuesViewController" bundle:nil] autorelease];
+        JMCIssuesViewController *issuesController = [[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain];
+        
+        self.issuesViewController = issuesController;
+        [issuesController release];
 
         _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
         _viewController.navigationBar.barStyle = UIBarStyleBlack;
