@@ -40,19 +40,23 @@ NSString* _jcoDbPath;
 - (id) init {
 	if ((self = [super init])) {
         // db init code...
+        NSLog(@"JMC databasePath = %@", _jcoDbPath);
         db = [FMDatabase databaseWithPath:_jcoDbPath];
+        [db setLogsErrors:YES];
         [db retain];
+        if (![db open]) {
+            NSLog(@"Error opening database for JMC. Issue Inbox will be unavailable.");
+            return nil;
+        }
         // create schema, preserving existing
         [self createSchema:NO];
-        [db open]; // TODO: check return value, and throw exception if false.
-        NSLog(@"JMC databasePath = %@", _jcoDbPath);
     }
 	return self;
 }
 
 -(void) createSchema:(BOOL)dropExisting
 {
-// for now - always get all the data from JIRA. store it in the local db.
+    // for now - always get all the data from JIRA. store it in the local db.
     if (dropExisting) {
         [db executeUpdate:@"DROP table if exists ISSUE"];
         [db executeUpdate:@"DROP table if exists COMMENT"];
