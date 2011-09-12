@@ -1,18 +1,18 @@
 /**
-   Copyright 2011 Atlassian Software
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-**/
+ Copyright 2011 Atlassian Software
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ **/
 #import "JMC.h"
 #import "Core/JMCPing.h"
 #import "Core/JMCNotifier.h"
@@ -43,7 +43,7 @@
 + (JMC *)instance
 {
     static JMC *singleton = nil;
-
+    
     if (singleton == nil) {
         singleton = [[JMC alloc] init];
     }
@@ -55,7 +55,11 @@
     if ((self = [super init])) {
         self._pinger = [[[JMCPing alloc] init] autorelease ];
         UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
-        self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
+        if (nil != window) {
+            self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
+        } else {
+            self._notifier = nil;
+        }
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
         self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
@@ -80,7 +84,7 @@
 {
     // generate and store a UUID if none exists already
     if ([self getUUID] == nil) {
-
+        
         NSString *uuid = nil;
         CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
         if (theUUID) {
@@ -96,18 +100,18 @@
 {
     self.url = [NSURL URLWithString:withUrl];
     [self generateAndStoreUUID];
-
+    
     [CrashReporter enableCrashReporter];
-
+    
     _pinger.baseUrl = self.url;
     [_pinger start];
-
+    
     _customDataSource = customDataSource;
     _jcController.payloadDataSource = _customDataSource;
-
+    
     // TODO: firing this when network becomes active would be better
     [NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
-
+    
     NSLog(@"JiraConnect is Configured with url: %@", withUrl);
 }
 
@@ -119,6 +123,15 @@
 
 - (UIViewController *)issuesViewController
 {
+    if (nil == _notifier) {
+        UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
+        if (nil != window) {
+            self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
+        } else {
+            @throw [NSException exceptionWithName:@"Initialization error" reason:@"Attempt to obtain JIRA Mobile Connect issuesViewController before setting the keyWindow on [UIApplication sharedApplication]" userInfo:nil];
+        }
+    }
+    
     [_notifier populateIssuesViewController];
     return _notifier.viewController;
 }
@@ -128,7 +141,7 @@
     UIDevice *device = [UIDevice currentDevice];
     NSDictionary *appMetaData = [[NSBundle mainBundle] infoDictionary];
     NSMutableDictionary *info = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
-
+    
     // add device data
     [info setObject:[device uniqueIdentifier] forKey:@"udid"];
     [info setObject:[self getUUID] forKey:@"uuid"];
@@ -136,13 +149,13 @@
     [info setObject:[device systemName] forKey:@"systemName"];
     [info setObject:[device systemVersion] forKey:@"systemVersion"];
     [info setObject:[device model] forKey:@"model"];
-
-
+    
+    
     // app application data 
     [info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
     [info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
     [info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
-
+    
     return info;
 }
 
@@ -166,13 +179,13 @@
 
 - (BOOL)isPhotosEnabled {
     return ([_customDataSource respondsToSelector:@selector(photosEnabled)]) ?
-           ([_customDataSource photosEnabled]) : YES; // defaults to YES
+    ([_customDataSource photosEnabled]) : YES; // defaults to YES
 }
 
 
 - (BOOL)isVoiceEnabled {
     BOOL voiceEnabled = ([_customDataSource respondsToSelector:@selector(voiceEnabled)]) ?
-                        ([_customDataSource voiceEnabled]) : YES; // defaults to YES
+    ([_customDataSource voiceEnabled]) : YES; // defaults to YES
     return voiceEnabled && [JMCRecorder audioRecordingIsAvailable]; // only enabled if device supports audio input
 }
 
