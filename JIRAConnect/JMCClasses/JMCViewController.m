@@ -73,6 +73,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 #if TARGET_IPHONE_SIMULATOR
         // -33.871088, 151.203665
         CLLocation *fixed = [[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665];
+        
         [self setCurrentLocation: fixed];
         [fixed release];
 #endif

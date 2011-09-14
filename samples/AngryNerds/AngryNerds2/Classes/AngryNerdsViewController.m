@@ -48,7 +48,7 @@
 
 - (NSString *)project
 {
-    return @"Angry Nerds";
+    return @"Angry Nerds"; // This must match the name of the JIRA Project (or project KEY) in your JIRA instance if it differs from the name of your App.
 }
 
 - (NSDictionary *)customFields
