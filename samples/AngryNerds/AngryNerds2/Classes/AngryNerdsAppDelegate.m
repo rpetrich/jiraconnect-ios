@@ -24,7 +24,6 @@
     [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
-
     return YES;
 }
 

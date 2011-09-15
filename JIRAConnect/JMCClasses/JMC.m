@@ -53,13 +53,8 @@
 - (id)init
 {
     if ((self = [super init])) {
+        NSLog(@"JMC init");
         self._pinger = [[[JMCPing alloc] init] autorelease ];
-        UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
-        if (nil != window) {
-            self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
-        } else {
-            self._notifier = nil;
-        }
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
         self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
@@ -98,23 +93,29 @@
 
 - (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
-    self.url = [NSURL URLWithString:withUrl];
-    [self generateAndStoreUUID];
-    
     [CrashReporter enableCrashReporter];
     
+    self.url = [NSURL URLWithString:withUrl];
+    [self generateAndStoreUUID];
+
     _pinger.baseUrl = self.url;
-    [_pinger start];
-    
+
     _customDataSource = customDataSource;
     _jcController.payloadDataSource = _customDataSource;
-    
+
     // TODO: firing this when network becomes active would be better
     [NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
-    
+    // wait for the window to become key, before setting in-app alerts for replies
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupNotifierAndPingForNotifications) name:UIWindowDidBecomeKeyNotification object:nil];
     NSLog(@"JiraConnect is Configured with url: %@", withUrl);
 }
 
+-(void)setupNotifierAndPingForNotifications
+{
+    UIView *window = [[UIApplication sharedApplication] keyWindow];
+    self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
+    [_pinger start]; // should only ever call _pinger start when the notifier is initialised to ensure it can display
+}
 
 - (UIViewController *)viewController
 {
@@ -123,15 +124,6 @@
 
 - (UIViewController *)issuesViewController
 {
-    if (nil == _notifier) {
-        UIView *window = [[UIApplication sharedApplication] keyWindow]; // TODO: investigate other ways to present the replies dialog.
-        if (nil != window) {
-            self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
-        } else {
-            @throw [NSException exceptionWithName:@"Initialization error" reason:@"Attempt to obtain JIRA Mobile Connect issuesViewController before setting the keyWindow on [UIApplication sharedApplication]" userInfo:nil];
-        }
-    }
-    
     [_notifier populateIssuesViewController];
     return _notifier.viewController;
 }
