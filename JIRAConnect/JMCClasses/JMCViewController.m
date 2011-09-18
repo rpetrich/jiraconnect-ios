@@ -169,7 +169,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         self.countdownView.height = (textViewHeight - self.navigationController.navigationBar.height) * 0.9f;
     }
 
-    self.descriptionField.backgroundColor = [UIColor redColor];
     CGRect newTextViewFrame = self.view.bounds;
     newTextViewFrame.size.height = textViewHeight - self.navigationController.navigationBar.height;
     newTextViewFrame.origin.y = self.navigationController.navigationBar.height;
