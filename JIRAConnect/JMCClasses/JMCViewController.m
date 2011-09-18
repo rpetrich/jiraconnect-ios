@@ -449,6 +449,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (IBAction)sendFeedback
 {
 
+    if ([self.descriptionField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length <= 0
+      && self.attachments.count <= 0) {
+        // No data entered, just return.
+        return;
+    }
 	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
 
     CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];

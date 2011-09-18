@@ -53,7 +53,6 @@
 - (id)init
 {
     if ((self = [super init])) {
-        NSLog(@"JMC init");
         self._pinger = [[[JMCPing alloc] init] autorelease ];
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
