@@ -25,11 +25,8 @@
 @implementation JMCPing
 
 - (void)start {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendPingDelayed) name:UIApplicationDidBecomeActiveNotification object:nil];
-}
-
-- (void)sendPingDelayed {
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(sendPing) userInfo:nil repeats:NO];
+    // delay a little, then ping to make notificaiton not so jarring
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(sendPing) userInfo:nil repeats:NO];
 }
 
 - (void)sendPing {

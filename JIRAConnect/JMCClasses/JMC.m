@@ -103,18 +103,18 @@
     _customDataSource = customDataSource;
     _jcController.payloadDataSource = _customDataSource;
 
+    JMCIssuesViewController *issuesController = [[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain];
+    JMCNotifier* notifier = [[JMCNotifier alloc] initWithIssuesViewController:issuesController];
+    self._notifier = notifier;
+    [issuesController release];
+    [notifier release];
+
     // TODO: firing this when network becomes active would be better
     [NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
-    // wait for the window to become key, before setting in-app alerts for replies
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupNotifierAndPingForNotifications) name:UIWindowDidBecomeKeyNotification object:nil];
+    // whenever the Application Becomes Active, ping for notifications from JIRA.
+    [[NSNotificationCenter defaultCenter] addObserver:_pinger selector:@selector(start) name:UIApplicationDidBecomeActiveNotification object:nil];
     NSLog(@"JiraConnect is Configured with url: %@", withUrl);
-}
 
--(void)setupNotifierAndPingForNotifications
-{
-    UIView *window = [[UIApplication sharedApplication] keyWindow];
-    self._notifier = [[[JMCNotifier alloc] initWithView:window] autorelease ];
-    [_pinger start]; // should only ever call _pinger start when the notifier is initialised to ensure it can display
 }
 
 - (UIViewController *)viewController

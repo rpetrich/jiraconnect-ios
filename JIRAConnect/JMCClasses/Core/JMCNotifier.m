@@ -23,10 +23,9 @@ UIToolbar *_toolbar;
 UILabel *_label;
 UIButton *_button;
 
-- (id)initWithView:(UIView *)parentView {
+- (id)initWithIssuesViewController:(JMCIssuesViewController *)issuesViewController {
     if ((self = [super init])) {
-
-        self.view = parentView;
+        self.issuesViewController = issuesViewController;
 
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
         [_toolbar setBarStyle:UIBarStyleBlack];
@@ -41,11 +40,6 @@ UIButton *_button;
         _button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         [_button setFrame:CGRectMake(0, 440, 320, 40)];
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
-
-        JMCIssuesViewController *issuesController = [[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain];
-        
-        self.issuesViewController = issuesController;
-        [issuesController release];
 
         _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
         _viewController.navigationBar.barStyle = UIBarStyleBlack;
@@ -63,8 +57,22 @@ UIButton *_button;
 
 - (void)notify:(NSTimer *)timer {
     // check notifications
+    if (!_view) {
+        _view =  [[UIApplication sharedApplication] keyWindow];
+    }
     if ([JMCIssueStore instance].newIssueCount > 0) {
 
+        if (!_view) {
+            // since there is no nice way to detect whether or not keyWindow has been setup,
+            // try and display notification 4 times, before giving up. This means JMC can be configured
+            // immediately on app launch.
+            NSNumber* repeatCount = timer.userInfo ? timer.userInfo : [NSNumber numberWithInt:3];
+            if (repeatCount.intValue <= 0) {
+                NSLog(@"In-App notification for replies can not be displayed since keyWindow was never intialised.");
+                return;
+            }
+            [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(notify:) userInfo:[NSNumber numberWithInt:repeatCount.intValue - 1] repeats:NO];
+        }
         int count = [JMCIssueStore instance].newIssueCount;
         NSString *pluralSuffix = count != 1 ? @"s" : @"";
         _label.text = [NSString stringWithFormat:@"%d new notification%@ from developer", count, pluralSuffix];
