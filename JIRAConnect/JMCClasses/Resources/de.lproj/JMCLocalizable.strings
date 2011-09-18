@@ -17,3 +17,7 @@
 
 /** Title of 'Inbox' view **/
 "Your Feedback" = "Dein Feedback";
+
+/** Alert View when Voice is not supported **/
+"Voice Recording" = "Tonaufnahme";
+"JMCVoiceRecordingNotSupported" = "Nicht unterstützt auf diesen Gerät. Bitte Text eingeben.";
