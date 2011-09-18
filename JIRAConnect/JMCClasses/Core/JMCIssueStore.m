@@ -83,6 +83,26 @@ NSString* _jcoDbPath;
                         "date INTEGER) "];
 }
 
+
+- (JMCComment*) newLastCommentFor:(JMCIssue *) issue {
+
+    FMResultSet *res = [db executeQuery:
+                               @"SELECT "
+                                   "* "
+                                "FROM comment WHERE issuekey = ? order by date desc limit 1",
+                           issue.key];
+
+    if ([db hadError]) {
+        NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        return nil;
+    }
+    if ([res next]) {
+        NSDictionary* resultDict = [res resultDict];
+        return [JMCComment newCommentFromDict:resultDict];
+    }
+    return nil;
+}
+
 - (JMCIssue *) initIssueAtIndex:(NSUInteger)issueIndex {
     // each column must match the JSON field JIRA returns for an issue entity
     FMResultSet *res = [db executeQuery:
@@ -96,8 +116,14 @@ NSString* _jcoDbPath;
                                 "FROM issue ORDER BY dateUpdated desc LIMIT 1 OFFSET ?",
                            [NSNumber numberWithUnsignedInt:issueIndex]];
     if ([res next]) {
-        NSDictionary *dictionary = [res resultDict];
-        return [[JMCIssue alloc] initWithDictionary:dictionary];
+        NSDictionary* dictionary = [res resultDict];
+        JMCIssue* issue = [[JMCIssue alloc] initWithDictionary:dictionary];
+        JMCComment* lastComment = [self newLastCommentFor:issue];
+        if (lastComment) {
+            issue.comments = [NSMutableArray arrayWithObject:lastComment];
+        }
+        [lastComment release];
+        return issue;
     }
     NSLog(@"No issue at index = %u", issueIndex);
     return nil;
@@ -197,7 +223,7 @@ NSString* _jcoDbPath;
     return [count intValue];
 }
 
--(int)newIssueCount {
+-(int) newIssueCount {
     FMResultSet *res = [db executeQuery:
                         @"SELECT "
                         "count(*) from ISSUE where hasUpdates = 1"];
