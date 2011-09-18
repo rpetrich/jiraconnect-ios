@@ -121,6 +121,7 @@
 		F8B80554139B574300EC5AD4 /* frontend.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B80549139B574300EC5AD4 /* frontend.png */; };
 		F8B80555139B574300EC5AD4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B8054A139B574300EC5AD4 /* Icon.png */; };
 		F8B80556139B574300EC5AD4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B8054B139B574300EC5AD4 /* MainWindow.xib */; };
+		F8B80556139B574300EC5AD6 /* JMCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5AD5 /* JMCNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,6 +302,8 @@
 		F8B80549139B574300EC5AD4 /* frontend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frontend.png; path = AngryNerds2/Resources/frontend.png; sourceTree = SOURCE_ROOT; };
 		F8B8054A139B574300EC5AD4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = AngryNerds2/Resources/Icon.png; sourceTree = SOURCE_ROOT; };
 		F8B8054B139B574300EC5AD4 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = AngryNerds2/Resources/MainWindow.xib; sourceTree = SOURCE_ROOT; };
+		F8B80556139B574300EC5AD5 /* JMCNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCNavigationController.m; sourceTree = "<group>"; };
+		F8B80556139B574300EC5AD7 /* JMCNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCNavigationController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +353,8 @@
 		01A71BB513E5B1E400EBD56E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F8B80556139B574300EC5AD7 /* JMCNavigationController.h */,
+				F8B80556139B574300EC5AD5 /* JMCNavigationController.m */,
 				01A71BB613E5B1E400EBD56E /* CrashReporter */,
 				01A71BB913E5B1E400EBD56E /* JMCComment.h */,
 				01A71BBA13E5B1E400EBD56E /* JMCComment.m */,
@@ -657,6 +662,7 @@
 		01E90AAE139AE741002CA0D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Nick Pellow";
 			};
 			buildConfigurationList = 01E90AB1139AE741002CA0D9 /* Build configuration list for PBXProject "AngryNerds2" */;
@@ -793,6 +799,7 @@
 				01A71C8113E5B1E500EBD56E /* UIImage+Alpha.m in Sources */,
 				01A71C8213E5B1E500EBD56E /* UIImage+Resize.m in Sources */,
 				01A71C8313E5B1E500EBD56E /* UIImage+RoundedCorner.m in Sources */,
+				F8B80556139B574300EC5AD6 /* JMCNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,6 +874,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AngryNerds2/AngryNerds2-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "AngryNerds2/AngryNerds2-Info.plist";
@@ -888,6 +896,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AngryNerds2/AngryNerds2-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "AngryNerds2/AngryNerds2-Info.plist";

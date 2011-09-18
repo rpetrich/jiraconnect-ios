@@ -23,6 +23,12 @@
 
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+
 -(void) hideSplash:(NSTimer*) timer
 {
     self.splashView.hidden = YES;

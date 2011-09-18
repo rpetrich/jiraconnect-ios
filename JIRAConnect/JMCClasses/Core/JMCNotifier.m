@@ -16,6 +16,7 @@
 #import "JMCNotifier.h"
 #import "JMCIssueStore.h"
 #import "JMC.h"
+#import "JMCNavigationController.h"
 
 @implementation JMCNotifier
 
@@ -30,6 +31,7 @@ UIButton *_button;
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
         [_toolbar setBarStyle:UIBarStyleBlack];
         [_toolbar setTranslucent:YES];
+        _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
         _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 20)];
         _label.backgroundColor = [UIColor clearColor];
@@ -41,8 +43,9 @@ UIButton *_button;
         [_button setFrame:CGRectMake(0, 440, 320, 40)];
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 
-        _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
+        _viewController = [[JMCNavigationController alloc] initWithRootViewController:self.issuesViewController];
         _viewController.navigationBar.barStyle = UIBarStyleBlack;
+        
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJMCReceivedCommentsNotification object:nil];
 

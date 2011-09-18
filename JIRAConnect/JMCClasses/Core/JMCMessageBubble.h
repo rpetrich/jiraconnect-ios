@@ -35,8 +35,8 @@
 @property (nonatomic, retain) UILabel *label;
 @property (nonatomic, retain) UILabel *detailLabel;
 
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifierComment detailHeight:(float)detailHeight;
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifierComment detailSize:(CGSize)detailSize;
 
-- (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font;
+- (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font size:(CGSize)constSize;
 
 @end

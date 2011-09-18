@@ -29,7 +29,7 @@
 
 @synthesize bubble, detailLabel, label;
 
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifierComment detailHeight:(float)detailHeight {
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifierComment detailSize:(CGSize)detailSize {
 
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifierComment])) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -42,7 +42,7 @@
 
         bubble = [[UIImageView alloc] initWithFrame:CGRectZero];
 
-        detailLabelHeight = detailHeight;
+        detailLabelHeight = detailSize.height;
 
         label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.tag = 2;
@@ -50,7 +50,7 @@
         label.lineBreakMode = UILineBreakModeWordWrap;
         label.backgroundColor = [UIColor clearColor];
 
-        detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, detailLabelHeight)];
+        detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, detailSize.width, detailLabelHeight)];
         detailLabel.tag = 3;
         detailLabel.numberOfLines = 1;
         detailLabel.lineBreakMode = UILineBreakModeClip;
@@ -64,24 +64,26 @@
         [message addSubview:detailLabel];
         [message addSubview:bubble];
         [message addSubview:label];
-
+        message.autoresizesSubviews = YES;
+        
         [self.contentView addSubview:message];
+
+        self.contentView.autoresizesSubviews = YES;
 
         [message release];
     }
     return self;
 }
 
+- (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font size:(CGSize)constSize {
 
-- (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font {
-    // TODO: un hardcode these sizes..
-   CGSize  size = [string sizeWithFont:font constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
+   CGSize  size = [string sizeWithFont:font constrainedToSize:CGSizeMake(constSize.width * 0.75f, constSize.height) lineBreakMode:UILineBreakModeWordWrap];
 
     UIImage * balloon;
     float balloonY = 2.0f + detailLabelHeight;
     float labelY = 8.0f + detailLabelHeight;
     if (leftAligned) {
-        CGRect frame = CGRectMake(320.0f - (size.width + 48.0f), balloonY, size.width + 28.0f, size.height + 12.0f);
+        CGRect frame = CGRectMake(constSize.width - (size.width + 48.0f), balloonY, size.width + 28.0f, size.height + 12.0f);
         self.bubble.frame = frame;
         self.bubble.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         balloon = [[UIImage imageNamed:@"Balloon_1"] stretchableImageWithLeftCapWidth:20.0f topCapHeight:15.0f];
@@ -93,7 +95,6 @@
         balloon = [[UIImage imageNamed:@"Balloon_2"] stretchableImageWithLeftCapWidth:25.0f topCapHeight:15.0f];
         self.label.frame = CGRectMake(20.0f, labelY - 2.0f, size.width + 5, size.height);
     }
-
     self.bubble.image = balloon;
     self.label.text = string;
 }

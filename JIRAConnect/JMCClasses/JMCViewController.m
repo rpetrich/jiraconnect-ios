@@ -161,10 +161,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     CGFloat textViewHeight = self.view.bounds.size.height;
 
     UIInterfaceOrientation o = [self interfaceOrientation];
-    if (o == UIInterfaceOrientationPortrait || o == UIInterfaceOrientationPortraitUpsideDown) {
+    if (UIInterfaceOrientationIsPortrait(o)) {
         textViewHeight -= kbSize.height;
         self.countdownView.height = 80.0f;
-    } else if(o == UIInterfaceOrientationLandscapeLeft || o == UIInterfaceOrientationLandscapeRight) {
+    } else if (UIInterfaceOrientationIsLandscape(o)) {
         textViewHeight -= kbSize.width;
         self.countdownView.height = (textViewHeight - self.navigationController.navigationBar.height) * 0.9f;
     }

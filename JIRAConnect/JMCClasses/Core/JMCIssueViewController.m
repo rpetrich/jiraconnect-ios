@@ -129,8 +129,6 @@ static float detailLabelHeight = 21.0f;
         CGSize size = [self.issue.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
         return size.height + 20;
 
-
-
     } else {
         JMCComment *comment = [self.comments objectAtIndex:indexPath.row];
         CGFloat height = [self sizeForComment:comment font:font].height;
@@ -142,12 +140,15 @@ static float detailLabelHeight = 21.0f;
     static NSString *cellIdentifierComment = @"JMCMessageCellComment";
 
     JMCMessageBubble *messageCell = (JMCMessageBubble *)[tableView dequeueReusableCellWithIdentifier:cellIdentifierComment];
+    CGSize detailSize = CGSizeMake(300.0f, detailLabelHeight); // TODO: un-hard code the width here
 
     if (messageCell == nil) {
-        messageCell = [[[JMCMessageBubble alloc] initWithReuseIdentifier:cellIdentifierComment detailHeight:detailLabelHeight] autorelease];
+        messageCell = [[[JMCMessageBubble alloc] initWithReuseIdentifier:cellIdentifierComment detailSize:detailSize] autorelease];
         messageCell.label.font = font;
     }
-    [messageCell setText:comment.body leftAligned:comment.systemUser withFont:font];
+    CGSize frameSize = self.view.frame.size;
+
+    [messageCell setText:comment.body leftAligned:comment.systemUser withFont:font size:frameSize];
 
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -156,6 +157,9 @@ static float detailLabelHeight = 21.0f;
     return messageCell;
 }
 
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) orientation {
+    [self.tableView reloadData];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -169,6 +173,8 @@ static float detailLabelHeight = 21.0f;
             issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
             issueCell.title.font = titleFont;
             issueCell.title.textColor = [UIColor colorWithRed:17/255.0f green:76/255.0f blue:147/255.0f alpha:1.0];
+            issueCell.autoresizesSubviews = YES;
+            issueCell.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
             [issueCell addSubview:issueCell.title];
             issueCell.accessoryType = UITableViewCellAccessoryNone;
         }

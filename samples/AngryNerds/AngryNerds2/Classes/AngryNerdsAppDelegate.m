@@ -21,8 +21,8 @@
      *    * your Application Bundle Name
      *    * the same value as returned by your [JMCCustomDataSource projectName]
      */
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
-//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
+//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
+    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
     return YES;
