@@ -184,7 +184,7 @@
 	[[self window] bringSubviewToFront:self];
 	
 	// Add overlay
-	[[self window] insertSubview:overlay belowSubview: self];	
+	[[self window] insertSubview:overlay belowSubview: self];
 }
 
 - (void) stopAnimating {
