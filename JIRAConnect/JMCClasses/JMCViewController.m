@@ -154,14 +154,25 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // Get the origin of the keyboard when it's displayed.
     NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
 
-    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system. The bottom of the text view's frame should align with the top of the keyboard's final position.
+    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
+    // The bottom of the text view's frame should align with the top of the keyboard's final position.
     CGRect keyboardRect = [aValue CGRectValue];
-    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+    CGSize kbSize = keyboardRect.size;
+    CGFloat textViewHeight = self.view.bounds.size.height;
 
-    CGFloat keyboardTop = keyboardRect.origin.y;
+    UIInterfaceOrientation o = [self interfaceOrientation];
+    if (o == UIInterfaceOrientationPortrait || o == UIInterfaceOrientationPortraitUpsideDown) {
+        textViewHeight -= kbSize.height;
+        self.countdownView.height = 80.0f;
+    } else if(o == UIInterfaceOrientationLandscapeLeft || o == UIInterfaceOrientationLandscapeRight) {
+        textViewHeight -= kbSize.width;
+        self.countdownView.height = (textViewHeight - self.navigationController.navigationBar.height) * 0.9f;
+    }
+
+    self.descriptionField.backgroundColor = [UIColor redColor];
     CGRect newTextViewFrame = self.view.bounds;
-    newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y - 40;
-    newTextViewFrame.origin.y = 44; // TODO: un-hardcode this
+    newTextViewFrame.size.height = textViewHeight - self.navigationController.navigationBar.height;
+    newTextViewFrame.origin.y = self.navigationController.navigationBar.height;
 
     // Get the duration of the animation.
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
@@ -176,6 +187,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     [UIView commitAnimations];
 
+    self.countdownView.center = self.descriptionField.center;
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification
@@ -551,7 +563,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+       return (UIInterfaceOrientationIsLandscape(interfaceOrientation) ||
+               UIInterfaceOrientationIsPortrait(interfaceOrientation));
 //    return YES;
 }
 
