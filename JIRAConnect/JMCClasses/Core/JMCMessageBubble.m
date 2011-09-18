@@ -94,7 +94,7 @@
         self.bubble.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
         balloon = [[UIImage imageNamed:@"Balloon_2"] stretchableImageWithLeftCapWidth:25.0f topCapHeight:15.0f];
         self.label.frame = CGRectMake(20.0f, labelY - 2.0f, size.width + 5, size.height);
-    }
+    } 
     self.bubble.image = balloon;
     self.label.text = string;
 }

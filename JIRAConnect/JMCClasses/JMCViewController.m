@@ -251,6 +251,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (IBAction)addVoice
 {
     JMCRecorder* recorder = [JMCRecorder instance];
+    if (!recorder) {
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle: JMCLocalizedString(@"Voice Recording", @"Alert title when no audio") 
+                                   message: JMCLocalizedString(@"JMCVoiceRecordingNotSupported", @"Alert when no audio") 
+                                  delegate: nil
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
     recorder.recorder.delegate = self;
     if (recorder.recorder.recording) {
         [recorder stop];

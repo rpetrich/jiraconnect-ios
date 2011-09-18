@@ -112,8 +112,7 @@
     [NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
     // whenever the Application Becomes Active, ping for notifications from JIRA.
     [[NSNotificationCenter defaultCenter] addObserver:_pinger selector:@selector(start) name:UIApplicationDidBecomeActiveNotification object:nil];
-    NSLog(@"JiraConnect is Configured with url: %@", withUrl);
-
+    NSLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
 }
 
 - (UIViewController *)viewController

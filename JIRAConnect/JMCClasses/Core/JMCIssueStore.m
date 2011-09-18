@@ -40,7 +40,6 @@ NSString* _jcoDbPath;
 - (id) init {
 	if ((self = [super init])) {
         // db init code...
-        NSLog(@"JMC databasePath = %@", _jcoDbPath);
         db = [FMDatabase databaseWithPath:_jcoDbPath];
         [db setLogsErrors:YES];
         [db retain];

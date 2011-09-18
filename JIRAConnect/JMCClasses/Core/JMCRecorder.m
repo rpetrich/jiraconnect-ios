@@ -68,17 +68,8 @@ NSString* _recorderFilePath;
 		err = nil;
 		AVAudioRecorder* recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
 
-		if(!recorder){
+		if (!recorder) {
 			NSLog(@"recorder: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-			UIAlertView *alert =
-			[[UIAlertView alloc] initWithTitle: @"Warning"
-									   message: [err localizedDescription]
-									  delegate: nil
-							 cancelButtonTitle:@"OK"
-							 otherButtonTitles:nil];
-			[alert show];
-			[alert release];
-
 			return nil;
 		}
 		
