@@ -28,17 +28,17 @@ FMDatabase *db;
 NSString* _jcoDbPath;
 
 +(JMCIssueStore *) instance {
-	static JMCIssueStore *singleton = nil;
-	
-	if (singleton == nil) {
+    static JMCIssueStore *singleton = nil;
+    
+    if (singleton == nil) {
         _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", DOCUMENTS_FOLDER] retain];
-		singleton = [[JMCIssueStore alloc] init];
-	}
-	return singleton;
+        singleton = [[JMCIssueStore alloc] init];
+    }
+    return singleton;
 }
 
 - (id) init {
-	if ((self = [super init])) {
+    if ((self = [super init])) {
         // db init code...
         db = [FMDatabase databaseWithPath:_jcoDbPath];
         [db setLogsErrors:YES];
@@ -50,7 +50,7 @@ NSString* _jcoDbPath;
         // create schema, preserving existing
         [self createSchema:NO];
     }
-	return self;
+    return self;
 }
 
 -(void) createSchema:(BOOL)dropExisting
@@ -102,7 +102,7 @@ NSString* _jcoDbPath;
     return nil;
 }
 
-- (JMCIssue *) initIssueAtIndex:(NSUInteger)issueIndex {
+- (JMCIssue *) newIssueAtIndex:(NSUInteger)issueIndex {
     // each column must match the JSON field JIRA returns for an issue entity
     FMResultSet *res = [db executeQuery:
                                @"SELECT "
@@ -269,7 +269,7 @@ NSString* _jcoDbPath;
 
 - (void) dealloc {
     [db release];
-	[super dealloc];
+    [super dealloc];
 }
 
 @end
