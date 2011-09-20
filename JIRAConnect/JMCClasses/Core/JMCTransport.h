@@ -19,9 +19,9 @@
 #import "ASIFormDataRequest.h"
 #import "JMCIssue.h"
 
-#define kJMCTransportCreateIssuePath   @"rest/jconnect/latest/issue/create?%@"
-#define kJMCTransportCreateCommentPath @"rest/jconnect/latest/issue/comment/%@"
-#define kJMCTransportNotificationsPath @"rest/jconnect/latest/issue/updates?%@"
+#define kJMCTransportCreateIssuePath   @"rest/jconnect/%@/issue/create?%@"
+#define kJMCTransportCreateCommentPath @"rest/jconnect/%@/issue/comment/%@"
+#define kJMCTransportNotificationsPath @"rest/jconnect/%@/issue/updates?%@"
 
 @protocol JMCTransportDelegate <NSObject>
 

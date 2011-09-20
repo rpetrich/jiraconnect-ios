@@ -62,6 +62,7 @@
 - (NSString *) getProject;
 - (NSString *) getAppName;
 - (NSString *) getUUID;
+- (NSString *) getAPIVersion;
 
 - (BOOL) isPhotosEnabled;
 - (BOOL) isVoiceEnabled;

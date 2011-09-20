@@ -41,7 +41,7 @@
     [params setObject:uuid forKey:@"uuid"];
     [params setValue:[lastPingTime stringValue] forKey:@"sinceMillis"];
     NSString * queryString = [JMCTransport encodeParameters:params];
-    NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, queryString];
+    NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, [[JMC instance] getAPIVersion], queryString];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
     NSLog(@"Retrieving notifications via: %@", [url absoluteURL]);

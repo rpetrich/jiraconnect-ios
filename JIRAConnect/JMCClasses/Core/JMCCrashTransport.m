@@ -30,7 +30,7 @@
 
     NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
-    NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, queryString];
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending crash report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
