@@ -45,6 +45,9 @@
     }
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
     [params setObject:typeName forKey:@"type"];
+
+    // TODO: Once the Request is built, serialize it to disk, in case sending fails. It can be retried later.
+    // TODO: This will allow for background sending of feedback, same as crash reports
     [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
