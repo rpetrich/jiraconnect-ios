@@ -24,7 +24,10 @@
 
 typedef enum {
     JMCAttachmentTypeRecording,
-    JMCAttachmentTypeImage
+    JMCAttachmentTypeImage,
+    JMCAttachmentTypePayload,
+    JMCAttachmentTypeCustom,
+    JMCAttachmentTypeSystem
 } JMCAttachmentType;
 
 @interface JMCAttachmentItem : NSObject {

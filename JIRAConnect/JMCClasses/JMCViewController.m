@@ -486,16 +486,26 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [av release];
 
     self.issueTransport.delegate = self;
-    NSDictionary *payloadData = nil;
+
     NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
+    NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
     if ([self.payloadDataSource respondsToSelector:@selector(payload)]) {
-        payloadData = [[self.payloadDataSource payload] retain];
+        NSDictionary *payloadData = [self.payloadDataSource payload];
+        if (payloadData) {
+            NSData *json = [[payloadData JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+            JMCAttachmentItem *payload = [[JMCAttachmentItem alloc] initWithName:@"payload"
+                                                                            data:json
+                                                                            type:JMCAttachmentTypePayload
+                                                                     contentType:@"plain/text"
+                                                                  filenameFormat:@"payload.txt"];
+            [allAttachments addObject:payload];
+            [payload release];
+        }
     }
     if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {
         [customFields addEntriesFromDictionary:[self.payloadDataSource customFields]];
     }
-
 
     if ([self shouldTrackLocation] && [self currentLocation]) {
         NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
@@ -515,12 +525,22 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         [dict release];
     }
 
+    // add all custom fields as one attachment item
+    NSData *customFieldsJSON = [[customFields JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+    [customFields release];
+    JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
+                                                                             data:customFieldsJSON
+                                                                             type:JMCAttachmentTypeCustom
+                                                                      contentType:@"application/json"
+                                                                   filenameFormat:@"customfields.json"];
+    [allAttachments addObject:customFieldsItem];
+    [customFieldsItem release];
+
+    
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue
                            description:self.descriptionField.text
-                                images:self.attachments
-                               payload:payloadData
-                                fields:customFields];
+                           attachments:allAttachments];
     } else {
         // use the first 80 chars of the description as the issue title
         NSString *description = self.descriptionField.text;
@@ -529,13 +549,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         NSString *truncationMarker = [description length] > length ? @"..." : @"";
         [self.issueTransport send:[[description substringToIndex:toIndex] stringByAppendingString:truncationMarker]
                       description:self.descriptionField.text
-                           images:self.attachments
-                          payload:payloadData
-                           fields:customFields];
+                      attachments:allAttachments];
     }
 
-    [payloadData release];
-    [customFields release];
+
 }
 
 -(void) dismissActivity

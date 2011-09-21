@@ -38,7 +38,7 @@
     [params setObject:subject forKey:@"summary"];
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
     [params setObject:typeName forKey:@"type"];
-    [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
+    [self populateCommonFields:description attachments:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     // 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

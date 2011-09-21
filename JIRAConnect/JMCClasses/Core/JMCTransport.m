@@ -18,38 +18,65 @@
 #import "JSON.h"
 #import "JMC.h"
 #import "JMCAttachmentItem.h"
+#import "JMCQueueItem.h"
+#import "JMCRequestQueue.h"
 
 @implementation JMCTransport
 
-- (void)populateCommonFields:(NSString *)description images:(NSArray *)attachments payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params {
 
+- (void)populateCommonFields:(NSString *)description attachments:(NSArray *)attachments upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params {
+
+    // write each data part to disk with a unique filename uuid-ID
+    // store metadata in an index file: uid-index. Contains: URL, parameters(key=value pairs), parts(contentType, name, filename)
     [params setObject:description forKey:@"description"];
-    NSDictionary *metaData = [[JMC instance] getMetaData];
-    [params addEntriesFromDictionary:metaData];
-    NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
-    [upRequest setData:jsonData withFileName:@"issue.json" andContentType:@"application/json" forKey:@"issue"];
+    [params addEntriesFromDictionary:[[JMC instance] getMetaData]];
     
-    if(attachments != nil)
-    {
-        for (int i = 0; i < [attachments count]; i++) {
-            JMCAttachmentItem *item = [attachments objectAtIndex:i];
-            if (item != nil) {
-                NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
-                NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
+    NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+    JMCAttachmentItem *issueItem = [[JMCAttachmentItem alloc] initWithName:@"issue"
+                                                                      data:jsonData
+                                                                      type:JMCAttachmentTypeSystem
+                                                               contentType:@"application/json"
+                                                            filenameFormat:@"issue.json"];
+    
+    
+    NSMutableArray *allAttachments = [NSMutableArray array];
+    [allAttachments addObject:issueItem];
+    [issueItem release];
+    
+    if (attachments != nil) {
+        [allAttachments addObjectsFromArray:attachments];
+    }
+    
+    for (int i = 0; i < [allAttachments count]; i++) {
+        JMCAttachmentItem *item = [allAttachments objectAtIndex:i];
+        if (item != nil) {
+            NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
+            NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
+            if (item.type == JMCAttachmentTypeCustom ||
+                item.type == JMCAttachmentTypeSystem) {
+                // the JIRA Plugin expects all customfields to be in the 'customfields' part. If this changes, plugin must change too
                 [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:key];
+            } else {
+                [upRequest addData:item.data withFileName:filename andContentType:item.contentType forKey:key];
             }
         }
     }
-    if (payloadData != nil) {
-        NSData *json = [[payloadData JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
-        [upRequest setData:json withFileName:@"payload.txt" andContentType:@"plain/text" forKey:@"payload"];
-    }
-    if (customFields != nil) {
-        NSData *json = [[customFields JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
-        [upRequest setData:json withFileName:@"customfields.json" andContentType:@"application/json" forKey:@"customfields"];
-    }
+
+    JMCQueueItem* queueItem = [[JMCQueueItem alloc] initWith:@"uuid-TODO"
+                                                         url:[upRequest.url absoluteString]
+                                                  parameters:params
+                                                  attachments:allAttachments];
+    JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
+    [queue addItem:queueItem];
+    [queueItem release];
+
+    upRequest.didStartSelector = @selector(requestDidStart:);
 }
 
+-(void) requestDidStart:(ASIHTTPRequest *) request {
+    ASIFormDataRequest *form = (ASIFormDataRequest*)request;
+    NSLog(@"STARTED request = %@", form.postBodyFilePath);
+}
 #pragma mark ASIHTTPRequest
 
 - (void)alert:(NSString *)msg withTitle:(NSString *)title button:(NSString *)button {
@@ -63,8 +90,14 @@
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
+
+    NSLog(@"Response id %@ '%@' for %@", request.requestID, request.responseString, request.url.absoluteURL);
+
+    if (request.didCreateTemporaryPostDataFile) {
+        NSLog(@"Did create temp post data file!");
+    }
+    NSLog(@"Request finished = %@, %@", request.postBody, request.postBodyFilePath);
     
-    NSLog(@"Response '%@' for %@", request.responseString, request.url.absoluteURL);
     if (request.responseStatusCode < 300) {
 
         NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on successful feedback submission");

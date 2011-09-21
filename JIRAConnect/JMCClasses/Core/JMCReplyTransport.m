@@ -26,14 +26,14 @@
 
 @implementation JMCReplyTransport
 
-- (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
+- (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description attachments:(NSArray *)attachments {
 
     NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending reply report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
+    [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params];
     
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];

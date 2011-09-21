@@ -39,7 +39,7 @@
 
 @property(nonatomic, retain) id <JMCTransportDelegate> delegate;
 
-- (void)populateCommonFields:(NSString *)description images:(NSArray *)attachments payloadData:(NSDictionary *)payloadData customFields:(NSDictionary *)customFields upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
+- (void)populateCommonFields:(NSString *)description attachments:(NSArray *)attachments upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
 
 - (void)requestFailed:(ASIHTTPRequest *)request;
 

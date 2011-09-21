@@ -19,12 +19,11 @@
 
 @interface JMCIssueTransport : JMCTransport
 {
-
     @private
     ASIFormDataRequest *createIssueRequest;
 }
 
-- (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
+- (void)send:(NSString *)subject description:(NSString *)description attachments:(NSArray *)attachments;
 
 /**
  * Cancel the request.
