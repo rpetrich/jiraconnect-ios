@@ -159,6 +159,11 @@
     return [[NSUserDefaults standardUserDefaults] stringForKey:kJIRAConnectUUID];
 }
 
+- (NSString *) getAPIVersion
+{
+    return @"1.0"; // TODO: pull this from a map. make it a config, etc..
+}
+
 - (NSString *)getProject
 {
     if ([_customDataSource respondsToSelector:@selector(project)]) {

@@ -32,7 +32,7 @@
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
     NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
-    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, queryString];
+    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
     NSURL *url = [NSURL URLWithString:urlPath
                         relativeToURL:[JMC instance].url];
 

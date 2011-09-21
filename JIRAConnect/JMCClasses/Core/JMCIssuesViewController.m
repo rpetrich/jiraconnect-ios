@@ -110,7 +110,7 @@ static NSString *cellId = @"CommentCell";
         cell = [topLevelObjects objectAtIndex:0];
     }
 
-    JMCIssue *issue = [self.issueStore initIssueAtIndex:indexPath.row];
+    JMCIssue *issue = [self.issueStore newIssueAtIndex:indexPath.row];
         
     JMCComment *latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description;
@@ -134,7 +134,7 @@ static NSString *cellId = @"CommentCell";
 
     JMCIssueViewController *detailViewController = [[JMCIssueViewController alloc] initWithNibName:@"JMCIssueViewController" bundle:nil];
 
-    JMCIssue *issue = [self.issueStore initIssueAtIndex:indexPath.row];
+    JMCIssue *issue = [self.issueStore newIssueAtIndex:indexPath.row];
     issue.comments = [self.issueStore loadCommentsFor:issue];
 
     detailViewController.issue = issue;

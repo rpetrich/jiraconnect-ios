@@ -13,12 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-//
-//  Created by nick on 28/04/11.
-//
-//  To change this template use File | Settings | File Templates.
-//
-
 
 #import "JMCTransport.h"
 #import "JMCReplyTransport.h"
@@ -28,7 +22,8 @@
 
 - (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description attachments:(NSArray *)attachments {
 
-    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, originalIssue.key];
+    
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, [[JMC instance] getAPIVersion], originalIssue.key];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
     NSLog(@"Sending reply report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];

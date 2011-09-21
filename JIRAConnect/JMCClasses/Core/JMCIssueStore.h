@@ -27,7 +27,7 @@
 
 - (void) createSchema:(BOOL)dropExisting;
 - (void) updateWithData:(NSDictionary*)data;
-- (JMCIssue *) initIssueAtIndex:(NSUInteger)index;
+- (JMCIssue *) newIssueAtIndex:(NSUInteger)index;
 - (NSMutableArray *) loadCommentsFor:(JMCIssue *)issue;
 - (void) insertOrUpdateIssue:(JMCIssue *)issue;
 - (void) insertComment:(JMCComment *)comment forIssue:(JMCIssue *)issue;
