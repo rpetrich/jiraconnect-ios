@@ -21,41 +21,38 @@
 
 @synthesize author = _author, systemUser = _systemUser, body = _body, date = _date, dateLong;
 
-- (void) dealloc {
+- (void)dealloc {
     self.author = nil;
     self.body = nil;
     self.date = nil;
-	[super dealloc];
+    [super dealloc];
 }
 
-- (id) initWithAuthor:(NSString*)p_author systemUser:(BOOL)p_sys body:(NSString*)p_body date:(NSDate*)p_date {
-	if ((self = [super init])) {
-		self.author = p_author;
+- (id)initWithAuthor:(NSString *)p_author systemUser:(BOOL)p_sys body:(NSString *)p_body date:(NSDate *)p_date {
+    if ((self = [super init])) {
+        self.author = p_author;
         self.body = p_body;
         self.date = p_date;
         self.systemUser = p_sys;
-	}
-	return self;
+    }
+    return self;
 }
 
 
-+ (NSNumber *)dateToMillisSince1970:(NSDate*) date
-{
++ (NSNumber *)dateToMillisSince1970:(NSDate *)date {
     return [NSNumber numberWithDouble:[date timeIntervalSince1970] * 1000];
 }
 
-+ (NSDate *) dateFromMillisSince1970:(NSNumber *)number
-{
++ (NSDate *)dateFromMillisSince1970:(NSNumber *)number {
     return [NSDate dateWithTimeIntervalSince1970:[number longLongValue] / 1000];
 }
 
-- (NSNumber *) dateLong
-{
+- (NSNumber *)dateLong {
     return [JMCComment dateToMillisSince1970:self.date];
 }
 
 
-+(JMCComment *) newCommentFromDict:(NSDictionary *)data {
++ (JMCComment *)newCommentFromDict:(NSDictionary *)data {
     // FMDB will lowercase all column names, so take a copy and lowercase the keys
     NSMutableDictionary *lowerMap = [[NSMutableDictionary alloc] initWithCapacity:[data count]];
     [data enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {

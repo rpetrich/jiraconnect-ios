@@ -39,6 +39,10 @@ static float detailLabelHeight = 21.0f;
         font = [UIFont systemFontOfSize:14.0];
         titleFont = [UIFont boldSystemFontOfSize:14.0];
         self.replyButton.layer.cornerRadius = 7.0f;
+        UIBarButtonItem *replyButton =
+                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(didTouchReply:)];
+        self.navigationItem.rightBarButtonItem = replyButton;
+        [replyButton release];
     }
     return self;
 }
