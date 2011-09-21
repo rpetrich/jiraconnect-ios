@@ -60,6 +60,7 @@
 
 - (NSDictionary*) getMetaData;
 - (NSString *) getProject;
+- (NSString *) getApiKey;
 - (NSString *) getAppName;
 - (NSString *) getUUID;
 - (NSString *) getAPIVersion;

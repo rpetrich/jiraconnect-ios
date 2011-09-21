@@ -30,7 +30,10 @@
 
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
-    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
+    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
+    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
+    [queryParams setObject:[[JMC instance] getApiKey]  forKey:@"apikey"];
+
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
     NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
     NSURL *url = [NSURL URLWithString:urlPath

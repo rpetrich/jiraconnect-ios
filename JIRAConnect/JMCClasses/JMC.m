@@ -172,6 +172,11 @@
     return [self getAppName];
 }
 
+-(NSString *)getApiKey
+{
+    return @"secret-api-key";
+}
+
 - (BOOL)isPhotosEnabled {
     return ([_customDataSource respondsToSelector:@selector(photosEnabled)]) ?
     ([_customDataSource photosEnabled]) : YES; // defaults to YES
