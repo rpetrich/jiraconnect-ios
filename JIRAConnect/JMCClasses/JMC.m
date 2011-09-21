@@ -18,6 +18,47 @@
 #import "Core/JMCNotifier.h"
 #import "Core/JMCCrashSender.h"
 
+@implementation JMCOptions
+@synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
+            photosEnabled=_photosEnabled, voiceEnabled=_voiceEnabled, locationEnabled=_locationEnabled,
+            customFields=_customFields;
+
+-(id)init
+{
+    if ((self = [super init])) {
+        _photosEnabled = YES;
+        _voiceEnabled = YES;
+        _locationEnabled = NO;
+    }
+    return self;
+}
+
++(id)optionsWithContentsOfFile:(NSString *)filePath
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    JMCOptions* options = [[[JMCOptions alloc] init]autorelease];
+    options.url = [dict objectForKey:kJMCOptionUrl];
+    options.projectKey = [dict objectForKey:kJMCOptionProjectKey];
+    options.apiKey = [dict objectForKey:kJMCOptionApiKey];
+    options.photosEnabled = [[dict objectForKey:kJMCOptionPhotosEnabled] boolValue];
+    options.voiceEnabled = [[dict objectForKey:kJMCOptionVoiceEnabled] boolValue];
+    options.photosEnabled = [[dict objectForKey:kJMCOptionPhotosEnabled] boolValue];
+    options.customFields = [dict objectForKey:kJMCOptionCustomFields];
+    return options;
+}
+
+-(void) dealloc
+{
+    self.url = nil;
+    self.projectKey = nil;
+    self.apiKey = nil;
+    self.customFields = nil;
+    [super dealloc];
+}
+
+@end
+
+
 @interface JMC ()
 
 @property (nonatomic, retain) JMCPing * _pinger;
@@ -26,6 +67,7 @@
 @property (nonatomic, retain) UINavigationController* _navController;
 @property (nonatomic, retain) JMCCrashSender *_crashSender;
 @property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
+@property (nonatomic, retain) JMCOptions* _options;
 
 @end
 
@@ -39,6 +81,7 @@
 @synthesize _navController;
 @synthesize _crashSender;
 @synthesize _customDataSource;
+@synthesize _options;
 
 + (JMC *)instance
 {
@@ -70,6 +113,7 @@
     [_jcController release];
     [_navController release];
     [_crashSender release];
+    [_options release];
     [super dealloc];
 }
 
@@ -88,6 +132,27 @@
             CFRelease(uuid);
         }
     }
+}
+
+- (void) configureJiraConnect:(NSString*) withUrl projectKey:(NSString*)project apiKey:(NSString *)apiKey
+{
+    JMCOptions *options = [[JMCOptions alloc]init];
+    options.url = withUrl;
+    options.projectKey = project;
+    options.apiKey = apiKey;
+    [self configureWithOptions:options];
+    [options release];
+}
+
+- (void) configureWithOptions:(JMCOptions*)options
+{
+    [self configureWithOptions:options dataSource:nil];
+}
+
+- (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource
+{
+    self._options = options;
+    [self configureJiraConnect:options.url customDataSource:customDataSource];
 }
 
 - (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
@@ -167,26 +232,25 @@
 - (NSString *)getProject
 {
     if ([_customDataSource respondsToSelector:@selector(project)]) {
-        return [_customDataSource project];
+        return [_customDataSource project]; // for backward compatibility with the beta... deprecated
+    }
+    if (self._options.projectKey != nil) {
+        return self._options.projectKey;
     }
     return [self getAppName];
 }
 
 -(NSString *)getApiKey
 {
-    return @"secret-api-key";
+    return _options.apiKey ? _options.apiKey : @"";
 }
 
 - (BOOL)isPhotosEnabled {
-    return ([_customDataSource respondsToSelector:@selector(photosEnabled)]) ?
-    ([_customDataSource photosEnabled]) : YES; // defaults to YES
+    return _options.photosEnabled;
 }
 
-
 - (BOOL)isVoiceEnabled {
-    BOOL voiceEnabled = ([_customDataSource respondsToSelector:@selector(voiceEnabled)]) ?
-    ([_customDataSource voiceEnabled]) : YES; // defaults to YES
-    return voiceEnabled && [JMCRecorder audioRecordingIsAvailable]; // only enabled if device supports audio input
+    return _options.voiceEnabled && [JMCRecorder audioRecordingIsAvailable]; // only enabled if device supports audio input
 }
 
 -(NSString*) issueTypeNameFor:(JMCIssueType)type useDefault:(NSString *)defaultType {

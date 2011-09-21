@@ -122,6 +122,8 @@
 		F8B80555139B574300EC5AD4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B8054A139B574300EC5AD4 /* Icon.png */; };
 		F8B80556139B574300EC5AD4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B8054B139B574300EC5AD4 /* MainWindow.xib */; };
 		F8B80556139B574300EC5AD6 /* JMCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5AD5 /* JMCNavigationController.m */; };
+		F8B80556139B574300EC5ADA /* JMCRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5AD9 /* JMCRequestQueue.m */; };
+		F8B80556139B574300EC5ADD /* JMCQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5ADC /* JMCQueueItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -304,6 +306,10 @@
 		F8B8054B139B574300EC5AD4 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = AngryNerds2/Resources/MainWindow.xib; sourceTree = SOURCE_ROOT; };
 		F8B80556139B574300EC5AD5 /* JMCNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCNavigationController.m; sourceTree = "<group>"; };
 		F8B80556139B574300EC5AD7 /* JMCNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCNavigationController.h; sourceTree = "<group>"; };
+		F8B80556139B574300EC5AD9 /* JMCRequestQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCRequestQueue.m; sourceTree = "<group>"; };
+		F8B80556139B574300EC5ADB /* JMCRequestQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCRequestQueue.h; sourceTree = "<group>"; };
+		F8B80556139B574300EC5ADC /* JMCQueueItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCQueueItem.m; sourceTree = "<group>"; };
+		F8B80556139B574300EC5ADE /* JMCQueueItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCQueueItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +414,7 @@
 				01A71BEB13E5B1E400EBD56E /* UILabel+VerticalAlign.m */,
 				01A71BEC13E5B1E400EBD56E /* UIView+Additions.h */,
 				01A71BED13E5B1E400EBD56E /* UIView+Additions.m */,
+				F8B80556139B574300EC5AD8 /* queue */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -636,6 +643,17 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		F8B80556139B574300EC5AD8 /* queue */ = {
+			isa = PBXGroup;
+			children = (
+				F8B80556139B574300EC5ADE /* JMCQueueItem.h */,
+				F8B80556139B574300EC5ADC /* JMCQueueItem.m */,
+				F8B80556139B574300EC5ADB /* JMCRequestQueue.h */,
+				F8B80556139B574300EC5AD9 /* JMCRequestQueue.m */,
+			);
+			path = queue;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -800,6 +818,8 @@
 				01A71C8213E5B1E500EBD56E /* UIImage+Resize.m in Sources */,
 				01A71C8313E5B1E500EBD56E /* UIImage+RoundedCorner.m in Sources */,
 				F8B80556139B574300EC5AD6 /* JMCNavigationController.m in Sources */,
+				F8B80556139B574300EC5ADA /* JMCRequestQueue.m in Sources */,
+				F8B80556139B574300EC5ADD /* JMCQueueItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,7 +861,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos4.3;
 			};
 			name = Debug;
 		};
@@ -858,7 +878,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos4.3;
 			};
 			name = Release;
 		};

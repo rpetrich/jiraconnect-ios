@@ -26,7 +26,7 @@
 
 @synthesize createIssueRequest;
 
-- (void)send:(NSString *)subject description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields {
+- (void)send:(NSString *)subject description:(NSString *)description attachments:(NSArray *)attachments {
 
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
@@ -51,7 +51,8 @@
 
     // TODO: Once the Request is built, serialize it to disk, in case sending fails. It can be retried later.
     // TODO: This will allow for background sending of feedback, same as crash reports
-    [self populateCommonFields:description images:images payloadData:payloadData customFields:customFields upRequest:upRequest params:params];
+    [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params];
+
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
     [upRequest setTimeOutSeconds:15];

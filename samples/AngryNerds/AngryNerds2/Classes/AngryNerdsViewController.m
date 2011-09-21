@@ -52,11 +52,6 @@
 
 #pragma mark JCOCustomDataSource
 
-- (NSString *)project
-{
-    return @"Angry Nerds"; // This must match the name of the JIRA Project (or project KEY) in your JIRA instance if it differs from the name of your App.
-}
-
 - (NSDictionary *)customFields
 {
     return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
@@ -76,20 +71,6 @@
 - (NSDictionary *)payload
 {
     return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
-}
-
--(BOOL) locationEnabled {
-    return YES;
-}
-
-- (BOOL)photosEnabled
-{
-    return YES;
-}
-
-- (BOOL)voiceEnabled
-{
-    return YES;
 }
 
 

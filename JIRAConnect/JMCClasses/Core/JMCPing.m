@@ -39,6 +39,8 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     [params setObject:project forKey:@"project"];
     [params setObject:uuid forKey:@"uuid"];
+    NSString* key = [[JMC instance] getApiKey];
+    [params setObject:key forKey:@"apikey"];
     [params setValue:[lastPingTime stringValue] forKey:@"sinceMillis"];
     NSString * queryString = [JMCTransport encodeParameters:params];
     NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, [[JMC instance] getAPIVersion], queryString];

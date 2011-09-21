@@ -47,23 +47,9 @@ typedef enum {
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.
 * This value can be either the JIRA Project's name, _or_ its Project Key. e.g. JRA
+* NB: This is deprecated. Use a JMCOptions instead.
 */
 -(NSString *)project;
-
-/**
- * If YES the location data (lat/lng) will be sent as a part of the issue, this is NO by default.
- */
--(BOOL) locationEnabled;
-
-/**
- * If YES users will be able to submit voice recordings with their feedback, this is YES by default.
- */
--(BOOL) voiceEnabled;
-
-/**
- * If YES users will be able to submit screenshots/photos with their feedback, this is YES by default.
- */
--(BOOL) photosEnabled;
 
 
 @end

@@ -30,6 +30,6 @@
 {
 
 }
-- (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description images:(NSArray *)images payload:(NSDictionary *)payloadData fields:(NSDictionary *)customFields;
+- (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description attachments:(NSArray *)images;
 
 @end

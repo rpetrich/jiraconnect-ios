@@ -28,7 +28,10 @@
 
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport {
 
-    NSDictionary *queryParams = [NSDictionary dictionaryWithObject:[[JMC instance] getProject] forKey:@"project"];
+    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
+    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
+    [queryParams setObject:[[JMC instance] getApiKey]  forKey:@"apikey"];
+
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
     NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
     NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
@@ -38,7 +41,7 @@
     [params setObject:subject forKey:@"summary"];
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
     [params setObject:typeName forKey:@"type"];
-    [self populateCommonFields:description images:nil payloadData:nil customFields:nil upRequest:upRequest params:params];
+    [self populateCommonFields:description attachments:nil upRequest:upRequest params:params];
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     // 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -72,7 +75,9 @@
     if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:)]) {
         [self.delegate transportDidFinishWithError:error];
     }
-    NSString *msg = [NSString stringWithFormat:@"\n %@.\n Please try again later.", [error localizedDescription]];
+
+    NSString * errMsg = [error localizedDescription] != nil ? [error localizedDescription] : @"";
+    NSString *msg = [NSString stringWithFormat:@"\n %@: %@\n Please try again later.", errMsg, [request responseString]];
     NSLog(@"CRASH requestFailed: %@. URL: %@, response code: %d", msg, [request url], [request responseStatusCode]);
 }
 
