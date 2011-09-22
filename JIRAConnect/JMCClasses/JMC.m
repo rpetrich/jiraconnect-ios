@@ -158,6 +158,9 @@
 - (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
     [CrashReporter enableCrashReporter];
+    if (!self._options) {
+        self._options = [[[JMCOptions alloc] init] autorelease];
+    }
 
     // TODO: handle URLs that contain a context, but don't end with a / ..
     self.url = [NSURL URLWithString:withUrl];
