@@ -158,8 +158,11 @@
 - (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
     [CrashReporter enableCrashReporter];
-    
+
+    // TODO: handle URLs that contain a context, but don't end with a / ..
     self.url = [NSURL URLWithString:withUrl];
+    NSLog(@"self.url = %@", self.url);
+    
     [self generateAndStoreUUID];
 
     _pinger.baseUrl = self.url;

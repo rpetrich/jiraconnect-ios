@@ -25,10 +25,11 @@
 //    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
 
 //    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
-
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
-                              projectKey:@"NERDS" 
-                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"];
+    
+    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/"
+                              projectKey:@"FOUR"
+                                  apiKey:@"e98c9722-2fa8-4198-adbe-0b1a21f837a2"];
+    
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
     return YES;
