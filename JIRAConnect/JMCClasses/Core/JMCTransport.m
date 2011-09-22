@@ -21,6 +21,8 @@
 #import "JMCQueueItem.h"
 #import "JMCRequestQueue.h"
 
+#define kJMCHeaderNameRequestId @"-x-jmc-requestid"
+
 @implementation JMCTransport
 
 
@@ -63,7 +65,9 @@
         }
     }
 
-    JMCQueueItem* queueItem = [[JMCQueueItem alloc] initWith:@"uuid-TODO"
+    NSString *requestId= @"uuid-TODO";
+    [upRequest addRequestHeader:kJMCHeaderNameRequestId value:requestId];
+    JMCQueueItem* queueItem = [[JMCQueueItem alloc] initWith:requestId
                                                          url:[upRequest.url absoluteString]
                                                   parameters:params
                                                   attachments:allAttachments];
@@ -86,6 +90,8 @@
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
+
+    NSLog(@"Request ID: %@", [request.requestHeaders objectForKey:kJMCHeaderNameRequestId]);
 
     if (request.responseStatusCode < 300) {
 

@@ -14,7 +14,7 @@
 }
 
 // generate a UUID for this request
--(NSString*) generateUniqueId {
++(NSString*) generateUniqueId {
     NSString *queueItemId = nil;
     CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
     if (theUUID) {

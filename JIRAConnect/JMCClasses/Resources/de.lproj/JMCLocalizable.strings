@@ -6,7 +6,7 @@
 "CrashDataFoundTitle" = "Crash-Bericht";
 
 /* Thank you message on successful feedback submission */
-"JMCFeedbackReceived" = "Your feedback has been received. Thank you for helping us improve %@.";
+"JMCFeedbackReceived" = "Dein Feedback is angekommen. Vielen dank für die Verbesserungen von %@.";
 
 "Always" = "Immer";
 "No" = "Nein";
