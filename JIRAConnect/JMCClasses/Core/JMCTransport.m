@@ -21,10 +21,15 @@
 #import "JMCQueueItem.h"
 #import "JMCRequestQueue.h"
 
+#define kJMCHeaderNameRequestId @"-x-jmc-requestid"
+
 @implementation JMCTransport
 
 
-- (void)populateCommonFields:(NSString *)description attachments:(NSArray *)attachments upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params {
+- (void)populateCommonFields:(NSString *)description
+                 attachments:(NSArray *)attachments
+                   upRequest:(ASIFormDataRequest *)upRequest
+                      params:(NSMutableDictionary *)params {
 
     // write each data part to disk with a unique filename uuid-ID
     // store metadata in an index file: uid-index. Contains: URL, parameters(key=value pairs), parts(contentType, name, filename)
@@ -63,7 +68,9 @@
         }
     }
 
-    JMCQueueItem* queueItem = [[JMCQueueItem alloc] initWith:@"uuid-TODO"
+    NSString *requestId= [JMCQueueItem generateUniqueId];
+    [upRequest addRequestHeader:kJMCHeaderNameRequestId value:requestId];
+    JMCQueueItem* queueItem = [[JMCQueueItem alloc] initWith:requestId
                                                          url:[upRequest.url absoluteString]
                                                   parameters:params
                                                   attachments:allAttachments];
@@ -87,6 +94,18 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
 
+    // TODO: this will be only deleted if the request was successful. Else, leave it in the queue.
+    // TODO: leaving this here for now, to test the read/write of attachments some more
+    NSString* requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
+    JMCQueueItem *queueItem = [[JMCRequestQueue sharedInstance] getItem:requestId];
+    if (queueItem == nil) {
+        NSLog(@"Missing queue item for request: %@", requestId);
+    }
+    // remove the request item from the queue
+    //TODO: consider synchronisation
+    JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
+    [queue deleteItem:requestId];
+    
     if (request.responseStatusCode < 300) {
 
         NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on successful feedback submission");

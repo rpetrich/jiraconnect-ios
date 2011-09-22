@@ -123,6 +123,7 @@
 		F8B80556139B574300EC5AD6 /* JMCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5AD5 /* JMCNavigationController.m */; };
 		F8B80556139B574300EC5ADA /* JMCRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5AD9 /* JMCRequestQueue.m */; };
 		F8B80556139B574300EC5ADD /* JMCQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5ADC /* JMCQueueItem.m */; };
+		F8B80556139B574300EC5AE0 /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5ADF /* JMCToolbarButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -308,6 +309,8 @@
 		F8B80556139B574300EC5ADB /* JMCRequestQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCRequestQueue.h; sourceTree = "<group>"; };
 		F8B80556139B574300EC5ADC /* JMCQueueItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCQueueItem.m; sourceTree = "<group>"; };
 		F8B80556139B574300EC5ADE /* JMCQueueItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCQueueItem.h; sourceTree = "<group>"; };
+		F8B80556139B574300EC5ADF /* JMCToolbarButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
+		F8B80556139B574300EC5AE1 /* JMCToolbarButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +360,8 @@
 		01A71BB513E5B1E400EBD56E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F8B80556139B574300EC5AE1 /* JMCToolbarButton.h */,
+				F8B80556139B574300EC5ADF /* JMCToolbarButton.m */,
 				F8B80556139B574300EC5AD7 /* JMCNavigationController.h */,
 				F8B80556139B574300EC5AD5 /* JMCNavigationController.m */,
 				01A71BB613E5B1E400EBD56E /* CrashReporter */,
@@ -816,6 +821,7 @@
 				F8B80556139B574300EC5AD6 /* JMCNavigationController.m in Sources */,
 				F8B80556139B574300EC5ADA /* JMCRequestQueue.m in Sources */,
 				F8B80556139B574300EC5ADD /* JMCQueueItem.m in Sources */,
+				F8B80556139B574300EC5AE0 /* JMCToolbarButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,60 +6,71 @@
 
 
 #import "JMCRequestQueue.h"
+#import "JMCAttachmentItem.h"
 
+@interface JMCRequestQueue ()
+- (NSString *)getQueueIndexPath;
 
-@interface JMCRequestQueue()
--(NSString *) getQueueIndexPath;
--(NSString *) getQueueDirPath;
--(NSMutableArray *) getQueueList;
--(void) saveQueueIndex:(NSMutableArray *)queueList;
+- (NSString *)getQueueDirPath;
+
+- (NSString *)getQueueItemPathFor:(NSString *)uuid;
+
+- (NSMutableArray *)getQueueList;
+
+- (void)saveQueueIndex:(NSMutableArray *)queueList;
 
 @end
 
-@implementation JMCRequestQueue
-{
+@implementation JMCRequestQueue {
 
 }
 
-+(JMCRequestQueue*) sharedInstance
++ (JMCRequestQueue *)sharedInstance
 {
-    static JMCRequestQueue* instance = nil;
+    static JMCRequestQueue *instance = nil;
     if (instance == nil) {
         instance = [[JMCRequestQueue alloc] init];
     }
     return instance;
 }
 
--(void)addItem:(JMCQueueItem *)item
+- (void)addItem:(JMCQueueItem *)item
 {
-//    NSMutableArray* queueIndex = [self getQueueList];
-//    [queueIndex addObject:item.uuid];
-//    [self saveQueueIndex:queueIndex];
+    NSMutableArray *queueIndex = [self getQueueList];
+    [queueIndex addObject:item.uuid];
+    [self saveQueueIndex:queueIndex];
+    // now save the queue item to disc...
+    NSString *itemPath = [self getQueueItemPathFor:item.uuid];
+    [item writeToFile:itemPath];
 }
+
+-(JMCQueueItem *)getItem:(NSString *)uuid
+{
+    NSString *itemPath = [self getQueueItemPathFor:uuid];
+    return [JMCQueueItem queueItemFromFile:itemPath];
+}
+
 
 - (void)saveQueueIndex:(NSMutableArray *)queueList
 {
-    NSLog(@"Saving Queue index to = %@", [self getQueueIndexPath]);
-
     [queueList writeToFile:[self getQueueIndexPath] atomically:YES];
 }
 
--(void)deleteItem:(NSString*)uuid
-{
-    
+- (void)deleteItem:(NSString *)uuid {
+    NSMutableArray *queue = [self getQueueList];
+    u_int index = [queue indexOfObject:uuid];
+    if (index < [queue count]) {
+        [queue removeObjectAtIndex:index];
+    }
+    [self saveQueueIndex:queue];
+    // now remove the queue item from disk
+    [[NSFileManager defaultManager] removeItemAtPath:[self getQueueItemPathFor:uuid] error:nil];
+
 }
 
--(NSArray *)getAllItems
-{
-    NSArray* queueIndex = [self getQueueList];
-    for (NSString * uuid in queueIndex) {
-        NSLog(@"UUID: %@", uuid);
-    }
-}
 
 // This is the actual list of items that need sending
--(NSMutableArray*) getQueueList
-{
+- (NSMutableArray *)getQueueList {
     NSMutableArray *queueIndex = [[[NSArray arrayWithContentsOfFile:[self getQueueIndexPath]] mutableCopy] autorelease];
     if (queueIndex == nil) {
         queueIndex = [NSMutableArray arrayWithCapacity:0];
@@ -68,27 +79,25 @@
 }
 
 // The path of the plist that stores a list of request that need resending
--(NSString *) getQueueIndexPath
-{
+- (NSString *)getQueueIndexPath {
     return [[self getQueueDirPath] stringByAppendingPathComponent:@"JMCQueueIndex.plist"];
 }
 
--(NSString *)getQueueDirPath
-{
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSArray *paths = NSSearchPathForDirectoriesInDomains( NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *cache = [paths objectAtIndex:0];
-	NSString *cachePath = [cache stringByAppendingPathComponent:@"JMC"];
-
-	if (![fileManager fileExistsAtPath:cachePath])
-		[fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
-
-	return cachePath;
+- (NSString *)getQueueItemPathFor:(NSString *)uuid {
+    return [[self getQueueDirPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"jmc-%@.plist", uuid]];
 }
 
--(NSString *) getQueueColophonPathFor:(NSString*)queueId
-{
-    return [[self getQueueDirPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"jmc-%@.plist", queueId]];
+- (NSString *)getQueueDirPath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cache = [paths objectAtIndex:0];
+    NSString *cachePath = [cache stringByAppendingPathComponent:@"JMC"];
+
+    if (![fileManager fileExistsAtPath:cachePath]) {
+        [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+
+    return cachePath;
 }
 
 @end

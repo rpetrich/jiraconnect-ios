@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface JMCQueueItem : NSObject {
+@interface JMCQueueItem : NSObject <NSCoding> {
     NSString* _uuid; // globally unique id for this item.
     NSString* _url;
     NSDictionary* _parameters;
@@ -20,8 +20,12 @@
 @property (retain, nonatomic) NSDictionary* parameters;
 @property (retain, nonatomic) NSArray* attachments;
 
++(NSString*) generateUniqueId;
+
 -(id)initWith:(NSString*)uuid url:(NSString*)url parameters:(NSDictionary*) params attachments:(NSArray*)attachments;
--(void)write;
--(void)read;
++ (JMCQueueItem *)queueItemFromFile:(NSString*)filepath;
+
+-(void)writeToFile:(NSString *)filepath;
+
 
 @end

@@ -21,9 +21,7 @@
 +(JMCRequestQueue*) sharedInstance;
 
 -(void) addItem:(JMCQueueItem *)item;
+-(JMCQueueItem *) getItem:(NSString *)uuid;
 -(void) deleteItem:(NSString*)uuid;
-
-/** Gets all JMCQueueItems in the queue.**/
--(NSArray*) getAllItems;
 
 @end

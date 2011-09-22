@@ -8,7 +8,6 @@
 /* Thank you message on successful feedback submission */
 "JMCFeedbackReceived" = "Vielen Dank für Ihr Feedback und Hilfe %@ zu verbessern.";
 
-
 "Always" = "Immer";
 "No" = "Nein";
 "Yes" = "Ja";

@@ -22,15 +22,16 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    JMCAttachmentTypeRecording,
-    JMCAttachmentTypeImage,
-    JMCAttachmentTypePayload,
-    JMCAttachmentTypeCustom,
-    JMCAttachmentTypeSystem
-} JMCAttachmentType;
+enum {
+    JMCAttachmentTypeRecording = 1,
+    JMCAttachmentTypeImage = 2,
+    JMCAttachmentTypePayload = 3,
+    JMCAttachmentTypeCustom = 4,
+    JMCAttachmentTypeSystem = 5
+};
+typedef int JMCAttachmentType;
 
-@interface JMCAttachmentItem : NSObject {
+@interface JMCAttachmentItem : NSObject <NSCoding> {
     NSString* name;
     NSString*filenameFormat;
     NSString* contentType;
@@ -44,6 +45,7 @@ typedef enum {
 @property(nonatomic) JMCAttachmentType type;
 
 - (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JMCAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat;
-
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (id)initWithCoder:(NSCoder *)aDecoder;
 
 @end

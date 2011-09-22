@@ -22,6 +22,7 @@
 #import "Core/JMCSketchViewController.h"
 #import "Core/JMCIssueStore.h"
 #import "JSON.h"
+#import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface JMCViewController ()
@@ -196,13 +197,14 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action
 {
-    UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *customView = [JMCToolbarButton buttonWithType:UIButtonTypeCustom];
     [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     [customView setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
     UIImage *icon = [UIImage imageNamed:iconNamed];
     CGRect frame = CGRectMake(0, 0, 41, 31);
     [customView setImage:icon forState:UIControlStateNormal];
     customView.frame = frame;
+    
     UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
 
     return barItem;

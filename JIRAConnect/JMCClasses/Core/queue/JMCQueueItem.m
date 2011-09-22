@@ -7,6 +7,10 @@
 
 #import "JMCQueueItem.h"
 
+#define kUuid @"itemUuid"
+#define kUrl @"itemUrl"
+#define kParameters @"parameters"
+#define kAttachments @"attachments"
 
 @implementation JMCQueueItem
 {
@@ -14,7 +18,7 @@
 }
 
 // generate a UUID for this request
--(NSString*) generateUniqueId {
++(NSString*) generateUniqueId {
     NSString *queueItemId = nil;
     CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
     if (theUUID) {
@@ -36,13 +40,36 @@
     }
     return self;
 }
--(void)write
-{
 
-}
--(void)read
++ (JMCQueueItem *)queueItemFromFile:(NSString*)filepath
 {
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:filepath];
+}
+
+
+- (void)encodeWithCoder:(NSCoder*)coder {
+    [coder encodeObject:self.uuid forKey:kUuid];
+    [coder encodeObject:self.url forKey:kUrl];
+    [coder encodeObject:self.parameters forKey:kParameters];
+    [coder encodeObject:self.attachments forKey:kAttachments];
+}
+
+- (id)initWithCoder:(NSCoder*)coder {
+
+    self = [super init];
+    if (!self) return nil;
+
+    self.uuid = [coder decodeObjectForKey:kUuid];
+    self.url = [coder decodeObjectForKey:kUrl];
+    self.attachments = [coder decodeObjectForKey:kAttachments];
+    self.parameters = [coder decodeObjectForKey:kParameters];
     
+    return self;
+}
+
+-(void)writeToFile:(NSString *)filepath
+{
+    [NSKeyedArchiver archiveRootObject:self toFile:filepath];
 }
 
 @synthesize uuid=_uuid, url=_url, parameters=_parameters, attachments=_attachments;
@@ -53,6 +80,6 @@
     self.url = nil;
     self.parameters = nil;
     self.attachments = nil;
-	[super dealloc];
+    [super dealloc];
 }
 @end
