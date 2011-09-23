@@ -60,10 +60,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    sendLocationData = NO;
-    if ([self.payloadDataSource respondsToSelector:@selector(locationEnabled)]) {
-        sendLocationData = [[self payloadDataSource] locationEnabled];
-    }
+    sendLocationData = [[JMC instance] isLocationEnabled];
 
     if ([self shouldTrackLocation]) {
         _locationManager = [[[CLLocationManager alloc] init] retain];

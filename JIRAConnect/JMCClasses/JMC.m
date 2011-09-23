@@ -42,7 +42,7 @@
     options.apiKey = [dict objectForKey:kJMCOptionApiKey];
     options.photosEnabled = [[dict objectForKey:kJMCOptionPhotosEnabled] boolValue];
     options.voiceEnabled = [[dict objectForKey:kJMCOptionVoiceEnabled] boolValue];
-    options.photosEnabled = [[dict objectForKey:kJMCOptionPhotosEnabled] boolValue];
+    options.locationEnabled = [[dict objectForKey:kJMCOptionLocationEnabled] boolValue];
     options.customFields = [dict objectForKey:kJMCOptionCustomFields];
     return options;
 }
@@ -171,6 +171,7 @@
     _pinger.baseUrl = self.url;
 
     _customDataSource = customDataSource;
+    [_customDataSource retain];
     _jcController.payloadDataSource = _customDataSource;
 
     JMCIssuesViewController *issuesController = [[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -213,9 +214,12 @@
     
     
     // app application data 
-    [info setObject:[appMetaData objectForKey:@"CFBundleVersion"] forKey:@"appVersion"];
-    [info setObject:[appMetaData objectForKey:@"CFBundleName"] forKey:@"appName"];
-    [info setObject:[appMetaData objectForKey:@"CFBundleIdentifier"] forKey:@"appId"];
+    NSString* bundleVersion = [appMetaData objectForKey:@"CFBundleVersion"];
+    NSString* bundleName = [appMetaData objectForKey:@"CFBundleName"];
+    NSString* bundleId = [appMetaData objectForKey:@"CFBundleIdentifier"];
+    if (bundleVersion) [info setObject:bundleVersion forKey:@"appVersion"];
+    if (bundleName) [info setObject:bundleName forKey:@"appName"];
+    if (bundleId) [info setObject:bundleId forKey:@"appId"];
     
     return info;
 }
@@ -253,6 +257,10 @@
 
 - (BOOL)isPhotosEnabled {
     return _options.photosEnabled;
+}
+
+- (BOOL)isLocationEnabled {
+    return _options.locationEnabled;
 }
 
 - (BOOL)isVoiceEnabled {

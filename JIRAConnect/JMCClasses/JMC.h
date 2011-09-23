@@ -111,9 +111,10 @@
 * no custom data is required, then pass in nil.
 */
 - (void) configureJiraConnect:(NSString*) withUrl customDataSource:(id<JMCCustomDataSource>)customDataSource;
+- (void) configureJiraConnect:(NSString*) withUrl projectKey:(NSString*)project apiKey:(NSString *)apiKey;
 - (void) configureWithOptions:(JMCOptions*)options;
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource;
-- (void) configureJiraConnect:(NSString*) withUrl projectKey:(NSString*)project apiKey:(NSString *)apiKey;
+
 
 /**
 * Retrieves the main viewController for JIRAConnect. This controller holds the 'create issue' view.
@@ -134,6 +135,7 @@
 
 - (BOOL) isPhotosEnabled;
 - (BOOL) isVoiceEnabled;
+- (BOOL) isLocationEnabled;
 - (NSString*) issueTypeNameFor:(JMCIssueType)type useDefault:(NSString *)defaultType;
 
 @end
