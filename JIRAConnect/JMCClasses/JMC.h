@@ -44,7 +44,14 @@
     NSDictionary* _customFields;
 }
 
-+(id)optionsWithContentsOfFile:(NSString *)filePath;
++(id) optionsWithContentsOfFile:(NSString *)filePath;
++(id) optionsWithUrl:(NSString *)jiraUrl
+            project:(NSString*)projectKey
+             apiKey:(NSString*)apiKey
+             photos:(BOOL)photos
+              voice:(BOOL)voice
+           location:(BOOL)location
+       customFields:(NSDictionary*)customFields;
 
 /**
 * The base URL of the JIRA instance.

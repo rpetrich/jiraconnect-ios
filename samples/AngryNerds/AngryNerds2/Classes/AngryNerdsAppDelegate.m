@@ -21,22 +21,22 @@
      *    * your Application Bundle Name
      *    * the same value as returned by your [JMCCustomDataSource projectName]
      */
-//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:viewController];
 
-//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/"
-//                              projectKey:@"NERDS"
-//                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"];
+    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+                              projectKey:@"NERDS"
+                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"];
 
-    JMCOptions *options = [[JMCOptions alloc] init];
-    options.url = @"http://connect.onjira.com";
-    options.projectKey = @"NERDS";
-    options.locationEnabled = YES;
-    [[JMC instance] configureWithOptions:options dataSource:viewController];
-    [options release];
+//    JMCOptions *options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com"
+//                                             project:@"NERDS"
+//                                              apiKey:nil
+//                                              photos:YES
+//                                               voice:YES
+//                                            location:YES
+//                                        customFields:nil];
+//
+//    [[JMC instance] configureWithOptions:options dataSource:viewController];
+//
 
-//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/"
-//                              projectKey:@"NERDS"
-//                                  apiKey:@""];
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
     return YES;

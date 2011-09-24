@@ -47,6 +47,26 @@
     return options;
 }
 
++(id)optionsWithUrl:(NSString *)jiraUrl
+            project:(NSString*)projectKey
+             apiKey:(NSString*)apiKey
+             photos:(BOOL)photos
+              voice:(BOOL)voice
+           location:(BOOL)location
+       customFields:(NSDictionary*)customFields
+{
+    JMCOptions* options = [[[JMCOptions alloc] init]autorelease];
+    options.url = jiraUrl;
+    options.projectKey = projectKey;
+    options.apiKey = apiKey;
+    options.photosEnabled = photos;
+    options.voiceEnabled = voice;
+    options.locationEnabled = location;
+    options.customFields = customFields;
+    return options;
+}
+
+
 -(void) dealloc
 {
     self.url = nil;
@@ -162,7 +182,10 @@
         self._options = [[[JMCOptions alloc] init] autorelease];
     }
 
-    // TODO: handle URLs that contain a context, but don't end with a / ..
+    unichar lastChar = [withUrl characterAtIndex:[withUrl length] - 1];
+    // if the lastChar is not a /, then add a /
+    NSString* charToAppend = lastChar != '/' ? @"/" : @"";
+    withUrl = [withUrl stringByAppendingString:charToAppend];
     self.url = [NSURL URLWithString:withUrl];
     NSLog(@"self.url = %@", self.url);
     

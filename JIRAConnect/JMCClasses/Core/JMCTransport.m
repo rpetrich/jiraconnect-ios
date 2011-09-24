@@ -109,7 +109,9 @@
     if (request.responseStatusCode < 300) {
 
         NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on successful feedback submission");
-        NSString *msg = [NSString stringWithFormat:thankyouMsg, [[JMC instance] getProject]];
+        NSString *appName= [[JMC instance] getAppName];
+        NSString *projectName = appName ? appName : [[JMC instance] getProject];
+        NSString *msg = [NSString stringWithFormat:thankyouMsg, projectName];
         [self alert:msg withTitle:@"Thank You" button:@"OK"];
         // alert the delegate!
         [self.delegate transportDidFinish:[request responseString]];
@@ -125,15 +127,15 @@
         [self.delegate transportDidFinishWithError:error];
     }
     NSString *msg = @"";
-    if (request.responseStatusCode >= 300) {
-        msg = [msg stringByAppendingFormat:@"Response code %d\n", request.responseStatusCode];
-    }
     if ([error localizedDescription] != nil) {
         msg = [msg stringByAppendingFormat:@"%@.\n", [error localizedDescription]];
     }
-    msg = [msg stringByAppendingString:@"Please try again later."];
-    
-    NSLog(@"requestFailed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
+    NSString *response= [request responseString];
+    if (response) {
+        msg = [msg stringByAppendingString:response];
+    }
+
+    NSLog(@"Request failed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
     [self alert:msg withTitle:@"Error submitting Feedback" button:@"OK"];
 }
 
