@@ -17,6 +17,7 @@
 #import "Core/JMCPing.h"
 #import "Core/JMCNotifier.h"
 #import "Core/JMCCrashSender.h"
+#import "JMCRequestQueue.h"
 
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
@@ -135,6 +136,24 @@
     [_crashSender release];
     [_options release];
     [super dealloc];
+}
+
+-(void)flushRequestQueue
+{
+
+    JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
+    NSArray *items = [requestQueue getQueueList];
+    
+    for (NSString *itemId in items) {
+        NSLog(@"sending itemId = %@", itemId);
+        JMCQueueItem *item = [requestQueue getItem:itemId];
+        if ([item.type isEqualToString:kTypeReply]) {
+            [self._jcController.replyTransport resendItem:item];
+        } else {
+            [self._jcController.issueTransport resendItem:item];
+        }
+        [requestQueue deleteItem:item.uuid];
+    }
 }
 
 

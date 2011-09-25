@@ -21,6 +21,7 @@
 +(JMCRequestQueue*) sharedInstance;
 
 -(void) addItem:(JMCQueueItem *)item;
+- (NSMutableArray *)getQueueList;
 -(JMCQueueItem *) getItem:(NSString *)uuid;
 -(void) deleteItem:(NSString*)uuid;
 

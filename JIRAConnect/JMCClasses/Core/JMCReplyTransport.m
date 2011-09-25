@@ -17,29 +17,41 @@
 #import "JMCTransport.h"
 #import "JMCReplyTransport.h"
 #import "JMC.h"
+#import "JMCQueueItem.h"
+#import "JMCRequestQueue.h"
 
 @implementation JMCReplyTransport
 
-- (void)sendReply:(JMCIssue *)originalIssue description:(NSString *)description attachments:(NSArray *)attachments {
-
+-(NSURL *)makeUrlFor:(NSString*)issueKey
+{
     NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
     [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
     [queryParams setObject:[[JMC instance] getApiKey] forKey:@"apikey"];
     NSString *queryString = [JMCTransport encodeParameters:queryParams];
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, [[JMC instance] getAPIVersion], issueKey, queryString];
+    return [NSURL URLWithString:path relativeToURL:[JMC instance].url];
+}
 
-    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, [[JMC instance] getAPIVersion], originalIssue.key, queryString];
-    NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
+-(NSString *) getType
+{
+    return kTypeReply;
+}
+
+- (void)sendReply:(JMCIssue *)originalIssue
+      description:(NSString *)description
+      attachments:(NSArray *)attachments
+{
+
+    NSURL *url = [self makeUrlFor:originalIssue.key];
     NSLog(@"Sending reply report to:   %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params];
-    
-    [upRequest setDelegate:self];
-    [upRequest setShouldAttemptPersistentConnection:NO];
-    [upRequest setTimeOutSeconds:15];
-    [upRequest startAsynchronous];
+    JMCQueueItem *queueItem =
+            [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params issueKey:originalIssue.key];
+    JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
+    [queue addItem:queueItem];
 
-    // TODO: consider doing this only if request is successful. Else, remove last comment on FAIL?
+    [upRequest startAsynchronous];
     JMCComment * comment = [[JMCComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date]];
     [originalIssue.comments addObject:comment];
     [comment release];

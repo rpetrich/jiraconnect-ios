@@ -9,8 +9,13 @@
 
 #define kUuid @"itemUuid"
 #define kUrl @"itemUrl"
-#define kParameters @"parameters"
 #define kAttachments @"attachments"
+#define kOriginalIssueKey @"originalIssueKey"
+
+#define kType @"type"
+
+#define kTypeCreate @"CREATE"
+#define kTypeReply @"REPLY"
 
 @implementation JMCQueueItem
 {
@@ -30,13 +35,14 @@
     return queueItemId; // what when nil?
 }
 
--(id)initWith:(NSString*)uuid url:(NSString*)url parameters:(NSDictionary*) params attachments:(NSArray*)attachments
+-(id)initWith:(NSString*)uuid url:(NSString*)url type:(NSString*)type attachments:(NSArray*)attachments issueKey:(NSString *)originalIssueKey
 {
     if ((self = [super init])) {
         self.uuid = uuid;
         self.url = url;
-        self.parameters = params;
+        self.type = type;
         self.attachments = attachments;
+        self.originalIssueKey = originalIssueKey;
     }
     return self;
 }
@@ -50,8 +56,9 @@
 - (void)encodeWithCoder:(NSCoder*)coder {
     [coder encodeObject:self.uuid forKey:kUuid];
     [coder encodeObject:self.url forKey:kUrl];
-    [coder encodeObject:self.parameters forKey:kParameters];
+    [coder encodeObject:self.type forKey:kType];
     [coder encodeObject:self.attachments forKey:kAttachments];
+    [coder encodeObject:self.originalIssueKey forKey:kOriginalIssueKey];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
@@ -62,7 +69,8 @@
     self.uuid = [coder decodeObjectForKey:kUuid];
     self.url = [coder decodeObjectForKey:kUrl];
     self.attachments = [coder decodeObjectForKey:kAttachments];
-    self.parameters = [coder decodeObjectForKey:kParameters];
+    self.originalIssueKey = [coder decodeObjectForKey:kOriginalIssueKey];
+    self.type = [coder decodeObjectForKey:kType];
     
     return self;
 }
@@ -72,14 +80,15 @@
     [NSKeyedArchiver archiveRootObject:self toFile:filepath];
 }
 
-@synthesize uuid=_uuid, url=_url, parameters=_parameters, attachments=_attachments;
+@synthesize uuid=_uuid, url=_url, type=_type, attachments=_attachments, originalIssueKey=_originalIssueKey;
 
 - (void) dealloc
 {
     self.uuid = nil;
     self.url = nil;
-    self.parameters = nil;
+    self.type = nil;
     self.attachments = nil;
+    self.originalIssueKey = nil;
     [super dealloc];
 }
 @end

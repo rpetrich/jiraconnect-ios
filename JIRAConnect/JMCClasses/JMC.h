@@ -122,6 +122,7 @@
 - (void) configureWithOptions:(JMCOptions*)options;
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource;
 
+-(void) flushRequestQueue;
 
 /**
 * Retrieves the main viewController for JIRAConnect. This controller holds the 'create issue' view.

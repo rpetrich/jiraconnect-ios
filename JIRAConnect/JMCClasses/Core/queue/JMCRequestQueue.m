@@ -15,7 +15,6 @@
 
 - (NSString *)getQueueItemPathFor:(NSString *)uuid;
 
-- (NSMutableArray *)getQueueList;
 
 - (void)saveQueueIndex:(NSMutableArray *)queueList;
 
@@ -30,6 +29,8 @@
     static JMCRequestQueue *instance = nil;
     if (instance == nil) {
         instance = [[JMCRequestQueue alloc] init];
+        NSLog(@"queue at  %@", [instance getQueueIndexPath]);
+
     }
     return instance;
 }
@@ -84,7 +85,7 @@
 }
 
 - (NSString *)getQueueItemPathFor:(NSString *)uuid {
-    return [[self getQueueDirPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"jmc-%@.plist", uuid]];
+    return [[self getQueueDirPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", uuid]];
 }
 
 - (NSString *)getQueueDirPath {

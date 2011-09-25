@@ -207,21 +207,22 @@ static float detailLabelHeight = 21.0f;
     [self presentModalViewController:navController animated:YES];
 
     self.feedbackController.replyToIssue = self.issue;
+    // TODO: fix this. Should no longer need to be set each time reply is tapped
     self.feedbackController.replyTransport.delegate = self;
     self.feedbackController.navigationItem.title = @"Reply";
     [navController release];
 }
 
 - (void)transportDidFinish:(NSString *)response {
-    
-    [self.feedbackController dismissActivity];
+    // TODO: ensure to add the comment at least to the in-memory rep of the issue comment data.
+    NSLog(@"TRANSPORT DID FINISH: response: %@", response);
     // insert comment in db
     NSDictionary *commentDict = [response JSONValue];
     // lower case
     JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
     [[JMCIssueStore instance] insertComment:comment forIssue:self.issue];
     [comment release];
-
+    
     [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
@@ -229,7 +230,7 @@ static float detailLabelHeight = 21.0f;
 }
 
 - (void)transportDidFinishWithError:(NSError *)error {
-    [self.feedbackController dismissActivity];
+
 }
 
 

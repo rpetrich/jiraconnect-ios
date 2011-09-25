@@ -379,6 +379,78 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0157CB5F142EDE7500EB8F88 /* Sketch */ = {
+			isa = PBXGroup;
+			children = (
+				0161F15E13E2C98E0048DD76 /* JMCLine.h */,
+				0161F15F13E2C98E0048DD76 /* JMCLine.m */,
+				0161F16C13E2C98E0048DD76 /* JMCSketch.h */,
+				0161F16D13E2C98E0048DD76 /* JMCSketch.m */,
+				0161F16E13E2C98E0048DD76 /* JMCSketchContainerView.h */,
+				0161F16F13E2C98E0048DD76 /* JMCSketchContainerView.m */,
+				0161F17013E2C98E0048DD76 /* JMCSketchScrollView.h */,
+				0161F17113E2C98E0048DD76 /* JMCSketchScrollView.m */,
+				0161F17213E2C98E0048DD76 /* JMCSketchView.h */,
+				0161F17313E2C98E0048DD76 /* JMCSketchView.m */,
+				0161F17413E2C98E0048DD76 /* JMCSketchViewController.h */,
+				0161F17513E2C98E0048DD76 /* JMCSketchViewController.m */,
+				0161F17613E2C98E0048DD76 /* JMCSketchViewController.xib */,
+				0161F17713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h */,
+			);
+			name = Sketch;
+			sourceTree = "<group>";
+		};
+		0157CB60142EDE9A00EB8F88 /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				0161F14B13E2C98E0048DD76 /* JMCCrashSender.h */,
+				0161F14C13E2C98E0048DD76 /* JMCCrashSender.m */,
+				0161F14D13E2C98E0048DD76 /* JMCCrashTransport.h */,
+				0161F14E13E2C98E0048DD76 /* JMCCrashTransport.m */,
+				0161F15913E2C98E0048DD76 /* JMCIssueTransport.h */,
+				0161F15A13E2C98E0048DD76 /* JMCIssueTransport.m */,
+				0161F16613E2C98E0048DD76 /* JMCPing.h */,
+				0161F16713E2C98E0048DD76 /* JMCPing.m */,
+				0161F16A13E2C98E0048DD76 /* JMCReplyTransport.h */,
+				0161F16B13E2C98E0048DD76 /* JMCReplyTransport.m */,
+				0161F17813E2C98E0048DD76 /* JMCTransport.h */,
+				0161F17913E2C98E0048DD76 /* JMCTransport.m */,
+			);
+			name = Transport;
+			sourceTree = "<group>";
+		};
+		0157CB61142EDEC600EB8F88 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				0161F15113E2C98E0048DD76 /* JMCIssuePreviewCell.h */,
+				0161F15213E2C98E0048DD76 /* JMCIssuePreviewCell.m */,
+				0161F15313E2C98E0048DD76 /* JMCIssuePreviewCell.xib */,
+				0161F15413E2C98E0048DD76 /* JMCIssueStore.h */,
+				0161F15513E2C98E0048DD76 /* JMCIssueStore.m */,
+				0161F15613E2C98E0048DD76 /* JMCIssuesViewController.h */,
+				0161F15713E2C98E0048DD76 /* JMCIssuesViewController.m */,
+				0161F15B13E2C98E0048DD76 /* JMCIssueViewController.h */,
+				0161F15C13E2C98E0048DD76 /* JMCIssueViewController.m */,
+				0161F15D13E2C98E0048DD76 /* JMCIssueViewController.xib */,
+				0161F16013E2C98E0048DD76 /* JMCMessageBubble.h */,
+				0161F16113E2C98E0048DD76 /* JMCMessageBubble.m */,
+				0161F16213E2C98E0048DD76 /* JMCMessageCell.h */,
+				0161F16313E2C98E0048DD76 /* JMCMessageCell.m */,
+			);
+			name = Inbox;
+			sourceTree = "<group>";
+		};
+		0157CB62142EDEF000EB8F88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0161F14913E2C98E0048DD76 /* JMCComment.h */,
+				0161F14A13E2C98E0048DD76 /* JMCComment.m */,
+				0161F14F13E2C98E0048DD76 /* JMCIssue.h */,
+				0161F15013E2C98E0048DD76 /* JMCIssue.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		0161F14413E2C98E0048DD76 /* JMCClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,58 +473,18 @@
 		0161F14513E2C98E0048DD76 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				01EC37E0142ED10A00BF600E /* JMCToolbarButton.h */,
-				01EC37E1142ED10A00BF600E /* JMCToolbarButton.m */,
 				01EC37D7142ED0AC00BF600E /* Queue */,
 				0161F14613E2C98E0048DD76 /* CrashReporter */,
-				0161F14913E2C98E0048DD76 /* JMCComment.h */,
-				0161F14A13E2C98E0048DD76 /* JMCComment.m */,
-				0161F14B13E2C98E0048DD76 /* JMCCrashSender.h */,
-				0161F14C13E2C98E0048DD76 /* JMCCrashSender.m */,
-				0161F14D13E2C98E0048DD76 /* JMCCrashTransport.h */,
-				0161F14E13E2C98E0048DD76 /* JMCCrashTransport.m */,
-				0161F14F13E2C98E0048DD76 /* JMCIssue.h */,
-				0161F15013E2C98E0048DD76 /* JMCIssue.m */,
-				0161F15113E2C98E0048DD76 /* JMCIssuePreviewCell.h */,
-				0161F15213E2C98E0048DD76 /* JMCIssuePreviewCell.m */,
-				0161F15313E2C98E0048DD76 /* JMCIssuePreviewCell.xib */,
-				0161F15413E2C98E0048DD76 /* JMCIssueStore.h */,
-				0161F15513E2C98E0048DD76 /* JMCIssueStore.m */,
-				0161F15613E2C98E0048DD76 /* JMCIssuesViewController.h */,
-				0161F15713E2C98E0048DD76 /* JMCIssuesViewController.m */,
-				0161F15913E2C98E0048DD76 /* JMCIssueTransport.h */,
-				0161F15A13E2C98E0048DD76 /* JMCIssueTransport.m */,
-				0161F15B13E2C98E0048DD76 /* JMCIssueViewController.h */,
-				0161F15C13E2C98E0048DD76 /* JMCIssueViewController.m */,
-				0161F15D13E2C98E0048DD76 /* JMCIssueViewController.xib */,
-				0161F15E13E2C98E0048DD76 /* JMCLine.h */,
-				0161F15F13E2C98E0048DD76 /* JMCLine.m */,
-				0161F16013E2C98E0048DD76 /* JMCMessageBubble.h */,
-				0161F16113E2C98E0048DD76 /* JMCMessageBubble.m */,
-				0161F16213E2C98E0048DD76 /* JMCMessageCell.h */,
-				0161F16313E2C98E0048DD76 /* JMCMessageCell.m */,
+				0157CB62142EDEF000EB8F88 /* Model */,
+				0157CB60142EDE9A00EB8F88 /* Transport */,
+				0157CB61142EDEC600EB8F88 /* Inbox */,
+				0157CB5F142EDE7500EB8F88 /* Sketch */,
+				01EC37E0142ED10A00BF600E /* JMCToolbarButton.h */,
+				01EC37E1142ED10A00BF600E /* JMCToolbarButton.m */,
 				0161F16413E2C98E0048DD76 /* JMCNotifier.h */,
 				0161F16513E2C98E0048DD76 /* JMCNotifier.m */,
-				0161F16613E2C98E0048DD76 /* JMCPing.h */,
-				0161F16713E2C98E0048DD76 /* JMCPing.m */,
 				0161F16813E2C98E0048DD76 /* JMCRecorder.h */,
 				0161F16913E2C98E0048DD76 /* JMCRecorder.m */,
-				0161F16A13E2C98E0048DD76 /* JMCReplyTransport.h */,
-				0161F16B13E2C98E0048DD76 /* JMCReplyTransport.m */,
-				0161F16C13E2C98E0048DD76 /* JMCSketch.h */,
-				0161F16D13E2C98E0048DD76 /* JMCSketch.m */,
-				0161F16E13E2C98E0048DD76 /* JMCSketchContainerView.h */,
-				0161F16F13E2C98E0048DD76 /* JMCSketchContainerView.m */,
-				0161F17013E2C98E0048DD76 /* JMCSketchScrollView.h */,
-				0161F17113E2C98E0048DD76 /* JMCSketchScrollView.m */,
-				0161F17213E2C98E0048DD76 /* JMCSketchView.h */,
-				0161F17313E2C98E0048DD76 /* JMCSketchView.m */,
-				0161F17413E2C98E0048DD76 /* JMCSketchViewController.h */,
-				0161F17513E2C98E0048DD76 /* JMCSketchViewController.m */,
-				0161F17613E2C98E0048DD76 /* JMCSketchViewController.xib */,
-				0161F17713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h */,
-				0161F17813E2C98E0048DD76 /* JMCTransport.h */,
-				0161F17913E2C98E0048DD76 /* JMCTransport.m */,
 				0161F17A13E2C98E0048DD76 /* UILabel+VerticalAlign.h */,
 				0161F17B13E2C98E0048DD76 /* UILabel+VerticalAlign.m */,
 				0161F17C13E2C98E0048DD76 /* UIView+Additions.h */,

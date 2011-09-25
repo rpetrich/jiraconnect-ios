@@ -41,7 +41,8 @@
     [params setObject:subject forKey:@"summary"];
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
     [params setObject:typeName forKey:@"type"];
-    [self populateCommonFields:description attachments:nil upRequest:upRequest params:params];
+    [self populateCommonFields:description attachments:nil upRequest:upRequest params:params issueKey:nil];
+    // don't queue crash requests. these are done in CrashSender
     NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     // 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

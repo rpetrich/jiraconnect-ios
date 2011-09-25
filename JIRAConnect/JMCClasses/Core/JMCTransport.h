@@ -18,6 +18,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JMCIssue.h"
+#import "JMCQueueItem.h"
 
 #define kJMCTransportCreateIssuePath   @"rest/jconnect/%@/issue/create?%@"
 #define kJMCTransportCreateCommentPath @"rest/jconnect/%@/issue/comment/%@?%@"
@@ -32,17 +33,31 @@
 
 @end
 
+@protocol JMCQueueItemDelegate <NSObject>
+- (NSString *) getType;
+- (NSString *) getIssueKey;
+- (NSURL *) makeUrlFor:(NSString *)issueKey;
+@end
 
-@interface JMCTransport : NSObject <UIAlertViewDelegate> {
+@interface JMCTransport : NSObject <UIAlertViewDelegate, JMCQueueItemDelegate> 
+{
     id <JMCTransportDelegate> _delegate;
 }
 
 @property(nonatomic, retain) id <JMCTransportDelegate> delegate;
 
-- (void)populateCommonFields:(NSString *)description attachments:(NSArray *)attachments upRequest:(ASIFormDataRequest *)upRequest params:(NSMutableDictionary *)params;
+- (void) resendItem:(JMCQueueItem *)item;
 
+- (JMCQueueItem *)populateCommonFields:(NSString *)description
+                           attachments:(NSArray *)attachments
+                             upRequest:(ASIFormDataRequest *)upRequest
+                                params:(NSMutableDictionary *)params
+                              issueKey:(NSString *)issueKey;
+
+-(void) sayThankYou;
 - (void)requestFailed:(ASIHTTPRequest *)request;
 
++ (NSString *)encodeCommonParameters;
 + (NSMutableString *)encodeParameters:(NSDictionary *)parameters;
 
 

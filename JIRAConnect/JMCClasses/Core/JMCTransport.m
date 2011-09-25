@@ -25,11 +25,79 @@
 
 @implementation JMCTransport
 
++(NSString *)encodeCommonParameters
+{
+    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
+    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
+    [queryParams setObject:[[JMC instance] getApiKey]  forKey:@"apikey"];
+    return [JMCTransport encodeParameters:queryParams];
+}
 
-- (void)populateCommonFields:(NSString *)description
-                 attachments:(NSArray *)attachments
-                   upRequest:(ASIFormDataRequest *)upRequest
-                      params:(NSMutableDictionary *)params {
++(void)addAllAttachments:(NSArray *)allAttachments toRequest:(ASIFormDataRequest *)upRequest
+{
+    for (u_int i = 0; i < [allAttachments count]; i++) {
+        JMCAttachmentItem *item = [allAttachments objectAtIndex:i];
+        if (item != nil) {
+            NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
+            NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
+            if (item.type == JMCAttachmentTypeCustom ||
+                item.type == JMCAttachmentTypeSystem) {
+                // the JIRA Plugin expects all customfields to be in the 'customfields' part.
+                // If this changes, plugin must change too
+                [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:item.name];
+            } else {
+                [upRequest addData:item.data withFileName:filename andContentType:item.contentType forKey:key];
+            }
+        }
+    }
+}
+
+- (NSString *) getType {
+    return nil;
+}
+- (NSString *) getIssueKey {
+    return nil;
+}
+- (NSURL *) makeUrlFor:(NSString *)issueKey {
+    return nil;
+}
+
+- (void) resendItem:(JMCQueueItem *)item {
+
+    // only ASIFormDataRequest are queued at the moment...
+    NSURL *url = [self makeUrlFor:item.originalIssueKey];
+    ASIFormDataRequest* request = [ASIFormDataRequest requestWithURL:url];
+    [JMCTransport addAllAttachments:item.attachments toRequest:request];
+
+    [request setShouldContinueWhenAppEntersBackground:YES];
+    [request setDelegate:self];
+    NSLog(@"request delegeate is: %@", request.delegate);
+    [request setShouldAttemptPersistentConnection:NO];
+    [request setTimeOutSeconds:30];
+    [request startAsynchronous];
+}
+
+-(void)sayThankYou {
+    NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on successful feedback submission");
+    NSString *appName = [[JMC instance] getAppName];
+    NSString *projectName = appName ? appName : [[JMC instance] getProject];
+    NSString *msg = [NSString stringWithFormat:thankyouMsg, projectName];
+
+    UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Thank You"
+                                                         message:msg
+                                                        delegate:self
+                                               cancelButtonTitle:@"Ok"
+                                               otherButtonTitles:nil];
+    [alertView2 show];
+    [alertView2 release];
+}
+
+- (JMCQueueItem *)populateCommonFields:(NSString *)description
+                           attachments:(NSArray *)attachments
+                             upRequest:(ASIFormDataRequest *)upRequest
+                                params:(NSMutableDictionary *)params
+                              issueKey:(NSString *)issueKey
+{
 
     // write each data part to disk with a unique filename uuid-ID
     // store metadata in an index file: uid-index. Contains: URL, parameters(key=value pairs), parts(contentType, name, filename)
@@ -51,75 +119,47 @@
     if (attachments != nil) {
         [allAttachments addObjectsFromArray:attachments];
     }
-    
-    for (u_int i = 0; i < [allAttachments count]; i++) {
-        JMCAttachmentItem *item = [allAttachments objectAtIndex:i];
-        if (item != nil) {
-            NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
-            NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
-            if (item.type == JMCAttachmentTypeCustom ||
-                item.type == JMCAttachmentTypeSystem) {
-                // the JIRA Plugin expects all customfields to be in the 'customfields' part.
-                // If this changes, plugin must change too
-                [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:item.name];
-            } else {
-                [upRequest addData:item.data withFileName:filename andContentType:item.contentType forKey:key];
-            }
-        }
-    }
-//    [upRequest setShouldContinueWhenAppEntersBackground:YES];
+
+    [JMCTransport addAllAttachments:allAttachments toRequest:upRequest];
+
+    [upRequest setShouldContinueWhenAppEntersBackground:YES];
+    [upRequest setDelegate:self];
+    [upRequest setShouldAttemptPersistentConnection:NO];
+    [upRequest setTimeOutSeconds:30];
 
     NSString *requestId= [JMCQueueItem generateUniqueId];
     [upRequest addRequestHeader:kJMCHeaderNameRequestId value:requestId];
-    JMCQueueItem* queueItem = [[JMCQueueItem alloc] initWith:requestId
-                                                         url:[upRequest.url absoluteString]
-                                                  parameters:params
-                                                  attachments:allAttachments];
-    JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
-    [queue addItem:queueItem];
-    [queueItem release];
 
+    JMCQueueItem *queueItem = [[JMCQueueItem alloc] initWith:requestId
+                                                         url:[upRequest.url absoluteString]
+                                                        type:[self getType]
+                                                 attachments:allAttachments
+                                                    issueKey:issueKey];
+
+    return [queueItem autorelease];
 }
+
 
 #pragma mark ASIHTTPRequest
 
-- (void)alert:(NSString *)msg withTitle:(NSString *)title button:(NSString *)button {
-    UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:title
-                message:msg
-                delegate:self
-                cancelButtonTitle:button
-                otherButtonTitles:nil];
-    [alertView2 show];
-    [alertView2 release];
-}
-
 - (void)requestFinished:(ASIHTTPRequest *)request {
-
-    // TODO: this will be only deleted if the request was successful. Else, leave it in the queue.
-    // TODO: leaving this here for now, to test the read/write of attachments some more
-    NSString* requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
-    JMCQueueItem *queueItem = [[JMCRequestQueue sharedInstance] getItem:requestId];
-    if (queueItem == nil) {
-        NSLog(@"Missing queue item for request: %@", requestId);
-    }
-    // remove the request item from the queue
-    //TODO: consider synchronisation
-    JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
-    [queue deleteItem:requestId];
     
+    NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     if (request.responseStatusCode < 300) {
 
-        NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on successful feedback submission");
-        NSString *appName= [[JMC instance] getAppName];
-        NSString *projectName = appName ? appName : [[JMC instance] getProject];
-        NSString *msg = [NSString stringWithFormat:thankyouMsg, projectName];
-        [self alert:msg withTitle:@"Thank You" button:@"OK"];
-        // alert the delegate!
+        // remove the request item from the queue
+        //TODO: consider synchronisation
+        JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
+        [queue deleteItem:requestId];
+
+        NSLog(@"Request succeeded & queued item is deleted. %@", requestId);
+        // alert the delegate! 
         [self.delegate transportDidFinish:[request responseString]];
+
     } else {
+        NSLog(@"Request FAILED & queued item is not deleted. %@", requestId);
         [self requestFailed:request];
     }
-
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
@@ -137,7 +177,6 @@
     }
 
     NSLog(@"Request failed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
-    [self alert:msg withTitle:@"Error submitting Feedback" button:@"OK"];
 }
 
 #pragma mark end

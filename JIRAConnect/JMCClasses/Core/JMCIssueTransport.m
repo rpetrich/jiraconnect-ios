@@ -17,6 +17,8 @@
 
 #import "JMCIssueTransport.h"
 #import "JMC.h"
+#import "JMCQueueItem.h"
+#import "JMCRequestQueue.h"
 
 @interface JMCIssueTransport ()
 @property(nonatomic, retain) ASIFormDataRequest *createIssueRequest;
@@ -26,19 +28,25 @@
 
 @synthesize createIssueRequest;
 
-- (void)send:(NSString *)subject description:(NSString *)description attachments:(NSArray *)attachments {
+- (NSURL *)makeUrlFor:(NSString *)issueKey {
+    NSString *queryString = [JMCTransport encodeCommonParameters];
+    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
+    NSURL *url = [NSURL URLWithString:urlPath relativeToURL:[JMC instance].url];
+    return url;
+}
+
+-(NSString *) getType {
+    return kTypeCreate;
+}
+
+
+- (void)send:(NSString *)subject
+ description:(NSString *)description
+ attachments:(NSArray *)attachments {
 
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
-    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
-    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
-    [queryParams setObject:[[JMC instance] getApiKey]  forKey:@"apikey"];
-
-    NSString *queryString = [JMCTransport encodeParameters:queryParams];
-    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
-    NSURL *url = [NSURL URLWithString:urlPath
-                        relativeToURL:[JMC instance].url];
-
+    NSURL *url = [self makeUrlFor:nil];
     NSLog(@"Sending feedback to:    %@", url.absoluteString);
     ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     [self setCreateIssueRequest:upRequest];
@@ -49,14 +57,11 @@
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
     [params setObject:typeName forKey:@"type"];
 
-    // TODO: Once the Request is built, serialize it to disk, in case sending fails. It can be retried later.
-    // TODO: This will allow for background sending of feedback, same as crash reports
-    [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params];
-
-    [upRequest setDelegate:self];
-    [upRequest setShouldAttemptPersistentConnection:NO];
-    [upRequest setTimeOutSeconds:30];
+    JMCQueueItem *queueItem =
+            [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params issueKey:nil];
+    [[JMCRequestQueue sharedInstance] addItem:queueItem];
     [upRequest startAsynchronous];
+    [self sayThankYou];
 }
 
 -(void) cancel {

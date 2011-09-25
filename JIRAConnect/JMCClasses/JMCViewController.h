@@ -77,8 +77,6 @@
 
 - (IBAction)sendFeedback;
 
-- (void)dismissActivity;
-
 - (IBAction)addScreenshot;
 
 - (IBAction)addVoice;

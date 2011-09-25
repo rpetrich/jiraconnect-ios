@@ -126,6 +126,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
 
+    [[JMC instance] flushRequestQueue];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -475,15 +477,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         // No data entered, just return.
         return;
     }
-	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
-
-    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
-    [av setText:JMCLocalizedString(@"Sending...", @"")];
-    [av startAnimating];
-    [av setDelegate:self];
-    [self setActivityView:av];
-    [av release];
-
     self.issueTransport.delegate = self;
 
     NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
@@ -543,37 +536,27 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                       description:self.descriptionField.text
                       attachments:allAttachments];
     }
-
-
-}
-
--(void) dismissActivity
-{
-    [[self activityView] stopAnimating];
+    [self dismissModalViewControllerAnimated:YES];
+    self.descriptionField.text = @"";
+    [self.attachments removeAllObjects];
+    [self.toolbar setItems:systemToolbarItems];
 }
 
 - (void)transportDidFinish:(NSString *)response
 {
-    [self dismissActivity];
-    [self dismissModalViewControllerAnimated:YES];
-
-    self.descriptionField.text = @"";
-    [self.attachments removeAllObjects];
-    [self.toolbar setItems:systemToolbarItems];
-
     // response needs to be an Issue.json... so we can insert one here.
     NSDictionary *responseDict = [response JSONValue];
     JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
     [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
-    // anounce that an issue was added, so the JMCIssuesView can redraw
-
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
     [issue release];
+    // anounce that an issue was added, so the JMCIssuesView can redraw
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
+
 }
 
 - (void)transportDidFinishWithError:(NSError *)error
 {
-    [self dismissActivity];
+
 }
 
 #pragma mark end
