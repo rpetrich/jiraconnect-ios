@@ -67,6 +67,7 @@
             }
         }
     }
+//    [upRequest setShouldContinueWhenAppEntersBackground:YES];
 
     NSString *requestId= [JMCQueueItem generateUniqueId];
     [upRequest addRequestHeader:kJMCHeaderNameRequestId value:requestId];

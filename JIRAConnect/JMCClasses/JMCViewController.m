@@ -489,17 +489,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
-    if ([self.payloadDataSource respondsToSelector:@selector(payload)]) {
-        NSDictionary *payloadData = [self.payloadDataSource payload];
+    if ([self.payloadDataSource respondsToSelector:@selector(attachment)]) {
+        JMCAttachmentItem *payloadData = [self.payloadDataSource attachment];
         if (payloadData) {
-            NSData *json = [[payloadData JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
-            JMCAttachmentItem *payload = [[JMCAttachmentItem alloc] initWithName:@"payload"
-                                                                            data:json
-                                                                            type:JMCAttachmentTypePayload
-                                                                     contentType:@"plain/text"
-                                                                  filenameFormat:@"payload.txt"];
-            [allAttachments addObject:payload];
-            [payload release];
+            [allAttachments addObject:payloadData];
         }
     }
     if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {

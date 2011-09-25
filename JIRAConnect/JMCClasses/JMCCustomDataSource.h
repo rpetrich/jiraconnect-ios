@@ -15,6 +15,7 @@
 **/
 
 #import <Foundation/Foundation.h>
+#import "JMCAttachmentItem.h"
 
 typedef enum {
     JMCIssueTypeCrash,
@@ -26,9 +27,9 @@ typedef enum {
 @optional
 
 /**
-* Return a dictionary that will be serialized to json and attached to any feedback created by the user.
+* Returns a custom attachment that will be attached to the issue.
 */
--(NSDictionary *) payload;
+-(JMCAttachmentItem *) attachment;
 
 /**
 * A dictionary containing any specialized custom fields (keyed by custom field name) 

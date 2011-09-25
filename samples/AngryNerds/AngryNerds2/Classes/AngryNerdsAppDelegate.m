@@ -22,20 +22,21 @@
      *    * the same value as returned by your [JMCCustomDataSource projectName]
      */
 
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
-                              projectKey:@"NERDS"
-                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"];
+//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+//                              projectKey:@"NERDS"
+//                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"];
+    
+    
+    JMCOptions *options = [JMCOptions optionsWithUrl:@"http://localhost:2990/jira"
+                                             project:@"NERDS"
+                                              apiKey:nil
+                                              photos:YES
+                                               voice:YES
+                                            location:YES
+                                        customFields:nil];
 
-//    JMCOptions *options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com"
-//                                             project:@"NERDS"
-//                                              apiKey:nil
-//                                              photos:YES
-//                                               voice:YES
-//                                            location:YES
-//                                        customFields:nil];
-//
-//    [[JMC instance] configureWithOptions:options dataSource:viewController];
-//
+    [[JMC instance] configureWithOptions:options dataSource:viewController];
+
 
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];

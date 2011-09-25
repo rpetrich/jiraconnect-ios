@@ -68,9 +68,13 @@
 }
 
 
-- (NSDictionary *)payload
+- (JMCAttachmentItem *) attachment
 {
-    return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
+    return [[[JMCAttachmentItem alloc] initWithName:@"custom-attachment"
+                                              data:[@"Add any other data as an attachment" dataUsingEncoding:NSUTF8StringEncoding]
+                                              type:JMCAttachmentTypePayload
+                                       contentType:@"text/plain"
+                                    filenameFormat:@"customattachment.txt"] autorelease];
 }
 
 

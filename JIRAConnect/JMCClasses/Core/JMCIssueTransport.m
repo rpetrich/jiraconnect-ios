@@ -55,7 +55,7 @@
 
     [upRequest setDelegate:self];
     [upRequest setShouldAttemptPersistentConnection:NO];
-    [upRequest setTimeOutSeconds:15];
+    [upRequest setTimeOutSeconds:30];
     [upRequest startAsynchronous];
 }
 
@@ -67,7 +67,6 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
 }
-
 
 -(void) dealloc {
     [createIssueRequest release];

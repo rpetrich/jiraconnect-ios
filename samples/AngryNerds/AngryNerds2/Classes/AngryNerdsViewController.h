@@ -16,7 +16,6 @@
 - (IBAction) triggerCrash;
 - (IBAction) triggerFeedback;
 - (IBAction) triggerDisplayNotifications;
-- (NSString *)project;
 
 -(IBAction)bounceNerd;
 
