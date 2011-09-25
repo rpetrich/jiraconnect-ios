@@ -70,6 +70,7 @@
     [JMCTransport addAllAttachments:item.attachments toRequest:request];
 
     [request setShouldContinueWhenAppEntersBackground:YES];
+    [request addRequestHeader:kJMCHeaderNameRequestId value:item.uuid];
     [request setDelegate:self];
     NSLog(@"request delegeate is: %@", request.delegate);
     [request setShouldAttemptPersistentConnection:NO];

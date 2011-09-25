@@ -149,8 +149,11 @@
         JMCQueueItem *item = [requestQueue getItem:itemId];
         if ([item.type isEqualToString:kTypeReply]) {
             [self._jcController.replyTransport resendItem:item];
-        } else {
+        } else if ([item.type isEqualToString:kTypeCreate]) {
             [self._jcController.issueTransport resendItem:item];
+        } else {
+            NSLog(@"Missing queued item with id: %@. Removing from queue.", itemId);
+            [requestQueue deleteItem:itemId];
         }
     }
 }

@@ -214,6 +214,9 @@ static float detailLabelHeight = 21.0f;
 }
 
 - (void)transportDidFinish:(NSString *)response {
+    
+    // TODO: when adding comments, possibly insert into the db immediately, then delete here..
+    
     // TODO: ensure to add the comment at least to the in-memory rep of the issue comment data.
     NSLog(@"TRANSPORT DID FINISH: response: %@", response);
     // insert comment in db

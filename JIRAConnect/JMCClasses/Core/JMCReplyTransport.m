@@ -55,6 +55,7 @@
     JMCComment * comment = [[JMCComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date]];
     [originalIssue.comments addObject:comment];
     [comment release];
+    // refresh the table view showing the replies thread somehow? possibly need to upgrade schema for a status flag...
 }
 
 #pragma mark UIAlertViewDelelgate
