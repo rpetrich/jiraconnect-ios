@@ -61,7 +61,10 @@ Copyright (C) 2011 Apple Inc. All Rights Reserved.
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {	
     /* Override point for customization after app. launch. */
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:self];
+    [[JMC instance]
+        configureJiraConnect:@"http://localhost:2990/jira/"
+                  projectKey:@"MOVIE"
+                      apiKey:@"2ad72e2f-fd1e-4397-b318-59922fabf360"];
     /* Add the tab bar controller's current view as a subview of the window. */
     [window addSubview:tabBarController.view];
     [window makeKeyAndVisible];    

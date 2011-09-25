@@ -152,7 +152,6 @@
         } else {
             [self._jcController.issueTransport resendItem:item];
         }
-        [requestQueue deleteItem:item.uuid];
     }
 }
 
