@@ -15,14 +15,16 @@
 **/
 
 #import "JMCIssue.h"
+#import "JSON.h"
 
 @implementation JMCIssue
 
-@synthesize key = _key, status = _status, title = _title, description = _description,
+@synthesize uuid=_uuid, key = _key, status = _status, title = _title, description = _description,
             comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
             dateCreated = _dateCreated, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
+    self.uuid = nil;
     self.key = nil;
     self.status = nil;
     self.title = nil;
@@ -57,6 +59,20 @@
     return [self dateToMillisSince1970:self.dateCreated];
 }
 
+-(BOOL) successfullySent
+{
+    return self.uuid != nil;
+}
+
++(JMCIssue *)issueWith:(NSString*)issueJSON requestId:(NSString*)uuid
+{
+    NSDictionary *responseDict = [issueJSON JSONValue];
+    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
+    issue.uuid = uuid;
+    return [issue autorelease];
+}
+
+
 - (id) initWithDictionary:(NSDictionary*)map
 {
 
@@ -66,7 +82,8 @@
         [lowerMap setObject:obj forKey:[key lowercaseString]];
     }];
     if ((self = [super init])) {
-		self.key = [lowerMap objectForKey:@"key"];
+        self.uuid = [lowerMap objectForKey:@"uuid"];
+        self.key = [lowerMap objectForKey:@"key"];
         self.status = [lowerMap objectForKey:@"status"];
         self.title = [lowerMap objectForKey:@"title"];
         self.description = [lowerMap objectForKey:@"description"];
@@ -96,7 +113,7 @@
         }
     }
     [lowerMap release];
-	return self;
+    return self;
 }
 
 @end

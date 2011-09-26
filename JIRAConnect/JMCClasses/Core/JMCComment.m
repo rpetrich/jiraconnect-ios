@@ -19,7 +19,7 @@
 
 @implementation JMCComment
 
-@synthesize author = _author, systemUser = _systemUser, body = _body, date = _date, dateLong;
+@synthesize uuid=_uuid, author = _author, systemUser = _systemUser, body = _body, date = _date, dateLong;
 
 - (void)dealloc {
     self.author = nil;
@@ -28,12 +28,14 @@
     [super dealloc];
 }
 
-- (id)initWithAuthor:(NSString *)p_author systemUser:(BOOL)p_sys body:(NSString *)p_body date:(NSDate *)p_date {
+- (id) initWithAuthor:(NSString*)p_author systemUser:(BOOL)p_sys body:(NSString*)p_body date:(NSDate*)p_date uuid:(NSString *)uuid
+{
     if ((self = [super init])) {
         self.author = p_author;
         self.body = p_body;
         self.date = p_date;
         self.systemUser = p_sys;
+        self.uuid = uuid;
     }
     return self;
 }
@@ -70,8 +72,9 @@
     NSNumber *msSinceEpoch = [lowerMap objectForKey:@"date"];
     NSDate *date = [JMCComment dateFromMillisSince1970:msSinceEpoch];
     NSNumber *value = (NSNumber *) [lowerMap objectForKey:@"systemuser"];
+    NSString *uuid = (NSString *) [lowerMap objectForKey:@"uuid"];
     [lowerMap release];
-    return [[JMCComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date];
+    return [[JMCComment alloc] initWithAuthor:author systemUser:[value boolValue] body:body date:date uuid:uuid];
 }
 
 @end

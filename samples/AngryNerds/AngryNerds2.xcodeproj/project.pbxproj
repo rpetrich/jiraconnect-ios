@@ -131,6 +131,7 @@
 		F8B80554139B574300EC5AD4 /* frontend.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B80549139B574300EC5AD4 /* frontend.png */; };
 		F8B80555139B574300EC5AD4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F8B8054A139B574300EC5AD4 /* Icon.png */; };
 		F8B80556139B574300EC5AD4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B8054B139B574300EC5AD4 /* MainWindow.xib */; };
+		F8B80556139B574300EC5AD6 /* JMCOfflineReplyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B80556139B574300EC5AD5 /* JMCOfflineReplyDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -327,6 +328,8 @@
 		F8B80549139B574300EC5AD4 /* frontend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frontend.png; path = AngryNerds2/Resources/frontend.png; sourceTree = SOURCE_ROOT; };
 		F8B8054A139B574300EC5AD4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = AngryNerds2/Resources/Icon.png; sourceTree = SOURCE_ROOT; };
 		F8B8054B139B574300EC5AD4 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = AngryNerds2/Resources/MainWindow.xib; sourceTree = SOURCE_ROOT; };
+		F8B80556139B574300EC5AD5 /* JMCOfflineReplyDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCOfflineReplyDelegate.m; sourceTree = "<group>"; };
+		F8B80556139B574300EC5AD7 /* JMCOfflineReplyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCOfflineReplyDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +378,8 @@
 		0149823F142F34AE00800EDA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F8B80556139B574300EC5AD7 /* JMCOfflineReplyDelegate.h */,
+				F8B80556139B574300EC5AD5 /* JMCOfflineReplyDelegate.m */,
 				01498240142F34AE00800EDA /* CrashReporter */,
 				01498243142F34AE00800EDA /* JMCComment.h */,
 				01498244142F34AE00800EDA /* JMCComment.m */,
@@ -878,6 +883,7 @@
 				0149832A142F34AE00800EDA /* UIImage+Alpha.m in Sources */,
 				0149832B142F34AE00800EDA /* UIImage+Resize.m in Sources */,
 				0149832C142F34AE00800EDA /* UIImage+RoundedCorner.m in Sources */,
+				F8B80556139B574300EC5AD6 /* JMCOfflineReplyDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

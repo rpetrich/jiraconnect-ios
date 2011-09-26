@@ -18,6 +18,7 @@
 #import "Core/JMCNotifier.h"
 #import "Core/JMCCrashSender.h"
 #import "JMCRequestQueue.h"
+#import "JMCOfflineReplyDelegate.h"
 
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
@@ -143,19 +144,27 @@
 
     JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
     NSArray *items = [requestQueue getQueueList];
-    
+
+    JMCIssueTransport* issueTransport = [[JMCIssueTransport alloc] init];
+    JMCReplyTransport* replyTransport = [[JMCReplyTransport alloc] init];
+    issueTransport.delegate = self._jcController;
+    JMCOfflineReplyDelegate *replyDelegate = [[JMCOfflineReplyDelegate alloc] init];
+    replyTransport.delegate = replyDelegate;
+    [replyDelegate release];
     for (NSString *itemId in items) {
         NSLog(@"sending itemId = %@", itemId);
         JMCQueueItem *item = [requestQueue getItem:itemId];
         if ([item.type isEqualToString:kTypeReply]) {
-            [self._jcController.replyTransport resendItem:item];
+            [replyTransport resendItem:item];
         } else if ([item.type isEqualToString:kTypeCreate]) {
-            [self._jcController.issueTransport resendItem:item];
+            [issueTransport resendItem:item];
         } else {
             NSLog(@"Missing queued item with id: %@. Removing from queue.", itemId);
             [requestQueue deleteItem:itemId];
         }
     }
+    [issueTransport release];
+    [replyTransport release];
 }
 
 

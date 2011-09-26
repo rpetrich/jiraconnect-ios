@@ -94,7 +94,8 @@ static float detailLabelHeight = 21.0f;
     JMCComment *description = [[JMCComment alloc] initWithAuthor:@"Author"
                                                       systemUser:YES
                                                             body:self.issue.description
-                                                            date:self.issue.dateCreated];
+                                                            date:self.issue.dateCreated
+                                                            uuid:self.issue.uuid]; 
     NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
     [commentData addObjectsFromArray:issue.comments];
     self.comments = commentData;
@@ -209,31 +210,44 @@ static float detailLabelHeight = 21.0f;
     self.feedbackController.replyToIssue = self.issue;
     // TODO: fix this. Should no longer need to be set each time reply is tapped
     self.feedbackController.replyTransport.delegate = self;
+    
     self.feedbackController.navigationItem.title = @"Reply";
     [navController release];
 }
 
-- (void)transportDidFinish:(NSString *)response {
+- (void)transportWillSend:(NSString *)entityJSON requestId:(NSString*)requestId
+{
+    JMCIssue *issue = [JMCIssue issueWith:entityJSON requestId:requestId];
+    JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jiraconnectuser"
+                                                  systemUser:YES
+                                                        body:issue.description
+                                                        date:issue.dateCreated
+                                                        uuid:requestId];
+    comment.date = [NSDate date];
+    [[JMCIssueStore instance] insertComment:comment forIssue:self.issue.key];
     
-    // TODO: when adding comments, possibly insert into the db immediately, then delete here..
-    
-    // TODO: ensure to add the comment at least to the in-memory rep of the issue comment data.
-    NSLog(@"TRANSPORT DID FINISH: response: %@", response);
-    // insert comment in db
-    NSDictionary *commentDict = [response JSONValue];
-    // lower case
-    JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
-    [[JMCIssueStore instance] insertComment:comment forIssue:self.issue];
     [comment release];
-    
     [self setUpCommentDataFor:self.issue];
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
     [self scrollToLastComment];
 }
 
-- (void)transportDidFinishWithError:(NSError *)error {
+- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId
+{
 
+    NSLog(@"REPLY DID FINISH: response: %@, %@", response, requestId);
+    // update comment in db as sent!
+    [[JMCIssueStore instance] markCommentAsSent:requestId];
+    [self.tableView reloadData];
+    [self scrollToLastComment];
+
+
+}
+
+- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
+{
+    NSLog(@"REPLY FAILED: %@, %@", [error description], requestId);
 }
 
 

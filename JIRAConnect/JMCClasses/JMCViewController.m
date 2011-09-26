@@ -542,21 +542,37 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [self.toolbar setItems:systemToolbarItems];
 }
 
-- (void)transportDidFinish:(NSString *)response
+- (void)transportWillSend:(NSString *)issueJSON requestId:(NSString*)requestId
 {
+    NSLog(@"CREATE transportWillSend response = %@", issueJSON);
     // response needs to be an Issue.json... so we can insert one here.
-    NSDictionary *responseDict = [response JSONValue];
-    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
-    [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
-    [issue release];
+
+    JMCIssue *issue = [JMCIssue issueWith:issueJSON requestId:requestId];
+    issue.hasUpdates = NO;
+    issue.dateCreated = [NSDate date];
+    issue.dateUpdated = [NSDate date];
+    issue.uuid = requestId;
+    
+    [[JMCIssueStore instance] insertIssue:issue]; // newly created issues have no comments
+
     // anounce that an issue was added, so the JMCIssuesView can redraw
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
 
 }
 
-- (void)transportDidFinishWithError:(NSError *)error
+- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId
 {
+    JMCIssue *issue = [JMCIssue issueWith:response requestId:requestId];
 
+    [[JMCIssueStore instance] updateIssueByUUID:issue];
+    // mark the issue has sent.
+    [[JMCIssueStore instance] markIssueAsSent:requestId];
+    NSLog(@"CREATE tranport finished. SUCCESS: Sent. %@", requestId);
+}
+
+- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
+{
+    NSLog(@"CREATE transportDidFinishWithError ERROR = %@, %@", [error description], requestId);
 }
 
 #pragma mark end

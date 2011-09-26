@@ -26,10 +26,12 @@
 
 @protocol JMCTransportDelegate <NSObject>
 
-- (void)transportDidFinish:(NSString *)response;
+- (void)transportWillSend:(NSString *)entityJSON requestId:(NSString*)requestId;
+- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId;
 
 @optional
-- (void)transportDidFinishWithError:(NSError*)error;
+
+- (void)transportDidFinishWithError:(NSError*)error requestId:(NSString*)requestId;
 
 @end
 

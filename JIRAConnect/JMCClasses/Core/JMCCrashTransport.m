@@ -63,8 +63,8 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
     if (request.responseStatusCode < 300) {
-        NSLog(@"Crash sent: %@", [request responseString]);
-        [self.delegate transportDidFinish:[request responseString]];
+        NSLog(@"Crash sent: %@. Delegate is: %@", [request responseString], self.delegate);
+        [self.delegate transportDidFinish:[request responseString] requestId:nil]; // TODO: use same offline for crash reports as feedback
     } else {
         [self requestFailed:request];
     }
@@ -73,8 +73,8 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     NSError *error = [request error];
-    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:)]) {
-        [self.delegate transportDidFinishWithError:error];
+    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:requestId:)]) {
+        [self.delegate transportDidFinishWithError:error requestId:nil];  // TODO: use same offline for crash reports as feedback
     }
 
     NSString * errMsg = [error localizedDescription] != nil ? [error localizedDescription] : @"";

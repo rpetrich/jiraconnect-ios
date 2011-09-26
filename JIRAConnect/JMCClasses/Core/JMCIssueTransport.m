@@ -60,6 +60,7 @@
     JMCQueueItem *queueItem =
             [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params issueKey:nil];
     [[JMCRequestQueue sharedInstance] addItem:queueItem];
+
     [upRequest startAsynchronous];
     [self sayThankYou];
 }

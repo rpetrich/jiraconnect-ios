@@ -29,7 +29,7 @@
     
     JMCOptions *options = [JMCOptions optionsWithUrl:@"http://localhost:2990/jira"
                                              project:@"NERDS"
-                                              apiKey:nil
+                                              apiKey:@"6f009120-17d2-4796-822c-da4149bbe07a"
                                               photos:YES
                                                voice:YES
                                             location:YES
