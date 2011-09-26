@@ -65,6 +65,7 @@ NSString* _jcoDbPath;
     [db executeUpdate:@"CREATE table if not exists ISSUE "
                         "(id INTEGER PRIMARY KEY ASC autoincrement, "
                         "uuid TEXT, " // a handle to manage unsent issues by
+                        "sent INTEGER, " // if the issue was sent successfully or not
                         "key TEXT, "
                         "status TEXT, "
                         "summary TEXT, "
@@ -78,6 +79,7 @@ NSString* _jcoDbPath;
     [db executeUpdate:@"CREATE table if not exists COMMENT "
                         "(id INTEGER PRIMARY KEY ASC autoincrement, "
                         "uuid TEXT, " // a handle to manage unsent comments by
+                        "sent INTEGER, " // if the comment was sent successfully or not
                         "issuekey TEXT, "
                         "username TEXT, "
                         "systemuser INTEGER, "
@@ -110,6 +112,7 @@ NSString* _jcoDbPath;
     FMResultSet *res = [db executeQuery:
                                @"SELECT "
                                    "uuid, "
+                                   "sent, "
                                    "key, "
                                    "summary, "
                                    "description, "
@@ -167,10 +170,11 @@ NSString* _jcoDbPath;
 
     [db executeUpdate:
         @"INSERT INTO COMMENT "
-                "(issuekey, username, systemuser, text, date, uuid) "
+                "(issuekey, username, systemuser, text, date, uuid, sent) "
                 "VALUES "
-                "(?,?,?,?,?,?) ",
-                issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.uuid];
+                "(?,?,?,?,?,?,?) ",
+                issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.uuid,
+                [NSNumber numberWithBool:comment.sent]];
 
     // TODO: handle error err...
     if ([db hadError]) {
@@ -197,11 +201,11 @@ NSString* _jcoDbPath;
 -(void) insertIssue:(JMCIssue *)issue {
     [db executeUpdate:
         @"INSERT INTO ISSUE "
-                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates) "
+                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates, sent) "
                 "VALUES "
-                "(?,?,?,?,?,?,?,?) ",
+                "(?,?,?,?,?,?,?,?,?) ",
         issue.key, issue.uuid, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
-        [NSNumber numberWithBool:issue.hasUpdates]];
+        [NSNumber numberWithBool:issue.hasUpdates], [NSNumber numberWithBool:issue.sent]];
 
     // TODO: handle error err...
     if ([db hadError]) {
@@ -213,7 +217,7 @@ NSString* _jcoDbPath;
 {
     [db executeUpdate:
             @"UPDATE issue "
-             "SET uuid = NULL "
+             "SET sent = 1 "
              "WHERE uuid = ?", requestId];
 }
 
@@ -221,7 +225,7 @@ NSString* _jcoDbPath;
 {
     [db executeUpdate:
             @"UPDATE comment "
-             "SET uuid = NULL "
+             "SET sent = 1 "
              "WHERE uuid = ?", requestId];
 }
 
@@ -282,28 +286,30 @@ NSString* _jcoDbPath;
         return;
     }
     // when there is an update - the database gets re-populated
-    [self createSchema:YES];
-    int numNewIssues = 0;
-    [db beginTransaction];
-    for (NSDictionary* dict in issues)
-    {
-        JMCIssue * issue = [[JMCIssue alloc] initWithDictionary:dict];
-        if (issue.hasUpdates) {
-            numNewIssues++;
-        }
-        [self insertOrUpdateIssue:issue];
+    @synchronized (self) {
+        [self createSchema:YES];
+        int numNewIssues = 0;
+        [db beginTransaction];
+        for (NSDictionary *dict in issues) {
+            JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:dict];
+            if (issue.hasUpdates) {
+                numNewIssues++;
+            }
+            [self insertOrUpdateIssue:issue];
 
-        NSArray* comments = [dict objectForKey:@"comments"];
-        // insert each comment
-        for (NSDictionary *commentDict in comments) {
-            JMCComment *jcoComment = [JMCComment newCommentFromDict:commentDict];
-            [self insertComment:jcoComment forIssue:issue.key];
-            [jcoComment release];
-        }
+            NSArray *comments = [dict objectForKey:@"comments"];
+            // insert each comment
+            for (NSDictionary *commentDict in comments) {
+                JMCComment *jcoComment = [JMCComment newCommentFromDict:commentDict];
+                [self insertComment:jcoComment forIssue:issue.key];
+                [jcoComment release];
+            }
 
-        [issue release];
+            [issue release];
+        }
+        [db commit];
     }
-    [db commit];
+
 }
 
 @synthesize newIssueCount, count;

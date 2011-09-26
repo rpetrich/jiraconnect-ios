@@ -153,16 +153,16 @@
     NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     if (request.responseStatusCode < 300) {
 
-        NSLog(@"Request success: Transport delegate = %@", self.delegate);
+        NSLog(@"%@ Request success: Transport delegate = %@", self, self.delegate);
         // alert the delegate!
         [self.delegate transportDidFinish:[request responseString] requestId:requestId];
 
         // remove the request item from the queue
         JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
         [queue deleteItem:requestId];
-        NSLog(@"Request succeeded & queued item is deleted. %@ ", requestId);
+        NSLog(@"%@ Request succeeded & queued item is deleted. %@ ",self, requestId);
     } else {
-        NSLog(@"Request FAILED & queued item is not deleted. %@", requestId);
+        NSLog(@"%@ Request FAILED & queued item is not deleted. %@",self, requestId);
         [self requestFailed:request];
     }
 }

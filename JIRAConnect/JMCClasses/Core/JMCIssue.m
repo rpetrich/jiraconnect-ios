@@ -21,7 +21,7 @@
 
 @synthesize uuid=_uuid, key = _key, status = _status, summary = _summary, description = _description,
             comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
-            dateCreated = _dateCreated, dateCreatedLong, dateUpdatedLong;
+            dateCreated = _dateCreated, sent=_sent, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
     self.uuid = nil;
@@ -59,11 +59,6 @@
     return [self dateToMillisSince1970:self.dateCreated];
 }
 
--(BOOL) successfullySent
-{
-    return self.uuid != nil;
-}
-
 +(JMCIssue *)issueWith:(NSString*)issueJSON requestId:(NSString*)uuid
 {
     NSDictionary *responseDict = [issueJSON JSONValue];
@@ -85,10 +80,13 @@
         self.uuid = [lowerMap objectForKey:@"uuid"];
         self.key = [lowerMap objectForKey:@"key"];
         self.status = [lowerMap objectForKey:@"status"];
-        self.summary = [lowerMap objectForKey:@"summary"];
+        NSString* summary = [lowerMap objectForKey:@"summary"];
+        self.summary = summary ? summary : [lowerMap objectForKey:@"title"];// for backward compatibility
         self.description = [lowerMap objectForKey:@"description"];
         NSNumber* hasUpdatesNum = [lowerMap objectForKey:@"hasupdates"];
         self.hasUpdates = [hasUpdatesNum boolValue];
+        NSNumber* sent = [lowerMap objectForKey:@"sent"];
+        self.sent = sent == NULL ? NO : [sent boolValue];
 
         NSNumber *created = [lowerMap objectForKey:@"datecreated"];
         NSNumber *updated = [lowerMap objectForKey:@"dateupdated"];

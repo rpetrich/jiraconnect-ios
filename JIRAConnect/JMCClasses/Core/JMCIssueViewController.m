@@ -22,7 +22,7 @@
 #import "JSON.h"
 
 static UIFont *font;
-static UIFont* titleFont;
+static UIFont *titleFont;
 
 @implementation JMCIssueViewController
 
@@ -33,7 +33,8 @@ static float detailLabelHeight = 21.0f;
 @synthesize feedbackController = _feedbackController;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         font = [UIFont systemFontOfSize:14.0];
@@ -49,7 +50,8 @@ static float detailLabelHeight = 21.0f;
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     self.issue = nil;
     self.comments = nil;
     self.tableView = nil;
@@ -69,7 +71,8 @@ static float detailLabelHeight = 21.0f;
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -78,31 +81,35 @@ static float detailLabelHeight = 21.0f;
 }
 
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     // Return YES for supported orientations
     return YES;
 }
 
-- (void)setUpCommentDataFor:(JMCIssue *)issue {
+- (void)setUpCommentDataFor:(JMCIssue *)issue
+{
     // the first comment is a dummy comment obj that stores the description of the issue
     JMCComment *description = [[JMCComment alloc] initWithAuthor:@"Author"
-                                                      systemUser:YES
-                                                            body:self.issue.description
+                                                      systemUser:YES body:self.issue.description
                                                             date:self.issue.dateCreated
-                                                            uuid:self.issue.uuid]; 
+                                                            uuid:self.issue.uuid
+                                                            sent:YES];
     NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
     [commentData addObjectsFromArray:issue.comments];
     self.comments = commentData;
     [description release];
 }
 
-- (void)setIssue:(JMCIssue *)issue {
+- (void)setIssue:(JMCIssue *)issue
+{
     NSLog(@"setIssue = %@", issue);
     if (_issue != issue) {
         [_issue release];
@@ -114,24 +121,29 @@ static float detailLabelHeight = 21.0f;
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     // Return the number of sections.
     return 2;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
     return nil; // no headings
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return (section == 0) ? 1 : [self.comments count];
 }
 
-- (CGSize)sizeForComment:(JMCComment *)comment font:(UIFont *)commentFont {
+- (CGSize)sizeForComment:(JMCComment *)comment font:(UIFont *)commentFont
+{
     return [comment.body sizeWithFont:commentFont constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (indexPath.section == 0) {
 
         CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
@@ -144,10 +156,11 @@ static float detailLabelHeight = 21.0f;
     }
 }
 
-- (UITableViewCell *)getBubbleCell:(UITableView *)tableView forMessage:(JMCComment *)comment {
+- (UITableViewCell *)getBubbleCell:(UITableView *)tableView forMessage:(JMCComment *)comment
+{
     static NSString *cellIdentifierComment = @"JMCMessageCellComment";
 
-    JMCMessageBubble *messageCell = (JMCMessageBubble *)[tableView dequeueReusableCellWithIdentifier:cellIdentifierComment];
+    JMCMessageBubble *messageCell = (JMCMessageBubble *) [tableView dequeueReusableCellWithIdentifier:cellIdentifierComment];
     CGSize detailSize = CGSizeMake(300.0f, detailLabelHeight); // TODO: un-hard code the width here
 
     if (messageCell == nil) {
@@ -165,22 +178,24 @@ static float detailLabelHeight = 21.0f;
     return messageCell;
 }
 
--(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) orientation {
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
     [self.tableView reloadData];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 
     if (indexPath.section == 0) {
         static NSString *cellIdentifier = @"JMCMessageCell";
-        JMCMessageCell *issueCell = (JMCMessageCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        JMCMessageCell *issueCell = (JMCMessageCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (issueCell == nil) {
 
             issueCell = [[[JMCMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
             CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
             issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
             issueCell.title.font = titleFont;
-            issueCell.title.textColor = [UIColor colorWithRed:17/255.0f green:76/255.0f blue:147/255.0f alpha:1.0];
+            issueCell.title.textColor = [UIColor colorWithRed:17 / 255.0f green:76 / 255.0f blue:147 / 255.0f alpha:1.0];
             issueCell.autoresizesSubviews = YES;
             issueCell.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
             [issueCell addSubview:issueCell.title];
@@ -198,7 +213,8 @@ static float detailLabelHeight = 21.0f;
     }
 }
 
-- (void)didTouchReply:(id)sender {
+- (void)didTouchReply:(id)sender
+{
 
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
     self.feedbackController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease];
@@ -211,33 +227,35 @@ static float detailLabelHeight = 21.0f;
     self.feedbackController.replyToIssue = self.issue;
     // TODO: fix this. Should no longer need to be set each time reply is tapped
     self.feedbackController.replyTransport.delegate = self;
-    
+
     self.feedbackController.navigationItem.title = @"Reply";
     [navController release];
 }
 
-- (void)transportWillSend:(NSString *)entityJSON requestId:(NSString*)requestId
+- (void)transportWillSend:(NSString *)entityJSON requestId:(NSString *)requestId
 {
+    NSLog(@"Transport Will Send: %@", entityJSON);
     // create a comment to be inserted in the db
-    JMCIssue *issue = [JMCIssue issueWith:entityJSON requestId:requestId];
+    NSDictionary *responseDict = [entityJSON JSONValue];
+    NSString* description = [responseDict objectForKey:@"description"];
     JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jiraconnectuser"
                                                   systemUser:YES
-                                                        body:issue.description
-                                                        date:issue.dateCreated
-                                                        uuid:requestId];
-    comment.date = [NSDate date];
+                                                        body:description
+                                                        date:[NSDate date]
+                                                        uuid:requestId
+                                                        sent:NO];
     // also add the comment to the list so it appears immediately
     [self.issue.comments addObject:comment];
     [[JMCIssueStore instance] insertComment:comment forIssue:self.issue.key];
     [comment release];
-    
+
     [self setUpCommentDataFor:self.issue];
     [self dismissModalViewControllerAnimated:YES];
     [self.tableView reloadData];
     [self scrollToLastComment];
 }
 
-- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId
+- (void)transportDidFinish:(NSString *)response requestId:(NSString *)requestId
 {
 
     NSLog(@"REPLY DID FINISH: response: %@, %@", response, requestId);
@@ -245,8 +263,9 @@ static float detailLabelHeight = 21.0f;
     [[JMCIssueStore instance] markCommentAsSent:requestId];
 }
 
-- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
+- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString *)requestId
 {
+    // TODO: bump the number of failed attempts by 1.
     NSLog(@"REPLY FAILED: %@, %@", [error description], requestId);
 }
 
