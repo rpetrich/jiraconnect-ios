@@ -22,7 +22,7 @@
     NSString* _uuid;
     NSString* _key;
     NSString* _status;
-    NSString* _title;
+    NSString* _summary;
     NSString* _description;
     NSDate* _dateUpdated;
     NSDate* _dateCreated;
@@ -37,7 +37,7 @@
 @property (nonatomic, retain) NSString* uuid;
 @property (nonatomic, retain) NSString* key;
 @property (nonatomic, retain) NSString* status;
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) NSString* summary;
 @property (nonatomic, retain) NSString* description;
 @property (nonatomic, retain) NSMutableArray* comments;
 @property (nonatomic, assign) BOOL hasUpdates;

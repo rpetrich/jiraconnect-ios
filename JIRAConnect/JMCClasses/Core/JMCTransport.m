@@ -153,16 +153,14 @@
     NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     if (request.responseStatusCode < 300) {
 
-        // remove the request item from the queue
-        //TODO: consider synchronisation
-
         NSLog(@"Request success: Transport delegate = %@", self.delegate);
+        // alert the delegate!
         [self.delegate transportDidFinish:[request responseString] requestId:requestId];
 
+        // remove the request item from the queue
         JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
         [queue deleteItem:requestId];
         NSLog(@"Request succeeded & queued item is deleted. %@ ", requestId);
-        // alert the delegate!
     } else {
         NSLog(@"Request FAILED & queued item is not deleted. %@", requestId);
         [self requestFailed:request];

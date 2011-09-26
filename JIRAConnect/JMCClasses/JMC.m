@@ -142,6 +142,7 @@
 -(void)flushRequestQueue
 {
 
+    // TODO: this needs to be done on an NSOperationQueue
     JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
     NSArray *items = [requestQueue getQueueList];
 

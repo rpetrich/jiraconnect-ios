@@ -69,11 +69,6 @@
     [[self createIssueRequest] cancel];
 }
 
-#pragma mark UIAlertViewDelelgate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    
-}
-
 -(void) dealloc {
     [createIssueRequest release];
     [super dealloc];

@@ -32,7 +32,9 @@ NSString* _jcoDbPath;
     
     if (singleton == nil) {
         _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", DOCUMENTS_FOLDER] retain];
-        singleton = [[JMCIssueStore alloc] init];
+        NSLog(@"DB AT = %@", _jcoDbPath);
+        
+                singleton = [[JMCIssueStore alloc] init];
     }
     return singleton;
 }
@@ -65,7 +67,7 @@ NSString* _jcoDbPath;
                         "uuid TEXT, " // a handle to manage unsent issues by
                         "key TEXT, "
                         "status TEXT, "
-                        "title TEXT, "
+                        "summary TEXT, "
                         "description TEXT, "
                         "dateCreated INTEGER, "
                         "dateUpdated INTEGER, "
@@ -109,7 +111,7 @@ NSString* _jcoDbPath;
                                @"SELECT "
                                    "uuid, "
                                    "key, "
-                                   "title, "
+                                   "summary, "
                                    "description, "
                                    "dateUpdated, "
                                    "dateCreated, "
@@ -195,10 +197,10 @@ NSString* _jcoDbPath;
 -(void) insertIssue:(JMCIssue *)issue {
     [db executeUpdate:
         @"INSERT INTO ISSUE "
-                "(key, uuid, status, title, description, dateCreated, dateUpdated, hasUpdates) "
+                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates) "
                 "VALUES "
                 "(?,?,?,?,?,?,?,?) ",
-        issue.key, issue.uuid, issue.status, issue.title, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
+        issue.key, issue.uuid, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
         [NSNumber numberWithBool:issue.hasUpdates]];
 
     // TODO: handle error err...

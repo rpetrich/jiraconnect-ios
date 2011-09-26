@@ -50,12 +50,8 @@
             [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params issueKey:originalIssue.key];
     JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
     [queue addItem:queueItem];
-
     [upRequest startAsynchronous];
-    JMCComment * comment = [[JMCComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date] uuid:queueItem.uuid];
-    [originalIssue.comments addObject:comment];
-    [comment release];
-    // refresh the table view showing the replies thread somehow? possibly need to upgrade schema for a status flag...
+    
 }
 
 #pragma mark UIAlertViewDelelgate

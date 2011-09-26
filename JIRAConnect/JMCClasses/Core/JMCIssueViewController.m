@@ -103,6 +103,7 @@ static float detailLabelHeight = 21.0f;
 }
 
 - (void)setIssue:(JMCIssue *)issue {
+    NSLog(@"setIssue = %@", issue);
     if (_issue != issue) {
         [_issue release];
         _issue = [issue retain];
@@ -133,7 +134,7 @@ static float detailLabelHeight = 21.0f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
 
-        CGSize size = [self.issue.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
+        CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
         return size.height + 20;
 
     } else {
@@ -176,7 +177,7 @@ static float detailLabelHeight = 21.0f;
         if (issueCell == nil) {
 
             issueCell = [[[JMCMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-            CGSize size = [self.issue.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
+            CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
             issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
             issueCell.title.font = titleFont;
             issueCell.title.textColor = [UIColor colorWithRed:17/255.0f green:76/255.0f blue:147/255.0f alpha:1.0];
@@ -186,7 +187,7 @@ static float detailLabelHeight = 21.0f;
             issueCell.accessoryType = UITableViewCellAccessoryNone;
         }
 
-        issueCell.title.text = self.issue.title;
+        issueCell.title.text = self.issue.summary;
 
         return issueCell;
 
@@ -217,6 +218,7 @@ static float detailLabelHeight = 21.0f;
 
 - (void)transportWillSend:(NSString *)entityJSON requestId:(NSString*)requestId
 {
+    // create a comment to be inserted in the db
     JMCIssue *issue = [JMCIssue issueWith:entityJSON requestId:requestId];
     JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jiraconnectuser"
                                                   systemUser:YES
@@ -224,12 +226,14 @@ static float detailLabelHeight = 21.0f;
                                                         date:issue.dateCreated
                                                         uuid:requestId];
     comment.date = [NSDate date];
+    // also add the comment to the list so it appears immediately
+    [self.issue.comments addObject:comment];
     [[JMCIssueStore instance] insertComment:comment forIssue:self.issue.key];
-    
     [comment release];
+    
     [self setUpCommentDataFor:self.issue];
-    [self.tableView reloadData];
     [self dismissModalViewControllerAnimated:YES];
+    [self.tableView reloadData];
     [self scrollToLastComment];
 }
 
@@ -239,10 +243,6 @@ static float detailLabelHeight = 21.0f;
     NSLog(@"REPLY DID FINISH: response: %@, %@", response, requestId);
     // update comment in db as sent!
     [[JMCIssueStore instance] markCommentAsSent:requestId];
-    [self.tableView reloadData];
-    [self scrollToLastComment];
-
-
 }
 
 - (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId

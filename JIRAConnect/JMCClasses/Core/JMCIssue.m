@@ -19,7 +19,7 @@
 
 @implementation JMCIssue
 
-@synthesize uuid=_uuid, key = _key, status = _status, title = _title, description = _description,
+@synthesize uuid=_uuid, key = _key, status = _status, summary = _summary, description = _description,
             comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
             dateCreated = _dateCreated, dateCreatedLong, dateUpdatedLong;
 
@@ -27,7 +27,7 @@
     self.uuid = nil;
     self.key = nil;
     self.status = nil;
-    self.title = nil;
+    self.summary = nil;
     self.description = nil;
     self.comments = nil;
     self.dateUpdated = nil;
@@ -85,7 +85,7 @@
         self.uuid = [lowerMap objectForKey:@"uuid"];
         self.key = [lowerMap objectForKey:@"key"];
         self.status = [lowerMap objectForKey:@"status"];
-        self.title = [lowerMap objectForKey:@"title"];
+        self.summary = [lowerMap objectForKey:@"summary"];
         self.description = [lowerMap objectForKey:@"description"];
         NSNumber* hasUpdatesNum = [lowerMap objectForKey:@"hasupdates"];
         self.hasUpdates = [hasUpdatesNum boolValue];
@@ -103,9 +103,9 @@
         {
             self.status = @"(no status)";
         }
-        if (!self.title)
+        if (!self.summary)
         {
-            self.title = @"(no title)";
+            self.summary = @"(no summary)";
         }
         if (!self.description)
         {

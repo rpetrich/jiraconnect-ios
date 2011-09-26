@@ -527,7 +527,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                            description:self.descriptionField.text
                            attachments:allAttachments];
     } else {
-        // use the first 80 chars of the description as the issue title
+        // use the first 80 chars of the description as the issue summary
         NSString *description = self.descriptionField.text;
         u_int length = 80;
         u_int toIndex = [description length] > length ? length : [description length];
@@ -544,7 +544,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (void)transportWillSend:(NSString *)issueJSON requestId:(NSString*)requestId
 {
-    NSLog(@"CREATE transportWillSend response = %@", issueJSON);
+    NSLog(@"CREATE transportWillSend issueJSON = %@", issueJSON);
     // response needs to be an Issue.json... so we can insert one here.
 
     JMCIssue *issue = [JMCIssue issueWith:issueJSON requestId:requestId];
