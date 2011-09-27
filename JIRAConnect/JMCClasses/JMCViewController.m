@@ -572,13 +572,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 
 #pragma mark -
-#pragma mark CRVActivityViewDelegate
-- (void)userDidCancelActivity
-{
-    [[self issueTransport] cancel];
-}
-
-#pragma mark -
 #pragma mark Private Methods
 - (BOOL)shouldTrackLocation {
     return sendLocationData && [CLLocationManager locationServicesEnabled];
