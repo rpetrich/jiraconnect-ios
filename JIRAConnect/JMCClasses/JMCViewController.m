@@ -49,10 +49,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
-        _issueTransport = [[[JMCIssueTransport alloc] init] retain];
-        _replyTransport = [[[JMCReplyTransport alloc] init] retain];
-        _issueTransport.delegate = [[JMCCreateIssueDelegate alloc] autorelease];
-        _replyTransport.delegate = [[JMCReplyDelegate alloc] autorelease];
+        self.issueTransport = [[[JMCIssueTransport alloc] init] autorelease];
+        self.replyTransport = [[[JMCReplyTransport alloc] init] autorelease];
+        self.issueTransport.delegate = [[[JMCCreateIssueDelegate alloc] init] autorelease];
+        self.replyTransport.delegate = [[[JMCReplyDelegate alloc] init] autorelease];
 
     }
     return self;
@@ -591,9 +591,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // Release any retained subviews of the main view.
     [self internalRelease];
-    // these ivars are retained in init
-    self.issueTransport = nil;
-    self.replyTransport = nil;
     [super dealloc];
 }
 
@@ -622,6 +619,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.payloadDataSource = nil;
     self.currentLocation = nil;
     self.activityView = nil;
+    self.replyTransport = nil;
+    self.issueTransport = nil;
 }
 
 @end

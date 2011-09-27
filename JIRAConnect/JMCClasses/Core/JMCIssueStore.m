@@ -30,11 +30,10 @@ static NSRecursiveLock *writeLock;
 
 +(JMCIssueStore *) instance {
     static JMCIssueStore *singleton = nil;
-    writeLock = [[NSRecursiveLock alloc] init];
-
     if (singleton == nil) {
         _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", DOCUMENTS_FOLDER] retain];
         singleton = [[JMCIssueStore alloc] init];
+        writeLock = [[NSRecursiveLock alloc] init];
     }
     return singleton;
 }
