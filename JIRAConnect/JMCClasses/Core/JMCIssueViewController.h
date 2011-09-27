@@ -19,11 +19,9 @@
 #import "JMCIssue.h"
 #import "JMCTransport.h"
 
-@protocol JMCTransportDelegate;
 @class JMCViewController;
 
-@interface JMCIssueViewController : UIViewController
-        <UITableViewDelegate, UITableViewDataSource, JMCTransportDelegate> {
+@interface JMCIssueViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* _tableView;
     IBOutlet UIButton* _replyButton;
     JMCIssue * _issue;

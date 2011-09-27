@@ -15,17 +15,19 @@
 **/
 
 #import "JMCIssue.h"
+#import "JSON.h"
 
 @implementation JMCIssue
 
-@synthesize key = _key, status = _status, title = _title, description = _description,
+@synthesize uuid=_uuid, key = _key, status = _status, summary = _summary, description = _description,
             comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
-            dateCreated = _dateCreated, dateCreatedLong, dateUpdatedLong;
+            dateCreated = _dateCreated, sent=_sent, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
+    self.uuid = nil;
     self.key = nil;
     self.status = nil;
-    self.title = nil;
+    self.summary = nil;
     self.description = nil;
     self.comments = nil;
     self.dateUpdated = nil;
@@ -57,6 +59,15 @@
     return [self dateToMillisSince1970:self.dateCreated];
 }
 
++(JMCIssue *)issueWith:(NSString*)issueJSON requestId:(NSString*)uuid
+{
+    NSDictionary *responseDict = [issueJSON JSONValue];
+    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
+    issue.uuid = uuid;
+    return [issue autorelease];
+}
+
+
 - (id) initWithDictionary:(NSDictionary*)map
 {
 
@@ -66,12 +77,16 @@
         [lowerMap setObject:obj forKey:[key lowercaseString]];
     }];
     if ((self = [super init])) {
-		self.key = [lowerMap objectForKey:@"key"];
+        self.uuid = [lowerMap objectForKey:@"uuid"];
+        self.key = [lowerMap objectForKey:@"key"];
         self.status = [lowerMap objectForKey:@"status"];
-        self.title = [lowerMap objectForKey:@"title"];
+        NSString* summary = [lowerMap objectForKey:@"summary"];
+        self.summary = summary ? summary : [lowerMap objectForKey:@"title"];// for backward compatibility
         self.description = [lowerMap objectForKey:@"description"];
         NSNumber* hasUpdatesNum = [lowerMap objectForKey:@"hasupdates"];
         self.hasUpdates = [hasUpdatesNum boolValue];
+        NSNumber* sent = [lowerMap objectForKey:@"sent"];
+        self.sent = sent == NULL ? NO : [sent boolValue];
 
         NSNumber *created = [lowerMap objectForKey:@"datecreated"];
         NSNumber *updated = [lowerMap objectForKey:@"dateupdated"];
@@ -86,9 +101,9 @@
         {
             self.status = @"(no status)";
         }
-        if (!self.title)
+        if (!self.summary)
         {
-            self.title = @"(no title)";
+            self.summary = @"(no summary)";
         }
         if (!self.description)
         {
@@ -96,7 +111,7 @@
         }
     }
     [lowerMap release];
-	return self;
+    return self;
 }
 
 @end

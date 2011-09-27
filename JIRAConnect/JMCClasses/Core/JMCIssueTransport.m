@@ -19,6 +19,7 @@
 #import "JMC.h"
 #import "JMCQueueItem.h"
 #import "JMCRequestQueue.h"
+#import "JMCIssueStore.h"
 
 @interface JMCIssueTransport ()
 @property(nonatomic, retain) ASIFormDataRequest *createIssueRequest;
@@ -28,11 +29,13 @@
 
 @synthesize createIssueRequest;
 
-- (NSURL *)makeUrlFor:(NSString *)issueKey {
+- (NSURL *)makeUrlFor:(NSString *)issueKey
+{
+    // issue creation url is:
+    // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
     NSString *queryString = [JMCTransport encodeCommonParameters];
     NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
-    NSURL *url = [NSURL URLWithString:urlPath relativeToURL:[JMC instance].url];
-    return url;
+    return [NSURL URLWithString:urlPath relativeToURL:[JMC instance].url];
 }
 
 -(NSString *) getType {
@@ -44,12 +47,6 @@
  description:(NSString *)description
  attachments:(NSArray *)attachments {
 
-    // issue creation url is:
-    // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
-    NSURL *url = [self makeUrlFor:nil];
-    NSLog(@"Sending feedback to:    %@", url.absoluteString);
-    ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
-    [self setCreateIssueRequest:upRequest];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (subject) {
         [params setObject:subject forKey:@"summary"];
@@ -57,20 +54,15 @@
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
     [params setObject:typeName forKey:@"type"];
 
-    JMCQueueItem *queueItem =
-            [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params issueKey:nil];
-    [[JMCRequestQueue sharedInstance] addItem:queueItem];
-    [upRequest startAsynchronous];
-    [self sayThankYou];
-}
-
--(void) cancel {
-    [[self createIssueRequest] cancel];
-}
-
-#pragma mark UIAlertViewDelelgate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    JMCQueueItem *queueItem = [self qeueItemWith:description
+                                     attachments:attachments
+                                          params:params
+                                        issueKey:nil];
     
+    [[JMCRequestQueue sharedInstance] addItem:queueItem];
+    [[JMC instance] flushRequestQueue];
+
+    [self sayThankYou];
 }
 
 -(void) dealloc {

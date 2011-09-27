@@ -24,10 +24,7 @@
 
 -(NSURL *)makeUrlFor:(NSString*)issueKey
 {
-    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
-    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
-    [queryParams setObject:[[JMC instance] getApiKey] forKey:@"apikey"];
-    NSString *queryString = [JMCTransport encodeParameters:queryParams];
+    NSString *queryString = [JMCTransport encodeCommonParameters];
     NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, [[JMC instance] getAPIVersion], issueKey, queryString];
     return [NSURL URLWithString:path relativeToURL:[JMC instance].url];
 }
@@ -42,27 +39,15 @@
       attachments:(NSArray *)attachments
 {
 
-    NSURL *url = [self makeUrlFor:originalIssue.key];
-    NSLog(@"Sending reply report to:   %@", url.absoluteString);
-    ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    JMCQueueItem *queueItem =
-            [self populateCommonFields:description attachments:attachments upRequest:upRequest params:params issueKey:originalIssue.key];
+    JMCQueueItem *queueItem = [self qeueItemWith:description
+                                     attachments:attachments
+                                          params:params
+                                        issueKey:originalIssue.key];
     JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
     [queue addItem:queueItem];
-
-    [upRequest startAsynchronous];
-    JMCComment * comment = [[JMCComment alloc] initWithAuthor:@"Author" systemUser:YES body:description date:[NSDate date]];
-    [originalIssue.comments addObject:comment];
-    [comment release];
-    // refresh the table view showing the replies thread somehow? possibly need to upgrade schema for a status flag...
-}
-
-#pragma mark UIAlertViewDelelgate
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // dismiss modal dialog. 
+    [[JMC instance] flushRequestQueue];
 
 }
-#pragma end
 
 @end

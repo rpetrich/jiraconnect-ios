@@ -16,7 +16,6 @@
 #import "JMCNotifier.h"
 #import "JMCIssueStore.h"
 #import "JMC.h"
-#import "JMCNavigationController.h"
 
 @implementation JMCNotifier
 
@@ -43,7 +42,7 @@ UIButton *_button;
         [_button setFrame:CGRectMake(0, 440, 320, 40)];
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 
-        _viewController = [[JMCNavigationController alloc] initWithRootViewController:self.issuesViewController];
+        _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
         _viewController.navigationBar.barStyle = UIBarStyleBlack;
         
 

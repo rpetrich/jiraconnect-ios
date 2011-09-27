@@ -19,28 +19,34 @@
 
 
 @interface JMCIssue : NSObject {
+    NSString* _uuid;
     NSString* _key;
     NSString* _status;
-    NSString* _title;
+    NSString* _summary;
     NSString* _description;
     NSDate* _dateUpdated;
     NSDate* _dateCreated;
     NSMutableArray* _comments;
     BOOL _hasUpdates;
+    BOOL _sent;
 }
 
 @property (nonatomic, retain) NSDate* dateCreated;
 @property (nonatomic, retain) NSDate* dateUpdated;
 @property (nonatomic, assign) NSNumber* dateUpdatedLong;
 @property (nonatomic, assign) NSNumber* dateCreatedLong;
+@property (nonatomic, retain) NSString* uuid;
 @property (nonatomic, retain) NSString* key;
 @property (nonatomic, retain) NSString* status;
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) NSString* summary;
 @property (nonatomic, retain) NSString* description;
 @property (nonatomic, retain) NSMutableArray* comments;
 @property (nonatomic, assign) BOOL hasUpdates;
+@property (nonatomic, assign) BOOL sent;
 
 - (id) initWithDictionary:(NSDictionary*)map;
 - (JMCComment *) latestComment;
+
++(JMCIssue *)issueWith:(NSString*)issueJSON requestId:(NSString*)uuid;
 
 @end

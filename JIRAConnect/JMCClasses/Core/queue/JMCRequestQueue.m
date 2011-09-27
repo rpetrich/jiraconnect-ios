@@ -7,6 +7,12 @@
 
 #import "JMCRequestQueue.h"
 #import "JMCAttachmentItem.h"
+#import "JMCIssueTransport.h"
+#import "JMCReplyTransport.h"
+#import "JMCCreateIssueDelegate.h"
+#import "JMCReplyDelegate.h"
+
+static NSOperationQueue *sharedOperationQueue = nil;
 
 @interface JMCRequestQueue ()
 - (NSString *)getQueueIndexPath;
@@ -15,10 +21,13 @@
 
 - (NSString *)getQueueItemPathFor:(NSString *)uuid;
 
-
 - (void)saveQueueIndex:(NSMutableArray *)queueList;
 
 @end
+
+JMCIssueTransport* _issueTransport;
+JMCReplyTransport* _replyTransport;
+NSRecursiveLock* _flushLock;
 
 @implementation JMCRequestQueue {
 
@@ -29,10 +38,41 @@
     static JMCRequestQueue *instance = nil;
     if (instance == nil) {
         instance = [[JMCRequestQueue alloc] init];
+        sharedOperationQueue = [[NSOperationQueue alloc] init];
+        [sharedOperationQueue setMaxConcurrentOperationCount:1];
+        _issueTransport = [[JMCIssueTransport alloc] init];
+        _replyTransport = [[JMCReplyTransport alloc] init];
+        _issueTransport.delegate = [[[JMCCreateIssueDelegate alloc]init] autorelease];
+        _replyTransport.delegate = [[[JMCReplyDelegate alloc] init] autorelease];
+        _flushLock = [[NSRecursiveLock alloc] init];
         NSLog(@"queue at  %@", [instance getQueueIndexPath]);
 
     }
     return instance;
+}
+
+-(void) flushQueue
+{
+    @synchronized (_flushLock) { // Ensure a single thread at a time tries to flush the queue.
+        JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
+        NSArray *items = [requestQueue getQueueList];
+        for (NSString *itemId in items) {
+            JMCQueueItem *item = [requestQueue getItem:itemId];
+            NSOperation *operation = nil;
+            if ([item.type isEqualToString:kTypeReply]) {
+                operation = [_replyTransport requestFromItem:item];
+            } else if ([item.type isEqualToString:kTypeCreate]) {
+                operation = [_issueTransport requestFromItem:item];
+            }
+            if (operation == nil) {
+                NSLog(@"Missing or invalid queued item with id: %@. Removing from queue.", itemId);
+                [requestQueue deleteItem:itemId];
+            } else {
+                [sharedOperationQueue addOperation:operation];
+                NSLog(@"Added request to operation queue %@", item.uuid);
+            }
+        }
+    }
 }
 
 - (void)addItem:(JMCQueueItem *)item
@@ -66,9 +106,7 @@
     [self saveQueueIndex:queue];
     // now remove the queue item from disk
     [[NSFileManager defaultManager] removeItemAtPath:[self getQueueItemPathFor:uuid] error:nil];
-
 }
-
 
 // This is the actual list of items that need sending
 - (NSMutableArray *)getQueueList {
@@ -99,6 +137,15 @@
     }
 
     return cachePath;
+}
+
+-(void) dealloc
+{
+    [_issueTransport release];
+    [_replyTransport release];
+    [sharedOperationQueue release];
+    [_flushLock release];
+    [super dealloc];
 }
 
 @end

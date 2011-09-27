@@ -17,18 +17,12 @@
 #import <Foundation/Foundation.h>
 #import "JMCTransport.h"
 
-@interface JMCIssueTransport : JMCTransport
+@interface JMCIssueTransport : JMCTransport 
 {
     @private
     ASIFormDataRequest *createIssueRequest;
 }
 
 - (void)send:(NSString *)subject description:(NSString *)description attachments:(NSArray *)attachments;
-
-/**
- * Cancel the request.
- */
--(void) cancel;
-
 
 @end

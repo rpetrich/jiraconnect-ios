@@ -23,64 +23,47 @@
 #import "JMCTransport.h"
 #import "JMCCrashTransport.h"
 #import "JMC.h"
+#import "JMCAttachmentItem.h"
+#import "JMCRequestQueue.h"
 
 @implementation JMCCrashTransport
 
-- (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport {
-
-    NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
-    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
-    [queryParams setObject:[[JMC instance] getApiKey]  forKey:@"apikey"];
-
-    NSString *queryString = [JMCTransport encodeParameters:queryParams];
+- (NSURL *)makeUrlFor:(NSString *)issueKey
+{
+    NSString *queryString = [JMCTransport encodeCommonParameters];
     NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
-    NSURL *url = [NSURL URLWithString:path relativeToURL:[JMC instance].url];
-    NSLog(@"Sending crash report to:   %@", url.absoluteString);
-    ASIFormDataRequest *upRequest = [ASIFormDataRequest requestWithURL:url];
+    return [NSURL URLWithString:path relativeToURL:[JMC instance].url];
+}
+
+- (NSString *) getType {
+    return kTypeCreate;
+}
+
+- (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport
+{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:subject forKey:@"summary"];
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
     [params setObject:typeName forKey:@"type"];
-    [self populateCommonFields:description attachments:nil upRequest:upRequest params:params issueKey:nil];
-    // don't queue crash requests. these are done in CrashSender
-    NSData *crashData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
-    // 
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm"];
     // TODO: use the actual crash date for this file extension
     // TODO: sanitize AppName for spaces, puntuation, etc..
-    NSString* filename = 
-        [[[JMC instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
+    NSString *filename =
+            [[[JMC instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
     [dateFormatter release];
+    NSData *rawData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
+    JMCAttachmentItem *crashData = [[JMCAttachmentItem alloc] initWithName:filename
+                                                                      data:rawData
+                                                                      type:JMCAttachmentTypeCustom
+                                                               contentType:@"text/plain"
+                                                            filenameFormat:filename];
+    NSArray *attachments = [NSArray arrayWithObject:crashData];
+    [crashData release];
     
-    [upRequest setData:crashData withFileName:filename andContentType:@"text/plain" forKey:@"crash"];
-    [upRequest setDelegate:self];
-    [upRequest setShouldAttemptPersistentConnection:NO];
-    [upRequest setTimeOutSeconds:15];
-    [upRequest startAsynchronous];
-
+    JMCQueueItem *item = [self qeueItemWith:description attachments:attachments params:params issueKey:nil];
+    [[JMCRequestQueue sharedInstance] addItem:item];
 }
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    if (request.responseStatusCode < 300) {
-        NSLog(@"Crash sent: %@", [request responseString]);
-        [self.delegate transportDidFinish:[request responseString]];
-    } else {
-        [self requestFailed:request];
-    }
-
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:)]) {
-        [self.delegate transportDidFinishWithError:error];
-    }
-
-    NSString * errMsg = [error localizedDescription] != nil ? [error localizedDescription] : @"";
-    NSString *msg = [NSString stringWithFormat:@"\n %@: %@\n Please try again later.", errMsg, [request responseString]];
-    NSLog(@"CRASH requestFailed: %@. URL: %@, response code: %d", msg, [request url], [request responseStatusCode]);
-}
-
 
 @end

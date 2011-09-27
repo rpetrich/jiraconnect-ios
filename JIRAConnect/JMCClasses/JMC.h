@@ -25,6 +25,7 @@
 #define kJMCReceivedCommentsNotification @"kJMCReceivedCommentsNotification"
 #define kJMCLastSuccessfulPingTime @"kJMCLastSuccessfulPingTime"
 #define kJMCNewIssueCreated @"kJMCNewIssueCreated"
+#define kJMCNewCommentCreated @"kJMCNewCommentCreated"
 
 #define kJMCOptionUrl @"kJMCOptionUrl"
 #define kJMCOptionProjectKey @"kJMCOptionProjectKey"

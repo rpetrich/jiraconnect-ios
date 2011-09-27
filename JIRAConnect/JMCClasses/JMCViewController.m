@@ -24,6 +24,8 @@
 #import "JSON.h"
 #import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import "JMCCreateIssueDelegate.h"
+#import "JMCReplyDelegate.h"
 
 @interface JMCViewController ()
 - (void)internalRelease;
@@ -46,8 +48,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _issueTransport = [[[JMCIssueTransport alloc] init] retain];
-        _replyTransport = [[[JMCReplyTransport alloc] init] retain];
+        // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
+        self.issueTransport = [[[JMCIssueTransport alloc] init] autorelease];
+        self.replyTransport = [[[JMCReplyTransport alloc] init] autorelease];
+        self.issueTransport.delegate = [[[JMCCreateIssueDelegate alloc] init] autorelease];
+        self.replyTransport.delegate = [[[JMCReplyDelegate alloc] init] autorelease];
+
     }
     return self;
 }
@@ -477,8 +483,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         // No data entered, just return.
         return;
     }
-    self.issueTransport.delegate = self;
-
+    
     NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
@@ -527,7 +532,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                            description:self.descriptionField.text
                            attachments:allAttachments];
     } else {
-        // use the first 80 chars of the description as the issue title
+        // use the first 80 chars of the description as the issue summary
         NSString *description = self.descriptionField.text;
         u_int length = 80;
         u_int toIndex = [description length] > length ? length : [description length];
@@ -540,23 +545,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
     [self.toolbar setItems:systemToolbarItems];
-}
-
-- (void)transportDidFinish:(NSString *)response
-{
-    // response needs to be an Issue.json... so we can insert one here.
-    NSDictionary *responseDict = [response JSONValue];
-    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
-    [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
-    [issue release];
-    // anounce that an issue was added, so the JMCIssuesView can redraw
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
-
-}
-
-- (void)transportDidFinishWithError:(NSError *)error
-{
-
 }
 
 #pragma mark end
@@ -584,13 +572,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 
 #pragma mark -
-#pragma mark CRVActivityViewDelegate
-- (void)userDidCancelActivity
-{
-    [[self issueTransport] cancel];
-}
-
-#pragma mark -
 #pragma mark Private Methods
 - (BOOL)shouldTrackLocation {
     return sendLocationData && [CLLocationManager locationServicesEnabled];
@@ -610,9 +591,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // Release any retained subviews of the main view.
     [self internalRelease];
-    // these ivars are retained in init
-    self.issueTransport = nil;
-    self.replyTransport = nil;
     [super dealloc];
 }
 
@@ -641,6 +619,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.payloadDataSource = nil;
     self.currentLocation = nil;
     self.activityView = nil;
+    self.replyTransport = nil;
+    self.issueTransport = nil;
 }
 
 @end

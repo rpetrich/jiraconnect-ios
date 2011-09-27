@@ -21,15 +21,14 @@
      *    * your Application Bundle Name
      *    * the same value as returned by your [JMCCustomDataSource projectName]
      */
-
 //    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
 //                              projectKey:@"NERDS"
 //                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"];
-    
-    
+
+
     JMCOptions *options = [JMCOptions optionsWithUrl:@"http://localhost:2990/jira"
                                              project:@"NERDS"
-                                              apiKey:nil
+                                              apiKey:@"6f009120-17d2-4796-822c-da4149bbe07a"
                                               photos:YES
                                                voice:YES
                                             location:YES

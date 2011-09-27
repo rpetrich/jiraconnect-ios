@@ -26,10 +26,12 @@
 
 @protocol JMCTransportDelegate <NSObject>
 
-- (void)transportDidFinish:(NSString *)response;
+- (void)transportWillSend:(NSString *)entityJSON requestId:(NSString *)requestId issueKey:(NSString *)issueKey;
+- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId;
 
 @optional
-- (void)transportDidFinishWithError:(NSError*)error;
+
+- (void)transportDidFinishWithError:(NSError*)error requestId:(NSString*)requestId;
 
 @end
 
@@ -46,14 +48,12 @@
 
 @property(nonatomic, retain) id <JMCTransportDelegate> delegate;
 
-- (void) resendItem:(JMCQueueItem *)item;
+- (ASIHTTPRequest *) requestFromItem:(JMCQueueItem *)item;
 
-- (JMCQueueItem *)populateCommonFields:(NSString *)description
-                           attachments:(NSArray *)attachments
-                             upRequest:(ASIFormDataRequest *)upRequest
-                                params:(NSMutableDictionary *)params
-                              issueKey:(NSString *)issueKey;
-
+- (JMCQueueItem *)qeueItemWith:(NSString *)description
+                   attachments:(NSArray *)attachments
+                        params:(NSMutableDictionary *)params
+                      issueKey:(NSString *)issueKey;
 -(void) sayThankYou;
 - (void)requestFailed:(ASIHTTPRequest *)request;
 

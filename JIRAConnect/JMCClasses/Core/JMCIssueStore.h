@@ -30,7 +30,12 @@
 - (JMCIssue *) newIssueAtIndex:(NSUInteger)index;
 - (NSMutableArray *) loadCommentsFor:(JMCIssue *)issue;
 - (void) insertOrUpdateIssue:(JMCIssue *)issue;
-- (void) insertComment:(JMCComment *)comment forIssue:(JMCIssue *)issue;
+- (void) updateIssueByUUID:(JMCIssue *)issue;
+- (void) insertIssue:(JMCIssue *)issue;
+- (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey;
+- (void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key;
+- (void) markIssueAsSent:(NSString *)requestId;
+- (void) markCommentAsSent:(NSString *)requestId;
 - (void) markAsRead:(JMCIssue *)issue;
 + (JMCIssueStore *) instance;
 

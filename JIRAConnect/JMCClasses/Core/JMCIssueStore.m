@@ -26,13 +26,14 @@
 
 FMDatabase *db;
 NSString* _jcoDbPath;
+static NSRecursiveLock *writeLock;
 
 +(JMCIssueStore *) instance {
     static JMCIssueStore *singleton = nil;
-    
     if (singleton == nil) {
         _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", DOCUMENTS_FOLDER] retain];
         singleton = [[JMCIssueStore alloc] init];
+        writeLock = [[NSRecursiveLock alloc] init];
     }
     return singleton;
 }
@@ -62,19 +63,22 @@ NSString* _jcoDbPath;
     }
     [db executeUpdate:@"CREATE table if not exists ISSUE "
                         "(id INTEGER PRIMARY KEY ASC autoincrement, "
+                        "uuid TEXT, " // a handle to manage unsent issues by
+                        "sent INTEGER, " // if the issue was sent successfully or not
                         "key TEXT, "
                         "status TEXT, "
-                        "title TEXT, "
+                        "summary TEXT, "
                         "description TEXT, "
                         "dateCreated INTEGER, "
                         "dateUpdated INTEGER, "
                         "dateDeleted INTEGER, "
-                        "hasUpdates  INTEGER, "
-                        "comments TEXT)"];
+                        "hasUpdates  INTEGER)"];
 
 
     [db executeUpdate:@"CREATE table if not exists COMMENT "
                         "(id INTEGER PRIMARY KEY ASC autoincrement, "
+                        "uuid TEXT, " // a handle to manage unsent comments by
+                        "sent INTEGER, " // if the comment was sent successfully or not
                         "issuekey TEXT, "
                         "username TEXT, "
                         "systemuser INTEGER, "
@@ -106,8 +110,10 @@ NSString* _jcoDbPath;
     // each column must match the JSON field JIRA returns for an issue entity
     FMResultSet *res = [db executeQuery:
                                @"SELECT "
+                                   "uuid, "
+                                   "sent, "
                                    "key, "
-                                   "title, "
+                                   "summary, "
                                    "description, "
                                    "dateUpdated, "
                                    "dateCreated, "
@@ -142,7 +148,7 @@ NSString* _jcoDbPath;
     }
     while ([res next]) {
         // a comment entity is the following JSON:
-        // {"username":"jiraconnectuser","systemUser":true,"text":"testing","date":1310840213824}
+        // {"username":"jiraconnectuser","systemUser":true,"text":"testing","date":1310840213824, "uuid":"uniquestring"}
         JMCComment *comment = [JMCComment newCommentFromDict:[res resultDict]];
         [comments addObject:comment];
         [comment release];
@@ -150,15 +156,26 @@ NSString* _jcoDbPath;
     return comments;
 }
 
-- (void) insertComment:(JMCComment *)comment forIssue:(JMCIssue *)issue {
+-(void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key
+{
+    NSDictionary *commentDict = [json JSONValue];
+    // lower case
+    JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
+    [self insertComment:comment forIssue:key];
+    [comment release];
+}
 
+- (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey {
+
+    @synchronized (writeLock) {
     [db executeUpdate:
         @"INSERT INTO COMMENT "
-                "(issuekey, username, systemuser, text, date) "
+                "(issuekey, username, systemuser, text, date, uuid, sent) "
                 "VALUES "
-                "(?,?,?,?,?) ",
-        issue.key, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong];
-
+                "(?,?,?,?,?,?,?) ",
+                issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.uuid,
+                [NSNumber numberWithBool:comment.sent]];
+    }
     // TODO: handle error err...
     if ([db hadError]) {
         NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -173,43 +190,81 @@ NSString* _jcoDbPath;
 
 -(void) updateIssue:(JMCIssue *)issue {
     // update an issue whenever the comments change. set comments and dateUpdated
+    @synchronized (writeLock) {
     [db executeUpdate:
         @"UPDATE issue "
-         "SET status = ?, dateUpdated = ?, hasUpdates = ? "
+         "SET status = ?, dateUpdated = ?, hasUpdates = ?, uuid = ? "
          "WHERE key = ?",
-        issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key];
+        issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.uuid, issue.key];
+    }
 
 }
 
 -(void) insertIssue:(JMCIssue *)issue {
+    @synchronized (writeLock) {
     [db executeUpdate:
         @"INSERT INTO ISSUE "
-                "(key, status, title, description, dateCreated, dateUpdated, hasUpdates) "
+                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates, sent) "
                 "VALUES "
-                "(?,?,?,?,?,?,?) ",
-        issue.key, issue.status, issue.title, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
-        [NSNumber numberWithBool:issue.hasUpdates]];
-
+                "(?,?,?,?,?,?,?,?,?) ",
+        issue.key, issue.uuid, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
+        [NSNumber numberWithBool:issue.hasUpdates], [NSNumber numberWithBool:issue.sent]];
+    }
     // TODO: handle error err...
     if ([db hadError]) {
         NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
     }
 }
 
--(void) markAsRead:(JMCIssue *)issue {
+- (void) markIssueAsSent:(NSString *)requestId
+{
+    @synchronized (writeLock) {
     [db executeUpdate:
             @"UPDATE issue "
-             "SET hasUpdates = 0 "
-             "WHERE key = ?", issue.key];
-    issue.hasUpdates = NO;
+             "SET sent = 1 "
+             "WHERE uuid = ?", requestId];
+    }
+}
+
+- (void) markCommentAsSent:(NSString *)requestId
+{
+    @synchronized (writeLock) {
+    [db executeUpdate:
+            @"UPDATE comment "
+             "SET sent = 1 "
+             "WHERE uuid = ?", requestId];
+    }
+}
+
+-(void) markAsRead:(JMCIssue *)issue {
+    @synchronized (writeLock) {
+        [db executeUpdate:
+                @"UPDATE issue "
+                        "SET hasUpdates = 0 "
+                        "WHERE key = ?", issue.key];
+        issue.hasUpdates = NO;
+    }
+}
+
+-(void) updateIssueByUUID:(JMCIssue *)issue {
+    // update an issue whenever the comments change. set comments and dateUpdated
+    @synchronized (writeLock) {
+        [db executeUpdate:
+                @"UPDATE issue "
+                        "SET status = ?, dateUpdated = ?, hasUpdates = ?, key = ?"
+                        "WHERE uuid = ?",
+                issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key, issue.uuid];
+    }
 }
 
 -(void) insertOrUpdateIssue:(JMCIssue *)issue {
 
-    if ([self issueExists:issue]) {
-        [self updateIssue:issue];
-    } else {
-        [self insertIssue:issue];
+    @synchronized (writeLock) {
+        if ([self issueExists:issue]) {
+            [self updateIssue:issue];
+        } else {
+            [self insertIssue:issue];
+        }
     }
 }
 
@@ -241,28 +296,30 @@ NSString* _jcoDbPath;
         return;
     }
     // when there is an update - the database gets re-populated
-    [self createSchema:YES];
-    int numNewIssues = 0;
-    [db beginTransaction];
-    for (NSDictionary* dict in issues)
-    {
-        JMCIssue * issue = [[JMCIssue alloc] initWithDictionary:dict];
-        if (issue.hasUpdates) {
-            numNewIssues++;
-        }
-        [self insertOrUpdateIssue:issue];
+    @synchronized (writeLock) {
+        [self createSchema:YES];
+        int numNewIssues = 0;
+        [db beginTransaction];
+        for (NSDictionary *dict in issues) {
+            JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:dict];
+            if (issue.hasUpdates) {
+                numNewIssues++;
+            }
+            [self insertOrUpdateIssue:issue];
 
-        NSArray* comments = [dict objectForKey:@"comments"];
-        // insert each comment
-        for (NSDictionary *commentDict in comments) {
-            JMCComment *jcoComment = [JMCComment newCommentFromDict:commentDict];
-            [self insertComment:jcoComment forIssue:issue];
-            [jcoComment release];
-        }
+            NSArray *comments = [dict objectForKey:@"comments"];
+            // insert each comment
+            for (NSDictionary *commentDict in comments) {
+                JMCComment *jcoComment = [JMCComment newCommentFromDict:commentDict];
+                [self insertComment:jcoComment forIssue:issue.key];
+                [jcoComment release];
+            }
 
-        [issue release];
+            [issue release];
+        }
+        [db commit];
     }
-    [db commit];
+
 }
 
 @synthesize newIssueCount, count;

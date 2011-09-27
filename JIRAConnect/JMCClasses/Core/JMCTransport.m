@@ -62,20 +62,24 @@
     return nil;
 }
 
-- (void) resendItem:(JMCQueueItem *)item {
-
+- (ASIHTTPRequest *) requestFromItem:(JMCQueueItem *)item
+{
     // only ASIFormDataRequest are queued at the moment...
     NSURL *url = [self makeUrlFor:item.originalIssueKey];
+    if (!url) {
+        NSLog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
+        return nil;
+    }
     ASIFormDataRequest* request = [ASIFormDataRequest requestWithURL:url];
     [JMCTransport addAllAttachments:item.attachments toRequest:request];
 
     [request setShouldContinueWhenAppEntersBackground:YES];
     [request addRequestHeader:kJMCHeaderNameRequestId value:item.uuid];
     [request setDelegate:self];
-    NSLog(@"request delegeate is: %@", request.delegate);
     [request setShouldAttemptPersistentConnection:NO];
     [request setTimeOutSeconds:30];
-    [request startAsynchronous];
+
+    return request;
 }
 
 -(void)sayThankYou {
@@ -93,19 +97,19 @@
     [alertView2 release];
 }
 
-- (JMCQueueItem *)populateCommonFields:(NSString *)description
-                           attachments:(NSArray *)attachments
-                             upRequest:(ASIFormDataRequest *)upRequest
-                                params:(NSMutableDictionary *)params
-                              issueKey:(NSString *)issueKey
+- (JMCQueueItem *)qeueItemWith:(NSString *)description
+                   attachments:(NSArray *)attachments
+                        params:(NSMutableDictionary *)params
+                      issueKey:(NSString *)issueKey
 {
 
     // write each data part to disk with a unique filename uuid-ID
     // store metadata in an index file: uid-index. Contains: URL, parameters(key=value pairs), parts(contentType, name, filename)
     [params setObject:description forKey:@"description"];
     [params addEntriesFromDictionary:[[JMC instance] getMetaData]];
-    
-    NSData *jsonData = [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSString *issueJSON = [params JSONRepresentation];
+    NSData *jsonData = [issueJSON dataUsingEncoding:NSUTF8StringEncoding];
     JMCAttachmentItem *issueItem = [[JMCAttachmentItem alloc] initWithName:@"issue"
                                                                       data:jsonData
                                                                       type:JMCAttachmentTypeSystem
@@ -121,21 +125,14 @@
         [allAttachments addObjectsFromArray:attachments];
     }
 
-    [JMCTransport addAllAttachments:allAttachments toRequest:upRequest];
-
-    [upRequest setShouldContinueWhenAppEntersBackground:YES];
-    [upRequest setDelegate:self];
-    [upRequest setShouldAttemptPersistentConnection:NO];
-    [upRequest setTimeOutSeconds:30];
-
-    NSString *requestId= [JMCQueueItem generateUniqueId];
-    [upRequest addRequestHeader:kJMCHeaderNameRequestId value:requestId];
+    NSString *requestId = [JMCQueueItem generateUniqueId];
 
     JMCQueueItem *queueItem = [[JMCQueueItem alloc] initWith:requestId
-                                                         url:[upRequest.url absoluteString]
                                                         type:[self getType]
                                                  attachments:allAttachments
                                                     issueKey:issueKey];
+
+    [self.delegate transportWillSend:issueJSON requestId:requestId issueKey:issueKey];
 
     return [queueItem autorelease];
 }
@@ -148,25 +145,25 @@
     NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     if (request.responseStatusCode < 300) {
 
+        NSLog(@"%@ Request success: Transport delegate = %@", self, requestId);
+        // alert the delegate!
+        [self.delegate transportDidFinish:[request responseString] requestId:requestId];
+
         // remove the request item from the queue
-        //TODO: consider synchronisation
         JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
         [queue deleteItem:requestId];
-
-        NSLog(@"Request succeeded & queued item is deleted. %@", requestId);
-        // alert the delegate! 
-        [self.delegate transportDidFinish:[request responseString]];
-
+        NSLog(@"%@ Request succeeded & queued item is deleted. %@ ",self, requestId);
     } else {
-        NSLog(@"Request FAILED & queued item is not deleted. %@", requestId);
+        NSLog(@"%@ Request FAILED & queued item is not deleted. %@",self, requestId);
         [self requestFailed:request];
     }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
+    NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     NSError *error = [request error];
-    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:)]) {
-        [self.delegate transportDidFinishWithError:error];
+    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:requestId:)]) {
+        [self.delegate transportDidFinishWithError:error requestId:requestId];
     }
     NSString *msg = @"";
     if ([error localizedDescription] != nil) {
