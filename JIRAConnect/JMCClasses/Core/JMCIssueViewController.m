@@ -20,6 +20,7 @@
 #import "JMCMessageBubble.h"
 #import "JMCIssueStore.h"
 #import "JSON.h"
+#import "JMC.h"
 
 static UIFont *font;
 static UIFont *titleFont;
@@ -46,6 +47,7 @@ static float detailLabelHeight = 21.0f;
                                                               action:@selector(didTouchReply:)];
         self.navigationItem.rightBarButtonItem = replyButton;
         [replyButton release];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCNewCommentCreated object:nil];
     }
     return self;
 }
@@ -110,7 +112,6 @@ static float detailLabelHeight = 21.0f;
 
 - (void)setIssue:(JMCIssue *)issue
 {
-    NSLog(@"setIssue = %@", issue);
     if (_issue != issue) {
         [_issue release];
         _issue = [issue retain];
@@ -207,7 +208,8 @@ static float detailLabelHeight = 21.0f;
         return issueCell;
 
     }
-    else {
+    else
+    {
         JMCComment *comment = [self.comments objectAtIndex:indexPath.row];
         return [self getBubbleCell:tableView forMessage:comment];
     }
@@ -223,51 +225,18 @@ static float detailLabelHeight = 21.0f;
     navController.navigationBar.barStyle = UIBarStyleBlack;
 
     [self presentModalViewController:navController animated:YES];
-
     self.feedbackController.replyToIssue = self.issue;
-    // TODO: fix this. Should no longer need to be set each time reply is tapped
-    self.feedbackController.replyTransport.delegate = self;
-
     self.feedbackController.navigationItem.title = @"Reply";
+    
     [navController release];
 }
 
-- (void)transportWillSend:(NSString *)entityJSON requestId:(NSString *)requestId
+-(void)refreshTable
 {
-    NSLog(@"Transport Will Send: %@", entityJSON);
-    // create a comment to be inserted in the db
-    NSDictionary *responseDict = [entityJSON JSONValue];
-    NSString* description = [responseDict objectForKey:@"description"];
-    JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jiraconnectuser"
-                                                  systemUser:YES
-                                                        body:description
-                                                        date:[NSDate date]
-                                                        uuid:requestId
-                                                        sent:NO];
-    // also add the comment to the list so it appears immediately
-    [self.issue.comments addObject:comment];
-    [[JMCIssueStore instance] insertComment:comment forIssue:self.issue.key];
-    [comment release];
-
+    self.issue.comments = [[JMCIssueStore instance] loadCommentsFor:self.issue];
     [self setUpCommentDataFor:self.issue];
-    [self dismissModalViewControllerAnimated:YES];
     [self.tableView reloadData];
     [self scrollToLastComment];
 }
-
-- (void)transportDidFinish:(NSString *)response requestId:(NSString *)requestId
-{
-
-    NSLog(@"REPLY DID FINISH: response: %@, %@", response, requestId);
-    // update comment in db as sent!
-    [[JMCIssueStore instance] markCommentAsSent:requestId];
-}
-
-- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString *)requestId
-{
-    // TODO: bump the number of failed attempts by 1.
-    NSLog(@"REPLY FAILED: %@, %@", [error description], requestId);
-}
-
 
 @end

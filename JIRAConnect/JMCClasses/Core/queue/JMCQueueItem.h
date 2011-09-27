@@ -12,21 +12,19 @@
 
 @interface JMCQueueItem : NSObject <NSCoding> {
     NSString* _uuid; // globally unique id for this item.
-    NSString* _url;
     NSString* _type; // is this a reply, or new feedback ?
     NSArray* _attachments;
     NSString* _originalIssueKey;
 }
 
 @property (retain, nonatomic) NSString* uuid;
-@property (retain, nonatomic) NSString* url;
 @property (retain, nonatomic) NSArray* attachments;
 @property (retain, nonatomic) NSString* type;
 @property (retain, nonatomic) NSString* originalIssueKey;
 
 +(NSString*) generateUniqueId;
 
--(id)initWith:(NSString*)uuid url:(NSString*)url type:(NSString*)type attachments:(NSArray*)attachments issueKey:(NSString *)originalIssueKey;
+-(id)initWith:(NSString*)uuid type:(NSString*)type attachments:(NSArray*)attachments issueKey:(NSString *)originalIssueKey;
 
 + (JMCQueueItem *)queueItemFromFile:(NSString*)filepath;
 

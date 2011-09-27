@@ -26,15 +26,15 @@
 
 FMDatabase *db;
 NSString* _jcoDbPath;
+static NSRecursiveLock *writeLock;
 
 +(JMCIssueStore *) instance {
     static JMCIssueStore *singleton = nil;
-    
+    writeLock = [[NSRecursiveLock alloc] init];
+
     if (singleton == nil) {
         _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", DOCUMENTS_FOLDER] retain];
-        NSLog(@"DB AT = %@", _jcoDbPath);
-        
-                singleton = [[JMCIssueStore alloc] init];
+        singleton = [[JMCIssueStore alloc] init];
     }
     return singleton;
 }
@@ -168,6 +168,7 @@ NSString* _jcoDbPath;
 
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey {
 
+    @synchronized (writeLock) {
     [db executeUpdate:
         @"INSERT INTO COMMENT "
                 "(issuekey, username, systemuser, text, date, uuid, sent) "
@@ -175,7 +176,7 @@ NSString* _jcoDbPath;
                 "(?,?,?,?,?,?,?) ",
                 issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.uuid,
                 [NSNumber numberWithBool:comment.sent]];
-
+    }
     // TODO: handle error err...
     if ([db hadError]) {
         NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -190,15 +191,18 @@ NSString* _jcoDbPath;
 
 -(void) updateIssue:(JMCIssue *)issue {
     // update an issue whenever the comments change. set comments and dateUpdated
+    @synchronized (writeLock) {
     [db executeUpdate:
         @"UPDATE issue "
          "SET status = ?, dateUpdated = ?, hasUpdates = ?, uuid = ? "
          "WHERE key = ?",
         issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.uuid, issue.key];
+    }
 
 }
 
 -(void) insertIssue:(JMCIssue *)issue {
+    @synchronized (writeLock) {
     [db executeUpdate:
         @"INSERT INTO ISSUE "
                 "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates, sent) "
@@ -206,7 +210,7 @@ NSString* _jcoDbPath;
                 "(?,?,?,?,?,?,?,?,?) ",
         issue.key, issue.uuid, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
         [NSNumber numberWithBool:issue.hasUpdates], [NSNumber numberWithBool:issue.sent]];
-
+    }
     // TODO: handle error err...
     if ([db hadError]) {
         NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -215,46 +219,53 @@ NSString* _jcoDbPath;
 
 - (void) markIssueAsSent:(NSString *)requestId
 {
+    @synchronized (writeLock) {
     [db executeUpdate:
             @"UPDATE issue "
              "SET sent = 1 "
              "WHERE uuid = ?", requestId];
+    }
 }
 
 - (void) markCommentAsSent:(NSString *)requestId
 {
+    @synchronized (writeLock) {
     [db executeUpdate:
             @"UPDATE comment "
              "SET sent = 1 "
              "WHERE uuid = ?", requestId];
+    }
 }
 
 -(void) markAsRead:(JMCIssue *)issue {
-    [db executeUpdate:
-            @"UPDATE issue "
-             "SET hasUpdates = 0 "
-             "WHERE key = ?", issue.key];
-    issue.hasUpdates = NO;
+    @synchronized (writeLock) {
+        [db executeUpdate:
+                @"UPDATE issue "
+                        "SET hasUpdates = 0 "
+                        "WHERE key = ?", issue.key];
+        issue.hasUpdates = NO;
+    }
 }
 
 -(void) updateIssueByUUID:(JMCIssue *)issue {
     // update an issue whenever the comments change. set comments and dateUpdated
+    @synchronized (writeLock) {
         [db executeUpdate:
-            @"UPDATE issue "
-             "SET status = ?, dateUpdated = ?, hasUpdates = ?, key = ?"
-             "WHERE uuid = ?",
-            issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key, issue.uuid];
+                @"UPDATE issue "
+                        "SET status = ?, dateUpdated = ?, hasUpdates = ?, key = ?"
+                        "WHERE uuid = ?",
+                issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key, issue.uuid];
+    }
 }
 
 -(void) insertOrUpdateIssue:(JMCIssue *)issue {
 
-    if ([self issueExists:issue]) {
-        NSLog(@"UPDATING issue = %@", issue);
-
-        [self updateIssue:issue];
-    } else {
-        NSLog(@"INSERTING issue = %@", issue);
-        [self insertIssue:issue];
+    @synchronized (writeLock) {
+        if ([self issueExists:issue]) {
+            [self updateIssue:issue];
+        } else {
+            [self insertIssue:issue];
+        }
     }
 }
 
@@ -286,7 +297,7 @@ NSString* _jcoDbPath;
         return;
     }
     // when there is an update - the database gets re-populated
-    @synchronized (self) {
+    @synchronized (writeLock) {
         [self createSchema:YES];
         int numNewIssues = 0;
         [db beginTransaction];

@@ -26,7 +26,7 @@
 
 
 @interface JMCViewController : UIViewController
-        <UITextViewDelegate, UITextFieldDelegate, JMCTransportDelegate, AVAudioRecorderDelegate,
+        <UITextViewDelegate, UITextFieldDelegate, AVAudioRecorderDelegate,
         JMCSketchViewControllerDelegate, UIAlertViewDelegate, CLLocationManagerDelegate, CRVActivityViewDelegate> {
 
     IBOutlet UITextView *descriptionField;

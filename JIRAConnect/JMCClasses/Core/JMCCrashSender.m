@@ -21,6 +21,7 @@
 #import "JMCTransport.h"
 #import "JMCIssueStore.h"
 #import "JSON.h"
+#import "JMCCreateIssueDelegate.h"
 
 #define kJiraConnectAutoSubmitCrashes @"JiraConnectAutoSubmitCras"
 
@@ -32,7 +33,7 @@ JMCCrashTransport *_transport;
     self = [super init];
     if (self) {
         _transport = [[JMCCrashTransport alloc] init];
-        _transport.delegate = self;
+        _transport.delegate = [[[JMCCreateIssueDelegate alloc] init] autorelease];
     }
     return self;
 }
@@ -87,31 +88,18 @@ JMCCrashTransport *_transport;
     }
 
     NSArray *reports = [[CrashReporter sharedCrashReporter] crashReports];
-
+    // queue all the reports
     for (NSString *report in reports) {
         u_int toIndex = [report length] > 500 ? 500 : [report length];
         [_transport send:@"Crash report"
              description:[[report substringToIndex:toIndex] stringByAppendingString:@"...\n(truncated)"]
              crashReport:report];
     }
-
-}
-- (void)transportWillSend:(NSString *)response requestId:(NSString*)requestId
-{
-    NSLog(@"CrashTranport WILL SEND: %@", requestId);
-}
-
-- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId {
+    // clean the reports
     [[CrashReporter sharedCrashReporter] cleanCrashReports];
+    // flush the queue to ensure they get sent
+    [[JMC instance] flushRequestQueue];
 
-    // response needs to be an Issue.json... so we can insert one here.
-    NSDictionary *responseDict = [response JSONValue];
-    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
-    [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
-    // anounce that an issue was added, so the JCOIssuesView can redraw
-
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
-    [issue release];
 }
 
 

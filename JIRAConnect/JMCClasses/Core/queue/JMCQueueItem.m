@@ -35,11 +35,10 @@
     return queueItemId; // what when nil?
 }
 
--(id)initWith:(NSString*)uuid url:(NSString*)url type:(NSString*)type attachments:(NSArray*)attachments issueKey:(NSString *)originalIssueKey
+-(id)initWith:(NSString*)uuid type:(NSString*)type attachments:(NSArray*)attachments issueKey:(NSString *)originalIssueKey
 {
     if ((self = [super init])) {
         self.uuid = uuid;
-        self.url = url;
         self.type = type;
         self.attachments = attachments;
         self.originalIssueKey = originalIssueKey;
@@ -55,7 +54,6 @@
 
 - (void)encodeWithCoder:(NSCoder*)coder {
     [coder encodeObject:self.uuid forKey:kUuid];
-    [coder encodeObject:self.url forKey:kUrl];
     [coder encodeObject:self.type forKey:kType];
     [coder encodeObject:self.attachments forKey:kAttachments];
     [coder encodeObject:self.originalIssueKey forKey:kOriginalIssueKey];
@@ -67,7 +65,6 @@
     if (!self) return nil;
 
     self.uuid = [coder decodeObjectForKey:kUuid];
-    self.url = [coder decodeObjectForKey:kUrl];
     self.attachments = [coder decodeObjectForKey:kAttachments];
     self.originalIssueKey = [coder decodeObjectForKey:kOriginalIssueKey];
     self.type = [coder decodeObjectForKey:kType];
@@ -80,12 +77,11 @@
     [NSKeyedArchiver archiveRootObject:self toFile:filepath];
 }
 
-@synthesize uuid=_uuid, url=_url, type=_type, attachments=_attachments, originalIssueKey=_originalIssueKey;
+@synthesize uuid=_uuid, type=_type, attachments=_attachments, originalIssueKey=_originalIssueKey;
 
 - (void) dealloc
 {
     self.uuid = nil;
-    self.url = nil;
     self.type = nil;
     self.attachments = nil;
     self.originalIssueKey = nil;

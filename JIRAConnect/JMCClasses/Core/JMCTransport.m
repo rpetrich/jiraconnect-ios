@@ -62,20 +62,24 @@
     return nil;
 }
 
-- (void) resendItem:(JMCQueueItem *)item {
-
+- (ASIHTTPRequest *) requestFromItem:(JMCQueueItem *)item
+{
     // only ASIFormDataRequest are queued at the moment...
     NSURL *url = [self makeUrlFor:item.originalIssueKey];
+    if (!url) {
+        NSLog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
+        return nil;
+    }
     ASIFormDataRequest* request = [ASIFormDataRequest requestWithURL:url];
     [JMCTransport addAllAttachments:item.attachments toRequest:request];
 
     [request setShouldContinueWhenAppEntersBackground:YES];
     [request addRequestHeader:kJMCHeaderNameRequestId value:item.uuid];
     [request setDelegate:self];
-    NSLog(@"ASIHTTP Request delegate is: %@", request.delegate);
     [request setShouldAttemptPersistentConnection:NO];
     [request setTimeOutSeconds:30];
-    [request startSynchronous];
+
+    return request;
 }
 
 -(void)sayThankYou {
@@ -93,11 +97,10 @@
     [alertView2 release];
 }
 
-- (JMCQueueItem *)populateCommonFields:(NSString *)description
-                           attachments:(NSArray *)attachments
-                             upRequest:(ASIFormDataRequest *)upRequest
-                                params:(NSMutableDictionary *)params
-                              issueKey:(NSString *)issueKey
+- (JMCQueueItem *)qeueItemWith:(NSString *)description
+                   attachments:(NSArray *)attachments
+                        params:(NSMutableDictionary *)params
+                      issueKey:(NSString *)issueKey
 {
 
     // write each data part to disk with a unique filename uuid-ID
@@ -122,25 +125,14 @@
         [allAttachments addObjectsFromArray:attachments];
     }
 
-    [JMCTransport addAllAttachments:allAttachments toRequest:upRequest];
-
-    [upRequest setShouldContinueWhenAppEntersBackground:YES];
-    [upRequest setDelegate:self];
-    [upRequest setShouldAttemptPersistentConnection:NO];
-    [upRequest setTimeOutSeconds:30];
-
-    NSLog(@"Foreground submission: ASIHTTP Request delegate: %@", upRequest.delegate);
-
-    NSString *requestId= [JMCQueueItem generateUniqueId];
-    [upRequest addRequestHeader:kJMCHeaderNameRequestId value:requestId];
+    NSString *requestId = [JMCQueueItem generateUniqueId];
 
     JMCQueueItem *queueItem = [[JMCQueueItem alloc] initWith:requestId
-                                                         url:[upRequest.url absoluteString]
                                                         type:[self getType]
                                                  attachments:allAttachments
                                                     issueKey:issueKey];
-    
-    [self.delegate transportWillSend:issueJSON requestId:requestId];
+
+    [self.delegate transportWillSend:issueJSON requestId:requestId issueKey:issueKey];
 
     return [queueItem autorelease];
 }
@@ -153,7 +145,7 @@
     NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     if (request.responseStatusCode < 300) {
 
-        NSLog(@"%@ Request success: Transport delegate = %@", self, self.delegate);
+        NSLog(@"%@ Request success: Transport delegate = %@", self, requestId);
         // alert the delegate!
         [self.delegate transportDidFinish:[request responseString] requestId:requestId];
 

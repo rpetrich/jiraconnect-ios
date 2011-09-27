@@ -24,6 +24,8 @@
 #import "JSON.h"
 #import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import "JMCCreateIssueDelegate.h"
+#import "JMCReplyDelegate.h"
 
 @interface JMCViewController ()
 - (void)internalRelease;
@@ -46,8 +48,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
         _issueTransport = [[[JMCIssueTransport alloc] init] retain];
         _replyTransport = [[[JMCReplyTransport alloc] init] retain];
+        _issueTransport.delegate = [[JMCCreateIssueDelegate alloc] autorelease];
+        _replyTransport.delegate = [[JMCReplyDelegate alloc] autorelease];
+
     }
     return self;
 }
@@ -477,8 +483,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         // No data entered, just return.
         return;
     }
-    self.issueTransport.delegate = self;
-
+    
     NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
@@ -540,40 +545,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
     [self.toolbar setItems:systemToolbarItems];
-}
-
-- (void)transportWillSend:(NSString *)issueJSON requestId:(NSString*)requestId
-{
-    NSLog(@"CREATE transportWillSend issueJSON = %@", issueJSON);
-    // response needs to be an Issue.json... so we can insert one here.
-
-    JMCIssue *issue = [JMCIssue issueWith:issueJSON requestId:requestId];
-    issue.hasUpdates = NO;
-    issue.dateCreated = [NSDate date];
-    issue.dateUpdated = [NSDate date];
-    issue.uuid = requestId;
-    issue.sent = NO;
-    
-    [[JMCIssueStore instance] insertIssue:issue]; // newly created issues have no comments
-
-    // anounce that an issue was added, so the JMCIssuesView can redraw
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
-
-}
-
-- (void)transportDidFinish:(NSString *)response requestId:(NSString*)requestId
-{
-    JMCIssue *issue = [JMCIssue issueWith:response requestId:requestId];
-
-    [[JMCIssueStore instance] updateIssueByUUID:issue];
-    // mark the issue has sent.
-    [[JMCIssueStore instance] markIssueAsSent:requestId];
-    NSLog(@"CREATE tranport finished. SUCCESS: Sent. %@", requestId);
-}
-
-- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
-{
-    NSLog(@"CREATE transportDidFinishWithError ERROR = %@, %@", [error description], requestId);
 }
 
 #pragma mark end

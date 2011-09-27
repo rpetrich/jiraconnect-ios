@@ -17,8 +17,8 @@
 #import "Core/JMCPing.h"
 #import "Core/JMCNotifier.h"
 #import "Core/JMCCrashSender.h"
+#import "JMCCreateIssueDelegate.h"
 #import "JMCRequestQueue.h"
-#import "JMCOfflineReplyDelegate.h"
 
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
@@ -136,36 +136,13 @@
     [_navController release];
     [_crashSender release];
     [_options release];
+
     [super dealloc];
 }
 
 -(void)flushRequestQueue
 {
-
-    // TODO: this needs to be done on an NSOperationQueue
-    JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
-    NSArray *items = [requestQueue getQueueList];
-
-    JMCIssueTransport* issueTransport = [[JMCIssueTransport alloc] init];
-    JMCReplyTransport* replyTransport = [[JMCReplyTransport alloc] init];
-    issueTransport.delegate = self._jcController;
-    JMCOfflineReplyDelegate *replyDelegate = [[JMCOfflineReplyDelegate alloc] init];
-    replyTransport.delegate = replyDelegate;
-    [replyDelegate release];
-    for (NSString *itemId in items) {
-        NSLog(@"sending itemId = %@", itemId);
-        JMCQueueItem *item = [requestQueue getItem:itemId];
-        if ([item.type isEqualToString:kTypeReply]) {
-            [replyTransport resendItem:item];
-        } else if ([item.type isEqualToString:kTypeCreate]) {
-            [issueTransport resendItem:item];
-        } else {
-            NSLog(@"Missing queued item with id: %@. Removing from queue.", itemId);
-            [requestQueue deleteItem:itemId];
-        }
-    }
-    [issueTransport release];
-    [replyTransport release];
+    [[JMCRequestQueue sharedInstance] flushQueue];
 }
 
 
