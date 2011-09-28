@@ -140,6 +140,7 @@
     [super dealloc];
 }
 
+// TODO: call this when network becomes active after app becomes active
 -(void)flushRequestQueue
 {
     [[JMCRequestQueue sharedInstance] flushQueue];
