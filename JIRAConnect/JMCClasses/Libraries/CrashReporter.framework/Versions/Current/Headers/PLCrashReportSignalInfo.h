@@ -28,53 +28,33 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PLCrashReportBinaryImageInfo : NSObject {
+@interface PLCrashReportSignalInfo : NSObject {
 @private
-    /** Base image address */
-    uint64_t _baseAddress;
+    /** Signal name */
+    NSString *_name;
+    
+    /** Signal code */
+    NSString *_code;
 
-    /** Image segment size */
-    uint64_t _imageSize;
-
-    /** Name of binary image */
-    NSString *_imageName;
-
-    /** If the UUID is available */
-    BOOL _hasImageUUID;
-
-    /** 128-bit object UUID. May be nil. */
-    NSString *_imageUUID;
+    /** Fauling instruction or address */
+    uint64_t _address;
 }
 
-- (id) initWithImageBaseAddress: (uint64_t) baseAddress 
-                      imageSize: (uint64_t) imageSize
-                      imageName: (NSString *) imageName
-                      imageUUID: (NSString *) imageUUID;
+- (id) initWithSignalName: (NSString *) name code: (NSString *) code address: (uint64_t) address;
 
 /**
- * Image base address.
+ * The signal name.
  */
-@property(nonatomic, readonly) uint64_t imageBaseAddress;
+@property(nonatomic, readonly) NSString *name;
 
 /**
- * Segment size.
+ * The signal code.
  */
-@property(nonatomic, readonly) uint64_t imageSize;
+@property(nonatomic, readonly) NSString *code;
 
 /**
- * Image name (absolute path)
+ * The faulting instruction or address.
  */
-@property(nonatomic, readonly) NSString *imageName;
-
-
-/**
- * YES if this image has an associated UUID.
- */
-@property(nonatomic, readonly) BOOL hasImageUUID;
-
-/**
- * 128-bit object UUID (matches Mach-O DWARF dSYM files). May be nil if unavailable.
- */
-@property(nonatomic, readonly) NSString *imageUUID;
+@property(nonatomic, readonly) uint64_t address;
 
 @end

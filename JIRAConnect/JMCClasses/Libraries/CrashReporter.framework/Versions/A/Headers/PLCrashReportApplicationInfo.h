@@ -28,53 +28,26 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PLCrashReportBinaryImageInfo : NSObject {
+@interface PLCrashReportApplicationInfo : NSObject {
 @private
-    /** Base image address */
-    uint64_t _baseAddress;
-
-    /** Image segment size */
-    uint64_t _imageSize;
-
-    /** Name of binary image */
-    NSString *_imageName;
-
-    /** If the UUID is available */
-    BOOL _hasImageUUID;
-
-    /** 128-bit object UUID. May be nil. */
-    NSString *_imageUUID;
+    /** Application identifier */
+    NSString *_applicationIdentifier;
+    
+    /** Application version */
+    NSString *_applicationVersion;
 }
 
-- (id) initWithImageBaseAddress: (uint64_t) baseAddress 
-                      imageSize: (uint64_t) imageSize
-                      imageName: (NSString *) imageName
-                      imageUUID: (NSString *) imageUUID;
+- (id) initWithApplicationIdentifier: (NSString *) applicationIdentifier 
+                  applicationVersion: (NSString *) applicationVersion;
 
 /**
- * Image base address.
+ * The application identifier. This is usually the application's CFBundleIdentifier value.
  */
-@property(nonatomic, readonly) uint64_t imageBaseAddress;
+@property(nonatomic, readonly) NSString *applicationIdentifier;
 
 /**
- * Segment size.
+ * The application version. This is usually the application's CFBundleVersion value.
  */
-@property(nonatomic, readonly) uint64_t imageSize;
-
-/**
- * Image name (absolute path)
- */
-@property(nonatomic, readonly) NSString *imageName;
-
-
-/**
- * YES if this image has an associated UUID.
- */
-@property(nonatomic, readonly) BOOL hasImageUUID;
-
-/**
- * 128-bit object UUID (matches Mach-O DWARF dSYM files). May be nil if unavailable.
- */
-@property(nonatomic, readonly) NSString *imageUUID;
+@property(nonatomic, readonly) NSString *applicationVersion;
 
 @end
