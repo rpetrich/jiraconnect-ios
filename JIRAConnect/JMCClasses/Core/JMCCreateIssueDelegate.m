@@ -38,6 +38,8 @@
     [[JMCIssueStore instance] updateIssueByUUID:issue];
     // mark the issue has sent.
     [[JMCIssueStore instance] markIssueAsSent:requestId];
+    NSLog(@"Successfully created %@", issue.key);
+
 }
 
 - (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
