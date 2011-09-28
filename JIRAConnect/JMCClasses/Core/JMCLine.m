@@ -20,7 +20,7 @@
 @synthesize points, color, curve;
 
 - (id)init {
-	if (self == [super init]) {
+	if (self = [super init]) {
 		self.points = [NSMutableArray arrayWithCapacity:5];
 	}
 	return self;

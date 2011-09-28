@@ -29,7 +29,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (id)init 
 {
-	if (self == [super init]) 
+	if (self = [super init]) 
 	{
 		self.lines = [NSMutableArray arrayWithCapacity:1];
 		self.undoHistory = [NSMutableArray arrayWithCapacity:1];
@@ -40,7 +40,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (id) initWithJson:(NSDictionary *)dictionary
 {
-	[self init];
+	self = [self init];
 	NSArray *lineArray = [dictionary objectForKey:@"lines"];
 	NSString *colorRGB = [dictionary objectForKey:@"color"]; // format: rrggbb in HEX
 	
