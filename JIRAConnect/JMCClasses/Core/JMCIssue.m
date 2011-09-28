@@ -19,12 +19,12 @@
 
 @implementation JMCIssue
 
-@synthesize uuid=_uuid, key = _key, status = _status, summary = _summary, description = _description,
+@synthesize requestId = _requestId, key = _key, status = _status, summary = _summary, description = _description,
             comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
             dateCreated = _dateCreated, sent=_sent, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
-    self.uuid = nil;
+    self.requestId = nil;
     self.key = nil;
     self.status = nil;
     self.summary = nil;
@@ -63,7 +63,7 @@
 {
     NSDictionary *responseDict = [issueJSON JSONValue];
     JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
-    issue.uuid = uuid;
+    issue.requestId = uuid;
     return [issue autorelease];
 }
 
@@ -77,7 +77,7 @@
         [lowerMap setObject:obj forKey:[key lowercaseString]];
     }];
     if ((self = [super init])) {
-        self.uuid = [lowerMap objectForKey:@"uuid"];
+        self.requestId = [lowerMap objectForKey:@"uuid"];
         self.key = [lowerMap objectForKey:@"key"];
         self.status = [lowerMap objectForKey:@"status"];
         NSString* summary = [lowerMap objectForKey:@"summary"];

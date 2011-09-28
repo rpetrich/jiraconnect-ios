@@ -19,7 +19,7 @@
     issue.hasUpdates = NO;
     issue.dateCreated = [NSDate date];
     issue.dateUpdated = [NSDate date];
-    issue.uuid = requestId;
+    issue.requestId = requestId;
     issue.sent = NO;
 
     [[JMCIssueStore instance] insertIssue:issue]; // newly created issues have no comments

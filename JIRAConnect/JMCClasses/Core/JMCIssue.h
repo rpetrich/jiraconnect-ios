@@ -19,7 +19,7 @@
 
 
 @interface JMCIssue : NSObject {
-    NSString* _uuid;
+    NSString*_requestId;
     NSString* _key;
     NSString* _status;
     NSString* _summary;
@@ -35,7 +35,7 @@
 @property (nonatomic, retain) NSDate* dateUpdated;
 @property (nonatomic, assign) NSNumber* dateUpdatedLong;
 @property (nonatomic, assign) NSNumber* dateCreatedLong;
-@property (nonatomic, retain) NSString* uuid;
+@property (nonatomic, retain) NSString* requestId;
 @property (nonatomic, retain) NSString* key;
 @property (nonatomic, retain) NSString* status;
 @property (nonatomic, retain) NSString* summary;

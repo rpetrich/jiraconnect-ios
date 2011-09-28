@@ -195,7 +195,7 @@ static NSRecursiveLock *writeLock;
         @"UPDATE issue "
          "SET status = ?, dateUpdated = ?, hasUpdates = ?, uuid = ? "
          "WHERE key = ?",
-        issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.uuid, issue.key];
+        issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.requestId, issue.key];
     }
 
 }
@@ -207,7 +207,7 @@ static NSRecursiveLock *writeLock;
                 "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates, sent) "
                 "VALUES "
                 "(?,?,?,?,?,?,?,?,?) ",
-        issue.key, issue.uuid, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
+        issue.key, issue.requestId, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
         [NSNumber numberWithBool:issue.hasUpdates], [NSNumber numberWithBool:issue.sent]];
     }
     // TODO: handle error err...
@@ -253,7 +253,7 @@ static NSRecursiveLock *writeLock;
                 @"UPDATE issue "
                         "SET status = ?, dateUpdated = ?, hasUpdates = ?, key = ?"
                         "WHERE uuid = ?",
-                issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key, issue.uuid];
+                issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key, issue.requestId];
     }
 }
 

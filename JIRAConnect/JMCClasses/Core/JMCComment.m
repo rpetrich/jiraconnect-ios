@@ -25,6 +25,7 @@
     self.author = nil;
     self.body = nil;
     self.date = nil;
+    self.uuid = nil;
     [super dealloc];
 }
 
