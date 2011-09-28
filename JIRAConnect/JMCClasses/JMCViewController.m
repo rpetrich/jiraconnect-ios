@@ -492,8 +492,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
-    NSLog(@"Payload DataSource: %@", self.payloadDataSource);
-    
     if ([self.payloadDataSource respondsToSelector:@selector(attachment)]) {
         JMCAttachmentItem *payloadData = [self.payloadDataSource attachment];
         if (payloadData) {
