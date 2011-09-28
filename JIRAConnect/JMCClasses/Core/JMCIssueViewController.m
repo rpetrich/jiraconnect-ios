@@ -102,7 +102,7 @@ static float detailLabelHeight = 21.0f;
     JMCComment *description = [[JMCComment alloc] initWithAuthor:@"Author"
                                                       systemUser:YES body:self.issue.description
                                                             date:self.issue.dateCreated
-                                                            uuid:self.issue.uuid
+                                                            uuid:self.issue.requestId
                                                             sent:YES];
     NSMutableArray *commentData = [NSMutableArray arrayWithObject:description];
     [commentData addObjectsFromArray:issue.comments];

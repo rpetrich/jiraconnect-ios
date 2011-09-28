@@ -48,11 +48,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
-        self.issueTransport = [[[JMCIssueTransport alloc] init] autorelease];
-        self.replyTransport = [[[JMCReplyTransport alloc] init] autorelease];
-        self.issueTransport.delegate = [[[JMCCreateIssueDelegate alloc] init] autorelease];
-        self.replyTransport.delegate = [[[JMCReplyDelegate alloc] init] autorelease];
+  
 
     }
     return self;
@@ -132,7 +128,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
 
-    [[JMC instance] flushRequestQueue];
+    // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
+    _issueTransport = [[JMCIssueTransport alloc] init];
+    _replyTransport = [[JMCReplyTransport alloc] init];
+    
+    JMCCreateIssueDelegate* createDelegate = [[JMCCreateIssueDelegate alloc] init];
+    _issueTransport.delegate = createDelegate;
+    [createDelegate release];
+    
+    JMCReplyDelegate* replyDelegate = [[JMCReplyDelegate alloc] init];
+    _replyTransport.delegate = replyDelegate;
+    [replyDelegate release];
 
 }
 

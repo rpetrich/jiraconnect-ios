@@ -200,11 +200,12 @@ static CrashReporter *crashReportSender = nil;
         {
             // crashData here is simply a protobuf! could also attach that?
 
-            PLCrashReport *report = [[[PLCrashReport alloc] initWithData:crashData error:&error] autorelease];
+            PLCrashReport *report = [[PLCrashReport alloc] initWithData:crashData error:&error];
 
             NSString *crashLogString = [self _crashLogStringForReport:report];
 
             [crashReports addObject:crashLogString];
+            [report release];
         }
     }
     return crashReports;
@@ -502,12 +503,13 @@ static CrashReporter *crashReportSender = nil;
 
         // We could send the report from here, but we'll just print out
         // some debugging info instead
-        PLCrashReport *report = [[[PLCrashReport alloc] initWithData:[crashData retain] error:&error] autorelease]; // we are crashing, so no need to release?
+        PLCrashReport *report = [[PLCrashReport alloc] initWithData:crashData error:&error];
         if (report == nil)
         {
             NSLog(@"Could not parse crash report");
             goto finish;
         }
+        [report release];
     }
 
     // Purge the report
