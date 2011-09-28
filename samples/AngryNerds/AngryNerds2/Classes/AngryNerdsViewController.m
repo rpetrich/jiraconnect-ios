@@ -54,7 +54,7 @@
 
 - (NSDictionary *)customFields
 {
-    return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
+    return [NSDictionary dictionaryWithObject:@"9999" forKey:@"Top Score"];
 }
 
 - (NSString *)jiraIssueTypeNameFor:(JMCIssueType)type
@@ -70,6 +70,7 @@
 
 - (JMCAttachmentItem *) attachment
 {
+    NSLog(@"Adding attachment...");
     return [[[JMCAttachmentItem alloc] initWithName:@"custom-attachment"
                                               data:[@"Add any other data as an attachment" dataUsingEncoding:NSUTF8StringEncoding]
                                               type:JMCAttachmentTypePayload

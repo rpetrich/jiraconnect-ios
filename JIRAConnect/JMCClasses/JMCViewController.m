@@ -489,18 +489,16 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         // No data entered, just return.
         return;
     }
-    
-    NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
+    NSLog(@"Payload DataSource: %@", self.payloadDataSource);
+    
     if ([self.payloadDataSource respondsToSelector:@selector(attachment)]) {
         JMCAttachmentItem *payloadData = [self.payloadDataSource attachment];
         if (payloadData) {
             [allAttachments addObject:payloadData];
         }
-    }
-    if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {
-        [customFields addEntriesFromDictionary:[self.payloadDataSource customFields]];
     }
 
     if ([self shouldTrackLocation] && [self currentLocation]) {
@@ -523,7 +521,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     // add all custom fields as one attachment item
     NSData *customFieldsJSON = [[customFields JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
-    [customFields release];
+    
     JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
                                                                              data:customFieldsJSON
                                                                              type:JMCAttachmentTypeCustom

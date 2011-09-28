@@ -30,7 +30,7 @@
     if ((self = [super init])) {
         _photosEnabled = YES;
         _voiceEnabled = YES;
-        _locationEnabled = NO;
+        _locationEnabled = YES;
     }
     return self;
 }
@@ -173,6 +173,19 @@
     [options release];
 }
 
+- (void) configureJiraConnect:(NSString*) withUrl
+                   projectKey:(NSString*)project
+                       apiKey:(NSString *)apiKey
+                   dataSource:(id<JMCCustomDataSource>)customDataSource
+{
+    JMCOptions *options = [[JMCOptions alloc]init];
+    options.url = withUrl;
+    options.projectKey = project;
+    options.apiKey = apiKey;
+    [self configureWithOptions:options dataSource:customDataSource];
+    [options release];
+}
+
 - (void) configureWithOptions:(JMCOptions*)options
 {
     [self configureWithOptions:options dataSource:nil];
@@ -280,6 +293,19 @@
         return self._options.projectKey;
     }
     return [self getAppName];
+}
+
+
+-(NSMutableDictionary *)getCustomFields
+{
+    NSMutableDictionary *customFields = [[[NSMutableDictionary alloc] init] autorelease];
+    if ([_customDataSource respondsToSelector:@selector(customFields)]) {
+        [customFields addEntriesFromDictionary:[_customDataSource customFields]];
+    }
+    if (_options.customFields) {
+        [customFields addEntriesFromDictionary:_options.customFields];
+    }
+    return customFields;
 }
 
 -(NSString *)getApiKey

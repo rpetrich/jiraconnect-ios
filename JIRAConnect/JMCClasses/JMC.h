@@ -120,6 +120,11 @@
 */
 - (void) configureJiraConnect:(NSString*) withUrl customDataSource:(id<JMCCustomDataSource>)customDataSource;
 - (void) configureJiraConnect:(NSString*) withUrl projectKey:(NSString*)project apiKey:(NSString *)apiKey;
+- (void) configureJiraConnect:(NSString*) withUrl
+                   projectKey:(NSString*)project
+                       apiKey:(NSString *)apiKey
+                   dataSource:(id<JMCCustomDataSource>)customDataSource;
+
 - (void) configureWithOptions:(JMCOptions*)options;
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource;
 
@@ -136,6 +141,7 @@
 - (UIViewController*) issuesViewController;
 
 - (NSDictionary*) getMetaData;
+- (NSMutableDictionary*) getCustomFields;
 - (NSString *) getProject;
 - (NSString *) getApiKey;
 - (NSString *) getAppName;
