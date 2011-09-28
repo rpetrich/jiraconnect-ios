@@ -74,7 +74,6 @@
 		0161F22313E2C98E0048DD76 /* JMCMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F18313E2C98E0048DD76 /* JMCMacros.h */; };
 		0161F22413E2C98E0048DD76 /* JMCViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F18413E2C98E0048DD76 /* JMCViewController.h */; };
 		0161F22513E2C98E0048DD76 /* JMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F18513E2C98E0048DD76 /* JMCViewController.m */; };
-		0161F23813E2C98E0048DD76 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0161F19B13E2C98E0048DD76 /* CrashReporter.framework */; };
 		0161F23913E2C98E0048DD76 /* CRVActivityView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F19C13E2C98E0048DD76 /* CRVActivityView.h */; };
 		0161F23A13E2C98E0048DD76 /* CRVActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F19D13E2C98E0048DD76 /* CRVActivityView.m */; };
 		0161F23B13E2C98E0048DD76 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F1A213E2C98E0048DD76 /* FMDatabase.h */; };
@@ -132,6 +131,7 @@
 		8D90CDBB1431B84F00DD97B5 /* JMCCreateIssueDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90CDB91431B84F00DD97B5 /* JMCCreateIssueDelegate.m */; };
 		8D90CDBF1431B89800DD97B5 /* JMCReplyDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D90CDBD1431B89800DD97B5 /* JMCReplyDelegate.h */; };
 		8D90CDC01431B89800DD97B5 /* JMCReplyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90CDBE1431B89800DD97B5 /* JMCReplyDelegate.m */; };
+		8D93F20614330D9600810E10 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D93F20514330D9600810E10 /* CrashReporter.framework */; };
 		F89A98D7139B58AC00D09DFF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
 		F89A98D9139B58B700D09DFF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D8139B58B700D09DFF /* CFNetwork.framework */; };
 		F89A98DB139B58BF00D09DFF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */; };
@@ -216,7 +216,6 @@
 		0161F18413E2C98E0048DD76 /* JMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCViewController.h; sourceTree = "<group>"; };
 		0161F18513E2C98E0048DD76 /* JMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCViewController.m; sourceTree = "<group>"; };
 		0161F18613E2C98E0048DD76 /* JMCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCViewController.xib; sourceTree = "<group>"; };
-		0161F19B13E2C98E0048DD76 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		0161F19C13E2C98E0048DD76 /* CRVActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRVActivityView.h; sourceTree = "<group>"; };
 		0161F19D13E2C98E0048DD76 /* CRVActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRVActivityView.m; sourceTree = "<group>"; };
 		0161F19F13E2C98E0048DD76 /* CONTRIBUTORS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTORS.txt; sourceTree = "<group>"; };
@@ -307,6 +306,7 @@
 		8D90CDB91431B84F00DD97B5 /* JMCCreateIssueDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCCreateIssueDelegate.m; sourceTree = "<group>"; };
 		8D90CDBD1431B89800DD97B5 /* JMCReplyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCReplyDelegate.h; sourceTree = "<group>"; };
 		8D90CDBE1431B89800DD97B5 /* JMCReplyDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCReplyDelegate.m; sourceTree = "<group>"; };
+		8D93F20514330D9600810E10 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		F89A98D6139B58AC00D09DFF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F89A98D8139B58B700D09DFF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -344,7 +344,7 @@
 				F89A98D9139B58B700D09DFF /* CFNetwork.framework in Frameworks */,
 				F89A98D7139B58AC00D09DFF /* UIKit.framework in Frameworks */,
 				F8B80566139B57EC00EC5AD4 /* Foundation.framework in Frameworks */,
-				0161F23813E2C98E0048DD76 /* CrashReporter.framework in Frameworks */,
+				8D93F20614330D9600810E10 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,10 +517,10 @@
 		0161F18713E2C98E0048DD76 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8D93F20514330D9600810E10 /* CrashReporter.framework */,
 				01EC37CA142ED07E00BF600E /* UIImageCategories */,
 				01EC37B0142ECDB300BF600E /* Reachability */,
 				0161F18813E2C98E0048DD76 /* ASIHTTP */,
-				0161F19B13E2C98E0048DD76 /* CrashReporter.framework */,
 				0161F19C13E2C98E0048DD76 /* CRVActivityView.h */,
 				0161F19D13E2C98E0048DD76 /* CRVActivityView.m */,
 				0161F19E13E2C98E0048DD76 /* FMDB */,
