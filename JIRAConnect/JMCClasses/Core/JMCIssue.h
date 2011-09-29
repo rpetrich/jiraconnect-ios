@@ -28,7 +28,6 @@
     NSDate* _dateCreated;
     NSMutableArray* _comments;
     BOOL _hasUpdates;
-    BOOL _sent;
 }
 
 @property (nonatomic, retain) NSDate* dateCreated;
@@ -42,7 +41,6 @@
 @property (nonatomic, retain) NSString* description;
 @property (nonatomic, retain) NSMutableArray* comments;
 @property (nonatomic, assign) BOOL hasUpdates;
-@property (nonatomic, assign) BOOL sent;
 
 - (id) initWithDictionary:(NSDictionary*)map;
 - (JMCComment *) latestComment;

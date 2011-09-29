@@ -36,8 +36,6 @@
 - (void) insertIssue:(JMCIssue *)issue;
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey;
 - (void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key;
-- (void) markIssueAsSent:(NSString *)requestId;
-- (void) markCommentAsSent:(NSString *)requestId;
 - (void) markAsRead:(JMCIssue *)issue;
 + (JMCIssueStore *) instance;
 

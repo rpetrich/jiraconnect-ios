@@ -307,6 +307,9 @@
 		8D90CDB91431B84F00DD97B5 /* JMCCreateIssueDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCCreateIssueDelegate.m; sourceTree = "<group>"; };
 		8D90CDBD1431B89800DD97B5 /* JMCReplyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCReplyDelegate.h; sourceTree = "<group>"; };
 		8D90CDBE1431B89800DD97B5 /* JMCReplyDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCReplyDelegate.m; sourceTree = "<group>"; };
+		8DD5D420143429F5003D030E /* notsent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = notsent.png; path = ../../../../../../notsent.png; sourceTree = "<group>"; };
+		8DD5D42B14344673003D030E /* notsent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notsent.png; sourceTree = "<group>"; };
+		8DD5D42C14344673003D030E /* notsent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notsent@2x.png"; sourceTree = "<group>"; };
 		F89A98D6139B58AC00D09DFF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F89A98D8139B58B700D09DFF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -600,6 +603,9 @@
 		0161F1BA13E2C98E0048DD76 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8DD5D42B14344673003D030E /* notsent.png */,
+				8DD5D42C14344673003D030E /* notsent@2x.png */,
+				8DD5D420143429F5003D030E /* notsent.png */,
 				013DA29F13E307E700103C46 /* en.lproj */,
 				013DA2A213E307E700103C46 /* de.lproj */,
 				013DA29413E3058F00103C46 /* button_base.png */,

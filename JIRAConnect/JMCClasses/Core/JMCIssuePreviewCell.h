@@ -22,12 +22,14 @@
     UILabel* _titleLabel;
     UILabel* _detailsLabel;
     UIImageView* _statusLabel;
+    UIImageView* _sentStatusLabel;
 }
 
 @property (retain, nonatomic) IBOutlet UILabel* dateLabel;
 @property (retain, nonatomic) IBOutlet UILabel* titleLabel;
 @property (retain, nonatomic) IBOutlet UILabel* detailsLabel;
 @property (retain, nonatomic) IBOutlet UIImageView* statusLabel;
+@property (retain, nonatomic) IBOutlet UIImageView* sentStatusLabel;
 
 
 

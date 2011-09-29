@@ -19,6 +19,7 @@
 #import "JMC.h"
 #import "UILabel+VerticalAlign.h"
 #import "../JMCMacros.h"
+#import "JMCRequestQueue.h"
 
 static NSString *cellId = @"CommentCell";
 
@@ -42,7 +43,7 @@ static NSString *cellId = @"CommentCell";
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCNewIssueCreated object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCIssueUpdated object:nil];
     }
     return self;
 }
@@ -119,6 +120,10 @@ static NSString *cellId = @"CommentCell";
     NSDate *date = latestComment.date != nil ? latestComment.date : issue.dateUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
     cell.statusLabel.hidden = !issue.hasUpdates;
+
+    JMCSentStatus sentStatus = [[JMCRequestQueue sharedInstance] requestStatusFor:issue.requestId];
+    cell.sentStatusLabel.hidden = !(sentStatus == JMCSentStatusRetry || sentStatus == JMCSentStatusPermError); // if in temp or perm error, mark it so
+
     [issue release];
     return cell;
 }

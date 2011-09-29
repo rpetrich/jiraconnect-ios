@@ -24,7 +24,7 @@
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
 #define kJMCReceivedCommentsNotification @"kJMCReceivedCommentsNotification"
 #define kJMCLastSuccessfulPingTime @"kJMCLastSuccessfulPingTime"
-#define kJMCNewIssueCreated @"kJMCNewIssueCreated"
+#define kJMCIssueUpdated @"kJMCIssueUpdated"
 #define kJMCNewCommentCreated @"kJMCNewCommentCreated"
 
 #define kJMCOptionUrl @"kJMCOptionUrl"

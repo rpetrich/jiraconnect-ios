@@ -161,6 +161,10 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
+
+    // TODO: time-out items in the request queue after N Attempts ?
+    [[JMCRequestQueue sharedInstance] updateItem:requestId sentStatus:JMCSentStatusRetry bumpNumAttemptsBy:1];
+    
     NSError *error = [request error];
     if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:requestId:)]) {
         [self.delegate transportDidFinishWithError:error requestId:requestId];
