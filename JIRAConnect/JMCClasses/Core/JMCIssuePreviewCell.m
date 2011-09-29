@@ -35,7 +35,7 @@
     // Configure the view for the selected state
 }
 
-@synthesize dateLabel=_dateLabel, titleLabel=_titleLabel, detailsLabel=_detailsLabell, statusLabel=_statusLabel;
+@synthesize dateLabel=_dateLabel, titleLabel=_titleLabel, detailsLabel=_detailsLabell, statusLabel=_statusLabel, sentStatusLabel=_sentStatusLabel;
 
 - (void)dealloc
 {
@@ -43,6 +43,7 @@
     self.titleLabel = nil;
     self.detailsLabel = nil;
     self.statusLabel = nil;
+    self.sentStatusLabel = nil;
     [super dealloc];
 }
 

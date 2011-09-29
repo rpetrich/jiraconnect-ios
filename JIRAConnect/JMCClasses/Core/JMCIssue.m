@@ -21,7 +21,7 @@
 
 @synthesize requestId = _requestId, key = _key, status = _status, summary = _summary, description = _description,
             comments = _comments, hasUpdates = _hasUpdates, dateUpdated = _dateUpdated,
-            dateCreated = _dateCreated, sent=_sent, dateCreatedLong, dateUpdatedLong;
+            dateCreated = _dateCreated, sentStatus = _sentStatus, dateCreatedLong, dateUpdatedLong;
 
 - (void) dealloc {
     self.requestId = nil;
@@ -85,8 +85,9 @@
         self.description = [lowerMap objectForKey:@"description"];
         NSNumber* hasUpdatesNum = [lowerMap objectForKey:@"hasupdates"];
         self.hasUpdates = [hasUpdatesNum boolValue];
-        NSNumber* sent = [lowerMap objectForKey:@"sent"];
-        self.sent = sent == NULL ? NO : [sent boolValue];
+
+        NSNumber* sent = [lowerMap objectForKey:@"sentstatus"];
+        self.sentStatus = sent == NULL ? 0 : sent.intValue;
 
         NSNumber *created = [lowerMap objectForKey:@"datecreated"];
         NSNumber *updated = [lowerMap objectForKey:@"dateupdated"];

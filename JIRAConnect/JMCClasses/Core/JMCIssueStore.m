@@ -63,8 +63,8 @@ static NSRecursiveLock *writeLock;
     }
     [db executeUpdate:@"CREATE table if not exists ISSUE "
                         "(id INTEGER PRIMARY KEY ASC autoincrement, "
-                        "uuid TEXT, " // a handle to manage unsent issues by
-                        "sent INTEGER, " // if the issue was sent successfully or not
+                        "uuid TEXT, " // a handle to manage unsentStatus issues by
+                        "sentStatus INTEGER, " // if the issue was sent successfully or not
                         "key TEXT, "
                         "status TEXT, "
                         "summary TEXT, "
@@ -78,7 +78,7 @@ static NSRecursiveLock *writeLock;
     [db executeUpdate:@"CREATE table if not exists COMMENT "
                         "(id INTEGER PRIMARY KEY ASC autoincrement, "
                         "uuid TEXT, " // a handle to manage unsent comments by
-                        "sent INTEGER, " // if the comment was sent successfully or not
+                        "sentStatus INTEGER, " // if the comment was sent successfully or not
                         "issuekey TEXT, "
                         "username TEXT, "
                         "systemuser INTEGER, "
@@ -111,7 +111,7 @@ static NSRecursiveLock *writeLock;
     FMResultSet *res = [db executeQuery:
                                @"SELECT "
                                    "uuid, "
-                                   "sent, "
+                                   "sentStatus, "
                                    "key, "
                                    "summary, "
                                    "description, "
@@ -170,11 +170,11 @@ static NSRecursiveLock *writeLock;
     @synchronized (writeLock) {
     [db executeUpdate:
         @"INSERT INTO COMMENT "
-                "(issuekey, username, systemuser, text, date, uuid, sent) "
+                "(issuekey, username, systemuser, text, date, uuid, sentStatus) "
                 "VALUES "
                 "(?,?,?,?,?,?,?) ",
                 issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.uuid,
-                [NSNumber numberWithBool:comment.sent]];
+                [NSNumber numberWithInt:comment.sentStatus]];
     }
     // TODO: handle error err...
     if ([db hadError]) {
@@ -193,9 +193,11 @@ static NSRecursiveLock *writeLock;
     @synchronized (writeLock) {
     [db executeUpdate:
         @"UPDATE issue "
-         "SET status = ?, dateUpdated = ?, hasUpdates = ?, uuid = ? "
+         "SET status = ?, dateUpdated = ?, hasUpdates = ?, uuid = ?, sentStatus = ? "
          "WHERE key = ?",
-        issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.requestId, issue.key];
+        issue.status, issue.dateUpdatedLong,
+                    [NSNumber numberWithBool:issue.hasUpdates],
+                    [NSNumber numberWithInt:issue.sentStatus], issue.requestId, issue.key];
     }
 
 }
@@ -204,11 +206,11 @@ static NSRecursiveLock *writeLock;
     @synchronized (writeLock) {
     [db executeUpdate:
         @"INSERT INTO ISSUE "
-                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates, sent) "
+                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates, sentStatus) "
                 "VALUES "
                 "(?,?,?,?,?,?,?,?,?) ",
         issue.key, issue.requestId, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
-        [NSNumber numberWithBool:issue.hasUpdates], [NSNumber numberWithBool:issue.sent]];
+        [NSNumber numberWithBool:issue.hasUpdates], [NSNumber numberWithInt:issue.sentStatus]];
     }
     // TODO: handle error err...
     if ([db hadError]) {
@@ -216,23 +218,23 @@ static NSRecursiveLock *writeLock;
     }
 }
 
-- (void) markIssueAsSent:(NSString *)requestId
+- (void) setSentStatus:(JMCSentStatus)status forIssue:(NSString *)requestId
 {
     @synchronized (writeLock) {
     [db executeUpdate:
             @"UPDATE issue "
-             "SET sent = 1 "
-             "WHERE uuid = ?", requestId];
+             "SET sentStatus = ? "
+             "WHERE uuid = ?", [NSNumber numberWithInt:status], requestId];
     }
 }
 
-- (void) markCommentAsSent:(NSString *)requestId
+- (void) setSentStatus:(JMCSentStatus)status forComment:(NSString *)requestId
 {
     @synchronized (writeLock) {
     [db executeUpdate:
             @"UPDATE comment "
-             "SET sent = 1 "
-             "WHERE uuid = ?", requestId];
+             "SET sentStatus = ? "
+             "WHERE uuid = ?", [NSNumber numberWithInt:status], requestId];
     }
 }
 
@@ -251,9 +253,11 @@ static NSRecursiveLock *writeLock;
     @synchronized (writeLock) {
         [db executeUpdate:
                 @"UPDATE issue "
-                        "SET status = ?, dateUpdated = ?, hasUpdates = ?, key = ?"
+                        "SET status = ?, dateUpdated = ?, hasUpdates = ?, key = ?, sentStatus = ? "
                         "WHERE uuid = ?",
-                issue.status, issue.dateUpdatedLong, [NSNumber numberWithBool:issue.hasUpdates], issue.key, issue.requestId];
+                issue.status, issue.dateUpdatedLong,
+                        [NSNumber numberWithBool:issue.hasUpdates], issue.key,
+                        [NSNumber numberWithInt:issue.sentStatus], issue.requestId];
     }
 }
 
@@ -317,6 +321,7 @@ static NSRecursiveLock *writeLock;
             if (issue.hasUpdates) {
                 numNewIssues++;
             }
+
             [self insertOrUpdateIssue:issue];
 
             NSArray *comments = [dict objectForKey:@"comments"];

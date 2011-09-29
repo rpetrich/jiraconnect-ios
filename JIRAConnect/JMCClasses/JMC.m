@@ -224,7 +224,7 @@
     [issuesController release];
     [notifier release];
 
-    // TODO: firing this when network becomes active would be better
+    // TODO: firing this when network becomes active could be better
     [NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
     // whenever the Application Becomes Active, ping for notifications from JIRA.
     [[NSNotificationCenter defaultCenter] addObserver:_pinger selector:@selector(start) name:UIApplicationDidBecomeActiveNotification object:nil];

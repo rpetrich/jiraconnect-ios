@@ -21,7 +21,7 @@ static NSOperationQueue *sharedOperationQueue = nil;
 
 - (NSString *)getQueueItemPathFor:(NSString *)uuid;
 
-- (void)saveQueueIndex:(NSMutableArray *)queueList;
+- (void)saveQueueIndex:(NSMutableDictionary *)queueList;
 
 @end
 
@@ -55,8 +55,8 @@ NSRecursiveLock* _flushLock;
 {
     @synchronized (_flushLock) { // Ensure a single thread at a time tries to flush the queue.
         JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
-        NSArray *items = [requestQueue getQueueList];
-        for (NSString *itemId in items) {
+        NSMutableDictionary *items = [requestQueue getQueueList];
+        for (NSString *itemId in [items allKeys]) {
             JMCQueueItem *item = [requestQueue getItem:itemId];
             NSOperation *operation = nil;
             if ([item.type isEqualToString:kTypeReply]) {
@@ -71,14 +71,19 @@ NSRecursiveLock* _flushLock;
                 [sharedOperationQueue addOperation:operation];
                 NSLog(@"Added request to operation queue %@", item.uuid);
             }
+            //TODO bump num attempts by 1 & resave the queue
+            
         }
     }
 }
 
 - (void)addItem:(JMCQueueItem *)item
 {
-    NSMutableArray *queueIndex = [self getQueueList];
-    [queueIndex addObject:item.uuid];
+    NSMutableDictionary *queueIndex = [self getQueueList];
+    NSMutableDictionary *metadata = [NSMutableDictionary dictionaryWithCapacity:2];
+    [metadata setObject:[NSNumber numberWithInt:JMCSentStatusNew] forKey:@"sentStatus"];
+    [metadata setObject:[NSNumber numberWithInt:0] forKey:@"numAttempts"];
+    [queueIndex setObject:metadata forKey:item.uuid];
     [self saveQueueIndex:queueIndex];
     // now save the queue item to disc...
     NSString *itemPath = [self getQueueItemPathFor:item.uuid];
@@ -92,27 +97,25 @@ NSRecursiveLock* _flushLock;
 }
 
 
-- (void)saveQueueIndex:(NSMutableArray *)queueList
+- (void)saveQueueIndex:(NSMutableDictionary *)queueList
 {
     [queueList writeToFile:[self getQueueIndexPath] atomically:YES];
 }
 
-- (void)deleteItem:(NSString *)uuid {
-    NSMutableArray *queue = [self getQueueList];
-    u_int index = [queue indexOfObject:uuid];
-    if (index < [queue count]) {
-        [queue removeObjectAtIndex:index];
-    }
+- (void)deleteItem:(NSString *)uuid
+{
+    NSMutableDictionary *queue = [self getQueueList];
+    [queue removeObjectForKey:uuid];
     [self saveQueueIndex:queue];
     // now remove the queue item from disk
     [[NSFileManager defaultManager] removeItemAtPath:[self getQueueItemPathFor:uuid] error:nil];
 }
 
 // This is the actual list of items that need sending
-- (NSMutableArray *)getQueueList {
-    NSMutableArray *queueIndex = [[[NSArray arrayWithContentsOfFile:[self getQueueIndexPath]] mutableCopy] autorelease];
+- (NSMutableDictionary *)getQueueList {
+    NSMutableDictionary  *queueIndex = [[[NSMutableDictionary dictionaryWithContentsOfFile:[self getQueueIndexPath]] mutableCopy] autorelease];
     if (queueIndex == nil) {
-        queueIndex = [NSMutableArray arrayWithCapacity:0];
+        queueIndex = [NSMutableDictionary dictionary];
     }
     return queueIndex;
 }

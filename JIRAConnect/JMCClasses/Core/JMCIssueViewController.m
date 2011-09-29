@@ -233,8 +233,10 @@ static float detailLabelHeight = 21.0f;
 
 -(void)refreshTable
 {
+    NSLog(@"Refreshing TABLE...");
     self.issue.comments = [[JMCIssueStore instance] loadCommentsFor:self.issue];
     [self setUpCommentDataFor:self.issue];
+    NSLog(@"Issue was sent...%d", self.issue.sentStatus);
     [self.tableView reloadData];
     [self scrollToLastComment];
 }

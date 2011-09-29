@@ -119,6 +119,9 @@ static NSString *cellId = @"CommentCell";
     NSDate *date = latestComment.date != nil ? latestComment.date : issue.dateUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
     cell.statusLabel.hidden = !issue.hasUpdates;
+    NSLog(@"Issue sent status: %@ = %d", issue.requestId, issue.sentStatus);
+    cell.sentStatusLabel.hidden = !(issue.sentStatus == JMCSentStatusRetry || issue.sentStatus == JMCSentStatusPermError); // if in temp or perm error, mark it so
+
     [issue release];
     return cell;
 }

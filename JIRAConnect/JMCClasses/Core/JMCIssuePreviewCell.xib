@@ -131,7 +131,7 @@
 							</object>
 							<object class="IBUIImageView" id="775222735">
 								<reference key="NSNextResponder" ref="630144290"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{5, 26}, {12, 12}}</string>
 								<reference key="NSSuperview" ref="630144290"/>
 								<reference key="NSWindow"/>
@@ -143,11 +143,25 @@
 									<string key="NSResourceName">bluedot.png</string>
 								</object>
 							</object>
+							<object class="IBUIImageView" id="1025210986">
+								<reference key="NSNextResponder" ref="630144290"/>
+								<int key="NSvFlags">-2147483356</int>
+								<string key="NSFrame">{{6, 29}, {12, 12}}</string>
+								<reference key="NSSuperview" ref="630144290"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="5583660"/>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">notsent.png</string>
+								</object>
+							</object>
 						</object>
 						<string key="NSFrameSize">{300, 70}</string>
 						<reference key="NSSuperview" ref="187720622"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="5583660"/>
+						<reference key="NSNextKeyView" ref="1025210986"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -210,6 +224,14 @@
 					</object>
 					<int key="connectionID">16</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">sentStatusLabel</string>
+						<reference key="source" ref="187720622"/>
+						<reference key="destination" ref="1025210986"/>
+					</object>
+					<int key="connectionID">18</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -240,6 +262,7 @@
 							<reference ref="347909637"/>
 							<reference ref="136277461"/>
 							<reference ref="775222735"/>
+							<reference ref="1025210986"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -263,6 +286,11 @@
 						<reference key="object" ref="775222735"/>
 						<reference key="parent" ref="187720622"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="1025210986"/>
+						<reference key="parent" ref="187720622"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -271,6 +299,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-2.CustomClassName</string>
 					<string>15.IBPluginDependency</string>
+					<string>17.IBPluginDependency</string>
 					<string>3.CustomClassName</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
@@ -280,6 +309,7 @@
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>JMCIssuePreviewCell</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -300,7 +330,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">18</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -314,6 +344,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>dateLabel</string>
 							<string>detailsLabel</string>
+							<string>sentStatusLabel</string>
 							<string>statusLabel</string>
 							<string>titleLabel</string>
 						</object>
@@ -321,6 +352,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>UILabel</string>
+							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
 						</object>
@@ -331,6 +363,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>dateLabel</string>
 							<string>detailsLabel</string>
+							<string>sentStatusLabel</string>
 							<string>statusLabel</string>
 							<string>titleLabel</string>
 						</object>
@@ -343,6 +376,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">detailsLabel</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sentStatusLabel</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">statusLabel</string>
@@ -370,8 +407,17 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">bluedot.png</string>
-			<string key="NS.object.0">{18, 18}</string>
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>bluedot.png</string>
+				<string>notsent.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{18, 18}</string>
+				<string>{16, 16}</string>
+			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>

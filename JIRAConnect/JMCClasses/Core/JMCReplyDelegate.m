@@ -39,7 +39,7 @@
     
     if ([store commentExistsIssueByUUID:requestId]) {
         // update comment in db as sent!
-        [store markCommentAsSent:requestId];
+        [store setSentStatus:JMCSentStatusSuccess forComment:requestId];
         NSLog(@"Comment added to JIRA and marked as sent: %@", response);
     } else {
         // insert a new comment.... a ping notification may have dropped the db
@@ -47,7 +47,7 @@
         JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
         NSString *issueKey = [commentDict valueForKey:@"issueKey"];
         NSLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);
-        comment.sent = YES;
+        comment.sentStatus = JMCSentStatusSuccess;
         comment.uuid = requestId;
         [store insertComment:comment forIssue:issueKey];
         [comment release];
@@ -57,7 +57,7 @@
 
 - (void)transportDidFinishWithError:(NSError *)error requestId:(NSString *)requestId
 {
- 
+    [[JMCIssueStore instance] setSentStatus:JMCSentStatusRetry forComment:requestId];
 }
 
 #pragma end 

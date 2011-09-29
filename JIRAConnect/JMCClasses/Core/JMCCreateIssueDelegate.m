@@ -20,7 +20,7 @@
     issue.dateCreated = [NSDate date];
     issue.dateUpdated = [NSDate date];
     issue.requestId = requestId;
-    issue.sent = NO;
+    issue.sentStatus = JMCSentStatusNew;
 
     [[JMCIssueStore instance] insertIssue:issue]; // newly created issues have no comments
 
@@ -34,16 +34,19 @@
     // response is JSON like so:
     // {"key":"NERDS-49","status":"Open","title":"Gimme feedback","description":"Gimme feedback","dateUpdated":1317106927991,"hasUpdates":false,"dateCreated":1317106927991,"comments":[]}
     JMCIssue *issue = [JMCIssue issueWith:response requestId:requestId];
-
+    issue.sentStatus = JMCSentStatusSuccess;
+    
     JMCIssueStore *issueStore = [JMCIssueStore instance];
     if ([issueStore issueExistsIssueByUUID:requestId]) {
         // this update will ensure the issuekey gets updated in the database
+
         [issueStore updateIssueByUUID:issue];
         // mark the issue has sent.
-        [issueStore markIssueAsSent:requestId];
+
     } else {
         // this means the issue didn't make it to JIRA before the JMCPing rebuilt the database. So, add a new issue.
         [issueStore insertOrUpdateIssue:issue];
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
     }
 
     NSLog(@"Successfully created %@", issue.key);
@@ -53,6 +56,11 @@
 - (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
 {
     // this will be resent next time the queue is flushed
+    [[JMCIssueStore instance] setSentStatus:JMCSentStatusRetry forIssue:requestId];
+    NSLog(@"Sent Status for %@ is %d", requestId, JMCSentStatusRetry);
+
+    // on error - broadcast that the issue could not be sent so views can be re-drawn to display the error
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
 }
 
 @end
