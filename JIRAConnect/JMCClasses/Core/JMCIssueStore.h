@@ -17,14 +17,6 @@
 #import <Foundation/Foundation.h>
 #import "JMCIssue.h"
 
-enum {
-    JMCSentStatusNew = 0, // request is newly queued
-    JMCSentStatusSuccess = 1,   // request success
-    JMCSentStatusRetry = 2,     // request in a temporary error - will be retried
-    JMCSentStatusPermError = 3  // request in a permanent error - will not be retried
-};
-typedef int JMCSentStatus;
-
 @interface JMCIssueStore : NSObject {
     int _newIssueCount;
     int _count; // the total issue count, including new and old issues
@@ -44,8 +36,6 @@ typedef int JMCSentStatus;
 - (void) insertIssue:(JMCIssue *)issue;
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey;
 - (void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key;
-- (void) setSentStatus:(JMCSentStatus)status forIssue:(NSString *)requestId;
-- (void) setSentStatus:(JMCSentStatus)status forComment:(NSString *)requestId;
 - (void) markAsRead:(JMCIssue *)issue;
 + (JMCIssueStore *) instance;
 

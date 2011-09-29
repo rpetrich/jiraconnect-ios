@@ -8,12 +8,11 @@
 #import <Foundation/Foundation.h>
 #import "JMCQueueItem.h"
 
-
 enum {
     JMCSentStatusNew = 0, // request is newly queued
     JMCSentStatusSuccess = 1,   // request success
     JMCSentStatusRetry = 2,     // request in a temporary error - will be retried
-    JMCSentStatusPermError = 3  // request in a permanent error - will not be retried
+    JMCSentStatusPermError = 4  // request in a permanent error - will not be retried
 };
 typedef int JMCSentStatus;
 
@@ -32,7 +31,8 @@ typedef int JMCSentStatus;
 -(void) flushQueue;
 
 -(void) addItem:(JMCQueueItem *)item;
-- (NSMutableDictionary *)getQueueList;
+-(void)updateItem:(NSString *)uuid sentStatus:(JMCSentStatus)sentStatus bumpNumAttemptsBy:(int)inc;
+-(JMCSentStatus) requestStatusFor:(NSString *)uuid;
 -(JMCQueueItem *) getItem:(NSString *)uuid;
 -(void) deleteItem:(NSString*)uuid;
 

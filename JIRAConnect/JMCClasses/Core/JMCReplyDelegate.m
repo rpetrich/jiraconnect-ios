@@ -25,8 +25,7 @@
                                                   systemUser:YES
                                                         body:description
                                                         date:[NSDate date]
-                                                        uuid:requestId
-                                                        sent:NO];
+                                                        uuid:requestId];
 
     [[JMCIssueStore instance] insertComment:comment forIssue:issueKey];
     [comment release];
@@ -37,17 +36,13 @@
 {
     JMCIssueStore *store = [JMCIssueStore instance];
     
-    if ([store commentExistsIssueByUUID:requestId]) {
-        // update comment in db as sent!
-        [store setSentStatus:JMCSentStatusSuccess forComment:requestId];
-        NSLog(@"Comment added to JIRA and marked as sent: %@", response);
-    } else {
+    if (![store commentExistsIssueByUUID:requestId])
+    {
         // insert a new comment.... a ping notification may have dropped the db
         NSDictionary *commentDict = [response JSONValue];
         JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
         NSString *issueKey = [commentDict valueForKey:@"issueKey"];
         NSLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);
-        comment.sentStatus = JMCSentStatusSuccess;
         comment.uuid = requestId;
         [store insertComment:comment forIssue:issueKey];
         [comment release];
@@ -57,7 +52,7 @@
 
 - (void)transportDidFinishWithError:(NSError *)error requestId:(NSString *)requestId
 {
-    [[JMCIssueStore instance] setSentStatus:JMCSentStatusRetry forComment:requestId];
+
 }
 
 #pragma end 

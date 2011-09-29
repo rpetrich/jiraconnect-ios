@@ -19,7 +19,7 @@
 
 @implementation JMCComment
 
-@synthesize uuid=_uuid, author = _author, systemUser = _systemUser, sentStatus = _sentStatus, body = _body, date = _date, dateLong;
+@synthesize uuid=_uuid, author = _author, systemUser = _systemUser, body = _body, date = _date, dateLong;
 
 - (void)dealloc {
     self.author = nil;
@@ -29,7 +29,7 @@
     [super dealloc];
 }
 
-- (id) initWithAuthor:(NSString*)p_author systemUser:(BOOL)p_sys body:(NSString*)p_body date:(NSDate*)p_date uuid:(NSString *)uuid sent:(int)sentStatus
+- (id) initWithAuthor:(NSString*)p_author systemUser:(BOOL)p_sys body:(NSString*)p_body date:(NSDate*)p_date uuid:(NSString *)uuid
 {
     if ((self = [super init])) {
         self.author = p_author;
@@ -37,7 +37,6 @@
         self.date = p_date;
         self.systemUser = p_sys;
         self.uuid = uuid;
-        self.sentStatus = sentStatus;
     }
     return self;
 }
@@ -73,16 +72,11 @@
     NSNumber *msSinceEpoch = [lowerMap objectForKey:@"date"];
     NSDate *date = [JMCComment dateFromMillisSince1970:msSinceEpoch];
     NSNumber *systemUser = (NSNumber *) [lowerMap objectForKey:@"systemuser"];
-    NSNumber *sent = (NSNumber *) [lowerMap objectForKey:@"sent"];
-    NSLog(@"sent = %@", sent);
-    
+
     NSString *uuid = (NSString *) [lowerMap objectForKey:@"uuid"];
     [lowerMap release];
 
-    int sentStatus = sent == NULL ? 0 : sent.intValue;
-    NSLog(@"COMMENT sentStatus = %d", sentStatus);
-    
-    return [[JMCComment alloc] initWithAuthor:author systemUser:systemUser.boolValue body:body date:date uuid:uuid sent:sentStatus];
+    return [[JMCComment alloc] initWithAuthor:author systemUser:systemUser.boolValue body:body date:date uuid:uuid];
 }
 
 @end

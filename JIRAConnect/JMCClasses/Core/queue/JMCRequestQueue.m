@@ -6,13 +6,15 @@
 
 
 #import "JMCRequestQueue.h"
-#import "JMCAttachmentItem.h"
 #import "JMCIssueTransport.h"
 #import "JMCReplyTransport.h"
 #import "JMCCreateIssueDelegate.h"
 #import "JMCReplyDelegate.h"
 
 static NSOperationQueue *sharedOperationQueue = nil;
+
+#define KEY_NUM_ATTEMPTS @"numAttempts"
+#define KEY_SENT_STATUS @"sentStatus"
 
 @interface JMCRequestQueue ()
 - (NSString *)getQueueIndexPath;
@@ -22,6 +24,8 @@ static NSOperationQueue *sharedOperationQueue = nil;
 - (NSString *)getQueueItemPathFor:(NSString *)uuid;
 
 - (void)saveQueueIndex:(NSMutableDictionary *)queueList;
+
+- (NSMutableDictionary *)getQueueList;
 
 @end
 
@@ -71,23 +75,52 @@ NSRecursiveLock* _flushLock;
                 [sharedOperationQueue addOperation:operation];
                 NSLog(@"Added request to operation queue %@", item.uuid);
             }
-            //TODO bump num attempts by 1 & resave the queue
-            
         }
     }
 }
 
-- (void)addItem:(JMCQueueItem *)item
+-(JMCSentStatus) requestStatusFor:(NSString *)uuid
 {
     NSMutableDictionary *queueIndex = [self getQueueList];
-    NSMutableDictionary *metadata = [NSMutableDictionary dictionaryWithCapacity:2];
-    [metadata setObject:[NSNumber numberWithInt:JMCSentStatusNew] forKey:@"sentStatus"];
-    [metadata setObject:[NSNumber numberWithInt:0] forKey:@"numAttempts"];
-    [queueIndex setObject:metadata forKey:item.uuid];
-    [self saveQueueIndex:queueIndex];
-    // now save the queue item to disc...
-    NSString *itemPath = [self getQueueItemPathFor:item.uuid];
-    [item writeToFile:itemPath];
+    NSDictionary *metadata = [queueIndex objectForKey:uuid];
+    if (!metadata) {
+        // no news, is good news! means the message was sent.
+        return JMCSentStatusSuccess;
+    }
+    NSNumber *status = [metadata objectForKey:KEY_SENT_STATUS];
+    return status.intValue;
+}
+
+-(void)updateItem:(NSString *)uuid sentStatus:(JMCSentStatus)sentStatus bumpNumAttemptsBy:(int)inc
+{
+    @synchronized (_flushLock) {
+        // get the index, set the sent status, save the index
+        NSMutableDictionary *queueIndex = [self getQueueList];
+        NSMutableDictionary *metadata = [queueIndex objectForKey:uuid];
+
+        [metadata setObject:[NSNumber numberWithInt:sentStatus] forKey:KEY_SENT_STATUS];
+
+        NSNumber *numAttempts = [metadata objectForKey:KEY_NUM_ATTEMPTS];
+        [metadata setObject:[NSNumber numberWithInt:numAttempts.intValue + inc] forKey:KEY_NUM_ATTEMPTS];
+        [self saveQueueIndex:queueIndex];
+    }
+
+}
+
+- (void)addItem:(JMCQueueItem *)item
+{
+    @synchronized (_flushLock) {
+        // get the index, set the metadata, save the index, write the item
+        NSMutableDictionary *queueIndex = [self getQueueList];
+        NSMutableDictionary *metadata = [NSMutableDictionary dictionaryWithCapacity:2];
+        [metadata setObject:[NSNumber numberWithInt:JMCSentStatusNew] forKey:KEY_SENT_STATUS];
+        [metadata setObject:[NSNumber numberWithInt:0] forKey:KEY_NUM_ATTEMPTS];
+        [queueIndex setObject:metadata forKey:item.uuid];
+        [self saveQueueIndex:queueIndex];
+        // now save the queue item to disc...
+        NSString *itemPath = [self getQueueItemPathFor:item.uuid];
+        [item writeToFile:itemPath];
+    }
 }
 
 -(JMCQueueItem *)getItem:(NSString *)uuid
@@ -104,11 +137,15 @@ NSRecursiveLock* _flushLock;
 
 - (void)deleteItem:(NSString *)uuid
 {
-    NSMutableDictionary *queue = [self getQueueList];
-    [queue removeObjectForKey:uuid];
-    [self saveQueueIndex:queue];
-    // now remove the queue item from disk
-    [[NSFileManager defaultManager] removeItemAtPath:[self getQueueItemPathFor:uuid] error:nil];
+    @synchronized (_flushLock) {
+        // get the index, remove the object, save the index, remove the item
+        NSMutableDictionary *queue = [self getQueueList];
+        [queue removeObjectForKey:uuid];
+        [self saveQueueIndex:queue];
+        // now remove the queue item from disk
+        [[NSFileManager defaultManager] removeItemAtPath:[self getQueueItemPathFor:uuid] error:nil];
+    }
+
 }
 
 // This is the actual list of items that need sending
