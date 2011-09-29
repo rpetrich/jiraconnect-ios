@@ -257,6 +257,18 @@ static NSRecursiveLock *writeLock;
     }
 }
 
+- (BOOL) issueExistsIssueByUUID:(NSString *)uuid
+{
+    FMResultSet *res = [db executeQuery:@"SELECT id FROM issue WHERE uuid = ?", uuid];
+    return [res next];
+
+}
+- (BOOL) commentExistsIssueByUUID:(NSString *)uuid
+{
+    FMResultSet *res = [db executeQuery:@"SELECT id FROM comment WHERE uuid = ?", uuid];
+    return [res next];
+}
+
 -(void) insertOrUpdateIssue:(JMCIssue *)issue {
 
     @synchronized (writeLock) {

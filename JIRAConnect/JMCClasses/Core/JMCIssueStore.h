@@ -31,6 +31,8 @@
 - (NSMutableArray *) loadCommentsFor:(JMCIssue *)issue;
 - (void) insertOrUpdateIssue:(JMCIssue *)issue;
 - (void) updateIssueByUUID:(JMCIssue *)issue;
+- (BOOL) issueExistsIssueByUUID:(NSString *)uuid;
+- (BOOL) commentExistsIssueByUUID:(NSString *)uuid;
 - (void) insertIssue:(JMCIssue *)issue;
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey;
 - (void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key;

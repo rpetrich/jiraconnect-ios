@@ -10,6 +10,7 @@
 #import "JMCRequestQueue.h"
 #import "JSON.h"
 #import "JMC.h"
+#import "JMCComment.h"
 
 @implementation JMCReplyDelegate
 
@@ -34,8 +35,24 @@
 
 - (void)transportDidFinish:(NSString *)response requestId:(NSString *)requestId
 {
-    // update comment in db as sent!
-    [[JMCIssueStore instance] markCommentAsSent:requestId];
+    JMCIssueStore *store = [JMCIssueStore instance];
+    
+    if ([store commentExistsIssueByUUID:requestId]) {
+        // update comment in db as sent!
+        [store markCommentAsSent:requestId];
+        NSLog(@"Comment added to JIRA and marked as sent: %@", response);
+    } else {
+        // insert a new comment.... a ping notification may have dropped the db
+        NSDictionary *commentDict = [response JSONValue];
+        JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
+        NSString *issueKey = [commentDict valueForKey:@"issueKey"];
+        NSLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);
+        comment.sent = YES;
+        comment.uuid = requestId;
+        [store insertComment:comment forIssue:issueKey];
+        [comment release];
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewCommentCreated object:nil]];
+    }
 }
 
 - (void)transportDidFinishWithError:(NSError *)error requestId:(NSString *)requestId

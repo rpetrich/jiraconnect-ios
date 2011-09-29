@@ -209,7 +209,6 @@
     NSString* charToAppend = lastChar != '/' ? @"/" : @"";
     withUrl = [withUrl stringByAppendingString:charToAppend];
     self.url = [NSURL URLWithString:withUrl];
-    NSLog(@"self.url = %@", self.url);
     
     [self generateAndStoreUUID];
 

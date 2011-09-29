@@ -81,6 +81,14 @@
     {
         NSLog(@"Error request comments and issues: %@", responseString);
     }
+    // Flush the request Queue on App launch and once the JIRA Ping has returned and potentially rebuilt the database
+    NSLog(@"Flushing the request queue");
+    [[JMC instance] flushRequestQueue];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSLog(@"Ping request failed: '%@'", [request responseString]);
 }
 
 @synthesize baseUrl = _baseUrl;
