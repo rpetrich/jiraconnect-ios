@@ -233,6 +233,11 @@
 
 - (UIViewController *)viewController
 {
+    return ([JMCIssueStore instance].count > 0) ? [self issuesViewController] : _navController;
+}
+
+- (UIViewController *)feedbackViewController
+{
     return _navController;
 }
 

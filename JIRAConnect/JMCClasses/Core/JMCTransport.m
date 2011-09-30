@@ -145,7 +145,6 @@
     NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
     if (request.responseStatusCode < 300) {
 
-        NSLog(@"%@ Request success: Transport delegate = %@", self, requestId);
         // alert the delegate!
         [self.delegate transportDidFinish:[request responseString] requestId:requestId];
 

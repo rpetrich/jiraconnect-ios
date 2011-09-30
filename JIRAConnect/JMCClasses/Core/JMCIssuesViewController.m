@@ -49,7 +49,7 @@ static NSString *cellId = @"CommentCell";
 }
 
 - (void)compose:(UIBarItem *)arg {
-    [self presentModalViewController:[JMC instance].viewController animated:YES];
+    [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
 }
 
 - (void)cancel:(UIBarItem *)arg {

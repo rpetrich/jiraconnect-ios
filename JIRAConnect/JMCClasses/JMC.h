@@ -131,9 +131,16 @@
 -(void) flushRequestQueue;
 
 /**
-* Retrieves the main viewController for JIRAConnect. This controller holds the 'create issue' view.
+* Retrieves the 'correct' viewController to present to the user.
+*  * If the user has previously created feedback, the inbox is returned.
+*  * If the user has not yet left any feedback, the feedbackViewController is returned.
 */
 - (UIViewController*) viewController;
+
+/**
+* Retrieves the feedback viewController for JIRAConnect. This controller holds the 'create issue' view.
+*/
+- (UIViewController*) feedbackViewController;
 
 /**
 * The view controller which displays the list of all issues a user has raised for this app.
