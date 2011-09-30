@@ -31,7 +31,7 @@ To install JIRA Mobile Connect into your current project:
     * CoreGraphics
     * AVFoundation
     * CoreLocation
-    * libz.1.2.5
+    * libz
     * libsqlite3
 1. Add the `CrashReporter.framework`:
     * Click **+** --> **'Add Other'**
@@ -54,20 +54,24 @@ To use JIRAConnect in your App:
     `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
 method, add the following line:
 
-        [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:nil];
+        [[JMC instance] configureJiraConnect:@"http://connect.onjira.com/"
+                                  projectKey:@"NERDS"
+                                      apiKey:@"591451a6-bc59-4ca9-8840-b67f8c1e440f"];
 
 1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
+    * Replace the string @"NERDS" with the name of the project you wish to use for collecting feedback from users or testers
+    * If the JIRA Mobile Connect plugin in JIRA has an API Key enabled, update the above apiKey parameter with the key for your project
 
 1. The JIRA URL you configured above, will need to have:
     * the jconnect-plugin installed
-    * a project named either the same as
-        * the XCode Project,
-        * or the value returned by your [id JMCCustomDataSource project] method. This can be the project key in JIRA, or the project's name.
+    * the project mentioned above has JIRA Mobile Connect enabled.
 
-1. Provide a trigger mechanism to allow users invoke the Submit Feedback view. This typically goes on the 'About' or 'Info' view.
+![Administration --> *Your Project* --> Settings --> JIRA Mobile Connect](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/jira_settings.png)
+
+1. Provide a trigger mechanism to allow users invoke the Feedback view. This typically goes on the 'About' or 'Info' view.
+(Or, if you are feeling creative: add it to the Shake Gesture as is done in the sample Angry Nerds App!)
 The UIViewController returned by JMC viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
-
 
         #import "JMC.h"
 
@@ -77,10 +81,6 @@ If your info ViewController is in a UINavigationController stack, then you can u
             [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                            target:self
                                                            action:@selector(showFeedback)] autorelease];
-            self.navigationItem.leftBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                           target:self
-                                                           action:@selector(showPastFeedback)] autorelease];
         }
 
         -(void) showFeedback
@@ -88,18 +88,15 @@ If your info ViewController is in a UINavigationController stack, then you can u
             [self presentModalViewController:[[JMC instance] viewController] animated:YES];
         }
 
-        -(void) showPastFeedback
-        {
-            [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
-        }
-
-1. If you would like your users to access their issue 'inbox' anytime, then you can do so by presenting the JMCIssuesViewController.
+1. [[JMC instance] viewController] will return the 'Create Issue' view until the user creates feedback. From then on, the 'Issue Inbox' view is displayed, from where the
+user can tap the 'Create' icon to send more feedback.
+1. If you would like your users to always access the Create Issue view, then you can do so by presenting the [[JMC instance] feedbackViewController] directly.
 
 e.g. the following will present the issue inbox programatically:
 
-        - (IBAction)triggerDisplayNotifications
+        - (IBAction)triggerCreateIssueView
         {
-            [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
+            [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
         }
 
 Integration Notes
@@ -123,7 +120,7 @@ Use [http://connect.onjira.com/browse/CONNECT](http://connect.onjira.com/browse/
 Third party Package - License - Copyright / Creator
 ===================================================
 
-asi-http-request	BSD		Copyright &copy; 2007-2011, [All-Seeing Interactive](http://allseeing-i.com/ASIHTTPRequest/)
+asi-http-request    BSD     Copyright &copy; 2007-2011, [All-Seeing Interactive](http://allseeing-i.com/ASIHTTPRequest/)
 
 json-framework      BSD     Copyright &copy; 2009 [Stig Brautaset.]( http://code.google.com/p/json-framework/)
 
