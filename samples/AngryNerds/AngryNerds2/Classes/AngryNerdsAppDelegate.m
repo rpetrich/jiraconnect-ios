@@ -21,14 +21,15 @@
      *    * your Application Bundle Name
      *    * the same value as returned by your [JMCCustomDataSource projectName]
      */
-    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira"
-                              projectKey:@"NERDS"
-                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"
-                              dataSource:viewController];
-//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira"
 //                              projectKey:@"NERDS"
 //                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"
 //                              dataSource:viewController];
+
+    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+                              projectKey:@"NERDS"
+                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"
+                              dataSource:viewController];
 
 
     [window addSubview:viewController.view];
