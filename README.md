@@ -48,7 +48,7 @@ To use JIRAConnect in your App:
 
         #import "JMC.h"
 
-1. Configure the [JMC instance] at the *end* of the ApplicationDelegate.m like so:
+1. Configure the [JMC instance] in your ApplicationDelegate.m like so:
 
 
     `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
