@@ -76,11 +76,18 @@ static NSString *cellId = @"CommentCell";
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[JMCRequestQueue sharedInstance] flushQueue];
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -120,9 +127,8 @@ static NSString *cellId = @"CommentCell";
     NSDate *date = latestComment.date != nil ? latestComment.date : issue.dateUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
     cell.statusLabel.hidden = !issue.hasUpdates;
-
     JMCSentStatus sentStatus = [[JMCRequestQueue sharedInstance] requestStatusFor:issue.requestId];
-    cell.sentStatusLabel.hidden = !(sentStatus == JMCSentStatusRetry || sentStatus == JMCSentStatusPermError); // if in temp or perm error, mark it so
+    cell.sentStatusLabel.hidden = sentStatus != JMCSentStatusPermError; // TODO: after n-attempts are reached, set status to PermError.
 
     [issue release];
     return cell;
@@ -137,11 +143,24 @@ static NSString *cellId = @"CommentCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    JMCIssueViewController *detailViewController = [[JMCIssueViewController alloc] initWithNibName:@"JMCIssueViewController" bundle:nil];
-
     JMCIssue *issue = [self.issueStore newIssueAtIndex:indexPath.row];
-    issue.comments = [self.issueStore loadCommentsFor:issue];
+    JMCSentStatus sentStatus = [[JMCRequestQueue sharedInstance] requestStatusFor:issue.requestId];
 
+    if (sentStatus != JMCSentStatusSuccess) {
+        
+        UIAlertView *alert =
+            [[UIAlertView alloc] initWithTitle: JMCLocalizedString(@"Message Pending", @"Alert title when message not arrived in JIRA")
+                                       message: JMCLocalizedString(@"JMCRequestPendingMessage", @"Alert when create issue request not yet successful")
+                                      delegate: nil
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+        return;
+    }
+    
+    issue.comments = [self.issueStore loadCommentsFor:issue];
+    JMCIssueViewController *detailViewController = [[JMCIssueViewController alloc] initWithNibName:@"JMCIssueViewController" bundle:nil];
     detailViewController.issue = issue;
 
     [self.navigationController pushViewController:detailViewController animated:YES];
