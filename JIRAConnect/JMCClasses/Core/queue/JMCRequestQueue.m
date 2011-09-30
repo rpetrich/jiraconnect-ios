@@ -62,6 +62,10 @@ NSRecursiveLock* _flushLock;
         NSMutableDictionary *items = [requestQueue getQueueList];
         for (NSString *itemId in [items allKeys]) {
             JMCQueueItem *item = [requestQueue getItem:itemId];
+            if ([requestQueue requestStatusFor:itemId] == JMCSentStatusInProgress) {
+                continue;
+            }
+            [requestQueue updateItem:itemId sentStatus:JMCSentStatusInProgress bumpNumAttemptsBy:0];
             NSOperation *operation = nil;
             if ([item.type isEqualToString:kTypeReply]) {
                 operation = [_replyTransport requestFromItem:item];

@@ -10,9 +10,10 @@
 
 enum {
     JMCSentStatusNew = 0, // request is newly queued
-    JMCSentStatusSuccess = 1,   // request success
-    JMCSentStatusRetry = 2,     // request in a temporary error - will be retried
-    JMCSentStatusPermError = 4  // request in a permanent error - will not be retried
+    JMCSentStatusInProgress = 1, // request is being sent at the moment
+    JMCSentStatusSuccess = 2,   // request success
+    JMCSentStatusRetry = 4,     // request in a temporary error - will be retried
+    JMCSentStatusPermError = 8  // request in a permanent error - will not be retried
 };
 typedef int JMCSentStatus;
 
