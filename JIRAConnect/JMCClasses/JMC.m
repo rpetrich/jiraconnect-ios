@@ -260,9 +260,15 @@
     [info setObject:[device systemName] forKey:@"systemName"];
     [info setObject:[device systemVersion] forKey:@"systemVersion"];
     [info setObject:[device model] forKey:@"model"];
+
+    NSLocale *locale = [NSLocale currentLocale];
+
+    NSString *language = [locale displayNameForKey:NSLocaleLanguageCode
+                                             value:[locale localeIdentifier]]; 
+
+    if (language) [info setObject:language forKey:@"language"];
     
-    
-    // app application data 
+    // app application data
     NSString* bundleVersion = [appMetaData objectForKey:@"CFBundleVersion"];
     NSString* bundleName = [appMetaData objectForKey:@"CFBundleName"];
     NSString* bundleId = [appMetaData objectForKey:@"CFBundleIdentifier"];
