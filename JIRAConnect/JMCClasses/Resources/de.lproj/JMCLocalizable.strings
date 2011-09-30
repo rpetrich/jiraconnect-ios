@@ -21,3 +21,9 @@
 /** Alert View when Voice is not supported **/
 "Voice Recording" = "Tonaufnahme";
 "JMCVoiceRecordingNotSupported" = "Nicht unterstützt auf diesen Gerät. Bitte Text eingeben.";
+
+/** Alert title when message not arrived in JIRA **/
+"Message Pending" = "Nachricht Unterwegs";
+
+/** Alert when create issue request not yet successful **/
+"JMCRequestPendingMessage" = "Diese Nachricth wurde noch nicht gesendet. Bitte probieren Sie gleich noch mal.";

@@ -132,10 +132,10 @@
 							<object class="IBUIImageView" id="775222735">
 								<reference key="NSNextResponder" ref="630144290"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{5, 26}, {12, 12}}</string>
+								<string key="NSFrame">{{4, 27}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="630144290"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="347909637"/>
+								<reference key="NSNextKeyView" ref="456314060"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -143,13 +143,13 @@
 									<string key="NSResourceName">bluedot.png</string>
 								</object>
 							</object>
-							<object class="IBUIImageView" id="1025210986">
+							<object class="IBUIImageView" id="456314060">
 								<reference key="NSNextResponder" ref="630144290"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{6, 29}, {12, 12}}</string>
+								<string key="NSFrame">{{4, 27}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="630144290"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="5583660"/>
+								<reference key="NSNextKeyView" ref="347909637"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -161,7 +161,7 @@
 						<string key="NSFrameSize">{300, 70}</string>
 						<reference key="NSSuperview" ref="187720622"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1025210986"/>
+						<reference key="NSNextKeyView" ref="5583660"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -228,7 +228,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">sentStatusLabel</string>
 						<reference key="source" ref="187720622"/>
-						<reference key="destination" ref="1025210986"/>
+						<reference key="destination" ref="456314060"/>
 					</object>
 					<int key="connectionID">18</int>
 				</object>
@@ -262,7 +262,7 @@
 							<reference ref="347909637"/>
 							<reference ref="136277461"/>
 							<reference ref="775222735"/>
-							<reference ref="1025210986"/>
+							<reference ref="456314060"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -288,7 +288,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
-						<reference key="object" ref="1025210986"/>
+						<reference key="object" ref="456314060"/>
 						<reference key="parent" ref="187720622"/>
 					</object>
 				</object>
