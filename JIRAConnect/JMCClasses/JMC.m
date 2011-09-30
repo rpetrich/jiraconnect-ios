@@ -262,7 +262,6 @@
     [info setObject:[device model] forKey:@"model"];
 
     NSLocale *locale = [NSLocale currentLocale];
-
     NSString *language = [locale displayNameForKey:NSLocaleLanguageCode
                                              value:[locale localeIdentifier]]; 
 
