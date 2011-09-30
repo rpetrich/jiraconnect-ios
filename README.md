@@ -62,10 +62,9 @@ method, add the following line:
     * Replace the string @"NERDS" with the name of the project you wish to use for collecting feedback from users or testers
     * If the JIRA Mobile Connect plugin in JIRA has an API Key enabled, update the above apiKey parameter with the key for your project
 
-1. The JIRA URL you configured above, will need to have:
-    * the jconnect-plugin installed
-    * the project mentioned above has JIRA Mobile Connect enabled.
-
+1. The JIRA instance at the URL you configured above, will need to have:
+    * the [JIRA Mobile Connect Plugin](https://plugins.atlassian.com/plugin/details/322837) installed
+    * JIRA Mobile Connect enabled for your project. Administration --> *Your Project* --> Settings --> JIRA Mobile Connect
 ![Administration --> *Your Project* --> Settings --> JIRA Mobile Connect](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/jira_settings.png)
 
 1. Provide a trigger mechanism to allow users invoke the Feedback view. This typically goes on the 'About' or 'Info' view.
