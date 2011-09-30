@@ -50,8 +50,23 @@
     }
 }
 
-- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString *)requestId
+- (void)transportDidFinishWithError:(NSError*)error statusCode:(int)status requestId:(NSString*)requestId
 {
+    // if the status code is 404, the issue has been deleted where this reply was attempted. alert the user? - add a comment
+    if (status == 404)
+    {
+        JMCQueueItem *item = [[JMCRequestQueue sharedInstance] getItem:requestId];
+        JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jmc"
+                                                      systemUser:NO
+                                                            body:@"This feedback has been deleted. Please create new feedback."
+                                                            date:[NSDate date]
+                                                            uuid:requestId];
+        [[JMCIssueStore instance] insertComment:comment forIssue:item.originalIssueKey];
+        [comment release];
+        [[JMCRequestQueue sharedInstance] deleteItem:requestId];
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewCommentCreated object:nil]];
+    }
+
 
 }
 

@@ -164,9 +164,9 @@
     // TODO: time-out items in the request queue after N Attempts ?
     [[JMCRequestQueue sharedInstance] updateItem:requestId sentStatus:JMCSentStatusRetry bumpNumAttemptsBy:1];
     
-    NSError *error = [request error];
-    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:requestId:)]) {
-        [self.delegate transportDidFinishWithError:error requestId:requestId];
+    NSError *error = [request error]; 
+    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:statusCode:requestId:)]) {
+        [self.delegate transportDidFinishWithError:error statusCode:[request responseStatusCode] requestId:requestId];
     }
     NSString *msg = @"";
     if ([error localizedDescription] != nil) {

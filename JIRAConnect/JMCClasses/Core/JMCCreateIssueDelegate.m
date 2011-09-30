@@ -49,7 +49,7 @@
 
 }
 
-- (void)transportDidFinishWithError:(NSError *)error requestId:(NSString*)requestId
+- (void)transportDidFinishWithError:(NSError*)error statusCode:(int)status requestId:(NSString*)requestId
 {
     // on error - broadcast that the issue could not be sent so views can be re-drawn to display the error
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCIssueUpdated object:nil]];

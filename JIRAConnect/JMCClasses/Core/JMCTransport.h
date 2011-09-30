@@ -31,7 +31,7 @@
 
 @optional
 
-- (void)transportDidFinishWithError:(NSError*)error requestId:(NSString*)requestId;
+- (void)transportDidFinishWithError:(NSError*)error statusCode:(int)status requestId:(NSString*)requestId;
 
 @end
 
