@@ -39,6 +39,11 @@ typedef enum {
 -(NSDictionary *) customFields;
 
 /**
+* The components to set on the issue
+*/
+-(NSArray *) components;
+
+/**
 * Return the name of the issue type in JIRA, for a given JMCIssueType.
 * If there is an issue type of the same in the JIRA server, then it will be used
 * as the issue type.

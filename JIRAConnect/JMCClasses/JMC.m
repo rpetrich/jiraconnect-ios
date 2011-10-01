@@ -317,6 +317,14 @@
     return customFields;
 }
 
+-(NSArray *)components
+{
+    if ([_customDataSource respondsToSelector:@selector(components)]) {
+        return [_customDataSource components];
+    }
+    return [NSArray arrayWithObject:@"iOS"];
+}
+
 -(NSString *)getApiKey
 {
     return _options.apiKey ? _options.apiKey : @"";

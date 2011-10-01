@@ -149,6 +149,7 @@
 
 - (NSDictionary*) getMetaData;
 - (NSMutableDictionary*) getCustomFields;
+- (NSArray *) components;
 - (NSString *) getProject;
 - (NSString *) getApiKey;
 - (NSString *) getAppName;

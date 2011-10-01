@@ -51,6 +51,11 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
+    NSArray *components = [[JMC instance] components];
+    if (components) {
+        [params setObject:components forKey:@"components"];
+    }
+
     NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
     [params setObject:typeName forKey:@"type"];
 

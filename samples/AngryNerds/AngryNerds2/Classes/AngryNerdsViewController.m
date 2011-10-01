@@ -57,6 +57,11 @@
     return [NSDictionary dictionaryWithObject:@"9999" forKey:@"Top Score"];
 }
 
+-(NSArray*) components
+{
+    return [NSArray arrayWithObjects:@"iOS", @"JIRA", nil];
+}
+
 - (NSString *)jiraIssueTypeNameFor:(JMCIssueType)type
 {
     if (type == JMCIssueTypeCrash) {
