@@ -91,6 +91,9 @@
 @property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
 @property (nonatomic, retain) JMCOptions* _options;
 
+-(CGRect)notifierStartFrame;
+-(CGRect)notifierEndFrame;
+
 @end
 
 
@@ -219,7 +222,9 @@
     _jcController.payloadDataSource = _customDataSource;
 
     JMCIssuesViewController *issuesController = [[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain];
-    JMCNotifier* notifier = [[JMCNotifier alloc] initWithIssuesViewController:issuesController];
+    JMCNotifier* notifier = [[JMCNotifier alloc] initWithIssuesViewController:issuesController
+                                                                   startFrame:[self notifierStartFrame]
+                                                                     endFrame:[self notifierEndFrame]];
     self._notifier = notifier;
     [issuesController release];
     [notifier release];
@@ -351,5 +356,23 @@
     }
     return defaultType;
 }
+
+-(CGRect)notifierStartFrame
+{
+    if ([_customDataSource respondsToSelector:@selector(notifierStartFrame)]) {
+        return [_customDataSource notifierStartFrame];
+    }
+    return CGRectMake(0, 520, 320, 40);
+}
+
+-(CGRect)notifierEndFrame
+{
+    if ([_customDataSource respondsToSelector:@selector(notifierEndFrame)]) {
+        return [_customDataSource notifierEndFrame];
+    }
+    return CGRectMake(0, 440, 320, 40);
+}
+
+
 
 @end

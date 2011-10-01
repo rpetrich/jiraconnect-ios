@@ -57,5 +57,16 @@ typedef enum {
 */
 -(NSString *)project;
 
+/**
+* The frame the HUD (Heads Up Display) will start at when the user receives a notification.
+* Use this to control the placement and animation of the in-app Notification.
+*/
+-(CGRect)notifierStartFrame;
+
+/**
+* The frame the HUD (Heads Up Display) will end at when the user receives a notification.
+* Use this to control the placement and animation of the in-app Notification.
+* */
+-(CGRect)notifierEndFrame;
 
 @end

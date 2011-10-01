@@ -83,6 +83,15 @@
                                     filenameFormat:@"customattachment.txt"] autorelease];
 }
 
+-(CGRect)notifierEndFrame
+{
+    return CGRectMake(0, 480, 320, 40);
+}
+
+-(CGRect)notifierStartFrame
+{
+    return CGRectMake(0, 440, 320, 40);
+}
 
 #pragma end
 

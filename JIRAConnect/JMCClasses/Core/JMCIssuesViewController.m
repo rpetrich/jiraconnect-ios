@@ -48,22 +48,15 @@ static NSString *cellId = @"CommentCell";
     return self;
 }
 
-- (void)compose:(UIBarItem *)arg {
+- (void)compose:(UIBarItem *)arg
+{
     [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
 }
 
-- (void)cancel:(UIBarItem *)arg {
-
+- (void)cancel:(UIBarItem *)arg
+{
     [self dismissModalViewControllerAnimated:YES];
 
-    // Dismiss the entire notification view, the same way it gets displayed... TODO: is there a cleaner to do this?
-    [UIView beginAnimations:@"animateView" context:nil];
-    [UIView setAnimationDuration:0.4];
-    [UIView setAnimationDidStopSelector:@selector(animationDidStop)];
-
-    CGRect frame = self.navigationController.view.frame;
-    [self.navigationController.view setFrame:CGRectMake(0, 480, frame.size.width, frame.size.height)]; //notice this is ON screen!
-    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning {

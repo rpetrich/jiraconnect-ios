@@ -22,12 +22,17 @@
 UIToolbar *_toolbar;
 UILabel *_label;
 UIButton *_button;
+CGRect startFrame;
+CGRect endFrame;
 
-- (id)initWithIssuesViewController:(JMCIssuesViewController *)issuesViewController {
+- (id)initWithIssuesViewController:(JMCIssuesViewController *)issuesViewController startFrame:(CGRect)start endFrame:(CGRect)end {
     if ((self = [super init])) {
         self.issuesViewController = issuesViewController;
 
-        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 520, 320, 40)];
+        startFrame = start;
+        endFrame = end;
+        
+        _toolbar = [[UIToolbar alloc] initWithFrame:startFrame];
         [_toolbar setBarStyle:UIBarStyleBlack];
         [_toolbar setTranslucent:YES];
         _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -39,7 +44,7 @@ UIButton *_button;
         [_toolbar addSubview:_label];
 
         _button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-        [_button setFrame:CGRectMake(0, 440, 320, 40)];
+        [_button setFrame:endFrame];
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 
         _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
@@ -81,12 +86,12 @@ UIButton *_button;
 
         [self populateIssuesViewController];
 
-        [_toolbar setFrame:CGRectMake(0, 520, 320, 40)];
+        [_toolbar setFrame:startFrame];
         [_view addSubview:_toolbar];
 
         [UIView beginAnimations:@"animateToolbar" context:nil];
         [UIView setAnimationDuration:0.4];
-        [_toolbar setFrame:CGRectMake(0, 440, 320, 40)]; //notice this is ON screen!
+        [_toolbar setFrame:endFrame]; //notice this is ON screen!
         [UIView commitAnimations];
 
         [_view addSubview:_button];

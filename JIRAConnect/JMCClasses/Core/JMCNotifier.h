@@ -28,7 +28,7 @@
 @property(retain, nonatomic) JMCIssuesViewController *issuesViewController;
 @property(retain, nonatomic) UIView *view;
 
-- (id)initWithIssuesViewController:(JMCIssuesViewController *)issuesViewController;
+- (id)initWithIssuesViewController:(JMCIssuesViewController *)issuesViewController startFrame:(CGRect)start endFrame:(CGRect)end;
 
 - (void)displayNotifications:(id)sender;
 
