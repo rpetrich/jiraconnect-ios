@@ -13,6 +13,14 @@
 		014C7EF213E1938C00A9415A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 014C7EF013E1938C00A9415A /* InfoPlist.strings */; };
 		014C7EF513E1938C00A9415A /* LogicTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 014C7EF413E1938C00A9415A /* LogicTests.h */; };
 		014C7EF713E1938C00A9415A /* LogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C7EF613E1938C00A9415A /* LogicTests.m */; };
+		0152EB6F1439AA83006024D1 /* JMCToolbarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB691439AA83006024D1 /* JMCToolbarButton.h */; };
+		0152EB701439AA83006024D1 /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB6A1439AA83006024D1 /* JMCToolbarButton.m */; };
+		0152EB711439AA83006024D1 /* UILabel+VerticalAlign.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB6B1439AA83006024D1 /* UILabel+VerticalAlign.h */; };
+		0152EB721439AA83006024D1 /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB6C1439AA83006024D1 /* UILabel+VerticalAlign.m */; };
+		0152EB731439AA83006024D1 /* UIView+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB6D1439AA83006024D1 /* UIView+Additions.h */; };
+		0152EB741439AA83006024D1 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB6E1439AA83006024D1 /* UIView+Additions.m */; };
+		0152EB771439AAA5006024D1 /* JMCNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB751439AAA5006024D1 /* JMCNotifier.h */; };
+		0152EB781439AAA5006024D1 /* JMCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB761439AAA5006024D1 /* JMCNotifier.m */; };
 		0157C932142ED3AB00EB8F88 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C931142ED3AB00EB8F88 /* libz.dylib */; };
 		0157C934142ED40C00EB8F88 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C933142ED40C00EB8F88 /* libsqlite3.dylib */; };
 		0161F1EB13E2C98E0048DD76 /* CrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F14713E2C98E0048DD76 /* CrashReporter.h */; };
@@ -41,8 +49,6 @@
 		0161F20213E2C98E0048DD76 /* JMCMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F16113E2C98E0048DD76 /* JMCMessageBubble.m */; };
 		0161F20313E2C98E0048DD76 /* JMCMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F16213E2C98E0048DD76 /* JMCMessageCell.h */; };
 		0161F20413E2C98E0048DD76 /* JMCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F16313E2C98E0048DD76 /* JMCMessageCell.m */; };
-		0161F20513E2C98E0048DD76 /* JMCNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F16413E2C98E0048DD76 /* JMCNotifier.h */; };
-		0161F20613E2C98E0048DD76 /* JMCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F16513E2C98E0048DD76 /* JMCNotifier.m */; };
 		0161F20713E2C98E0048DD76 /* JMCPing.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F16613E2C98E0048DD76 /* JMCPing.h */; };
 		0161F20813E2C98E0048DD76 /* JMCPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F16713E2C98E0048DD76 /* JMCPing.m */; };
 		0161F20913E2C98E0048DD76 /* JMCRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F16813E2C98E0048DD76 /* JMCRecorder.h */; };
@@ -62,10 +68,6 @@
 		0161F21713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F17713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h */; };
 		0161F21813E2C98E0048DD76 /* JMCTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F17813E2C98E0048DD76 /* JMCTransport.h */; };
 		0161F21913E2C98E0048DD76 /* JMCTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F17913E2C98E0048DD76 /* JMCTransport.m */; };
-		0161F21A13E2C98E0048DD76 /* UILabel+VerticalAlign.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F17A13E2C98E0048DD76 /* UILabel+VerticalAlign.h */; };
-		0161F21B13E2C98E0048DD76 /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F17B13E2C98E0048DD76 /* UILabel+VerticalAlign.m */; };
-		0161F21C13E2C98E0048DD76 /* UIView+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F17C13E2C98E0048DD76 /* UIView+Additions.h */; };
-		0161F21D13E2C98E0048DD76 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F17D13E2C98E0048DD76 /* UIView+Additions.m */; };
 		0161F21E13E2C98E0048DD76 /* JMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F17E13E2C98E0048DD76 /* JMC.h */; };
 		0161F21F13E2C98E0048DD76 /* JMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F17F13E2C98E0048DD76 /* JMC.m */; };
 		0161F22013E2C98E0048DD76 /* JMCAttachmentItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F18013E2C98E0048DD76 /* JMCAttachmentItem.h */; };
@@ -126,8 +128,6 @@
 		01EC37DD142ED0AC00BF600E /* JMCQueueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EC37D9142ED0AC00BF600E /* JMCQueueItem.m */; };
 		01EC37DE142ED0AC00BF600E /* JMCRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 01EC37DA142ED0AC00BF600E /* JMCRequestQueue.h */; };
 		01EC37DF142ED0AC00BF600E /* JMCRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EC37DB142ED0AC00BF600E /* JMCRequestQueue.m */; };
-		01EC37E2142ED10A00BF600E /* JMCToolbarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 01EC37E0142ED10A00BF600E /* JMCToolbarButton.h */; };
-		01EC37E3142ED10A00BF600E /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EC37E1142ED10A00BF600E /* JMCToolbarButton.m */; };
 		8D90CDBA1431B84F00DD97B5 /* JMCCreateIssueDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D90CDB81431B84F00DD97B5 /* JMCCreateIssueDelegate.h */; };
 		8D90CDBB1431B84F00DD97B5 /* JMCCreateIssueDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90CDB91431B84F00DD97B5 /* JMCCreateIssueDelegate.m */; };
 		8D90CDBF1431B89800DD97B5 /* JMCReplyDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D90CDBD1431B89800DD97B5 /* JMCReplyDelegate.h */; };
@@ -151,6 +151,14 @@
 		014C7EF313E1938C00A9415A /* LogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LogicTests-Prefix.pch"; sourceTree = "<group>"; };
 		014C7EF413E1938C00A9415A /* LogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogicTests.h; sourceTree = "<group>"; };
 		014C7EF613E1938C00A9415A /* LogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogicTests.m; sourceTree = "<group>"; };
+		0152EB691439AA83006024D1 /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
+		0152EB6A1439AA83006024D1 /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
+		0152EB6B1439AA83006024D1 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
+		0152EB6C1439AA83006024D1 /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
+		0152EB6D1439AA83006024D1 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
+		0152EB6E1439AA83006024D1 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
+		0152EB751439AAA5006024D1 /* JMCNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCNotifier.h; sourceTree = "<group>"; };
+		0152EB761439AAA5006024D1 /* JMCNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCNotifier.m; sourceTree = "<group>"; };
 		0157C931142ED3AB00EB8F88 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0157C933142ED40C00EB8F88 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		0161F14713E2C98E0048DD76 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
@@ -181,8 +189,6 @@
 		0161F16113E2C98E0048DD76 /* JMCMessageBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCMessageBubble.m; sourceTree = "<group>"; };
 		0161F16213E2C98E0048DD76 /* JMCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMessageCell.h; sourceTree = "<group>"; };
 		0161F16313E2C98E0048DD76 /* JMCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCMessageCell.m; sourceTree = "<group>"; };
-		0161F16413E2C98E0048DD76 /* JMCNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCNotifier.h; sourceTree = "<group>"; };
-		0161F16513E2C98E0048DD76 /* JMCNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCNotifier.m; sourceTree = "<group>"; };
 		0161F16613E2C98E0048DD76 /* JMCPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCPing.h; sourceTree = "<group>"; };
 		0161F16713E2C98E0048DD76 /* JMCPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCPing.m; sourceTree = "<group>"; };
 		0161F16813E2C98E0048DD76 /* JMCRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCRecorder.h; sourceTree = "<group>"; };
@@ -203,10 +209,6 @@
 		0161F17713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchViewControllerDelegate.h; sourceTree = "<group>"; };
 		0161F17813E2C98E0048DD76 /* JMCTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCTransport.h; sourceTree = "<group>"; };
 		0161F17913E2C98E0048DD76 /* JMCTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransport.m; sourceTree = "<group>"; };
-		0161F17A13E2C98E0048DD76 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
-		0161F17B13E2C98E0048DD76 /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
-		0161F17C13E2C98E0048DD76 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
-		0161F17D13E2C98E0048DD76 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		0161F17E13E2C98E0048DD76 /* JMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMC.h; sourceTree = "<group>"; };
 		0161F17F13E2C98E0048DD76 /* JMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMC.m; sourceTree = "<group>"; };
 		0161F18013E2C98E0048DD76 /* JMCAttachmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCAttachmentItem.h; sourceTree = "<group>"; };
@@ -301,8 +303,6 @@
 		01EC37D9142ED0AC00BF600E /* JMCQueueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCQueueItem.m; sourceTree = "<group>"; };
 		01EC37DA142ED0AC00BF600E /* JMCRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCRequestQueue.h; sourceTree = "<group>"; };
 		01EC37DB142ED0AC00BF600E /* JMCRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCRequestQueue.m; sourceTree = "<group>"; };
-		01EC37E0142ED10A00BF600E /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
-		01EC37E1142ED10A00BF600E /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
 		8D90CDB81431B84F00DD97B5 /* JMCCreateIssueDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCCreateIssueDelegate.h; sourceTree = "<group>"; };
 		8D90CDB91431B84F00DD97B5 /* JMCCreateIssueDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCCreateIssueDelegate.m; sourceTree = "<group>"; };
 		8D90CDBD1431B89800DD97B5 /* JMCReplyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCReplyDelegate.h; sourceTree = "<group>"; };
@@ -390,6 +390,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0152EB681439AA56006024D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0152EB691439AA83006024D1 /* JMCToolbarButton.h */,
+				0152EB6A1439AA83006024D1 /* JMCToolbarButton.m */,
+				0152EB6B1439AA83006024D1 /* UILabel+VerticalAlign.h */,
+				0152EB6C1439AA83006024D1 /* UILabel+VerticalAlign.m */,
+				0152EB6D1439AA83006024D1 /* UIView+Additions.h */,
+				0152EB6E1439AA83006024D1 /* UIView+Additions.m */,
+			);
+			name = Views;
+			path = views;
+			sourceTree = "<group>";
+		};
 		0157CB5F142EDE7500EB8F88 /* Sketch */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +423,7 @@
 				0161F17713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h */,
 			);
 			name = Sketch;
+			path = sketch;
 			sourceTree = "<group>";
 		};
 		0157CB60142EDE9A00EB8F88 /* Transport */ = {
@@ -432,11 +447,14 @@
 				0161F17913E2C98E0048DD76 /* JMCTransport.m */,
 			);
 			name = Transport;
+			path = transport;
 			sourceTree = "<group>";
 		};
 		0157CB61142EDEC600EB8F88 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
+				0152EB751439AAA5006024D1 /* JMCNotifier.h */,
+				0152EB761439AAA5006024D1 /* JMCNotifier.m */,
 				0161F15113E2C98E0048DD76 /* JMCIssuePreviewCell.h */,
 				0161F15213E2C98E0048DD76 /* JMCIssuePreviewCell.m */,
 				0161F15313E2C98E0048DD76 /* JMCIssuePreviewCell.xib */,
@@ -453,6 +471,7 @@
 				0161F16313E2C98E0048DD76 /* JMCMessageCell.m */,
 			);
 			name = Inbox;
+			path = inbox;
 			sourceTree = "<group>";
 		};
 		0157CB62142EDEF000EB8F88 /* Model */ = {
@@ -464,6 +483,7 @@
 				0161F15013E2C98E0048DD76 /* JMCIssue.m */,
 			);
 			name = Model;
+			path = model;
 			sourceTree = "<group>";
 		};
 		0161F14413E2C98E0048DD76 /* JMCClasses */ = {
@@ -488,22 +508,15 @@
 		0161F14513E2C98E0048DD76 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0152EB681439AA56006024D1 /* Views */,
 				01EC37D7142ED0AC00BF600E /* Queue */,
 				0161F14613E2C98E0048DD76 /* CrashReporter */,
 				0157CB62142EDEF000EB8F88 /* Model */,
 				0157CB60142EDE9A00EB8F88 /* Transport */,
 				0157CB61142EDEC600EB8F88 /* Inbox */,
 				0157CB5F142EDE7500EB8F88 /* Sketch */,
-				01EC37E0142ED10A00BF600E /* JMCToolbarButton.h */,
-				01EC37E1142ED10A00BF600E /* JMCToolbarButton.m */,
-				0161F16413E2C98E0048DD76 /* JMCNotifier.h */,
-				0161F16513E2C98E0048DD76 /* JMCNotifier.m */,
 				0161F16813E2C98E0048DD76 /* JMCRecorder.h */,
 				0161F16913E2C98E0048DD76 /* JMCRecorder.m */,
-				0161F17A13E2C98E0048DD76 /* UILabel+VerticalAlign.h */,
-				0161F17B13E2C98E0048DD76 /* UILabel+VerticalAlign.m */,
-				0161F17C13E2C98E0048DD76 /* UIView+Additions.h */,
-				0161F17D13E2C98E0048DD76 /* UIView+Additions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -751,7 +764,6 @@
 				0161F1FF13E2C98E0048DD76 /* JMCLine.h in Headers */,
 				0161F20113E2C98E0048DD76 /* JMCMessageBubble.h in Headers */,
 				0161F20313E2C98E0048DD76 /* JMCMessageCell.h in Headers */,
-				0161F20513E2C98E0048DD76 /* JMCNotifier.h in Headers */,
 				0161F20713E2C98E0048DD76 /* JMCPing.h in Headers */,
 				0161F20913E2C98E0048DD76 /* JMCRecorder.h in Headers */,
 				0161F20B13E2C98E0048DD76 /* JMCReplyTransport.h in Headers */,
@@ -762,8 +774,6 @@
 				0161F21513E2C98E0048DD76 /* JMCSketchViewController.h in Headers */,
 				0161F21713E2C98E0048DD76 /* JMCSketchViewControllerDelegate.h in Headers */,
 				0161F21813E2C98E0048DD76 /* JMCTransport.h in Headers */,
-				0161F21A13E2C98E0048DD76 /* UILabel+VerticalAlign.h in Headers */,
-				0161F21C13E2C98E0048DD76 /* UIView+Additions.h in Headers */,
 				0161F21E13E2C98E0048DD76 /* JMC.h in Headers */,
 				0161F22013E2C98E0048DD76 /* JMCAttachmentItem.h in Headers */,
 				0161F22213E2C98E0048DD76 /* JMCCustomDataSource.h in Headers */,
@@ -797,9 +807,12 @@
 				01EC37D5142ED07E00BF600E /* UIImage+RoundedCorner.h in Headers */,
 				01EC37DC142ED0AC00BF600E /* JMCQueueItem.h in Headers */,
 				01EC37DE142ED0AC00BF600E /* JMCRequestQueue.h in Headers */,
-				01EC37E2142ED10A00BF600E /* JMCToolbarButton.h in Headers */,
 				8D90CDBA1431B84F00DD97B5 /* JMCCreateIssueDelegate.h in Headers */,
 				8D90CDBF1431B89800DD97B5 /* JMCReplyDelegate.h in Headers */,
+				0152EB6F1439AA83006024D1 /* JMCToolbarButton.h in Headers */,
+				0152EB711439AA83006024D1 /* UILabel+VerticalAlign.h in Headers */,
+				0152EB731439AA83006024D1 /* UIView+Additions.h in Headers */,
+				0152EB771439AAA5006024D1 /* JMCNotifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,7 +935,6 @@
 				0161F20013E2C98E0048DD76 /* JMCLine.m in Sources */,
 				0161F20213E2C98E0048DD76 /* JMCMessageBubble.m in Sources */,
 				0161F20413E2C98E0048DD76 /* JMCMessageCell.m in Sources */,
-				0161F20613E2C98E0048DD76 /* JMCNotifier.m in Sources */,
 				0161F20813E2C98E0048DD76 /* JMCPing.m in Sources */,
 				0161F20A13E2C98E0048DD76 /* JMCRecorder.m in Sources */,
 				0161F20C13E2C98E0048DD76 /* JMCReplyTransport.m in Sources */,
@@ -932,8 +944,6 @@
 				0161F21413E2C98E0048DD76 /* JMCSketchView.m in Sources */,
 				0161F21613E2C98E0048DD76 /* JMCSketchViewController.m in Sources */,
 				0161F21913E2C98E0048DD76 /* JMCTransport.m in Sources */,
-				0161F21B13E2C98E0048DD76 /* UILabel+VerticalAlign.m in Sources */,
-				0161F21D13E2C98E0048DD76 /* UIView+Additions.m in Sources */,
 				0161F21F13E2C98E0048DD76 /* JMC.m in Sources */,
 				0161F22113E2C98E0048DD76 /* JMCAttachmentItem.m in Sources */,
 				0161F22513E2C98E0048DD76 /* JMCViewController.m in Sources */,
@@ -960,9 +970,12 @@
 				01EC37D6142ED07E00BF600E /* UIImage+RoundedCorner.m in Sources */,
 				01EC37DD142ED0AC00BF600E /* JMCQueueItem.m in Sources */,
 				01EC37DF142ED0AC00BF600E /* JMCRequestQueue.m in Sources */,
-				01EC37E3142ED10A00BF600E /* JMCToolbarButton.m in Sources */,
 				8D90CDBB1431B84F00DD97B5 /* JMCCreateIssueDelegate.m in Sources */,
 				8D90CDC01431B89800DD97B5 /* JMCReplyDelegate.m in Sources */,
+				0152EB701439AA83006024D1 /* JMCToolbarButton.m in Sources */,
+				0152EB721439AA83006024D1 /* UILabel+VerticalAlign.m in Sources */,
+				0152EB741439AA83006024D1 /* UIView+Additions.m in Sources */,
+				0152EB781439AAA5006024D1 /* JMCNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,12 +15,12 @@
 **/
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "Core/JMCTransport.h"
+#import "JMCTransport.h"
 #import "JMCCustomDataSource.h"
 #import "Core/JMCRecorder.h"
-#import "Core/JMCIssueTransport.h"
-#import "Core/JMCReplyTransport.h"
-#import "Core/JMCSketchViewControllerDelegate.h"
+#import "JMCIssueTransport.h"
+#import "JMCReplyTransport.h"
+#import "JMCSketchViewControllerDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import "CRVActivityView.h"
 

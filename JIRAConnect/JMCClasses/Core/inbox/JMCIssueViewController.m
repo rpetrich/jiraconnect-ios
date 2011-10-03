@@ -16,7 +16,7 @@
 
 #import "JMCIssueViewController.h"
 #import "JMCMessageCell.h"
-#import "../JMCViewController.h"
+#import "JMCViewController.h"
 #import "JMCMessageBubble.h"
 #import "JMCIssueStore.h"
 #import "JSON.h"

@@ -17,10 +17,10 @@
 #import "JMCMacros.h"
 #import "JMCViewController.h"
 #import "UIImage+Resize.h"
-#import "Core/UIView+Additions.h"
+#import "UIView+Additions.h"
 #import "JMCAttachmentItem.h"
-#import "Core/JMCSketchViewController.h"
-#import "Core/JMCIssueStore.h"
+#import "JMCSketchViewController.h"
+#import "JMCIssueStore.h"
 #import "JSON.h"
 #import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>

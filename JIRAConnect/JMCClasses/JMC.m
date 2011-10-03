@@ -14,9 +14,9 @@
  limitations under the License.
  **/
 #import "JMC.h"
-#import "Core/JMCPing.h"
-#import "Core/JMCNotifier.h"
-#import "Core/JMCCrashSender.h"
+#import "JMCPing.h"
+#import "JMCNotifier.h"
+#import "JMCCrashSender.h"
 #import "JMCCreateIssueDelegate.h"
 #import "JMCRequestQueue.h"
 
