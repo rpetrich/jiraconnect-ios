@@ -11,6 +11,7 @@
 #import "JSON.h"
 #import "JMC.h"
 #import "JMCComment.h"
+#import "JMCMacros.h"
 
 @implementation JMCReplyDelegate
 
@@ -55,10 +56,11 @@
     // if the status code is 404, the issue has been deleted where this reply was attempted. alert the user? - add a comment
     if (status == 404)
     {
+        // TODO: potentially create a new feedback instead of leaving a reply ? UX maybe tricky..
         JMCQueueItem *item = [[JMCRequestQueue sharedInstance] getItem:requestId];
         JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jmc"
                                                       systemUser:NO
-                                                            body:@"This feedback has been deleted. Please create new feedback."
+                                                            body:JMCLocalizedString(@"JMCDeletedIssueMessage", @"This issue has been deleted. Please create new feedback instead.")
                                                             date:[NSDate date]
                                                             uuid:requestId];
         [[JMCIssueStore instance] insertComment:comment forIssue:item.originalIssueKey];

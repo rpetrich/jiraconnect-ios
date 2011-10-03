@@ -27,3 +27,6 @@
 
 /** Alert when create issue request not yet successful **/
 "JMCRequestPendingMessage" = "Diese Nachricth wurde noch nicht gesendet. Bitte probieren Sie gleich noch mal.";
+
+/** This feedback has been deleted. Please create new feedback instead **/
+"JMCDeletedIssueMessage" = "Dieses Feedback wurde gelöscht. Bitte ein neues Feedback hinterlassen.";
