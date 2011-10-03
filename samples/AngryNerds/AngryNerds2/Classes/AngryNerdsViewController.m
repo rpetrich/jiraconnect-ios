@@ -83,14 +83,16 @@
                                     filenameFormat:@"customattachment.txt"] autorelease];
 }
 
--(CGRect)notifierEndFrame
-{
-    return CGRectMake(0, 480, 320, 40);
-}
-
 -(CGRect)notifierStartFrame
 {
-    return CGRectMake(0, 440, 320, 40);
+    CGRect frame = self.view.frame;
+    return CGRectMake(frame.origin.x, frame.size.height, frame.size.width, 40); // start just off screen.
+}
+
+-(CGRect)notifierEndFrame
+{
+    CGRect frame = self.view.frame;
+    return CGRectMake(frame.origin.x, frame.size.height - 40 + 20, frame.size.width, 40); // end 40 pixels from bottom of the screen
 }
 
 #pragma end

@@ -55,8 +55,14 @@ static NSString *cellId = @"CommentCell";
 
 - (void)cancel:(UIBarItem *)arg
 {
+    
     [self dismissModalViewControllerAnimated:YES];
-
+    
+    [UIView beginAnimations:@"animateView" context:nil];
+    [UIView setAnimationDuration:0.4];
+    CGRect frame = self.navigationController.view.frame;
+    [self.navigationController.view setFrame:CGRectMake(0, frame.size.height, frame.size.width, frame.size.height)]; 
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning {
