@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		014C7EEA13E1938C00A9415A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
-		014C7EEB13E1938C00A9415A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
-		014C7EEC13E1938C00A9415A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DE139B58CE00D09DFF /* CoreGraphics.framework */; };
-		014C7EF213E1938C00A9415A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 014C7EF013E1938C00A9415A /* InfoPlist.strings */; };
-		014C7EF513E1938C00A9415A /* LogicTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 014C7EF413E1938C00A9415A /* LogicTests.h */; };
-		014C7EF713E1938C00A9415A /* LogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C7EF613E1938C00A9415A /* LogicTests.m */; };
 		0152EB6F1439AA83006024D1 /* JMCToolbarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB691439AA83006024D1 /* JMCToolbarButton.h */; };
 		0152EB701439AA83006024D1 /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB6A1439AA83006024D1 /* JMCToolbarButton.m */; };
 		0152EB711439AA83006024D1 /* UILabel+VerticalAlign.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB6B1439AA83006024D1 /* UILabel+VerticalAlign.h */; };
@@ -21,6 +15,21 @@
 		0152EB741439AA83006024D1 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB6E1439AA83006024D1 /* UIView+Additions.m */; };
 		0152EB771439AAA5006024D1 /* JMCNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152EB751439AAA5006024D1 /* JMCNotifier.h */; };
 		0152EB781439AAA5006024D1 /* JMCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB761439AAA5006024D1 /* JMCNotifier.m */; };
+		0152EC9B1439CE27006024D1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0152EC9A1439CE27006024D1 /* SenTestingKit.framework */; };
+		0152EC9C1439CE27006024D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
+		0152EC9D1439CE27006024D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
+		0152ECA31439CE27006024D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0152ECA11439CE27006024D1 /* InfoPlist.strings */; };
+		0152ECA61439CE27006024D1 /* UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152ECA51439CE27006024D1 /* UnitTests.m */; };
+		0152ECAD1439D0BA006024D1 /* libJIRAConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80562139B57EC00EC5AD4 /* libJIRAConnect.a */; };
+		0152ECAE1439D103006024D1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D8139B58B700D09DFF /* CFNetwork.framework */; };
+		0152ECAF1439D10C006024D1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */; };
+		0152ECB01439D117006024D1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DC139B58C700D09DFF /* MobileCoreServices.framework */; };
+		0152ECB11439D11F006024D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DE139B58CE00D09DFF /* CoreGraphics.framework */; };
+		0152ECB21439D127006024D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98E0139B58D500D09DFF /* AVFoundation.framework */; };
+		0152ECB31439D133006024D1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98E2139B58DB00D09DFF /* CoreLocation.framework */; };
+		0152ECB41439D13B006024D1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C931142ED3AB00EB8F88 /* libz.dylib */; };
+		0152ECB51439D141006024D1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C933142ED40C00EB8F88 /* libsqlite3.dylib */; };
+		0152ECB61439D160006024D1 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0161F19B13E2C98E0048DD76 /* CrashReporter.framework */; };
 		0157C932142ED3AB00EB8F88 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C931142ED3AB00EB8F88 /* libz.dylib */; };
 		0157C934142ED40C00EB8F88 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C933142ED40C00EB8F88 /* libsqlite3.dylib */; };
 		0161F1EB13E2C98E0048DD76 /* CrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F14713E2C98E0048DD76 /* CrashReporter.h */; };
@@ -142,15 +151,19 @@
 		F8B80566139B57EC00EC5AD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0152ECAB1439CF2D006024D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F8B80559139B57EC00EC5AD4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8B80561139B57EC00EC5AD4;
+			remoteInfo = JIRAConnect;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		013DA29413E3058F00103C46 /* button_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_base.png; sourceTree = "<group>"; };
 		013DA29513E3058F00103C46 /* button_base@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_base@2x.png"; sourceTree = "<group>"; };
-		014C7EE913E1938C00A9415A /* LogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		014C7EEF13E1938C00A9415A /* LogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LogicTests-Info.plist"; sourceTree = "<group>"; };
-		014C7EF113E1938C00A9415A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		014C7EF313E1938C00A9415A /* LogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LogicTests-Prefix.pch"; sourceTree = "<group>"; };
-		014C7EF413E1938C00A9415A /* LogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogicTests.h; sourceTree = "<group>"; };
-		014C7EF613E1938C00A9415A /* LogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogicTests.m; sourceTree = "<group>"; };
 		0152EB691439AA83006024D1 /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 		0152EB6A1439AA83006024D1 /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
 		0152EB6B1439AA83006024D1 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
@@ -159,6 +172,13 @@
 		0152EB6E1439AA83006024D1 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		0152EB751439AAA5006024D1 /* JMCNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCNotifier.h; sourceTree = "<group>"; };
 		0152EB761439AAA5006024D1 /* JMCNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCNotifier.m; sourceTree = "<group>"; };
+		0152EC991439CE27006024D1 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0152EC9A1439CE27006024D1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0152ECA01439CE27006024D1 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
+		0152ECA21439CE27006024D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0152ECA41439CE27006024D1 /* UnitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitTests.h; sourceTree = "<group>"; };
+		0152ECA51439CE27006024D1 /* UnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitTests.m; sourceTree = "<group>"; };
+		0152ECA71439CE27006024D1 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		0157C931142ED3AB00EB8F88 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0157C933142ED40C00EB8F88 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		0161F14713E2C98E0048DD76 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
@@ -323,13 +343,23 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		014C7EE513E1938C00A9415A /* Frameworks */ = {
+		0152EC951439CE27006024D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014C7EEA13E1938C00A9415A /* UIKit.framework in Frameworks */,
-				014C7EEB13E1938C00A9415A /* Foundation.framework in Frameworks */,
-				014C7EEC13E1938C00A9415A /* CoreGraphics.framework in Frameworks */,
+				0152ECB61439D160006024D1 /* CrashReporter.framework in Frameworks */,
+				0152ECB51439D141006024D1 /* libsqlite3.dylib in Frameworks */,
+				0152ECB41439D13B006024D1 /* libz.dylib in Frameworks */,
+				0152ECB31439D133006024D1 /* CoreLocation.framework in Frameworks */,
+				0152ECB21439D127006024D1 /* AVFoundation.framework in Frameworks */,
+				0152ECB11439D11F006024D1 /* CoreGraphics.framework in Frameworks */,
+				0152ECB01439D117006024D1 /* MobileCoreServices.framework in Frameworks */,
+				0152ECAF1439D10C006024D1 /* SystemConfiguration.framework in Frameworks */,
+				0152ECAE1439D103006024D1 /* CFNetwork.framework in Frameworks */,
+				0152ECAD1439D0BA006024D1 /* libJIRAConnect.a in Frameworks */,
+				0152EC9B1439CE27006024D1 /* SenTestingKit.framework in Frameworks */,
+				0152EC9C1439CE27006024D1 /* UIKit.framework in Frameworks */,
+				0152EC9D1439CE27006024D1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,26 +400,6 @@
 			path = de.lproj;
 			sourceTree = "<group>";
 		};
-		014C7EED13E1938C00A9415A /* LogicTests */ = {
-			isa = PBXGroup;
-			children = (
-				014C7EF413E1938C00A9415A /* LogicTests.h */,
-				014C7EF613E1938C00A9415A /* LogicTests.m */,
-				014C7EEE13E1938C00A9415A /* Supporting Files */,
-			);
-			path = LogicTests;
-			sourceTree = "<group>";
-		};
-		014C7EEE13E1938C00A9415A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				014C7EEF13E1938C00A9415A /* LogicTests-Info.plist */,
-				014C7EF013E1938C00A9415A /* InfoPlist.strings */,
-				014C7EF313E1938C00A9415A /* LogicTests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		0152EB681439AA56006024D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +412,26 @@
 			);
 			name = Views;
 			path = views;
+			sourceTree = "<group>";
+		};
+		0152EC9E1439CE27006024D1 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				0152ECA41439CE27006024D1 /* UnitTests.h */,
+				0152ECA51439CE27006024D1 /* UnitTests.m */,
+				0152EC9F1439CE27006024D1 /* Supporting Files */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		0152EC9F1439CE27006024D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0152ECA01439CE27006024D1 /* UnitTests-Info.plist */,
+				0152ECA11439CE27006024D1 /* InfoPlist.strings */,
+				0152ECA71439CE27006024D1 /* UnitTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		0157CB5F142EDE7500EB8F88 /* Sketch */ = {
@@ -695,7 +725,7 @@
 			isa = PBXGroup;
 			children = (
 				F8B80567139B57EC00EC5AD4 /* JIRAConnect */,
-				014C7EED13E1938C00A9415A /* LogicTests */,
+				0152EC9E1439CE27006024D1 /* UnitTests */,
 				F8B80564139B57EC00EC5AD4 /* Frameworks */,
 				F8B80563139B57EC00EC5AD4 /* Products */,
 			);
@@ -705,7 +735,7 @@
 			isa = PBXGroup;
 			children = (
 				F8B80562139B57EC00EC5AD4 /* libJIRAConnect.a */,
-				014C7EE913E1938C00A9415A /* LogicTests.octest */,
+				0152EC991439CE27006024D1 /* UnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -723,6 +753,7 @@
 				F89A98D8139B58B700D09DFF /* CFNetwork.framework */,
 				F89A98D6139B58AC00D09DFF /* UIKit.framework */,
 				F8B80565139B57EC00EC5AD4 /* Foundation.framework */,
+				0152EC9A1439CE27006024D1 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -819,22 +850,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		014C7EE813E1938C00A9415A /* LogicTests */ = {
+		0152EC981439CE27006024D1 /* UnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 014C7EF813E1938C00A9415A /* Build configuration list for PBXNativeTarget "LogicTests" */;
+			buildConfigurationList = 0152ECA81439CE27006024D1 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
-				014C7EE413E1938C00A9415A /* Sources */,
-				014C7EE513E1938C00A9415A /* Frameworks */,
-				014C7EE613E1938C00A9415A /* Resources */,
-				014C7EE713E1938C00A9415A /* ShellScript */,
+				0152EC941439CE27006024D1 /* Sources */,
+				0152EC951439CE27006024D1 /* Frameworks */,
+				0152EC961439CE27006024D1 /* Resources */,
+				0152EC971439CE27006024D1 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0152ECAC1439CF2D006024D1 /* PBXTargetDependency */,
 			);
-			name = LogicTests;
-			productName = LogicTests;
-			productReference = 014C7EE913E1938C00A9415A /* LogicTests.octest */;
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 0152EC991439CE27006024D1 /* UnitTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		F8B80561139B57EC00EC5AD4 /* JIRAConnect */ = {
@@ -860,6 +892,7 @@
 		F8B80559139B57EC00EC5AD4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = coravy.;
 			};
 			buildConfigurationList = F8B8055C139B57EC00EC5AD4 /* Build configuration list for PBXProject "JIRAConnect" */;
@@ -876,27 +909,26 @@
 			projectRoot = "";
 			targets = (
 				F8B80561139B57EC00EC5AD4 /* JIRAConnect */,
-				014C7EE813E1938C00A9415A /* LogicTests */,
+				0152EC981439CE27006024D1 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		014C7EE613E1938C00A9415A /* Resources */ = {
+		0152EC961439CE27006024D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014C7EF213E1938C00A9415A /* InfoPlist.strings in Resources */,
-				014C7EF513E1938C00A9415A /* LogicTests.h in Resources */,
+				0152ECA31439CE27006024D1 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		014C7EE713E1938C00A9415A /* ShellScript */ = {
+		0152EC971439CE27006024D1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -910,11 +942,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		014C7EE413E1938C00A9415A /* Sources */ = {
+		0152EC941439CE27006024D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014C7EF713E1938C00A9415A /* LogicTests.m in Sources */,
+				0152ECA61439CE27006024D1 /* UnitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,11 +1013,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0152ECAC1439CF2D006024D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F8B80561139B57EC00EC5AD4 /* JIRAConnect */;
+			targetProxy = 0152ECAB1439CF2D006024D1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		014C7EF013E1938C00A9415A /* InfoPlist.strings */ = {
+		0152ECA11439CE27006024D1 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				014C7EF113E1938C00A9415A /* en */,
+				0152ECA21439CE27006024D1 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1009,44 +1049,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		014C7EF913E1938C00A9415A /* Debug */ = {
+		0152ECA91439CE27006024D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/libJIRAConnect.a";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/JMCClasses/Libraries\"",
 				);
+				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LogicTests/LogicTests-Prefix.pch";
-				INFOPLIST_FILE = "LogicTests/LogicTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = (
-					"-framework",
-					SenTestingKit,
+				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
 				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
-		014C7EFA13E1938C00A9415A /* Release */ = {
+		0152ECAA1439CE27006024D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/JMCClasses/Libraries\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LogicTests/LogicTests-Prefix.pch";
-				INFOPLIST_FILE = "LogicTests/LogicTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = (
-					"-framework",
-					SenTestingKit,
-				);
+				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -1092,6 +1141,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JIRAConnect-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1109,6 +1159,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JIRAConnect-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1117,14 +1168,13 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		014C7EF813E1938C00A9415A /* Build configuration list for PBXNativeTarget "LogicTests" */ = {
+		0152ECA81439CE27006024D1 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				014C7EF913E1938C00A9415A /* Debug */,
-				014C7EFA13E1938C00A9415A /* Release */,
+				0152ECA91439CE27006024D1 /* Debug */,
+				0152ECAA1439CE27006024D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		F8B8055C139B57EC00EC5AD4 /* Build configuration list for PBXProject "JIRAConnect" */ = {
 			isa = XCConfigurationList;
