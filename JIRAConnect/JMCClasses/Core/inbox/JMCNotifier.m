@@ -101,12 +101,17 @@ CGRect endFrame;
 }
 
 - (void)displayNotifications:(id)sender {
-    [self.viewController.view setFrame:CGRectMake(0, 480, 320, 480)];
+    
+    CGRect currStartFrame = CGRectMake(startFrame.origin.x, startFrame.origin.y, 320, 480);
+    CGRect currEndFrame = CGRectMake(0, 0, 320, 480);
+
+    
+    [self.viewController.view setFrame:currStartFrame];
     [self.view addSubview:self.viewController.view];
 
     [UIView beginAnimations:@"animateView" context:nil];
     [UIView setAnimationDuration:0.4];
-    [self.viewController.view setFrame:CGRectMake(0, 0, 320, 480)]; //notice this is ON screen!
+    [self.viewController.view setFrame:currEndFrame]; //notice this is ON screen!
     [UIView commitAnimations];
 
     [_button removeFromSuperview];
