@@ -153,15 +153,6 @@ static NSRecursiveLock *writeLock;
     return comments;
 }
 
--(void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key
-{
-    NSDictionary *commentDict = [json JSONValue];
-    // lower case
-    JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
-    [self insertComment:comment forIssue:key];
-    [comment release];
-}
-
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey {
 
     @synchronized (writeLock) {
@@ -170,7 +161,7 @@ static NSRecursiveLock *writeLock;
                 "(issuekey, username, systemuser, text, date, uuid) "
                 "VALUES "
                 "(?,?,?,?,?,?) ",
-                issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.uuid];
+                issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.requestId];
     }
     // TODO: handle error err...
     if ([db hadError]) {

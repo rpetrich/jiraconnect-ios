@@ -35,7 +35,6 @@
 - (BOOL) commentExistsIssueByUUID:(NSString *)uuid;
 - (void) insertIssue:(JMCIssue *)issue;
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey;
-- (void) insertCommentFromJSON:(NSString *)json forIssueKey:(NSString *)key;
 - (void) markAsRead:(JMCIssue *)issue;
 + (JMCIssueStore *) instance;
 

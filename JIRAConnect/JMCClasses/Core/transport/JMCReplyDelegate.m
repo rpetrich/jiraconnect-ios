@@ -26,7 +26,7 @@
                                                   systemUser:YES
                                                         body:description
                                                         date:[NSDate date]
-                                                        uuid:requestId];
+                                                        requestId:requestId];
 
     [[JMCIssueStore instance] insertComment:comment forIssue:issueKey];
     [comment release];
@@ -44,7 +44,7 @@
         JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
         NSString *issueKey = [commentDict valueForKey:@"issueKey"];
         NSLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);
-        comment.uuid = requestId;
+        comment.requestId = requestId;
         [store insertComment:comment forIssue:issueKey];
         [comment release];
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewCommentCreated object:nil]];
@@ -62,7 +62,7 @@
                                                       systemUser:NO
                                                             body:JMCLocalizedString(@"JMCDeletedIssueMessage", @"This issue has been deleted. Please create new feedback instead.")
                                                             date:[NSDate date]
-                                                            uuid:requestId];
+                                                            requestId:requestId];
         [[JMCIssueStore instance] insertComment:comment forIssue:item.originalIssueKey];
         [comment release];
         [[JMCRequestQueue sharedInstance] deleteItem:requestId];
