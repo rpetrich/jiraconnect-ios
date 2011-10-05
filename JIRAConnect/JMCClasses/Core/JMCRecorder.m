@@ -16,119 +16,120 @@
 
 #import "JMCRecorder.h"
 
+
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
 @implementation JMCRecorder
 
-NSString* _recorderFilePath;
+NSString *_recorderFilePath;
 
-+(JMCRecorder*) instance
-{
-    static JMCRecorder* singleton;
++ (JMCRecorder *)instance {
+    static JMCRecorder *singleton;
     if (singleton == nil) {
         singleton = [[[JMCRecorder alloc] init] retain];
     }
     return singleton;
 }
 
-+(BOOL)audioRecordingIsAvailable {
-    AVAudioSession* session = [AVAudioSession sharedInstance];
-	return session.inputIsAvailable;
++ (BOOL)audioRecordingIsAvailable {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    return session.inputIsAvailable;
 }
 
--(id)init {
-	if ((self = [super init])) {
-		
-		self.recordTime = 10;
-		_recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.aac", DOCUMENTS_FOLDER] retain];
+- (id)init {
+    if ((self = [super init])) {
 
-		// delete the previous recording.
+        self.recordTime = 10;
+        _recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.aac", DOCUMENTS_FOLDER] retain];
+
+        // delete the previous recording.
         [self cleanUp];
-		
-		AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-		NSError *err = nil;
-		[audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
-		if(err){
-			NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-			return nil;
-		}
-		[audioSession setActive:YES error:&err];
-		err = nil;
-		if(err){
-			NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-			return nil;
-		}
-		
-		NSMutableDictionary* recordSetting = [[[NSMutableDictionary alloc] init] autorelease];
-		
-		[recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-		
-		// Create a recording file	
-		NSURL *url = [NSURL fileURLWithPath:_recorderFilePath];
-		err = nil;
-		AVAudioRecorder* recorder = [[ AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
 
-		if (!recorder) {
-			NSLog(@"recorder: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-			return nil;
-		}
-		
-		//prepare to record
-		[recorder prepareToRecord];
-		recorder.meteringEnabled = YES;
-		self.recorder = recorder;
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        NSError *err = nil;
+        [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
+        if (err) {
+            NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+            return nil;
+        }
+        [audioSession setActive:YES error:&err];
+        err = nil;
+        if (err) {
+            NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+            return nil;
+        }
+
+        NSMutableDictionary *recordSetting = [[[NSMutableDictionary alloc] init] autorelease];
+
+        [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+
+        // Create a recording file
+        NSURL *url = [NSURL fileURLWithPath:_recorderFilePath];
+        err = nil;
+        AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
+
+        if (!recorder) {
+            NSLog(@"recorder: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+            return nil;
+        }
+
+        //prepare to record
+        [recorder prepareToRecord];
+        recorder.meteringEnabled = YES;
+        self.recorder = recorder;
         [recorder release];
-	}
-	return self;	
+    }
+    return self;
 }
 
--(void) start {
-	[self.recorder recordForDuration:self.recordTime];
+- (void)start {
+    [self.recorder recordForDuration:self.recordTime];
 }
 
--(void) stop {	
-	[self.recorder stop];
+- (void)stop {
+    [self.recorder stop];
 }
 
--(float) currentDuration {
-	return (float)self.recorder.currentTime;
+- (float)currentDuration {
+    return (float) self.recorder.currentTime;
 }
 
--(float) previousDuration {
+- (float)previousDuration {
 
-    AVAudioPlayer* player = [[[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil] autorelease];
+    AVAudioPlayer *player = [[[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil] autorelease];
     player.volume = 1;
-    return (float)player.duration;
+    return (float) player.duration;
 
 }
 
--(NSData*) audioData {
-    
+- (NSData *)audioData {
+
     if ([self previousDuration] <= 0.0f) {
         return nil;
     }
-                                
-	NSURL *url = [NSURL fileURLWithPath: _recorderFilePath];
-	NSError *err = nil; 
-	NSData *audioData = [NSData dataWithContentsOfFile:[url path] options: 0 error:&err];
-	if(!audioData) {
-		NSLog(@"audio data: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-	}
-	return audioData;	
+
+    NSURL *url = [NSURL fileURLWithPath:_recorderFilePath];
+    NSError *err = nil;
+    NSData *audioData = [NSData dataWithContentsOfFile:[url path] options:0 error:&err];
+    if (!audioData) {
+        NSLog(@"audio data: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+    }
+    return audioData;
 }
 
 
 // deletes any cached audio files
--(void) cleanUp {
+- (void)cleanUp {
     [[NSFileManager defaultManager] removeItemAtPath:_recorderFilePath error:nil];
 }
 
-@synthesize recorder=_recorder, recordTime=_recordTime;
+@synthesize recorder = _recorder, recordTime = _recordTime;
 
-- (void) dealloc {
+- (void)dealloc {
     self.recorder = nil;
-	[_recorderFilePath release]; _recorderFilePath = nil;
+    [_recorderFilePath release];
+    _recorderFilePath = nil;
     [super dealloc];
-}	
+}
 
 @end
