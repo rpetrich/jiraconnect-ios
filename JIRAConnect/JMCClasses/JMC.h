@@ -33,6 +33,7 @@
 #define kJMCOptionPhotosEnabled @"kJMCOptionPhotosEnabled"
 #define kJMCOptionVoiceEnabled @"kJMCOptionVoiceEnabled"
 #define kJMCOptionLocationEnabled @"kJMCOptionLocationEnabled"
+#define kJMCOptionCrashReportingEnabled @"kJMCOptionCrashReportingEnabled"
 #define kJMCOptionCustomFields @"kJMCOptionCustomFields"
 
 @interface JMCOptions : NSObject {
@@ -42,6 +43,7 @@
     BOOL _photosEnabled;
     BOOL _voiceEnabled;
     BOOL _locationEnabled;
+    BOOL _crashReportingEnabled;
     NSDictionary* _customFields;
 }
 
@@ -52,6 +54,7 @@
              photos:(BOOL)photos
               voice:(BOOL)voice
            location:(BOOL)location
+       crashreporting:(BOOL)crashreporting
        customFields:(NSDictionary*)customFields;
 
 /**
@@ -86,6 +89,12 @@
  * If YES the location data (lat/lng) will be sent as a part of the issue, this is NO by default.
  */
 @property (assign) BOOL locationEnabled;
+
+/**
+ * If YES, Crash Reports will be submitted directly to JIRA. Set this to NO if you don't wish to collect crash reports
+ * or are collecting Crash Reports via some other means.
+ */
+@property (assign) BOOL crashReportingEnabled;
 
 /**
 * A dicitonary mapping custom field names to custom field values.

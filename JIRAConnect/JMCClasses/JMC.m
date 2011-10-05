@@ -23,6 +23,7 @@
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
             photosEnabled=_photosEnabled, voiceEnabled=_voiceEnabled, locationEnabled=_locationEnabled,
+            crashReportingEnabled=_crashReportingEnabled,
             customFields=_customFields;
 
 -(id)init
@@ -30,7 +31,8 @@
     if ((self = [super init])) {
         _photosEnabled = YES;
         _voiceEnabled = YES;
-        _locationEnabled = YES;
+        _locationEnabled = NO;
+        _crashReportingEnabled = YES;
     }
     return self;
 }
@@ -45,6 +47,7 @@
     options.photosEnabled = [[dict objectForKey:kJMCOptionPhotosEnabled] boolValue];
     options.voiceEnabled = [[dict objectForKey:kJMCOptionVoiceEnabled] boolValue];
     options.locationEnabled = [[dict objectForKey:kJMCOptionLocationEnabled] boolValue];
+    options.crashReportingEnabled = [[dict objectForKey:kJMCOptionCrashReportingEnabled] boolValue];
     options.customFields = [dict objectForKey:kJMCOptionCustomFields];
     return options;
 }
@@ -55,6 +58,7 @@
              photos:(BOOL)photos
               voice:(BOOL)voice
            location:(BOOL)location
+     crashreporting:(BOOL)crashreporting
        customFields:(NSDictionary*)customFields
 {
     JMCOptions* options = [[[JMCOptions alloc] init]autorelease];
@@ -64,6 +68,7 @@
     options.photosEnabled = photos;
     options.voiceEnabled = voice;
     options.locationEnabled = location;
+    options.crashReportingEnabled = crashreporting;
     options.customFields = customFields;
     return options;
 }
@@ -121,11 +126,7 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self._pinger = [[[JMCPing alloc] init] autorelease ];
-        self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
-        self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
-        self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
-        _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+
     }
     return self;
 }
@@ -202,10 +203,20 @@
 
 - (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
-    [CrashReporter enableCrashReporter];
     if (!self._options) {
-        self._options = [[[JMCOptions alloc] init] autorelease];
+          self._options = [[[JMCOptions alloc] init] autorelease];
     }
+    
+    if (self._options.crashReportingEnabled) {
+        self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
+        [CrashReporter enableCrashReporter];
+    }
+
+    self._pinger = [[[JMCPing alloc] init] autorelease ];
+
+    self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
+    self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
+    _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 
     unichar lastChar = [withUrl characterAtIndex:[withUrl length] - 1];
     // if the lastChar is not a /, then add a /
