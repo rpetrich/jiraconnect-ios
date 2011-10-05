@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>kJMCOptionUrl</key>
+	<string>http://connect.onjira.com</string>
+	<key>kJMCOptionProjectKey</key>
+	<string>NERDS</string>
+	<key>kJMCOptionApiKey</key>
+	<string>123ABC</string>
+	<key>kJMCOptionPhotosEnabled</key>
+	<false/>
+	<key>kJMCOptionVoiceEnabled</key>
+	<false/>
+	<key>kJMCOptionLocationEnabled</key>
+	<false/>
+	<key>kJMCOptionCustomFields</key>
+	<dict>
+		<key>customfield1</key>
+		<string>value1</string>
+		<key>customfield2</key>
+		<string>value2</string>
+	</dict>
+</dict>
+</plist>

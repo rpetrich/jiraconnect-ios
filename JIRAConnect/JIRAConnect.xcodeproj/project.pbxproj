@@ -19,7 +19,7 @@
 		0152EC9C1439CE27006024D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
 		0152EC9D1439CE27006024D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
 		0152ECA31439CE27006024D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0152ECA11439CE27006024D1 /* InfoPlist.strings */; };
-		0152ECA61439CE27006024D1 /* UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152ECA51439CE27006024D1 /* UnitTests.m */; };
+		0152ECA61439CE27006024D1 /* JMCOptionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152ECA51439CE27006024D1 /* JMCOptionsTests.m */; };
 		0152ECAD1439D0BA006024D1 /* libJIRAConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80562139B57EC00EC5AD4 /* libJIRAConnect.a */; };
 		0152ECAE1439D103006024D1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D8139B58B700D09DFF /* CFNetwork.framework */; };
 		0152ECAF1439D10C006024D1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */; };
@@ -105,6 +105,7 @@
 		0161F24913E2C98E0048DD76 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F1B113E2C98E0048DD76 /* SBJsonParser.m */; };
 		0161F24A13E2C98E0048DD76 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F1B213E2C98E0048DD76 /* SBJsonWriter.h */; };
 		0161F24B13E2C98E0048DD76 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F1B313E2C98E0048DD76 /* SBJsonWriter.m */; };
+		01E36567143BACA900A5239D /* JMCTestConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01E36566143BACA900A5239D /* JMCTestConfiguration.plist */; };
 		01EC3796142ECC9400BF600E /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 01EC3782142ECC9400BF600E /* ASIAuthenticationDialog.h */; };
 		01EC3797142ECC9400BF600E /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EC3783142ECC9400BF600E /* ASIAuthenticationDialog.m */; };
 		01EC3798142ECC9400BF600E /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 01EC3784142ECC9400BF600E /* ASICacheDelegate.h */; };
@@ -149,6 +150,7 @@
 		F89A98E1139B58D500D09DFF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98E0139B58D500D09DFF /* AVFoundation.framework */; };
 		F89A98E3139B58DB00D09DFF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98E2139B58DB00D09DFF /* CoreLocation.framework */; };
 		F8B80566139B57EC00EC5AD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
+		F8B8056E139B57EC00EC5AD6 /* ModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8056E139B57EC00EC5AD5 /* ModelTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,8 +178,8 @@
 		0152EC9A1439CE27006024D1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0152ECA01439CE27006024D1 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		0152ECA21439CE27006024D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0152ECA41439CE27006024D1 /* UnitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitTests.h; sourceTree = "<group>"; };
-		0152ECA51439CE27006024D1 /* UnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitTests.m; sourceTree = "<group>"; };
+		0152ECA41439CE27006024D1 /* JMCOptionsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCOptionsTests.h; sourceTree = "<group>"; };
+		0152ECA51439CE27006024D1 /* JMCOptionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCOptionsTests.m; sourceTree = "<group>"; };
 		0152ECA71439CE27006024D1 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		0157C931142ED3AB00EB8F88 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0157C933142ED40C00EB8F88 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -291,6 +293,7 @@
 		0161F1EA13E2C98E0048DD76 /* writeareply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeareply.png; sourceTree = "<group>"; };
 		01A71AB713E5AAEE00EBD56E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = JMCLocalizable.strings; sourceTree = "<group>"; };
 		01A71AB913E5AB3900EBD56E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JMCLocalizable.strings; sourceTree = "<group>"; };
+		01E36566143BACA900A5239D /* JMCTestConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JMCTestConfiguration.plist; sourceTree = "<group>"; };
 		01EC3782142ECC9400BF600E /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		01EC3783142ECC9400BF600E /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		01EC3784142ECC9400BF600E /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -340,6 +343,8 @@
 		F8B80562139B57EC00EC5AD4 /* libJIRAConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJIRAConnect.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B80565139B57EC00EC5AD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F8B80569139B57EC00EC5AD4 /* JIRAConnect-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JIRAConnect-Prefix.pch"; sourceTree = "<group>"; };
+		F8B8056E139B57EC00EC5AD5 /* ModelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelTests.m; sourceTree = "<group>"; };
+		F8B8056E139B57EC00EC5AD7 /* ModelTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelTests.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,8 +422,10 @@
 		0152EC9E1439CE27006024D1 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				0152ECA41439CE27006024D1 /* UnitTests.h */,
-				0152ECA51439CE27006024D1 /* UnitTests.m */,
+				F8B8056E139B57EC00EC5AD7 /* ModelTests.h */,
+				F8B8056E139B57EC00EC5AD5 /* ModelTests.m */,
+				0152ECA41439CE27006024D1 /* JMCOptionsTests.h */,
+				0152ECA51439CE27006024D1 /* JMCOptionsTests.m */,
 				0152EC9F1439CE27006024D1 /* Supporting Files */,
 			);
 			path = UnitTests;
@@ -430,6 +437,7 @@
 				0152ECA01439CE27006024D1 /* UnitTests-Info.plist */,
 				0152ECA11439CE27006024D1 /* InfoPlist.strings */,
 				0152ECA71439CE27006024D1 /* UnitTests-Prefix.pch */,
+				01E36566143BACA900A5239D /* JMCTestConfiguration.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -920,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0152ECA31439CE27006024D1 /* InfoPlist.strings in Resources */,
+				01E36567143BACA900A5239D /* JMCTestConfiguration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,7 +955,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0152ECA61439CE27006024D1 /* UnitTests.m in Sources */,
+				0152ECA61439CE27006024D1 /* JMCOptionsTests.m in Sources */,
+				F8B8056E139B57EC00EC5AD6 /* ModelTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,7 +1062,7 @@
 		0152ECA91439CE27006024D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/libJIRAConnect.a";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1070,9 +1080,14 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/JMCClasses/Libraries\"",
+					"\U001b",
+				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1080,7 +1095,7 @@
 		0152ECAA1439CE27006024D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1092,9 +1107,14 @@
 				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/JMCClasses/Libraries\"",
+					"\U001b",
+				);
 				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1144,6 +1164,8 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_AFTER_BUILD = NO;
 			};
 			name = Debug;
 		};
@@ -1162,6 +1184,8 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_AFTER_BUILD = NO;
 			};
 			name = Release;
 		};
@@ -1175,6 +1199,7 @@
 				0152ECAA1439CE27006024D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8B8055C139B57EC00EC5AD4 /* Build configuration list for PBXProject "JIRAConnect" */ = {
 			isa = XCConfigurationList;
