@@ -33,6 +33,19 @@
                                   apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"
                               dataSource:viewController];
 
+//
+//    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
+//                                             project:@"NERDS"
+//                                              apiKey:@"81da567a-ac0d-4e6c-b55a-627caecce9c0"
+//                                              photos:YES
+//                                               voice:YES
+//                                            location:YES
+//                                      crashreporting:YES
+//                                        customFields:nil];
+//    [[JMC instance]
+//            configureWithOptions:options
+//                  dataSource:viewController];
+
 
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
