@@ -23,7 +23,7 @@
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
             photosEnabled=_photosEnabled, voiceEnabled=_voiceEnabled, locationEnabled=_locationEnabled,
-            crashReportingEnabled=_crashReportingEnabled,
+            crashReportingEnabled=_crashReportingEnabled, barStyle=_barStyle,
             customFields=_customFields;
 
 -(id)init
@@ -33,6 +33,7 @@
         _voiceEnabled = YES;
         _locationEnabled = NO;
         _crashReportingEnabled = YES;
+        _barStyle = UIBarStyleDefault;
     }
     return self;
 }
@@ -49,6 +50,7 @@
     options.locationEnabled = [[dict objectForKey:kJMCOptionLocationEnabled] boolValue];
     options.crashReportingEnabled = [[dict objectForKey:kJMCOptionCrashReportingEnabled] boolValue];
     options.customFields = [dict objectForKey:kJMCOptionCustomFields];
+    options.barStyle = [[dict objectForKey:kJMCOptionUIBarStyle] intValue];
     return options;
 }
 
@@ -216,8 +218,8 @@
 
     self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
     self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
-    _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-
+    _navController.navigationBar.barStyle = self._options.barStyle;
+    
     unichar lastChar = [withUrl characterAtIndex:[withUrl length] - 1];
     // if the lastChar is not a /, then add a /
     NSString* charToAppend = lastChar != '/' ? @"/" : @"";
@@ -366,6 +368,10 @@
         }
     }
     return defaultType;
+}
+
+-(UIBarStyle) getBarStyle {
+    return _options.barStyle;
 }
 
 -(CGRect)notifierStartFrame

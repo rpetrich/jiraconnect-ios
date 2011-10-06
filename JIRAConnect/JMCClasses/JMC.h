@@ -35,6 +35,7 @@
 #define kJMCOptionLocationEnabled @"kJMCOptionLocationEnabled"
 #define kJMCOptionCrashReportingEnabled @"kJMCOptionCrashReportingEnabled"
 #define kJMCOptionCustomFields @"kJMCOptionCustomFields"
+#define kJMCOptionUIBarStyle @"kJMCOptionUIBarStyle"
 
 @interface JMCOptions : NSObject {
     NSString* _url;
@@ -45,6 +46,7 @@
     BOOL _locationEnabled;
     BOOL _crashReportingEnabled;
     NSDictionary* _customFields;
+    UIBarStyle _barStyle;
 }
 
 +(id) optionsWithContentsOfFile:(NSString *)filePath;
@@ -102,6 +104,11 @@
 * when creating any issues.
 */
 @property (retain) NSDictionary* customFields;
+
+/**
+ * The style to use for all navigation bars.
+ */
+@property (assign) UIBarStyle barStyle;
 
 @end
 
@@ -164,6 +171,7 @@
 - (NSString *) getAppName;
 - (NSString *) getUUID;
 - (NSString *) getAPIVersion;
+- (UIBarStyle) getBarStyle;
 
 - (BOOL) isPhotosEnabled;
 - (BOOL) isVoiceEnabled;

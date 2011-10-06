@@ -220,8 +220,7 @@ static float detailLabelHeight = 21.0f;
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
     self.feedbackController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
-    navController.navigationBar.translucent = YES;
-    navController.navigationBar.barStyle = UIBarStyleBlack;
+    navController.navigationBar.barStyle = [[JMC instance] getBarStyle];
 
     [self presentModalViewController:navController animated:YES];
     self.feedbackController.replyToIssue = self.issue;

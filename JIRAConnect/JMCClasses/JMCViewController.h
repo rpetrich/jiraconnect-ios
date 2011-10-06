@@ -49,7 +49,6 @@
 @private
     NSTimer *_timer;
     NSUInteger currentAttachmentItemIndex;
-    CGRect descriptionFrame;
     CLLocation *currentLocation;
     CLLocationManager *_locationManager;
     BOOL sendLocationData;

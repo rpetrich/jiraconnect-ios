@@ -48,7 +48,7 @@ CGRect endFrame;
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 
         _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
-        _viewController.navigationBar.barStyle = UIBarStyleBlack;
+        _viewController.navigationBar.barStyle = [[JMC instance] getBarStyle];
         
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJMCReceivedCommentsNotification object:nil];

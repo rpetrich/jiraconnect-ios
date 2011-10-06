@@ -37,23 +37,11 @@
 - (BOOL)shouldTrackLocation;
 
 @property(nonatomic, retain) CLLocation *currentLocation;
-@property(nonatomic, retain) CRVActivityView *activityView;
 @end
 
 @implementation JMCViewController
 
 NSArray* toolbarItems; // holds the first 3 system toolbar items.
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-  
-
-    }
-    return self;
-}
-
 
 - (void)viewDidLoad
 {
@@ -61,8 +49,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // Observe keyboard hide and show notifications to resize the text view appropriately.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
-    sendLocationData = [[JMC instance] isLocationEnabled];
 
     if ([self shouldTrackLocation]) {
         _locationManager = [[[CLLocationManager alloc] init] retain];
@@ -96,18 +82,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                                               style:UIBarButtonItemStyleDone
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
+    
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.toolbar.clipsToBounds = YES;
     self.toolbar.autoresizesSubviews = YES;
 
-    float descriptionFieldInset = 15;
-    self.descriptionField.top = 44 + descriptionFieldInset;
-    self.descriptionField.width = self.view.width - (descriptionFieldInset * 2.0);
-    descriptionFrame = self.descriptionField.frame;
+//    self.descriptionField.top = 44;  
+    self.descriptionField.width = self.view.width;
 
     self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
-    [self.toolbar setBarStyle:UIBarStyleBlackOpaque];
+    [self.toolbar setBarStyle:[[JMC instance] getBarStyle]];
 
     UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
     UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
@@ -182,8 +167,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
 
     CGRect newTextViewFrame = self.view.bounds;
-    newTextViewFrame.size.height = textViewHeight - self.navigationController.navigationBar.height;
-    newTextViewFrame.origin.y = self.navigationController.navigationBar.height;
+    float yOffset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.height : 0;
+    newTextViewFrame.size.height = textViewHeight - yOffset;
+    newTextViewFrame.origin.y = yOffset;
 
     // Get the duration of the animation.
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
@@ -576,13 +562,13 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 #pragma mark -
 #pragma mark Private Methods
 - (BOOL)shouldTrackLocation {
-    return sendLocationData && [CLLocationManager locationServicesEnabled];
+    return [[JMC instance] isLocationEnabled] && [CLLocationManager locationServicesEnabled];
 }
 
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, activityView;
+@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
@@ -608,6 +594,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(_locationManager) {
       [_locationManager release];
+      _locationManager = nil;
     }
     [systemToolbarItems release];
     self.voiceButton = nil;
@@ -620,7 +607,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.descriptionField = nil;
     self.payloadDataSource = nil;
     self.currentLocation = nil;
-    self.activityView = nil;
     self.replyTransport = nil;
     self.issueTransport = nil;
 }
