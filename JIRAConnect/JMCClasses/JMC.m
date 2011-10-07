@@ -19,6 +19,7 @@
 #import "JMCCrashSender.h"
 #import "JMCCreateIssueDelegate.h"
 #import "JMCRequestQueue.h"
+#import "JMCIssuesViewController.h"
 
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
@@ -93,6 +94,8 @@
 @property (nonatomic, retain) JMCPing * _pinger;
 @property (nonatomic, retain) JMCNotifier * _notifier;
 @property (nonatomic, retain) JMCViewController * _jcController;
+@property (nonatomic, retain) JMCIssuesViewController * _issuesController;
+@property (nonatomic, retain) UINavigationController* _navIssuesController;
 @property (nonatomic, retain) UINavigationController* _navController;
 @property (nonatomic, retain) JMCCrashSender *_crashSender;
 @property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
@@ -110,7 +113,9 @@
 @synthesize _pinger;
 @synthesize _notifier;
 @synthesize _jcController;
+@synthesize _issuesController;
 @synthesize _navController;
+@synthesize _navIssuesController;
 @synthesize _crashSender;
 @synthesize _customDataSource;
 @synthesize _options;
@@ -125,20 +130,14 @@
     return singleton;
 }
 
-- (id)init
-{
-    if ((self = [super init])) {
-
-    }
-    return self;
-}
-
 - (void)dealloc
 {
     self.url = nil;
     [_pinger release];
     [_notifier release];
     [_jcController release];
+    [_issuesController release];
+    [_navIssuesController release];
     [_navController release];
     [_crashSender release];
     [_options release];
@@ -218,8 +217,12 @@
 
     self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
     self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
+    self._issuesController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    self._navIssuesController = [[[UINavigationController alloc] initWithRootViewController:_issuesController] autorelease ];
+
     _navController.navigationBar.barStyle = self._options.barStyle;
-    
+    _navIssuesController.navigationBar.barStyle = self._options.barStyle;
+
     unichar lastChar = [withUrl characterAtIndex:[withUrl length] - 1];
     // if the lastChar is not a /, then add a /
     NSString* charToAppend = lastChar != '/' ? @"/" : @"";
@@ -234,12 +237,9 @@
     [_customDataSource retain];
     _jcController.payloadDataSource = _customDataSource;
 
-    JMCIssuesViewController *issuesController = [[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain];
-    JMCNotifier* notifier = [[JMCNotifier alloc] initWithIssuesViewController:issuesController
-                                                                   startFrame:[self notifierStartFrame]
-                                                                     endFrame:[self notifierEndFrame]];
+    JMCNotifier* notifier = [[JMCNotifier alloc] initWithStartFrame:[self notifierStartFrame]
+                                                           endFrame:[self notifierEndFrame]];
     self._notifier = notifier;
-    [issuesController release];
     [notifier release];
 
     // TODO: firing this when network becomes active could be better
@@ -249,9 +249,21 @@
     NSLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
 }
 
+
+- (void)loadIssuesView
+{
+    [self._issuesController loadView];
+    [self._issuesController setIssueStore:[JMCIssueStore instance]];
+}
+
 - (UIViewController *)viewController
 {
-    return ([JMCIssueStore instance].count > 0) ? [self issuesViewController] : _navController;
+    if ([JMCIssueStore instance].count > 0) {
+        [self loadIssuesView];
+        return _navIssuesController;
+    } else {
+        return _navController;
+    }
 }
 
 - (UIViewController *)feedbackViewController
@@ -261,8 +273,8 @@
 
 - (UIViewController *)issuesViewController
 {
-    [_notifier populateIssuesViewController];
-    return _notifier.viewController;
+    [self loadIssuesView];
+    return _navIssuesController;
 }
 
 - (NSDictionary *)getMetaData

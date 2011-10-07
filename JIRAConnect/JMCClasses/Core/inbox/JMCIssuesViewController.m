@@ -26,6 +26,7 @@ static NSString *cellId = @"CommentCell";
 @implementation JMCIssuesViewController
 
 @synthesize issueStore = _issueStore;
+@synthesize isModal = _isModal;
 
 - (id)initWithStyle:(UITableViewStyle)style {
 
@@ -42,7 +43,7 @@ static NSString *cellId = @"CommentCell";
         _dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-
+        self.isModal = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCIssueUpdated object:nil];
     }
     return self;
@@ -55,14 +56,20 @@ static NSString *cellId = @"CommentCell";
 
 - (void)cancel:(UIBarItem *)arg
 {
-    
-    [self dismissModalViewControllerAnimated:YES];
-    
-    [UIView beginAnimations:@"animateView" context:nil];
-    [UIView setAnimationDuration:0.4];
-    CGRect frame = self.navigationController.view.frame;
-    [self.navigationController.view setFrame:CGRectMake(0, frame.size.height, frame.size.width, frame.size.height)]; 
-    [UIView commitAnimations];
+
+    if (self.isModal) {
+        [self dismissModalViewControllerAnimated:YES];
+    } else {
+        [UIView animateWithDuration:0.4 animations:^{
+            CGRect frame = self.navigationController.view.frame;
+            CGRect toFrame = CGRectMake(0, frame.size.height, frame.size.width, frame.size.height);
+            [self.navigationController.view setFrame:toFrame];
+            
+        } completion:^(BOOL finished) {
+
+        }];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

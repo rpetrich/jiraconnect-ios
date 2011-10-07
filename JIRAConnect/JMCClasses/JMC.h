@@ -118,7 +118,9 @@
     JMCPing *_pinger;
     JMCNotifier *_notifier;
     JMCViewController *_jcController;
+    JMCIssuesViewController *_issuesController;
     UINavigationController *_navController;
+    UINavigationController *_navIssuesController;
     JMCCrashSender *_crashSender;
     id <JMCCustomDataSource> _customDataSource;
     JMCOptions* _options;

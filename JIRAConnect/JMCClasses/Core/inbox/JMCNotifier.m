@@ -25,9 +25,10 @@ UIButton *_button;
 CGRect startFrame;
 CGRect endFrame;
 
-- (id)initWithIssuesViewController:(JMCIssuesViewController *)issuesViewController startFrame:(CGRect)start endFrame:(CGRect)end {
+- (id)initWithStartFrame:(CGRect)start endFrame:(CGRect)end {
     if ((self = [super init])) {
-        self.issuesViewController = issuesViewController;
+        self.issuesViewController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+        self.issuesViewController.isModal = NO;
 
         startFrame = start;
         endFrame = end;
@@ -105,7 +106,6 @@ CGRect endFrame;
     CGRect currStartFrame = CGRectMake(startFrame.origin.x, startFrame.origin.y, 320, 480);
     CGRect currEndFrame = CGRectMake(0, 0, 320, 480);
 
-    
     [self.viewController.view setFrame:currStartFrame];
     [self.view addSubview:self.viewController.view];
 
