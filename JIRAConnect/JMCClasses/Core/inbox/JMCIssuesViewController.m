@@ -162,8 +162,8 @@ static NSString *cellId = @"CommentCell";
                              otherButtonTitles:nil];
             [alert show];
             [alert release];
-        return;
-    }
+
+    } else {
     
     issue.comments = [self.issueStore loadCommentsFor:issue];
     JMCIssueViewController *detailViewController = [[JMCIssueViewController alloc] initWithNibName:@"JMCIssueViewController" bundle:nil];
@@ -174,6 +174,7 @@ static NSString *cellId = @"CommentCell";
 
     [self.issueStore markAsRead:issue];
     [tableView reloadData]; // redraw the table.
+    }
     [issue release];
 }
 #pragma mark end

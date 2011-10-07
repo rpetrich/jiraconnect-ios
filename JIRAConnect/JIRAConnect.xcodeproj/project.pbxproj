@@ -86,8 +86,6 @@
 		0161F22413E2C98E0048DD76 /* JMCViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F18413E2C98E0048DD76 /* JMCViewController.h */; };
 		0161F22513E2C98E0048DD76 /* JMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F18513E2C98E0048DD76 /* JMCViewController.m */; };
 		0161F23813E2C98E0048DD76 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0161F19B13E2C98E0048DD76 /* CrashReporter.framework */; };
-		0161F23913E2C98E0048DD76 /* CRVActivityView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F19C13E2C98E0048DD76 /* CRVActivityView.h */; };
-		0161F23A13E2C98E0048DD76 /* CRVActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F19D13E2C98E0048DD76 /* CRVActivityView.m */; };
 		0161F23B13E2C98E0048DD76 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F1A213E2C98E0048DD76 /* FMDatabase.h */; };
 		0161F23C13E2C98E0048DD76 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F1A313E2C98E0048DD76 /* FMDatabase.m */; };
 		0161F23D13E2C98E0048DD76 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161F1A413E2C98E0048DD76 /* FMDatabaseAdditions.h */; };
@@ -246,8 +244,6 @@
 		0161F18513E2C98E0048DD76 /* JMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCViewController.m; sourceTree = "<group>"; };
 		0161F18613E2C98E0048DD76 /* JMCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCViewController.xib; sourceTree = "<group>"; };
 		0161F19B13E2C98E0048DD76 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		0161F19C13E2C98E0048DD76 /* CRVActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRVActivityView.h; sourceTree = "<group>"; };
-		0161F19D13E2C98E0048DD76 /* CRVActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRVActivityView.m; sourceTree = "<group>"; };
 		0161F19F13E2C98E0048DD76 /* CONTRIBUTORS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTORS.txt; sourceTree = "<group>"; };
 		0161F1A013E2C98E0048DD76 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		0161F1A213E2C98E0048DD76 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -592,8 +588,6 @@
 				01EC37B0142ECDB300BF600E /* Reachability */,
 				0161F18813E2C98E0048DD76 /* ASIHTTP */,
 				0161F19B13E2C98E0048DD76 /* CrashReporter.framework */,
-				0161F19C13E2C98E0048DD76 /* CRVActivityView.h */,
-				0161F19D13E2C98E0048DD76 /* CRVActivityView.m */,
 				0161F19E13E2C98E0048DD76 /* FMDB */,
 				0161F1A813E2C98E0048DD76 /* JSON */,
 			);
@@ -854,7 +848,6 @@
 				0161F22213E2C98E0048DD76 /* JMCCustomDataSource.h in Headers */,
 				0161F22313E2C98E0048DD76 /* JMCMacros.h in Headers */,
 				0161F22413E2C98E0048DD76 /* JMCViewController.h in Headers */,
-				0161F23913E2C98E0048DD76 /* CRVActivityView.h in Headers */,
 				0161F23B13E2C98E0048DD76 /* FMDatabase.h in Headers */,
 				0161F23D13E2C98E0048DD76 /* FMDatabaseAdditions.h in Headers */,
 				0161F23F13E2C98E0048DD76 /* FMResultSet.h in Headers */,
@@ -1030,7 +1023,6 @@
 				0161F21F13E2C98E0048DD76 /* JMC.m in Sources */,
 				0161F22113E2C98E0048DD76 /* JMCAttachmentItem.m in Sources */,
 				0161F22513E2C98E0048DD76 /* JMCViewController.m in Sources */,
-				0161F23A13E2C98E0048DD76 /* CRVActivityView.m in Sources */,
 				0161F23C13E2C98E0048DD76 /* FMDatabase.m in Sources */,
 				0161F23E13E2C98E0048DD76 /* FMDatabaseAdditions.m in Sources */,
 				0161F24013E2C98E0048DD76 /* FMResultSet.m in Sources */,

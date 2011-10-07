@@ -54,7 +54,6 @@
 		0152EC5B1439AB26006024D1 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EBDE1439AB26006024D1 /* ASIInputStream.m */; };
 		0152EC5C1439AB26006024D1 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EBE01439AB26006024D1 /* ASINetworkQueue.m */; };
 		0152EC5D1439AB26006024D1 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0152EBE21439AB26006024D1 /* CrashReporter.framework */; };
-		0152EC5E1439AB26006024D1 /* CRVActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EBE41439AB26006024D1 /* CRVActivityView.m */; };
 		0152EC5F1439AB26006024D1 /* CONTRIBUTORS.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0152EBE61439AB26006024D1 /* CONTRIBUTORS.txt */; };
 		0152EC601439AB26006024D1 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0152EBE71439AB26006024D1 /* LICENSE.txt */; };
 		0152EC611439AB26006024D1 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EBEA1439AB26006024D1 /* FMDatabase.m */; };
@@ -232,8 +231,6 @@
 		0152EBE01439AB26006024D1 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		0152EBE11439AB26006024D1 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		0152EBE21439AB26006024D1 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		0152EBE31439AB26006024D1 /* CRVActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRVActivityView.h; sourceTree = "<group>"; };
-		0152EBE41439AB26006024D1 /* CRVActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRVActivityView.m; sourceTree = "<group>"; };
 		0152EBE61439AB26006024D1 /* CONTRIBUTORS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTORS.txt; sourceTree = "<group>"; };
 		0152EBE71439AB26006024D1 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		0152EBE91439AB26006024D1 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -511,8 +508,6 @@
 			children = (
 				0152EBCD1439AB26006024D1 /* ASIHTTP */,
 				0152EBE21439AB26006024D1 /* CrashReporter.framework */,
-				0152EBE31439AB26006024D1 /* CRVActivityView.h */,
-				0152EBE41439AB26006024D1 /* CRVActivityView.m */,
 				0152EBE51439AB26006024D1 /* FMDB */,
 				0152EBEF1439AB26006024D1 /* JSON */,
 				0152EBFB1439AB26006024D1 /* Licenses */,
@@ -919,7 +914,6 @@
 				0152EC5A1439AB26006024D1 /* ASIHTTPRequest.m in Sources */,
 				0152EC5B1439AB26006024D1 /* ASIInputStream.m in Sources */,
 				0152EC5C1439AB26006024D1 /* ASINetworkQueue.m in Sources */,
-				0152EC5E1439AB26006024D1 /* CRVActivityView.m in Sources */,
 				0152EC611439AB26006024D1 /* FMDatabase.m in Sources */,
 				0152EC621439AB26006024D1 /* FMDatabaseAdditions.m in Sources */,
 				0152EC631439AB26006024D1 /* FMResultSet.m in Sources */,

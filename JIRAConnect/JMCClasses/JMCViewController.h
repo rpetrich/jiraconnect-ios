@@ -22,12 +22,11 @@
 #import "JMCReplyTransport.h"
 #import "JMCSketchViewControllerDelegate.h"
 #import <CoreLocation/CoreLocation.h>
-#import "CRVActivityView.h"
 
 
 @interface JMCViewController : UIViewController
         <UITextViewDelegate, UITextFieldDelegate, AVAudioRecorderDelegate,
-        JMCSketchViewControllerDelegate, UIAlertViewDelegate, CLLocationManagerDelegate, CRVActivityViewDelegate> {
+        JMCSketchViewControllerDelegate, UIAlertViewDelegate, CLLocationManagerDelegate> {
 
     IBOutlet UITextView *descriptionField;
 
@@ -51,8 +50,6 @@
     NSUInteger currentAttachmentItemIndex;
     CLLocation *currentLocation;
     CLLocationManager *_locationManager;
-    BOOL sendLocationData;
-    CRVActivityView *activityView;
     UIBarButtonItem *_voiceButton;
     NSArray *systemToolbarItems; // holds the 3 system toolbar items.
 }
