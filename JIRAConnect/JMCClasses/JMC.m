@@ -265,12 +265,12 @@
     [notifier release];
 
     // whenever the Application Becomes Active, ping for notifications from JIRA.
-    if ([JMCIssueStore instance].count > 0) {
-        [[NSNotificationCenter defaultCenter] addObserver:_pinger
-                                                 selector:@selector(start)
-                                                     name:UIApplicationDidBecomeActiveNotification
-                                                   object:nil];
-    }
+
+    [[NSNotificationCenter defaultCenter] addObserver:_pinger
+                                             selector:@selector(start)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+
     NSLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
 }
 

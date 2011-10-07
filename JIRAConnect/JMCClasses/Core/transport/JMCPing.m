@@ -25,8 +25,11 @@
 @implementation JMCPing
 
 - (void)start {
+
+    if ([JMCIssueStore instance].count > 0) {
     // delay a little, then ping to make notificaiton not so jarring
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(sendPing) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(sendPing) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)sendPing {
