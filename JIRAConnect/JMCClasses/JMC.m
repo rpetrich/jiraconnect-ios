@@ -228,6 +228,11 @@
     if (self._options.crashReportingEnabled) {
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         [CrashReporter enableCrashReporter];
+        // TODO: firing this when network becomes active could be better
+        [NSTimer scheduledTimerWithTimeInterval:3
+                                         target:_crashSender
+                                       selector:@selector(promptThenMaybeSendCrashReports)
+                                       userInfo:nil repeats:NO];
     }
 
     self._pinger = [[[JMCPing alloc] init] autorelease ];
@@ -259,10 +264,13 @@
     self._notifier = notifier;
     [notifier release];
 
-    // TODO: firing this when network becomes active could be better
-    [NSTimer scheduledTimerWithTimeInterval:3 target:_crashSender selector:@selector(promptThenMaybeSendCrashReports) userInfo:nil repeats:NO];
     // whenever the Application Becomes Active, ping for notifications from JIRA.
-    [[NSNotificationCenter defaultCenter] addObserver:_pinger selector:@selector(start) name:UIApplicationDidBecomeActiveNotification object:nil];
+    if ([JMCIssueStore instance].count > 0) {
+        [[NSNotificationCenter defaultCenter] addObserver:_pinger
+                                                 selector:@selector(start)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
+    }
     NSLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
 }
 

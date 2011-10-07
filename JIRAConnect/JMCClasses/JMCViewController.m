@@ -82,7 +82,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                                               style:UIBarButtonItemStyleDone
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
-    
+
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.toolbar.clipsToBounds = YES;

@@ -291,7 +291,6 @@
 		0161F1E513E2C98E0048DD76 /* icon_record_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_active@2x.png"; sourceTree = "<group>"; };
 		0161F1E613E2C98E0048DD76 /* icon_record_pulse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_record_pulse.png; sourceTree = "<group>"; };
 		0161F1E713E2C98E0048DD76 /* icon_record_pulse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_pulse@2x.png"; sourceTree = "<group>"; };
-		0161F1EA13E2C98E0048DD76 /* writeareply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeareply.png; sourceTree = "<group>"; };
 		01A71AB713E5AAEE00EBD56E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = JMCLocalizable.strings; sourceTree = "<group>"; };
 		01A71AB913E5AB3900EBD56E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = JMCLocalizable.strings; sourceTree = "<group>"; };
 		01E36566143BACA900A5239D /* JMCTestConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JMCTestConfiguration.plist; sourceTree = "<group>"; };
@@ -345,6 +344,8 @@
 		8DD5D420143429F5003D030E /* notsent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = notsent.png; path = ../../../../../../notsent.png; sourceTree = "<group>"; };
 		8DD5D42B14344673003D030E /* notsent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notsent.png; sourceTree = "<group>"; };
 		8DD5D42C14344673003D030E /* notsent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notsent@2x.png"; sourceTree = "<group>"; };
+		8DFFA7DC143EAE4D00FF5453 /* megaphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megaphone.png; sourceTree = "<group>"; };
+		8DFFA7DD143EAE4D00FF5453 /* megaphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megaphone@2x.png"; sourceTree = "<group>"; };
 		F89A98D6139B58AC00D09DFF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F89A98D8139B58B700D09DFF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -665,6 +666,8 @@
 		0161F1BA13E2C98E0048DD76 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8DFFA7DC143EAE4D00FF5453 /* megaphone.png */,
+				8DFFA7DD143EAE4D00FF5453 /* megaphone@2x.png */,
 				8DD5D42B14344673003D030E /* notsent.png */,
 				8DD5D42C14344673003D030E /* notsent@2x.png */,
 				8DD5D420143429F5003D030E /* notsent.png */,
@@ -700,7 +703,6 @@
 				0161F1E513E2C98E0048DD76 /* icon_record_active@2x.png */,
 				0161F1E613E2C98E0048DD76 /* icon_record_pulse.png */,
 				0161F1E713E2C98E0048DD76 /* icon_record_pulse@2x.png */,
-				0161F1EA13E2C98E0048DD76 /* writeareply.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
