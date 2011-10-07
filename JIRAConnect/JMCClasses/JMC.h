@@ -142,6 +142,11 @@
                    projectKey:(NSString*) project
                        apiKey:(NSString *)apiKey
                    dataSource:(id<JMCCustomDataSource>)customDataSource;
+- (void) configureJiraConnect:(NSString*) withUrl
+                   projectKey:(NSString*) project
+                       apiKey:(NSString *)apiKey
+                     location:(BOOL) locationEnabled
+                   dataSource:(id<JMCCustomDataSource>)customDataSource;
 
 - (void) configureWithOptions:(JMCOptions*)options;
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource;

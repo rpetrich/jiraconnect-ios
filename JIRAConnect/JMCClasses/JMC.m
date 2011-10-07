@@ -191,6 +191,23 @@
     [options release];
 }
 
+- (void) configureJiraConnect:(NSString*) withUrl
+                   projectKey:(NSString*) project
+                       apiKey:(NSString *)apiKey
+                     location:(BOOL) locationEnabled
+                   dataSource:(id<JMCCustomDataSource>)customDataSource
+{
+    JMCOptions *options = [[JMCOptions alloc]init];
+    options.url = withUrl;
+    options.projectKey = project;
+    options.apiKey = apiKey;
+    options.locationEnabled = locationEnabled;
+    [self configureWithOptions:options dataSource:customDataSource];
+    [options release];
+}
+
+
+
 - (void) configureWithOptions:(JMCOptions*)options
 {
     [self configureWithOptions:options dataSource:nil];
