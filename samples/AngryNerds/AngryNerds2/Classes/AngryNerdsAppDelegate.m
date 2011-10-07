@@ -30,7 +30,7 @@
 
     [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
                               projectKey:@"NERDS"
-                                  apiKey:@"3555f5e9-a9a3-43ff-9899-400a2cfe8c21"
+                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
                                 location:YES
                               dataSource:viewController];
 
@@ -43,6 +43,7 @@
 //                                            location:YES
 //                                      crashreporting:YES
 //                                        customFields:nil];
+//    options.barStyle = UIBarStyleDefault;
 //    [[JMC instance]
 //            configureWithOptions:options
 //                  dataSource:viewController];
