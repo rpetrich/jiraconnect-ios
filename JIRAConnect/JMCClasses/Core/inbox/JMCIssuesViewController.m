@@ -162,6 +162,7 @@ static NSString *cellId = @"CommentCell";
                              otherButtonTitles:nil];
             [alert show];
             [alert release];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
 
     } else {
     
