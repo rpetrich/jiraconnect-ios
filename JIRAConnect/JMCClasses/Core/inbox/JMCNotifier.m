@@ -27,6 +27,7 @@ CGRect endFrame;
 
 - (id)initWithStartFrame:(CGRect)start endFrame:(CGRect)end {
     if ((self = [super init])) {
+        // TODO: only create this view controller when the user actually taps the in-app notification.
         self.issuesViewController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
         self.issuesViewController.isModal = NO;
 
