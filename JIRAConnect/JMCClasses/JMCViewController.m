@@ -556,7 +556,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-//    NSLog(@"Location failed with error: %@", [error localizedDescription]);
+    JMCDLog(@"Location failed with error: %@", [error localizedDescription]);
 }
 
 #pragma mark -

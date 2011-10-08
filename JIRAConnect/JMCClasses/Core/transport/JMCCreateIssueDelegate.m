@@ -45,7 +45,7 @@
         [issueStore insertOrUpdateIssue:issue];
     }
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCIssueUpdated object:nil]];
-    NSLog(@"Successfully created %@", issue.key);
+    JMCDLog(@"Successfully created %@", issue.key);
 
 }
 

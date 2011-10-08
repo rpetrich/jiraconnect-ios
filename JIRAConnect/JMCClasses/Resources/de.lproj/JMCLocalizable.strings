@@ -11,6 +11,8 @@
 "Always" = "Immer";
 "No" = "Nein";
 "Yes" = "Ja";
+"No Comment" = "(Keine Kommentar)";
+"No Description" = "(Kein Text)";
 
 "AlertBeforeDeletingRecording" = "Möchten Sie dies Aufnahme löschen?";
 "RemoveRecording" = "Aufnahme Löschen";

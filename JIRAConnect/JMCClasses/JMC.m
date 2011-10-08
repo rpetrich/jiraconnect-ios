@@ -271,7 +271,7 @@
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
 
-    NSLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
+    JMCDLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
 }
 
 

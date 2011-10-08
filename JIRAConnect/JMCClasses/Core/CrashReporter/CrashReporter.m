@@ -30,6 +30,7 @@
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporter.h"
 #import "JMC.h"
+#import "JMCMacros.h"
 #import "sys/sysctl.h"
 
 static CrashReporter *crashReportSender = nil;
@@ -115,9 +116,9 @@ static CrashReporter *crashReportSender = nil;
 
             // Enable the Crash Reporter
             if (![crashReporter enableCrashReporterAndReturnError:&error])
-                    NSLog(@"Warning: Could not enable crash reporter: %@", error);
+                JMCALog(@"Warning: Could not enable crash reporter: %@", error);
 
-            NSLog(@"Crash reporter enabled.");
+            JMCDLog(@"Crash reporter enabled.");
         }
     }
     return self;
@@ -487,7 +488,7 @@ static CrashReporter *crashReportSender = nil;
 
     if (crashData == nil)
     {
-        NSLog(@"Could not load crash report: %@", error);
+        JMCDLog(@"Could not load crash report: %@", error);
         goto finish;
     } else
     {
@@ -506,7 +507,7 @@ static CrashReporter *crashReportSender = nil;
         PLCrashReport *report = [[PLCrashReport alloc] initWithData:crashData error:&error];
         if (report == nil)
         {
-            NSLog(@"Could not parse crash report");
+            JMCDLog(@"Could not parse crash report");
             goto finish;
         }
         [report release];

@@ -49,7 +49,7 @@
     NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, [[JMC instance] getAPIVersion], queryString];
 
     NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
-    NSLog(@"Retrieving notifications via: %@", [url absoluteURL]);
+    JMCDLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
@@ -64,7 +64,7 @@
     NSString *responseString = [request responseString];
     if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""])
     {
-        NSLog(@"Invalid, empty response from JIRA: %@", responseString);
+        JMCALog(@"Invalid, empty response from JIRA: %@", responseString);
         return;
     }
 
@@ -78,20 +78,20 @@
         // sinceMillis is the server's time
         NSNumber *sinceMillis = [data valueForKey:@"sinceMillis"];
         [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJMCLastSuccessfulPingTime];
-        NSLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
+        JMCDLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
     }
     else
     {
-        NSLog(@"Error request comments and issues: %@", responseString);
+        JMCALog(@"Error request comments and issues: %@", responseString);
     }
     // Flush the request Queue on App launch and once the JIRA Ping has returned and potentially rebuilt the database
-    NSLog(@"Flushing the request queue");
+    JMCDLog(@"Flushing the request queue");
     [[JMC instance] flushRequestQueue];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    NSLog(@"Ping request failed: '%@'", [request responseString]);
+    JMCDLog(@"Ping request failed: '%@'", [request responseString]);
 }
 
 @synthesize baseUrl = _baseUrl;

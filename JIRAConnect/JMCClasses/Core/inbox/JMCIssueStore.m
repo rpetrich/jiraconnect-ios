@@ -19,6 +19,7 @@
 #import "JMCComment.h"
 #import "FMDatabase.h"
 #import "JSON.h"
+#import "JMCMacros.h"
 
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
@@ -45,7 +46,7 @@ static NSRecursiveLock *writeLock;
         [db setLogsErrors:YES];
         [db retain];
         if (![db open]) {
-            NSLog(@"Error opening database for JMC. Issue Inbox will be unavailable.");
+            JMCALog(@"Error opening database for JMC. Issue Inbox will be unavailable.");
             return nil;
         }
         // create schema, preserving existing
@@ -94,7 +95,7 @@ static NSRecursiveLock *writeLock;
                            issue.key];
 
     if ([db hadError]) {
-        NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        JMCALog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
         return nil;
     }
     if ([res next]) {
@@ -127,7 +128,7 @@ static NSRecursiveLock *writeLock;
         [lastComment release];
         return issue;
     }
-    NSLog(@"No issue at index = %u", issueIndex);
+    JMCALog(@"No issue at index = %u", issueIndex);
     return nil;
 }
 
@@ -141,7 +142,7 @@ static NSRecursiveLock *writeLock;
     NSMutableArray *comments = [NSMutableArray arrayWithCapacity:1];
 
     if ([db hadError]) {
-        NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        JMCALog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
     }
     while ([res next]) {
         // a comment entity is the following JSON:
@@ -156,16 +157,17 @@ static NSRecursiveLock *writeLock;
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey {
 
     @synchronized (writeLock) {
-    [db executeUpdate:
-        @"INSERT INTO COMMENT "
-                "(issuekey, username, systemuser, text, date, uuid) "
-                "VALUES "
-                "(?,?,?,?,?,?) ",
-                issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], comment.body, comment.dateLong, comment.requestId];
+        NSString* body = comment.body.length > 0 ? comment.body : JMCLocalizedString(@"No Comment", @"No Comment");
+        [db executeUpdate:
+         @"INSERT INTO COMMENT "
+         "(issuekey, username, systemuser, text, date, uuid) "
+         "VALUES "
+         "(?,?,?,?,?,?) ",
+         issueKey, comment.author, [NSNumber numberWithBool:comment.systemUser], body, comment.dateLong, comment.requestId];
     }
     // TODO: handle error err...
     if ([db hadError]) {
-        NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        JMCALog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
     }
 
 }
@@ -190,17 +192,19 @@ static NSRecursiveLock *writeLock;
 
 -(void) insertIssue:(JMCIssue *)issue {
     @synchronized (writeLock) {
-    [db executeUpdate:
-        @"INSERT INTO ISSUE "
-                "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates) "
-                "VALUES "
-                "(?,?,?,?,?,?,?,?) ",
-        issue.key, issue.requestId, issue.status, issue.summary, issue.description, issue.dateCreatedLong, issue.dateUpdatedLong,
-        [NSNumber numberWithBool:issue.hasUpdates]];
+        NSString* description = issue.description.length > 0 ? issue.description : JMCLocalizedString(@"No Description", @"No description");
+        NSString* summary = issue.summary.length > 0 ? issue.summary : JMCLocalizedString(@"No Description", @"No description");
+        [db executeUpdate:
+         @"INSERT INTO ISSUE "
+         "(key, uuid, status, summary, description, dateCreated, dateUpdated, hasUpdates) "
+         "VALUES "
+         "(?,?,?,?,?,?,?,?) ",
+         issue.key, issue.requestId, issue.status, summary, description, issue.dateCreatedLong, issue.dateUpdatedLong,
+         [NSNumber numberWithBool:issue.hasUpdates]];
     }
     // TODO: handle error err...
     if ([db hadError]) {
-        NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        JMCALog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
     }
 }
 

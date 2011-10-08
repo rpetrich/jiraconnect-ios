@@ -18,6 +18,7 @@
 #import "JMCViewController.h"
 #import "CrashReporter.h"
 #import "JMCAttachmentItem.h"
+#import "JMCMacros.h"
 
 @class JMCIssuesViewController, JMCPing, JMCNotifier, JMCNotifier, JMCCrashSender;
 

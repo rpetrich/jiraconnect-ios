@@ -76,7 +76,7 @@ CGRect endFrame;
             // immediately on app launch.
             NSNumber* repeatCount = timer.userInfo ? timer.userInfo : [NSNumber numberWithInt:3];
             if (repeatCount.intValue <= 0) {
-                NSLog(@"In-App notification for replies can not be displayed since keyWindow was never intialised.");
+                JMCALog(@"In-App notification for replies can not be displayed since keyWindow was never intialised.");
                 return;
             }
             [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(notify:) userInfo:[NSNumber numberWithInt:repeatCount.intValue - 1] repeats:NO];

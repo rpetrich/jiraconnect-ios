@@ -13,13 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-//
-//  JMCMacros.h
-//  JIRA_Connect
-//
-//  Created by Stefan Saasen on 01.06.11.
-//  Copyright 2011 Atlassian. All rights reserved.
-//
 
 #define JMCLocalizedString(key, comment) \
     [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:@"JMCLocalizable"]
+
+# define JMCALog(format, ...) NSLog((@"%d %s " format), __LINE__, __PRETTY_FUNCTION__, ##__VA_ARGS__);
+
+# ifdef DEBUG
+#  define JMCDLog(format, ...) JMCALog(format, ##__VA_ARGS__);
+# else
+#   define JMCDLog(...)
+# endif

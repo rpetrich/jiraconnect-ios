@@ -5,6 +5,7 @@
 //
 
 
+#import "JMCMacros.h"
 #import "JMCRequestQueue.h"
 #import "JMCIssueTransport.h"
 #import "JMCReplyTransport.h"
@@ -49,7 +50,7 @@ NSRecursiveLock* _flushLock;
         _issueTransport.delegate = [[[JMCCreateIssueDelegate alloc]init] autorelease];
         _replyTransport.delegate = [[[JMCReplyDelegate alloc] init] autorelease];
         _flushLock = [[NSRecursiveLock alloc] init];
-        NSLog(@"queue at  %@", [instance getQueueIndexPath]);
+        JMCDLog(@"queue at  %@", [instance getQueueIndexPath]);
 
     }
     return instance;
@@ -73,11 +74,11 @@ NSRecursiveLock* _flushLock;
                 operation = [_issueTransport requestFromItem:item];
             }
             if (operation == nil) {
-                NSLog(@"Missing or invalid queued item with id: %@. Removing from queue.", itemId);
+                JMCALog(@"Missing or invalid queued item with id: %@. Removing from queue.", itemId);
                 [requestQueue deleteItem:itemId];
             } else {
                 [sharedOperationQueue addOperation:operation];
-                NSLog(@"Added request to operation queue %@", item.uuid);
+                JMCDLog(@"Added request to operation queue %@", item.uuid);
             }
         }
     }

@@ -14,6 +14,7 @@
    limitations under the License.
 **/
 
+#import "JMCMacros.h"
 #import "JMCRecorder.h"
 
 
@@ -49,13 +50,13 @@ NSString *_recorderFilePath;
         NSError *err = nil;
         [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
         if (err) {
-            NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+            JMCALog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
             return nil;
         }
         [audioSession setActive:YES error:&err];
         err = nil;
         if (err) {
-            NSLog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+            JMCALog(@"audioSession: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
             return nil;
         }
 
@@ -69,7 +70,7 @@ NSString *_recorderFilePath;
         AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recordSetting error:&err];
 
         if (!recorder) {
-            NSLog(@"recorder: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+            JMCALog(@"recorder: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
             return nil;
         }
 
@@ -112,7 +113,7 @@ NSString *_recorderFilePath;
     NSError *err = nil;
     NSData *audioData = [NSData dataWithContentsOfFile:[url path] options:0 error:&err];
     if (!audioData) {
-        NSLog(@"audio data: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+        JMCALog(@"audio data: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
     }
     return audioData;
 }

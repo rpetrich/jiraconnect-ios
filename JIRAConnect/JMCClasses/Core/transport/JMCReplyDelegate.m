@@ -43,7 +43,7 @@
         NSDictionary *commentDict = [response JSONValue];
         JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
         NSString *issueKey = [commentDict valueForKey:@"issueKey"];
-        NSLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);
+        JMCDLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);
         comment.requestId = requestId;
         [store insertComment:comment forIssue:issueKey];
         [comment release];

@@ -67,7 +67,7 @@
     // only ASIFormDataRequest are queued at the moment...
     NSURL *url = [self makeUrlFor:item.originalIssueKey];
     if (!url) {
-        NSLog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
+        JMCALog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
         return nil;
     }
     ASIFormDataRequest* request = [ASIFormDataRequest requestWithURL:url];
@@ -151,9 +151,9 @@
         // remove the request item from the queue
         JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
         [queue deleteItem:requestId];
-        NSLog(@"%@ Request succeeded & queued item is deleted. %@ ",self, requestId);
+        JMCDLog(@"%@ Request succeeded & queued item is deleted. %@ ",self, requestId);
     } else {
-        NSLog(@"%@ Request FAILED & queued item is not deleted. %@",self, requestId);
+        JMCDLog(@"%@ Request FAILED & queued item is not deleted. %@",self, requestId);
         [self requestFailed:request];
     }
 }
@@ -177,7 +177,7 @@
         msg = [msg stringByAppendingString:response];
     }
 
-    NSLog(@"Request failed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
+    JMCDLog(@"Request failed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
 }
 
 #pragma mark end
