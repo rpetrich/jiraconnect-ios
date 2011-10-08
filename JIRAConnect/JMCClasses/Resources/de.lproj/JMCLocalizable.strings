@@ -11,24 +11,27 @@
 "Always" = "Immer";
 "No" = "Nein";
 "Yes" = "Ja";
-"No Comment" = "(Keine Kommentar)";
+"No Comment" = "(Kein Kommentar)";
 "No Description" = "(Kein Text)";
 
-"AlertBeforeDeletingRecording" = "Möchten Sie dies Aufnahme löschen?";
+"AlertBeforeDeletingRecording" = "Möchten Sie diese Aufnahme löschen?";
 "RemoveRecording" = "Aufnahme Löschen";
 
 /** Title of 'Inbox' view **/
-"Your Feedback" = "Dein Feedback";
+"Your Feedback" = "Ihr Feedback";
 
 /** Alert View when Voice is not supported **/
 "Voice Recording" = "Tonaufnahme";
-"JMCVoiceRecordingNotSupported" = "Nicht unterstützt auf diesen Gerät. Bitte Text eingeben.";
+"JMCVoiceRecordingNotSupported" = "Nicht unterstützt auf diesem Gerät. Bitte Text eingeben.";
 
 /** Alert title when message not arrived in JIRA **/
-"Message Pending" = "Nachricht Unterwegs";
+"Message Pending" = "Nachricht wird gesendet";
 
 /** Alert when create issue request not yet successful **/
-"JMCRequestPendingMessage" = "Diese Nachricth wurde noch nicht gesendet. Bitte probieren Sie gleich noch mal.";
+"JMCRequestPendingMessage" = "Diese Nachricht wurde noch nicht gesendet. Bitte probieren Sie es gleich noch einmal.";
 
 /** This feedback has been deleted. Please create new feedback instead **/
 "JMCDeletedIssueMessage" = "Dieses Feedback wurde gelöscht. Bitte ein neues Feedback hinterlassen.";
+
+"JMCInAppNotification-Singular" = "%d neue Nachricht von Entwickler";
+"JMCInAppNotification-Plural" = "%d neue Nachrichten von Entwickler";

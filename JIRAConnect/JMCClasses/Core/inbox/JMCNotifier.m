@@ -82,8 +82,10 @@ CGRect endFrame;
             [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(notify:) userInfo:[NSNumber numberWithInt:repeatCount.intValue - 1] repeats:NO];
         }
         int count = [JMCIssueStore instance].newIssueCount;
-        NSString *pluralSuffix = count != 1 ? @"s" : @"";
-        _label.text = [NSString stringWithFormat:@"%d new notification%@ from developer", count, pluralSuffix];
+        NSString *notificationFmt = count != 1 ? JMCLocalizedString(@"JMCInAppNotification-Plural", @"%d new notification%@ from developer") : 
+                                                 JMCLocalizedString(@"JMCInAppNotification-Singular", @"");
+        
+        _label.text = [NSString stringWithFormat:notificationFmt, count];
 
         [self populateIssuesViewController];
 
