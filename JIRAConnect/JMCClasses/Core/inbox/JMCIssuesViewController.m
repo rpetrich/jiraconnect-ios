@@ -154,27 +154,34 @@ static NSString *cellId = @"CommentCell";
 
     if (sentStatus != JMCSentStatusSuccess) {
         
+        NSString* title = (sentStatus == JMCSentStatusPermError) ?
+        JMCLocalizedString(@"JMCRequestPermErrorTitle", @"Alert title when message has not been sent to JIRA after N attempts.") :
+        JMCLocalizedString(@"JMCRequestPendingTitle", @"Alert title when message not yet arrived in JIRA");
+        NSString* message = (sentStatus == JMCSentStatusPermError) ?
+        JMCLocalizedString(@"JMCRequestPermErrorMessage", @"Alert when create issue request not successful after N attempts."):
+        JMCLocalizedString(@"JMCRequestPendingMessage", @"Alert when create issue request not yet successful");
         UIAlertView *alert =
-            [[UIAlertView alloc] initWithTitle: JMCLocalizedString(@"Message Pending", @"Alert title when message not arrived in JIRA")
-                                       message: JMCLocalizedString(@"JMCRequestPendingMessage", @"Alert when create issue request not yet successful")
+            [[UIAlertView alloc] initWithTitle: title
+                                       message: message
                                       delegate: nil
                              cancelButtonTitle:@"OK"
                              otherButtonTitles:nil];
             [alert show];
             [alert release];
+        
         [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
 
     } else {
     
-    issue.comments = [self.issueStore loadCommentsFor:issue];
-    JMCIssueViewController *detailViewController = [[JMCIssueViewController alloc] initWithNibName:@"JMCIssueViewController" bundle:nil];
-    detailViewController.issue = issue;
-
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-
-    [self.issueStore markAsRead:issue];
-    [tableView reloadData]; // redraw the table.
+        issue.comments = [self.issueStore loadCommentsFor:issue];
+        JMCIssueViewController *detailViewController = [[JMCIssueViewController alloc] initWithNibName:@"JMCIssueViewController" bundle:nil];
+        detailViewController.issue = issue;
+        
+        [self.navigationController pushViewController:detailViewController animated:YES];
+        [detailViewController release];
+        
+        [self.issueStore markAsRead:issue];
+        [tableView reloadData]; // redraw the table.
     }
     [issue release];
 }

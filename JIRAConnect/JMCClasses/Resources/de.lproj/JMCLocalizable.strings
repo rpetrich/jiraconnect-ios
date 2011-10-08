@@ -25,10 +25,14 @@
 "JMCVoiceRecordingNotSupported" = "Nicht unterstützt auf diesem Gerät. Bitte Text eingeben.";
 
 /** Alert title when message not arrived in JIRA **/
-"Message Pending" = "Nachricht wird gesendet";
-
+"JMCRequestPendingTitle" = "Nachricht wird gesendet";
 /** Alert when create issue request not yet successful **/
 "JMCRequestPendingMessage" = "Diese Nachricht wurde noch nicht gesendet. Bitte probieren Sie es gleich noch einmal.";
+
+/** Alert title when a request has reached the maximum number of retry attempts and will be attempted no more... */
+"JMCRequestPermErrorTitle" = "Nachricht nich gesendet";
+/** Alert message when a request has reached the maximum number of retry attempts and will be attempted no more... */
+"JMCRequestPermErrorMessage" = "Diese Nachrict wurde nicht gesendet. Bitte prüfen Sie Ihr Internetverbindund und probieren Sie es noch einmal";
 
 /** This feedback has been deleted. Please create new feedback instead **/
 "JMCDeletedIssueMessage" = "Dieses Feedback wurde gelöscht. Bitte ein neues Feedback hinterlassen.";

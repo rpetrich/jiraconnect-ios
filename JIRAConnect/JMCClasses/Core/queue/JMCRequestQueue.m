@@ -63,7 +63,9 @@ NSRecursiveLock* _flushLock;
         NSMutableDictionary *items = [requestQueue getQueueList];
         for (NSString *itemId in [items allKeys]) {
             JMCQueueItem *item = [requestQueue getItem:itemId];
-            if ([requestQueue requestStatusFor:itemId] == JMCSentStatusInProgress) {
+            JMCSentStatus sentStatus = [requestQueue requestStatusFor:itemId];
+            if (sentStatus == JMCSentStatusInProgress ||
+                sentStatus == JMCSentStatusPermError) {
                 continue;
             }
             [requestQueue updateItem:itemId sentStatus:JMCSentStatusInProgress bumpNumAttemptsBy:0];
@@ -105,8 +107,12 @@ NSRecursiveLock* _flushLock;
 
         [metadata setObject:[NSNumber numberWithInt:sentStatus] forKey:KEY_SENT_STATUS];
 
-        NSNumber *numAttempts = [metadata objectForKey:KEY_NUM_ATTEMPTS];
-        [metadata setObject:[NSNumber numberWithInt:numAttempts.intValue + inc] forKey:KEY_NUM_ATTEMPTS];
+        NSNumber *lastNumAttempts = [metadata objectForKey:KEY_NUM_ATTEMPTS];
+        NSNumber *newNumAttempts  = [NSNumber numberWithInt:lastNumAttempts.intValue + inc];
+        if (newNumAttempts.intValue > 100) {
+            [metadata setObject:[NSNumber numberWithInt:JMCSentStatusPermError] forKey:KEY_SENT_STATUS];
+        }
+        [metadata setObject:newNumAttempts forKey:KEY_NUM_ATTEMPTS];
         [self saveQueueIndex:queueIndex];
     }
 
