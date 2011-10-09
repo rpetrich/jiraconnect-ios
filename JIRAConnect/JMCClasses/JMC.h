@@ -171,6 +171,11 @@
 */
 - (UIViewController*) issuesViewController;
 
+/**
+ * This is a generic icon that can be used in your App as the icon for Feedback.
+ */
+-(UIImage*) feedbackIcon;
+
 - (NSDictionary*) getMetaData;
 - (NSMutableDictionary*) getCustomFields;
 - (NSArray *) components;

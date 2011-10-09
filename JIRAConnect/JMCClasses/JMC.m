@@ -302,6 +302,10 @@
     return _navIssuesController;
 }
 
+-(UIImage*) feedbackIcon {
+    return [UIImage imageNamed:@"megaphone.png"];
+}
+
 - (NSDictionary *)getMetaData
 {
     UIDevice *device = [UIDevice currentDevice];
@@ -409,6 +413,7 @@
 -(UIBarStyle) getBarStyle {
     return _options.barStyle;
 }
+
 
 -(CGRect)notifierStartFrame
 {

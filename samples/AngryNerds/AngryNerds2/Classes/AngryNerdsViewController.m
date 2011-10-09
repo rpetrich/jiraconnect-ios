@@ -38,7 +38,6 @@
 - (IBAction)triggerFeedback
 {
     UIViewController *controller = [[JMC instance] viewController];
-
     [self presentModalViewController:controller animated:YES];
 }
 
