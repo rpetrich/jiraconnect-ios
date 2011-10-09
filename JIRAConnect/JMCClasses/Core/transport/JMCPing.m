@@ -33,7 +33,7 @@
 }
 
 - (void)sendPing {
-
+    
     NSString *project = [[JMC instance] getProject];
     NSString *uuid = [[JMC instance] getUUID];
     NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJMCLastSuccessfulPingTime];
@@ -54,7 +54,8 @@
     // send ping
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
     [request setTimeOutSeconds:60];
-
+    [request setAllowCompressedResponse:YES];
+    [request setShouldAttemptPersistentConnection:NO]; // without this, the poll request may be made twice. 
     [request setDelegate:self];
     [request startAsynchronous];
 }
