@@ -6,14 +6,36 @@
 "CrashDataFoundTitle" = "Crash-Bericht";
 
 /* Thank you message on successful feedback submission */
-"JMCFeedbackReceived" = "Your feedback has been received. Thank you for helping us improve %@.";
+"JMCFeedbackReceived" = "Vielen Dank für Ihr Feedback und Hilfe %@ zu verbessern.";
 
 "Always" = "Immer";
 "No" = "Nein";
 "Yes" = "Ja";
+"No Comment" = "(Kein Kommentar)";
+"No Description" = "(Kein Text)";
 
-"AlertBeforeDeletingRecording" = "Möchten Sie dies Aufnahme löschen?";
+"AlertBeforeDeletingRecording" = "Möchten Sie diese Aufnahme löschen?";
 "RemoveRecording" = "Aufnahme Löschen";
 
 /** Title of 'Inbox' view **/
-"Your Feedback" = "Dein Feedback";
+"Your Feedback" = "Ihr Feedback";
+
+/** Alert View when Voice is not supported **/
+"Voice Recording" = "Tonaufnahme";
+"JMCVoiceRecordingNotSupported" = "Nicht unterstützt auf diesem Gerät. Bitte Text eingeben.";
+
+/** Alert title when message not arrived in JIRA **/
+"JMCRequestPendingTitle" = "Nachricht wird gesendet";
+/** Alert when create issue request not yet successful **/
+"JMCRequestPendingMessage" = "Diese Nachricht wurde noch nicht gesendet. Bitte probieren Sie es gleich noch einmal.";
+
+/** Alert title when a request has reached the maximum number of retry attempts and will be attempted no more... */
+"JMCRequestPermErrorTitle" = "Nachricht nich gesendet";
+/** Alert message when a request has reached the maximum number of retry attempts and will be attempted no more... */
+"JMCRequestPermErrorMessage" = "Diese Nachrict wurde nicht gesendet. Bitte prüfen Sie Ihr Internetverbindund und probieren Sie es noch einmal";
+
+/** This feedback has been deleted. Please create new feedback instead **/
+"JMCDeletedIssueMessage" = "Dieses Feedback wurde gelöscht. Bitte ein neues Feedback hinterlassen.";
+
+"JMCInAppNotification-Singular" = "%d neue Nachricht von Entwickler";
+"JMCInAppNotification-Plural" = "%d neue Nachrichten von Entwickler";

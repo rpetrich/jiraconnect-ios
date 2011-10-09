@@ -15,18 +15,18 @@
 **/
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "Core/JMCTransport.h"
+#import "JMCTransport.h"
 #import "JMCCustomDataSource.h"
 #import "Core/JMCRecorder.h"
-#import "Core/JMCIssueTransport.h"
-#import "Core/JMCReplyTransport.h"
-#import "Core/JMCSketchViewControllerDelegate.h"
+#import "JMCIssueTransport.h"
+#import "JMCReplyTransport.h"
+#import "JMCSketchViewControllerDelegate.h"
 #import <CoreLocation/CoreLocation.h>
-#import "CRVActivityView.h"
 
 
-@interface JMCViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate, JMCTransportDelegate, AVAudioRecorderDelegate, JMCSketchViewControllerDelegate, UIAlertViewDelegate,
-        CLLocationManagerDelegate, CRVActivityViewDelegate> {
+@interface JMCViewController : UIViewController
+        <UITextViewDelegate, UITextFieldDelegate, AVAudioRecorderDelegate,
+        JMCSketchViewControllerDelegate, UIAlertViewDelegate, CLLocationManagerDelegate> {
 
     IBOutlet UITextView *descriptionField;
 
@@ -48,13 +48,10 @@
 @private
     NSTimer *_timer;
     NSUInteger currentAttachmentItemIndex;
-    CGRect descriptionFrame;
     CLLocation *currentLocation;
     CLLocationManager *_locationManager;
-    BOOL sendLocationData;
-    CRVActivityView *activityView;
     UIBarButtonItem *_voiceButton;
-    NSArray *systemToolbarItems; // holds the first 3 system toolbar items.
+    NSArray *systemToolbarItems; // holds the 3 system toolbar items.
 }
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
 
@@ -76,8 +73,6 @@
 @property(retain, nonatomic) UIBarButtonItem *voiceButton;
 
 - (IBAction)sendFeedback;
-
-- (void)dismissActivity;
 
 - (IBAction)addScreenshot;
 

@@ -30,6 +30,7 @@
 #import <CrashReporter/CrashReporter.h>
 #import "CrashReporter.h"
 #import "JMC.h"
+#import "JMCMacros.h"
 #import "sys/sysctl.h"
 
 static CrashReporter *crashReportSender = nil;
@@ -115,9 +116,9 @@ static CrashReporter *crashReportSender = nil;
 
             // Enable the Crash Reporter
             if (![crashReporter enableCrashReporterAndReturnError:&error])
-                    NSLog(@"Warning: Could not enable crash reporter: %@", error);
+                JMCALog(@"Warning: Could not enable crash reporter: %@", error);
 
-            NSLog(@"Crash reporter enabled.");
+            JMCDLog(@"Crash reporter enabled.");
         }
     }
     return self;
@@ -200,11 +201,12 @@ static CrashReporter *crashReportSender = nil;
         {
             // crashData here is simply a protobuf! could also attach that?
 
-            PLCrashReport *report = [[[PLCrashReport alloc] initWithData:crashData error:&error] autorelease];
+            PLCrashReport *report = [[PLCrashReport alloc] initWithData:crashData error:&error];
 
             NSString *crashLogString = [self _crashLogStringForReport:report];
 
             [crashReports addObject:crashLogString];
+            [report release];
         }
     }
     return crashReports;
@@ -212,24 +214,24 @@ static CrashReporter *crashReportSender = nil;
 
 // taken from http://stackoverflow.com/questions/4857195/how-to-get-programmatically-ioss-alphanumeric-version-string
 - (NSString *)osVersionBuild {
-    int mib[2] = {CTL_KERN, KERN_OSVERSION};
-    u_int namelen = sizeof(mib) / sizeof(mib[0]);
-    size_t bufferSize = 0;
+     int mib[2] = {CTL_KERN, KERN_OSVERSION};
+     size_t size = 0;
 
-    NSString *osBuildVersion = nil;
+     // Get the size for the buffer
+     sysctl(mib, 2, NULL, &size, NULL, 0);
 
-    // Get the size for the buffer
-    sysctl(mib, namelen, NULL, &bufferSize, NULL, 0);
+     char *answer = malloc(size);
+     int result = sysctl(mib, 2, answer, &size, NULL, 0);
 
-    u_char buildBuffer[bufferSize];
-    int result = sysctl(mib, namelen, buildBuffer, &bufferSize, NULL, 0);
-
+    NSString *versionStr;
     if (result >= 0) {
-        osBuildVersion = [[[NSString alloc] initWithBytes:buildBuffer length:bufferSize encoding:NSUTF8StringEncoding] autorelease];
+        versionStr = [NSString stringWithCString:answer encoding:NSUTF8StringEncoding];
+    } else {
+        versionStr = @"-";
     }
-
-    return osBuildVersion;
-}
+    free(answer);
+    return versionStr;
+ }
 
 - (NSString *)_crashLogStringForReport:(PLCrashReport *)report
 {
@@ -319,7 +321,11 @@ static CrashReporter *crashReportSender = nil;
         }
         
         [reportString appendFormat:@"Incident Identifier: %@\n", uuid];
-        CFRelease(uuid);
+
+        if (uuid) {
+            CFRelease(uuid);
+        }
+        
         [reportString appendFormat:@"CrashReporter Key:   %@\n", [[JMC instance] getUUID]];
         [reportString appendFormat:@"Hardware Model:       %@,%@\n", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
 
@@ -482,7 +488,7 @@ static CrashReporter *crashReportSender = nil;
 
     if (crashData == nil)
     {
-        NSLog(@"Could not load crash report: %@", error);
+        JMCDLog(@"Could not load crash report: %@", error);
         goto finish;
     } else
     {
@@ -498,12 +504,13 @@ static CrashReporter *crashReportSender = nil;
 
         // We could send the report from here, but we'll just print out
         // some debugging info instead
-        PLCrashReport *report = [[[PLCrashReport alloc] initWithData:[crashData retain] error:&error] autorelease]; // we are crashing, so no need to release?
+        PLCrashReport *report = [[PLCrashReport alloc] initWithData:crashData error:&error];
         if (report == nil)
         {
-            NSLog(@"Could not parse crash report");
+            JMCDLog(@"Could not parse crash report");
             goto finish;
         }
+        [report release];
     }
 
     // Purge the report

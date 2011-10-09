@@ -2,6 +2,7 @@
 #import "JMC.h"
 #import "UIView+Additions.h"
 #import <QuartzCore/QuartzCore.h>
+#import "JMCMacros.h"
 
 @implementation AngryNerdsViewController
 
@@ -23,6 +24,12 @@
 
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+
 -(void) hideSplash:(NSTimer*) timer
 {
     self.splashView.hidden = YES;
@@ -31,7 +38,6 @@
 - (IBAction)triggerFeedback
 {
     UIViewController *controller = [[JMC instance] viewController];
-
     [self presentModalViewController:controller animated:YES];
 }
 
@@ -46,14 +52,15 @@
 
 #pragma mark JCOCustomDataSource
 
-- (NSString *)project
-{
-    return @"Angry Nerds";
-}
-
 - (NSDictionary *)customFields
 {
-    return [NSDictionary dictionaryWithObject:@"test" forKey:@"customField"];
+    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"9999", @"42" ,nil]
+                                       forKeys:[NSArray arrayWithObjects:@"Top Score", @"jmctestfield", nil]];
+}
+
+-(NSArray*) components
+{
+    return [NSArray arrayWithObjects:@"iOS", @"JIRA", nil];
 }
 
 - (NSString *)jiraIssueTypeNameFor:(JMCIssueType)type
@@ -67,25 +74,27 @@
 }
 
 
-- (NSDictionary *)payload
+- (JMCAttachmentItem *) attachment
 {
-    return [NSDictionary dictionaryWithObject:@"store any custom information here." forKey:@"customer"];
+
+    return [[[JMCAttachmentItem alloc] initWithName:@"custom-attachment"
+                                              data:[@"Add any other data as an attachment" dataUsingEncoding:NSUTF8StringEncoding]
+                                              type:JMCAttachmentTypePayload
+                                       contentType:@"text/plain"
+                                    filenameFormat:@"customattachment.txt"] autorelease];
 }
 
--(BOOL) locationEnabled {
-    return YES;
-}
-
-- (BOOL)photosEnabled
+-(CGRect)notifierStartFrame
 {
-    return YES;
+    CGRect frame = self.view.frame;
+    return CGRectMake(frame.origin.x, frame.size.height, frame.size.width, 40); // start just off screen.
 }
 
-- (BOOL)voiceEnabled
+-(CGRect)notifierEndFrame
 {
-    return YES;
+    CGRect frame = self.view.frame;
+    return CGRectMake(frame.origin.x, frame.size.height - 40 + 20, frame.size.width, 40); // end 40 pixels from bottom of the screen
 }
-
 
 #pragma end
 

@@ -17,12 +17,15 @@
 #import "JMCMacros.h"
 #import "JMCViewController.h"
 #import "UIImage+Resize.h"
-#import "Core/UIView+Additions.h"
+#import "UIView+Additions.h"
 #import "JMCAttachmentItem.h"
-#import "Core/JMCSketchViewController.h"
-#import "Core/JMCIssueStore.h"
+#import "JMCSketchViewController.h"
+#import "JMCIssueStore.h"
 #import "JSON.h"
+#import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import "JMCCreateIssueDelegate.h"
+#import "JMCReplyDelegate.h"
 
 @interface JMCViewController ()
 - (void)internalRelease;
@@ -34,35 +37,18 @@
 - (BOOL)shouldTrackLocation;
 
 @property(nonatomic, retain) CLLocation *currentLocation;
-@property(nonatomic, retain) CRVActivityView *activityView;
 @end
 
 @implementation JMCViewController
 
 NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _issueTransport = [[[JMCIssueTransport alloc] init] retain];
-        _replyTransport = [[[JMCReplyTransport alloc] init] retain];
-    }
-    return self;
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        // Observe keyboard hide and show notifications to resize the text view appropriately.
+    // Observe keyboard hide and show notifications to resize the text view appropriately.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
-    sendLocationData = NO;
-    if ([self.payloadDataSource respondsToSelector:@selector(locationEnabled)]) {
-        sendLocationData = [[self payloadDataSource] locationEnabled];
-    }
 
     if ([self shouldTrackLocation]) {
         _locationManager = [[[CLLocationManager alloc] init] retain];
@@ -73,6 +59,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 #if TARGET_IPHONE_SIMULATOR
         // -33.871088, 151.203665
         CLLocation *fixed = [[CLLocation alloc] initWithLatitude:-33.871088 longitude:151.203665];
+        
         [self setCurrentLocation: fixed];
         [fixed release];
 #endif
@@ -96,24 +83,24 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
 
+
     self.attachments = [NSMutableArray arrayWithCapacity:1];
     self.toolbar.clipsToBounds = YES;
-    self.toolbar.items = nil;
     self.toolbar.autoresizesSubviews = YES;
 
-    float descriptionFieldInset = 15;
-    self.descriptionField.top = 44 + descriptionFieldInset;
-    self.descriptionField.width = self.view.width - (descriptionFieldInset * 2.0);
-    descriptionFrame = self.descriptionField.frame;
+//    self.descriptionField.top = 44;  
+    self.descriptionField.width = self.view.width;
 
     self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
-    [self.toolbar setBarStyle:UIBarStyleBlackOpaque];
+    [self.toolbar setBarStyle:[[JMC instance] getBarStyle]];
 
     UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
     UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
     UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:nil action:nil] autorelease];
     NSMutableArray* items = [NSMutableArray arrayWithCapacity:3];
+    [items addObject:spaceButton];
+
     if ([[JMC instance] isPhotosEnabled]) {
         [items addObject:screenshotButton];
     }
@@ -121,12 +108,22 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         [items addObject:recordButton];
     }
 
-    [items addObject:spaceButton];
-
     systemToolbarItems = [[NSArray arrayWithArray:items] retain];
     self.voiceButton = recordButton;
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
+
+    // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
+    _issueTransport = [[JMCIssueTransport alloc] init];
+    _replyTransport = [[JMCReplyTransport alloc] init];
+    
+    JMCCreateIssueDelegate* createDelegate = [[JMCCreateIssueDelegate alloc] init];
+    _issueTransport.delegate = createDelegate;
+    [createDelegate release];
+    
+    JMCReplyDelegate* replyDelegate = [[JMCReplyDelegate alloc] init];
+    _replyTransport.delegate = replyDelegate;
+    [replyDelegate release];
 
 }
 
@@ -154,14 +151,25 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // Get the origin of the keyboard when it's displayed.
     NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
 
-    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system. The bottom of the text view's frame should align with the top of the keyboard's final position.
+    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
+    // The bottom of the text view's frame should align with the top of the keyboard's final position.
     CGRect keyboardRect = [aValue CGRectValue];
-    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+    CGSize kbSize = keyboardRect.size;
+    CGFloat textViewHeight = self.view.bounds.size.height;
 
-    CGFloat keyboardTop = keyboardRect.origin.y;
+    UIInterfaceOrientation o = [self interfaceOrientation];
+    if (UIInterfaceOrientationIsPortrait(o)) {
+        textViewHeight -= kbSize.height;
+        self.countdownView.height = 80.0f;
+    } else if (UIInterfaceOrientationIsLandscape(o)) {
+        textViewHeight -= kbSize.width;
+        self.countdownView.height = (textViewHeight - self.navigationController.navigationBar.height) * 0.9f;
+    }
+
     CGRect newTextViewFrame = self.view.bounds;
-    newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y - 40;
-    newTextViewFrame.origin.y = 44; // TODO: un-hardcode this
+    float yOffset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.height : 0;
+    newTextViewFrame.size.height = textViewHeight - yOffset;
+    newTextViewFrame.origin.y = yOffset;
 
     // Get the duration of the animation.
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
@@ -176,6 +184,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     [UIView commitAnimations];
 
+    self.countdownView.center = self.descriptionField.center;
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification
@@ -185,13 +194,14 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action
 {
-    UIButton *customView = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *customView = [JMCToolbarButton buttonWithType:UIButtonTypeCustom];
     [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     [customView setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
     UIImage *icon = [UIImage imageNamed:iconNamed];
     CGRect frame = CGRectMake(0, 0, 41, 31);
     [customView setImage:icon forState:UIControlStateNormal];
     customView.frame = frame;
+    
     UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
 
     return barItem;
@@ -240,6 +250,17 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (IBAction)addVoice
 {
     JMCRecorder* recorder = [JMCRecorder instance];
+    if (!recorder) {
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle: JMCLocalizedString(@"Voice Recording", @"Alert title when no audio") 
+                                   message: JMCLocalizedString(@"JMCVoiceRecordingNotSupported", @"Alert when no audio") 
+                                  delegate: nil
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
     recorder.recorder.delegate = self;
     if (recorder.recorder.recording) {
         [recorder stop];
@@ -283,6 +304,16 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [attachment release];
 }
 
+-(void)reindexAllItems:(NSArray*)buttonItems
+{
+    // re-tag all buttons... with their new index.
+    for (int i = 0; i < [buttonItems count]; i++) {
+        UIBarButtonItem *item = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
+        item.customView.tag = i;
+    }
+    [self.toolbar setItems:buttonItems animated:YES];
+}
+
 - (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
 {
     CGRect buttonFrame = CGRectMake(0, 0, 30, 30);
@@ -297,12 +328,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [button setImage:icon forState:UIControlStateNormal];
     
     UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
-    button.tag = [self.toolbar.items count];
-
+    
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems addObject:buttonItem];
-    [self.toolbar setItems:buttonItems];
-    [self.attachments addObject:attachment];
+    [buttonItems insertObject:buttonItem atIndex:0];
+    [self.attachments insertObject:attachment atIndex:0]; // attachments must be kept in sycnh with buttons
+    [self reindexAllItems:buttonItems];
 }
 
 - (void)addImageAttachmentItem:(UIImage *)origImg
@@ -322,24 +352,16 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex
 {
-
-    [self.attachments removeObjectAtIndex:attachmentIndex];
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems removeObjectAtIndex:attachmentIndex + [systemToolbarItems count]]; // TODO: fix this pullava
-    // re-tag all buttons... with their new index. indexed from 2, due to icons...
-    for (int i = 0; i < [buttonItems count]; i++) {
-        UIBarButtonItem *buttonItem = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
-        buttonItem.customView.tag = i;
-    }
-
-    [self.toolbar setItems:buttonItems animated:YES];
+    [self.attachments removeObjectAtIndex:attachmentIndex];
+    [buttonItems removeObjectAtIndex:attachmentIndex];
+    [self reindexAllItems:buttonItems];
 }
 
 - (void)imageAttachmentTapped:(UIButton *)touch
 {
-    // delete that button, both from the bar, and the images array
     NSUInteger touchIndex = (u_int) touch.tag;
-    NSUInteger attachmentIndex = touchIndex - [systemToolbarItems count];
+    NSUInteger attachmentIndex = touchIndex;
     JMCAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     JMCSketchViewController *sketchViewController = [[[JMCSketchViewController alloc] initWithNibName:@"JMCSketchViewController" bundle:nil] autorelease];
     // get the original image, wire it up to the sketch controller
@@ -354,7 +376,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // delete that button, both from the bar, and the images array
     NSUInteger tapIndex = (u_int) touch.tag;
-    NSUInteger attachmentIndex = tapIndex - [systemToolbarItems count]; // TODO: refactor this, and the image method too, into a rebase method..
+    NSUInteger attachmentIndex = tapIndex;
     UIAlertView *view =
             [[UIAlertView alloc] initWithTitle:JMCLocalizedString(@"RemoveRecording", @"Remove recording title")
                                  message:JMCLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
@@ -419,7 +441,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIImage * iconImg =
             [image thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
 
-    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:imgIndex + [systemToolbarItems count]];
+    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:imgIndex];
     ((UIButton *) item.customView).imageView.image = iconImg;
 }
 
@@ -448,26 +470,20 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (IBAction)sendFeedback
 {
 
-	CGPoint center = CGPointMake(self.descriptionField.width/2.0, self.descriptionField.height/2.0 + 50);
-
-    CRVActivityView *av = [CRVActivityView newDefaultViewForParentView:[self view] center:center];
-    [av setText:JMCLocalizedString(@"Sending...", @"")];
-    [av startAnimating];
-    [av setDelegate:self];
-    [self setActivityView:av];
-    [av release];
-
-    self.issueTransport.delegate = self;
-    NSDictionary *payloadData = nil;
-    NSMutableDictionary *customFields = [[NSMutableDictionary alloc] init];
-
-    if ([self.payloadDataSource respondsToSelector:@selector(payload)]) {
-        payloadData = [[self.payloadDataSource payload] retain];
+    if ([self.descriptionField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length <= 0
+      && self.attachments.count <= 0) {
+        // No data entered, just return.
+        return;
     }
-    if ([self.payloadDataSource respondsToSelector:@selector(customFields)]) {
-        [customFields addEntriesFromDictionary:[self.payloadDataSource customFields]];
-    }
+    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
+    NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
+    if ([self.payloadDataSource respondsToSelector:@selector(attachment)]) {
+        JMCAttachmentItem *payloadData = [self.payloadDataSource attachment];
+        if (payloadData) {
+            [allAttachments addObject:payloadData];
+        }
+    }
 
     if ([self shouldTrackLocation] && [self currentLocation]) {
         NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
@@ -487,56 +503,36 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
         [dict release];
     }
 
+    // add all custom fields as one attachment item
+    NSData *customFieldsJSON = [[customFields JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
+                                                                             data:customFieldsJSON
+                                                                             type:JMCAttachmentTypeCustom
+                                                                      contentType:@"application/json"
+                                                                   filenameFormat:@"customfields.json"];
+    [allAttachments addObject:customFieldsItem];
+    [customFieldsItem release];
+
+    
     if (self.replyToIssue) {
         [self.replyTransport sendReply:self.replyToIssue
                            description:self.descriptionField.text
-                                images:self.attachments
-                               payload:payloadData
-                                fields:customFields];
+                           attachments:allAttachments];
     } else {
-        // use the first 80 chars of the description as the issue title
+        // use the first 80 chars of the description as the issue summary
         NSString *description = self.descriptionField.text;
         u_int length = 80;
         u_int toIndex = [description length] > length ? length : [description length];
         NSString *truncationMarker = [description length] > length ? @"..." : @"";
         [self.issueTransport send:[[description substringToIndex:toIndex] stringByAppendingString:truncationMarker]
                       description:self.descriptionField.text
-                           images:self.attachments
-                          payload:payloadData
-                           fields:customFields];
+                      attachments:allAttachments];
     }
-
-    [payloadData release];
-    [customFields release];
-}
-
--(void) dismissActivity
-{
-    [[self activityView] stopAnimating];
-}
-
-- (void)transportDidFinish:(NSString *)response
-{
-    [self dismissActivity];
     [self dismissModalViewControllerAnimated:YES];
-
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
     [self.toolbar setItems:systemToolbarItems];
-
-    // response needs to be an Issue.json... so we can insert one here.
-    NSDictionary *responseDict = [response JSONValue];
-    JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
-    [[JMCIssueStore instance] insertOrUpdateIssue:issue]; // newly created issues have no comments
-    // anounce that an issue was added, so the JMCIssuesView can redraw
-
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCNewIssueCreated object:nil]];
-    [issue release];
-}
-
-- (void)transportDidFinishWithError:(NSError *)error
-{
-    [self dismissActivity];
 }
 
 #pragma mark end
@@ -545,7 +541,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+       return (UIInterfaceOrientationIsLandscape(interfaceOrientation) ||
+               UIInterfaceOrientationIsPortrait(interfaceOrientation));
 //    return YES;
 }
 
@@ -559,26 +556,19 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-//    NSLog(@"Location failed with error: %@", [error localizedDescription]);
-}
-
-#pragma mark -
-#pragma mark CRVActivityViewDelegate
-- (void)userDidCancelActivity
-{
-    [[self issueTransport] cancel];
+    JMCDLog(@"Location failed with error: %@", [error localizedDescription]);
 }
 
 #pragma mark -
 #pragma mark Private Methods
 - (BOOL)shouldTrackLocation {
-    return sendLocationData && [CLLocationManager locationServicesEnabled];
+    return [[JMC instance] isLocationEnabled] && [CLLocationManager locationServicesEnabled];
 }
 
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, activityView;
+@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
@@ -589,9 +579,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     // Release any retained subviews of the main view.
     [self internalRelease];
-    // these ivars are retained in init
-    self.issueTransport = nil;
-    self.replyTransport = nil;
     [super dealloc];
 }
 
@@ -607,6 +594,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(_locationManager) {
       [_locationManager release];
+      _locationManager = nil;
     }
     [systemToolbarItems release];
     self.voiceButton = nil;
@@ -619,7 +607,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.descriptionField = nil;
     self.payloadDataSource = nil;
     self.currentLocation = nil;
-    self.activityView = nil;
+    self.replyTransport = nil;
+    self.issueTransport = nil;
 }
 
 @end

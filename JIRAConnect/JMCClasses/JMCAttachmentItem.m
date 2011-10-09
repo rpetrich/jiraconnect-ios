@@ -22,6 +22,11 @@
 
 #import "JMCAttachmentItem.h"
 
+#define kFilenameFormat @"filenameFormat"
+#define kContentType @"contentType"
+#define kData @"data"
+#define kName @"name"
+#define kType @"type"
 
 @implementation JMCAttachmentItem
 
@@ -32,7 +37,11 @@
 @synthesize type;
 
 
-- (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JMCAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat {
+- (id)initWithName:(NSString *)aName
+              data:(NSData *)aData
+              type:(JMCAttachmentType)aType
+       contentType:(NSString *)aContentType
+    filenameFormat:(NSString *)aFilenameFormat {
     self = [super init];
     if (self) {
         contentType = [aContentType retain];
@@ -44,6 +53,29 @@
     }
     return self;
 }
+
+- (void)encodeWithCoder:(NSCoder*)coder {
+    
+    [coder encodeObject:self.data forKey:kData];
+    [coder encodeObject:self.contentType forKey:kContentType];
+    [coder encodeObject:self.filenameFormat forKey:kFilenameFormat];
+    [coder encodeObject:self.name forKey:kName];
+    [coder encodeInt:self.type forKey:kType];
+}
+
+- (id)initWithCoder:(NSCoder*)coder {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.data = [coder decodeObjectForKey:kData];
+    self.contentType = [coder decodeObjectForKey:kContentType];
+    self.filenameFormat = [coder decodeObjectForKey:kFilenameFormat];
+    self.name = [coder decodeObjectForKey:kName];
+    self.type = [coder decodeIntForKey:kType];
+
+    return self;
+}
+
 
 - (void)dealloc {
     [filenameFormat release];

@@ -22,20 +22,24 @@ To install JIRA Mobile Connect into your current project:
 1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JMCClasses directory to your project.
 1. If the project you are integrating contains any of the 3rd Party libaries listed at the bottom of this page, you shouldn't need to copy the equivalent library in JIRAConnect/JMCClasses/Libraries.
-1. Select the project (top most) element in the file/groups tree
+1. Open the project (top most) element in the file/groups tree
 1. Click **'Build Phases'** --> Expand **'Link Binary with Libraries'** --> **+**
-1. add the following frameworks:
+1. Add the iOS built-in frameworks:
     * CFNetwork
     * SystemConfiguration
     * MobileCoreServices
     * CoreGraphics
     * AVFoundation
     * CoreLocation
-    * libz1.2.3
+    * libz
     * libsqlite3
-1. Add the `CrashReporter.framework` to your project's frameworks: **+** --> **'Add Other'**
-1. Browse to jiraconnect-ios then **JIRAConnect/JMCClasses/Libraries/** --> **CrashReporter.framework**
-1. Click **'Open'**
+1. Add the `CrashReporter.framework`:
+    * Click **+** --> **'Add Other'**
+    * Browse to jiraconnect-ios then **JIRAConnect/JMCClasses/Libraries/** --> **CrashReporter.framework**
+    * Click **'Open'**
+1. If you use automatic reference counting (ARC) you will need to disable it for the JIRA Mobile Connect code:
+    * In the **'Build Phases'** view, expand **'Compile Sources'**
+    * For all JMC source files, set `-fno-objc-arc` as the compiler flags
 1. Try compiling your App, and ensure there are no errors.
 
 To use JIRAConnect in your App:
@@ -44,26 +48,29 @@ To use JIRAConnect in your App:
 
         #import "JMC.h"
 
-1. Configure the [JMC instance] at the *end* of the ApplicationDelegate.m like so:
+1. Configure the [JMC instance] in your ApplicationDelegate.m like so:
 
 
     `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
 method, add the following line:
 
-        [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" customDataSource:nil];
+        [[JMC instance] configureJiraConnect:@"http://connect.onjira.com/"
+                                  projectKey:@"NERDS"
+                                      apiKey:@"591451a6-bc59-4ca9-8840-b67f8c1e440f"];
 
 1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
+    * Replace the string @"NERDS" with the name of the project you wish to use for collecting feedback from users or testers
+    * If the JIRA Mobile Connect plugin in JIRA has an API Key enabled, update the above apiKey parameter with the key for your project
 
-1. The JIRA URL you configured above, will need to have:
-    * the jconnect-plugin installed
-    * a project named either the same as
-        * the XCode Project,
-        * or the value returned by your [id JMCCustomDataSource project] method. This can be the project key in JIRA, or the project's name.
+1. The JIRA instance at the URL you configured above, will need to have:
+    * the [JIRA Mobile Connect Plugin](https://plugins.atlassian.com/plugin/details/322837) installed
+    * JIRA Mobile Connect enabled for your project. Administration --> *Your Project* --> Settings --> JIRA Mobile Connect
+![Administration --> *Your Project* --> Settings --> JIRA Mobile Connect](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/jira_settings.png)
 
-1. Provide a trigger mechanism to allow users invoke the Submit Feedback view. This typically goes on the 'About' or 'Info' view.
+1. Provide a trigger mechanism to allow users invoke the Feedback view. This typically goes on the 'About' or 'Info' view.
+(Or, if you are feeling creative: add it to the Shake Gesture as is done in the sample Angry Nerds App!)
 The UIViewController returned by JMC viewController is designed to be presented modally.
 If your info ViewController is in a UINavigationController stack, then you can use the following snippet to show both the feedback view, and the history view.
-
 
         #import "JMC.h"
 
@@ -73,10 +80,6 @@ If your info ViewController is in a UINavigationController stack, then you can u
             [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                            target:self
                                                            action:@selector(showFeedback)] autorelease];
-            self.navigationItem.leftBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                           target:self
-                                                           action:@selector(showPastFeedback)] autorelease];
         }
 
         -(void) showFeedback
@@ -84,18 +87,15 @@ If your info ViewController is in a UINavigationController stack, then you can u
             [self presentModalViewController:[[JMC instance] viewController] animated:YES];
         }
 
-        -(void) showPastFeedback
-        {
-            [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
-        }
-
-1. If you would like your users to access their issue 'inbox' anytime, then you can do so by presenting the JMCIssuesViewController.
+1. [[JMC instance] viewController] will return the 'Create Issue' view until the user creates feedback. From then on, the 'Issue Inbox' view is displayed, from where the
+user can tap the 'Create' icon to send more feedback.
+1. If you would like your users to always access the Create Issue view, then you can do so by presenting the [[JMC instance] feedbackViewController] directly.
 
 e.g. the following will present the issue inbox programatically:
 
-        - (IBAction)triggerDisplayNotifications
+        - (IBAction)triggerCreateIssueView
         {
-            [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
+            [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
         }
 
 Integration Notes
@@ -119,7 +119,7 @@ Use [http://connect.onjira.com/browse/CONNECT](http://connect.onjira.com/browse/
 Third party Package - License - Copyright / Creator
 ===================================================
 
-asi-http-request	BSD		Copyright &copy; 2007-2011, [All-Seeing Interactive](http://allseeing-i.com/ASIHTTPRequest/)
+asi-http-request    BSD     Copyright &copy; 2007-2011, [All-Seeing Interactive](http://allseeing-i.com/ASIHTTPRequest/)
 
 json-framework      BSD     Copyright &copy; 2009 [Stig Brautaset.]( http://code.google.com/p/json-framework/)
 

@@ -21,22 +21,28 @@
 
 @interface JMCRecorder : NSObject {
 
-	AVAudioRecorder* _recorder;
-	float _recordTime;
+    AVAudioRecorder *_recorder;
+    float _recordTime;
 }
 
-@property (nonatomic, retain) AVAudioRecorder* recorder;
-@property (assign) float recordTime; // maximum voice record time in seconds
+@property(nonatomic, retain) AVAudioRecorder *recorder;
+@property(assign) float recordTime; // maximum voice record time in seconds
 
 
-+(JMCRecorder*) instance;
-+(BOOL)audioRecordingIsAvailable;
++ (JMCRecorder *)instance;
 
--(void) start;
--(void) stop;
--(float) currentDuration;
--(float) previousDuration;
--(NSData*) audioData;
--(void) cleanUp;
++ (BOOL)audioRecordingIsAvailable;
+
+- (void)start;
+
+- (void)stop;
+
+- (float)currentDuration;
+
+- (float)previousDuration;
+
+- (NSData *)audioData;
+
+- (void)cleanUp;
 
 @end

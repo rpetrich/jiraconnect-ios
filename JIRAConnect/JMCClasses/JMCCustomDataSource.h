@@ -15,6 +15,7 @@
 **/
 
 #import <Foundation/Foundation.h>
+#import "JMCAttachmentItem.h"
 
 typedef enum {
     JMCIssueTypeCrash,
@@ -26,9 +27,9 @@ typedef enum {
 @optional
 
 /**
-* Return a dictionary that will be serialized to json and attached to any feedback created by the user.
+* Returns a custom attachment that will be attached to the issue.
 */
--(NSDictionary *) payload;
+-(JMCAttachmentItem *) attachment;
 
 /**
 * A dictionary containing any specialized custom fields (keyed by custom field name) 
@@ -36,6 +37,11 @@ typedef enum {
 * NB: custom field names should be *all* lower case.
 */
 -(NSDictionary *) customFields;
+
+/**
+* The components to set on the issue
+*/
+-(NSArray *) components;
 
 /**
 * Return the name of the issue type in JIRA, for a given JMCIssueType.
@@ -47,23 +53,20 @@ typedef enum {
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.
 * This value can be either the JIRA Project's name, _or_ its Project Key. e.g. JRA
+* NB: This is deprecated. Use a JMCOptions instead.
 */
 -(NSString *)project;
 
 /**
- * If YES the location data (lat/lng) will be sent as a part of the issue, this is NO by default.
- */
--(BOOL) locationEnabled;
+* The frame the HUD (Heads Up Display) will start at when the user receives a notification.
+* Use this to control the placement and animation of the in-app Notification.
+*/
+-(CGRect)notifierStartFrame;
 
 /**
- * If YES users will be able to submit voice recordings with their feedback, this is YES by default.
- */
--(BOOL) voiceEnabled;
-
-/**
- * If YES users will be able to submit screenshots/photos with their feedback, this is YES by default.
- */
--(BOOL) photosEnabled;
-
+* The frame the HUD (Heads Up Display) will end at when the user receives a notification.
+* Use this to control the placement and animation of the in-app Notification.
+* */
+-(CGRect)notifierEndFrame;
 
 @end

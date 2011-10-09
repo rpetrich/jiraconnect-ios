@@ -11,24 +11,47 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@"app launched");
-    [window addSubview:viewController.view];
-    [window makeKeyAndVisible];
-
-    // NOTE: JMC must be configured after the keyWindow is made (note: needs trailing slash)
+    
     /*
-        To configure JIRAConnect:
-        1. call 	[[JMC instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
-        2. You can then present [JMC instance].viewController from anywhere in your app
-        3. Be sure that your JIRA instance has the JIRAConnect plugin installed and has a project with the same name as either:
-           * your Application Bundle Name
-           * the same value as returned by your [JMCCustomDataSource projectName]
+     To configure JIRA Mobile Connect:
+     1. call [[JMC instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
+     2. You can then present [JMC instance].viewController from anywhere in your app
+     3. Be sure that your JIRA instance has the JIRA Mobile Connect plugin installed. (https://plugins.atlassian.com/plugin/details/322837)
+     4. Ensure your JIRA instance has a project with the same name as either:
+     *    * your Application Bundle Name
+     *    * the same value as returned by your [JMCCustomDataSource projectName]
      */
 
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com" 
-                        customDataSource:viewController];
-//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira/" customDataSource:viewController];
+//    [[JMC instance]
+//            configureJiraConnect:@"http://localhost:2990/jira/"
+//                      projectKey:@"NERDS"
+//                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
+//                        location:YES 
+//                      dataSource:viewController];
 
+    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+                              projectKey:@"NERDS"
+                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
+                                location:YES
+                              dataSource:viewController];
+
+//
+//    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
+//                                             project:@"NERDS"
+//                                              apiKey:@"81da567a-ac0d-4e6c-b55a-627caecce9c0"
+//                                              photos:YES
+//                                               voice:YES
+//                                            location:YES
+//                                      crashreporting:YES
+//                                        customFields:nil];
+//    options.barStyle = UIBarStyleDefault;
+//    [[JMC instance]
+//            configureWithOptions:options
+//                  dataSource:viewController];
+
+
+    [window addSubview:viewController.view];
+    [window makeKeyAndVisible];
     return YES;
 }
 
