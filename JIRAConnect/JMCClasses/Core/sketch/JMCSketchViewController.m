@@ -44,6 +44,7 @@
     // make sketchView proportional to image
     double scale = 1.0;
     CGSize sketchSize = CGSizeMake((CGFloat) (scale * self.image.size.width), (CGFloat) (scale * self.image.size.height));
+    
     JMCSketchView *sketchView = [[[JMCSketchView alloc] initWithFrame:CGRectMake(0, 0, sketchSize.width, sketchSize.height)] autorelease];
     sketchView.backgroundColor = [UIColor clearColor];
 
@@ -59,8 +60,14 @@
     [self.scrollView addSubview:self.mainView];
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+        [self.scrollView setZoomScale:1.0 animated:YES];
+        [self.scrollView setZoomScale:0.5 animated:YES];
+        [self.scrollView setZoomScale:1.0 animated:YES];
+}
 - (void)viewWillAppear:(BOOL)animated {
-    [self.scrollView setZoomScale:1.0 animated:NO];
+
     [self.scrollView setScrollEnabled:NO];
     [self.scrollView setContentOffset:CGPointMake(0, 0)];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
