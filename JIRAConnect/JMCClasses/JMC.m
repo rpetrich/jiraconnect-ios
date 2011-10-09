@@ -309,7 +309,6 @@
     NSMutableDictionary *info = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
     
     // add device data
-    [info setObject:[device uniqueIdentifier] forKey:@"udid"];
     [info setObject:[self getUUID] forKey:@"uuid"];
     [info setObject:[device name] forKey:@"devName"];
     [info setObject:[device systemName] forKey:@"systemName"];

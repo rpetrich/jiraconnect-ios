@@ -11,6 +11,8 @@
 #import "JMCReplyTransport.h"
 #import "JMCCreateIssueDelegate.h"
 #import "JMCReplyDelegate.h"
+#import "Reachability.h"
+#import "JMC.h"
 
 static NSOperationQueue *sharedOperationQueue = nil;
 
@@ -28,11 +30,14 @@ static NSOperationQueue *sharedOperationQueue = nil;
 
 - (NSMutableDictionary *)getQueueList;
 
+- (void) doFlushQueue;
+
 @end
 
 JMCIssueTransport* _issueTransport;
 JMCReplyTransport* _replyTransport;
 NSRecursiveLock* _flushLock;
+int _maxNumRequestFailures;
 
 @implementation JMCRequestQueue {
 
@@ -50,25 +55,47 @@ NSRecursiveLock* _flushLock;
         _issueTransport.delegate = [[[JMCCreateIssueDelegate alloc]init] autorelease];
         _replyTransport.delegate = [[[JMCReplyDelegate alloc] init] autorelease];
         _flushLock = [[NSRecursiveLock alloc] init];
+        _maxNumRequestFailures = 50;
         JMCDLog(@"queue at  %@", [instance getQueueIndexPath]);
 
     }
     return instance;
 }
 
+-(BOOL) reachable {
+    Reachability *r = [Reachability reachabilityWithHostName:[JMC instance].url.host];
+    NetworkStatus internetStatus = [r currentReachabilityStatus];
+    return internetStatus == NotReachable ?  NO : YES;
+}
+
+-(void) flushQueueIfReachable:(NSTimer*) timer
+{
+    if ([self reachable]) {
+        [self doFlushQueue];
+        return;
+    }
+    JMCDLog(@"Not reachable. Not flushing!");
+}
+
 -(void) flushQueue
 {
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(flushQueueIfReachable:) userInfo:nil repeats:NO];
+}
+
+-(void)doFlushQueue
+{
     @synchronized (_flushLock) { // Ensure a single thread at a time tries to flush the queue.
-        JMCRequestQueue *requestQueue = [JMCRequestQueue sharedInstance];
-        NSMutableDictionary *items = [requestQueue getQueueList];
+
+        NSMutableDictionary *items = [self getQueueList];        
+        JMCDLog(@"Actually flushing queue. Item count: %d", items.count);
         for (NSString *itemId in [items allKeys]) {
-            JMCQueueItem *item = [requestQueue getItem:itemId];
-            JMCSentStatus sentStatus = [requestQueue requestStatusFor:itemId];
+            JMCQueueItem *item = [self getItem:itemId];
+            JMCSentStatus sentStatus = [self requestStatusFor:itemId];
             if (sentStatus == JMCSentStatusInProgress ||
                 sentStatus == JMCSentStatusPermError) {
                 continue;
             }
-            [requestQueue updateItem:itemId sentStatus:JMCSentStatusInProgress bumpNumAttemptsBy:0];
+            [self updateItem:itemId sentStatus:JMCSentStatusInProgress bumpNumAttemptsBy:0];
             NSOperation *operation = nil;
             if ([item.type isEqualToString:kTypeReply]) {
                 operation = [_replyTransport requestFromItem:item];
@@ -77,7 +104,7 @@ NSRecursiveLock* _flushLock;
             }
             if (operation == nil) {
                 JMCALog(@"Missing or invalid queued item with id: %@. Removing from queue.", itemId);
-                [requestQueue deleteItem:itemId];
+                [self deleteItem:itemId];
             } else {
                 [sharedOperationQueue addOperation:operation];
                 JMCDLog(@"Added request to operation queue %@", item.uuid);
@@ -85,6 +112,7 @@ NSRecursiveLock* _flushLock;
         }
     }
 }
+
 
 -(JMCSentStatus) requestStatusFor:(NSString *)uuid
 {
@@ -109,7 +137,7 @@ NSRecursiveLock* _flushLock;
 
         NSNumber *lastNumAttempts = [metadata objectForKey:KEY_NUM_ATTEMPTS];
         NSNumber *newNumAttempts  = [NSNumber numberWithInt:lastNumAttempts.intValue + inc];
-        if (newNumAttempts.intValue > 100) {
+        if (newNumAttempts.intValue >= _maxNumRequestFailures) {
             [metadata setObject:[NSNumber numberWithInt:JMCSentStatusPermError] forKey:KEY_SENT_STATUS];
         }
         [metadata setObject:newNumAttempts forKey:KEY_NUM_ATTEMPTS];
