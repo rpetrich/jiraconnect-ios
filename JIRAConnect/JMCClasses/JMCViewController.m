@@ -411,10 +411,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     UIImage *origImg = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
 
-      if (origImg.size.height > self.view.height) {
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    if (origImg.size.height > screenSize.height) {
+
         // resize image... its too huge! (only meant to be screenshots, not photos..)
         CGSize size = origImg.size;
-        float ratio = self.view.height / size.height;
+        float ratio = screenSize.height / size.height;
         CGSize smallerSize = CGSizeMake(ratio * size.width, ratio * size.height);
         origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
     }
