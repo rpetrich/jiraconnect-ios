@@ -432,5 +432,16 @@
 }
 
 
++ (NSString *)getDataDirPath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *cache = [paths objectAtIndex:0];
+    NSString *dataDirPath = [cache stringByAppendingPathComponent:@"JMC"];
+    
+    if (![fileManager fileExistsAtPath:dataDirPath]) {
+        [fileManager createDirectoryAtPath:dataDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return dataDirPath;
+}
 
 @end
