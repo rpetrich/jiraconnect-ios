@@ -432,7 +432,8 @@
 }
 
 
-+ (NSString *)getDataDirPath {
++ (NSString *)getDataDirPath 
+{
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *cache = [paths objectAtIndex:0];
