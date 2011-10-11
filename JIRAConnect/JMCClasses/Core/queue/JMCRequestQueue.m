@@ -206,16 +206,7 @@ int _maxNumRequestFailures;
 }
 
 - (NSString *)getQueueDirPath {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cache = [paths objectAtIndex:0];
-    NSString *cachePath = [cache stringByAppendingPathComponent:@"JMC"];
-
-    if (![fileManager fileExistsAtPath:cachePath]) {
-        [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-
-    return cachePath;
+    return [[JMC instance] getDataDirPath];
 }
 
 -(void) dealloc

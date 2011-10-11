@@ -100,10 +100,11 @@
 @property (nonatomic, retain) JMCCrashSender *_crashSender;
 @property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
 @property (nonatomic, retain) JMCOptions* _options;
+@property (nonatomic, retain) NSString* _dataDirPath;
 
 -(CGRect)notifierStartFrame;
 -(CGRect)notifierEndFrame;
-
+- (NSString *)makeDataDirPath;
 @end
 
 
@@ -119,6 +120,7 @@
 @synthesize _crashSender;
 @synthesize _customDataSource;
 @synthesize _options;
+@synthesize _dataDirPath;
 
 + (JMC *)instance
 {
@@ -141,6 +143,7 @@
     [_navController release];
     [_crashSender release];
     [_options release];
+    [_dataDirPath release];
 
     [super dealloc];
 }
@@ -224,6 +227,7 @@
     if (!self._options) {
           self._options = [[[JMCOptions alloc] init] autorelease];
     }
+    self._dataDirPath = [self makeDataDirPath];
     
     if (self._options.crashReportingEnabled) {
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
@@ -431,6 +435,22 @@
     return CGRectMake(0, 440, 320, 40);
 }
 
+- (NSString *)getDataDirPath 
+{
+    return self._dataDirPath;
+}
 
+- (NSString *)makeDataDirPath 
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *cache = [paths objectAtIndex:0];
+    NSString *dataDirPath = [cache stringByAppendingPathComponent:@"JMC"];
+    
+    if (![fileManager fileExistsAtPath:dataDirPath]) {
+        [fileManager createDirectoryAtPath:dataDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return dataDirPath;
+}
 
 @end

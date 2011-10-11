@@ -20,8 +20,7 @@
 #import "FMDatabase.h"
 #import "JSON.h"
 #import "JMCMacros.h"
-
-#define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
+#import "JMC.h"
 
 @implementation JMCIssueStore
 
@@ -29,10 +28,12 @@ FMDatabase *db;
 NSString* _jcoDbPath;
 static NSRecursiveLock *writeLock;
 
+
 +(JMCIssueStore *) instance {
     static JMCIssueStore *singleton = nil;
     if (singleton == nil) {
-        _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", DOCUMENTS_FOLDER] retain];
+        NSString* jmcDbPath = [[JMC instance] getDataDirPath];
+        _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", jmcDbPath] retain];
         singleton = [[JMCIssueStore alloc] init];
         writeLock = [[NSRecursiveLock alloc] init];
     }
