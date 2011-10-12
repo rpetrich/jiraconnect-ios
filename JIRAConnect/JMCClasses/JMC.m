@@ -435,7 +435,7 @@
     return CGRectMake(0, 440, 320, 40);
 }
 
-- (NSString *)getDataDirPath 
+- (NSString *)dataDirPath 
 {
     return self._dataDirPath;
 }

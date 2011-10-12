@@ -192,6 +192,6 @@
 - (NSString*) issueTypeNameFor:(JMCIssueType)type useDefault:(NSString *)defaultType;
 
 /** The path that JMC uses to store its data: local DB cache, and offline request queue. **/
-- (NSString *)getDataDirPath;
+- (NSString *)dataDirPath;
 
 @end
