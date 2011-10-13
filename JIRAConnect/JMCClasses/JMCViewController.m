@@ -595,6 +595,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(_locationManager) {
+      [_locationManager stopUpdatingLocation];
       [_locationManager release];
       _locationManager = nil;
     }

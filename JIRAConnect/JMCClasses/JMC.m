@@ -332,9 +332,11 @@
     // app application data
     NSString* bundleVersion = [appMetaData objectForKey:@"CFBundleVersion"];
     NSString* bundleName = [appMetaData objectForKey:@"CFBundleName"];
+    NSString* bundleDisplayName = [appMetaData objectForKey:@"CFBundleDisplayName"];
     NSString* bundleId = [appMetaData objectForKey:@"CFBundleIdentifier"];
     if (bundleVersion) [info setObject:bundleVersion forKey:@"appVersion"];
     if (bundleName) [info setObject:bundleName forKey:@"appName"];
+    if (bundleDisplayName) [info setObject:bundleName forKey:@"appDisplayName"];
     if (bundleId) [info setObject:bundleId forKey:@"appId"];
     
     return info;
@@ -342,7 +344,10 @@
 
 - (NSString *)getAppName
 {
-    return [[self getMetaData] objectForKey:@"appName"];
+    NSDictionary *metaData = [self getMetaData];
+    if ([metaData objectForKey:@"appName"])        return [metaData objectForKey:@"appName"];
+    if ([metaData objectForKey:@"appDisplayName"]) return [metaData objectForKey:@"appDisplayName"];
+    return @"this App";
 }
 
 - (NSString *)getUUID
