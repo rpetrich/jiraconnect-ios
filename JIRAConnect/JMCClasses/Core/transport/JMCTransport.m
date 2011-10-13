@@ -37,7 +37,8 @@
 {
     for (u_int i = 0; i < [allAttachments count]; i++) {
         JMCAttachmentItem *item = [allAttachments objectAtIndex:i];
-        if (item != nil) {
+        if (item != nil && item.filenameFormat != nil) {
+
             NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
             NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
             if (item.type == JMCAttachmentTypeCustom ||

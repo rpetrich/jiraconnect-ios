@@ -206,7 +206,7 @@ int _maxNumRequestFailures;
 }
 
 - (NSString *)getQueueDirPath {
-    return [[JMC instance] getDataDirPath];
+    return [[JMC instance] dataDirPath];
 }
 
 -(void) dealloc
