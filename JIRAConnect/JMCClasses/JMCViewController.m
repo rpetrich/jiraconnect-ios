@@ -36,6 +36,7 @@
 
 - (BOOL)shouldTrackLocation;
 
+@property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, retain) CLLocation *currentLocation;
 @end
 
@@ -51,9 +52,12 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     if ([self shouldTrackLocation]) {
-        _locationManager = [[[CLLocationManager alloc] init] retain];
-        _locationManager.delegate = self;
-        [_locationManager startUpdatingLocation];
+        CLLocationManager* locMgr = [[CLLocationManager alloc] init];
+        self.locationManager = locMgr;
+        [locMgr release];
+        self.locationManager.delegate = self;
+        [self.locationManager startUpdatingLocation];
+        
 
         //TODO: remove this. just for testing location in the simulator.
 #if TARGET_IPHONE_SIMULATOR
@@ -129,11 +133,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (void) viewWillAppear:(BOOL)animated {
     [self.descriptionField becomeFirstResponder];
-    [_locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
-    [_locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
 }
 
 
@@ -570,7 +574,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation;
+@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, locationManager;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
@@ -594,9 +598,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)internalRelease
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if(_locationManager) {
-      [_locationManager release];
-      _locationManager = nil;
+    if(self.locationManager) {
+        self.locationManager.delegate = nil;
+        [self.locationManager stopUpdatingLocation];
+        self.locationManager = nil;
     }
     [systemToolbarItems release];
     self.voiceButton = nil;

@@ -17,9 +17,8 @@
      1. call [[JMC instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
      2. You can then present [JMC instance].viewController from anywhere in your app
      3. Be sure that your JIRA instance has the JIRA Mobile Connect plugin installed. (https://plugins.atlassian.com/plugin/details/322837)
-     4. Ensure your JIRA instance has a project with the same name as either:
-     *    * your Application Bundle Name
-     *    * the same value as returned by your [JMCCustomDataSource projectName]
+     4. Lots of other configuration available via JMCOptions.
+     5. NOTE: Location tracking is disabled by default.
      */
 
 //    [[JMC instance]
@@ -35,7 +34,7 @@
                                 location:YES
                               dataSource:viewController];
 
-//
+
 //    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
 //                                             project:@"NERDS"
 //                                              apiKey:@"81da567a-ac0d-4e6c-b55a-627caecce9c0"
