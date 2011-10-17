@@ -21,18 +21,18 @@
      5. NOTE: Location tracking is disabled by default.
      */
 
-//    [[JMC instance]
-//            configureJiraConnect:@"http://localhost:2990/jira/"
-//                      projectKey:@"NERDS"
-//                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
-//                        location:YES 
-//                      dataSource:viewController];
+    [[JMC instance]
+            configureJiraConnect:@"http://localhost:2990/jira/"
+                      projectKey:@"NERDS"
+                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
+                        location:YES 
+                      dataSource:viewController];
 
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
-                              projectKey:@"NERDS"
-                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
-                                location:YES
-                              dataSource:viewController];
+//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+//                              projectKey:@"NERDS"
+//                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
+//                                location:YES
+//                              dataSource:viewController];
 
 
 //    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"

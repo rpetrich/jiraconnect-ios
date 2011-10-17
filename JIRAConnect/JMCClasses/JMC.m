@@ -331,10 +331,12 @@
     
     // app application data
     NSString* bundleVersion = [appMetaData objectForKey:@"CFBundleVersion"];
+    NSString* bundleVersionShort = [appMetaData objectForKey:@"CFBundleShortVersionString"];
     NSString* bundleName = [appMetaData objectForKey:@"CFBundleName"];
     NSString* bundleDisplayName = [appMetaData objectForKey:@"CFBundleDisplayName"];
     NSString* bundleId = [appMetaData objectForKey:@"CFBundleIdentifier"];
     if (bundleVersion) [info setObject:bundleVersion forKey:@"appVersion"];
+    if (bundleVersionShort) [info setObject:bundleVersionShort forKey:@"appVersionShort"];
     if (bundleName) [info setObject:bundleName forKey:@"appName"];
     if (bundleDisplayName) [info setObject:bundleName forKey:@"appDisplayName"];
     if (bundleId) [info setObject:bundleId forKey:@"appId"];
