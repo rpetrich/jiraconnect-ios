@@ -21,20 +21,28 @@
      5. NOTE: Location tracking is disabled by default.
      */
 
-    [[JMC instance]
-            configureJiraConnect:@"http://localhost:2990/jira/"
-                      projectKey:@"NERDS"
-                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
-                        location:YES 
-                      dataSource:viewController];
-
-//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
-//                              projectKey:@"NERDS"
-//                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
-//                                location:YES
-//                              dataSource:viewController];
+//    [[JMC instance]
+//            configureJiraConnect:@"http://localhost:2990/jira/"
+//                      projectKey:@"NERDS"
+//                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
+//                        location:YES 
+//                      dataSource:viewController];
 
 
+//    [JMC instance].options.locationEnabled = YES;
+//    [JMC instance].customDataSource = viewController;
+//    [JMC instance].options.url = @"http://localhost:2990/jira";
+//    [JMC instance].options.projectKey = @"NERDS";
+//    [JMC instance].options.apiKey = @"b84bcd12-1e02-47e9-8954-7e1671b42b55";
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:10 target:[JMC instance] selector:@selector(start) userInfo:nil repeats:NO];
+    
+    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+                              projectKey:@"NERDS"
+                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
+                                location:YES
+                              dataSource:viewController];
+    
 //    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
 //                                             project:@"NERDS"
 //                                              apiKey:@"81da567a-ac0d-4e6c-b55a-627caecce9c0"

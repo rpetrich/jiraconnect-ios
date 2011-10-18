@@ -484,8 +484,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
-    if ([self.payloadDataSource respondsToSelector:@selector(attachment)]) {
-        JMCAttachmentItem *payloadData = [self.payloadDataSource attachment];
+    
+    if ([[JMC instance].customDataSource respondsToSelector:@selector(attachment)]) {
+        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource attachment];
         if (payloadData) {
             [allAttachments addObject:payloadData];
         }
@@ -576,7 +577,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 @synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, locationManager;
 
-@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, payloadDataSource = _payloadDataSource, attachments = _attachments, replyToIssue = _replyToIssue;
+@synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
 @synthesize voiceButton = _voiceButton;
 
@@ -612,7 +613,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.replyToIssue = nil;
     self.countdownView = nil;
     self.descriptionField = nil;
-    self.payloadDataSource = nil;
     self.currentLocation = nil;
     self.replyTransport = nil;
     self.issueTransport = nil;
