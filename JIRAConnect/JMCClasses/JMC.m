@@ -429,6 +429,7 @@
     if ([_customDataSource respondsToSelector:@selector(notifierStartFrame)]) {
         return [_customDataSource notifierStartFrame];
     }
+    
     return CGRectMake(0, 520, 320, 40);
 }
 

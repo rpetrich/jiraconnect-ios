@@ -84,12 +84,13 @@
 }
 
 -(void)sayThankYou {
-    NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on successful feedback submission");
+    NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on feedback submission");
     NSString *appName = [[JMC instance] getAppName];
     NSString *projectName = appName ? appName : [[JMC instance] getProject];
     NSString *msg = [NSString stringWithFormat:thankyouMsg, projectName];
 
-    UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Thank You"
+    NSString *thankyouTitle = JMCLocalizedString(@"Thank You", @"Thank you title on feedback submission");
+    UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:thankyouTitle
                                                          message:msg
                                                         delegate:self
                                                cancelButtonTitle:@"Ok"
