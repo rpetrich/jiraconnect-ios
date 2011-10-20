@@ -129,6 +129,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     _replyTransport.delegate = replyDelegate;
     [replyDelegate release];
 
+    self.imagePicker = [[[UIImagePickerController alloc] init] autorelease];
+
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -230,7 +234,15 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 - (IBAction)addScreenshot
 {
-    [self presentModalViewController:imagePicker animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    NSLog(@"Status bar style: %d",     [[UIApplication sharedApplication] statusBarStyle]);    
+    NSLog(@"image picker: %@", self.imagePicker);
+    UIPopoverController *popView = [[UIPopoverController alloc]initWithContentViewController:self.imagePicker];
+    [popView 
+     presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
+            permittedArrowDirections:UIPopoverArrowDirectionAny 
+     animated:YES];
+   
 }
 
 - (void)updateProgress:(NSTimer *)theTimer

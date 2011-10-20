@@ -426,10 +426,11 @@
 
 -(CGRect)notifierStartFrame
 {
+    NSLog(@"[UIScreen mainScreen] %@", [UIScreen mainScreen]);
     if ([_customDataSource respondsToSelector:@selector(notifierStartFrame)]) {
         return [_customDataSource notifierStartFrame];
     }
-    
+
     return CGRectMake(0, 520, 320, 40);
 }
 
