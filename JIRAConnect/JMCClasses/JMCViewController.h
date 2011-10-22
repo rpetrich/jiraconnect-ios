@@ -41,7 +41,6 @@
 
     JMCIssueTransport *_issueTransport;
     JMCReplyTransport *_replyTransport;
-    id <JMCCustomDataSource> _payloadDataSource;
     NSMutableArray *_attachments;
     JMCIssue *_replyToIssue;
 
@@ -58,12 +57,12 @@
 @property(retain, nonatomic) IBOutlet UIView *countdownView;
 @property(retain, nonatomic) IBOutlet UIProgressView *progressView;
 
+
 @property(retain, nonatomic) UIImagePickerController *imagePicker;
 @property(retain, nonatomic) IBOutlet UIToolbar *toolbar;;
 
 @property(retain, nonatomic) JMCIssueTransport *issueTransport;
 @property(retain, nonatomic) JMCReplyTransport *replyTransport;
-@property(retain, nonatomic) id <JMCCustomDataSource> payloadDataSource;
 
 // an array of items to attach to the issue
 @property(retain, nonatomic) NSMutableArray *attachments;

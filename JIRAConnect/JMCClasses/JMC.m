@@ -76,6 +76,16 @@
     return options;
 }
 
+-(void)setUrl:(NSString*)url
+{
+    unichar lastChar = [url characterAtIndex:[url length] - 1];
+    // if the lastChar is not a /, then add a /
+    NSString* charToAppend = lastChar != '/' ? @"/" : @"";
+    url = [url stringByAppendingString:charToAppend];
+
+    [_url autorelease];
+    _url = [url retain];
+}
 
 -(void) dealloc
 {
@@ -98,19 +108,21 @@
 @property (nonatomic, retain) UINavigationController* _navIssuesController;
 @property (nonatomic, retain) UINavigationController* _navController;
 @property (nonatomic, retain) JMCCrashSender *_crashSender;
-@property (nonatomic, assign) id <JMCCustomDataSource> _customDataSource;
-@property (nonatomic, retain) JMCOptions* _options;
 @property (nonatomic, retain) NSString* _dataDirPath;
 
 -(CGRect)notifierStartFrame;
 -(CGRect)notifierEndFrame;
 - (NSString *)makeDataDirPath;
+- (void)generateAndStoreUUID;
 @end
 
+BOOL started;
 
 @implementation JMC
 
-@synthesize url = _url;
+@synthesize customDataSource=_customDataSource;
+@synthesize options=_options;
+@synthesize url;
 @synthesize _pinger;
 @synthesize _notifier;
 @synthesize _jcController;
@@ -118,8 +130,6 @@
 @synthesize _navController;
 @synthesize _navIssuesController;
 @synthesize _crashSender;
-@synthesize _customDataSource;
-@synthesize _options;
 @synthesize _dataDirPath;
 
 + (JMC *)instance
@@ -128,13 +138,15 @@
     
     if (singleton == nil) {
         singleton = [[JMC alloc] init];
+        started = NO;
     }
     return singleton;
 }
 
 - (void)dealloc
 {
-    self.url = nil;
+    self.options = nil;
+    self.customDataSource = nil;
     [_pinger release];
     [_notifier release];
     [_jcController release];
@@ -142,11 +154,35 @@
     [_navIssuesController release];
     [_navController release];
     [_crashSender release];
-    [_options release];
     [_dataDirPath release];
 
     [super dealloc];
 }
+
+-(id)init
+{
+    if ((self = [super init])) {
+        JMCOptions* options = [[JMCOptions alloc] init];
+        self.options = options;
+        [options release];
+        
+        self._dataDirPath = [self makeDataDirPath];
+        
+        self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
+        self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
+        self._issuesController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+        self._navIssuesController = [[[UINavigationController alloc] initWithRootViewController:_issuesController] autorelease ];
+        
+        self._navController.navigationBar.barStyle = self.options.barStyle;
+        self._navIssuesController.navigationBar.barStyle = self.options.barStyle;
+        
+        
+        [self generateAndStoreUUID];
+
+    }
+    return self;
+}
+
 
 // TODO: call this when network becomes active after app becomes active
 -(void)flushRequestQueue
@@ -209,8 +245,6 @@
     [options release];
 }
 
-
-
 - (void) configureWithOptions:(JMCOptions*)options
 {
     [self configureWithOptions:options dataSource:nil];
@@ -218,18 +252,20 @@
 
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource
 {
-    self._options = options;
+    self.options = options;
     [self configureJiraConnect:options.url customDataSource:customDataSource];
 }
 
 - (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
-    if (!self._options) {
-          self._options = [[[JMCOptions alloc] init] autorelease];
-    }
-    self._dataDirPath = [self makeDataDirPath];
-    
-    if (self._options.crashReportingEnabled) {
+    self.options.url = withUrl;
+    self.customDataSource = customDataSource;
+    [self start];
+}
+
+-(void) start 
+{
+    if (self.options.crashReportingEnabled) {
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         [CrashReporter enableCrashReporter];
         // TODO: firing this when network becomes active could be better
@@ -238,46 +274,31 @@
                                        selector:@selector(promptThenMaybeSendCrashReports)
                                        userInfo:nil repeats:NO];
     }
-
-    self._pinger = [[[JMCPing alloc] init] autorelease ];
-
-    self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
-    self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
-    self._issuesController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
-    self._navIssuesController = [[[UINavigationController alloc] initWithRootViewController:_issuesController] autorelease ];
-
-    _navController.navigationBar.barStyle = self._options.barStyle;
-    _navIssuesController.navigationBar.barStyle = self._options.barStyle;
-
-    unichar lastChar = [withUrl characterAtIndex:[withUrl length] - 1];
-    // if the lastChar is not a /, then add a /
-    NSString* charToAppend = lastChar != '/' ? @"/" : @"";
-    withUrl = [withUrl stringByAppendingString:charToAppend];
-    self.url = [NSURL URLWithString:withUrl];
     
-    [self generateAndStoreUUID];
-
-    _pinger.baseUrl = self.url;
-
-    _customDataSource = customDataSource;
-    [_customDataSource retain];
-    _jcController.payloadDataSource = _customDataSource;
-
+    self._pinger = [[[JMCPing alloc] init] autorelease ];
+    
+        
     JMCNotifier* notifier = [[JMCNotifier alloc] initWithStartFrame:[self notifierStartFrame]
                                                            endFrame:[self notifierEndFrame]];
     self._notifier = notifier;
     [notifier release];
-
+    
     // whenever the Application Becomes Active, ping for notifications from JIRA.
-
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:_pinger]; // in case app was already configured, don't add a second observer.
     [[NSNotificationCenter defaultCenter] addObserver:_pinger
                                              selector:@selector(start)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-
-    JMCDLog(@"JIRA Mobile Connect is configured with url: %@", withUrl);
+    started = YES;
+    
+    JMCDLog(@"JIRA Mobile Connect is configured with url: %@", self.url);
 }
 
+-(NSURL*)url
+{
+    return self.options.url ? [NSURL URLWithString:self.options.url] : nil;
+}
 
 - (void)loadIssuesView
 {
@@ -331,10 +352,12 @@
     
     // app application data
     NSString* bundleVersion = [appMetaData objectForKey:@"CFBundleVersion"];
+    NSString* bundleVersionShort = [appMetaData objectForKey:@"CFBundleShortVersionString"];
     NSString* bundleName = [appMetaData objectForKey:@"CFBundleName"];
     NSString* bundleDisplayName = [appMetaData objectForKey:@"CFBundleDisplayName"];
     NSString* bundleId = [appMetaData objectForKey:@"CFBundleIdentifier"];
     if (bundleVersion) [info setObject:bundleVersion forKey:@"appVersion"];
+    if (bundleVersionShort) [info setObject:bundleVersionShort forKey:@"appVersionShort"];
     if (bundleName) [info setObject:bundleName forKey:@"appName"];
     if (bundleDisplayName) [info setObject:bundleName forKey:@"appDisplayName"];
     if (bundleId) [info setObject:bundleId forKey:@"appId"];
@@ -365,8 +388,8 @@
     if ([_customDataSource respondsToSelector:@selector(project)]) {
         return [_customDataSource project]; // for backward compatibility with the beta... deprecated
     }
-    if (self._options.projectKey != nil) {
-        return self._options.projectKey;
+    if (self.options.projectKey != nil) {
+        return self.options.projectKey;
     }
     return [self getAppName];
 }

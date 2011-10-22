@@ -5,6 +5,7 @@ JIRAConnect is an iOS library that can be embedded into any iOS App to provide f
 
 * **Real Time Crash Reporting** have users or testers submit crash reports directly to your JIRA instance
 * **User or Tester Feedback** views for allowing users or testers to create a bug report within your app.
+* **Rich Data Input** users can attach and annotate screenshots, leave a voice message, have their location sent
 * **2-way Communication with Users** thank your users or testers for providing feedback on your App!
 
 ![Report Issue Screen](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_report-issue.png) ![Crash Report Dialog](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_crash-report.png) ![2-Way Communications](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/small_replies-view.png)
@@ -19,7 +20,7 @@ To install JIRA Mobile Connect into your current project:
 1. `hg clone ssh://hg@bitbucket.org/atlassian/jiraconnect-ios` or download the
    latest release:
    [https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip](https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip)
-1. Open your project in XCode, right click on your Classes group, and select **'Add Files to YourProjectName'**
+1. Open your project in Xcode (Xcode 4 is used for the purposes), right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JMCClasses directory to your project.
 1. If the project you are integrating contains any of the 3rd Party libaries listed at the bottom of this page, you shouldn't need to copy the equivalent library in JIRAConnect/JMCClasses/Libraries.
 1. Open the project (top most) element in the file/groups tree
@@ -31,8 +32,8 @@ To install JIRA Mobile Connect into your current project:
     * CoreGraphics
     * AVFoundation
     * CoreLocation
-    * libz
-    * libsqlite3
+    * libz (used to compress network request bodies)
+    * libsqlite3 (used to cache issues on the device)
 1. Add the `CrashReporter.framework`:
     * Click **+** --> **'Add Other'**
     * Browse to jiraconnect-ios then **JIRAConnect/JMCClasses/Libraries/** --> **CrashReporter.framework**
@@ -54,17 +55,17 @@ To use JIRAConnect in your App:
     `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
 method, add the following line:
 
-        [[JMC instance] configureJiraConnect:@"http://connect.onjira.com/"
+        [[JMC instance] configureJiraConnect:@"https://connect.onjira.com/"
                                   projectKey:@"NERDS"
                                       apiKey:@"591451a6-bc59-4ca9-8840-b67f8c1e440f"];
 
-1. Replace the string @"http://connect.onjira.com" with the location of the JIRA instance you wish to connect to.
+1. Replace the string @"https://connect.onjira.com" with the location of the JIRA instance you wish to connect to. NB: We highly recommend you use https (not http) to ensure secure communication between JMC and the User.
     * Replace the string @"NERDS" with the name of the project you wish to use for collecting feedback from users or testers
     * If the JIRA Mobile Connect plugin in JIRA has an API Key enabled, update the above apiKey parameter with the key for your project
 
 1. The JIRA instance at the URL you configured above, will need to have:
     * the [JIRA Mobile Connect Plugin](https://plugins.atlassian.com/plugin/details/322837) installed
-    * JIRA Mobile Connect enabled for your project. Administration --> *Your Project* --> Settings --> JIRA Mobile Connect
+    * JIRA Mobile Connect enabled for your project. 'Administer Project' --> *Your Project* --> Settings --> JIRA Mobile Connect
 ![Administration --> *Your Project* --> Settings --> JIRA Mobile Connect](https://bytebucket.org/atlassian/jiraconnect-ios/wiki/jira_settings.png)
 
 1. Provide a trigger mechanism to allow users invoke the Feedback view. This typically goes on the 'About' or 'Info' view.
@@ -91,12 +92,37 @@ If your info ViewController is in a UINavigationController stack, then you can u
 user can tap the 'Create' icon to send more feedback.
 1. If you would like your users to always access the Create Issue view, then you can do so by presenting the [[JMC instance] feedbackViewController] directly.
 
-e.g. the following will present the issue inbox programatically:
+e.g. the following will present just the create issue ViewController programatically:
 
         - (IBAction)triggerCreateIssueView
         {
             [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
         }
+Use [[JMC instance] issuesViewController] to simply present the inbox directly.
+
+Advanced Configuration Options
+------------------------------
+
+1. There are some other configuration options you can choose to set, if the defaults aren't what you require. To do this, explore the [JMC instance] configureXXX] methods.
+1. The JMCOptions object supports most of the advanced settings. This object gets passed to JMC when configure is called. ie during applicationDidFinishLaunching. The JMCOptions class lets you configure:
+  * screenshots
+  * voice recordings
+  * location tracking
+  * crash reporting
+  * custom fields
+  * UIBarStyle for JMC Views
+  * JIRA Project Key
+  * JIRA instance URL
+  * API Key
+See the the JMC.h file for all JMCOptions available.
+
+1. The JMCCustomDataSource can be used to provide JIRA with extra data at runtime. The following is supported:
+  * an extra attachment (e.g. a database file)
+  * customFields (these get mapped by key name if a custom field of the same name exists for the JIRA project)
+  * issue components to set (e.g. iOS)
+  * JIRA issue type - maps the name of the issue-type to use in JIRA. e.g. a Crash --> Bug, Feedback --> Improvement.
+  * notifierStartFrame, notifierEndFrame: used to control where the notifier is animated from and to.
+See the JMCCustomDataSource.h file for more information on these settings.
 
 Integration Notes
 -----------------
@@ -107,7 +133,7 @@ JIRA Plugin
 ===========
 You will need access to a JIRA instance with the [JIRA Mobile Connect Plugin](https://plugins.atlassian.com/plugin/details/322837) installed.
 
-Alternatively, for a limited time, you can use the NERDS project at http://connect.onjira.com .
+If you don't yet have access to a JIRA instance, you can use the NERDS project at http://connect.onjira.com for testing.
 
 
 Issue tracking

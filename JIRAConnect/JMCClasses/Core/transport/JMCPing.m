@@ -34,6 +34,12 @@
 
 - (void)sendPing {
     
+    if ([JMC instance].url == nil) 
+    {
+        JMCDLog(@"JMC instance url not yet set. No ping this time.");
+        return;
+    }
+    
     NSString *project = [[JMC instance] getProject];
     NSString *uuid = [[JMC instance] getUUID];
     NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJMCLastSuccessfulPingTime];
@@ -48,7 +54,7 @@
     NSString * queryString = [JMCTransport encodeParameters:params];
     NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, [[JMC instance] getAPIVersion], queryString];
 
-    NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:self.baseUrl];
+    NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:[JMC instance].url];
     JMCDLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
