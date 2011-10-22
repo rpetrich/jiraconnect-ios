@@ -64,7 +64,7 @@
 * The base URL of the JIRA instance.
 * e.g. http://connect.onjira.com
 */
-@property (retain) NSString* url;
+@property (retain, nonatomic) NSString* url;
 
 /**
 * If non-nil, use this project name when creating feedback. Otherwise, the bundle name is used.
@@ -127,7 +127,9 @@
     JMCOptions* _options;
 }
 
-@property (nonatomic, retain) NSURL* url;
+@property (nonatomic, assign) id <JMCCustomDataSource> customDataSource;
+@property (nonatomic, retain) JMCOptions* options;
+@property (readonly) NSURL* url;
 
 + (JMC *) instance;
 
@@ -152,6 +154,11 @@
 - (void) configureWithOptions:(JMCOptions*)options;
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource;
 
+/**
+ * This method should not be called if any of the configureXXX methods above are called.
+ * Only call start if none of the configureXXX methods were called.
+ */
+-(void) start;
 -(void) flushRequestQueue;
 
 /**

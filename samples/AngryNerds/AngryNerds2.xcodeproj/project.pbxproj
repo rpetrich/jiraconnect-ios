@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01198358144B882000184199 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01198357144B882000184199 /* libz.dylib */; };
 		0140735B13AF35C3008A28C0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0140735A13AF35C3008A28C0 /* libsqlite3.dylib */; };
 		0152EC301439AB26006024D1 /* CrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB7E1439AB25006024D1 /* CrashReporter.m */; };
 		0152EC311439AB26006024D1 /* JMCIssuePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152EB811439AB25006024D1 /* JMCIssuePreviewCell.m */; };
@@ -118,7 +119,6 @@
 		01E90BE9139AE956002CA0D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */; };
 		01E90BEC139AE964002CA0D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BEB139AE964002CA0D9 /* CoreLocation.framework */; };
 		01E90BF8139AE9ED002CA0D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */; };
-		8DB0D7D6141DB6300017907C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB0D7D5141DB6300017907C /* libz.dylib */; };
 		8DFFA7E8143EAEAD00FF5453 /* megaphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DFFA7E6143EAEAD00FF5453 /* megaphone.png */; };
 		8DFFA7E9143EAEAD00FF5453 /* megaphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DFFA7E7143EAEAD00FF5453 /* megaphone@2x.png */; };
 		F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */; };
@@ -138,6 +138,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01198357144B882000184199 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0140735A13AF35C3008A28C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		0152EB7D1439AB25006024D1 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
 		0152EB7E1439AB25006024D1 /* CrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashReporter.m; sourceTree = "<group>"; };
@@ -314,9 +315,7 @@
 		01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		01E90BEA139AE95D002CA0D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		01E90BEB139AE964002CA0D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		01E90BED139AE96A002CA0D9 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		8DB0D7D5141DB6300017907C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8DFFA7E6143EAEAD00FF5453 /* megaphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megaphone.png; sourceTree = "<group>"; };
 		8DFFA7E7143EAEAD00FF5453 /* megaphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megaphone@2x.png"; sourceTree = "<group>"; };
 		F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsAppDelegate.h; path = Classes/AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
@@ -342,7 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DB0D7D6141DB6300017907C /* libz.dylib in Frameworks */,
+				01198358144B882000184199 /* libz.dylib in Frameworks */,
 				0140735B13AF35C3008A28C0 /* libsqlite3.dylib in Frameworks */,
 				01E90BF8139AE9ED002CA0D9 /* QuartzCore.framework in Frameworks */,
 				01E90BEC139AE964002CA0D9 /* CoreLocation.framework in Frameworks */,
@@ -686,10 +685,9 @@
 		01E90ABA139AE741002CA0D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8DB0D7D5141DB6300017907C /* libz.dylib */,
+				01198357144B882000184199 /* libz.dylib */,
 				0140735A13AF35C3008A28C0 /* libsqlite3.dylib */,
 				01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */,
-				01E90BED139AE96A002CA0D9 /* libz.1.2.3.dylib */,
 				01E90BEB139AE964002CA0D9 /* CoreLocation.framework */,
 				01E90BEA139AE95D002CA0D9 /* CoreGraphics.framework */,
 				01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */,
