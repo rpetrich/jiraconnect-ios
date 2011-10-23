@@ -56,6 +56,7 @@
         detailLabel.lineBreakMode = UILineBreakModeClip;
         detailLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
         detailLabel.textColor = [UIColor darkGrayColor];
+        detailLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 
         detailLabel.backgroundColor = [UIColor clearColor];
         detailLabel.textAlignment = UITextAlignmentCenter;
@@ -65,9 +66,8 @@
         [message addSubview:bubble];
         [message addSubview:label];
         message.autoresizesSubviews = YES;
-        
+        message.tag = 22;
         [self.contentView addSubview:message];
-
         self.contentView.autoresizesSubviews = YES;
 
         [message release];
@@ -75,16 +75,20 @@
     return self;
 }
 
-- (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font size:(CGSize)constSize {
+- (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font size:(CGSize)constSize
+{
 
-    CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(constSize.width * 0.75f, constSize.height) lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [string sizeWithFont:font 
+                     constrainedToSize:CGSizeMake(constSize.width * 0.75, constSize.height)
+                         lineBreakMode:UILineBreakModeWordWrap];
     
     UIImage * balloon;
     float balloonY = 2.0f + detailLabelHeight;
     float labelY = 8.0f + detailLabelHeight;
     if (leftAligned) {
-        
-        CGRect frame = CGRectMake(constSize.width - (size.width), balloonY, size.width + 28.0f, size.height + 12.0f);
+        float width = size.width + 30.0f;
+        float x = self.contentView.frame.size.width - width;
+        CGRect frame = CGRectMake(x, balloonY, width, size.height + 12.0f);
         self.bubble.frame = frame;
         self.bubble.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         balloon = [[UIImage imageNamed:@"Balloon_1"] stretchableImageWithLeftCapWidth:20.0f topCapHeight:15.0f];
@@ -98,6 +102,7 @@
     } 
     self.bubble.image = balloon;
     self.label.text = string;
+
 }
 
 - (void)dealloc {

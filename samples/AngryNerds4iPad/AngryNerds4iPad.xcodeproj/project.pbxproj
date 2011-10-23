@@ -21,7 +21,6 @@
 		01808C0B1450456A00284012 /* JMCIssueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01808B5C1450456A00284012 /* JMCIssueStore.m */; };
 		01808C0C1450456A00284012 /* JMCIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01808B5E1450456A00284012 /* JMCIssuesViewController.m */; };
 		01808C0D1450456A00284012 /* JMCIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01808B601450456A00284012 /* JMCIssueViewController.m */; };
-		01808C0E1450456A00284012 /* JMCIssueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01808B611450456A00284012 /* JMCIssueViewController.xib */; };
 		01808C0F1450456A00284012 /* JMCMessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 01808B631450456A00284012 /* JMCMessageBubble.m */; };
 		01808C101450456A00284012 /* JMCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01808B651450456A00284012 /* JMCMessageCell.m */; };
 		01808C111450456A00284012 /* JMCNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 01808B671450456A00284012 /* JMCNotifier.m */; };
@@ -126,6 +125,7 @@
 		01808C83145045F300284012 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C79145045F300284012 /* UIKit.framework */; };
 		01808C84145045F300284012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C7A145045F300284012 /* Foundation.framework */; };
 		01808C85145045F300284012 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C7B145045F300284012 /* CoreGraphics.framework */; };
+		01CC3E4D14540025002132B0 /* JMCIssueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CC3E4C14540025002132B0 /* JMCIssueViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,7 +153,6 @@
 		01808B5E1450456A00284012 /* JMCIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssuesViewController.m; sourceTree = "<group>"; };
 		01808B5F1450456A00284012 /* JMCIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCIssueViewController.h; sourceTree = "<group>"; };
 		01808B601450456A00284012 /* JMCIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCIssueViewController.m; sourceTree = "<group>"; };
-		01808B611450456A00284012 /* JMCIssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCIssueViewController.xib; sourceTree = "<group>"; };
 		01808B621450456A00284012 /* JMCMessageBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMessageBubble.h; sourceTree = "<group>"; };
 		01808B631450456A00284012 /* JMCMessageBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCMessageBubble.m; sourceTree = "<group>"; };
 		01808B641450456A00284012 /* JMCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMessageCell.h; sourceTree = "<group>"; };
@@ -315,6 +314,7 @@
 		01808C79145045F300284012 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01808C7A145045F300284012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01808C7B145045F300284012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		01CC3E4C14540025002132B0 /* JMCIssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCIssueViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,7 +461,7 @@
 				01808B5E1450456A00284012 /* JMCIssuesViewController.m */,
 				01808B5F1450456A00284012 /* JMCIssueViewController.h */,
 				01808B601450456A00284012 /* JMCIssueViewController.m */,
-				01808B611450456A00284012 /* JMCIssueViewController.xib */,
+				01CC3E4C14540025002132B0 /* JMCIssueViewController.xib */,
 				01808B621450456A00284012 /* JMCMessageBubble.h */,
 				01808B631450456A00284012 /* JMCMessageBubble.m */,
 				01808B641450456A00284012 /* JMCMessageCell.h */,
@@ -765,7 +765,6 @@
 				01808B401450454E00284012 /* InfoPlist.strings in Resources */,
 				01808B4C1450454E00284012 /* ViewController.xib in Resources */,
 				01808C0A1450456A00284012 /* JMCIssuePreviewCell.xib in Resources */,
-				01808C0E1450456A00284012 /* JMCIssueViewController.xib in Resources */,
 				01808C1D1450456A00284012 /* JMCSketchViewController.xib in Resources */,
 				01808C2C1450456A00284012 /* JMCViewController.xib in Resources */,
 				01808C361450456A00284012 /* CONTRIBUTORS.txt in Resources */,
@@ -811,6 +810,7 @@
 				01808C6A1450456A00284012 /* megaphone@2x.png in Resources */,
 				01808C6B1450456A00284012 /* notsent.png in Resources */,
 				01808C6C1450456A00284012 /* notsent@2x.png in Resources */,
+				01CC3E4D14540025002132B0 /* JMCIssueViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,6 +1005,7 @@
 				01808B511450454E00284012 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

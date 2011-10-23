@@ -22,18 +22,14 @@
 @class JMCViewController;
 
 @interface JMCIssueViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UITableView* _tableView;
-    IBOutlet UIButton* _replyButton;
     JMCIssue * _issue;
     NSArray * _comments;
+    IBOutlet UITableView* _tableView;
 @private
     JMCViewController *_feedbackController;
 }
 
-- (IBAction) didTouchReply:(UITextField*)sender;
-
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
-@property (nonatomic, retain) IBOutlet UIButton* replyButton;
 @property (nonatomic, retain) JMCIssue * issue;
 @property (nonatomic, retain) NSArray * comments;
 @property (nonatomic, retain) JMCViewController * feedbackController;
