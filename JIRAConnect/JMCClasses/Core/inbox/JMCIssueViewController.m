@@ -40,7 +40,6 @@ static float detailLabelHeight = 21.0f;
     if (self) {
         font = [UIFont systemFontOfSize:14.0];
         titleFont = [UIFont boldSystemFontOfSize:14.0];
-        self.replyButton.layer.cornerRadius = 7.0f;
         UIBarButtonItem *replyButton =
                 [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply
                                                               target:self
@@ -137,16 +136,32 @@ static float detailLabelHeight = 21.0f;
     return (section == 0) ? 1 : [self.comments count];
 }
 
+-(CGSize) detailSize 
+{
+    CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
+    return CGSizeMake(screenFrame.size.width - 20.0f, detailLabelHeight);
+}
+
+-(CGSize) bubbleSize
+{
+    return CGSizeMake(self.tableView.frame.size.width - ([self detailSize].width * 0.15), self.view.frame.size.height);
+}
+
 - (CGSize)sizeForComment:(JMCComment *)comment font:(UIFont *)commentFont
 {
-    return [comment.body sizeWithFont:commentFont constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
+    CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
+
+    CGSize bubbleSize = [self bubbleSize];
+    // the text is constrained to 3/4 of the width of the bubble. see JMCMessageBubble setText...
+    CGSize constrainTo = CGSizeMake(bubbleSize.width * 0.75f, screenFrame.size.height);
+    return [comment.body sizeWithFont:commentFont constrainedToSize:constrainTo lineBreakMode:UILineBreakModeWordWrap];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-
-        CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
+        CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
+        CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(screenFrame.size.width - 20.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
         return size.height + 20;
 
     } else {
@@ -161,13 +176,14 @@ static float detailLabelHeight = 21.0f;
     static NSString *cellIdentifierComment = @"JMCMessageCellComment";
 
     JMCMessageBubble *messageCell = (JMCMessageBubble *) [tableView dequeueReusableCellWithIdentifier:cellIdentifierComment];
-    CGSize detailSize = CGSizeMake(300.0f, detailLabelHeight); // TODO: un-hard code the width here
-
+    
+    CGSize detailSize = [self detailSize];
+    CGSize frameSize = [self bubbleSize];
+    
     if (messageCell == nil) {
         messageCell = [[[JMCMessageBubble alloc] initWithReuseIdentifier:cellIdentifierComment detailSize:detailSize] autorelease];
         messageCell.label.font = font;
     }
-    CGSize frameSize = self.view.frame.size;
 
     [messageCell setText:comment.body leftAligned:comment.systemUser withFont:font size:frameSize];
 
@@ -192,8 +208,10 @@ static float detailLabelHeight = 21.0f;
         if (issueCell == nil) {
 
             issueCell = [[[JMCMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-            CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
-            issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
+            CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
+            CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(screenFrame.size.width - 40.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
+            
+            issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(screenFrame.size.width * 0.1f, 10, size.width, size.height)] autorelease];
             issueCell.title.font = titleFont;
             issueCell.title.textColor = [UIColor colorWithRed:17 / 255.0f green:76 / 255.0f blue:147 / 255.0f alpha:1.0];
             issueCell.autoresizesSubviews = YES;

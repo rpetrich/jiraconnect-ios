@@ -77,13 +77,14 @@
 
 - (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font size:(CGSize)constSize {
 
-   CGSize  size = [string sizeWithFont:font constrainedToSize:CGSizeMake(constSize.width * 0.75f, constSize.height) lineBreakMode:UILineBreakModeWordWrap];
-
+    CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(constSize.width * 0.75f, constSize.height) lineBreakMode:UILineBreakModeWordWrap];
+    
     UIImage * balloon;
     float balloonY = 2.0f + detailLabelHeight;
     float labelY = 8.0f + detailLabelHeight;
     if (leftAligned) {
-        CGRect frame = CGRectMake(constSize.width - (size.width + 48.0f), balloonY, size.width + 28.0f, size.height + 12.0f);
+        
+        CGRect frame = CGRectMake(constSize.width - (size.width), balloonY, size.width + 28.0f, size.height + 12.0f);
         self.bubble.frame = frame;
         self.bubble.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         balloon = [[UIImage imageNamed:@"Balloon_1"] stretchableImageWithLeftCapWidth:20.0f topCapHeight:15.0f];
