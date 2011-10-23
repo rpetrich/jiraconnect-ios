@@ -60,9 +60,12 @@ static NSString *cellId = @"CommentCell";
     if (self.isModal) {
         [self dismissModalViewControllerAnimated:YES];
     } else {
+        CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+        CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
+        
         [UIView animateWithDuration:0.4 animations:^{
             CGRect frame = self.navigationController.view.frame;
-            CGRect toFrame = CGRectMake(0, frame.size.height, frame.size.width, frame.size.height);
+            CGRect toFrame = CGRectMake(0, screenSize.height + statusBarFrame.size.height, frame.size.width, frame.size.height);
             [self.navigationController.view setFrame:toFrame];
             
         } completion:^(BOOL finished) {

@@ -449,12 +449,11 @@ BOOL started;
 
 -(CGRect)notifierStartFrame
 {
-    NSLog(@"[UIScreen mainScreen] %@", [UIScreen mainScreen]);
     if ([_customDataSource respondsToSelector:@selector(notifierStartFrame)]) {
         return [_customDataSource notifierStartFrame];
     }
-
-    return CGRectMake(0, 520, 320, 40);
+    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
+    return CGRectMake(0, screenSize.height + 40, screenSize.width, 40);
 }
 
 -(CGRect)notifierEndFrame
@@ -462,7 +461,8 @@ BOOL started;
     if ([_customDataSource respondsToSelector:@selector(notifierEndFrame)]) {
         return [_customDataSource notifierEndFrame];
     }
-    return CGRectMake(0, 440, 320, 40);
+    CGSize screenSize = [[UIScreen mainScreen] applicationFrame].size;
+    return CGRectMake(0, screenSize.height - 20, screenSize.width, 40);
 }
 
 - (NSString *)dataDirPath 
