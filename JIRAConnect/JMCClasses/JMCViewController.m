@@ -38,6 +38,9 @@
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, retain) CLLocation *currentLocation;
+@property(nonatomic, retain) UIPopoverController *popover;
+@property(nonatomic, retain) UIBarButtonItem *screenshotButton;
+
 @end
 
 @implementation JMCViewController
@@ -114,6 +117,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
     systemToolbarItems = [[NSArray arrayWithArray:items] retain];
     self.voiceButton = recordButton;
+    self.screenshotButton = screenshotButton;
     self.toolbar.items = systemToolbarItems;
     self.descriptionField.inputAccessoryView = self.toolbar;
 
@@ -128,10 +132,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     JMCReplyDelegate* replyDelegate = [[JMCReplyDelegate alloc] init];
     _replyTransport.delegate = replyDelegate;
     [replyDelegate release];
-
-    self.imagePicker = [[[UIImagePickerController alloc] init] autorelease];
-
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 
 }
 
@@ -232,17 +232,41 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     [self.descriptionField resignFirstResponder];
 }
 
+static BOOL isPad(void) {
+#ifdef UI_USER_INTERFACE_IDIOM
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+#else
+    return NO;
+#endif
+}
+
 - (IBAction)addScreenshot
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    NSLog(@"Status bar style: %d",     [[UIApplication sharedApplication] statusBarStyle]);    
-    NSLog(@"image picker: %@", self.imagePicker);
-    UIPopoverController *popView = [[UIPopoverController alloc]initWithContentViewController:self.imagePicker];
-    [popView 
-     presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
-            permittedArrowDirections:UIPopoverArrowDirectionAny 
-     animated:YES];
-   
+    if ([self.popover isPopoverVisible]) 
+    {
+        [self.popover dismissPopoverAnimated:YES];
+        self.popover = nil;
+    } 
+    else 
+    {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.delegate = self;
+        if (isPad()) 
+        {
+            self.popover = [[UIPopoverController alloc]initWithContentViewController:imagePicker];
+            [self.popover
+                    presentPopoverFromBarButtonItem:self.screenshotButton 
+                           permittedArrowDirections:UIPopoverArrowDirectionDown 
+                                           animated:YES];
+        }
+        else 
+        {
+            [self presentModalViewController:imagePicker animated:YES];
+        }
+        [imagePicker release];
+    }
+       
 }
 
 - (void)updateProgress:(NSTimer *)theTimer
@@ -423,7 +447,11 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
-    [self dismissModalViewControllerAnimated:YES];
+    if ([self.popover isPopoverVisible]) {
+        [self.popover dismissPopoverAnimated:YES];
+    } else {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 
     UIImage *origImg = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
 
@@ -587,7 +615,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize descriptionField, countdownView, progressView, imagePicker, currentLocation, locationManager;
+@synthesize descriptionField, countdownView, progressView, currentLocation, locationManager, popover, screenshotButton;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
@@ -618,8 +646,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
     [systemToolbarItems release];
     self.voiceButton = nil;
+    self.screenshotButton = nil;
     self.toolbar = nil;
-    self.imagePicker = nil;
     self.attachments = nil;
     self.progressView = nil;
     self.replyToIssue = nil;
@@ -628,6 +656,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.currentLocation = nil;
     self.replyTransport = nil;
     self.issueTransport = nil;
+    self.popover = nil;
 }
 
 @end
