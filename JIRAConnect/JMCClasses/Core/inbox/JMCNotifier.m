@@ -39,7 +39,7 @@ CGRect endFrame;
         [_toolbar setTranslucent:YES];
         _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 20)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, endFrame.size.width, 20)];
         _label.backgroundColor = [UIColor clearColor];
         _label.textAlignment = UITextAlignmentCenter;
         _label.textColor = [UIColor whiteColor];
@@ -106,8 +106,10 @@ CGRect endFrame;
 
 - (void)displayNotifications:(id)sender {
     
-    CGRect currStartFrame = CGRectMake(startFrame.origin.x, startFrame.origin.y, 320, 480);
-    CGRect currEndFrame = CGRectMake(0, 0, 320, 480);
+    CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+    CGSize frameSize = [[UIScreen mainScreen] applicationFrame].size;
+    CGRect currStartFrame = CGRectMake(startFrame.origin.x, startFrame.origin.y, frameSize.width, frameSize.height);
+    CGRect currEndFrame = CGRectMake(0, 0 + statusBarFrame.size.height, frameSize.width, frameSize.height);
 
     [self.viewController.view setFrame:currStartFrame];
     [self.view addSubview:self.viewController.view];

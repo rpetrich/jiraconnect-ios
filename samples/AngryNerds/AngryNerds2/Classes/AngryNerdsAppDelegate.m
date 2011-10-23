@@ -59,6 +59,8 @@
 
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
+    
+    
     return YES;
 }
 

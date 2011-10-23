@@ -29,10 +29,9 @@ static UIFont *titleFont;
 
 static float detailLabelHeight = 21.0f;
 
-@synthesize tableView = _tableView, replyButton = _replyButton, issue = _issue;
+@synthesize tableView = _tableView, issue = _issue;
 @synthesize comments = _comments;
 @synthesize feedbackController = _feedbackController;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,11 +39,10 @@ static float detailLabelHeight = 21.0f;
     if (self) {
         font = [UIFont systemFontOfSize:14.0];
         titleFont = [UIFont boldSystemFontOfSize:14.0];
-        self.replyButton.layer.cornerRadius = 7.0f;
         UIBarButtonItem *replyButton =
-                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply
-                                                              target:self
-                                                              action:@selector(didTouchReply:)];
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply
+                                                      target:self
+                                                      action:@selector(didTouchReply:)];
         self.navigationItem.rightBarButtonItem = replyButton;
         [replyButton release];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCNewCommentCreated object:nil];
@@ -57,7 +55,6 @@ static float detailLabelHeight = 21.0f;
     self.issue = nil;
     self.comments = nil;
     self.tableView = nil;
-    self.replyButton = nil;
     self.feedbackController = nil;
     [super dealloc];
 }
@@ -86,13 +83,13 @@ static float detailLabelHeight = 21.0f;
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.tableView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
+
     return YES;
 }
 
@@ -137,16 +134,30 @@ static float detailLabelHeight = 21.0f;
     return (section == 0) ? 1 : [self.comments count];
 }
 
+-(CGSize) detailSize 
+{
+    CGRect frame = [UIScreen mainScreen].applicationFrame;
+    return CGSizeMake(frame.size.width, detailLabelHeight);
+}
+
+-(CGSize) bubbleSize
+{
+    return CGSizeMake([self detailSize].width * 0.9f, self.view.frame.size.height);
+}
+
 - (CGSize)sizeForComment:(JMCComment *)comment font:(UIFont *)commentFont
 {
-    return [comment.body sizeWithFont:commentFont constrainedToSize:CGSizeMake(240.0f, 480.0f) lineBreakMode:UILineBreakModeWordWrap];
+    CGSize bubbleSize = [self bubbleSize];
+    // the text is constrained to 3/4 of the width of the bubble. see JMCMessageBubble setText...
+    CGSize constrainTo = CGSizeMake(bubbleSize.width * 0.75f, bubbleSize.height);
+    return [comment.body sizeWithFont:commentFont constrainedToSize:constrainTo lineBreakMode:UILineBreakModeWordWrap];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-
-        CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(300.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
+        CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
+        CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(screenFrame.size.width - 20.0f, 18.0f) lineBreakMode:UILineBreakModeClip];
         return size.height + 20;
 
     } else {
@@ -156,20 +167,38 @@ static float detailLabelHeight = 21.0f;
     }
 }
 
+static BOOL isPad(void) {
+#ifdef UI_USER_INTERFACE_IDIOM
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+#else
+    return NO;
+#endif
+}
+
 - (UITableViewCell *)getBubbleCell:(UITableView *)tableView forMessage:(JMCComment *)comment
 {
     static NSString *cellIdentifierComment = @"JMCMessageCellComment";
 
     JMCMessageBubble *messageCell = (JMCMessageBubble *) [tableView dequeueReusableCellWithIdentifier:cellIdentifierComment];
-    CGSize detailSize = CGSizeMake(300.0f, detailLabelHeight); // TODO: un-hard code the width here
-
+    
+    CGSize detailSize = [self detailSize];
+    CGSize frameSize = [self bubbleSize];
+    
     if (messageCell == nil) {
         messageCell = [[[JMCMessageBubble alloc] initWithReuseIdentifier:cellIdentifierComment detailSize:detailSize] autorelease];
         messageCell.label.font = font;
     }
-    CGSize frameSize = self.view.frame.size;
+    if (isPad() && messageCell.contentView.frame.size.width < 600) {
+        // TODO: remove this hack. need to force a draw of each table cell possibly. to ensure width set correctly on iPad, since xib is for iPhone.
+        CGRect frame = messageCell.contentView.frame;
+        frame.size.width = 678; 
+        messageCell.contentView.frame = frame;
+    }
 
-    [messageCell setText:comment.body leftAligned:comment.systemUser withFont:font size:frameSize];
+    [messageCell setText:comment.body 
+             leftAligned:comment.systemUser 
+                withFont:font 
+                    size:frameSize];
 
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -192,8 +221,10 @@ static float detailLabelHeight = 21.0f;
         if (issueCell == nil) {
 
             issueCell = [[[JMCMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-            CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(280.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
-            issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(20, 10, size.width, size.height)] autorelease];
+            CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
+            CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(screenFrame.size.width - 40.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
+            
+            issueCell.title = [[[UILabel alloc] initWithFrame:CGRectMake(screenFrame.size.width * 0.1f, 10, size.width, size.height)] autorelease];
             issueCell.title.font = titleFont;
             issueCell.title.textColor = [UIColor colorWithRed:17 / 255.0f green:76 / 255.0f blue:147 / 255.0f alpha:1.0];
             issueCell.autoresizesSubviews = YES;

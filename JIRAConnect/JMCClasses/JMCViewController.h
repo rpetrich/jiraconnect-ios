@@ -26,6 +26,7 @@
 
 @interface JMCViewController : UIViewController
         <UITextViewDelegate, UITextFieldDelegate, AVAudioRecorderDelegate,
+        UINavigationControllerDelegate, UIImagePickerControllerDelegate,
         JMCSketchViewControllerDelegate, UIAlertViewDelegate, CLLocationManagerDelegate> {
 
     IBOutlet UITextView *descriptionField;
@@ -33,9 +34,6 @@
     IBOutlet UILabel *countdownTimer;
     IBOutlet UIProgressView *progressView;
     IBOutlet UIView *countdownView;
-    
-
-    IBOutlet UIImagePickerController *imagePicker;
 
     IBOutlet UIToolbar* toolbar;
 
@@ -57,7 +55,6 @@
 @property(retain, nonatomic) IBOutlet UIView *countdownView;
 @property(retain, nonatomic) IBOutlet UIProgressView *progressView;
 
-@property(retain, nonatomic) IBOutlet UIImagePickerController *imagePicker;
 @property(retain, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property(retain, nonatomic) JMCIssueTransport *issueTransport;
