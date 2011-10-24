@@ -79,7 +79,6 @@ static float detailLabelHeight = 21.0f;
     [self scrollToLastComment];
 }
 
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -187,12 +186,6 @@ static BOOL isPad(void) {
     if (messageCell == nil) {
         messageCell = [[[JMCMessageBubble alloc] initWithReuseIdentifier:cellIdentifierComment detailSize:detailSize] autorelease];
         messageCell.label.font = font;
-    }
-    if (isPad() && messageCell.contentView.frame.size.width < 600) {
-        // TODO: remove this hack. need to force a draw of each table cell possibly. to ensure width set correctly on iPad, since xib is for iPhone.
-        CGRect frame = messageCell.contentView.frame;
-        frame.size.width = 678; 
-        messageCell.contentView.frame = frame;
     }
 
     [messageCell setText:comment.body 

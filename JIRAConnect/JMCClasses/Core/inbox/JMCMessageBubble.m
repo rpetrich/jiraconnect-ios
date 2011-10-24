@@ -56,7 +56,7 @@
         detailLabel.lineBreakMode = UILineBreakModeClip;
         detailLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
         detailLabel.textColor = [UIColor darkGrayColor];
-        detailLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+        detailLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
         detailLabel.backgroundColor = [UIColor clearColor];
         detailLabel.textAlignment = UITextAlignmentCenter;
@@ -73,6 +73,33 @@
         [message release];
     }
     return self;
+}
+
+-(void) layoutSubviews
+{
+    [super layoutSubviews];
+
+    // only when layoutSubviews is called, is the contentFrame setup correctly.
+    CGRect contentFrame = self.contentView.frame;
+    
+    CGRect detailFrame = self.detailLabel.frame;
+    detailFrame.size.width = contentFrame.size.width;
+    self.detailLabel.frame = detailFrame; // This is only picked up when the cell goes offscreen...
+    
+    CGRect bubbleFrame = self.bubble.frame;
+    CGRect labelFrame = self.label.frame;
+    
+    if (bubbleFrame.origin.x == 0) { 
+        return; // only views that are right justified require relayout.
+    }
+    // set the correct x coord of the right aligned bubble
+    bubbleFrame = CGRectMake(contentFrame.size.width - bubbleFrame.size.width, 
+                                   bubbleFrame.origin.y, bubbleFrame.size.width, bubbleFrame.size.height);
+
+    // the same for the label that is in the bubble
+    labelFrame.origin.x = bubbleFrame.origin.x + 12.0f;
+    self.label.frame = labelFrame;
+    self.bubble.frame = bubbleFrame;
 }
 
 - (void)setText:(NSString *)string leftAligned:(BOOL)leftAligned withFont:(UIFont *)font size:(CGSize)constSize
