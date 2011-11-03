@@ -1,8 +1,10 @@
+// Based on FMDB. License see Licenses/FMDB.txt.
+
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
-#import "FMResultSet.h"
+#import "JMCResultSet.h"
 
-@interface FMDatabase : NSObject 
+@interface JMCDatabase : NSObject 
 {
 	sqlite3*    db;
 	NSString*   databasePath;
@@ -52,10 +54,10 @@
 - (BOOL)executeUpdate:(NSString*)sql withArgumentsInArray:(NSArray *)arguments;
 - (BOOL)executeUpdate:(NSString*)sql error:(NSError**)outErr withArgumentsInArray:(NSArray*)arrayArgs orVAList:(va_list)args; // you shouldn't ever need to call this.  use the previous two instead.
 
-- (FMResultSet *)executeQuery:(NSString*)sql, ...;
-- (FMResultSet *)executeQueryWithFormat:(NSString*)format, ...;
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments;
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orVAList:(va_list)args; // you shouldn't ever need to call this.  use the previous two instead.
+- (JMCResultSet *)executeQuery:(NSString*)sql, ...;
+- (JMCResultSet *)executeQueryWithFormat:(NSString*)format, ...;
+- (JMCResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments;
+- (JMCResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orVAList:(va_list)args; // you shouldn't ever need to call this.  use the previous two instead.
 
 - (BOOL)rollback;
 - (BOOL)commit;
@@ -96,7 +98,7 @@
 
 @end
 
-@interface FMStatement : NSObject {
+@interface JMCStatement : NSObject {
     sqlite3_stmt *statement;
     NSString *query;
     long useCount;

@@ -1,13 +1,7 @@
-//
-//  FMDatabaseAdditions.h
-//  fmkit
-//
-//  Created by August Mueller on 10/30/05.
-//  Copyright 2005 Flying Meat Inc.. All rights reserved.
-//
+// Based on FMDB. License see Licenses/FMDB.txt.
 
 #import <Foundation/Foundation.h>
-@interface FMDatabase (FMDatabaseAdditions)
+@interface JMCDatabase (JMCDatabaseAdditions)
 
 
 - (int)intForQuery:(NSString*)objs, ...;
@@ -24,8 +18,8 @@
 
 
 - (BOOL)tableExists:(NSString*)tableName;
-- (FMResultSet*)getSchema;
-- (FMResultSet*)getTableSchema:(NSString*)tableName;
+- (JMCResultSet*)getSchema;
+- (JMCResultSet*)getTableSchema:(NSString*)tableName;
 - (BOOL)columnExists:(NSString*)tableName columnName:(NSString*)columnName;
 
 - (BOOL)validateSQL:(NSString*)sql error:(NSError**)error;

@@ -1,7 +1,9 @@
-#import "FMDatabase.h"
+// Based on FMDB. License see Licenses/FMDB.txt.
+
+#import "JMCDatabase.h"
 #import "unistd.h"
 
-@implementation FMDatabase
+@implementation JMCDatabase
 
 + (id)databaseWithPath:(NSString*)aPath {
     return [[[self alloc] initWithPath:aPath] autorelease];
@@ -112,7 +114,7 @@
 - (void)clearCachedStatements {
     
     NSEnumerator *e = [cachedStatements objectEnumerator];
-    FMStatement *cachedStmt;
+    JMCStatement *cachedStmt;
 
     while ((cachedStmt = [e nextObject])) {
         [cachedStmt close];
@@ -129,23 +131,23 @@
     NSValue *returnedResultSet = nil;
     
     while((returnedResultSet = [e nextObject])) {
-        FMResultSet *rs = (FMResultSet *)[returnedResultSet pointerValue];
+        JMCResultSet *rs = (JMCResultSet *)[returnedResultSet pointerValue];
         if ([rs respondsToSelector:@selector(close)]) {
             [rs close];
         }
     }
 }
 
-- (void)resultSetDidClose:(FMResultSet *)resultSet {
+- (void)resultSetDidClose:(JMCResultSet *)resultSet {
     NSValue *setValue = [NSValue valueWithNonretainedObject:resultSet];
     [openResultSets removeObject:setValue];
 }
 
-- (FMStatement*)cachedStatementForQuery:(NSString*)query {
+- (JMCStatement*)cachedStatementForQuery:(NSString*)query {
     return [cachedStatements objectForKey:query];
 }
 
-- (void)setCachedStatement:(FMStatement*)statement forQuery:(NSString*)query {
+- (void)setCachedStatement:(JMCStatement*)statement forQuery:(NSString*)query {
     //NSLog(@"setting query: %@", query);
     query = [query copy]; // in case we got handed in a mutable string...
     [statement setQuery:query];
@@ -193,7 +195,7 @@
         return NO;
     }
     
-    FMResultSet *rs = [self executeQuery:@"select name from sqlite_master where type='table'"];
+    JMCResultSet *rs = [self executeQuery:@"select name from sqlite_master where type='table'"];
     
     if (rs) {
         [rs close];
@@ -404,7 +406,7 @@
     
 }
 
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orVAList:(va_list)args {
+- (JMCResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orVAList:(va_list)args {
     
     if (inUse) {
         [self compainAboutInUse];
@@ -413,11 +415,11 @@
     
     [self setInUse:YES];
     
-    FMResultSet *rs = nil;
+    JMCResultSet *rs = nil;
     
     int rc                  = 0x00;;
     sqlite3_stmt *pStmt     = 0x00;;
-    FMStatement *statement  = 0x00;
+    JMCStatement *statement  = 0x00;
     
     if (traceExecution && sql) {
         NSLog(@"%@ executeQuery: %@", self, sql);
@@ -502,7 +504,7 @@
     [statement retain]; // to balance the release below
     
     if (!statement) {
-        statement = [[FMStatement alloc] init];
+        statement = [[JMCStatement alloc] init];
         [statement setStatement:pStmt];
         
         if (shouldCacheStatements) {
@@ -511,7 +513,7 @@
     }
     
     // the statement gets closed in rs's dealloc or [rs close];
-    rs = [FMResultSet resultSetWithStatement:statement usingParentDatabase:self];
+    rs = [JMCResultSet resultSetWithStatement:statement usingParentDatabase:self];
     [rs setQuery:sql];
     NSValue *openResultSet = [NSValue valueWithNonretainedObject:rs];
     [openResultSets addObject:openResultSet];
@@ -525,7 +527,7 @@
     return rs;
 }
 
-- (FMResultSet *)executeQuery:(NSString*)sql, ... {
+- (JMCResultSet *)executeQuery:(NSString*)sql, ... {
     va_list args;
     va_start(args, sql);
     
@@ -535,7 +537,7 @@
     return result;
 }
 
-- (FMResultSet *)executeQueryWithFormat:(NSString*)format, ... {
+- (JMCResultSet *)executeQueryWithFormat:(NSString*)format, ... {
     va_list args;
     va_start(args, format);
     
@@ -548,7 +550,7 @@
     return [self executeQuery:sql withArgumentsInArray:arguments];
 }
 
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments {
+- (JMCResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments {
     return [self executeQuery:sql withArgumentsInArray:arguments orVAList:nil];
 }
 
@@ -563,7 +565,7 @@
     
     int rc                   = 0x00;
     sqlite3_stmt *pStmt      = 0x00;
-    FMStatement *cachedStmt = 0x00;
+    JMCStatement *cachedStmt = 0x00;
     
     if (traceExecution && sql) {
         NSLog(@"%@ executeUpdate: %@", self, sql);
@@ -700,7 +702,7 @@
     
     
     if (shouldCacheStatements && !cachedStmt) {
-        cachedStmt = [[FMStatement alloc] init];
+        cachedStmt = [[JMCStatement alloc] init];
         
         [cachedStmt setStatement:pStmt];
         
@@ -882,7 +884,7 @@
 
 
 
-@implementation FMStatement
+@implementation JMCStatement
 
 - (void)finalize {
     [self close];

@@ -17,13 +17,13 @@
 #import "JMCIssueStore.h"
 #import "JMCIssue.h"
 #import "JMCComment.h"
-#import "FMDatabase.h"
+#import "JMCDatabase.h"
 #import "JMCMacros.h"
 #import "JMC.h"
 
 @implementation JMCIssueStore
 
-FMDatabase *db;
+JMCDatabase *db;
 NSString* _jcoDbPath;
 static NSRecursiveLock *writeLock;
 
@@ -42,7 +42,7 @@ static NSRecursiveLock *writeLock;
 - (id) init {
     if ((self = [super init])) {
         // db init code...
-        db = [FMDatabase databaseWithPath:_jcoDbPath];
+        db = [JMCDatabase databaseWithPath:_jcoDbPath];
         [db setLogsErrors:YES];
         [db retain];
         if (![db open]) {
@@ -88,7 +88,7 @@ static NSRecursiveLock *writeLock;
 
 - (JMCComment*) newLastCommentFor:(JMCIssue *) issue {
 
-    FMResultSet *res = [db executeQuery:
+    JMCResultSet *res = [db executeQuery:
                                @"SELECT "
                                    "* "
                                 "FROM comment WHERE issuekey = ? order by date desc limit 1",
@@ -107,7 +107,7 @@ static NSRecursiveLock *writeLock;
 
 - (JMCIssue *) newIssueAtIndex:(NSUInteger)issueIndex {
     // each column must match the JSON field JIRA returns for an issue entity
-    FMResultSet *res = [db executeQuery:
+    JMCResultSet *res = [db executeQuery:
                                @"SELECT "
                                    "uuid, "
                                    "key, "
@@ -134,7 +134,7 @@ static NSRecursiveLock *writeLock;
 
 - (NSMutableArray*) loadCommentsFor:(JMCIssue *) issue {
 
-    FMResultSet *res = [db executeQuery:
+    JMCResultSet *res = [db executeQuery:
                                @"SELECT "
                                    "* "
                                 "FROM comment WHERE issuekey = ?",
@@ -173,7 +173,7 @@ static NSRecursiveLock *writeLock;
 }
 
 -(BOOL) issueExists:(JMCIssue *)issue {
-    FMResultSet *res = [db executeQuery:@"SELECT key FROM issue WHERE key = ?", issue.key];
+    JMCResultSet *res = [db executeQuery:@"SELECT key FROM issue WHERE key = ?", issue.key];
     return [res next];
 }
 
@@ -232,13 +232,13 @@ static NSRecursiveLock *writeLock;
 
 - (BOOL) issueExistsIssueByUUID:(NSString *)uuid
 {
-    FMResultSet *res = [db executeQuery:@"SELECT id FROM issue WHERE uuid = ?", uuid];
+    JMCResultSet *res = [db executeQuery:@"SELECT id FROM issue WHERE uuid = ?", uuid];
     return [res next];
 
 }
 - (BOOL) commentExistsIssueByUUID:(NSString *)uuid
 {
-    FMResultSet *res = [db executeQuery:@"SELECT id FROM comment WHERE uuid = ?", uuid];
+    JMCResultSet *res = [db executeQuery:@"SELECT id FROM comment WHERE uuid = ?", uuid];
     return [res next];
 }
 
@@ -254,7 +254,7 @@ static NSRecursiveLock *writeLock;
 }
 
 -(int) count {
-    FMResultSet *res = [db executeQuery:
+    JMCResultSet *res = [db executeQuery:
                         @"SELECT "
                         "count(*) as count from ISSUE"];
     [res next];
@@ -263,7 +263,7 @@ static NSRecursiveLock *writeLock;
 }
 
 -(int) newIssueCount {
-    FMResultSet *res = [db executeQuery:
+    JMCResultSet *res = [db executeQuery:
                         @"SELECT "
                         "count(*) from ISSUE where hasUpdates = 1"];
     [res next];

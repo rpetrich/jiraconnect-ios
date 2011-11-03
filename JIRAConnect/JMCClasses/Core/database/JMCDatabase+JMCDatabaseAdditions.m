@@ -1,20 +1,14 @@
-//
-//  FMDatabaseAdditions.m
-//  fmkit
-//
-//  Created by August Mueller on 10/30/05.
-//  Copyright 2005 Flying Meat Inc.. All rights reserved.
-//
+// Based on FMDB. License see Licenses/FMDB.txt.
 
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
+#import "JMCDatabase.h"
+#import "JMCDatabase+JMCDatabaseAdditions.h"
 
-@implementation FMDatabase (FMDatabaseAdditions)
+@implementation JMCDatabase (JMCDatabaseAdditions)
 
 #define RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(type, sel)             \
 va_list args;                                                        \
 va_start(args, query);                                               \
-FMResultSet *resultSet = [self executeQuery:query withArgumentsInArray:0x00 orVAList:args];   \
+JMCResultSet *resultSet = [self executeQuery:query withArgumentsInArray:0x00 orVAList:args];   \
 va_end(args);                                                        \
 if (![resultSet next]) { return (type)0; }                           \
 type ret = [resultSet sel:0];                                        \
@@ -59,7 +53,7 @@ return ret;
     //lower case table name
     tableName = [tableName lowercaseString];
     //search in sqlite_master table if table exists
-    FMResultSet *rs = [self executeQuery:@"select [sql] from sqlite_master where [type] = 'table' and lower(name) = ?", tableName];
+    JMCResultSet *rs = [self executeQuery:@"select [sql] from sqlite_master where [type] = 'table' and lower(name) = ?", tableName];
     //if at least one next exists, table exists
     returnBool = [rs next];
     //close and free object
@@ -70,19 +64,19 @@ return ret;
 
 //get table with list of tables: result colums: type[STRING], name[STRING],tbl_name[STRING],rootpage[INTEGER],sql[STRING]
 //check if table exist in database  (patch from OZLB)
-- (FMResultSet*)getSchema {
+- (JMCResultSet*)getSchema {
     
     //result colums: type[STRING], name[STRING],tbl_name[STRING],rootpage[INTEGER],sql[STRING]
-    FMResultSet *rs = [self executeQuery:@"SELECT type, name, tbl_name, rootpage, sql FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type != 'meta' AND name NOT LIKE 'sqlite_%' ORDER BY tbl_name, type DESC, name"];
+    JMCResultSet *rs = [self executeQuery:@"SELECT type, name, tbl_name, rootpage, sql FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type != 'meta' AND name NOT LIKE 'sqlite_%' ORDER BY tbl_name, type DESC, name"];
     
     return rs;
 }
 
 //get table schema: result colums: cid[INTEGER], name,type [STRING], notnull[INTEGER], dflt_value[],pk[INTEGER]
-- (FMResultSet*)getTableSchema:(NSString*)tableName {
+- (JMCResultSet*)getTableSchema:(NSString*)tableName {
     
     //result colums: cid[INTEGER], name,type [STRING], notnull[INTEGER], dflt_value[],pk[INTEGER]
-    FMResultSet *rs = [self executeQuery:[NSString stringWithFormat: @"PRAGMA table_info(%@)", tableName]];
+    JMCResultSet *rs = [self executeQuery:[NSString stringWithFormat: @"PRAGMA table_info(%@)", tableName]];
     
     return rs;
 }
@@ -97,7 +91,7 @@ return ret;
     //lower case column name
     columnName = [columnName lowercaseString];
     //get table schema
-    FMResultSet *rs = [self getTableSchema: tableName];
+    JMCResultSet *rs = [self getTableSchema: tableName];
     //check if column is present in table schema
     while ([rs next]) {
         if ([[[rs stringForColumn:@"name"] lowercaseString] isEqualToString: columnName]) {

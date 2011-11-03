@@ -1,22 +1,24 @@
-#import "FMResultSet.h"
-#import "FMDatabase.h"
+// Based on FMDB. License see Licenses/FMDB.txt.
+
+#import "JMCResultSet.h"
+#import "JMCDatabase.h"
 #import "unistd.h"
 
-@interface FMDatabase ()
-- (void)resultSetDidClose:(FMResultSet *)resultSet;
+@interface JMCDatabase ()
+- (void)resultSetDidClose:(JMCResultSet *)resultSet;
 @end
 
 
-@interface FMResultSet (Private)
+@interface JMCResultSet (Private)
 - (NSMutableDictionary *)columnNameToIndexMap;
 - (void)setColumnNameToIndexMap:(NSMutableDictionary *)value;
 @end
 
-@implementation FMResultSet
+@implementation JMCResultSet
 
-+ (id)resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB {
++ (id)resultSetWithStatement:(JMCStatement *)statement usingParentDatabase:(JMCDatabase*)aDB {
     
-    FMResultSet *rs = [[FMResultSet alloc] init];
+    JMCResultSet *rs = [[JMCResultSet alloc] init];
     
     [rs setStatement:statement];
     [rs setParentDB:aDB];
@@ -368,7 +370,7 @@
     return [NSString stringWithUTF8String: sqlite3_column_name(statement.statement, columnIdx)];
 }
 
-- (void)setParentDB:(FMDatabase *)newDb {
+- (void)setParentDB:(JMCDatabase *)newDb {
     parentDB = newDb;
 }
 
@@ -393,11 +395,11 @@
     columnNameToIndexMap = value;
 }
 
-- (FMStatement *)statement {
+- (JMCStatement *)statement {
     return statement;
 }
 
-- (void)setStatement:(FMStatement *)value {
+- (void)setStatement:(JMCStatement *)value {
     if (statement != value) {
         [statement release];
         statement = [value retain];

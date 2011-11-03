@@ -1,3 +1,5 @@
+// Based on FMDB. License see Licenses/FMDB.txt.
+
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
 
@@ -13,12 +15,12 @@
 #endif
 #endif
 
-@class FMDatabase;
-@class FMStatement;
+@class JMCDatabase;
+@class JMCStatement;
 
-@interface FMResultSet : NSObject {
-    FMDatabase *parentDB;
-    FMStatement *statement;
+@interface JMCResultSet : NSObject {
+    JMCDatabase *parentDB;
+    JMCStatement *statement;
     
     NSString *query;
     NSMutableDictionary *columnNameToIndexMap;
@@ -26,17 +28,17 @@
 }
 
 
-+ (id)resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB;
++ (id)resultSetWithStatement:(JMCStatement *)statement usingParentDatabase:(JMCDatabase*)aDB;
 
 - (void)close;
 
 - (NSString *)query;
 - (void)setQuery:(NSString *)value;
 
-- (FMStatement *)statement;
-- (void)setStatement:(FMStatement *)value;
+- (JMCStatement *)statement;
+- (void)setStatement:(JMCStatement *)value;
 
-- (void)setParentDB:(FMDatabase *)newDb;
+- (void)setParentDB:(JMCDatabase *)newDb;
 
 - (BOOL)next;
 - (BOOL)hasAnotherRow;
