@@ -254,7 +254,7 @@ static BOOL isPad(void) {
         imagePicker.delegate = self;
         if (isPad()) 
         {
-            self.popover = [[UIPopoverController alloc]initWithContentViewController:imagePicker];
+            self.popover = [[[UIPopoverController alloc] initWithContentViewController:imagePicker] autorelease];
             [self.popover
                     presentPopoverFromBarButtonItem:self.screenshotButton 
                            permittedArrowDirections:UIPopoverArrowDirectionDown 
@@ -615,7 +615,7 @@ static BOOL isPad(void) {
 #pragma mark -
 #pragma mark Memory Managment
 
-@synthesize descriptionField, countdownView, progressView, currentLocation, locationManager, popover, screenshotButton;
+@synthesize descriptionField, countdownView, progressView, currentLocation, locationManager = _locationManager, popover, screenshotButton;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;

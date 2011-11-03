@@ -22,6 +22,10 @@
 
 @class JMCIssuesViewController, JMCPing, JMCNotifier, JMCNotifier, JMCCrashSender;
 
+// Use this macro outside JMC to enable code that depends on JMC
+#define JMC_PRESENT
+
+// Constants
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
 #define kJMCReceivedCommentsNotification @"kJMCReceivedCommentsNotification"
 #define kJMCLastSuccessfulPingTime @"kJMCLastSuccessfulPingTime"

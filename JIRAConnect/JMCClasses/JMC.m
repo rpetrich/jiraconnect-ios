@@ -122,7 +122,7 @@ BOOL started;
 
 @synthesize customDataSource=_customDataSource;
 @synthesize options=_options;
-@synthesize url;
+@synthesize url=_url;
 @synthesize _pinger;
 @synthesize _notifier;
 @synthesize _jcController;
