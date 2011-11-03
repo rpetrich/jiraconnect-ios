@@ -76,6 +76,22 @@
     return options;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+  JMCOptions* copy = [[JMCOptions alloc] init];
+  copy.url = self.url;
+  copy.projectKey = self.projectKey;
+  copy.apiKey = self.apiKey;
+  copy.photosEnabled = self.photosEnabled;
+  copy.voiceEnabled = self.voiceEnabled;
+  copy.locationEnabled = self.locationEnabled;
+  copy.crashReportingEnabled = self.crashReportingEnabled;
+  copy.customFields = self.customFields;
+  copy.barStyle = self.barStyle;
+  return copy;
+}
+
+
 -(void)setUrl:(NSString*)url
 {
     unichar lastChar = [url characterAtIndex:[url length] - 1];
@@ -173,9 +189,6 @@ BOOL started;
         self._issuesController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
         self._navIssuesController = [[[UINavigationController alloc] initWithRootViewController:_issuesController] autorelease ];
         
-        self._navController.navigationBar.barStyle = self.options.barStyle;
-        self._navIssuesController.navigationBar.barStyle = self.options.barStyle;
-        
         
         [self generateAndStoreUUID];
 
@@ -209,7 +222,7 @@ BOOL started;
 
 - (void) configureJiraConnect:(NSString*) withUrl projectKey:(NSString*)project apiKey:(NSString *)apiKey
 {
-    JMCOptions *options = [[JMCOptions alloc]init];
+    JMCOptions *options = [self.options copy];
     options.url = withUrl;
     options.projectKey = project;
     options.apiKey = apiKey;
@@ -222,7 +235,7 @@ BOOL started;
                        apiKey:(NSString *)apiKey
                    dataSource:(id<JMCCustomDataSource>)customDataSource
 {
-    JMCOptions *options = [[JMCOptions alloc]init];
+    JMCOptions *options = [self.options copy];
     options.url = withUrl;
     options.projectKey = project;
     options.apiKey = apiKey;
@@ -236,7 +249,7 @@ BOOL started;
                      location:(BOOL) locationEnabled
                    dataSource:(id<JMCCustomDataSource>)customDataSource
 {
-    JMCOptions *options = [[JMCOptions alloc]init];
+    JMCOptions *options = [self.options copy];
     options.url = withUrl;
     options.projectKey = project;
     options.apiKey = apiKey;
@@ -253,6 +266,10 @@ BOOL started;
 - (void) configureWithOptions:(JMCOptions*)options dataSource:(id<JMCCustomDataSource>)customDataSource
 {
     self.options = options;
+  
+    self._navController.navigationBar.barStyle = self.options.barStyle;
+    self._navIssuesController.navigationBar.barStyle = self.options.barStyle;
+  
     [self configureJiraConnect:options.url customDataSource:customDataSource];
 }
 

@@ -17,7 +17,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "JMCTransport.h"
 #import "JMCCustomDataSource.h"
-#import "Core/JMCRecorder.h"
+#import "JMCRecorder.h"
 #import "JMCIssueTransport.h"
 #import "JMCReplyTransport.h"
 #import "JMCSketchViewControllerDelegate.h"
