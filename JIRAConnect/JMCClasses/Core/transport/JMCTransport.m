@@ -170,6 +170,8 @@
     if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:statusCode:requestId:)]) {
         [self.delegate transportDidFinishWithError:error statusCode:[request responseStatusCode] requestId:requestId];
     }
+
+#ifdef DEBUG
     NSString *msg = @"";
     if ([error localizedDescription] != nil) {
         msg = [msg stringByAppendingFormat:@"%@.\n", [error localizedDescription]];
@@ -180,6 +182,7 @@
     }
 
     JMCDLog(@"Request failed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
+#endif
 }
 
 #pragma mark end
