@@ -15,12 +15,11 @@
 **/
 
 #import "ASIHTTPRequest.h"
-#import "JSON.h"
 #import "JMCPing.h"
 #import "JMC.h"
 #import "JMCIssueStore.h"
 #import "ASIDownloadCache.h"
-
+#import "JMCTransport.h"
 
 @implementation JMCPing
 
@@ -77,7 +76,7 @@
 
     if (request.responseStatusCode < 300)
     {
-        NSDictionary *data = [responseString JSONValue];
+        NSDictionary *data = [JMCTransport parseJSONString:responseString];
 
         [[JMCIssueStore instance] updateWithData:data];
         [[NSNotificationCenter defaultCenter] postNotificationName:kJMCReceivedCommentsNotification object:self];

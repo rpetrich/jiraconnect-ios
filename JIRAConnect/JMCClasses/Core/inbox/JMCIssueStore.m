@@ -18,7 +18,6 @@
 #import "JMCIssue.h"
 #import "JMCComment.h"
 #import "FMDatabase.h"
-#import "JSON.h"
 #import "JMCMacros.h"
 #import "JMC.h"
 

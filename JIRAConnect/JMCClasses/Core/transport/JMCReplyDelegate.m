@@ -8,10 +8,10 @@
 #import "JMCReplyDelegate.h"
 #import "JMCIssueStore.h"
 #import "JMCRequestQueue.h"
-#import "JSON.h"
 #import "JMC.h"
 #import "JMCComment.h"
 #import "JMCMacros.h"
+#import "JMCTransport.h"
 
 @implementation JMCReplyDelegate
 
@@ -20,7 +20,7 @@
 - (void)transportWillSend:(NSString *)entityJSON requestId:(NSString *)requestId issueKey:(NSString *)issueKey
 {
     // create a comment to be inserted in the db
-    NSDictionary *responseDict = [entityJSON JSONValue];
+    NSDictionary *responseDict = [JMCTransport parseJSONString:entityJSON];
     NSString* description = [responseDict objectForKey:@"description"];
     JMCComment *comment = [[JMCComment alloc] initWithAuthor:@"jiraconnectuser"
                                                   systemUser:YES
@@ -40,7 +40,7 @@
     if (![store commentExistsIssueByUUID:requestId])
     {
         // insert a new comment.... a ping notification may have dropped the db
-        NSDictionary *commentDict = [response JSONValue];
+        NSDictionary *commentDict = [JMCTransport parseJSONString:response];
         JMCComment *comment = [JMCComment newCommentFromDict:commentDict];
         NSString *issueKey = [commentDict valueForKey:@"issueKey"];
         JMCDLog(@"Comment inserted for JIRA %@ and marked as sent: %@", issueKey, requestId);

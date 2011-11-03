@@ -15,7 +15,7 @@
 **/
 
 #import "JMCIssue.h"
-#import "JSON.h"
+#import "JMCTransport.h"
 
 @implementation JMCIssue
 
@@ -61,7 +61,7 @@
 
 +(JMCIssue *)issueWith:(NSString*)issueJSON requestId:(NSString*)uuid
 {
-    NSDictionary *responseDict = [issueJSON JSONValue];
+    NSDictionary *responseDict = [JMCTransport parseJSONString:issueJSON];
     JMCIssue *issue = [[JMCIssue alloc] initWithDictionary:responseDict];
     issue.requestId = uuid;
     return [issue autorelease];

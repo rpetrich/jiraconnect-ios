@@ -19,7 +19,6 @@
 #import "JMCViewController.h"
 #import "JMCMessageBubble.h"
 #import "JMCIssueStore.h"
-#import "JSON.h"
 #import "JMC.h"
 
 static UIFont *font;

@@ -20,7 +20,6 @@
 #import "JMCCrashTransport.h"
 #import "JMCTransport.h"
 #import "JMCIssueStore.h"
-#import "JSON.h"
 #import "JMCCreateIssueDelegate.h"
 
 #define kJiraConnectAutoSubmitCrashes @"JiraConnectAutoSubmitCras"

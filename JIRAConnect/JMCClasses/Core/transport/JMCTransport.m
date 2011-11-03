@@ -15,7 +15,6 @@
 **/
 #import "JMCMacros.h"
 #import "JMCTransport.h"
-#import "JSON.h"
 #import "JMC.h"
 #import "JMCAttachmentItem.h"
 #import "JMCQueueItem.h"
@@ -51,6 +50,65 @@
             }
         }
     }
+}
+
++ (id)parseJSONString:(NSString *)jsonString {
+    NSError *error = nil;
+    id feedResult = nil;
+    
+    SEL sbJSONSelector = NSSelectorFromString(@"JSONValue");
+    SEL jsonKitSelector = NSSelectorFromString(@"objectFromJSONStringWithParseOptions:error:");
+    
+    if (jsonKitSelector && [jsonString respondsToSelector:jsonKitSelector]) {
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[jsonString methodSignatureForSelector:jsonKitSelector]];
+        invocation.target = jsonString;
+        invocation.selector = jsonKitSelector;
+        int parseOptions = 0;
+        [invocation setArgument:&parseOptions atIndex:2];
+        [invocation setArgument:&error atIndex:3];
+        [invocation invoke];
+        [invocation getReturnValue:&feedResult];
+    } 
+    else if (sbJSONSelector && [jsonString respondsToSelector:sbJSONSelector]) {
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[jsonString methodSignatureForSelector:sbJSONSelector]];
+        invocation.target = jsonString;
+        invocation.selector = sbJSONSelector;
+        [invocation invoke];
+        [invocation getReturnValue:&feedResult];
+    } else {
+        JMCALog(@"Error: You need a JSON Framework in your runtime!");
+        [self doesNotRecognizeSelector:_cmd];
+    }    
+    if (error) {
+        JMCALog(@"Error while parsing response feed: %@", [error localizedDescription]);
+        return nil;
+    }
+    
+    return feedResult;
+}
+
++ (NSString *)buildJSONString:(id)object {
+    NSError *error = nil;
+    id stringResult = nil;
+    
+    SEL sbJSONSelector = NSSelectorFromString(@"JSONRepresentation");
+    SEL jsonKitSelector = NSSelectorFromString(@"JSONString");
+    
+    if (jsonKitSelector && [object respondsToSelector:jsonKitSelector]) {
+        stringResult = [object performSelector:jsonKitSelector];
+    } 
+    else if (sbJSONSelector && [object respondsToSelector:sbJSONSelector]) {
+        stringResult = [object performSelector:sbJSONSelector];
+    } else {
+        JMCALog(@"Error: You need a JSON Framework in your runtime!");
+        [self doesNotRecognizeSelector:_cmd];
+    }    
+    if (error) {
+        JMCALog(@"Error while parsing response feed: %@", [error localizedDescription]);
+        return nil;
+    }
+    
+    return stringResult;
 }
 
 - (NSString *) getType {
@@ -110,7 +168,7 @@
     [params setObject:description forKey:@"description"];
     [params addEntriesFromDictionary:[[JMC instance] getMetaData]];
 
-    NSString *issueJSON = [params JSONRepresentation];
+    NSString *issueJSON = [[self class] buildJSONString:params];
     NSData *jsonData = [issueJSON dataUsingEncoding:NSUTF8StringEncoding];
     JMCAttachmentItem *issueItem = [[JMCAttachmentItem alloc] initWithName:@"issue"
                                                                       data:jsonData

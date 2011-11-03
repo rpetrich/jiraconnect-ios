@@ -60,5 +60,7 @@
 + (NSString *)encodeCommonParameters;
 + (NSMutableString *)encodeParameters:(NSDictionary *)parameters;
 
++ (NSString *)buildJSONString:(id)object;
++ (id)parseJSONString:(NSString *)jsonString;
 
 @end

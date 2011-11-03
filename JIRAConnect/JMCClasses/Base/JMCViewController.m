@@ -21,11 +21,11 @@
 #import "JMCAttachmentItem.h"
 #import "JMCSketchViewController.h"
 #import "JMCIssueStore.h"
-#import "JSON.h"
 #import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>
 #import "JMCCreateIssueDelegate.h"
 #import "JMCReplyDelegate.h"
+#import "JMCTransport.h"
 
 @interface JMCViewController ()
 - (void)internalRelease;
@@ -551,7 +551,7 @@ static BOOL isPad(void) {
     }
 
     // add all custom fields as one attachment item
-    NSData *customFieldsJSON = [[customFields JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *customFieldsJSON = [[JMCTransport buildJSONString:customFields] dataUsingEncoding:NSUTF8StringEncoding];
     
     JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
                                                                              data:customFieldsJSON
