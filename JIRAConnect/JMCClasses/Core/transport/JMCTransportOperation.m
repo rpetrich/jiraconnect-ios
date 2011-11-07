@@ -1,4 +1,5 @@
 #import "JMCTransportOperation.h"
+#import "JMCMacros.h"
 #import "JMCRequestQueue.h"
 #import "JMCTransport.h"
 
