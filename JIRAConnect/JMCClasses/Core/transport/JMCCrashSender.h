@@ -15,8 +15,6 @@
 **/
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
-#import "ASIFormDataRequest.h"
 #import "JMCTransport.h"
 
 // flags if the crashreporter should automatically send crashes without asking the user again

@@ -14,11 +14,9 @@
    limitations under the License.
 **/
 
-#import "ASIHTTPRequest.h"
 #import "JMCPing.h"
 #import "JMC.h"
 #import "JMCIssueStore.h"
-#import "ASIDownloadCache.h"
 #import "JMCTransport.h"
 
 @implementation JMCPing
@@ -57,34 +55,53 @@
     JMCDLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url usingCache:[ASIDownloadCache sharedCache]];
-    [request setTimeOutSeconds:60];
-    [request setAllowCompressedResponse:YES];
-    [request setShouldAttemptPersistentConnection:NO]; // without this, the poll request may be made twice. 
-    [request setDelegate:self];
-    [request startAsynchronous];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.timeoutInterval = 60;
+    
+    connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
+- (void)didReceiveComments:(NSDictionary *)comments {
+    [[JMCIssueStore instance] updateWithData:comments];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJMCReceivedCommentsNotification object:self];
+    
+    // update the timestamp since we last requested comments.
+    // sinceMillis is the server's time
+    NSNumber *sinceMillis = [comments valueForKey:@"sinceMillis"];
+    [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJMCLastSuccessfulPingTime];
+    JMCDLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
+}
 
-    NSString *responseString = [request responseString];
+- (void)flushQueue {
+    [[JMC instance] flushRequestQueue];
+}
+
+- (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
+    statusCode = [(NSHTTPURLResponse *)response statusCode];
+    
+    [responseData release];
+    responseData = [[NSMutableData alloc] init];
+    [responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [responseData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
+    NSString *responseString = [[[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding] autorelease];
+    
     if ([responseString isEqualToString:@"null"] || [responseString isEqualToString:@""])
     {
         JMCALog(@"Invalid, empty response from JIRA: %@", responseString);
         return;
     }
-
-    if (request.responseStatusCode < 300)
+    
+    if (statusCode < 300)
     {
         NSDictionary *data = [JMCTransport parseJSONString:responseString];
-
-        [[JMCIssueStore instance] updateWithData:data];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kJMCReceivedCommentsNotification object:self];
-        // update the timestamp since we last requested comments.
-        // sinceMillis is the server's time
-        NSNumber *sinceMillis = [data valueForKey:@"sinceMillis"];
-        [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJMCLastSuccessfulPingTime];
-        JMCDLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
+        [self performSelectorOnMainThread:@selector(didReceiveComments:) withObject:data waitUntilDone:YES];
     }
     else
     {
@@ -92,12 +109,12 @@
     }
     // Flush the request Queue on App launch and once the JIRA Ping has returned and potentially rebuilt the database
     JMCDLog(@"Flushing the request queue");
-    [[JMC instance] flushRequestQueue];
+    [self performSelectorOnMainThread:@selector(flushQueue) withObject:nil waitUntilDone:YES];
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    JMCDLog(@"Ping request failed: '%@'", [request responseString]);
+- (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+    NSString *responseString = [[[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding] autorelease];
+    JMCDLog(@"Ping request failed: '%@'", responseString);
 }
 
 @synthesize baseUrl = _baseUrl;

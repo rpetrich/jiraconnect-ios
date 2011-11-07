@@ -19,8 +19,7 @@
 #import "JMCAttachmentItem.h"
 #import "JMCQueueItem.h"
 #import "JMCRequestQueue.h"
-
-#define kJMCHeaderNameRequestId @"-x-jmc-requestid"
+#import "JMCTransportOperation.h"
 
 @implementation JMCTransport
 
@@ -32,24 +31,55 @@
     return [JMCTransport encodeParameters:queryParams];
 }
 
-+(void)addAllAttachments:(NSArray *)allAttachments toRequest:(ASIFormDataRequest *)upRequest
++(void)addAllAttachments:(NSArray *)allAttachments toRequest:(NSMutableURLRequest *)request boundary:(NSString *)boundary
 {
+    NSMutableData *body = [NSMutableData dataWithCapacity:0];
+
+    NSMutableDictionary *unique = [[NSMutableDictionary alloc] init];
+    
+    // Ignore for now
+    NSInteger index = 0;
     for (u_int i = 0; i < [allAttachments count]; i++) {
         JMCAttachmentItem *item = [allAttachments objectAtIndex:i];
         if (item != nil && item.filenameFormat != nil) {
 
-            NSString *filename = [NSString stringWithFormat:item.filenameFormat, i];
-            NSString *key = [item.name stringByAppendingFormat:@"-%d", i];
+            NSString *filename = [NSString stringWithFormat:item.filenameFormat, index];
+            NSString *key = [item.name stringByAppendingFormat:@"-%d", index];
+            NSLog(@"%@=%@ (%@)", key, item.data, item.contentType);
             if (item.type == JMCAttachmentTypeCustom ||
                 item.type == JMCAttachmentTypeSystem) {
                 // the JIRA Plugin expects all customfields to be in the 'customfields' part.
                 // If this changes, plugin must change too
-                [upRequest setData:item.data withFileName:filename andContentType:item.contentType forKey:item.name];
+                [unique setValue:item forKey:item.name];
             } else {
-                [upRequest addData:item.data withFileName:filename andContentType:item.contentType forKey:key];
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n", item.contentType] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:item.data];
+                [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                index++;
             }
         }
     }
+    
+    for (NSString *key in unique) {
+        JMCAttachmentItem *item = [unique valueForKey:key];
+        NSString *filename = [NSString stringWithFormat:item.filenameFormat, index];
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", item.name, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n", item.contentType] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:item.data];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        index++;
+    }
+    [unique release];
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPBody:body];
 }
 
 + (id)parseJSONString:(NSString *)jsonString {
@@ -121,24 +151,36 @@
     return nil;
 }
 
-- (ASIHTTPRequest *) requestFromItem:(JMCQueueItem *)item
+- (NSString *)hashForConnection:(NSURLConnection *)connection {
+    return [NSString stringWithFormat:@"%ld", connection];
+}
+
+- (JMCTransportOperation *) requestFromItem:(JMCQueueItem *)item
 {
+    NSString *boundary = @"JMCf06ddca8d02e6810c0a7e3e9e9086da87f07080f";
+
     // only ASIFormDataRequest are queued at the moment...
     NSURL *url = [self makeUrlFor:item.originalIssueKey];
     if (!url) {
         JMCALog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
         return nil;
     }
-    ASIFormDataRequest* request = [ASIFormDataRequest requestWithURL:url];
-    [JMCTransport addAllAttachments:item.attachments toRequest:request];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
 
-    [request setShouldContinueWhenAppEntersBackground:YES];
-    [request addRequestHeader:kJMCHeaderNameRequestId value:item.uuid];
-    [request setDelegate:self];
-    [request setShouldAttemptPersistentConnection:NO];
-    [request setTimeOutSeconds:30];
+    // FIXME: Replace by own solution
+    //[request setShouldContinueWhenAppEntersBackground:YES];
+    
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+    [request setValue:item.uuid forHTTPHeaderField:kJMCHeaderNameRequestId];
+    request.timeoutInterval = 60;
 
-    return request;
+    [JMCTransport addAllAttachments:item.attachments toRequest:request boundary:boundary];
+
+    JMCTransportOperation *operation = [JMCTransportOperation operationWithRequest:request delegate:self.delegate];
+    
+    return operation;
 }
 
 -(void)sayThankYou {
@@ -195,52 +237,6 @@
     [self.delegate transportWillSend:issueJSON requestId:requestId issueKey:issueKey];
 
     return [queueItem autorelease];
-}
-
-
-#pragma mark ASIHTTPRequest
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    
-    NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
-    if (request.responseStatusCode < 300) {
-
-        // alert the delegate!
-        [self.delegate transportDidFinish:[request responseString] requestId:requestId];
-
-        // remove the request item from the queue
-        JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
-        [queue deleteItem:requestId];
-        JMCDLog(@"%@ Request succeeded & queued item is deleted. %@ ",self, requestId);
-    } else {
-        JMCDLog(@"%@ Request FAILED & queued item is not deleted. %@",self, requestId);
-        [self requestFailed:request];
-    }
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    NSString *requestId = [request.requestHeaders objectForKey:kJMCHeaderNameRequestId];
-
-    // TODO: time-out items in the request queue after N Attempts ?
-    [[JMCRequestQueue sharedInstance] updateItem:requestId sentStatus:JMCSentStatusRetry bumpNumAttemptsBy:1];
-    
-    NSError *error = [request error]; 
-    if ([self.delegate respondsToSelector:@selector(transportDidFinishWithError:statusCode:requestId:)]) {
-        [self.delegate transportDidFinishWithError:error statusCode:[request responseStatusCode] requestId:requestId];
-    }
-
-#ifdef DEBUG
-    NSString *msg = @"";
-    if ([error localizedDescription] != nil) {
-        msg = [msg stringByAppendingFormat:@"%@.\n", [error localizedDescription]];
-    }
-    NSString *response= [request responseString];
-    if (response) {
-        msg = [msg stringByAppendingString:response];
-    }
-
-    JMCDLog(@"Request failed: %@ URL: %@, response code: %d", msg, [[request url] absoluteURL], [request responseStatusCode]);
-#endif
 }
 
 #pragma mark end

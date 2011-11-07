@@ -15,14 +15,16 @@
 **/
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
-#import "ASIFormDataRequest.h"
 #import "JMCIssue.h"
 #import "JMCQueueItem.h"
+
+@class JMCTransportOperation;
 
 #define kJMCTransportCreateIssuePath   @"rest/jconnect/%@/issue/create?%@"
 #define kJMCTransportCreateCommentPath @"rest/jconnect/%@/issue/comment/%@?%@"
 #define kJMCTransportNotificationsPath @"rest/jconnect/%@/issue/updates?%@"
+
+#define kJMCHeaderNameRequestId @"-x-jmc-requestid"
 
 @protocol JMCTransportDelegate <NSObject>
 
@@ -43,19 +45,19 @@
 
 @interface JMCTransport : NSObject <UIAlertViewDelegate, JMCQueueItemDelegate> 
 {
+    @private
     id <JMCTransportDelegate> _delegate;
 }
 
 @property(nonatomic, retain) id <JMCTransportDelegate> delegate;
 
-- (ASIHTTPRequest *) requestFromItem:(JMCQueueItem *)item;
+- (JMCTransportOperation *) requestFromItem:(JMCQueueItem *)item;
 
 - (JMCQueueItem *)qeueItemWith:(NSString *)description
                    attachments:(NSArray *)attachments
                         params:(NSMutableDictionary *)params
                       issueKey:(NSString *)issueKey;
--(void) sayThankYou;
-- (void)requestFailed:(ASIHTTPRequest *)request;
+- (void)sayThankYou;
 
 + (NSString *)encodeCommonParameters;
 + (NSMutableString *)encodeParameters:(NSDictionary *)parameters;

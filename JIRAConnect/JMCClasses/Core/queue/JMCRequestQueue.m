@@ -13,6 +13,7 @@
 #import "JMCReplyDelegate.h"
 #import "Reachability.h"
 #import "JMC.h"
+#import "JMCTransportOperation.h"
 
 static NSOperationQueue *sharedOperationQueue = nil;
 
@@ -93,6 +94,7 @@ int _maxNumRequestFailures;
             JMCSentStatus sentStatus = [self requestStatusFor:itemId];
             if (sentStatus == JMCSentStatusInProgress ||
                 sentStatus == JMCSentStatusPermError) {
+                JMCALog(@"Ignored queued item as it is in progress: %@.", itemId);
                 continue;
             }
             [self updateItem:itemId sentStatus:JMCSentStatusInProgress bumpNumAttemptsBy:0];

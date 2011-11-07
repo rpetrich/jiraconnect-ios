@@ -20,7 +20,7 @@
 @interface JMCIssueTransport : JMCTransport 
 {
     @private
-    ASIFormDataRequest *createIssueRequest;
+    NSURLRequest *createIssueRequest;
 }
 
 - (void)send:(NSString *)subject description:(NSString *)description attachments:(NSArray *)attachments;

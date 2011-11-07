@@ -25,7 +25,7 @@
     [[JMCIssueStore instance] insertIssue:issue]; // newly created issues have no comments
 
     // anounce that an issue was added, so the JMCIssuesView can redraw, say
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCIssueUpdated object:nil]];
+    [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:kJMCIssueUpdated object:nil] waitUntilDone:NO];
 
 }
 
@@ -44,7 +44,7 @@
         // this means the issue didn't make it to JIRA before the JMCPing rebuilt the database. So, add a new issue.
         [issueStore insertOrUpdateIssue:issue];
     }
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCIssueUpdated object:nil]];
+    [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:kJMCIssueUpdated object:nil] waitUntilDone:NO];
     JMCDLog(@"Successfully created %@", issue.key);
 
 }
@@ -52,7 +52,7 @@
 - (void)transportDidFinishWithError:(NSError*)error statusCode:(int)status requestId:(NSString*)requestId
 {
     // on error - broadcast that the issue could not be sent so views can be re-drawn to display the error
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kJMCIssueUpdated object:nil]];
+    [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:kJMCIssueUpdated object:nil] waitUntilDone:NO];
 }
 
 @end

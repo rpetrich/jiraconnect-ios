@@ -1,0 +1,18 @@
+@interface JMCTransportOperation : NSOperation <NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
+@private
+    BOOL finished;
+    BOOL executing;
+    BOOL looping;
+    NSInteger statusCode;
+    NSMutableData *responseData;
+    NSURLConnection *connection;
+    NSURLRequest *request;
+}
+
+@property (nonatomic, retain) NSURLRequest *request;
+
+@property (nonatomic, assign) id delegate;
+
++ (JMCTransportOperation *)operationWithRequest:(NSURLRequest *)request delegate:(id)delegate;
+
+@end

@@ -20,7 +20,7 @@
 #import "JMCRequestQueue.h"
 
 @interface JMCIssueTransport ()
-@property(nonatomic, retain) ASIFormDataRequest *createIssueRequest;
+@property(nonatomic, retain) NSURLRequest *createIssueRequest;
 @end
 
 @implementation JMCIssueTransport
