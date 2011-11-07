@@ -3,17 +3,19 @@
 // Free for personal or commercial use, with or without modification.
 // No warranty is expressed or implied.
 
-#import "UIImage+Alpha.h"
+#import "UIImage+JMCAlpha.h"
 
 // Private helper methods
 @interface UIImage ()
+
 - (CGImageRef)newBorderMask:(NSUInteger)borderSize size:(CGSize)size;
+
 @end
 
 @implementation UIImage (Alpha)
 
 // Returns true if the image has an alpha layer
-- (BOOL)hasAlpha {
+- (BOOL)jmc_hasAlpha {
     CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
     return (alpha == kCGImageAlphaFirst ||
             alpha == kCGImageAlphaLast ||
@@ -22,8 +24,8 @@
 }
 
 // Returns a copy of the given image, adding an alpha channel if it doesn't already have one
-- (UIImage *)imageWithAlpha {
-    if ([self hasAlpha]) {
+- (UIImage *)jmc_imageWithAlpha {
+    if ([self jmc_hasAlpha]) {
         return self;
     }
     
@@ -54,9 +56,9 @@
 
 // Returns a copy of the image with a transparent border of the given size added around its edges.
 // If the image has no alpha layer, one will be added to it.
-- (UIImage *)transparentBorderImage:(NSUInteger)borderSize {
+- (UIImage *)jmc_transparentBorderImage:(NSUInteger)borderSize {
     // If the image does not have an alpha layer, add one
-    UIImage *image = [self imageWithAlpha];
+    UIImage *image = [self jmc_imageWithAlpha];
     
     CGRect newRect = CGRectMake(0, 0, image.size.width + borderSize * 2, image.size.height + borderSize * 2);
     

@@ -16,7 +16,7 @@
 #import "JMC.h"
 #import "JMCMacros.h"
 #import "JMCViewController.h"
-#import "UIImage+Resize.h"
+#import "UIImage+JMCResize.h"
 #import "UIView+Additions.h"
 #import "JMCAttachmentItem.h"
 #import "JMCSketchViewController.h"
@@ -332,6 +332,8 @@ static BOOL isPad(void) {
     [self hideAudioProgress];
 
     JMCRecorder* recorder = [JMCRecorder instance];
+    // FIXME: This leads to potential crashes as it loads the audio file into memory 
+    // regardless of its size and how many attachments were already added
     JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"recording"
                                                                        data:[recorder audioData]
                                                                        type:JMCAttachmentTypeRecording
@@ -369,6 +371,8 @@ static BOOL isPad(void) {
     
     UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
     
+    // FIXME: Limit number of items so that they don't overlap with the default buttons
+    // or add a "more" item if more than 3 items exist
     NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
     [buttonItems insertObject:buttonItem atIndex:0];
     [self.attachments insertObject:attachment atIndex:0]; // attachments must be kept in sycnh with buttons
@@ -385,7 +389,7 @@ static BOOL isPad(void) {
 
     
     UIImage * iconImg =
-            [origImg thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
+            [origImg jmc_thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
     [self addAttachmentItem:attachment withIcon:iconImg action:@selector(imageAttachmentTapped:)];
     [attachment release];
 }
@@ -462,7 +466,7 @@ static BOOL isPad(void) {
         CGSize size = origImg.size;
         float ratio = screenSize.height / size.height;
         CGSize smallerSize = CGSizeMake(ratio * size.width, ratio * size.height);
-        origImg = [origImg resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
+        origImg = [origImg jmc_resizedImage:smallerSize interpolationQuality:kCGInterpolationMedium];
     }
 
     [self addImageAttachmentItem:origImg];
@@ -485,7 +489,7 @@ static BOOL isPad(void) {
 
     // also update the icon in the toolbar
     UIImage * iconImg =
-            [image thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
+            [image jmc_thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
 
     UIBarButtonItem *item = [self.toolbar.items objectAtIndex:imgIndex];
     ((UIButton *) item.customView).imageView.image = iconImg;
