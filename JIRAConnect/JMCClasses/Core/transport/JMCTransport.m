@@ -166,9 +166,6 @@
         JMCALog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
         return nil;
     }
-
-    // FIXME: Replace by own solution
-    //[request setShouldContinueWhenAppEntersBackground:YES];
     
     // Create request
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];

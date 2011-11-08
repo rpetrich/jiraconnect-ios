@@ -5,8 +5,10 @@
     BOOL looping;
     NSInteger statusCode;
     NSMutableData *responseData;
+    NSThread *requestThread;
     NSURLConnection *connection;
     NSURLRequest *request;
+    UIBackgroundTaskIdentifier backgroundTask;
 }
 
 @property (nonatomic, retain) NSURLRequest *request;

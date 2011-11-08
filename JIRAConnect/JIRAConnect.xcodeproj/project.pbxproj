@@ -241,7 +241,7 @@
 		4D71E5D71468962F00E0A7C3 /* JMCTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCTransport.h; sourceTree = "<group>"; };
 		4D71E5D81468962F00E0A7C3 /* JMCTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransport.m; sourceTree = "<group>"; };
 		4D71E5D91468962F00E0A7C3 /* JMCTransportOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCTransportOperation.h; sourceTree = "<group>"; };
-		4D71E5DA1468962F00E0A7C3 /* JMCTransportOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportOperation.m; sourceTree = "<group>"; };
+		4D71E5DA1468962F00E0A7C3 /* JMCTransportOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportOperation.m; sourceTree = "<group>"; };
 		4D71E5DC1468962F00E0A7C3 /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 		4D71E5DD1468962F00E0A7C3 /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
 		4D71E5DE1468962F00E0A7C3 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };

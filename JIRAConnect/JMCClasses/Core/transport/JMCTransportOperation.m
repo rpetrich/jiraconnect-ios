@@ -31,6 +31,12 @@
 
 #pragma mark - NSOperation Methods
 
+- (void)cancel {
+    if (requestThread != nil) {
+        [self performSelector:@selector(cancelOnRequestThread) onThread:requestThread withObject:nil waitUntilDone:YES];
+    }
+}
+
 - (void)start {
     if (![self isCancelled]) {    
         [self willChangeValueForKey:@"isExecuting"];
@@ -68,11 +74,31 @@
     [[JMCRequestQueue sharedInstance] updateItem:requestId sentStatus:JMCSentStatusRetry bumpNumAttemptsBy:1];
 }
 
+- (void)cancelOnRequestThread {
+    looping = NO;
+    [connection cancel];
+    [self cancelItem];
+}
+
 - (void)connect {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
+    backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        // Synchronize the cleanup call on the main thread in case
+        // the task actually finishes at around the same time.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (backgroundTask != UIBackgroundTaskInvalid) {
+                [[UIApplication sharedApplication] endBackgroundTask:backgroundTask];
+                backgroundTask = UIBackgroundTaskInvalid;
+                [self cancel];
+            }
+        });
+    }];
+#endif
+    
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    requestThread = [NSThread currentThread];
     
     connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
     if (connection != nil) {
         do {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -86,15 +112,25 @@
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];  
     
+    requestThread = nil;
     [connection release], connection = nil;
     [pool drain];
+    
+#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (backgroundTask != UIBackgroundTaskInvalid) {
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTask];
+            backgroundTask = UIBackgroundTaskInvalid;
+        }
+    });
+#endif
 }
 
 #pragma mark - NSURLConnection Delegate Methods
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
     statusCode = [(NSHTTPURLResponse *)response statusCode];
-
+    
     [responseData release];
     responseData = [[NSMutableData alloc] init];
     [responseData setLength:0];
@@ -148,7 +184,7 @@
     NSString *absoluteURL = [[request.URL absoluteURL] description];
     JMCDLog(@"Request failed: %@ URL: %@, response code: %d", msg, absoluteURL, statusCode);
 #endif
-
+    
     looping = NO;
 }
 
