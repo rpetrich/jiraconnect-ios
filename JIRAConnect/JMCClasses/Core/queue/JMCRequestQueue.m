@@ -146,7 +146,7 @@ int _maxNumRequestFailures;
 -(JMCSentStatus) requestStatusFor:(NSString *)uuid
 {
     NSDictionary *metadata = [self metaDataFor:uuid];
-    if (!metadata) {
+    if (metadata) {
         NSNumber *status = [metadata objectForKey:KEY_SENT_STATUS];
         return status.intValue;
     }

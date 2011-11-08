@@ -327,8 +327,10 @@ BOOL started;
 {
     if ([JMCIssueStore instance].count > 0) {
         [self loadIssuesView];
+        [_navIssuesController popToRootViewControllerAnimated:NO];
         return _navIssuesController;
     } else {
+        [_navController popToRootViewControllerAnimated:NO];
         return _navController;
     }
 }

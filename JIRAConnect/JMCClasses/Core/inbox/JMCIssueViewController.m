@@ -213,6 +213,9 @@ static BOOL isPad(void) {
         if (issueCell == nil) {
 
             issueCell = [[[JMCMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+            issueCell.backgroundColor = [UIColor whiteColor];
+            issueCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             CGRect screenFrame = [UIScreen mainScreen].applicationFrame;
             CGSize size = [self.issue.summary sizeWithFont:titleFont constrainedToSize:CGSizeMake(screenFrame.size.width - 40.0f, 18.0f) lineBreakMode:UILineBreakModeTailTruncation];
             
@@ -242,14 +245,17 @@ static BOOL isPad(void) {
 
     //TODO: using a UINavigationController to get the nice navigationBar at the top of the feedback view. better way to do this?
     self.feedbackController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
-    navController.navigationBar.barStyle = [[JMC instance] getBarStyle];
-
-    [self presentModalViewController:navController animated:YES];
     self.feedbackController.replyToIssue = self.issue;
-    self.feedbackController.navigationItem.title = @"Reply";
     
-    [navController release];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.navigationController pushViewController:self.feedbackController animated:YES];
+    }
+    else {
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
+        navController.navigationBar.barStyle = [[JMC instance] getBarStyle];
+        [self presentModalViewController:navController animated:YES];
+        [navController release];
+    }
 }
 
 -(void)refreshTable

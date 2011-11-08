@@ -75,13 +75,21 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // layout views
     self.countdownView.layer.cornerRadius = 7.0;
     
-    self.navigationItem.leftBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Close", @"Close navigation item")
-                                              style:UIBarButtonItemStyleBordered
-                                             target:self
-                                             action:@selector(dismiss)] autorelease];
+    // Show close button only on Phone (use back button on Pad)
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.navigationItem.leftBarButtonItem =
+                [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Close", @"Close navigation item")
+                                                  style:UIBarButtonItemStyleBordered
+                                                 target:self
+                                                 action:@selector(dismiss)] autorelease];
+    }
     
-    self.navigationItem.title = JMCLocalizedString(@"Feedback", "Title of the feedback controller");
+    if (self.replyToIssue) {
+        self.navigationItem.title = JMCLocalizedString(@"Reply", "Title of the feedback controller");
+    }
+    else {
+        self.navigationItem.title = JMCLocalizedString(@"Feedback", "Title of the feedback controller");
+    }
 
 
     self.navigationItem.rightBarButtonItem =

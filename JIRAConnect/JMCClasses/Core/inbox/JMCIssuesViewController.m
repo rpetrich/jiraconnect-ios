@@ -51,7 +51,14 @@ static NSString *cellId = @"CommentCell";
 
 - (void)compose:(UIBarItem *)arg
 {
-    [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
+    UIViewController *feedbackViewController = [[JMC instance] feedbackViewController];
+    if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) && ([feedbackViewController isKindOfClass:[UINavigationController class]])) {
+        UINavigationController *feedbackNavigationController = (UINavigationController *)feedbackViewController;
+        [self.navigationController pushViewController:[feedbackNavigationController.viewControllers objectAtIndex:0] animated:YES];
+    }
+    else {
+        [self presentModalViewController:feedbackViewController animated:YES];
+    }
 }
 
 - (void)cancel:(UIBarItem *)arg
