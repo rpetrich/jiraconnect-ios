@@ -157,19 +157,21 @@
 
 - (JMCTransportOperation *) requestFromItem:(JMCQueueItem *)item
 {
-    NSString *boundary = @"JMCf06ddca8d02e6810c0a7e3e9e9086da87f07080f";
+    // Bounday for multi-part upload
+    static NSString *boundary = @"JMCf06ddca8d02e6810c0a7e3e9e9086da87f07080f";
 
-    // only ASIFormDataRequest are queued at the moment...
+    // Get URL
     NSURL *url = [self makeUrlFor:item.originalIssueKey];
     if (!url) {
         JMCALog(@"Invalid URL made for original issue key: %@", item.originalIssueKey);
         return nil;
     }
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
 
     // FIXME: Replace by own solution
     //[request setShouldContinueWhenAppEntersBackground:YES];
     
+    // Create request
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
     [request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
     [request setHTTPMethod:@"POST"];
     [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];

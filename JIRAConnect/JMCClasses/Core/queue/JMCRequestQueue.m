@@ -19,6 +19,7 @@ static NSOperationQueue *sharedOperationQueue = nil;
 
 #define KEY_NUM_ATTEMPTS @"numAttempts"
 #define KEY_SENT_STATUS @"sentStatus"
+#define KEY_UPDATED_AT @"updatedAt"
 
 @interface JMCRequestQueue ()
 - (NSString *)getQueueIndexPath;
@@ -85,29 +86,50 @@ int _maxNumRequestFailures;
 
 -(void)doFlushQueue
 {
-    @synchronized (_flushLock) { // Ensure a single thread at a time tries to flush the queue.
-
+    // Ensure a single thread at a time tries to flush the queue.
+    @synchronized (_flushLock) { 
         NSMutableDictionary *items = [self getQueueList];        
         JMCDLog(@"Actually flushing queue. Item count: %d", items.count);
+        
         for (NSString *itemId in [items allKeys]) {
             JMCQueueItem *item = [self getItem:itemId];
-            JMCSentStatus sentStatus = [self requestStatusFor:itemId];
-            if (sentStatus == JMCSentStatusInProgress ||
-                sentStatus == JMCSentStatusPermError) {
-                JMCALog(@"Ignored queued item as it is in progress: %@.", itemId);
+            
+            // Get metadata and check if empty
+            NSDictionary *metadata = [self metaDataFor:itemId]
+            if (!metadata) {
                 continue;
             }
+
+            // Check permanent error
+            JMCSentStatus sentStatus = [[metadata valueForKey:KEY_SENT_STATUS] intValue];
+            if (sentStatus == JMCSentStatusPermError) {
+                JMCALog(@"Ignored queued item as sent status shows permanent error: %@.", itemId);
+                continue;
+            }
+            
+            // Check if in progress (timeout after 30minutes)
+            if ((sentStatus == JMCSentStatusInProgress) && ([[metadata objectForKey:KEY_UPDATED_AT] timeIntervalSinceNow] > -30 * 60)) {
+                JMCALog(@"Ignored queued item as send process is in progress: %@.", itemId);
+                continue;
+            }
+            
+            // Set to in progess
             [self updateItem:itemId sentStatus:JMCSentStatusInProgress bumpNumAttemptsBy:0];
+            
+            // Create operation according to type
             NSOperation *operation = nil;
             if ([item.type isEqualToString:kTypeReply]) {
                 operation = [_replyTransport requestFromItem:item];
-            } else if ([item.type isEqualToString:kTypeCreate]) {
+            } 
+            else if ([item.type isEqualToString:kTypeCreate]) {
                 operation = [_issueTransport requestFromItem:item];
             }
+            
             if (operation == nil) {
                 JMCALog(@"Missing or invalid queued item with id: %@. Removing from queue.", itemId);
                 [self deleteItem:itemId];
-            } else {
+            } 
+            else {
                 [sharedOperationQueue addOperation:operation];
                 JMCDLog(@"Added request to operation queue %@", item.uuid);
             }
@@ -115,17 +137,23 @@ int _maxNumRequestFailures;
     }
 }
 
-
--(JMCSentStatus) requestStatusFor:(NSString *)uuid
+-(NSDictionary *) metaDataFor:(NSString *)uuid
 {
     NSMutableDictionary *queueIndex = [self getQueueList];
-    NSDictionary *metadata = [queueIndex objectForKey:uuid];
+    return [queueIndex objectForKey:uuid];
+}
+                
+-(JMCSentStatus) requestStatusFor:(NSString *)uuid
+{
+    NSDictionary *metadata = [self metaDataFor:uuid];
     if (!metadata) {
-        // no news, is good news! means the message was sent.
+        NSNumber *status = [metadata objectForKey:KEY_SENT_STATUS];
+        return status.intValue;
+    }
+    else {
+        // No news is good news, return success
         return JMCSentStatusSuccess;
     }
-    NSNumber *status = [metadata objectForKey:KEY_SENT_STATUS];
-    return status.intValue;
 }
 
 -(void)updateItem:(NSString *)uuid sentStatus:(JMCSentStatus)sentStatus bumpNumAttemptsBy:(int)inc
@@ -136,6 +164,7 @@ int _maxNumRequestFailures;
         NSMutableDictionary *metadata = [queueIndex objectForKey:uuid];
 
         [metadata setObject:[NSNumber numberWithInt:sentStatus] forKey:KEY_SENT_STATUS];
+        [metadata setObject:[NSDate date] forKey:KEY_UPDATED_AT];
 
         NSNumber *lastNumAttempts = [metadata objectForKey:KEY_NUM_ATTEMPTS];
         NSNumber *newNumAttempts  = [NSNumber numberWithInt:lastNumAttempts.intValue + inc];
