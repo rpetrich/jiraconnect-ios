@@ -75,15 +75,6 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // layout views
     self.countdownView.layer.cornerRadius = 7.0;
     
-    // Show close button only on Phone (use back button on Pad)
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.navigationItem.leftBarButtonItem =
-                [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Close", @"Close navigation item")
-                                                  style:UIBarButtonItemStyleBordered
-                                                 target:self
-                                                 action:@selector(dismiss)] autorelease];
-    }
-    
     if (self.replyToIssue) {
         self.navigationItem.title = JMCLocalizedString(@"Reply", "Title of the feedback controller");
     }
@@ -93,7 +84,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 
     self.navigationItem.rightBarButtonItem =
-            [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Send", @"Close navigation item")
+            [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Send", @"Send feedback")
                                               style:UIBarButtonItemStyleDone
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
@@ -146,6 +137,15 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 - (void) viewWillAppear:(BOOL)animated {
     [self.descriptionField becomeFirstResponder];
     [self.locationManager startUpdatingLocation];
+    
+    // Show close button only on Phone (use back button on Pad)
+    if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) || ([self.navigationController.viewControllers objectAtIndex:0] == self)) {
+        self.navigationItem.leftBarButtonItem =
+        [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Cancel", @"Cancel feedback")
+                                          style:UIBarButtonItemStyleBordered
+                                         target:self
+                                         action:@selector(dismiss)] autorelease];
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
