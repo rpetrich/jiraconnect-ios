@@ -330,13 +330,14 @@ BOOL started;
         [_navIssuesController popToRootViewControllerAnimated:NO];
         return _navIssuesController;
     } else {
-        [_navController popToRootViewControllerAnimated:NO];
+        _navController.viewControllers = [NSArray arrayWithObject:_jcController];
         return _navController;
     }
 }
 
 - (UIViewController *)feedbackViewController
 {
+    _navController.viewControllers = [NSArray arrayWithObject:_jcController];
     return _navController;
 }
 
