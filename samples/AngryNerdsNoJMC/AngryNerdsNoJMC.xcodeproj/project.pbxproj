@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01198358144B882000184199 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01198357144B882000184199 /* libz.dylib */; };
+		0140735B13AF35C3008A28C0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0140735A13AF35C3008A28C0 /* libsqlite3.dylib */; };
+		01E90ABC139AE741002CA0D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90ABB139AE741002CA0D9 /* UIKit.framework */; };
+		01E90ABE139AE741002CA0D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90ABD139AE741002CA0D9 /* Foundation.framework */; };
+		01E90AC0139AE741002CA0D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90ABF139AE741002CA0D9 /* CoreGraphics.framework */; };
+		01E90AC6139AE741002CA0D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01E90AC4139AE741002CA0D9 /* InfoPlist.strings */; };
+		01E90AC9139AE741002CA0D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E90AC8139AE741002CA0D9 /* main.m */; };
+		01E90BE3139AE940002CA0D9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE2139AE940002CA0D9 /* AVFoundation.framework */; };
+		01E90BE5139AE948002CA0D9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE4139AE948002CA0D9 /* CFNetwork.framework */; };
+		01E90BE7139AE950002CA0D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE6139AE950002CA0D9 /* SystemConfiguration.framework */; };
+		01E90BE9139AE956002CA0D9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */; };
+		01E90BEC139AE964002CA0D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BEB139AE964002CA0D9 /* CoreLocation.framework */; };
+		01E90BF8139AE9ED002CA0D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */; };
+		8D1AE26D146CEE8E00A0400A /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AE269146CEE8E00A0400A /* UIView+Additions.m */; };
+		8D1AE26E146CEE8E00A0400A /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AE26B146CEE8E00A0400A /* UILabel+VerticalAlign.m */; };
+		F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */; };
+		F8B8053F139B573000EC5AD4 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053C139B573000EC5AD4 /* AngryNerdsViewController.m */; };
+		F8B80540139B573000EC5AD4 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B8053D139B573000EC5AD4 /* AngryNerdsViewController.xib */; };
+		F8B8054C139B574300EC5AD4 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = F8B80541139B574300EC5AD4 /* Resources */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01198357144B882000184199 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0140735A13AF35C3008A28C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		01E90AB7139AE741002CA0D9 /* Angry Nerds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Angry Nerds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01E90ABB139AE741002CA0D9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		01E90ABD139AE741002CA0D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		01E90ABF139AE741002CA0D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		01E90AC3139AE741002CA0D9 /* AngryNerdsNoJMC-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AngryNerdsNoJMC-Info.plist"; sourceTree = "<group>"; };
+		01E90AC5139AE741002CA0D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01E90AC7139AE741002CA0D9 /* AngryNerdsNoJMC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AngryNerdsNoJMC-Prefix.pch"; sourceTree = "<group>"; };
+		01E90AC8139AE741002CA0D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		01E90BE2139AE940002CA0D9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		01E90BE4139AE948002CA0D9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		01E90BE6139AE950002CA0D9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		01E90BEA139AE95D002CA0D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		01E90BEB139AE964002CA0D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8D1AE269146CEE8E00A0400A /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
+		8D1AE26A146CEE8E00A0400A /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
+		8D1AE26B146CEE8E00A0400A /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
+		8D1AE26C146CEE8E00A0400A /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
+		F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsAppDelegate.h; path = Classes/AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
+		F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AngryNerdsAppDelegate.m; path = Classes/AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
+		F8B8053B139B573000EC5AD4 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsViewController.h; path = Classes/AngryNerdsViewController.h; sourceTree = "<group>"; };
+		F8B8053C139B573000EC5AD4 /* AngryNerdsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AngryNerdsViewController.m; path = Classes/AngryNerdsViewController.m; sourceTree = "<group>"; };
+		F8B8053D139B573000EC5AD4 /* AngryNerdsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AngryNerdsViewController.xib; path = Classes/AngryNerdsViewController.xib; sourceTree = "<group>"; };
+		F8B80541139B574300EC5AD4 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = AngryNerds/Resources; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01E90AB4139AE741002CA0D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01198358144B882000184199 /* libz.dylib in Frameworks */,
+				0140735B13AF35C3008A28C0 /* libsqlite3.dylib in Frameworks */,
+				01E90BF8139AE9ED002CA0D9 /* QuartzCore.framework in Frameworks */,
+				01E90BEC139AE964002CA0D9 /* CoreLocation.framework in Frameworks */,
+				01E90AC0139AE741002CA0D9 /* CoreGraphics.framework in Frameworks */,
+				01E90BE9139AE956002CA0D9 /* MobileCoreServices.framework in Frameworks */,
+				01E90BE7139AE950002CA0D9 /* SystemConfiguration.framework in Frameworks */,
+				01E90BE5139AE948002CA0D9 /* CFNetwork.framework in Frameworks */,
+				01E90BE3139AE940002CA0D9 /* AVFoundation.framework in Frameworks */,
+				01E90ABC139AE741002CA0D9 /* UIKit.framework in Frameworks */,
+				01E90ABE139AE741002CA0D9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01E90AAC139AE741002CA0D9 = {
+			isa = PBXGroup;
+			children = (
+				01E90AC1139AE741002CA0D9 /* AngryNerds */,
+				01E90ABA139AE741002CA0D9 /* Frameworks */,
+				01E90AB8139AE741002CA0D9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01E90AB8139AE741002CA0D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01E90AB7139AE741002CA0D9 /* Angry Nerds.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01E90ABA139AE741002CA0D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01198357144B882000184199 /* libz.dylib */,
+				0140735A13AF35C3008A28C0 /* libsqlite3.dylib */,
+				01E90BF7139AE9ED002CA0D9 /* QuartzCore.framework */,
+				01E90BEB139AE964002CA0D9 /* CoreLocation.framework */,
+				01E90BEA139AE95D002CA0D9 /* CoreGraphics.framework */,
+				01E90BE8139AE956002CA0D9 /* MobileCoreServices.framework */,
+				01E90BE6139AE950002CA0D9 /* SystemConfiguration.framework */,
+				01E90BE4139AE948002CA0D9 /* CFNetwork.framework */,
+				01E90BE2139AE940002CA0D9 /* AVFoundation.framework */,
+				01E90ABB139AE741002CA0D9 /* UIKit.framework */,
+				01E90ABD139AE741002CA0D9 /* Foundation.framework */,
+				01E90ABF139AE741002CA0D9 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		01E90AC1139AE741002CA0D9 /* AngryNerds */ = {
+			isa = PBXGroup;
+			children = (
+				F8B80538139B572500EC5AD4 /* Classes */,
+				01E90AC2139AE741002CA0D9 /* Supporting Files */,
+			);
+			path = AngryNerds;
+			sourceTree = "<group>";
+		};
+		01E90AC2139AE741002CA0D9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F8B80541139B574300EC5AD4 /* Resources */,
+				01E90AC3139AE741002CA0D9 /* AngryNerdsNoJMC-Info.plist */,
+				01E90AC4139AE741002CA0D9 /* InfoPlist.strings */,
+				01E90AC7139AE741002CA0D9 /* AngryNerdsNoJMC-Prefix.pch */,
+				01E90AC8139AE741002CA0D9 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F8B80538139B572500EC5AD4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8D1AE269146CEE8E00A0400A /* UIView+Additions.m */,
+				8D1AE26A146CEE8E00A0400A /* UIView+Additions.h */,
+				8D1AE26B146CEE8E00A0400A /* UILabel+VerticalAlign.m */,
+				8D1AE26C146CEE8E00A0400A /* UILabel+VerticalAlign.h */,
+				F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */,
+				F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */,
+				F8B8053B139B573000EC5AD4 /* AngryNerdsViewController.h */,
+				F8B8053C139B573000EC5AD4 /* AngryNerdsViewController.m */,
+				F8B8053D139B573000EC5AD4 /* AngryNerdsViewController.xib */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		01E90AB6139AE741002CA0D9 /* AngryNerdsNoJMC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01E90AD8139AE741002CA0D9 /* Build configuration list for PBXNativeTarget "AngryNerdsNoJMC" */;
+			buildPhases = (
+				01E90AB3139AE741002CA0D9 /* Sources */,
+				01E90AB4139AE741002CA0D9 /* Frameworks */,
+				01E90AB5139AE741002CA0D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AngryNerdsNoJMC;
+			productName = AngryNerds2;
+			productReference = 01E90AB7139AE741002CA0D9 /* Angry Nerds.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		01E90AAE139AE741002CA0D9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Nick Pellow";
+			};
+			buildConfigurationList = 01E90AB1139AE741002CA0D9 /* Build configuration list for PBXProject "AngryNerdsNoJMC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+			);
+			mainGroup = 01E90AAC139AE741002CA0D9;
+			productRefGroup = 01E90AB8139AE741002CA0D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01E90AB6139AE741002CA0D9 /* AngryNerdsNoJMC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		01E90AB5139AE741002CA0D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01E90AC6139AE741002CA0D9 /* InfoPlist.strings in Resources */,
+				F8B80540139B573000EC5AD4 /* AngryNerdsViewController.xib in Resources */,
+				F8B8054C139B574300EC5AD4 /* Resources in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01E90AB3139AE741002CA0D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01E90AC9139AE741002CA0D9 /* main.m in Sources */,
+				F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */,
+				F8B8053F139B573000EC5AD4 /* AngryNerdsViewController.m in Sources */,
+				8D1AE26D146CEE8E00A0400A /* UIView+Additions.m in Sources */,
+				8D1AE26E146CEE8E00A0400A /* UILabel+VerticalAlign.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		01E90AC4139AE741002CA0D9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01E90AC5139AE741002CA0D9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		01E90AD6139AE741002CA0D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos5.0;
+			};
+			name = Debug;
+		};
+		01E90AD7139AE741002CA0D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos5.0;
+			};
+			name = Release;
+		};
+		01E90AD9139AE741002CA0D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../JIRAConnect/JMCClasses/Libraries\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AngryNerds/AngryNerdsNoJMC-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				INFOPLIST_FILE = "AngryNerds/AngryNerdsNoJMC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "Angry Nerds";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		01E90ADA139AE741002CA0D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../JIRAConnect/JMCClasses/Libraries\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AngryNerds/AngryNerdsNoJMC-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				INFOPLIST_FILE = "AngryNerds/AngryNerdsNoJMC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "Angry Nerds";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01E90AB1139AE741002CA0D9 /* Build configuration list for PBXProject "AngryNerdsNoJMC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01E90AD6139AE741002CA0D9 /* Debug */,
+				01E90AD7139AE741002CA0D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01E90AD8139AE741002CA0D9 /* Build configuration list for PBXNativeTarget "AngryNerdsNoJMC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01E90AD9139AE741002CA0D9 /* Debug */,
+				01E90ADA139AE741002CA0D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 01E90AAE139AE741002CA0D9 /* Project object */;
+}
