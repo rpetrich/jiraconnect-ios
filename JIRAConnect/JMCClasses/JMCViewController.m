@@ -525,8 +525,8 @@ static BOOL isPad(void) {
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
 
     
-    if ([[JMC instance].customDataSource respondsToSelector:@selector(attachment)]) {
-        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource attachment];
+    if ([[JMC instance].customDataSource respondsToSelector:@selector(customAttachment)]) {
+        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource customAttachment];
         if (payloadData) {
             [allAttachments addObject:payloadData];
         }
