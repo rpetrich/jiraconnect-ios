@@ -3,7 +3,7 @@
 
 #import "AngryNerdsViewController.h"
 
-@interface AngryNerdsAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     AngryNerdsViewController *viewController;
 }

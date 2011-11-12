@@ -1,7 +1,6 @@
-#import "AngryNerdsAppDelegate.h"
-#import "JMC.h"
+#import "AppDelegate.h"
 
-@implementation AngryNerdsAppDelegate
+@implementation AppDelegate
 
 @synthesize window;
 @synthesize viewController;
@@ -12,45 +11,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    /*
-     To configure JIRA Mobile Connect:
-     1. call [[JMC instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
-     2. You can then present [JMC instance].viewController from anywhere in your app
-     3. Be sure that your JIRA instance has the JIRA Mobile Connect plugin installed. (https://plugins.atlassian.com/plugin/details/322837)
-     4. Lots of other configuration available via JMCOptions.
-     5. NOTE: Location tracking is disabled by default.
-     */
 
-    [[JMC instance]
-            configureJiraConnect:@"http://localhost:2990/jira/"
-                      projectKey:@"NERDS"
-                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
-                        location:YES 
-                      dataSource:viewController];
-
-//    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
-//                              projectKey:@"NERDS"
-//                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
-//                                location:YES
-//                              dataSource:viewController];
-
-
-//    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
-//                                             project:@"NERDS"
-//                                              apiKey:@"81da567a-ac0d-4e6c-b55a-627caecce9c0"
-//                                              photos:YES
-//                                               voice:YES
-//                                            location:YES
-//                                      crashreporting:YES
-//                                        customFields:nil];
-//    options.barStyle = UIBarStyleDefault;
-//    [[JMC instance]
-//            configureWithOptions:options
-//                  dataSource:viewController];
-
-
-    [window addSubview:viewController.view];
+    window.rootViewController = self.viewController;
+    [window addSubview:self.viewController.view];
     [window makeKeyAndVisible];
+
+    NSLog(@"View Controller: %@", viewController);
+    
+    
     return YES;
 }
 
