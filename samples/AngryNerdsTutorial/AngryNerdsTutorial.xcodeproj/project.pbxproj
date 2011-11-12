@@ -81,7 +81,6 @@
 		01E98FFE146DF0C700665A05 = {
 			isa = PBXGroup;
 			children = (
-				01E99038146DF15700665A05 /* QuartzCore.framework */,
 				01E99013146DF0C700665A05 /* AngryNerdsTutorial */,
 				01E9900C146DF0C700665A05 /* Frameworks */,
 				01E9900A146DF0C700665A05 /* Products */,
@@ -99,6 +98,7 @@
 		01E9900C146DF0C700665A05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01E99038146DF15700665A05 /* QuartzCore.framework */,
 				01E9900D146DF0C700665A05 /* UIKit.framework */,
 				01E9900F146DF0C700665A05 /* Foundation.framework */,
 				01E99011146DF0C700665A05 /* CoreGraphics.framework */,
