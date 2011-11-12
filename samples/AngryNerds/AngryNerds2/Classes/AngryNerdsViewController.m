@@ -74,7 +74,7 @@
 }
 
 
-- (JMCAttachmentItem *) attachment
+- (JMCAttachmentItem *) customAttachment
 {
 
     return [[[JMCAttachmentItem alloc] initWithName:@"custom-attachment"
