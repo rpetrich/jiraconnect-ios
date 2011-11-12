@@ -45,7 +45,7 @@
 
             NSString *filename = [NSString stringWithFormat:item.filenameFormat, index];
             NSString *key = [item.name stringByAppendingFormat:@"-%d", index];
-            NSLog(@"%@=%@ (%@)", key, item.data, item.contentType);
+            JMCDLog(@"%@=%@ (%@)", key, item.name, item.contentType);
             if (item.type == JMCAttachmentTypeCustom ||
                 item.type == JMCAttachmentTypeSystem) {
                 // the JIRA Plugin expects all customfields to be in the 'customfields' part.
@@ -106,8 +106,14 @@
         [invocation invoke];
         [invocation getReturnValue:&feedResult];
     } else {
-        JMCALog(@"Error: You need a JSON Framework in your runtime!");
-        [self doesNotRecognizeSelector:_cmd];
+        JMCALog(@"Error: You need a JSON Framework in your runtime! Also add the classes in JIRAConnect/Support/SBJSON/Classes to your project. ");
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Missing JSON Lib" 
+                                                       message:@"Please add the SBJSON Framework to your runtime. See logs for more information." 
+                                                      delegate:nil 
+                                             cancelButtonTitle:@"OK" 
+                                             otherButtonTitles: nil];
+        [alert show];
+        [alert release];
     }    
     if (error) {
         JMCALog(@"Error while parsing response feed: %@", [error localizedDescription]);

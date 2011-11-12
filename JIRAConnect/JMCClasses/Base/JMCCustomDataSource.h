@@ -29,7 +29,7 @@ typedef enum {
 /**
 * Returns a custom attachment that will be attached to the issue.
 */
--(JMCAttachmentItem *) attachment;
+-(JMCAttachmentItem *) customAttachment;
 
 /**
 * A dictionary containing any specialized custom fields (keyed by custom field name) 

@@ -1,8 +1,7 @@
 #import "AngryNerdsViewController.h"
-#import "JMC.h"
-#import "UIView+Additions.h"
 #import <QuartzCore/QuartzCore.h>
-#import "JMCMacros.h"
+#import "UIView+Additions.h"
+
 
 @implementation AngryNerdsViewController
 
@@ -37,8 +36,7 @@
 
 - (IBAction)triggerFeedback
 {
-    UIViewController *controller = [[JMC instance] viewController];
-    [self presentModalViewController:controller animated:YES];
+
 }
 
 - (IBAction)triggerCrash
@@ -63,26 +61,6 @@
     return [NSArray arrayWithObjects:@"iOS", @"JIRA", nil];
 }
 
-- (NSString *)jiraIssueTypeNameFor:(JMCIssueType)type
-{
-    if (type == JMCIssueTypeCrash) {
-        return @"crash";
-    } else if (type == JMCIssueTypeFeedback) {
-        return @"improvement";
-    }
-    return nil;
-}
-
-
-- (JMCAttachmentItem *) customAttachment
-{
-
-    return [[[JMCAttachmentItem alloc] initWithName:@"custom-attachment"
-                                              data:[@"Add any other data as an attachment" dataUsingEncoding:NSUTF8StringEncoding]
-                                              type:JMCAttachmentTypePayload
-                                       contentType:@"text/plain"
-                                    filenameFormat:@"customattachment.txt"] autorelease];
-}
 
 -(CGRect)notifierStartFrame
 {
@@ -100,7 +78,7 @@
 
 - (IBAction)triggerDisplayNotifications
 {
-    [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
+ 
 }
 
 // allow shake gesture to trigger Feedback

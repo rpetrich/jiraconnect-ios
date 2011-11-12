@@ -141,9 +141,8 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
-    NSString *responseString = [[[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding] autorelease];
     NSString *requestId = [request valueForHTTPHeaderField:kJMCHeaderNameRequestId];
-    
+    NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding];    
     if (statusCode < 300) {
         // alert the delegate!
         [self.delegate transportDidFinish:responseString requestId:requestId];
@@ -153,15 +152,16 @@
         [queue deleteItem:requestId];
         JMCDLog(@"%@ Request succeeded & queued item is deleted. %@ ",self, requestId);
     } else {
-        JMCDLog(@"%@ Request FAILED & queued item is not deleted. %@",self, requestId);
+
+        JMCDLog(@"%@ Request FAILED & queued item is not deleted. %@ %@",self, requestId, responseString);
         [self connection:connection didFailWithError:nil];
     }
-    
+    [responseString release];
     looping = NO;
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-    NSString *responseString = [[[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding] autorelease];
+
     NSString *requestId = [request valueForHTTPHeaderField:kJMCHeaderNameRequestId];
     
     // TODO: time-out items in the request queue after N Attempts ?
@@ -176,13 +176,13 @@
     if ([error localizedDescription] != nil) {
         msg = [msg stringByAppendingFormat:@"%@.\n", [error localizedDescription]];
     }
-    NSString *response = responseString;
+    NSString *response = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding];
     if (response) {
         msg = [msg stringByAppendingString:response];
     }
-    
     NSString *absoluteURL = [[request.URL absoluteURL] description];
     JMCDLog(@"Request failed: %@ URL: %@, response code: %d", msg, absoluteURL, statusCode);
+    [response release];
 #endif
     
     looping = NO;
