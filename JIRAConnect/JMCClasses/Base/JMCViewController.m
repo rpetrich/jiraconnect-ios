@@ -223,8 +223,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     return barItem;
 }
 
-- (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
-    
+- (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView 
+{
     return YES;
 }
 
@@ -352,6 +352,7 @@ static BOOL isPad(void) {
     UIImage *newImage = [UIImage imageNamed:@"icon_record_2"];
     [self addAttachmentItem:attachment withIcon:newImage action:@selector(voiceAttachmentTapped:)];
     [attachment release];
+    [recorder cleanUp];
 }
 
 -(void)reindexAllItems:(NSArray*)buttonItems

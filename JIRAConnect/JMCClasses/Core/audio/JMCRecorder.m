@@ -18,7 +18,7 @@
 #import "JMCRecorder.h"
 
 
-#define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
+#define TMP_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"]
 
 @implementation JMCRecorder
 
@@ -41,7 +41,7 @@ NSString *_recorderFilePath;
     if ((self = [super init])) {
 
         self.recordTime = 10;
-        _recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.aac", DOCUMENTS_FOLDER] retain];
+        _recorderFilePath = [[NSString stringWithFormat:@"%@/jiraconnect-recording.aac", TMP_FOLDER] retain];
 
         // delete the previous recording.
         [self cleanUp];

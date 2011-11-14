@@ -13,20 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-//
-//  Created by nick on 22/05/11.
-//
-//  To change this template use File | Settings | File Templates.
-//
-
 
 #import <Foundation/Foundation.h>
 
 enum {
     JMCAttachmentTypeRecording = 1,
     JMCAttachmentTypeImage = 2,
-    JMCAttachmentTypePayload = 3,
-    JMCAttachmentTypeCustom = 4,
+    JMCAttachmentTypePayload = 3, // use this type for any custom attachments.
+    JMCAttachmentTypeCustom = 4,  // used for any custom fields
     JMCAttachmentTypeSystem = 5
 };
 typedef int JMCAttachmentType;

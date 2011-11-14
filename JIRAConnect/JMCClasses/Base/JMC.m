@@ -20,6 +20,7 @@
 #import "JMCCreateIssueDelegate.h"
 #import "JMCRequestQueue.h"
 #import "JMCIssuesViewController.h"
+#include <sys/xattr.h>
 
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
@@ -490,6 +491,18 @@ BOOL started;
     return self._dataDirPath;
 }
 
+// copied from http://developer.apple.com/library/ios/#qa/qa1719/_index.html
+- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    const char* filePath = [[URL path] fileSystemRepresentation];
+    
+    const char* attrName = "com.apple.MobileBackup";
+    u_int8_t attrValue = 1;
+    
+    int result = setxattr(filePath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+    return result == 0;
+}
+
 - (NSString *)makeDataDirPath 
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -500,6 +513,7 @@ BOOL started;
     if (![fileManager fileExistsAtPath:dataDirPath]) {
         [fileManager createDirectoryAtPath:dataDirPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
+    [self addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:dataDirPath]];
     return dataDirPath;
 }
 

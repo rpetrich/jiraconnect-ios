@@ -16,7 +16,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JMCPing : NSObject <NSURLConnectionDataDelegate> {
+@interface JMCPing : NSObject 
+{
     NSInteger statusCode;
     NSMutableData *responseData;
     NSURL *_baseUrl;

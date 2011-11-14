@@ -1,4 +1,5 @@
-@interface JMCTransportOperation : NSOperation <NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
+@interface JMCTransportOperation : NSOperation  
+{
 @private
     BOOL finished;
     BOOL executing;
