@@ -589,7 +589,10 @@ static BOOL isPad(void) {
                       description:self.descriptionField.text
                       attachments:allAttachments];
     }
+
+    // TODO: handle case when this is not a modal view controller,
     [self dismissModalViewControllerAnimated:YES];
+
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
     [self.toolbar setItems:systemToolbarItems];
