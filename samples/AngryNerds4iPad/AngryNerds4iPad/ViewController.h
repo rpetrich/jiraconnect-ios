@@ -11,5 +11,6 @@
 @interface ViewController : UIViewController
 
 -(IBAction) feedMe;
+-(IBAction) crashMe;
 
 @end

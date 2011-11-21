@@ -19,11 +19,16 @@
 
 -(IBAction) feedMe
 {
-
-    [[JMC instance] viewController].modalPresentationStyle = UIModalPresentationFormSheet;
-    [[JMC instance] viewController].modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:[[JMC instance] viewController] animated:YES];
 }
+
+
+-(IBAction) crashMe
+{
+    NSLog(@"Crashing!");
+    CFRelease(NULL);
+}
+
 
 #pragma mark - View lifecycle
 

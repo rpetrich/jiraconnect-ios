@@ -17,7 +17,7 @@
 #import "JMCMacros.h"
 #import "JMCViewController.h"
 #import "UIImage+JMCResize.h"
-#import "UIView+Additions.h"
+#import "UIView+JMCAdditions.h"
 #import "JMCAttachmentItem.h"
 #import "JMCSketchViewController.h"
 #import "JMCIssueStore.h"
@@ -95,9 +95,9 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     self.toolbar.autoresizesSubviews = YES;
 
 //    self.descriptionField.top = 44;  
-    self.descriptionField.width = self.view.width;
+    self.descriptionField.jmc_width = self.view.jmc_width;
 
-    self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)] autorelease];
+    self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.jmc_width, 44)] autorelease];
     [self.toolbar setBarStyle:[[JMC instance] getBarStyle]];
 
     UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
@@ -176,14 +176,14 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     UIInterfaceOrientation o = [self interfaceOrientation];
     if (UIInterfaceOrientationIsPortrait(o)) {
         textViewHeight -= kbSize.height;
-        self.countdownView.height = 80.0f;
+        self.countdownView.jmc_height = 80.0f;
     } else if (UIInterfaceOrientationIsLandscape(o)) {
         textViewHeight -= kbSize.width;
-        self.countdownView.height = (textViewHeight - self.navigationController.navigationBar.height) * 0.9f;
+        self.countdownView.jmc_height = (textViewHeight - self.navigationController.navigationBar.jmc_height) * 0.9f;
     }
 
     CGRect newTextViewFrame = self.view.bounds;
-    float yOffset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.height : 0;
+    float yOffset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.jmc_height : 0;
     newTextViewFrame.size.height = textViewHeight - yOffset;
     newTextViewFrame.origin.y = yOffset;
 

@@ -25,10 +25,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
-                              projectKey:@"NERDS"
-                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"];
     
+    //    [[CNSHockeyManager sharedHockeyManager] !! configureWithIdentifier:@"APP_IDENTIFIER" delegate:nil];
+    
+    [[JMC instance]
+        configureJiraConnect:@"http://localhost:2990/jira/"
+                  projectKey:@"NERDS"
+                      apiKey:@"a8848688-5f68-431a-84ad-8fa0a025f893"];
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.

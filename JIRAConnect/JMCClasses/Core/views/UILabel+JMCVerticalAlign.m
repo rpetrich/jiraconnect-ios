@@ -1,9 +1,9 @@
 
-#import "UILabel+VerticalAlign.h"
+#import "UILabel+JMCVerticalAlign.h"
 
 
-@implementation UILabel (VerticalAlign)
-- (void)alignTop {
+@implementation UILabel (JMCVerticalAlign)
+- (void)jmc_alignTop {
     CGSize fontSize = [self.text sizeWithFont:self.font];
     double finalHeight = fontSize.height * self.numberOfLines;
     double finalWidth = self.frame.size.width;    //expected width of label
@@ -13,7 +13,7 @@
         self.text = [self.text stringByAppendingString:@"\n "];
 }
 
-- (void)alignBottom {
+- (void)jmc_alignBottom {
     CGSize fontSize = [self.text sizeWithFont:self.font];
     double finalHeight = fontSize.height * self.numberOfLines;
     double finalWidth = self.frame.size.width;    //expected width of label

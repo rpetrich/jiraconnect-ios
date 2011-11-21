@@ -17,7 +17,7 @@
 #import "JMCIssuePreviewCell.h"
 #import "JMCIssueViewController.h"
 #import "JMC.h"
-#import "UILabel+VerticalAlign.h"
+#import "UILabel+JMCVerticalAlign.h"
 #import "JMCMacros.h"
 #import "JMCRequestQueue.h"
 
@@ -139,7 +139,7 @@ static NSString *cellId = @"CommentCell";
         
     JMCComment *latestComment = [issue latestComment];
     cell.detailsLabel.text = latestComment != nil ? latestComment.body : issue.description;
-    [cell.detailsLabel alignTop];
+    [cell.detailsLabel jmc_alignTop];
     cell.titleLabel.text = issue.summary;
     NSDate *date = latestComment.date != nil ? latestComment.date : issue.dateUpdated;
     cell.dateLabel.text = [_dateFormatter stringFromDate:date];
