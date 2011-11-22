@@ -177,7 +177,7 @@ static CrashReporter *crashReportSender = nil;
 
     NSFileManager *fm = [NSFileManager defaultManager];
 
-    for (int i = 0; i < [_crashFiles count]; i++)
+    for (NSUInteger i = 0; i < [_crashFiles count]; i++)
     {
         [fm removeItemAtPath:[_crashesDir stringByAppendingPathComponent:[_crashFiles objectAtIndex:i]] error:&error];
     }
@@ -190,7 +190,7 @@ static CrashReporter *crashReportSender = nil;
 
     NSMutableArray *crashReports = [NSMutableArray arrayWithCapacity:[_crashFiles count]];
 
-    for (int i = 0; i < [_crashFiles count]; i++)
+    for (NSUInteger i = 0; i < [_crashFiles count]; i++)
     {
         NSString *filename = [_crashesDir stringByAppendingPathComponent:[_crashFiles objectAtIndex:i]];
 

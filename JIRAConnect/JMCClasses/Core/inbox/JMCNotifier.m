@@ -27,10 +27,6 @@ CGRect endFrame;
 
 - (id)initWithStartFrame:(CGRect)start endFrame:(CGRect)end {
     if ((self = [super init])) {
-        // TODO: only create this view controller when the user actually taps the in-app notification.
-        self.issuesViewController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
-        self.issuesViewController.isModal = NO;
-
         startFrame = start;
         endFrame = end;
         
@@ -49,19 +45,10 @@ CGRect endFrame;
         [_button setFrame:endFrame];
         [_button addTarget:self action:@selector(displayNotifications:) forControlEvents:UIControlEventTouchUpInside];
 
-        _viewController = [[UINavigationController alloc] initWithRootViewController:self.issuesViewController];
-        _viewController.navigationBar.barStyle = [[JMC instance] getBarStyle];
-        
-
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notify:) name:kJMCReceivedCommentsNotification object:nil];
 
     }
     return self;
-}
-
-- (void)populateIssuesViewController {
-    [self.issuesViewController loadView];
-    [self.issuesViewController setIssueStore:[JMCIssueStore instance]];
 }
 
 - (void)notify:(NSTimer *)timer {
@@ -88,8 +75,6 @@ CGRect endFrame;
         
         _label.text = [NSString stringWithFormat:notificationFmt, count];
 
-        [self populateIssuesViewController];
-
         [_toolbar setFrame:startFrame];
         [_view addSubview:_toolbar];
 
@@ -104,6 +89,25 @@ CGRect endFrame;
     }
 }
 
+- (UIWindow *)findVisibleWindow {
+    UIWindow *visibleWindow = nil;
+    
+    NSArray *windows = [[UIApplication sharedApplication] windows];
+    for (UIWindow *window in windows) {
+        if (!window.hidden && !visibleWindow) {
+            visibleWindow = window;
+        }
+        if ([UIWindow instancesRespondToSelector:@selector(rootViewController)]) {
+            if ([window rootViewController]) {
+                visibleWindow = window;
+                break;
+            }
+        }
+    }
+    
+    return visibleWindow;
+}
+
 - (void)displayNotifications:(id)sender {
     
     CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
@@ -111,23 +115,30 @@ CGRect endFrame;
     CGRect currStartFrame = CGRectMake(startFrame.origin.x, startFrame.origin.y, frameSize.width, frameSize.height);
     CGRect currEndFrame = CGRectMake(0, 0 + statusBarFrame.size.height, frameSize.width, frameSize.height);
 
-    [self.viewController.view setFrame:currStartFrame];
-    [self.view addSubview:self.viewController.view];
+    UIViewController *viewController = [[JMC instance] issuesViewControllerWithMode:JMCViewControllerModeDefault];
+    UIWindow *window = [self findVisibleWindow];
+    if ((window) && ([window respondsToSelector:@selector(rootViewController)]) && ([window rootViewController])) {
+        [window.rootViewController presentModalViewController:viewController animated:YES];
+    }
+    else {
+        [viewController.view setFrame:currStartFrame];
+        [self.view addSubview:viewController.view];
 
-    [UIView beginAnimations:@"animateView" context:nil];
-    [UIView setAnimationDuration:0.4];
-    [self.viewController.view setFrame:currEndFrame]; //notice this is ON screen!
-    [UIView commitAnimations];
+        [UIView beginAnimations:@"animateView" context:nil];
+        [UIView setAnimationDuration:0.4];
+        [viewController.view setFrame:currEndFrame]; //notice this is ON screen!
+        [UIView commitAnimations];
+    }
 
     [_button removeFromSuperview];
     [_toolbar removeFromSuperview];
 }
 
-@synthesize viewController = _viewController, view = _view, issuesViewController = _issuesViewController;
+@synthesize view = _view;
 
 - (void)dealloc {
 
-    self.view = nil, self.viewController = nil, self.issuesViewController = nil;
+    self.view = nil;
     [_label release];
     _label = nil;
     [_toolbar release];

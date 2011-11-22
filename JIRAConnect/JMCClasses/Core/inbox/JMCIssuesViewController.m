@@ -26,16 +26,11 @@ static NSString *cellId = @"CommentCell";
 @implementation JMCIssuesViewController
 
 @synthesize issueStore = _issueStore;
-@synthesize isModal = _isModal;
 
 - (id)initWithStyle:(UITableViewStyle)style {
 
     self = [super initWithStyle:style];
     if (self) {
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Close", @"Close navigation item")
-                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                 target:self
-                                                                                 action:@selector(cancel:)] autorelease];
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                                 target:self
                                                                                                 action:@selector(compose:)] autorelease];
@@ -44,7 +39,6 @@ static NSString *cellId = @"CommentCell";
         _dateFormatter = [[[NSDateFormatter alloc] init] retain];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        self.isModal = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCIssueUpdated object:nil];
     }
     return self;
@@ -52,20 +46,25 @@ static NSString *cellId = @"CommentCell";
 
 - (void)compose:(UIBarItem *)arg
 {
-    UIViewController *feedbackViewController = [[JMC instance] feedbackViewController];
-    if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) && ([feedbackViewController isKindOfClass:[UINavigationController class]])) {
-        UINavigationController *feedbackNavigationController = (UINavigationController *)feedbackViewController;
-        [self.navigationController pushViewController:[feedbackNavigationController.viewControllers objectAtIndex:0] animated:YES];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.navigationController pushViewController:[[JMC instance] feedbackViewControllerWithMode:JMCViewControllerModeCustom] animated:YES];
     }
     else {
-        [self presentModalViewController:feedbackViewController animated:YES];
+        [self presentModalViewController:[[JMC instance] feedbackViewControllerWithMode:JMCViewControllerModeDefault] animated:YES];
     }
 }
 
 - (void)cancel:(UIBarItem *)arg
 {
-
-    if (self.isModal) {
+    UIViewController *presentingViewController = nil;
+    if ([self.navigationController respondsToSelector:@selector(presentingViewController)]) {
+        presentingViewController = self.navigationController.presentingViewController;
+    }
+    else {
+        presentingViewController = self.navigationController.parentViewController;
+    }
+    
+    if (presentingViewController) {
         [self dismissModalViewControllerAnimated:YES];
     } else {
         CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
@@ -105,6 +104,17 @@ static NSString *cellId = @"CommentCell";
 {
     [[JMCRequestQueue sharedInstance] flushQueue];
     [super viewWillAppear:animated];
+
+    // If we are not the root of the stack, we don't show the close button
+    if ([self.navigationController.viewControllers count] > 1) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+    else {
+        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Close", @"Close navigation item")
+                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                 target:self
+                                                                                 action:@selector(cancel:)] autorelease];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -97,28 +97,33 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 //    self.descriptionField.top = 44;  
     self.descriptionField.jmc_width = self.view.jmc_width;
 
-    self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.jmc_width, 44)] autorelease];
-    [self.toolbar setBarStyle:[[JMC instance] getBarStyle]];
+    // Create the toolbar only on iPhone for now
+    // FIXME: Replace by new UI
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.jmc_width, 44)] autorelease];
+        [self.toolbar setBarStyle:[[JMC instance] getBarStyle]];
 
-    UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
-    UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
-    UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                            target:nil action:nil] autorelease];
-    NSMutableArray* items = [NSMutableArray arrayWithCapacity:3];
-    [items addObject:spaceButton];
+        UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
+        UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
+        UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                target:nil action:nil] autorelease];
+        NSMutableArray* items = [NSMutableArray arrayWithCapacity:3];
+        [items addObject:spaceButton];
 
-    if ([[JMC instance] isPhotosEnabled]) {
-        [items addObject:screenshotButton];
+        if ([[JMC instance] isPhotosEnabled]) {
+            [items addObject:screenshotButton];
+        }
+        if ([[JMC instance] isVoiceEnabled]) {
+            [items addObject:recordButton];
+        }
+
+        systemToolbarItems = [[NSArray arrayWithArray:items] retain];
+        self.voiceButton = recordButton;
+        self.screenshotButton = screenshotButton;
+        self.toolbar.items = systemToolbarItems;
+  
+        self.descriptionField.inputAccessoryView = self.toolbar;
     }
-    if ([[JMC instance] isVoiceEnabled]) {
-        [items addObject:recordButton];
-    }
-
-    systemToolbarItems = [[NSArray arrayWithArray:items] retain];
-    self.voiceButton = recordButton;
-    self.screenshotButton = screenshotButton;
-    self.toolbar.items = systemToolbarItems;
-    self.descriptionField.inputAccessoryView = self.toolbar;
 
     // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
     _issueTransport = [[JMCIssueTransport alloc] init];
@@ -358,7 +363,7 @@ static BOOL isPad(void) {
 -(void)reindexAllItems:(NSArray*)buttonItems
 {
     // re-tag all buttons... with their new index.
-    for (int i = 0; i < [buttonItems count]; i++) {
+    for (NSUInteger i = 0; i < [buttonItems count]; i++) {
         UIBarButtonItem *item = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
         item.customView.tag = i;
     }
@@ -590,8 +595,13 @@ static BOOL isPad(void) {
                       attachments:allAttachments];
     }
 
-    // TODO: handle case when this is not a modal view controller,
-    [self dismissModalViewControllerAnimated:YES];
+    if ([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        // FIXME: Call delegate here instead of dismissing
+        [self dismissModalViewControllerAnimated:YES];
+    }
 
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];

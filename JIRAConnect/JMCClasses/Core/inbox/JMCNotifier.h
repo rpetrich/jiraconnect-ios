@@ -19,19 +19,12 @@
 @interface JMCNotifier : NSObject
 {
     UIView *_view;
-    UINavigationController *_viewController;
-    JMCIssuesViewController *_issuesViewController;
-
 }
 
-@property(retain, nonatomic) UINavigationController *viewController;
-@property(retain, nonatomic) JMCIssuesViewController *issuesViewController;
 @property(retain, nonatomic) UIView *view;
 
 - (id)initWithStartFrame:(CGRect)start endFrame:(CGRect)end;
 
 - (void)displayNotifications:(id)sender;
-
-- (void)populateIssuesViewController;
 
 @end

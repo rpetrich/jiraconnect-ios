@@ -20,12 +20,10 @@
 @interface JMCIssuesViewController : UITableViewController {
 
     JMCIssueStore * _issueStore;
-    BOOL _isModal;
     @private
     NSDateFormatter *_dateFormatter;
 }
 
 @property (retain, nonatomic) JMCIssueStore * issueStore;
-@property (assign) BOOL isModal;
 
 @end

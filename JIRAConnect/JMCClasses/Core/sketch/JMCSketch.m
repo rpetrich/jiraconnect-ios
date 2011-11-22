@@ -122,7 +122,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 	JMCLine *lastLine = [lines lastObject];
 	if (!lastLine) return;
 	// check undoto
-	if (undoto >= [lines count]) return;
+	if ((NSUInteger)undoto >= [lines count]) return;
 	
 	[undoHistory addObject:lastLine];
 	[lines removeLastObject];

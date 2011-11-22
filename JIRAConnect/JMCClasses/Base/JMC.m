@@ -120,10 +120,6 @@
 
 @property (nonatomic, retain) JMCPing * _pinger;
 @property (nonatomic, retain) JMCNotifier * _notifier;
-@property (nonatomic, retain) JMCViewController * _jcController;
-@property (nonatomic, retain) JMCIssuesViewController * _issuesController;
-@property (nonatomic, retain) UINavigationController* _navIssuesController;
-@property (nonatomic, retain) UINavigationController* _navController;
 @property (nonatomic, retain) JMCCrashSender *_crashSender;
 @property (nonatomic, retain) NSString* _dataDirPath;
 
@@ -142,10 +138,6 @@ BOOL started;
 @synthesize url=_url;
 @synthesize _pinger;
 @synthesize _notifier;
-@synthesize _jcController;
-@synthesize _issuesController;
-@synthesize _navController;
-@synthesize _navIssuesController;
 @synthesize _crashSender;
 @synthesize _dataDirPath;
 
@@ -166,10 +158,6 @@ BOOL started;
     self.customDataSource = nil;
     [_pinger release];
     [_notifier release];
-    [_jcController release];
-    [_issuesController release];
-    [_navIssuesController release];
-    [_navController release];
     [_crashSender release];
     [_dataDirPath release];
 
@@ -184,12 +172,6 @@ BOOL started;
         [options release];
         
         self._dataDirPath = [self makeDataDirPath];
-        
-        self._jcController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
-        self._navController = [[[UINavigationController alloc] initWithRootViewController:_jcController] autorelease ];
-        self._issuesController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
-        self._navIssuesController = [[[UINavigationController alloc] initWithRootViewController:_issuesController] autorelease ];
-        
         
         [self generateAndStoreUUID];
 
@@ -268,9 +250,6 @@ BOOL started;
 {
     self.options = options;
   
-    self._navController.navigationBar.barStyle = self.options.barStyle;
-    self._navIssuesController.navigationBar.barStyle = self.options.barStyle;
-  
     [self configureJiraConnect:options.url customDataSource:customDataSource];
 }
 
@@ -318,34 +297,61 @@ BOOL started;
     return self.options.url ? [NSURL URLWithString:self.options.url] : nil;
 }
 
-- (void)loadIssuesView
-{
-    [self._issuesController loadView];
-    [self._issuesController setIssueStore:[JMCIssueStore instance]];
+- (JMCViewController *)_jcController {
+    return [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
+}
+
+- (JMCIssuesViewController *)_issuesController {
+    JMCIssuesViewController *viewController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    [viewController loadView];
+    [viewController setIssueStore:[JMCIssueStore instance]];
+    return viewController;
 }
 
 - (UIViewController *)viewController
 {
+    return [self viewControllerWithMode:JMCViewControllerModeDefault];
+}
+
+- (UIViewController *)viewControllerWithMode:(enum JMCViewControllerMode)mode 
+{
     if ([JMCIssueStore instance].count > 0) {
-        [self loadIssuesView];
-        [_navIssuesController popToRootViewControllerAnimated:NO];
-        return _navIssuesController;
+        return [self issuesViewControllerWithMode:mode];
     } else {
-        _navController.viewControllers = [NSArray arrayWithObject:_jcController];
-        return _navController;
+        return [self feedbackViewControllerWithMode:mode];
     }
 }
 
 - (UIViewController *)feedbackViewController
 {
-    _navController.viewControllers = [NSArray arrayWithObject:_jcController];
-    return _navController;
+    return [self feedbackViewControllerWithMode:JMCViewControllerModeDefault];
+}
+
+- (UIViewController *)feedbackViewControllerWithMode:(enum JMCViewControllerMode)mode {
+    if (mode == JMCViewControllerModeCustom) {
+        return [self _jcController];
+    }
+    else {
+        UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:[self _jcController]] autorelease];
+        navigationController.navigationBar.barStyle =  self.options.barStyle;
+        return navigationController;
+    }
 }
 
 - (UIViewController *)issuesViewController
 {
-    [self loadIssuesView];
-    return _navIssuesController;
+    return [self issuesViewControllerWithMode:JMCViewControllerModeDefault];
+}
+
+- (UIViewController *)issuesViewControllerWithMode:(enum JMCViewControllerMode)mode {
+    if (mode == JMCViewControllerModeCustom) {
+        return [self _issuesController];
+    }
+    else {
+        UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:[self _issuesController]] autorelease];
+        navigationController.navigationBar.barStyle =  self.options.barStyle;
+        return navigationController;
+    }
 }
 
 -(UIImage*) feedbackIcon {

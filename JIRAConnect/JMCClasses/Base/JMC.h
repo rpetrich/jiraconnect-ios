@@ -122,14 +122,15 @@
     NSURL* _url;
     JMCPing *_pinger;
     JMCNotifier *_notifier;
-    JMCViewController *_jcController;
-    JMCIssuesViewController *_issuesController;
-    UINavigationController *_navController;
-    UINavigationController *_navIssuesController;
     JMCCrashSender *_crashSender;
     id <JMCCustomDataSource> _customDataSource;
     JMCOptions* _options;
 }
+
+enum JMCViewControllerMode {
+  JMCViewControllerModeDefault,
+  JMCViewControllerModeCustom
+};
 
 @property (nonatomic, assign) id <JMCCustomDataSource> customDataSource;
 @property (nonatomic, retain) JMCOptions* options;
@@ -171,16 +172,19 @@
 *  * If the user has not yet left any feedback, the feedbackViewController is returned.
 */
 - (UIViewController*) viewController;
+- (UIViewController*) viewControllerWithMode:(enum JMCViewControllerMode)mode;
 
 /**
 * Retrieves the feedback viewController for JIRAConnect. This controller holds the 'create issue' view.
 */
 - (UIViewController*) feedbackViewController;
+- (UIViewController*) feedbackViewControllerWithMode:(enum JMCViewControllerMode)mode;
 
 /**
 * The view controller which displays the list of all issues a user has raised for this app.
 */
 - (UIViewController*) issuesViewController;
+- (UIViewController*) issuesViewControllerWithMode:(enum JMCViewControllerMode)mode;
 
 /**
  * This is a generic icon that can be used in your App as the icon for Feedback.

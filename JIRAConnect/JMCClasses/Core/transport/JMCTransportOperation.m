@@ -6,6 +6,7 @@
 @interface JMCTransportOperation ()
 
 - (void)cancelItem;
+- (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error;
 
 @end
 
@@ -161,7 +162,6 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-
     NSString *requestId = [request valueForHTTPHeaderField:kJMCHeaderNameRequestId];
     
     // TODO: time-out items in the request queue after N Attempts ?
