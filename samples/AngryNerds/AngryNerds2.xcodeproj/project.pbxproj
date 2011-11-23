@@ -62,8 +62,6 @@
 		01E9911A146E24B900665A05 /* JMCTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990BD146E24B900665A05 /* JMCTransport.m */; };
 		01E9911B146E24B900665A05 /* JMCTransportOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990BF146E24B900665A05 /* JMCTransportOperation.m */; };
 		01E9911C146E24B900665A05 /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990C2146E24B900665A05 /* JMCToolbarButton.m */; };
-		01E9911D146E24B900665A05 /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990C4146E24B900665A05 /* UILabel+VerticalAlign.m */; };
-		01E9911E146E24B900665A05 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990C6146E24B900665A05 /* UIView+Additions.m */; };
 		01E9911F146E24B900665A05 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E990C8146E24B900665A05 /* CrashReporter.framework */; };
 		01E99120146E24B900665A05 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990CB146E24B900665A05 /* Reachability.m */; };
 		01E99121146E24B900665A05 /* LICENSES in Resources */ = {isa = PBXBuildFile; fileRef = 01E990CC146E24B900665A05 /* LICENSES */; };
@@ -111,6 +109,8 @@
 		01E99160146E276300665A05 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E99155146E276300665A05 /* SBJsonStreamWriterState.m */; };
 		01E99161146E276300665A05 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E99157146E276300665A05 /* SBJsonTokeniser.m */; };
 		01E99162146E276300665A05 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E99159146E276300665A05 /* SBJsonWriter.m */; };
+		8DE7F390147CC08800596FED /* UIView+JMCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F38C147CC08800596FED /* UIView+JMCAdditions.m */; };
+		8DE7F391147CC08800596FED /* UILabel+JMCVerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F38D147CC08800596FED /* UILabel+JMCVerticalAlign.m */; };
 		F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */; };
 		F8B8053F139B573000EC5AD4 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053C139B573000EC5AD4 /* AngryNerdsViewController.m */; };
 		F8B80540139B573000EC5AD4 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B8053D139B573000EC5AD4 /* AngryNerdsViewController.xib */; };
@@ -228,10 +228,6 @@
 		01E990BF146E24B900665A05 /* JMCTransportOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportOperation.m; sourceTree = "<group>"; };
 		01E990C1146E24B900665A05 /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 		01E990C2146E24B900665A05 /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
-		01E990C3146E24B900665A05 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
-		01E990C4146E24B900665A05 /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
-		01E990C5146E24B900665A05 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
-		01E990C6146E24B900665A05 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		01E990C8146E24B900665A05 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		01E990CA146E24B900665A05 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		01E990CB146E24B900665A05 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -291,6 +287,10 @@
 		01E99157146E276300665A05 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		01E99158146E276300665A05 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		01E99159146E276300665A05 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		8DE7F38C147CC08800596FED /* UIView+JMCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMCAdditions.m"; sourceTree = "<group>"; };
+		8DE7F38D147CC08800596FED /* UILabel+JMCVerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JMCVerticalAlign.m"; sourceTree = "<group>"; };
+		8DE7F38E147CC08800596FED /* UIView+JMCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMCAdditions.h"; sourceTree = "<group>"; };
+		8DE7F38F147CC08800596FED /* UILabel+JMCVerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JMCVerticalAlign.h"; sourceTree = "<group>"; };
 		F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsAppDelegate.h; path = Classes/AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
 		F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AngryNerdsAppDelegate.m; path = Classes/AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
 		F8B8053B139B573000EC5AD4 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsViewController.h; path = Classes/AngryNerdsViewController.h; sourceTree = "<group>"; };
@@ -593,12 +593,12 @@
 		01E990C0146E24B900665A05 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				8DE7F38C147CC08800596FED /* UIView+JMCAdditions.m */,
+				8DE7F38D147CC08800596FED /* UILabel+JMCVerticalAlign.m */,
+				8DE7F38E147CC08800596FED /* UIView+JMCAdditions.h */,
+				8DE7F38F147CC08800596FED /* UILabel+JMCVerticalAlign.h */,
 				01E990C1146E24B900665A05 /* JMCToolbarButton.h */,
 				01E990C2146E24B900665A05 /* JMCToolbarButton.m */,
-				01E990C3146E24B900665A05 /* UILabel+VerticalAlign.h */,
-				01E990C4146E24B900665A05 /* UILabel+VerticalAlign.m */,
-				01E990C5146E24B900665A05 /* UIView+Additions.h */,
-				01E990C6146E24B900665A05 /* UIView+Additions.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -663,7 +663,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		01E99146146E276300665A05 /* SBJSON */ = {
+		01E99146146E276300665A05 /* U001bSBJSON */ = {
 			isa = PBXGroup;
 			children = (
 				01E99147146E276300665A05 /* JSON.h */,
@@ -693,7 +693,7 @@
 		F8B80538139B572500EC5AD4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				01E99146146E276300665A05 /* SBJSON */,
+				01E99146146E276300665A05 /* U001bSBJSON */,
 				F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */,
 				F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */,
 				F8B8053B139B573000EC5AD4 /* AngryNerdsViewController.h */,
@@ -859,8 +859,6 @@
 				01E9911A146E24B900665A05 /* JMCTransport.m in Sources */,
 				01E9911B146E24B900665A05 /* JMCTransportOperation.m in Sources */,
 				01E9911C146E24B900665A05 /* JMCToolbarButton.m in Sources */,
-				01E9911D146E24B900665A05 /* UILabel+VerticalAlign.m in Sources */,
-				01E9911E146E24B900665A05 /* UIView+Additions.m in Sources */,
 				01E99120146E24B900665A05 /* Reachability.m in Sources */,
 				01E9915A146E276300665A05 /* NSObject+JSON.m in Sources */,
 				01E9915B146E276300665A05 /* SBJsonParser.m in Sources */,
@@ -871,6 +869,8 @@
 				01E99160146E276300665A05 /* SBJsonStreamWriterState.m in Sources */,
 				01E99161146E276300665A05 /* SBJsonTokeniser.m in Sources */,
 				01E99162146E276300665A05 /* SBJsonWriter.m in Sources */,
+				8DE7F390147CC08800596FED /* UIView+JMCAdditions.m in Sources */,
+				8DE7F391147CC08800596FED /* UILabel+JMCVerticalAlign.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

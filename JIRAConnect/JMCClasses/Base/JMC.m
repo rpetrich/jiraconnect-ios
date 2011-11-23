@@ -123,6 +123,7 @@
 @property (nonatomic, retain) JMCCrashSender *_crashSender;
 @property (nonatomic, retain) NSString* _dataDirPath;
 
+
 -(CGRect)notifierStartFrame;
 -(CGRect)notifierEndFrame;
 - (NSString *)makeDataDirPath;
@@ -130,6 +131,7 @@
 @end
 
 BOOL started;
+JMCViewController* _jcViewController;
 
 @implementation JMC
 
@@ -298,7 +300,11 @@ BOOL started;
 }
 
 - (JMCViewController *)_jcController {
-    return [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] autorelease ];
+    if (_jcViewController == nil) {
+        _jcViewController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] retain];
+    }
+    return _jcViewController;
+    
 }
 
 - (JMCIssuesViewController *)_issuesController {

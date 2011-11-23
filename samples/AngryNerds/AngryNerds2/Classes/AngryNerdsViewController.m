@@ -1,6 +1,6 @@
 #import "AngryNerdsViewController.h"
 #import "JMC.h"
-#import "UIView+Additions.h"
+
 #import <QuartzCore/QuartzCore.h>
 #import "JMCMacros.h"
 
@@ -178,14 +178,18 @@
     [UIView animateWithDuration:0.2
                           delay:0 options:opts
                        animations:^{
-                           self.nerdsView.top -= 100;
+                           CGRect frame = self.nerdsView.frame;
+                           frame.origin.y -= 100;
+                           self.nerdsView.frame = frame;
                        } completion:^(BOOL finished) {
 
         [UIView animateWithDuration:0.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             self.nerdsView.top += 100;
+                             CGRect frame = self.nerdsView.frame;
+                             frame.origin.y += 100;
+                             self.nerdsView.frame = frame;
                          }
                          completion:^(BOOL fini) {
                              [self jiggleNerd];
