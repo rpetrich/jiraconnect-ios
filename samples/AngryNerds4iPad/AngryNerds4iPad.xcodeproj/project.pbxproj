@@ -25,6 +25,8 @@
 		01808C83145045F300284012 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C79145045F300284012 /* UIKit.framework */; };
 		01808C84145045F300284012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C7A145045F300284012 /* Foundation.framework */; };
 		01808C85145045F300284012 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C7B145045F300284012 /* CoreGraphics.framework */; };
+		8DE7F385147CB42D00596FED /* UIView+JMCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F381147CB42D00596FED /* UIView+JMCAdditions.m */; };
+		8DE7F386147CB42D00596FED /* UILabel+JMCVerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F382147CB42D00596FED /* UILabel+JMCVerticalAlign.m */; };
 		8DEE22171479D21900E3CABF /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEE216B1479D21900E3CABF /* CrashReporter.framework */; };
 		8DEE22181479D21900E3CABF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE216E1479D21900E3CABF /* Reachability.m */; };
 		8DEE22191479D21900E3CABF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE21701479D21900E3CABF /* .gitignore */; };
@@ -84,8 +86,6 @@
 		8DEE232E1479D23E00E3CABF /* JMCTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE22D11479D23E00E3CABF /* JMCTransport.m */; };
 		8DEE232F1479D23E00E3CABF /* JMCTransportOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE22D31479D23E00E3CABF /* JMCTransportOperation.m */; };
 		8DEE23301479D23E00E3CABF /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE22D61479D23E00E3CABF /* JMCToolbarButton.m */; };
-		8DEE23311479D23E00E3CABF /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE22D81479D23E00E3CABF /* UILabel+VerticalAlign.m */; };
-		8DEE23321479D23E00E3CABF /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE22DA1479D23E00E3CABF /* UIView+Additions.m */; };
 		8DEE23351479D23E00E3CABF /* LICENSES in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE22E01479D23E00E3CABF /* LICENSES */; };
 		8DEE23361479D23E00E3CABF /* Balloon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE22E21479D23E00E3CABF /* Balloon_1.png */; };
 		8DEE23371479D23E00E3CABF /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE22E31479D23E00E3CABF /* Balloon_2.png */; };
@@ -158,6 +158,10 @@
 		01808C79145045F300284012 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01808C7A145045F300284012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01808C7B145045F300284012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8DE7F381147CB42D00596FED /* UIView+JMCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMCAdditions.m"; sourceTree = "<group>"; };
+		8DE7F382147CB42D00596FED /* UILabel+JMCVerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JMCVerticalAlign.m"; sourceTree = "<group>"; };
+		8DE7F383147CB42D00596FED /* UIView+JMCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMCAdditions.h"; sourceTree = "<group>"; };
+		8DE7F384147CB42D00596FED /* UILabel+JMCVerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JMCVerticalAlign.h"; sourceTree = "<group>"; };
 		8DEE216B1479D21900E3CABF /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		8DEE216D1479D21900E3CABF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8DEE216E1479D21900E3CABF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -271,10 +275,6 @@
 		8DEE22D31479D23E00E3CABF /* JMCTransportOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportOperation.m; sourceTree = "<group>"; };
 		8DEE22D51479D23E00E3CABF /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 		8DEE22D61479D23E00E3CABF /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
-		8DEE22D71479D23E00E3CABF /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
-		8DEE22D81479D23E00E3CABF /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
-		8DEE22D91479D23E00E3CABF /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
-		8DEE22DA1479D23E00E3CABF /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		8DEE22E01479D23E00E3CABF /* LICENSES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSES; sourceTree = "<group>"; };
 		8DEE22E21479D23E00E3CABF /* Balloon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_1.png; sourceTree = "<group>"; };
 		8DEE22E31479D23E00E3CABF /* Balloon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_2.png; sourceTree = "<group>"; };
@@ -687,12 +687,12 @@
 		8DEE22D41479D23E00E3CABF /* views */ = {
 			isa = PBXGroup;
 			children = (
+				8DE7F381147CB42D00596FED /* UIView+JMCAdditions.m */,
+				8DE7F382147CB42D00596FED /* UILabel+JMCVerticalAlign.m */,
+				8DE7F383147CB42D00596FED /* UIView+JMCAdditions.h */,
+				8DE7F384147CB42D00596FED /* UILabel+JMCVerticalAlign.h */,
 				8DEE22D51479D23E00E3CABF /* JMCToolbarButton.h */,
 				8DEE22D61479D23E00E3CABF /* JMCToolbarButton.m */,
-				8DEE22D71479D23E00E3CABF /* UILabel+VerticalAlign.h */,
-				8DEE22D81479D23E00E3CABF /* UILabel+VerticalAlign.m */,
-				8DEE22D91479D23E00E3CABF /* UIView+Additions.h */,
-				8DEE22DA1479D23E00E3CABF /* UIView+Additions.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -934,8 +934,6 @@
 				8DEE232E1479D23E00E3CABF /* JMCTransport.m in Sources */,
 				8DEE232F1479D23E00E3CABF /* JMCTransportOperation.m in Sources */,
 				8DEE23301479D23E00E3CABF /* JMCToolbarButton.m in Sources */,
-				8DEE23311479D23E00E3CABF /* UILabel+VerticalAlign.m in Sources */,
-				8DEE23321479D23E00E3CABF /* UIView+Additions.m in Sources */,
 				8DEE25A01479EC2C00E3CABF /* NSObject+JSON.m in Sources */,
 				8DEE25A11479EC2C00E3CABF /* SBJsonParser.m in Sources */,
 				8DEE25A21479EC2C00E3CABF /* SBJsonStreamParser.m in Sources */,
@@ -945,6 +943,8 @@
 				8DEE25A61479EC2C00E3CABF /* SBJsonStreamWriterState.m in Sources */,
 				8DEE25A71479EC2C00E3CABF /* SBJsonTokeniser.m in Sources */,
 				8DEE25A81479EC2C00E3CABF /* SBJsonWriter.m in Sources */,
+				8DE7F385147CB42D00596FED /* UIView+JMCAdditions.m in Sources */,
+				8DE7F386147CB42D00596FED /* UILabel+JMCVerticalAlign.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
