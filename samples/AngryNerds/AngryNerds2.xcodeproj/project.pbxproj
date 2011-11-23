@@ -663,7 +663,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		01E99146146E276300665A05 /* U001bSBJSON */ = {
+		01E99146146E276300665A05 /* SBJSON */ = {
 			isa = PBXGroup;
 			children = (
 				01E99147146E276300665A05 /* JSON.h */,
@@ -686,14 +686,14 @@
 				01E99158146E276300665A05 /* SBJsonWriter.h */,
 				01E99159146E276300665A05 /* SBJsonWriter.m */,
 			);
-			name = U001bSBJSON;
+			name = SBJSON;
 			path = ../../../JIRAConnect/Support/SBJSON/Classes;
 			sourceTree = "<group>";
 		};
 		F8B80538139B572500EC5AD4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				01E99146146E276300665A05 /* U001bSBJSON */,
+				01E99146146E276300665A05 /* SBJSON */,
 				F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */,
 				F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */,
 				F8B8053B139B573000EC5AD4 /* AngryNerdsViewController.h */,

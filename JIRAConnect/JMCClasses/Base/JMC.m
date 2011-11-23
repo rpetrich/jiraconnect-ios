@@ -162,7 +162,7 @@ JMCViewController* _jcViewController;
     [_notifier release];
     [_crashSender release];
     [_dataDirPath release];
-
+    [_jcViewController release];
     [super dealloc];
 }
 
@@ -299,9 +299,14 @@ JMCViewController* _jcViewController;
     return self.options.url ? [NSURL URLWithString:self.options.url] : nil;
 }
 
+-(JMCViewController*)initJMCViewController
+{
+    return [[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil];
+}
+
 - (JMCViewController *)_jcController {
     if (_jcViewController == nil) {
-        _jcViewController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] retain];
+        _jcViewController = [[self initJMCViewController] retain];
     }
     return _jcViewController;
     
@@ -335,9 +340,9 @@ JMCViewController* _jcViewController;
 
 - (UIViewController *)feedbackViewControllerWithMode:(enum JMCViewControllerMode)mode {
     if (mode == JMCViewControllerModeCustom) {
-        return [self _jcController];
+        return [[self initJMCViewController] autorelease]; // customview modes get a clean JMCViewController
     }
-    else {
+    else { // standard re-uses the same
         UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:[self _jcController]] autorelease];
         navigationController.navigationBar.barStyle =  self.options.barStyle;
         return navigationController;
@@ -351,7 +356,7 @@ JMCViewController* _jcViewController;
 
 - (UIViewController *)issuesViewControllerWithMode:(enum JMCViewControllerMode)mode {
     if (mode == JMCViewControllerModeCustom) {
-        return [self _issuesController];
+        return [self _issuesController]; 
     }
     else {
         UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:[self _issuesController]] autorelease];
