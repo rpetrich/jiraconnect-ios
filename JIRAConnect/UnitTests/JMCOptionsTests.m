@@ -29,16 +29,16 @@
 {
     NSDictionary* customFields = [NSDictionary dictionaryWithObject:@"value"
                                                              forKey:@"fieldname"];
-    JMCOptions* options = [JMCOptions optionsWithUrl:@"http://connect.onjira.com" 
-                                             project:@"NERDS" 
+    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://connect.onjira.com" 
+                                             projectKey:@"NERDS" 
                                               apiKey:@"SECRET-123" 
                                               photos:YES
                                                voice:YES
                                             location:YES
-                                      crashreporting:YES
+                                      crashReporting:YES
                                         customFields:customFields];
 
-    STAssertEqualObjects(@"http://connect.onjira.com", options.url, @"URL not set correctly");
+    STAssertEqualObjects(@"https://connect.onjira.com/", options.url, @"URL not set correctly");
     STAssertEqualObjects(@"NERDS", options.projectKey, @"Project Key not set correctly");
     STAssertEqualObjects(customFields, options.customFields, @"Custom Fields not set correctly");
 
@@ -52,7 +52,7 @@
 {
     JMCOptions *options2 = [JMCOptions optionsWithContentsOfFile:@"UnitTests/JMCTestConfiguration.plist"];
     STAssertNotNil(options2, @"Could not load options from file");
-    STAssertEqualObjects(options2.url, @"http://connect.onjira.com", @"URL not loaded from file");
+    STAssertEqualObjects(options2.url, @"http://connect.onjira.com/", @"URL not loaded from file");
     STAssertEqualObjects(options2.projectKey, @"NERDS", @"ProjectKey not loaded from file");
     STAssertNotNil(options2.customFields, @"Custom fields not loaded from file");
 

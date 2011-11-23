@@ -57,12 +57,12 @@
 }
 
 +(id)optionsWithUrl:(NSString *)jiraUrl
-            project:(NSString*)projectKey
+            projectKey:(NSString*)projectKey
              apiKey:(NSString*)apiKey
              photos:(BOOL)photos
               voice:(BOOL)voice
            location:(BOOL)location
-     crashreporting:(BOOL)crashreporting
+     crashReporting:(BOOL)crashreporting
        customFields:(NSDictionary*)customFields
 {
     JMCOptions* options = [[[JMCOptions alloc] init]autorelease];
