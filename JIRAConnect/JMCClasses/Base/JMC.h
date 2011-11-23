@@ -41,6 +41,7 @@
 #define kJMCOptionCrashReportingEnabled @"kJMCOptionCrashReportingEnabled"
 #define kJMCOptionCustomFields @"kJMCOptionCustomFields"
 #define kJMCOptionUIBarStyle @"kJMCOptionUIBarStyle"
+#define kJMCOptionUIModalPresentationStyle @"kJMCOptionUIModalPresentationStyle"
 
 @interface JMCOptions : NSObject {
     NSString* _url;
@@ -52,6 +53,7 @@
     BOOL _crashReportingEnabled;
     NSDictionary* _customFields;
     UIBarStyle _barStyle;
+    UIModalPresentationStyle _modalPresentationStyle;
 }
 
 +(id) optionsWithContentsOfFile:(NSString *)filePath;
@@ -114,6 +116,12 @@
  * The style to use for all navigation bars.
  */
 @property (assign) UIBarStyle barStyle;
+
+/**
+ * The presentation styles of the modal view controllers.
+ */
+@property (assign) UIModalPresentationStyle modalPresentationStyle;
+
 
 @end
 

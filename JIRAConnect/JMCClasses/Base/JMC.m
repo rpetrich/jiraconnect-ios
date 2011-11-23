@@ -26,7 +26,7 @@
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
             photosEnabled=_photosEnabled, voiceEnabled=_voiceEnabled, locationEnabled=_locationEnabled,
             crashReportingEnabled=_crashReportingEnabled, barStyle=_barStyle,
-            customFields=_customFields;
+            customFields=_customFields, modalPresentationStyle=_modalPresentationStyle;
 
 -(id)init
 {
@@ -36,6 +36,7 @@
         _locationEnabled = NO;
         _crashReportingEnabled = YES;
         _barStyle = UIBarStyleDefault;
+        _modalPresentationStyle = UIModalPresentationFullScreen;
     }
     return self;
 }
@@ -53,6 +54,7 @@
     options.crashReportingEnabled = [[dict objectForKey:kJMCOptionCrashReportingEnabled] boolValue];
     options.customFields = [dict objectForKey:kJMCOptionCustomFields];
     options.barStyle = [[dict objectForKey:kJMCOptionUIBarStyle] intValue];
+    options.modalPresentationStyle = [[dict objectForKey:kJMCOptionUIModalPresentationStyle] intValue];
     return options;
 }
 
@@ -79,17 +81,18 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-  JMCOptions* copy = [[JMCOptions alloc] init];
-  copy.url = self.url;
-  copy.projectKey = self.projectKey;
-  copy.apiKey = self.apiKey;
-  copy.photosEnabled = self.photosEnabled;
-  copy.voiceEnabled = self.voiceEnabled;
-  copy.locationEnabled = self.locationEnabled;
-  copy.crashReportingEnabled = self.crashReportingEnabled;
-  copy.customFields = self.customFields;
-  copy.barStyle = self.barStyle;
-  return copy;
+    JMCOptions* copy = [[JMCOptions alloc] init];
+    copy.url = self.url;
+    copy.projectKey = self.projectKey;
+    copy.apiKey = self.apiKey;
+    copy.photosEnabled = self.photosEnabled;
+    copy.voiceEnabled = self.voiceEnabled;
+    copy.locationEnabled = self.locationEnabled;
+    copy.crashReportingEnabled = self.crashReportingEnabled;
+    copy.customFields = self.customFields;
+    copy.barStyle = self.barStyle;
+    copy.modalPresentationStyle = self.modalPresentationStyle;
+    return copy;
 }
 
 
@@ -130,8 +133,8 @@
 - (void)generateAndStoreUUID;
 @end
 
-BOOL started;
-JMCViewController* _jcViewController;
+static BOOL started;
+static JMCViewController* _jcViewController;
 
 @implementation JMC
 
@@ -302,6 +305,7 @@ JMCViewController* _jcViewController;
 - (JMCViewController *)_jcController {
     if (_jcViewController == nil) {
         _jcViewController = [[[JMCViewController alloc] initWithNibName:@"JMCViewController" bundle:nil] retain];
+        _jcViewController.modalPresentationStyle = self.options.modalPresentationStyle;
     }
     return _jcViewController;
     
@@ -311,6 +315,7 @@ JMCViewController* _jcViewController;
     JMCIssuesViewController *viewController = [[[JMCIssuesViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
     [viewController loadView];
     [viewController setIssueStore:[JMCIssueStore instance]];
+    viewController.modalPresentationStyle = self.options.modalPresentationStyle;
     return viewController;
 }
 
@@ -340,6 +345,7 @@ JMCViewController* _jcViewController;
     else {
         UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:[self _jcController]] autorelease];
         navigationController.navigationBar.barStyle =  self.options.barStyle;
+        navigationController.modalPresentationStyle = self.options.modalPresentationStyle;
         return navigationController;
     }
 }
@@ -356,6 +362,7 @@ JMCViewController* _jcViewController;
     else {
         UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:[self _issuesController]] autorelease];
         navigationController.navigationBar.barStyle =  self.options.barStyle;
+        navigationController.modalPresentationStyle = self.options.modalPresentationStyle;
         return navigationController;
     }
 }
