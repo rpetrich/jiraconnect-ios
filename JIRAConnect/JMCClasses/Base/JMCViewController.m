@@ -28,24 +28,30 @@
 #import "JMCTransport.h"
 
 @interface JMCViewController ()
-- (void)internalRelease;
-
-- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action;
-
-- (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
 
 - (BOOL)shouldTrackLocation;
+
+- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action;
+- (UIButton *)buttonFor:(NSString *)iconNamed action:(SEL)action;
+
+- (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
+- (void)addButtonsToView;
+- (void)addImageAttachmentItem:(UIImage *)origImg;
+- (void)dismissKeyboard;
+- (void)internalRelease;
+- (void)hideAudioProgress;
+- (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex;
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) UIPopoverController *popover;
-@property(nonatomic, retain) UIBarButtonItem *screenshotButton;
+@property(nonatomic, retain) UIButton *screenshotButton;
 
 @end
 
 @implementation JMCViewController
 
-NSArray* toolbarItems; // holds the first 3 system toolbar items.
+#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
@@ -53,6 +59,7 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     // Observe keyboard hide and show notifications to resize the text view appropriately.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 
     if ([self shouldTrackLocation]) {
         CLLocationManager* locMgr = [[CLLocationManager alloc] init];
@@ -91,39 +98,8 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 
 
     self.attachments = [NSMutableArray arrayWithCapacity:1];
-    self.toolbar.clipsToBounds = YES;
-    self.toolbar.autoresizesSubviews = YES;
 
-//    self.descriptionField.top = 44;  
-    self.descriptionField.jmc_width = self.view.jmc_width;
-
-    // Create the toolbar only on iPhone for now
-    // FIXME: Replace by new UI
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.jmc_width, 44)] autorelease];
-        [self.toolbar setBarStyle:[[JMC instance] getBarStyle]];
-
-        UIBarButtonItem *screenshotButton = [self barButtonFor:@"icon_capture" action:@selector(addScreenshot)];
-        UIBarButtonItem *recordButton = [self barButtonFor:@"icon_record" action:@selector(addVoice)];
-        UIBarButtonItem *spaceButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:nil action:nil] autorelease];
-        NSMutableArray* items = [NSMutableArray arrayWithCapacity:3];
-        [items addObject:spaceButton];
-
-        if ([[JMC instance] isPhotosEnabled]) {
-            [items addObject:screenshotButton];
-        }
-        if ([[JMC instance] isVoiceEnabled]) {
-            [items addObject:recordButton];
-        }
-
-        systemToolbarItems = [[NSArray arrayWithArray:items] retain];
-        self.voiceButton = recordButton;
-        self.screenshotButton = screenshotButton;
-        self.toolbar.items = systemToolbarItems;
-  
-        self.descriptionField.inputAccessoryView = self.toolbar;
-    }
+    [self addButtonsToView];
 
     // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
     _issueTransport = [[JMCIssueTransport alloc] init];
@@ -140,11 +116,10 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [self.descriptionField becomeFirstResponder];
     [self.locationManager startUpdatingLocation];
     
-    // Show close button only on Phone (use back button on Pad)
-    if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) || ([self.navigationController.viewControllers objectAtIndex:0] == self)) {
+    // Show cancel button only if this is the first controller on the stack
+    if ([self.navigationController.viewControllers objectAtIndex:0] == self) {
         self.navigationItem.leftBarButtonItem =
         [[[UIBarButtonItem alloc] initWithTitle:JMCLocalizedString(@"Cancel", @"Cancel feedback")
                                           style:UIBarButtonItemStyleBordered
@@ -153,104 +128,140 @@ NSArray* toolbarItems; // holds the first 3 system toolbar items.
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self.descriptionField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self dismissKeyboard];
+}
+
 - (void) viewDidDisappear:(BOOL)animated {
     [self.locationManager stopUpdatingLocation];
 }
 
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (UIInterfaceOrientationIsLandscape(interfaceOrientation) ||
+            UIInterfaceOrientationIsPortrait(interfaceOrientation));
+    //    return YES;
+}
 
-#pragma mark UITextViewDelegate
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    // Hide the popover if visible, dealloc otherwise
+    if (self.popover.popoverVisible) {
+        [self.popover dismissPopoverAnimated:NO];
+    }
+    else {
+        self.popover = nil;
+    }
+}
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    // If popover is set, then present it from button
+    if (self.popover) {
+        [self.popover presentPopoverFromRect:self.screenshotButton.frame
+                                      inView:self.screenshotButton.superview 
+                    permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                    animated:YES];
+    }
+}
+
+#pragma mark - UIKeyboard Notification Methods
+
+/*
+ Reduce the size of the view so that it's not obscured by the keyboard.
+ Animate the resize so that it's in sync with the appearance of the keyboard.
+ */
 - (void)keyboardWillShow:(NSNotification*)notification
 {
-   /*
-     Reduce the size of the text view so that it's not obscured by the keyboard.
-     Animate the resize so that it's in sync with the appearance of the keyboard.
-     */
-
     NSDictionary *userInfo = [notification userInfo];
-
-    // Get the origin of the keyboard when it's displayed.
-    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-
-    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
-    // The bottom of the text view's frame should align with the top of the keyboard's final position.
-    CGRect keyboardRect = [aValue CGRectValue];
-    CGSize kbSize = keyboardRect.size;
-    CGFloat textViewHeight = self.view.bounds.size.height;
-
-    UIInterfaceOrientation o = [self interfaceOrientation];
-    if (UIInterfaceOrientationIsPortrait(o)) {
-        textViewHeight -= kbSize.height;
-        self.countdownView.jmc_height = 80.0f;
-    } else if (UIInterfaceOrientationIsLandscape(o)) {
-        textViewHeight -= kbSize.width;
-        self.countdownView.jmc_height = (textViewHeight - self.navigationController.navigationBar.jmc_height) * 0.9f;
-    }
-
-    CGRect newTextViewFrame = self.view.bounds;
-    float yOffset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.jmc_height : 0;
-    newTextViewFrame.size.height = textViewHeight - yOffset;
-    newTextViewFrame.origin.y = yOffset;
-
-    // Get the duration of the animation.
-    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
-
-    // Animate the resize of the text view's frame in sync with the keyboard's appearance.
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationDuration:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
+    [UIView setAnimationCurve:[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
 
-    self.descriptionField.frame = newTextViewFrame;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        // Get the origin of the keyboard when it's displayed.
+        NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
 
+        // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
+        // The bottom of the text view's frame should align with the top of the keyboard's final position.
+        CGRect keyboardRect = [aValue CGRectValue];
+
+        CGRect newFrame = self.view.bounds;
+        newFrame.size.height -= keyboardRect.size.height;
+
+        self.view.frame = newFrame;
+        self.countdownView.center = self.descriptionField.center;
+    }
+    else {
+        CGRect newFrame = self.view.bounds;
+        newFrame.size.height /= 2;
+
+        self.descriptionField.frame = newFrame;
+    }
+    
     [UIView commitAnimations];
-
-    self.countdownView.center = self.descriptionField.center;
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification
 {
-
-}
-
-- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action
-{
-    UIButton *customView = [JMCToolbarButton buttonWithType:UIButtonTypeCustom];
-    [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [customView setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
-    UIImage *icon = [UIImage imageNamed:iconNamed];
-    CGRect frame = CGRectMake(0, 0, 41, 31);
-    [customView setImage:icon forState:UIControlStateNormal];
-    customView.frame = frame;
+    NSDictionary *userInfo = [notification userInfo];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:[[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
+    [UIView setAnimationCurve:[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     
-    UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
-
-    return barItem;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        // Get the origin of the keyboard when it's displayed.
+        NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+        
+        // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
+        // The bottom of the text view's frame should align with the top of the keyboard's final position.
+        CGRect keyboardRect = [aValue CGRectValue];
+        
+        CGRect newFrame = self.view.bounds;
+        newFrame.size.height += keyboardRect.size.height;
+        
+        self.view.frame = newFrame;
+        self.countdownView.center = self.descriptionField.center;
+    }
+    else {
+        self.descriptionField.frame = self.view.bounds;
+    }
+    
+    [UIView commitAnimations];
 }
+
+- (void)keyboardDidHide:(NSNotification*)notification
+{
+    // If keyboard did hide and popover is visible, present it from new position
+    if (self.popover.popoverVisible) {
+        [self.popover presentPopoverFromRect:self.screenshotButton.frame
+                                      inView:self.screenshotButton.superview 
+                    permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                    animated:YES];
+    }
+}
+
+#pragma mark - UITextViewDelegate Methods
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView 
 {
     return YES;
 }
 
-#pragma mark end
+#pragma mark - UIControl Action Methods
 
 - (IBAction)dismiss
 {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)dismissKeyboard
-{
-    [self.descriptionField resignFirstResponder];
-}
-
-static BOOL isPad(void) {
-#ifdef UI_USER_INTERFACE_IDIOM
-    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
-#else
-    return NO;
-#endif
+    if ([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)addScreenshot
@@ -265,13 +276,13 @@ static BOOL isPad(void) {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
-        if (isPad()) 
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
         {
             self.popover = [[[UIPopoverController alloc] initWithContentViewController:imagePicker] autorelease];
-            [self.popover
-                    presentPopoverFromBarButtonItem:self.screenshotButton 
-                           permittedArrowDirections:UIPopoverArrowDirectionDown 
-                                           animated:YES];
+            [self.popover presentPopoverFromRect:self.screenshotButton.frame
+                                          inView:self.screenshotButton.superview 
+                        permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                        animated:YES];
         }
         else 
         {
@@ -280,24 +291,6 @@ static BOOL isPad(void) {
         [imagePicker release];
     }
        
-}
-
-- (void)updateProgress:(NSTimer *)theTimer
-{
-    JMCRecorder* recorder = [JMCRecorder instance];
-    float currentDuration = [recorder currentDuration];
-    float progress = (currentDuration / recorder.recordTime);
-    self.progressView.progress = progress;
-}
-
-- (void)hideAudioProgress
-{
-    self.countdownView.hidden = YES;
-    self.progressView.progress = 0;
-    UIButton *voiceButton = (UIButton *) self.voiceButton.customView;
-    [voiceButton.imageView stopAnimating];
-    voiceButton.imageView.animationImages = nil;
-    [_timer invalidate];
 }
 
 - (IBAction)addVoice
@@ -332,88 +325,11 @@ static BOOL isPad(void) {
             UIImage *img = [UIImage imageNamed:sprintName];
             [sprites addObject:img];
         }
-        UIButton * customView = (UIButton *)self.voiceButton.customView;
-        customView.imageView.animationImages = sprites;
-        customView.imageView.animationDuration = 0.85f;
-        [customView.imageView startAnimating];
+        self.voiceButton.imageView.animationImages = sprites;
+        self.voiceButton.imageView.animationDuration = 0.85f;
+        [self.voiceButton.imageView startAnimating];
 
     }
-}
-
-- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)avRecorder successfully:(BOOL)success
-{
-    [self hideAudioProgress];
-
-    JMCRecorder* recorder = [JMCRecorder instance];
-    // FIXME: This leads to potential crashes as it loads the audio file into memory 
-    // regardless of its size and how many attachments were already added
-    JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"recording"
-                                                                       data:[recorder audioData]
-                                                                       type:JMCAttachmentTypeRecording
-                                                                contentType:@"audio/aac"
-                                                             filenameFormat:@"recording-%d.aac"];
-
-
-    UIImage *newImage = [UIImage imageNamed:@"icon_record_2"];
-    [self addAttachmentItem:attachment withIcon:newImage action:@selector(voiceAttachmentTapped:)];
-    [attachment release];
-    [recorder cleanUp];
-}
-
--(void)reindexAllItems:(NSArray*)buttonItems
-{
-    // re-tag all buttons... with their new index.
-    for (NSUInteger i = 0; i < [buttonItems count]; i++) {
-        UIBarButtonItem *item = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
-        item.customView.tag = i;
-    }
-    [self.toolbar setItems:buttonItems animated:YES];
-}
-
-- (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
-{
-    CGRect buttonFrame = CGRectMake(0, 0, 30, 30);
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = buttonFrame;
-    
-    [button setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
-
-    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    button.imageView.layer.cornerRadius = 5.0;
-
-    [button setImage:icon forState:UIControlStateNormal];
-    
-    UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
-    
-    // FIXME: Limit number of items so that they don't overlap with the default buttons
-    // or add a "more" item if more than 3 items exist
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems insertObject:buttonItem atIndex:0];
-    [self.attachments insertObject:attachment atIndex:0]; // attachments must be kept in sycnh with buttons
-    [self reindexAllItems:buttonItems];
-}
-
-- (void)addImageAttachmentItem:(UIImage *)origImg
-{
-    JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"screenshot"
-                                                                       data:UIImagePNGRepresentation(origImg)
-                                                                       type:JMCAttachmentTypeImage
-                                                                contentType:@"image/png"
-                                                             filenameFormat:@"screenshot-%d.png"];
-
-    
-    UIImage * iconImg =
-            [origImg jmc_thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
-    [self addAttachmentItem:attachment withIcon:iconImg action:@selector(imageAttachmentTapped:)];
-    [attachment release];
-}
-
-- (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex
-{
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [self.attachments removeObjectAtIndex:attachmentIndex];
-    [buttonItems removeObjectAtIndex:attachmentIndex];
-    [self reindexAllItems:buttonItems];
 }
 
 - (void)imageAttachmentTapped:(UIButton *)touch
@@ -448,7 +364,106 @@ static BOOL isPad(void) {
 
 }
 
-#pragma mark UIAlertViewDelelgate
+- (IBAction)sendFeedback
+{
+    
+    if ([self.descriptionField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length <= 0
+        && self.attachments.count <= 0) {
+        // No data entered, just return.
+        return;
+    }
+    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
+    NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
+    
+    
+    if ([[JMC instance].customDataSource respondsToSelector:@selector(customAttachment)]) {
+        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource customAttachment];
+        if (payloadData) {
+            [allAttachments addObject:payloadData];
+        }
+    }
+    
+    if ([self shouldTrackLocation] && [self currentLocation]) {
+        NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
+        NSMutableArray *keys =    [NSMutableArray arrayWithCapacity:3];
+        @synchronized (self) {
+            NSNumber *lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+            NSNumber *lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
+            [keys addObject:@"lat"];      [objects addObject:lat];
+            [keys addObject:@"lng"];      [objects addObject:lng];
+            [keys addObject:@"location"]; [objects addObject:locationString];
+        }
+        
+        // Merge the location into the existing customFields.
+        NSDictionary *dict = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+        [customFields addEntriesFromDictionary:dict];
+        [dict release];
+    }
+    
+    // add all custom fields as one attachment item
+    NSData *customFieldsJSON = [[JMCTransport buildJSONString:customFields] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
+                                                                             data:customFieldsJSON
+                                                                             type:JMCAttachmentTypeCustom
+                                                                      contentType:@"application/json"
+                                                                   filenameFormat:@"customfields.json"];
+    [allAttachments addObject:customFieldsItem];
+    [customFieldsItem release];
+    
+    
+    if (self.replyToIssue) {
+        [self.replyTransport sendReply:self.replyToIssue
+                           description:self.descriptionField.text
+                           attachments:allAttachments];
+    } else {
+        // use the first 80 chars of the description as the issue summary
+        NSString *description = self.descriptionField.text;
+        u_int length = 80;
+        u_int toIndex = [description length] > length ? length : [description length];
+        NSString *truncationMarker = [description length] > length ? @"..." : @"";
+        [self.issueTransport send:[[description substringToIndex:toIndex] stringByAppendingString:truncationMarker]
+                      description:self.descriptionField.text
+                      attachments:allAttachments];
+    }
+    
+    if ([self.navigationController.viewControllers count] > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    
+    self.descriptionField.text = @"";
+    [self.attachments removeAllObjects];
+    [self.toolbar setItems:systemToolbarItems];
+}
+
+#pragma mark - AVAudioRecorderDelegate Methods
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)avRecorder successfully:(BOOL)success
+{
+    [self hideAudioProgress];
+    
+    JMCRecorder* recorder = [JMCRecorder instance];
+    // FIXME: This leads to potential crashes as it loads the audio file into memory 
+    // regardless of its size and how many attachments were already added
+    JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"recording"
+                                                                       data:[recorder audioData]
+                                                                       type:JMCAttachmentTypeRecording
+                                                                contentType:@"audio/aac"
+                                                             filenameFormat:@"recording-%d.aac"];
+    
+    
+    UIImage *newImage = [UIImage imageNamed:@"icon_record_2"];
+    [self addAttachmentItem:attachment withIcon:newImage action:@selector(voiceAttachmentTapped:)];
+    [attachment release];
+    [recorder cleanUp];
+}
+
+#pragma mark - UIAlertViewDelelgate
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     // dismiss modal dialog.
@@ -458,10 +473,8 @@ static BOOL isPad(void) {
     currentAttachmentItemIndex = 0;
 }
 
+#pragma mark - UIImagePickerControllerDelegate
 
-#pragma end
-
-#pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
@@ -490,9 +503,8 @@ static BOOL isPad(void) {
 {
     [self dismissModalViewControllerAnimated:YES];
 }
-#pragma mark end
 
-#pragma mark JMCSketchViewControllerDelegate
+#pragma mark - JMCSketchViewControllerDelegate
 
 - (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
@@ -520,107 +532,8 @@ static BOOL isPad(void) {
     [self removeAttachmentItemAtIndex:[imageId unsignedIntegerValue]];
 }
 
+#pragma mark - CLLocationManagerDelegate Methods
 
-#pragma mark end
-
-#pragma mark UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-#pragma mark end
-
-- (IBAction)sendFeedback
-{
-
-    if ([self.descriptionField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length <= 0
-      && self.attachments.count <= 0) {
-        // No data entered, just return.
-        return;
-    }
-    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
-    NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
-
-    
-    if ([[JMC instance].customDataSource respondsToSelector:@selector(customAttachment)]) {
-        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource customAttachment];
-        if (payloadData) {
-            [allAttachments addObject:payloadData];
-        }
-    }
-
-    if ([self shouldTrackLocation] && [self currentLocation]) {
-        NSMutableArray *objects = [NSMutableArray arrayWithCapacity:3];
-        NSMutableArray *keys =    [NSMutableArray arrayWithCapacity:3];
-        @synchronized (self) {
-            NSNumber *lat = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
-            NSNumber *lng = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
-            NSString *locationString = [NSString stringWithFormat:@"%f,%f", lat.doubleValue, lng.doubleValue];
-            [keys addObject:@"lat"];      [objects addObject:lat];
-            [keys addObject:@"lng"];      [objects addObject:lng];
-            [keys addObject:@"location"]; [objects addObject:locationString];
-        }
-
-        // Merge the location into the existing customFields.
-        NSDictionary *dict = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
-        [customFields addEntriesFromDictionary:dict];
-        [dict release];
-    }
-
-    // add all custom fields as one attachment item
-    NSData *customFieldsJSON = [[JMCTransport buildJSONString:customFields] dataUsingEncoding:NSUTF8StringEncoding];
-    
-    JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
-                                                                             data:customFieldsJSON
-                                                                             type:JMCAttachmentTypeCustom
-                                                                      contentType:@"application/json"
-                                                                   filenameFormat:@"customfields.json"];
-    [allAttachments addObject:customFieldsItem];
-    [customFieldsItem release];
-
-    
-    if (self.replyToIssue) {
-        [self.replyTransport sendReply:self.replyToIssue
-                           description:self.descriptionField.text
-                           attachments:allAttachments];
-    } else {
-        // use the first 80 chars of the description as the issue summary
-        NSString *description = self.descriptionField.text;
-        u_int length = 80;
-        u_int toIndex = [description length] > length ? length : [description length];
-        NSString *truncationMarker = [description length] > length ? @"..." : @"";
-        [self.issueTransport send:[[description substringToIndex:toIndex] stringByAppendingString:truncationMarker]
-                      description:self.descriptionField.text
-                      attachments:allAttachments];
-    }
-
-    if ([self.navigationController.viewControllers count] > 1) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else {
-        // FIXME: Call delegate here instead of dismissing
-        [self dismissModalViewControllerAnimated:YES];
-    }
-
-    self.descriptionField.text = @"";
-    [self.attachments removeAllObjects];
-    [self.toolbar setItems:systemToolbarItems];
-}
-
-#pragma mark end
-
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-       return (UIInterfaceOrientationIsLandscape(interfaceOrientation) ||
-               UIInterfaceOrientationIsPortrait(interfaceOrientation));
-//    return YES;
-}
-
-#pragma mark -
-#pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     @synchronized (self) {
@@ -632,21 +545,173 @@ static BOOL isPad(void) {
     JMCDLog(@"Location failed with error: %@", [error localizedDescription]);
 }
 
-#pragma mark -
-#pragma mark Private Methods
+#pragma mark - Private Helper Methods
+
+- (void)addButtonsToView {
+    float offset = 5;
+    if ([[JMC instance] isPhotosEnabled]) {
+        self.screenshotButton = [self buttonFor:@"icon_capture" action:@selector(addScreenshot)];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            self.screenshotButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+            self.screenshotButton.frame = CGRectMake(self.descriptionField.frame.size.width - 44.0 - offset, 
+                                                     self.view.frame.size.height - 44.0, 
+                                                     44.0, 
+                                                     44.0);
+        }
+        else {
+            self.screenshotButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+            self.screenshotButton.frame = CGRectMake(self.descriptionField.frame.size.width - 50.0, 
+                                                     0 + offset, 
+                                                     44.0, 
+                                                     44.0);
+        }
+        [self.view addSubview:self.screenshotButton]; 
+        
+        offset += 50;
+    }
+    
+    if ([[JMC instance] isVoiceEnabled]) {
+        self.voiceButton = [self buttonFor:@"icon_record" action:@selector(addVoice)];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            self.voiceButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+            self.voiceButton.frame = CGRectMake(self.descriptionField.frame.size.width - 44.0 - offset, 
+                                                self.view.frame.size.height - 44.0, 
+                                                44.0, 
+                                                44.0);
+        }
+        else {
+            self.voiceButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+            self.voiceButton.frame = CGRectMake(self.descriptionField.frame.size.width - 50.0, 
+                                                0 + offset, 
+                                                44.0, 
+                                                44.0);
+        }
+        [self.view addSubview:self.voiceButton]; 
+    }
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.descriptionField.jmc_height -= 50.0;
+    }
+    else {
+        self.descriptionField.jmc_width -= 50.0;
+    }
+}
+
+- (UIButton *)buttonFor:(NSString *)iconNamed action:(SEL)action
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:iconNamed] forState:UIControlStateNormal];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    return button;
+}
+
+- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action
+{
+    UIButton *customView = [JMCToolbarButton buttonWithType:UIButtonTypeCustom];
+    [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [customView setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
+    UIImage *icon = [UIImage imageNamed:iconNamed];
+    CGRect frame = CGRectMake(0, 0, 41, 31);
+    [customView setImage:icon forState:UIControlStateNormal];
+    customView.frame = frame;
+    
+    UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
+    
+    return barItem;
+}
+
 - (BOOL)shouldTrackLocation {
     return [[JMC instance] isLocationEnabled] && [CLLocationManager locationServicesEnabled];
 }
 
-#pragma mark -
-#pragma mark Memory Managment
+- (void)dismissKeyboard
+{
+    [self.descriptionField resignFirstResponder];
+}
 
-@synthesize descriptionField, countdownView, progressView, currentLocation, locationManager = _locationManager, popover, screenshotButton;
+- (void)updateProgress:(NSTimer *)theTimer
+{
+    JMCRecorder* recorder = [JMCRecorder instance];
+    float currentDuration = [recorder currentDuration];
+    float progress = (currentDuration / recorder.recordTime);
+    self.progressView.progress = progress;
+}
+
+- (void)hideAudioProgress
+{
+    self.countdownView.hidden = YES;
+    self.progressView.progress = 0;
+    [self.voiceButton.imageView stopAnimating];
+    self.voiceButton.imageView.animationImages = nil;
+    [_timer invalidate];
+}
+
+-(void)reindexAllItems:(NSArray*)buttonItems
+{
+    // re-tag all buttons... with their new index.
+    for (NSUInteger i = 0; i < [buttonItems count]; i++) {
+        UIBarButtonItem *item = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
+        item.customView.tag = i;
+    }
+    [self.toolbar setItems:buttonItems animated:YES];
+}
+
+- (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
+{
+    CGRect buttonFrame = CGRectMake(0, 0, 30, 30);
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = buttonFrame;
+    
+    [button setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
+    
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    button.imageView.layer.cornerRadius = 5.0;
+    
+    [button setImage:icon forState:UIControlStateNormal];
+    
+    UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
+    
+    // FIXME: Limit number of items so that they don't overlap with the default buttons
+    // or add a "more" item if more than 3 items exist
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
+    [buttonItems insertObject:buttonItem atIndex:0];
+    [self.attachments insertObject:attachment atIndex:0]; // attachments must be kept in sycnh with buttons
+    [self reindexAllItems:buttonItems];
+}
+
+- (void)addImageAttachmentItem:(UIImage *)origImg
+{
+    JMCAttachmentItem *attachment = [[JMCAttachmentItem alloc] initWithName:@"screenshot"
+                                                                       data:UIImagePNGRepresentation(origImg)
+                                                                       type:JMCAttachmentTypeImage
+                                                                contentType:@"image/png"
+                                                             filenameFormat:@"screenshot-%d.png"];
+    
+    
+    UIImage * iconImg =
+    [origImg jmc_thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
+    [self addAttachmentItem:attachment withIcon:iconImg action:@selector(imageAttachmentTapped:)];
+    [attachment release];
+}
+
+- (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex
+{
+    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
+    [self.attachments removeObjectAtIndex:attachmentIndex];
+    [buttonItems removeObjectAtIndex:attachmentIndex];
+    [self reindexAllItems:buttonItems];
+}
+
+#pragma mark - Memory Managment Methods
+
+@synthesize descriptionField, countdownView, progressView, currentLocation, locationManager = _locationManager, popover;
 
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize toolbar;
-@synthesize voiceButton = _voiceButton;
-
+@synthesize voiceButton = _voiceButton, screenshotButton = _screenshotButton;
 
 - (void)dealloc
 {
@@ -665,12 +730,13 @@ static BOOL isPad(void) {
 - (void)internalRelease
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if(self.locationManager) {
-        self.locationManager.delegate = nil;
-        [self.locationManager stopUpdatingLocation];
-        self.locationManager = nil;
-    }
-    [systemToolbarItems release];
+
+    self.locationManager.delegate = nil;
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager = nil;
+    
+    [systemToolbarItems release], systemToolbarItems = nil;
+    
     self.voiceButton = nil;
     self.screenshotButton = nil;
     self.toolbar = nil;

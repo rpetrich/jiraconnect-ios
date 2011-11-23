@@ -47,7 +47,8 @@
     NSUInteger currentAttachmentItemIndex;
     CLLocation *currentLocation;
     CLLocationManager *_locationManager;
-    UIBarButtonItem *_voiceButton;
+    UIButton *_voiceButton;
+    UIButton *_screenshotButton;
     NSArray *systemToolbarItems; // holds the 3 system toolbar items.
 }
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
@@ -65,7 +66,7 @@
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
 @property(retain, nonatomic) JMCIssue *replyToIssue;
 
-@property(retain, nonatomic) UIBarButtonItem *voiceButton;
+@property(retain, nonatomic) UIButton *voiceButton;
 
 - (IBAction)sendFeedback;
 
