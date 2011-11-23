@@ -116,7 +116,7 @@ static NSRecursiveLock *writeLock;
                                    "dateUpdated, "
                                    "dateCreated, "
                                    "hasUpdates "
-                                "FROM issue ORDER BY dateUpdated desc LIMIT 1 OFFSET ?",
+                                "FROM issue ORDER BY hasUpdates desc, dateUpdated desc LIMIT 1 OFFSET ?",
                            [NSNumber numberWithUnsignedInt:issueIndex]];
     if ([res next]) {
         NSDictionary* dictionary = [res resultDict];
