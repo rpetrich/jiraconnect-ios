@@ -19,6 +19,7 @@
 @interface JMCNotifier : NSObject
 {
     UIView *_view;
+    UIViewController *_viewController;
 }
 
 @property(retain, nonatomic) UIView *view;

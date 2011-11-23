@@ -19,11 +19,13 @@
 
 @implementation JMCNotifier
 
-UIToolbar *_toolbar;
-UILabel *_label;
-UIButton *_button;
-CGRect startFrame;
-CGRect endFrame;
+@synthesize view = _view;
+
+static UIToolbar *_toolbar;
+static UILabel *_label;
+static UIButton *_button;
+static CGRect startFrame;
+static CGRect endFrame;
 
 - (id)initWithStartFrame:(CGRect)start endFrame:(CGRect)end {
     if ((self = [super init])) {
@@ -115,18 +117,21 @@ CGRect endFrame;
     CGRect currStartFrame = CGRectMake(startFrame.origin.x, startFrame.origin.y, frameSize.width, frameSize.height);
     CGRect currEndFrame = CGRectMake(0, 0 + statusBarFrame.size.height, frameSize.width, frameSize.height);
 
-    UIViewController *viewController = [[JMC instance] issuesViewControllerWithMode:JMCViewControllerModeDefault];
+    if (!_viewController) {
+        _viewController = [[[JMC instance] issuesViewControllerWithMode:JMCViewControllerModeDefault] retain];
+    }
+    
     UIWindow *window = [self findVisibleWindow];
     if ((window) && ([window respondsToSelector:@selector(rootViewController)]) && ([window rootViewController])) {
-        [window.rootViewController presentModalViewController:viewController animated:YES];
+        [window.rootViewController presentModalViewController:_viewController animated:YES];
     }
     else {
-        [viewController.view setFrame:currStartFrame];
-        [self.view addSubview:viewController.view];
+        [_viewController.view setFrame:currStartFrame];
+        [self.view addSubview:_viewController.view];
 
         [UIView beginAnimations:@"animateView" context:nil];
         [UIView setAnimationDuration:0.4];
-        [viewController.view setFrame:currEndFrame]; //notice this is ON screen!
+        [_viewController.view setFrame:currEndFrame]; //notice this is ON screen!
         [UIView commitAnimations];
     }
 
@@ -134,17 +139,15 @@ CGRect endFrame;
     [_toolbar removeFromSuperview];
 }
 
-@synthesize view = _view;
-
 - (void)dealloc {
 
     self.view = nil;
-    [_label release];
-    _label = nil;
-    [_toolbar release];
-    _toolbar = nil;
-    [_button release];
-    _button = nil;
+    
+    [_viewController release], _viewController = nil;
+    [_label release], _label = nil;
+    [_toolbar release], _toolbar = nil;
+    [_button release], _button = nil;
+    
     [super dealloc];
 }
 
