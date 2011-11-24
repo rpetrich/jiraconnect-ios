@@ -62,7 +62,6 @@
 		01E9911A146E24B900665A05 /* JMCTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990BD146E24B900665A05 /* JMCTransport.m */; };
 		01E9911B146E24B900665A05 /* JMCTransportOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990BF146E24B900665A05 /* JMCTransportOperation.m */; };
 		01E9911C146E24B900665A05 /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990C2146E24B900665A05 /* JMCToolbarButton.m */; };
-		01E9911F146E24B900665A05 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E990C8146E24B900665A05 /* CrashReporter.framework */; };
 		01E99120146E24B900665A05 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E990CB146E24B900665A05 /* Reachability.m */; };
 		01E99121146E24B900665A05 /* LICENSES in Resources */ = {isa = PBXBuildFile; fileRef = 01E990CC146E24B900665A05 /* LICENSES */; };
 		01E99122146E24B900665A05 /* Balloon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E990CE146E24B900665A05 /* Balloon_1.png */; };
@@ -109,6 +108,7 @@
 		01E99160146E276300665A05 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E99155146E276300665A05 /* SBJsonStreamWriterState.m */; };
 		01E99161146E276300665A05 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E99157146E276300665A05 /* SBJsonTokeniser.m */; };
 		01E99162146E276300665A05 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E99159146E276300665A05 /* SBJsonWriter.m */; };
+		8D84EA36147DE79500478D7B /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D84EA35147DE79500478D7B /* CrashReporter.framework */; };
 		8DE7F390147CC08800596FED /* UIView+JMCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F38C147CC08800596FED /* UIView+JMCAdditions.m */; };
 		8DE7F391147CC08800596FED /* UILabel+JMCVerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F38D147CC08800596FED /* UILabel+JMCVerticalAlign.m */; };
 		F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */; };
@@ -228,7 +228,6 @@
 		01E990BF146E24B900665A05 /* JMCTransportOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportOperation.m; sourceTree = "<group>"; };
 		01E990C1146E24B900665A05 /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 		01E990C2146E24B900665A05 /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
-		01E990C8146E24B900665A05 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		01E990CA146E24B900665A05 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		01E990CB146E24B900665A05 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		01E990CC146E24B900665A05 /* LICENSES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSES; sourceTree = "<group>"; };
@@ -287,6 +286,7 @@
 		01E99157146E276300665A05 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		01E99158146E276300665A05 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		01E99159146E276300665A05 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		8D84EA35147DE79500478D7B /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		8DE7F38C147CC08800596FED /* UIView+JMCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMCAdditions.m"; sourceTree = "<group>"; };
 		8DE7F38D147CC08800596FED /* UILabel+JMCVerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JMCVerticalAlign.m"; sourceTree = "<group>"; };
 		8DE7F38E147CC08800596FED /* UIView+JMCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMCAdditions.h"; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 				01E90BE3139AE940002CA0D9 /* AVFoundation.framework in Frameworks */,
 				01E90ABC139AE741002CA0D9 /* UIKit.framework in Frameworks */,
 				01E90ABE139AE741002CA0D9 /* Foundation.framework in Frameworks */,
-				01E9911F146E24B900665A05 /* CrashReporter.framework in Frameworks */,
+				8D84EA36147DE79500478D7B /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +606,7 @@
 		01E990C7146E24B900665A05 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				01E990C8146E24B900665A05 /* CrashReporter.framework */,
+				8D84EA35147DE79500478D7B /* CrashReporter.framework */,
 				01E990C9146E24B900665A05 /* Reachability */,
 			);
 			path = Libraries;

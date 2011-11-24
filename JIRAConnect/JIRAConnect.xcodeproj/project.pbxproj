@@ -103,7 +103,6 @@
 		4D71E65A1468962F00E0A7C3 /* JMCTransportOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E5DA1468962F00E0A7C3 /* JMCTransportOperation.m */; };
 		4D71E65B1468962F00E0A7C3 /* JMCToolbarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D71E5DC1468962F00E0A7C3 /* JMCToolbarButton.h */; };
 		4D71E65C1468962F00E0A7C3 /* JMCToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E5DD1468962F00E0A7C3 /* JMCToolbarButton.m */; };
-		4D71E6611468962F00E0A7C3 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71E5E41468962F00E0A7C3 /* CrashReporter.framework */; };
 		4D71E6621468962F00E0A7C3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D71E5E61468962F00E0A7C3 /* Reachability.h */; };
 		4D71E6631468962F00E0A7C3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E5E71468962F00E0A7C3 /* Reachability.m */; };
 		4D71E78D1468968700E0A7C3 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D71E6691468968600E0A7C3 /* JSON.h */; };
@@ -125,6 +124,8 @@
 		4D71E79D1468968700E0A7C3 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E6791468968600E0A7C3 /* SBJsonTokeniser.m */; };
 		4D71E79E1468968700E0A7C3 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D71E67A1468968600E0A7C3 /* SBJsonWriter.h */; };
 		4D71E79F1468968700E0A7C3 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E67B1468968600E0A7C3 /* SBJsonWriter.m */; };
+		8D84EA2E147DE2C400478D7B /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D84EA2D147DE2C400478D7B /* CrashReporter.framework */; };
+		8D84EA2F147DE2C400478D7B /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D84EA2D147DE2C400478D7B /* CrashReporter.framework */; };
 		8DE7F360147CA60000596FED /* UIView+JMCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F35C147CA60000596FED /* UIView+JMCAdditions.m */; };
 		8DE7F361147CA60000596FED /* UILabel+JMCVerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7F35D147CA60000596FED /* UILabel+JMCVerticalAlign.m */; };
 		8DE7F362147CA60000596FED /* UIView+JMCAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DE7F35E147CA60000596FED /* UIView+JMCAdditions.h */; };
@@ -138,7 +139,6 @@
 		8DE7F372147CA6D700596FED /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E6771468968600E0A7C3 /* SBJsonStreamWriterState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DE7F374147CA6D700596FED /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E6791468968600E0A7C3 /* SBJsonTokeniser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DE7F376147CA6D700596FED /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E67B1468968600E0A7C3 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		8DE7F37B147CA9F900596FED /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71E5E41468962F00E0A7C3 /* CrashReporter.framework */; };
 		F89A98D7139B58AC00D09DFF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
 		F89A98D9139B58B700D09DFF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D8139B58B700D09DFF /* CFNetwork.framework */; };
 		F89A98DB139B58BF00D09DFF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98DA139B58BF00D09DFF /* SystemConfiguration.framework */; };
@@ -254,7 +254,6 @@
 		4D71E5DA1468962F00E0A7C3 /* JMCTransportOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportOperation.m; sourceTree = "<group>"; };
 		4D71E5DC1468962F00E0A7C3 /* JMCToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCToolbarButton.h; sourceTree = "<group>"; };
 		4D71E5DD1468962F00E0A7C3 /* JMCToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCToolbarButton.m; sourceTree = "<group>"; };
-		4D71E5E41468962F00E0A7C3 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		4D71E5E61468962F00E0A7C3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4D71E5E71468962F00E0A7C3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		4D71E5E91468962F00E0A7C3 /* Balloon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_1.png; sourceTree = "<group>"; };
@@ -312,6 +311,7 @@
 		4D71E6791468968600E0A7C3 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		4D71E67A1468968600E0A7C3 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		4D71E67B1468968600E0A7C3 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		8D84EA2D147DE2C400478D7B /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		8DE7F35C147CA60000596FED /* UIView+JMCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMCAdditions.m"; sourceTree = "<group>"; };
 		8DE7F35D147CA60000596FED /* UILabel+JMCVerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JMCVerticalAlign.m"; sourceTree = "<group>"; };
 		8DE7F35E147CA60000596FED /* UIView+JMCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMCAdditions.h"; sourceTree = "<group>"; };
@@ -335,7 +335,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DE7F37B147CA9F900596FED /* CrashReporter.framework in Frameworks */,
 				0152ECB51439D141006024D1 /* libsqlite3.dylib in Frameworks */,
 				0152ECB41439D13B006024D1 /* libz.dylib in Frameworks */,
 				0152ECB31439D133006024D1 /* CoreLocation.framework in Frameworks */,
@@ -348,6 +347,7 @@
 				0152EC9B1439CE27006024D1 /* SenTestingKit.framework in Frameworks */,
 				0152EC9C1439CE27006024D1 /* UIKit.framework in Frameworks */,
 				0152EC9D1439CE27006024D1 /* Foundation.framework in Frameworks */,
+				8D84EA2F147DE2C400478D7B /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +365,7 @@
 				F89A98D9139B58B700D09DFF /* CFNetwork.framework in Frameworks */,
 				F89A98D7139B58AC00D09DFF /* UIKit.framework in Frameworks */,
 				F8B80566139B57EC00EC5AD4 /* Foundation.framework in Frameworks */,
-				4D71E6611468962F00E0A7C3 /* CrashReporter.framework in Frameworks */,
+				8D84EA2E147DE2C400478D7B /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,7 +590,7 @@
 		4D71E5E31468962F00E0A7C3 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				4D71E5E41468962F00E0A7C3 /* CrashReporter.framework */,
+				8D84EA2D147DE2C400478D7B /* CrashReporter.framework */,
 				4D71E5E51468962F00E0A7C3 /* Reachability */,
 			);
 			path = Libraries;
