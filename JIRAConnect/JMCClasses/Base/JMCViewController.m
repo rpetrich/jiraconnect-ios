@@ -191,7 +191,12 @@
         CGRect keyboardRect = [aValue CGRectValue];
 
         CGRect newFrame = self.view.bounds;
-        newFrame.size.height -= keyboardRect.size.height;
+        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+            newFrame.size.height -= keyboardRect.size.height;
+        }
+        else {
+            newFrame.size.height -= keyboardRect.size.width;
+        }
 
         self.view.frame = newFrame;
         self.countdownView.center = self.descriptionField.center;
@@ -222,7 +227,12 @@
         CGRect keyboardRect = [aValue CGRectValue];
         
         CGRect newFrame = self.view.bounds;
-        newFrame.size.height += keyboardRect.size.height;
+        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+            newFrame.size.height += keyboardRect.size.height;
+        }
+        else {
+            newFrame.size.height += keyboardRect.size.width;
+        }
         
         self.view.frame = newFrame;
         self.countdownView.center = self.descriptionField.center;
