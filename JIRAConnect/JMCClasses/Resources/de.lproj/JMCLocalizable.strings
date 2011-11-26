@@ -42,3 +42,8 @@
 
 "JMCInAppNotification-Singular" = "%d neue Nachricht von Entwickler";
 "JMCInAppNotification-Plural" = "%d neue Nachrichten von Entwickler";
+
+"JMCAttachmentsTitle" = "Anhänge";
+"JMCRecordingLabel" = "Tonaufnahme";
+"JMCImageLabel" = "Bild";
+"JMCCustomerLabel" = "Sonstiges";

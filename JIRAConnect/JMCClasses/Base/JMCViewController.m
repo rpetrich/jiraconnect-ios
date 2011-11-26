@@ -13,43 +13,50 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 **/
-#import "JMC.h"
-#import "JMCMacros.h"
-#import "JMCViewController.h"
-#import "UIImage+JMCResize.h"
-#import "UIView+JMCAdditions.h"
-#import "JMCAttachmentItem.h"
-#import "JMCSketchViewController.h"
-#import "JMCIssueStore.h"
-#import "JMCToolbarButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import "JMC.h"
+#import "JMCViewController.h"
+#import "JMCAttachmentItem.h"
+#import "JMCAttachmentsViewController.h"
 #import "JMCCreateIssueDelegate.h"
+#import "JMCIssueStore.h"
+#import "JMCMacros.h"
 #import "JMCReplyDelegate.h"
 #import "JMCTransport.h"
+#import "UIImage+JMCResize.h"
+#import "UIView+JMCAdditions.h"
 
 @interface JMCViewController ()
 
 - (BOOL)shouldTrackLocation;
 
-- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action;
 - (UIButton *)buttonFor:(NSString *)iconNamed action:(SEL)action;
+
+- (NSMutableArray *)removeImageViewsFromAttachmentsButton;
 
 - (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action;
 - (void)addButtonsToView;
 - (void)addImageAttachmentItem:(UIImage *)origImg;
+- (void)addImageViewsToAttachmentsButton:(NSArray *)imageViews;
 - (void)dismissKeyboard;
-- (void)internalRelease;
 - (void)hideAudioProgress;
+- (void)internalRelease;
+- (void)reloadAttachmentsButton;
 - (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex;
+
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, retain) CLLocation *currentLocation;
 @property(nonatomic, retain) UIPopoverController *popover;
 @property(nonatomic, retain) UIButton *screenshotButton;
+@property(nonatomic, retain) UIButton *attachmentsButton;
 
 @end
 
 @implementation JMCViewController
+
+static float kJMCButtonSpacing = 50.0;
+static NSInteger kJMCTag = 10133;
 
 #pragma mark - UIViewController Methods
 
@@ -97,7 +104,9 @@
                                              action:@selector(sendFeedback)] autorelease];
 
 
-    self.attachments = [NSMutableArray arrayWithCapacity:1];
+    if (!self.attachments) {
+        self.attachments = [NSMutableArray arrayWithCapacity:1];
+    }
 
     [self addButtonsToView];
 
@@ -266,6 +275,12 @@
 
 - (IBAction)dismiss
 {
+    // Delete all attachments and button
+    self.attachments = nil;
+    [self.attachmentsButton removeFromSuperview];
+    self.attachmentsButton = nil;
+    _buttonOffset -= kJMCButtonSpacing;
+    
     if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -342,36 +357,9 @@
     }
 }
 
-- (void)imageAttachmentTapped:(UIButton *)touch
-{
-    NSUInteger touchIndex = (u_int) touch.tag;
-    NSUInteger attachmentIndex = touchIndex;
-    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
-    JMCSketchViewController *sketchViewController = [[[JMCSketchViewController alloc] initWithNibName:@"JMCSketchViewController" bundle:nil] autorelease];
-    // get the original image, wire it up to the sketch controller
-    sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
-    sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:attachmentIndex]; // set this image's id. just the index in the array
-    sketchViewController.delegate = self;
-    [self presentModalViewController:sketchViewController animated:YES];
-    currentAttachmentItemIndex = touchIndex;
-}
-
-- (void)voiceAttachmentTapped:(UIButton *)touch
-{
-    // delete that button, both from the bar, and the images array
-    NSUInteger tapIndex = (u_int) touch.tag;
-    NSUInteger attachmentIndex = tapIndex;
-    UIAlertView *view =
-            [[UIAlertView alloc] initWithTitle:JMCLocalizedString(@"RemoveRecording", @"Remove recording title")
-                                 message:JMCLocalizedString(@"AlertBeforeDeletingRecording", @"Warning message before deleting a recording.")
-                                 delegate:self
-                             cancelButtonTitle:JMCLocalizedString(@"No", @"")
-                             otherButtonTitles:JMCLocalizedString(@"Yes", @""), nil];
-    currentAttachmentItemIndex = attachmentIndex;
-    [view show];
-    [view release];
-
-
+- (void)viewAttachments:(UIButton *)sender {
+    self.attachmentsViewController.attachments = self.attachments;
+    [self.navigationController pushViewController:self.attachmentsViewController animated:YES];
 }
 
 - (IBAction)sendFeedback
@@ -447,7 +435,6 @@
     
     self.descriptionField.text = @"";
     [self.attachments removeAllObjects];
-    [self.toolbar setItems:systemToolbarItems];
 }
 
 #pragma mark - AVAudioRecorderDelegate Methods
@@ -466,21 +453,10 @@
                                                              filenameFormat:@"recording-%d.aac"];
     
     
-    UIImage *newImage = [UIImage imageNamed:@"icon_record_2"];
-    [self addAttachmentItem:attachment withIcon:newImage action:@selector(voiceAttachmentTapped:)];
+    attachment.thumbnail = [UIImage imageNamed:@"icon_recording"];
+    [self addAttachmentItem:attachment withIcon:attachment.thumbnail action:@selector(voiceAttachmentTapped:)];
     [attachment release];
     [recorder cleanUp];
-}
-
-#pragma mark - UIAlertViewDelelgate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    // dismiss modal dialog.
-    if (buttonIndex == 1) {
-        [self removeAttachmentItemAtIndex:currentAttachmentItemIndex];
-    }
-    currentAttachmentItemIndex = 0;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -514,32 +490,14 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - JMCSketchViewControllerDelegate
+#pragma mark - JMCAttachmentsViewControllerDelegate
 
-- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
-{
-    [self dismissModalViewControllerAnimated:YES];
-    NSUInteger imgIndex = [imageId unsignedIntegerValue];
-    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:imgIndex];
-    attachment.data = UIImagePNGRepresentation(image);
-
-    // also update the icon in the toolbar
-    UIImage * iconImg =
-            [image jmc_thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
-
-    UIBarButtonItem *item = [self.toolbar.items objectAtIndex:imgIndex];
-    ((UIButton *) item.customView).imageView.image = iconImg;
+- (void)attachmentsViewController:(JMCAttachmentsViewController *)controller didDeleteAttachment:(JMCAttachmentItem *)attachment {
+    [self reloadAttachmentsButton];
 }
 
-- (void)sketchControllerDidCancel:(UIViewController *)controller
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)imageId
-{
-    [self dismissModalViewControllerAnimated:YES];
-    [self removeAttachmentItemAtIndex:[imageId unsignedIntegerValue]];
+- (void)attachmentsViewController:(JMCAttachmentsViewController *)controller didChangeAttachment:(JMCAttachmentItem *)attachment {
+    [self reloadAttachmentsButton];
 }
 
 #pragma mark - CLLocationManagerDelegate Methods
@@ -557,55 +515,136 @@
 
 #pragma mark - Private Helper Methods
 
-- (void)addButtonsToView {
-    float offset = 5;
-    if ([[JMC instance] isPhotosEnabled]) {
-        self.screenshotButton = [self buttonFor:@"icon_capture" action:@selector(addScreenshot)];
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            self.screenshotButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-            self.screenshotButton.frame = CGRectMake(self.descriptionField.frame.size.width - 44.0 - offset, 
-                                                     self.view.frame.size.height - 44.0, 
-                                                     44.0, 
-                                                     44.0);
-        }
-        else {
-            self.screenshotButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-            self.screenshotButton.frame = CGRectMake(self.descriptionField.frame.size.width - 50.0, 
-                                                     0 + offset, 
-                                                     44.0, 
-                                                     44.0);
-        }
-        [self.view addSubview:self.screenshotButton]; 
-        
-        offset += 50;
-    }
-    
-    if ([[JMC instance] isVoiceEnabled]) {
-        self.voiceButton = [self buttonFor:@"icon_record" action:@selector(addVoice)];
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            self.voiceButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-            self.voiceButton.frame = CGRectMake(self.descriptionField.frame.size.width - 44.0 - offset, 
-                                                self.view.frame.size.height - 44.0, 
-                                                44.0, 
-                                                44.0);
-        }
-        else {
-            self.voiceButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-            self.voiceButton.frame = CGRectMake(self.descriptionField.frame.size.width - 50.0, 
-                                                0 + offset, 
-                                                44.0, 
-                                                44.0);
-        }
-        [self.view addSubview:self.voiceButton]; 
-    }
-    
+- (void)layoutActionButton:(UIButton *)button {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.descriptionField.jmc_height -= 50.0;
+        button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+        button.frame = CGRectMake(self.descriptionField.frame.size.width - 44.0 - _buttonOffset, 
+                                  self.view.frame.size.height - 44.0, 
+                                  44.0, 
+                                  44.0);
     }
     else {
-        self.descriptionField.jmc_width -= 50.0;
+        button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+        button.frame = CGRectMake(self.descriptionField.frame.size.width - kJMCButtonSpacing, 
+                                  0 + _buttonOffset, 
+                                  44.0, 
+                                  44.0);
+    }
+    
+    _buttonOffset += kJMCButtonSpacing;
+}
+
+- (void)addScreenshotButton {
+    if ([[JMC instance] isPhotosEnabled]) {
+        self.screenshotButton = [self buttonFor:@"icon_capture" action:@selector(addScreenshot)];
+        [self layoutActionButton:self.screenshotButton];
+        [self.view addSubview:self.screenshotButton]; 
+    }
+}
+
+- (void)addVoiceButton {
+    if ([[JMC instance] isVoiceEnabled]) {
+        self.voiceButton = [self buttonFor:@"icon_record" action:@selector(addVoice)];
+        [self layoutActionButton:self.voiceButton];
+        [self.view addSubview:self.voiceButton]; 
+    }
+}
+
+- (void)addShadowToImageView:(UIImageView *)imageView {
+    imageView.layer.shadowPath = [UIBezierPath bezierPathWithRect:imageView.bounds].CGPath;
+    imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    imageView.layer.shadowOpacity = 0.8;
+    imageView.layer.shadowOffset = CGSizeMake(1, 1);
+    imageView.layer.shadowRadius = 1.0;
+}
+
+- (void)addImageViewsToAttachmentsButton:(NSArray *)imageViews {
+    static NSUInteger kIconMaxCount = 3;
+    static float kIconMaxWidth = 30;
+    
+    NSUInteger maxViews = MIN([imageViews count], kIconMaxCount);
+    float size = (kIconMaxWidth - (maxViews - 1) * kIconMaxCount);
+    float offset = ceil((self.attachmentsButton.frame.size.width - kIconMaxWidth) / 2);
+    for (NSUInteger index = 1; index <= maxViews; index++) {
+        float position = offset + (index - 1) * kIconMaxCount;
+        UIImageView *imageView = [imageViews objectAtIndex:[imageViews count] - index];
+        imageView.frame = CGRectMake(position, position, size, size);
+        [self addShadowToImageView:imageView];
+        [self.attachmentsButton insertSubview:imageView atIndex:0];
+    }
+    
+}
+
+- (NSMutableArray *)removeImageViewsFromAttachmentsButton {
+    NSMutableArray *subviews = [[self.attachmentsButton subviews] mutableCopy];
+    for (UIView *subview in subviews) {
+        if (subview.tag == kJMCTag) {
+            [subview removeFromSuperview];
+        }
+        else {
+            [subviews removeObject:subview];
+        }
+    }
+    return [subviews autorelease];
+}
+
+- (void)addAttachmentsButtonWithIcon:(UIImage *)icon {
+    if (!self.attachmentsButton) {
+        self.attachmentsButton = [self buttonFor:nil action:@selector(viewAttachments:)];
+        self.attachmentsButton.showsTouchWhenHighlighted = YES;
+        [self layoutActionButton:self.attachmentsButton];
+        [self.view addSubview:self.attachmentsButton]; 
+    }
+    
+    NSMutableArray *subviews = [self removeImageViewsFromAttachmentsButton];
+    
+    UIImageView *iconView = [[UIImageView alloc] initWithImage:icon];
+    iconView.tag = kJMCTag;
+    [subviews addObject:iconView];
+    [iconView release];
+    
+    [self addImageViewsToAttachmentsButton:subviews];
+}
+
+- (void)reloadAttachmentsButton {
+    NSMutableArray *subviews = [self removeImageViewsFromAttachmentsButton];
+    [subviews removeAllObjects];
+    
+    for (JMCAttachmentItem *attachment in self.attachments) {
+        if (attachment.thumbnail) {
+            UIImageView *iconView = [[UIImageView alloc] initWithImage:attachment.thumbnail];
+            iconView.tag = kJMCTag;
+            [subviews addObject:iconView];
+            [iconView release];
+        }
+    }
+    
+    if ([subviews count] > 0) {
+        [self addImageViewsToAttachmentsButton:subviews];
+    }
+    else {
+        [self.attachmentsButton removeFromSuperview];
+        self.attachmentsButton = nil;
+        _buttonOffset -= kJMCButtonSpacing;
+    }
+}
+
+- (void)addButtonsToView {
+    // Offset from right side (iPhone) or top (iPad)
+    _buttonOffset = 5;
+    
+    // Add buttons
+    [self addScreenshotButton];
+    [self addVoiceButton];
+
+    // If the offset is bigger than 5, than at least one button was added
+    if (_buttonOffset > 5) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            self.descriptionField.jmc_height -= kJMCButtonSpacing;
+        }
+        else {
+            self.descriptionField.jmc_width -= kJMCButtonSpacing;
+        }
     }
 }
 
@@ -616,21 +655,6 @@
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     button.frame = CGRectMake(0, 0, 44, 44);
     return button;
-}
-
-- (UIBarButtonItem *)barButtonFor:(NSString *)iconNamed action:(SEL)action
-{
-    UIButton *customView = [JMCToolbarButton buttonWithType:UIButtonTypeCustom];
-    [customView addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [customView setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
-    UIImage *icon = [UIImage imageNamed:iconNamed];
-    CGRect frame = CGRectMake(0, 0, 41, 31);
-    [customView setImage:icon forState:UIControlStateNormal];
-    customView.frame = frame;
-    
-    UIBarButtonItem *barItem = [[[UIBarButtonItem alloc] initWithCustomView:customView] autorelease];
-    
-    return barItem;
 }
 
 - (BOOL)shouldTrackLocation {
@@ -659,37 +683,11 @@
     [_timer invalidate];
 }
 
--(void)reindexAllItems:(NSArray*)buttonItems
-{
-    // re-tag all buttons... with their new index.
-    for (NSUInteger i = 0; i < [buttonItems count]; i++) {
-        UIBarButtonItem *item = (UIBarButtonItem *) [buttonItems objectAtIndex:(NSUInteger) i];
-        item.customView.tag = i;
-    }
-    [self.toolbar setItems:buttonItems animated:YES];
-}
-
 - (void)addAttachmentItem:(JMCAttachmentItem *)attachment withIcon:(UIImage *)icon action:(SEL)action
 {
-    CGRect buttonFrame = CGRectMake(0, 0, 30, 30);
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = buttonFrame;
-    
-    [button setBackgroundImage:[UIImage imageNamed:@"button_base"] forState:UIControlStateNormal];
-    
-    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    button.imageView.layer.cornerRadius = 5.0;
-    
-    [button setImage:icon forState:UIControlStateNormal];
-    
-    UIBarButtonItem *buttonItem = [[[UIBarButtonItem alloc] initWithCustomView:button] autorelease];
-    
-    // FIXME: Limit number of items so that they don't overlap with the default buttons
-    // or add a "more" item if more than 3 items exist
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
-    [buttonItems insertObject:buttonItem atIndex:0];
     [self.attachments insertObject:attachment atIndex:0]; // attachments must be kept in sycnh with buttons
-    [self reindexAllItems:buttonItems];
+
+    [self addAttachmentsButtonWithIcon:icon];
 }
 
 - (void)addImageAttachmentItem:(UIImage *)origImg
@@ -701,32 +699,34 @@
                                                              filenameFormat:@"screenshot-%d.png"];
     
     
-    UIImage * iconImg =
-    [origImg jmc_thumbnailImage:30 transparentBorder:0 cornerRadius:0.0 interpolationQuality:kCGInterpolationDefault];
-    [self addAttachmentItem:attachment withIcon:iconImg action:@selector(imageAttachmentTapped:)];
+    attachment.thumbnail = [origImg jmc_thumbnailImage:34 transparentBorder:0 cornerRadius:3.0 interpolationQuality:kCGInterpolationDefault];
+    [self addAttachmentItem:attachment withIcon:attachment.thumbnail action:@selector(imageAttachmentTapped:)];
     [attachment release];
 }
 
 - (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex
 {
-    NSMutableArray *buttonItems = [NSMutableArray arrayWithArray:self.toolbar.items];
     [self.attachments removeObjectAtIndex:attachmentIndex];
-    [buttonItems removeObjectAtIndex:attachmentIndex];
-    [self reindexAllItems:buttonItems];
+    // TODO
 }
 
 #pragma mark - Memory Managment Methods
 
 @synthesize descriptionField, countdownView, progressView, currentLocation, locationManager = _locationManager, popover;
-
+@synthesize attachmentsViewController;
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, attachments = _attachments, replyToIssue = _replyToIssue;
-@synthesize toolbar;
-@synthesize voiceButton = _voiceButton, screenshotButton = _screenshotButton;
+@synthesize voiceButton = _voiceButton, screenshotButton = _screenshotButton, attachmentsButton = _attachmentsButton;
 
 - (void)dealloc
 {
     // Release any retained subviews of the main view.
     [self internalRelease];
+
+    // Release these vars only if controller is deallocated
+    self.attachmentsButton = nil;
+    self.attachments = nil;
+    self.currentLocation = nil;
+    
     [super dealloc];
 }
 
@@ -744,18 +744,14 @@
     self.locationManager.delegate = nil;
     [self.locationManager stopUpdatingLocation];
     self.locationManager = nil;
-    
-    [systemToolbarItems release], systemToolbarItems = nil;
-    
+
+    self.attachmentsViewController = nil;
     self.voiceButton = nil;
     self.screenshotButton = nil;
-    self.toolbar = nil;
-    self.attachments = nil;
     self.progressView = nil;
     self.replyToIssue = nil;
     self.countdownView = nil;
     self.descriptionField = nil;
-    self.currentLocation = nil;
     self.replyTransport = nil;
     self.issueTransport = nil;
     self.popover = nil;

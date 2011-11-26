@@ -15,27 +15,22 @@
 **/
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "JMCTransport.h"
-#import "JMCCustomDataSource.h"
-#import "JMCRecorder.h"
-#import "JMCIssueTransport.h"
-#import "JMCReplyTransport.h"
-#import "JMCSketchViewControllerDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import "JMCAttachmentsViewController.h"
+#import "JMCCustomDataSource.h"
+#import "JMCIssueTransport.h"
+#import "JMCRecorder.h"
+#import "JMCReplyTransport.h"
+#import "JMCTransport.h"
 
+@class JMCAttachmentsViewController;
 
-@interface JMCViewController : UIViewController
-        <UITextViewDelegate, UITextFieldDelegate, AVAudioRecorderDelegate,
-        UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-        JMCSketchViewControllerDelegate, UIAlertViewDelegate, CLLocationManagerDelegate> {
-
+@interface JMCViewController : UIViewController<UITextViewDelegate, AVAudioRecorderDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, JMCAttachmentsViewControllerDelegate> {
+    IBOutlet JMCAttachmentsViewController *attachmentsViewController;
     IBOutlet UITextView *descriptionField;
-
     IBOutlet UILabel *countdownTimer;
     IBOutlet UIProgressView *progressView;
     IBOutlet UIView *countdownView;
-
-    IBOutlet UIToolbar* toolbar;
 
     JMCIssueTransport *_issueTransport;
     JMCReplyTransport *_replyTransport;
@@ -43,26 +38,26 @@
     JMCIssue *_replyToIssue;
 
 @private
+    float _buttonOffset;
     NSTimer *_timer;
-    NSUInteger currentAttachmentItemIndex;
     CLLocation *currentLocation;
     CLLocationManager *_locationManager;
+    UIButton *_attachmentsButton;
     UIButton *_voiceButton;
     UIButton *_screenshotButton;
-    NSArray *systemToolbarItems; // holds the 3 system toolbar items.
 }
-@property(retain, nonatomic) IBOutlet UITextView *descriptionField;
 
+@property(retain, nonatomic) IBOutlet JMCAttachmentsViewController *attachmentsViewController;
+@property(retain, nonatomic) IBOutlet UITextView *descriptionField;
 @property(retain, nonatomic) IBOutlet UIView *countdownView;
 @property(retain, nonatomic) IBOutlet UIProgressView *progressView;
-
-@property(retain, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property(retain, nonatomic) JMCIssueTransport *issueTransport;
 @property(retain, nonatomic) JMCReplyTransport *replyTransport;
 
 // an array of items to attach to the issue
 @property(retain, nonatomic) NSMutableArray *attachments;
+
 // if this is non-null, then a reply is sent to that issue. Otherwise, a new issue is created.
 @property(retain, nonatomic) JMCIssue *replyToIssue;
 

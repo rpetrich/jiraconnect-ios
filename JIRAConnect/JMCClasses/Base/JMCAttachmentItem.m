@@ -35,6 +35,7 @@
 @synthesize data;
 @synthesize name;
 @synthesize type;
+@synthesize thumbnail;
 
 
 - (id)initWithName:(NSString *)aName
@@ -49,7 +50,7 @@
         filenameFormat = [aFilenameFormat retain];
         name = [aName retain];
         type = aType;
-
+        thumbnail = nil;
     }
     return self;
 }
@@ -78,10 +79,11 @@
 
 
 - (void)dealloc {
-    [filenameFormat release];
-    [contentType release];
-    [data release];
-    [name release];
+    [thumbnail release], thumbnail = nil;
+    [filenameFormat release], filenameFormat = nil;
+    [contentType release], contentType = nil;
+    [data release], data = nil;
+    [name release], name = nil;
     [super dealloc];
 }
 @end

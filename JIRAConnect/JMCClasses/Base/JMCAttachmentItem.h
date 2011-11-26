@@ -31,11 +31,14 @@ typedef int JMCAttachmentType;
     NSString* contentType;
     JMCAttachmentType type;
     NSData* data;
+    UIImage *thumbnail;
 }
+
 @property(nonatomic, retain) NSString *contentType;
 @property(nonatomic, retain) NSData *data;
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *filenameFormat;
+@property(nonatomic, retain) UIImage *thumbnail;
 @property(nonatomic) JMCAttachmentType type;
 
 - (id)initWithName:(NSString *)aName data:(NSData *)aData type:(JMCAttachmentType)aType contentType:(NSString *)aContentType filenameFormat:(NSString *)aFilenameFormat;
