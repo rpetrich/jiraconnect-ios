@@ -64,19 +64,20 @@
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f kB", round([attachment.data length] / 1000.0 * 100) / 100];
     }
     
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     switch (attachment.type) {
         case JMCAttachmentTypeRecording:
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = JMCLocalizedString(@"JMCRecordingLabel", "Recording");
             break;
             
         case JMCAttachmentTypeImage:
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             cell.textLabel.text = JMCLocalizedString(@"JMCImageLabel", "Image");
             break;
             
         case JMCAttachmentTypeCustom:
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = JMCLocalizedString(@"JMCCustomLabel", "Custom");
             break;
             
