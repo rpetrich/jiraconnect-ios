@@ -43,7 +43,7 @@
 - (void)internalRelease;
 - (void)reloadAttachmentsButton;
 - (void)removeAttachmentItemAtIndex:(NSUInteger)attachmentIndex;
-
+- (void)deleteAttachments;
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, retain) CLLocation *currentLocation;
@@ -276,11 +276,7 @@ static NSInteger kJMCTag = 10133;
 
 - (IBAction)dismiss
 {
-    // Delete all attachments and button
-    self.attachments = nil;
-    [self.attachmentsButton removeFromSuperview];
-    self.attachmentsButton = nil;
-    _buttonOffset -= kJMCButtonSpacing;
+    [self deleteAttachments];
     
     if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -437,7 +433,7 @@ static NSInteger kJMCTag = 10133;
     }
     
     self.descriptionField.text = @"";
-    [self.attachments removeAllObjects];
+    [self deleteAttachments];
 }
 
 #pragma mark - AVAudioRecorderDelegate Methods
@@ -632,6 +628,16 @@ static NSInteger kJMCTag = 10133;
         [self addImageViewsToAttachmentsButton:subviews];
     }
     else {
+        [self.attachmentsButton removeFromSuperview];
+        self.attachmentsButton = nil;
+        _buttonOffset -= kJMCButtonSpacing;
+    }
+}
+
+- (void)deleteAttachments {
+    [self.attachments removeAllObjects];
+    
+    if (self.attachmentsButton) {
         [self.attachmentsButton removeFromSuperview];
         self.attachmentsButton = nil;
         _buttonOffset -= kJMCButtonSpacing;
