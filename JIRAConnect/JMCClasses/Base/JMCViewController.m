@@ -103,12 +103,13 @@ static NSInteger kJMCTag = 10133;
                                              target:self
                                              action:@selector(sendFeedback)] autorelease];
 
-
+    [self addButtonsToView];
     if (!self.attachments) {
         self.attachments = [NSMutableArray arrayWithCapacity:1];
     }
-
-    [self addButtonsToView];
+    else {
+        [self reloadAttachmentsButton];
+    }
 
     // TODO: the transport class should be split in 2. 1 for actually sending, the other for creating the request
     _issueTransport = [[JMCIssueTransport alloc] init];
@@ -298,6 +299,8 @@ static NSInteger kJMCTag = 10133;
     } 
     else 
     {
+        [self dismissKeyboard];
+        
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
@@ -588,13 +591,17 @@ static NSInteger kJMCTag = 10133;
     return [subviews autorelease];
 }
 
-- (void)addAttachmentsButtonWithIcon:(UIImage *)icon {
+- (void)addAttachmentsButton {
     if (!self.attachmentsButton) {
         self.attachmentsButton = [self buttonFor:nil action:@selector(viewAttachments:)];
         self.attachmentsButton.showsTouchWhenHighlighted = YES;
         [self layoutActionButton:self.attachmentsButton];
         [self.view addSubview:self.attachmentsButton]; 
     }
+}
+
+- (void)addAttachmentsButtonWithIcon:(UIImage *)icon {
+    [self addAttachmentsButton];
     
     NSMutableArray *subviews = [self removeImageViewsFromAttachmentsButton];
     
@@ -607,6 +614,8 @@ static NSInteger kJMCTag = 10133;
 }
 
 - (void)reloadAttachmentsButton {
+    [self addAttachmentsButton];
+    
     NSMutableArray *subviews = [self removeImageViewsFromAttachmentsButton];
     [subviews removeAllObjects];
     
@@ -723,7 +732,6 @@ static NSInteger kJMCTag = 10133;
     [self internalRelease];
 
     // Release these vars only if controller is deallocated
-    self.attachmentsButton = nil;
     self.attachments = nil;
     self.currentLocation = nil;
     
@@ -745,6 +753,7 @@ static NSInteger kJMCTag = 10133;
     [self.locationManager stopUpdatingLocation];
     self.locationManager = nil;
 
+    self.attachmentsButton = nil;
     self.attachmentsViewController = nil;
     self.voiceButton = nil;
     self.screenshotButton = nil;
