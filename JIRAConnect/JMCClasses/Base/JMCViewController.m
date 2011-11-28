@@ -528,7 +528,7 @@ static NSInteger kJMCTag = 10133;
     }
     else {
         button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-        button.frame = CGRectMake(self.descriptionField.frame.size.width - kJMCButtonSpacing, 
+        button.frame = CGRectMake(self.view.frame.size.width - kJMCButtonSpacing, 
                                   0 + _buttonOffset, 
                                   44.0, 
                                   44.0);
@@ -623,7 +623,7 @@ static NSInteger kJMCTag = 10133;
         if (attachment.thumbnail) {
             UIImageView *iconView = [[UIImageView alloc] initWithImage:attachment.thumbnail];
             iconView.tag = kJMCTag;
-            [subviews addObject:iconView];
+            [subviews insertObject:iconView atIndex:0];
             [iconView release];
         }
     }
