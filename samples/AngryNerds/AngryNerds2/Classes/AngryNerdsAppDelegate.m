@@ -42,6 +42,7 @@
                                   apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
                                 location:YES
                               dataSource:viewController];
+//    [JMC instance].options.barStyle = UIBarStyleBlack;
     
 //    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
 //                                             project:@"NERDS"
@@ -59,6 +60,7 @@
 
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
+    window.rootViewController = viewController;
     
     
     return YES;
