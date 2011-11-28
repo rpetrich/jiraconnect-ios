@@ -36,7 +36,8 @@
         _locationEnabled = NO;
         _crashReportingEnabled = YES;
         _barStyle = UIBarStyleDefault;
-        _modalPresentationStyle = UIModalPresentationFullScreen;
+        _modalPresentationStyle = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)) ? 
+                                    UIModalPresentationFormSheet : UIModalPresentationFullScreen;
     }
     return self;
 }

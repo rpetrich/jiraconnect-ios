@@ -32,7 +32,6 @@
         configureJiraConnect:@"http://localhost:2990/jira/"
                   projectKey:@"NERDS"
                       apiKey:@"a8848688-5f68-431a-84ad-8fa0a025f893"];
-    [JMC instance].options.modalPresentationStyle = UIModalPresentationFormSheet;
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
