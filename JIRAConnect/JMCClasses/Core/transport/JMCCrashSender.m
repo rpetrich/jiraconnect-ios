@@ -74,6 +74,7 @@ JMCCrashTransport *_transport;
             break;
         case 2:
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAutomaticallySendCrashReports];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self sendCrashReports];
             break;
     }
