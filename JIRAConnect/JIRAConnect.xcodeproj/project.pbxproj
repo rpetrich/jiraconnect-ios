@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010360C9148223BB009C49B8 /* JMCAttachmentsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 010360C7148223BB009C49B8 /* JMCAttachmentsViewController.h */; };
+		010360CA148223BB009C49B8 /* JMCAttachmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010360C8148223BB009C49B8 /* JMCAttachmentsViewController.m */; };
 		0152EC9B1439CE27006024D1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0152EC9A1439CE27006024D1 /* SenTestingKit.framework */; };
 		0152EC9C1439CE27006024D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
 		0152EC9D1439CE27006024D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
@@ -161,6 +163,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010360C6148223BB009C49B8 /* JMCAttachmentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCAttachmentsView.xib; sourceTree = "<group>"; };
+		010360C7148223BB009C49B8 /* JMCAttachmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCAttachmentsViewController.h; sourceTree = "<group>"; };
+		010360C8148223BB009C49B8 /* JMCAttachmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCAttachmentsViewController.m; sourceTree = "<group>"; };
 		0152EC991439CE27006024D1 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0152EC9A1439CE27006024D1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0152ECA01439CE27006024D1 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
@@ -372,6 +377,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010360C5148223BB009C49B8 /* attachments */ = {
+			isa = PBXGroup;
+			children = (
+				010360C6148223BB009C49B8 /* JMCAttachmentsView.xib */,
+				010360C7148223BB009C49B8 /* JMCAttachmentsViewController.h */,
+				010360C8148223BB009C49B8 /* JMCAttachmentsViewController.m */,
+			);
+			path = attachments;
+			sourceTree = "<group>";
+		};
 		0152EC9E1439CE27006024D1 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +440,7 @@
 		4D71E5891468962F00E0A7C3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				010360C5148223BB009C49B8 /* attachments */,
 				4D71E58A1468962F00E0A7C3 /* audio */,
 				4D71E58D1468962F00E0A7C3 /* crashes */,
 				4D71E5901468962F00E0A7C3 /* database */,
@@ -805,6 +821,7 @@
 				4D71E79E1468968700E0A7C3 /* SBJsonWriter.h in Headers */,
 				8DE7F362147CA60000596FED /* UIView+JMCAdditions.h in Headers */,
 				8DE7F363147CA60000596FED /* UILabel+JMCVerticalAlign.h in Headers */,
+				010360C9148223BB009C49B8 /* JMCAttachmentsViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +994,7 @@
 				4D71E79F1468968700E0A7C3 /* SBJsonWriter.m in Sources */,
 				8DE7F360147CA60000596FED /* UIView+JMCAdditions.m in Sources */,
 				8DE7F361147CA60000596FED /* UILabel+JMCVerticalAlign.m in Sources */,
+				010360CA148223BB009C49B8 /* JMCAttachmentsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
