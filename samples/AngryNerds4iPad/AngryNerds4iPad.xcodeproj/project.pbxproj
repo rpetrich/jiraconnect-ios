@@ -931,7 +931,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../JIRAConnect/JMCClasses/Libraries\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Hockey+JMC/External\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AngryNerds4iPad/AngryNerds4iPad-Prefix.pch";
@@ -947,7 +946,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../JIRAConnect/JMCClasses/Libraries\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Hockey+JMC/External\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AngryNerds4iPad/AngryNerds4iPad-Prefix.pch";
