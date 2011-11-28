@@ -55,6 +55,7 @@
 
 @implementation JMCViewController
 
+static float kJMCInitialButtonOffset = 5.0;
 static float kJMCButtonSpacing = 50.0;
 static NSInteger kJMCTag = 10133;
 
@@ -213,6 +214,7 @@ static NSInteger kJMCTag = 10133;
     }
     else {
         CGRect newFrame = self.view.bounds;
+        newFrame.size.width -= (_buttonOffset > kJMCInitialButtonOffset ? kJMCButtonSpacing : 0);
         newFrame.size.height /= 2;
 
         self.descriptionField.frame = newFrame;
@@ -248,7 +250,10 @@ static NSInteger kJMCTag = 10133;
         self.countdownView.center = self.descriptionField.center;
     }
     else {
-        self.descriptionField.frame = self.view.bounds;
+        CGRect newFrame = self.view.bounds;
+        newFrame.size.width -= (_buttonOffset > kJMCInitialButtonOffset ? kJMCButtonSpacing : 0);
+        
+        self.descriptionField.frame = newFrame;
     }
     
     [UIView commitAnimations];
@@ -645,15 +650,16 @@ static NSInteger kJMCTag = 10133;
 
 - (void)addButtonsToView {
     // Offset from right side (iPhone) or top (iPad)
-    _buttonOffset = 5;
+    _buttonOffset = kJMCInitialButtonOffset;
     
     // Add buttons
     [self addScreenshotButton];
     [self addVoiceButton];
 
     // If the offset is bigger than 5, than at least one button was added
-    if (_buttonOffset > 5) {
+    if (_buttonOffset > kJMCInitialButtonOffset) {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            self.descriptionField.clipsToBounds = YES;
             self.descriptionField.jmc_height -= kJMCButtonSpacing;
         }
         else {
