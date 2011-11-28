@@ -38,6 +38,7 @@
     JMCIssue *_replyToIssue;
 
 @private
+    BOOL _ignoreKeyboardHide;
     float _buttonOffset;
     NSTimer *_timer;
     CLLocation *currentLocation;

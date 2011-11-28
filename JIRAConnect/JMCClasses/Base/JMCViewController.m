@@ -137,18 +137,14 @@ static NSInteger kJMCTag = 10133;
                                          target:self
                                          action:@selector(dismiss)] autorelease];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    
     [self.descriptionField becomeFirstResponder];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self dismissKeyboard];
+    _ignoreKeyboardHide = NO;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     [self.locationManager stopUpdatingLocation];
+    [self dismissKeyboard];
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -194,22 +190,15 @@ static NSInteger kJMCTag = 10133;
     [UIView setAnimationCurve:[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        // Get the origin of the keyboard when it's displayed.
-        NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-
-        // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
-        // The bottom of the text view's frame should align with the top of the keyboard's final position.
-        CGRect keyboardRect = [aValue CGRectValue];
-
         CGRect newFrame = self.view.bounds;
         if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-            newFrame.size.height -= keyboardRect.size.height;
+            newFrame.size.height = 200;
         }
         else {
-            newFrame.size.height -= keyboardRect.size.width;
+            newFrame.size.height = 106;
         }
 
-        self.view.frame = newFrame;
+        self.descriptionField.superview.frame = newFrame;
         self.countdownView.center = self.descriptionField.center;
     }
     else {
@@ -231,23 +220,18 @@ static NSInteger kJMCTag = 10133;
     [UIView setAnimationCurve:[[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        // Get the origin of the keyboard when it's displayed.
-        NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-        
-        // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system.
-        // The bottom of the text view's frame should align with the top of the keyboard's final position.
-        CGRect keyboardRect = [aValue CGRectValue];
-        
-        CGRect newFrame = self.view.bounds;
-        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-            newFrame.size.height += keyboardRect.size.height;
+        if (!_ignoreKeyboardHide) {
+            CGRect newFrame = self.view.bounds;
+            if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+                newFrame.size.height = 416;
+            }
+            else {
+                newFrame.size.height = 268;
+            }
+            
+            self.descriptionField.superview.frame = newFrame;
+            self.countdownView.center = self.descriptionField.center;
         }
-        else {
-            newFrame.size.height += keyboardRect.size.width;
-        }
-        
-        self.view.frame = newFrame;
-        self.countdownView.center = self.descriptionField.center;
     }
     else {
         CGRect newFrame = self.view.bounds;
@@ -299,8 +283,6 @@ static NSInteger kJMCTag = 10133;
     } 
     else 
     {
-        [self dismissKeyboard];
-        
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = self;
@@ -314,6 +296,7 @@ static NSInteger kJMCTag = 10133;
         }
         else 
         {
+            _ignoreKeyboardHide = YES;
             [self presentModalViewController:imagePicker animated:YES];
         }
         [imagePicker release];
@@ -362,6 +345,7 @@ static NSInteger kJMCTag = 10133;
 
 - (void)viewAttachments:(UIButton *)sender {
     self.attachmentsViewController.attachments = self.attachments;
+    _ignoreKeyboardHide = YES;
     [self.navigationController pushViewController:self.attachmentsViewController animated:YES];
 }
 
@@ -521,14 +505,14 @@ static NSInteger kJMCTag = 10133;
 - (void)layoutActionButton:(UIButton *)button {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-        button.frame = CGRectMake(self.descriptionField.frame.size.width - 44.0 - _buttonOffset, 
-                                  self.view.frame.size.height - 44.0, 
+        button.frame = CGRectMake(self.descriptionField.superview.frame.size.width - 44.0 - _buttonOffset, 
+                                  self.descriptionField.superview.frame.size.height - 44.0, 
                                   44.0, 
                                   44.0);
     }
     else {
         button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-        button.frame = CGRectMake(self.view.frame.size.width - kJMCButtonSpacing, 
+        button.frame = CGRectMake(self.descriptionField.superview.frame.size.width - kJMCButtonSpacing, 
                                   0 + _buttonOffset, 
                                   44.0, 
                                   44.0);
@@ -541,7 +525,7 @@ static NSInteger kJMCTag = 10133;
     if ([[JMC instance] isPhotosEnabled]) {
         self.screenshotButton = [self buttonFor:@"icon_capture" action:@selector(addScreenshot)];
         [self layoutActionButton:self.screenshotButton];
-        [self.view addSubview:self.screenshotButton]; 
+        [self.descriptionField.superview addSubview:self.screenshotButton]; 
     }
 }
 
@@ -549,7 +533,7 @@ static NSInteger kJMCTag = 10133;
     if ([[JMC instance] isVoiceEnabled]) {
         self.voiceButton = [self buttonFor:@"icon_record" action:@selector(addVoice)];
         [self layoutActionButton:self.voiceButton];
-        [self.view addSubview:self.voiceButton]; 
+        [self.descriptionField.superview addSubview:self.voiceButton]; 
     }
 }
 
@@ -596,7 +580,7 @@ static NSInteger kJMCTag = 10133;
         self.attachmentsButton = [self buttonFor:nil action:@selector(viewAttachments:)];
         self.attachmentsButton.showsTouchWhenHighlighted = YES;
         [self layoutActionButton:self.attachmentsButton];
-        [self.view addSubview:self.attachmentsButton]; 
+        [self.descriptionField.superview addSubview:self.attachmentsButton]; 
     }
 }
 
@@ -660,7 +644,7 @@ static NSInteger kJMCTag = 10133;
     if (_buttonOffset > kJMCInitialButtonOffset) {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
             self.descriptionField.clipsToBounds = YES;
-            self.descriptionField.jmc_height -= kJMCButtonSpacing;
+            self.descriptionField.jmc_height -= 44.0;
         }
         else {
             self.descriptionField.jmc_width -= kJMCButtonSpacing;
