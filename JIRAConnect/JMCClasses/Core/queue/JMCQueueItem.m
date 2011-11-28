@@ -64,7 +64,8 @@
     self = [super init];
     if (!self) return nil;
 
-    self.uuid = [coder decodeObjectForKey:kUuid];
+    NSString* tmpUuid = [coder decodeObjectForKey:kUuid];
+    self.uuid = tmpUuid;
     self.attachments = [coder decodeObjectForKey:kAttachments];
     self.originalIssueKey = [coder decodeObjectForKey:kOriginalIssueKey];
     self.type = [coder decodeObjectForKey:kType];

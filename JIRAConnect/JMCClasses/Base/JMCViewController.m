@@ -276,7 +276,6 @@ static NSInteger kJMCTag = 10133;
 
 - (IBAction)dismiss
 {
-    [self deleteAttachments];
     
     if ([self.navigationController.viewControllers count] > 1) {
         [self.navigationController popViewControllerAnimated:YES];

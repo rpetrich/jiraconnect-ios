@@ -26,7 +26,7 @@
 
 - (void)dealloc {
     delegate = nil;
-    
+    [responseData release];
     [super dealloc];
 }
 

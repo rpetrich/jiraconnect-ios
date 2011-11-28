@@ -81,7 +81,7 @@ int _maxNumRequestFailures;
 
 -(void) flushQueue
 {
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(flushQueueIfReachable:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(flushQueueIfReachable:) userInfo:nil repeats:NO];
 }
 
 -(void)doFlushQueue

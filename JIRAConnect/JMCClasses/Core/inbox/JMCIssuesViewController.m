@@ -36,7 +36,7 @@ static NSString *cellId = @"CommentCell";
                                                                                                 action:@selector(compose:)] autorelease];
 
         self.title = JMCLocalizedString(@"Your Feedback", @"Title of list of previous messages");
-        _dateFormatter = [[[NSDateFormatter alloc] init] retain];
+        _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kJMCIssueUpdated object:nil];

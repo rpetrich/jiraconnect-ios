@@ -16,6 +16,8 @@
 #import "JMCAttachmentsViewController.h"
 #import "JMCSketchViewController.h"
 #import "UIImage+JMCResize.h"
+#import "JMCMacros.h"
+#import "JMCAttachmentItem.h"
 
 @interface JMCAttachmentsViewController ()
 
