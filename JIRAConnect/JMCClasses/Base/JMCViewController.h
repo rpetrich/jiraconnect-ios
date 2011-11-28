@@ -28,6 +28,7 @@
 @interface JMCViewController : UIViewController<UITextViewDelegate, AVAudioRecorderDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, JMCAttachmentsViewControllerDelegate> {
     IBOutlet JMCAttachmentsViewController *attachmentsViewController;
     IBOutlet UITextView *descriptionField;
+    IBOutlet UIImageView *buttonOverlayView;
     IBOutlet UILabel *countdownTimer;
     IBOutlet UIProgressView *progressView;
     IBOutlet UIView *countdownView;
@@ -49,6 +50,7 @@
 }
 
 @property(retain, nonatomic) IBOutlet JMCAttachmentsViewController *attachmentsViewController;
+@property(retain, nonatomic) IBOutlet UIImageView *buttonOverlayView;
 @property(retain, nonatomic) IBOutlet UITextView *descriptionField;
 @property(retain, nonatomic) IBOutlet UIView *countdownView;
 @property(retain, nonatomic) IBOutlet UIProgressView *progressView;

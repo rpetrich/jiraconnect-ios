@@ -521,6 +521,25 @@ static NSInteger kJMCTag = 10133;
     _buttonOffset += kJMCButtonSpacing;
 }
 
+
+- (void)configureButtonOverlayView {
+    self.buttonOverlayView.image = [UIImage imageNamed:@"background_overlay.png"];
+}
+
+- (void)layoutButtonOverlayView {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        self.buttonOverlayView.frame = CGRectMake(self.descriptionField.superview.frame.size.width - _buttonOffset, 
+                                                  self.descriptionField.superview.frame.size.height - 48.0, 
+                                                  _buttonOffset, 
+                                                  52.0);
+        
+        UIColor *grayBackgroundColor = [UIColor colorWithWhite:0.99 alpha:1.0];
+        self.buttonOverlayView.superview.backgroundColor = grayBackgroundColor;
+        self.descriptionField.backgroundColor = grayBackgroundColor;
+        self.view.backgroundColor = grayBackgroundColor;
+    }
+}
+
 - (void)addScreenshotButton {
     if ([[JMC instance] isPhotosEnabled]) {
         self.screenshotButton = [self buttonFor:@"icon_capture" action:@selector(addScreenshot)];
@@ -581,6 +600,7 @@ static NSInteger kJMCTag = 10133;
         self.attachmentsButton.showsTouchWhenHighlighted = YES;
         [self layoutActionButton:self.attachmentsButton];
         [self.descriptionField.superview addSubview:self.attachmentsButton]; 
+        [self layoutButtonOverlayView];
     }
 }
 
@@ -619,6 +639,8 @@ static NSInteger kJMCTag = 10133;
         [self.attachmentsButton removeFromSuperview];
         self.attachmentsButton = nil;
         _buttonOffset -= kJMCButtonSpacing;
+        
+        [self layoutButtonOverlayView];
     }
 }
 
@@ -629,6 +651,8 @@ static NSInteger kJMCTag = 10133;
         [self.attachmentsButton removeFromSuperview];
         self.attachmentsButton = nil;
         _buttonOffset -= kJMCButtonSpacing;
+        
+        [self layoutButtonOverlayView];
     }
 }
 
@@ -637,17 +661,18 @@ static NSInteger kJMCTag = 10133;
     _buttonOffset = kJMCInitialButtonOffset;
     
     // Add buttons
+    [self configureButtonOverlayView];
     [self addScreenshotButton];
     [self addVoiceButton];
+    [self layoutButtonOverlayView];
 
     // If the offset is bigger than 5, than at least one button was added
     if (_buttonOffset > kJMCInitialButtonOffset) {
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            self.descriptionField.clipsToBounds = YES;
-            self.descriptionField.jmc_height -= 44.0;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            self.descriptionField.jmc_width -= kJMCButtonSpacing;
         }
         else {
-            self.descriptionField.jmc_width -= kJMCButtonSpacing;
+            self.descriptionField.jmc_height -= kJMCButtonSpacing / 2;
         }
     }
 }
@@ -717,7 +742,7 @@ static NSInteger kJMCTag = 10133;
 #pragma mark - Memory Managment Methods
 
 @synthesize descriptionField, countdownView, progressView, currentLocation, locationManager = _locationManager, popover;
-@synthesize attachmentsViewController;
+@synthesize attachmentsViewController, buttonOverlayView;
 @synthesize issueTransport = _issueTransport, replyTransport = _replyTransport, attachments = _attachments, replyToIssue = _replyToIssue;
 @synthesize voiceButton = _voiceButton, screenshotButton = _screenshotButton, attachmentsButton = _attachmentsButton;
 

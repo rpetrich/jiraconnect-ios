@@ -13,11 +13,12 @@
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBUIProgressView</string>
-			<string>IBUITextView</string>
-			<string>IBUIViewController</string>
-			<string>IBUIView</string>
-			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
+			<string>IBUIViewController</string>
+			<string>IBUILabel</string>
+			<string>IBUIImageView</string>
+			<string>IBUITextView</string>
+			<string>IBUIView</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -42,19 +43,19 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIView" id="904648747">
+					<object class="IBUIView" id="276800484">
 						<reference key="NSNextResponder" ref="481240288"/>
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUITextView" id="1068701691">
-								<reference key="NSNextResponder" ref="904648747"/>
+								<reference key="NSNextResponder" ref="276800484"/>
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{320, 460}</string>
-								<reference key="NSSuperview" ref="904648747"/>
+								<reference key="NSSuperview" ref="276800484"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="197009698"/>
-								<object class="NSColor" key="IBUIBackgroundColor" id="945989502">
+								<reference key="NSNextKeyView" ref="614851157"/>
+								<object class="NSColor" key="IBUIBackgroundColor" id="1033954474">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
@@ -81,13 +82,25 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
+							<object class="IBUIImageView" id="614851157">
+								<reference key="NSNextResponder" ref="276800484"/>
+								<int key="NSvFlags">265</int>
+								<string key="NSFrame">{{270, 410}, {50, 50}}</string>
+								<reference key="NSSuperview" ref="276800484"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="197009698"/>
+								<string key="NSReuseIdentifierKey">_NS:567</string>
+								<int key="IBUIContentMode">9</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
 						</object>
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="481240288"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1068701691"/>
 						<string key="NSReuseIdentifierKey">_NS:196</string>
-						<reference key="IBUIBackgroundColor" ref="945989502"/>
+						<reference key="IBUIBackgroundColor" ref="1033954474"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUIView" id="197009698">
@@ -155,8 +168,8 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="904648747"/>
-				<reference key="IBUIBackgroundColor" ref="945989502"/>
+				<reference key="NSNextKeyView" ref="276800484"/>
+				<reference key="IBUIBackgroundColor" ref="1033954474"/>
 				<bool key="IBUIClipsSubviews">YES</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -224,6 +237,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">buttonOverlayView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="614851157"/>
+					</object>
+					<int key="connectionID">81</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1068701691"/>
 						<reference key="destination" ref="372490531"/>
@@ -267,7 +288,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="197009698"/>
-							<reference ref="904648747"/>
+							<reference ref="276800484"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>
@@ -299,17 +320,23 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">79</int>
-						<reference key="object" ref="904648747"/>
+						<reference key="object" ref="276800484"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1068701691"/>
+							<reference ref="614851157"/>
 						</object>
 						<reference key="parent" ref="481240288"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
 						<reference key="object" ref="1068701691"/>
-						<reference key="parent" ref="904648747"/>
+						<reference key="parent" ref="276800484"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">80</int>
+						<reference key="object" ref="614851157"/>
+						<reference key="parent" ref="276800484"/>
 					</object>
 				</object>
 			</object>
@@ -329,6 +356,7 @@
 					<string>76.IBPluginDependency</string>
 					<string>79.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
+					<string>80.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -341,6 +369,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>JMCAttachmentsViewController</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -358,7 +387,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">79</int>
+			<int key="maxID">81</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -436,6 +465,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attachmentsViewController</string>
+							<string>buttonOverlayView</string>
 							<string>countdownTimer</string>
 							<string>countdownView</string>
 							<string>descriptionField</string>
@@ -444,6 +474,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>JMCAttachmentsViewController</string>
+							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UITextView</string>
@@ -455,6 +486,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attachmentsViewController</string>
+							<string>buttonOverlayView</string>
 							<string>countdownTimer</string>
 							<string>countdownView</string>
 							<string>descriptionField</string>
@@ -465,6 +497,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">attachmentsViewController</string>
 								<string key="candidateClassName">JMCAttachmentsViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonOverlayView</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">countdownTimer</string>
