@@ -140,7 +140,7 @@ static float detailLabelHeight = 21.0f;
 
 -(CGSize) bubbleSize
 {
-    return CGSizeMake([self detailSize].width * 0.9f, self.view.frame.size.height);
+    return CGSizeMake([self detailSize].width * 0.9f, self.view.frame.size.height * 20.0f); // 20 screens of text should be ample :)
 }
 
 - (CGSize)sizeForComment:(JMCComment *)comment font:(UIFont *)commentFont
@@ -148,6 +148,7 @@ static float detailLabelHeight = 21.0f;
     CGSize bubbleSize = [self bubbleSize];
     // the text is constrained to 3/4 of the width of the bubble. see JMCMessageBubble setText...
     CGSize constrainTo = CGSizeMake(bubbleSize.width * 0.75f, bubbleSize.height);
+
     return [comment.body sizeWithFont:commentFont constrainedToSize:constrainTo lineBreakMode:UILineBreakModeWordWrap];
 }
 
