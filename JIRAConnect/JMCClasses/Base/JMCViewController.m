@@ -672,7 +672,7 @@ static NSInteger kJMCTag = 10133;
             self.descriptionField.jmc_width -= kJMCButtonSpacing;
         }
         else {
-            self.descriptionField.jmc_height -= kJMCButtonSpacing / 2;
+            self.descriptionField.jmc_height -= kJMCButtonSpacing;
         }
     }
 }
