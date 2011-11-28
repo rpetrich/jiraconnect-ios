@@ -111,22 +111,6 @@
 		01808C83145045F300284012 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C79145045F300284012 /* UIKit.framework */; };
 		01808C84145045F300284012 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C7A145045F300284012 /* Foundation.framework */; };
 		01808C85145045F300284012 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C7B145045F300284012 /* CoreGraphics.framework */; };
-		8DEE22171479D21900E3CABF /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEE216B1479D21900E3CABF /* CrashReporter.framework */; };
-		8DEE22191479D21900E3CABF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE21701479D21900E3CABF /* .gitignore */; };
-		8DEE221A1479D21900E3CABF /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21731479D21900E3CABF /* BWApp.m */; };
-		8DEE221B1479D21900E3CABF /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21751479D21900E3CABF /* BWGlobal.m */; };
-		8DEE221C1479D21900E3CABF /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21771479D21900E3CABF /* BWHockeyManager.m */; };
-		8DEE221D1479D21900E3CABF /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21791479D21900E3CABF /* BWHockeySettingsViewController.m */; };
-		8DEE221E1479D21900E3CABF /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE217B1479D21900E3CABF /* BWHockeyViewController.m */; };
-		8DEE221F1479D21900E3CABF /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE217D1479D21900E3CABF /* BWQuincyManager.m */; };
-		8DEE22201479D21900E3CABF /* CNSHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE217F1479D21900E3CABF /* CNSHockeyManager.m */; };
-		8DEE22211479D21900E3CABF /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21811479D21900E3CABF /* NSString+HockeyAdditions.m */; };
-		8DEE22221479D21900E3CABF /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21831479D21900E3CABF /* PSAppStoreHeader.m */; };
-		8DEE22231479D21900E3CABF /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21851479D21900E3CABF /* PSStoreButton.m */; };
-		8DEE22241479D21900E3CABF /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21871479D21900E3CABF /* PSWebTableViewCell.m */; };
-		8DEE22251479D21900E3CABF /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE21891479D21900E3CABF /* UIImage+HockeyAdditions.m */; };
-		8DEE22261479D21900E3CABF /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE218B1479D21900E3CABF /* Hockey.bundle */; };
-		8DEE22271479D21900E3CABF /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE218C1479D21900E3CABF /* Quincy.bundle */; };
 		8DEE235A1479D9FB00E3CABF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DEE23591479D9FB00E3CABF /* QuartzCore.framework */; };
 		8DEE25A01479EC2C00E3CABF /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE258F1479EC2C00E3CABF /* NSObject+JSON.m */; };
 		8DEE25A11479EC2C00E3CABF /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE25911479EC2C00E3CABF /* SBJsonParser.m */; };
@@ -295,34 +279,6 @@
 		01808C79145045F300284012 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01808C7A145045F300284012 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01808C7B145045F300284012 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8DEE216B1479D21900E3CABF /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		8DEE21701479D21900E3CABF /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		8DEE21721479D21900E3CABF /* BWApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWApp.h; sourceTree = "<group>"; };
-		8DEE21731479D21900E3CABF /* BWApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWApp.m; sourceTree = "<group>"; };
-		8DEE21741479D21900E3CABF /* BWGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGlobal.h; sourceTree = "<group>"; };
-		8DEE21751479D21900E3CABF /* BWGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGlobal.m; sourceTree = "<group>"; };
-		8DEE21761479D21900E3CABF /* BWHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyManager.h; sourceTree = "<group>"; };
-		8DEE21771479D21900E3CABF /* BWHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyManager.m; sourceTree = "<group>"; };
-		8DEE21781479D21900E3CABF /* BWHockeySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeySettingsViewController.h; sourceTree = "<group>"; };
-		8DEE21791479D21900E3CABF /* BWHockeySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeySettingsViewController.m; sourceTree = "<group>"; };
-		8DEE217A1479D21900E3CABF /* BWHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyViewController.h; sourceTree = "<group>"; };
-		8DEE217B1479D21900E3CABF /* BWHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyViewController.m; sourceTree = "<group>"; };
-		8DEE217C1479D21900E3CABF /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
-		8DEE217D1479D21900E3CABF /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
-		8DEE217E1479D21900E3CABF /* CNSHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNSHockeyManager.h; sourceTree = "<group>"; };
-		8DEE217F1479D21900E3CABF /* CNSHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNSHockeyManager.m; sourceTree = "<group>"; };
-		8DEE21801479D21900E3CABF /* NSString+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HockeyAdditions.h"; sourceTree = "<group>"; };
-		8DEE21811479D21900E3CABF /* NSString+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HockeyAdditions.m"; sourceTree = "<group>"; };
-		8DEE21821479D21900E3CABF /* PSAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppStoreHeader.h; sourceTree = "<group>"; };
-		8DEE21831479D21900E3CABF /* PSAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppStoreHeader.m; sourceTree = "<group>"; };
-		8DEE21841479D21900E3CABF /* PSStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStoreButton.h; sourceTree = "<group>"; };
-		8DEE21851479D21900E3CABF /* PSStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStoreButton.m; sourceTree = "<group>"; };
-		8DEE21861479D21900E3CABF /* PSWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebTableViewCell.h; sourceTree = "<group>"; };
-		8DEE21871479D21900E3CABF /* PSWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebTableViewCell.m; sourceTree = "<group>"; };
-		8DEE21881479D21900E3CABF /* UIImage+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HockeyAdditions.h"; sourceTree = "<group>"; };
-		8DEE21891479D21900E3CABF /* UIImage+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HockeyAdditions.m"; sourceTree = "<group>"; };
-		8DEE218B1479D21900E3CABF /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
-		8DEE218C1479D21900E3CABF /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		8DEE23591479D9FB00E3CABF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8DEE258D1479EC2C00E3CABF /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		8DEE258E1479EC2C00E3CABF /* NSObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSON.h"; sourceTree = "<group>"; };
@@ -364,7 +320,6 @@
 				01808C83145045F300284012 /* UIKit.framework in Frameworks */,
 				01808C84145045F300284012 /* Foundation.framework in Frameworks */,
 				01808C85145045F300284012 /* CoreGraphics.framework in Frameworks */,
-				8DEE22171479D21900E3CABF /* CrashReporter.framework in Frameworks */,
 				017C3B0A14832F700018B29F /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,7 +637,6 @@
 			children = (
 				017C3A4614832F700018B29F /* JMCClasses */,
 				8DEE258C1479EC2C00E3CABF /* SBJSON */,
-				8DEE21691479D21900E3CABF /* Hockey */,
 				01808B441450454E00284012 /* AppDelegate.h */,
 				01808B451450454E00284012 /* AppDelegate.m */,
 				01808B471450454E00284012 /* ViewController.h */,
@@ -702,74 +656,6 @@
 				01808B431450454E00284012 /* AngryNerds4iPad-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8DEE21691479D21900E3CABF /* Hockey */ = {
-			isa = PBXGroup;
-			children = (
-				8DEE216A1479D21900E3CABF /* External */,
-				8DEE216F1479D21900E3CABF /* Hockey */,
-			);
-			name = Hockey;
-			path = "../../../../../../Downloads/Hockey+JMC";
-			sourceTree = "<group>";
-		};
-		8DEE216A1479D21900E3CABF /* External */ = {
-			isa = PBXGroup;
-			children = (
-				8DEE216B1479D21900E3CABF /* CrashReporter.framework */,
-			);
-			path = External;
-			sourceTree = "<group>";
-		};
-		8DEE216F1479D21900E3CABF /* Hockey */ = {
-			isa = PBXGroup;
-			children = (
-				8DEE21701479D21900E3CABF /* .gitignore */,
-				8DEE21711479D21900E3CABF /* Classes */,
-				8DEE218A1479D21900E3CABF /* Resources */,
-			);
-			path = Hockey;
-			sourceTree = "<group>";
-		};
-		8DEE21711479D21900E3CABF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				8DEE21721479D21900E3CABF /* BWApp.h */,
-				8DEE21731479D21900E3CABF /* BWApp.m */,
-				8DEE21741479D21900E3CABF /* BWGlobal.h */,
-				8DEE21751479D21900E3CABF /* BWGlobal.m */,
-				8DEE21761479D21900E3CABF /* BWHockeyManager.h */,
-				8DEE21771479D21900E3CABF /* BWHockeyManager.m */,
-				8DEE21781479D21900E3CABF /* BWHockeySettingsViewController.h */,
-				8DEE21791479D21900E3CABF /* BWHockeySettingsViewController.m */,
-				8DEE217A1479D21900E3CABF /* BWHockeyViewController.h */,
-				8DEE217B1479D21900E3CABF /* BWHockeyViewController.m */,
-				8DEE217C1479D21900E3CABF /* BWQuincyManager.h */,
-				8DEE217D1479D21900E3CABF /* BWQuincyManager.m */,
-				8DEE217E1479D21900E3CABF /* CNSHockeyManager.h */,
-				8DEE217F1479D21900E3CABF /* CNSHockeyManager.m */,
-				8DEE21801479D21900E3CABF /* NSString+HockeyAdditions.h */,
-				8DEE21811479D21900E3CABF /* NSString+HockeyAdditions.m */,
-				8DEE21821479D21900E3CABF /* PSAppStoreHeader.h */,
-				8DEE21831479D21900E3CABF /* PSAppStoreHeader.m */,
-				8DEE21841479D21900E3CABF /* PSStoreButton.h */,
-				8DEE21851479D21900E3CABF /* PSStoreButton.m */,
-				8DEE21861479D21900E3CABF /* PSWebTableViewCell.h */,
-				8DEE21871479D21900E3CABF /* PSWebTableViewCell.m */,
-				8DEE21881479D21900E3CABF /* UIImage+HockeyAdditions.h */,
-				8DEE21891479D21900E3CABF /* UIImage+HockeyAdditions.m */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		8DEE218A1479D21900E3CABF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				8DEE218B1479D21900E3CABF /* Hockey.bundle */,
-				8DEE218C1479D21900E3CABF /* Quincy.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		8DEE258C1479EC2C00E3CABF /* SBJSON */ = {
@@ -853,9 +739,6 @@
 			files = (
 				01808B401450454E00284012 /* InfoPlist.strings in Resources */,
 				01808B4C1450454E00284012 /* ViewController.xib in Resources */,
-				8DEE22191479D21900E3CABF /* .gitignore in Resources */,
-				8DEE22261479D21900E3CABF /* Hockey.bundle in Resources */,
-				8DEE22271479D21900E3CABF /* Quincy.bundle in Resources */,
 				017C3ADF14832F700018B29F /* JMCViewController.xib in Resources */,
 				017C3AE014832F700018B29F /* JMCAttachmentsView.xib in Resources */,
 				017C3AEB14832F700018B29F /* JMCIssuePreviewCell.xib in Resources */,
@@ -912,18 +795,6 @@
 				01808B421450454E00284012 /* main.m in Sources */,
 				01808B461450454E00284012 /* AppDelegate.m in Sources */,
 				01808B491450454E00284012 /* ViewController.m in Sources */,
-				8DEE221A1479D21900E3CABF /* BWApp.m in Sources */,
-				8DEE221B1479D21900E3CABF /* BWGlobal.m in Sources */,
-				8DEE221C1479D21900E3CABF /* BWHockeyManager.m in Sources */,
-				8DEE221D1479D21900E3CABF /* BWHockeySettingsViewController.m in Sources */,
-				8DEE221E1479D21900E3CABF /* BWHockeyViewController.m in Sources */,
-				8DEE221F1479D21900E3CABF /* BWQuincyManager.m in Sources */,
-				8DEE22201479D21900E3CABF /* CNSHockeyManager.m in Sources */,
-				8DEE22211479D21900E3CABF /* NSString+HockeyAdditions.m in Sources */,
-				8DEE22221479D21900E3CABF /* PSAppStoreHeader.m in Sources */,
-				8DEE22231479D21900E3CABF /* PSStoreButton.m in Sources */,
-				8DEE22241479D21900E3CABF /* PSWebTableViewCell.m in Sources */,
-				8DEE22251479D21900E3CABF /* UIImage+HockeyAdditions.m in Sources */,
 				8DEE25A01479EC2C00E3CABF /* NSObject+JSON.m in Sources */,
 				8DEE25A11479EC2C00E3CABF /* SBJsonParser.m in Sources */,
 				8DEE25A21479EC2C00E3CABF /* SBJsonStreamParser.m in Sources */,
