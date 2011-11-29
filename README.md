@@ -87,7 +87,6 @@ If your info ViewController is in a UINavigationController stack, then you can u
 1. [[JMC instance] viewController] will return the 'Create Issue' view until the user creates feedback. From then on, the 'Issue Inbox' view is displayed, from where the
 user can tap the 'Create' icon to send more feedback.
 1. If you would like your users to always access the Create Issue view, then you can do so by presenting the [[JMC instance] feedbackViewController] directly.
-
 e.g. the following will present just the create issue ViewController programatically:
 
         - (IBAction)triggerCreateIssueView
@@ -141,7 +140,12 @@ If you don't yet have access to a JIRA instance, you can use the NERDS project a
 Issue tracking
 ==============
 
-Use [http://connect.onjira.com/browse/CONNECT](http://connect.onjira.com/browse/CONNECT) to raise any issue with the JIRA Mobile Connect library for testing.
+Use [http://connect.onjira.com/browse/CONNECT](http://connect.onjira.com/browse/CONNECT) to raise any issue with the JIRA Mobile Connect library.
+
+Need Help?
+=========
+
+If you have any questions regarding JIRA Mobile Connect, please ask on [Atlassian Answers](https://answers.atlassian.com/tags/jira-mobile-connect/).
 
 Contributors
 ============
