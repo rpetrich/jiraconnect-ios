@@ -32,7 +32,6 @@
 		8D47F2821484566300872BEF /* JMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F1EC1484566300872BEF /* JMC.m */; };
 		8D47F2831484566300872BEF /* JMCAttachmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F1EE1484566300872BEF /* JMCAttachmentItem.m */; };
 		8D47F2841484566300872BEF /* JMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F1F21484566300872BEF /* JMCViewController.m */; };
-		8D47F2851484566300872BEF /* JMCViewController.m.orig in Resources */ = {isa = PBXBuildFile; fileRef = 8D47F1F31484566300872BEF /* JMCViewController.m.orig */; };
 		8D47F2861484566300872BEF /* JMCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D47F1F41484566300872BEF /* JMCViewController.xib */; };
 		8D47F2871484566300872BEF /* JMCAttachmentsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D47F1F71484566300872BEF /* JMCAttachmentsView.xib */; };
 		8D47F2881484566300872BEF /* JMCAttachmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F1F91484566300872BEF /* JMCAttachmentsViewController.m */; };
@@ -179,7 +178,6 @@
 		8D47F1F01484566300872BEF /* JMCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMacros.h; sourceTree = "<group>"; };
 		8D47F1F11484566300872BEF /* JMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCViewController.h; sourceTree = "<group>"; };
 		8D47F1F21484566300872BEF /* JMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCViewController.m; sourceTree = "<group>"; };
-		8D47F1F31484566300872BEF /* JMCViewController.m.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JMCViewController.m.orig; sourceTree = "<group>"; };
 		8D47F1F41484566300872BEF /* JMCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCViewController.xib; sourceTree = "<group>"; };
 		8D47F1F71484566300872BEF /* JMCAttachmentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCAttachmentsView.xib; sourceTree = "<group>"; };
 		8D47F1F81484566300872BEF /* JMCAttachmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCAttachmentsViewController.h; sourceTree = "<group>"; };
@@ -475,7 +473,6 @@
 				8D47F1F01484566300872BEF /* JMCMacros.h */,
 				8D47F1F11484566300872BEF /* JMCViewController.h */,
 				8D47F1F21484566300872BEF /* JMCViewController.m */,
-				8D47F1F31484566300872BEF /* JMCViewController.m.orig */,
 				8D47F1F41484566300872BEF /* JMCViewController.xib */,
 			);
 			path = Base;
@@ -799,7 +796,6 @@
 				F8B80554139B574300EC5AD4 /* frontend.png in Resources */,
 				F8B80555139B574300EC5AD4 /* Icon.png in Resources */,
 				F8B80556139B574300EC5AD4 /* MainWindow.xib in Resources */,
-				8D47F2851484566300872BEF /* JMCViewController.m.orig in Resources */,
 				8D47F2861484566300872BEF /* JMCViewController.xib in Resources */,
 				8D47F2871484566300872BEF /* JMCAttachmentsView.xib in Resources */,
 				8D47F2921484566300872BEF /* JMCIssuePreviewCell.xib in Resources */,
