@@ -141,15 +141,21 @@ Issue tracking
 
 Use [http://connect.onjira.com/browse/CONNECT](http://connect.onjira.com/browse/CONNECT) to raise any issue with the JIRA Mobile Connect library for testing.
 
+Contributors
+============
+* Nick Pellow [@niick](http://twitter.com/niick)
+* Thomas Dohmke [@ashtom](http://twitter.com/ashtom)
+* Stefan Saasen [@stefansaasen](http://twitter.com/stefansaasen)
+* Shihab Hamid [@shihabhamid](http://twitter.com/shihabhamid)
+* Erik Romijn [@erikpub](http://twitter.com/erikpub)
+* Bindu Wavell [@binduwavell](http://twitter.com/binduwavell)
 
 Third party Package - License - Copyright / Creator
 ===================================================
 
-asi-http-request    BSD     Copyright &copy; 2007-2011, [All-Seeing Interactive](http://allseeing-i.com/ASIHTTPRequest/)
-
 json-framework      BSD     Copyright &copy; 2009 [Stig Brautaset.]( http://code.google.com/p/json-framework/)
 
-plcrashreporter     MIT     Copyright (c) 2008-2009 [Plausible Labs Cooperative, Inc.]( http://code.google.com/p/plcrashreporter/)
+plcrashreporter     MIT     Copyright &copy; 2008-2009 [Plausible Labs Cooperative, Inc.]( http://code.google.com/p/plcrashreporter/)
 
 crash-reporter              Copyright &copy; 2009 Andreas Linde & Kent Sutherland.
 
