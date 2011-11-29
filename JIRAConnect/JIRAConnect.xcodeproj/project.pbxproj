@@ -316,6 +316,10 @@
 		4D71E6791468968600E0A7C3 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		4D71E67A1468968600E0A7C3 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		4D71E67B1468968600E0A7C3 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		8D47F2DE14845A2000872BEF /* background_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_overlay.png; sourceTree = "<group>"; };
+		8D47F2DF14845A2000872BEF /* background_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_overlay@2x.png"; sourceTree = "<group>"; };
+		8D47F2E114845AE800872BEF /* icon_recording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_recording.png; sourceTree = "<group>"; };
+		8D47F2E214845AE800872BEF /* icon_recording@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_recording@2x.png"; sourceTree = "<group>"; };
 		8D84EA2D147DE2C400478D7B /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		8DE7F35C147CA60000596FED /* UIView+JMCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMCAdditions.m"; sourceTree = "<group>"; };
 		8DE7F35D147CA60000596FED /* UILabel+JMCVerticalAlign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JMCVerticalAlign.m"; sourceTree = "<group>"; };
@@ -624,6 +628,10 @@
 		4D71E5E81468962F00E0A7C3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8D47F2E114845AE800872BEF /* icon_recording.png */,
+				8D47F2E214845AE800872BEF /* icon_recording@2x.png */,
+				8D47F2DE14845A2000872BEF /* background_overlay.png */,
+				8D47F2DF14845A2000872BEF /* background_overlay@2x.png */,
 				4D71E5E91468962F00E0A7C3 /* Balloon_1.png */,
 				4D71E5EA1468962F00E0A7C3 /* Balloon_2.png */,
 				4D71E5EB1468962F00E0A7C3 /* bluedot.png */,

@@ -14,48 +14,27 @@
     
     /*
      To configure JIRA Mobile Connect:
-     1. call [[JMC instance] configureJiraConnect:@"url to your JIRA instance" customDataSource:<AnyCustomDataSource>];
+     1. call one of the [[JMC instance] configureXXX methods;
      2. You can then present [JMC instance].viewController from anywhere in your app
      3. Be sure that your JIRA instance has the JIRA Mobile Connect plugin installed. (https://plugins.atlassian.com/plugin/details/322837)
      4. Lots of other configuration available via JMCOptions.
      5. NOTE: Location tracking is disabled by default.
      */
 
-//    [[JMC instance]
-//            configureJiraConnect:@"http://localhost:2990/jira/"
-//                      projectKey:@"NERDS"
-//                          apiKey:@"296c47e9-efc2-4567-ac76-46655f2471b9"
-//                        location:YES 
-//                      dataSource:viewController];
-
-
-//    [JMC instance].options.locationEnabled = YES;
-//    [JMC instance].customDataSource = viewController;
-//    [JMC instance].options.url = @"http://localhost:2990/jira";
-//    [JMC instance].options.projectKey = @"NERDS";
-//    [JMC instance].options.apiKey = @"b84bcd12-1e02-47e9-8954-7e1671b42b55";
-//    
-//    [NSTimer scheduledTimerWithTimeInterval:10 target:[JMC instance] selector:@selector(start) userInfo:nil repeats:NO];
-    
     [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
                               projectKey:@"NERDS"
                                   apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
                                 location:YES
                               dataSource:viewController];
-//    [JMC instance].options.barStyle = UIBarStyleBlack;
+
+    // extra options may be configured directly on the options property of the JMC instance.
     
-//    JMCOptions* options = [JMCOptions optionsWithUrl:@"https://jmc.jira-dev.com/"
-//                                             project:@"NERDS"
-//                                              apiKey:@"81da567a-ac0d-4e6c-b55a-627caecce9c0"
-//                                              photos:YES
-//                                               voice:YES
-//                                            location:YES
-//                                      crashreporting:YES
-//                                        customFields:nil];
-//    options.barStyle = UIBarStyleDefault;
-//    [[JMC instance]
-//            configureWithOptions:options
-//                  dataSource:viewController];
+//    [JMC instance].options.locationEnabled = YES;
+//    [JMC instance].customDataSource = viewController;
+//    [JMC instance].options.url = @"http://localhost:2990/jira";
+//    [JMC instance].options.projectKey = @"NERDS";
+//    [JMC instance].options.apiKey = @"b84bcd12-1e02-47e9-8954-7e1671b42b55";
+//    [JMC instance].options.barStyle = UIBarStyleDefault;
 
 
     [window addSubview:viewController.view];
