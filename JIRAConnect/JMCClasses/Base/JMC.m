@@ -25,7 +25,7 @@
 @implementation JMCOptions
 @synthesize url=_url, projectKey=_projectKey, apiKey=_apiKey,
             photosEnabled=_photosEnabled, voiceEnabled=_voiceEnabled, locationEnabled=_locationEnabled,
-            crashReportingEnabled=_crashReportingEnabled, barStyle=_barStyle,
+            crashReportingEnabled=_crashReportingEnabled, notificationsEnabled=_notificationsEnabled, barStyle=_barStyle,
             customFields=_customFields, modalPresentationStyle=_modalPresentationStyle;
 
 -(id)init
@@ -35,6 +35,7 @@
         _voiceEnabled = YES;
         _locationEnabled = NO;
         _crashReportingEnabled = YES;
+        _notificationsEnabled = YES;
         _barStyle = UIBarStyleDefault;
         _modalPresentationStyle = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)) ? 
                                     UIModalPresentationFormSheet : UIModalPresentationFullScreen;
@@ -53,6 +54,7 @@
     options.voiceEnabled = [[dict objectForKey:kJMCOptionVoiceEnabled] boolValue];
     options.locationEnabled = [[dict objectForKey:kJMCOptionLocationEnabled] boolValue];
     options.crashReportingEnabled = [[dict objectForKey:kJMCOptionCrashReportingEnabled] boolValue];
+    options.notificationsEnabled = [[dict objectForKey:kJMCOptionNotificationsEnabled] boolValue];
     options.customFields = [dict objectForKey:kJMCOptionCustomFields];
     options.barStyle = [[dict objectForKey:kJMCOptionUIBarStyle] intValue];
     options.modalPresentationStyle = [[dict objectForKey:kJMCOptionUIModalPresentationStyle] intValue];
@@ -66,6 +68,7 @@
               voice:(BOOL)voice
            location:(BOOL)location
      crashReporting:(BOOL)crashreporting
+      notifications:(BOOL)notifications
        customFields:(NSDictionary*)customFields
 {
     JMCOptions* options = [[[JMCOptions alloc] init]autorelease];
@@ -90,6 +93,7 @@
     copy.voiceEnabled = self.voiceEnabled;
     copy.locationEnabled = self.locationEnabled;
     copy.crashReportingEnabled = self.crashReportingEnabled;
+    copy.notificationsEnabled = self.notificationsEnabled;
     copy.customFields = self.customFields;
     copy.barStyle = self.barStyle;
     copy.modalPresentationStyle = self.modalPresentationStyle;
@@ -277,22 +281,24 @@ static JMCViewController* _jcViewController;
                                        selector:@selector(promptThenMaybeSendCrashReports)
                                        userInfo:nil repeats:NO];
     }
-    
-    self._pinger = [[[JMCPing alloc] init] autorelease ];
-    
-        
-    JMCNotifier* notifier = [[JMCNotifier alloc] initWithStartFrame:[self notifierStartFrame]
-                                                           endFrame:[self notifierEndFrame]];
-    self._notifier = notifier;
-    [notifier release];
-    
-    // whenever the Application Becomes Active, ping for notifications from JIRA.
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:_pinger]; // in case app was already configured, don't add a second observer.
-    [[NSNotificationCenter defaultCenter] addObserver:_pinger
-                                             selector:@selector(start)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
+
+
+    if (self.options.notificationsEnabled) {
+
+        self._pinger = [[[JMCPing alloc] init] autorelease ];
+        JMCNotifier* notifier = [[JMCNotifier alloc] initWithStartFrame:[self notifierStartFrame]
+                                                               endFrame:[self notifierEndFrame]];
+        self._notifier = notifier;
+        [notifier release];
+        // whenever the Application Becomes Active, ping for notifications from JIRA.
+        [[NSNotificationCenter defaultCenter] removeObserver:_pinger]; // in case app was already configured, don't add a second observer.
+        [[NSNotificationCenter defaultCenter] addObserver:_pinger
+                                                 selector:@selector(start)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
+    } else {
+        JMCDLog(@"Notifications are disabled.");
+    }
     started = YES;
     
     JMCDLog(@"JIRA Mobile Connect is configured with url: %@", self.url);

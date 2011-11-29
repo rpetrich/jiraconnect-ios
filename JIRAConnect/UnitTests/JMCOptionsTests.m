@@ -36,6 +36,7 @@
                                                voice:YES
                                             location:YES
                                       crashReporting:YES
+                                       notifications:YES
                                         customFields:customFields];
 
     STAssertEqualObjects(@"https://connect.onjira.com/", options.url, @"URL not set correctly");
@@ -46,6 +47,7 @@
     STAssertTrue(options.voiceEnabled, @"Photos are not enabled");
     STAssertTrue(options.locationEnabled, @"Photos are not enabled");
     STAssertTrue(options.crashReportingEnabled, @"Crash Reporting is not enabled");
+    STAssertTrue(options.notificationsEnabled, @"Notifications are not enabled");
 }
 
 -(void) testLoadConfigFromFile

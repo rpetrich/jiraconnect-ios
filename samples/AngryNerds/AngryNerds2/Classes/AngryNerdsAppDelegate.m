@@ -27,6 +27,7 @@
                                 location:YES
                               dataSource:viewController];
 
+
     // extra options may be configured directly on the options property of the JMC instance.
     
 //    [JMC instance].options.locationEnabled = YES;

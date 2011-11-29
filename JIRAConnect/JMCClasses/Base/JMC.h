@@ -39,6 +39,7 @@
 #define kJMCOptionVoiceEnabled @"kJMCOptionVoiceEnabled"
 #define kJMCOptionLocationEnabled @"kJMCOptionLocationEnabled"
 #define kJMCOptionCrashReportingEnabled @"kJMCOptionCrashReportingEnabled"
+#define kJMCOptionNotificationsEnabled @"kJMCOptionNotificationsEnabled"
 #define kJMCOptionCustomFields @"kJMCOptionCustomFields"
 #define kJMCOptionUIBarStyle @"kJMCOptionUIBarStyle"
 #define kJMCOptionUIModalPresentationStyle @"kJMCOptionUIModalPresentationStyle"
@@ -51,6 +52,7 @@
     BOOL _voiceEnabled;
     BOOL _locationEnabled;
     BOOL _crashReportingEnabled;
+    BOOL _notificationsEnabled;
     NSDictionary* _customFields;
     UIBarStyle _barStyle;
     UIModalPresentationStyle _modalPresentationStyle;
@@ -64,6 +66,7 @@
               voice:(BOOL)voice
            location:(BOOL)location
        crashReporting:(BOOL)crashreporting
+       notifications:(BOOL)notifications
        customFields:(NSDictionary*)customFields;
 
 /**
@@ -104,6 +107,13 @@
  * or are collecting Crash Reports via some other means.
  */
 @property (assign) BOOL crashReportingEnabled;
+
+
+/**
+ * If YES, once a user has left some feedback or reported a crash, then JMC will display an In-App notification
+ * whenever a developer comments on an issue in JIRA. If NO, notifications will not appear.
+ */
+@property (assign) BOOL notificationsEnabled;
 
 /**
 * A dicitonary mapping custom field names to custom field values.
