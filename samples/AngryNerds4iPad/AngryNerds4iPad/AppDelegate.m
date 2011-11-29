@@ -25,11 +25,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    //    [[CNSHockeyManager sharedHockeyManager] !! configureWithIdentifier:@"APP_IDENTIFIER" delegate:nil];
-    
+      
     [[JMC instance]
-        configureJiraConnect:@"http://localhost:2990/jira/"
+        configureJiraConnect:@"https://connect.onjira.com"
                   projectKey:@"NERDS"
                       apiKey:@"a8848688-5f68-431a-84ad-8fa0a025f893"];
     
