@@ -34,14 +34,10 @@ To install JIRA Mobile Connect into your current project:
     * AVFoundation
     * CoreLocation
     * libsqlite3 (used to cache issues on the device)
-1. Add the `CrashReporter.framework`:
-    * Click **+** --> **'Add Other'**
-    * Browse to jiraconnect-ios then **JIRAConnect/JMCClasses/Libraries/** --> **CrashReporter.framework**
-    * Click **'Open'**
 1. If you use automatic reference counting (ARC) you will need to disable it for the JIRA Mobile Connect code:
     * In the **'Build Phases'** view, expand **'Compile Sources'**
     * For all JMC source files, set `-fno-objc-arc` as the compiler flags
-1. Try compiling your App, and ensure there are no errors.
+1. Build your App, and ensure there are no errors.
 
 To use JIRAConnect in your App:
 -------------------------------
@@ -99,6 +95,8 @@ e.g. the following will present just the create issue ViewController programatic
             [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
         }
 Use [[JMC instance] issuesViewController] to simply present the inbox directly.
+
+1. You can test the Crash Reporting, simply by adding a CFRelease(NULL); statement somewhere in your code. 
 
 Advanced Configuration Options
 ------------------------------
