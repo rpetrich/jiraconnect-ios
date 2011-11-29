@@ -103,8 +103,8 @@ Use [[JMC instance] issuesViewController] to simply present the inbox directly.
 Advanced Configuration Options
 ------------------------------
 
-1. There are some other configuration options you can choose to set, if the defaults aren't what you require. To do this, explore the [JMC instance] configureXXX] methods.
-1. The JMCOptions object supports most of the advanced settings. This object gets passed to JMC when configure is called. ie during applicationDidFinishLaunching. The JMCOptions class lets you configure:
+There are some other configuration options you can choose to set, if the defaults aren't what you require. To do this, explore the [JMC instance] configureXXX] methods.
+The JMCOptions object supports most of the advanced settings. This object gets passed to JMC when configure is called. ie during applicationDidFinishLaunching. The JMCOptions class lets you configure:
   * screenshots
   * voice recordings
   * location tracking
@@ -116,7 +116,7 @@ Advanced Configuration Options
   * API Key
 See the the JMC.h file for all JMCOptions available.
 
-1. The JMCCustomDataSource can be used to provide JIRA with extra data at runtime. The following is supported:
+The JMCCustomDataSource can be used to provide JIRA with extra data at runtime. The following is supported:
   * an extra attachment (e.g. a database file)
   * customFields (these get mapped by key name if a custom field of the same name exists for the JIRA project)
   * issue components to set (e.g. iOS)
