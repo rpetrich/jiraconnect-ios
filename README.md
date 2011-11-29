@@ -22,7 +22,8 @@ To install JIRA Mobile Connect into your current project:
    [https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip](https://bitbucket.org/atlassian/jiraconnect-ios/get/tip.zip)
 1. Open your project in Xcode (Xcode 4 is used for the purposes), right click on your Classes group, and select **'Add Files to YourProjectName'**
 1. Browse to the **jiraconnect-ios** clone directory, and add the entire JIRAConnect/JMCClasses directory to your project.
-1. If the project you are integrating contains any of the 3rd Party libaries listed at the bottom of this page, you shouldn't need to copy the equivalent library in JIRAConnect/JMCClasses/Libraries.
+1. If the project you are integrating already contains the Reachability or PLCrashReporter libraries, remove those from the JMCClasses/Libraries directory.
+1. If your project does *not* contain a JSON parsing library, then add the SBJSON library from Support/SBJSON to your project.
 1. Open the project (top most) element in the file/groups tree
 1. Click **'Build Phases'** --> Expand **'Link Binary with Libraries'** --> **+**
 1. Add the iOS built-in frameworks:
@@ -32,7 +33,6 @@ To install JIRA Mobile Connect into your current project:
     * CoreGraphics
     * AVFoundation
     * CoreLocation
-    * libz (used to compress network request bodies)
     * libsqlite3 (used to cache issues on the device)
 1. Add the `CrashReporter.framework`:
     * Click **+** --> **'Add Other'**

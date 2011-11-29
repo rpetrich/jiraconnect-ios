@@ -19,7 +19,6 @@
 		01808C7D145045F300284012 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C73145045F300284012 /* MobileCoreServices.framework */; };
 		01808C7E145045F300284012 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C74145045F300284012 /* AVFoundation.framework */; };
 		01808C7F145045F300284012 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C75145045F300284012 /* SystemConfiguration.framework */; };
-		01808C80145045F300284012 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C76145045F300284012 /* libz.dylib */; };
 		01808C81145045F300284012 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C77145045F300284012 /* libsqlite3.dylib */; };
 		01808C82145045F300284012 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C78145045F300284012 /* CoreLocation.framework */; };
 		01808C83145045F300284012 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01808C79145045F300284012 /* UIKit.framework */; };
@@ -318,7 +317,6 @@
 				01808C7D145045F300284012 /* MobileCoreServices.framework in Frameworks */,
 				01808C7E145045F300284012 /* AVFoundation.framework in Frameworks */,
 				01808C7F145045F300284012 /* SystemConfiguration.framework in Frameworks */,
-				01808C80145045F300284012 /* libz.dylib in Frameworks */,
 				01808C81145045F300284012 /* libsqlite3.dylib in Frameworks */,
 				01808C82145045F300284012 /* CoreLocation.framework in Frameworks */,
 				01808C83145045F300284012 /* UIKit.framework in Frameworks */,
