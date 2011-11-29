@@ -153,13 +153,11 @@ Contributors
 Third party Package - License - Copyright / Creator
 ===================================================
 
-json-framework      BSD     Copyright &copy; 2009 [Stig Brautaset.]( http://code.google.com/p/json-framework/)
+plcrashreporter     MIT     Copyright (c) 2008-2009 [Plausible Labs Cooperative, Inc.]( http://code.google.com/p/plcrashreporter/)
 
-plcrashreporter     MIT     Copyright &copy; 2008-2009 [Plausible Labs Cooperative, Inc.]( http://code.google.com/p/plcrashreporter/)
-
-crash-reporter              Copyright &copy; 2009 Andreas Linde & Kent Sutherland.
+crash-reporter              Copyright (c) 2009 Andreas Linde & Kent Sutherland.
 
 UIImageCategories           Created by [Trevor Harmon.](http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/)
 
-FMDB                MIT     Copyright &copy; 2008 [Flying Meat Inc.](http://github.com/ccgus/fmdb)
+FMDB                MIT     Copyright (c) 2008 [Flying Meat Inc.](http://github.com/ccgus/fmdb)
 
