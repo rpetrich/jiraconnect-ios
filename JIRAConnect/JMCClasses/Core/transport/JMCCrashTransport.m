@@ -39,19 +39,32 @@
     return kTypeCreate;
 }
 
-- (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport
+- (void)addCustomFieldsTo:(NSMutableArray *)attachments
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:subject forKey:@"summary"];
-    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
-    [params setObject:typeName forKey:@"type"];
+    // add all custom fields as one attachment item
+    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
+    if ([customFields count] > 0) 
+    {
+        NSData *customFieldsJSON = [[JMCTransport buildJSONString:customFields] dataUsingEncoding:NSUTF8StringEncoding];
+        
+        JMCAttachmentItem *customFieldsItem = [[JMCAttachmentItem alloc] initWithName:@"customfields"
+                                                                                 data:customFieldsJSON
+                                                                                 type:JMCAttachmentTypeCustom
+                                                                          contentType:@"application/json"
+                                                                       filenameFormat:@"customfields.json"];
+        [attachments addObject:customFieldsItem];
+        [customFieldsItem release];
+    }
+}
 
+- (void)addCrashData:(NSString *)crashReport to:(NSMutableArray *)attachments
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm"];
     // TODO: use the actual crash date for this file extension
     // TODO: sanitize AppName for spaces, puntuation, etc..
     NSString *filename =
-            [[[JMC instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
+    [[[JMC instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
     [dateFormatter release];
     NSData *rawData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     JMCAttachmentItem *crashData = [[JMCAttachmentItem alloc] initWithName:filename
@@ -59,8 +72,29 @@
                                                                       type:JMCAttachmentTypeCustom
                                                                contentType:@"text/plain"
                                                             filenameFormat:filename];
-    NSArray *attachments = [NSArray arrayWithObject:crashData];
+    
+    [attachments addObject:crashData];
     [crashData release];
+}
+
+-(void)addCustomAttachmentTo:(NSMutableArray*)attachments
+{
+    if ([[JMC instance].customDataSource respondsToSelector:@selector(customAttachment)]) {
+        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource customAttachment];
+        if (payloadData) {
+            [attachments addObject:payloadData];
+        }
+    }
+}
+
+- (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport
+{
+    NSMutableDictionary *params = [self buildCommonParams:subject defaultType:@"Crash"];
+    NSMutableArray* attachments = [NSMutableArray arrayWithCapacity:3];
+
+    [self addCustomFieldsTo:attachments];
+    [self addCrashData:crashReport to:attachments];    
+    [self addCustomAttachmentTo:attachments];
     
     JMCQueueItem *item = [self qeueItemWith:description attachments:attachments params:params issueKey:nil];
     [[JMCRequestQueue sharedInstance] addItem:item];

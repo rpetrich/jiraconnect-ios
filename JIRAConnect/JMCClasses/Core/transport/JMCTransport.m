@@ -31,6 +31,23 @@
     return [JMCTransport encodeParameters:queryParams];
 }
 
+
+- (NSMutableDictionary*)buildCommonParams:(NSString*)subject defaultType:(NSString *)type
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (subject) {
+        [params setObject:subject forKey:@"summary"];
+    }
+    NSArray *components = [[JMC instance] components];
+    if (components) {
+        [params setObject:components forKey:@"components"];
+    }
+
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:type];
+    [params setObject:typeName forKey:@"type"];
+    return params;
+}
+
 +(void)addAllAttachments:(NSArray *)allAttachments toRequest:(NSMutableURLRequest *)request boundary:(NSString *)boundary
 {
     NSMutableData *body = [NSMutableData dataWithCapacity:0];

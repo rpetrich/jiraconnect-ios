@@ -59,6 +59,8 @@
                       issueKey:(NSString *)issueKey;
 - (void)sayThankYou;
 
+- (NSMutableDictionary*)buildCommonParams:(NSString*)subject defaultType:(NSString*)type;
+
 + (NSString *)encodeCommonParameters;
 + (NSMutableString *)encodeParameters:(NSDictionary *)parameters;
 

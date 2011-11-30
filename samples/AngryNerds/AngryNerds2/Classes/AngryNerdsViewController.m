@@ -54,8 +54,8 @@
 
 - (NSDictionary *)customFields
 {
-    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"9999", @"42" ,nil]
-                                       forKeys:[NSArray arrayWithObjects:@"Top Score", @"jmctestfield", nil]];
+    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"9999", @"42" , @"43", nil]
+                                       forKeys:[NSArray arrayWithObjects:@"Top Score", @"jmctestfield", @"jmctestfield2", nil]];
 }
 
 -(NSArray*) components
