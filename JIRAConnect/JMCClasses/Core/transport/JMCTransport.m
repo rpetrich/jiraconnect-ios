@@ -32,7 +32,7 @@
 }
 
 
-- (NSMutableDictionary*)buildCommonParams:(NSString*)subject defaultType:(NSString *)type
+- (NSMutableDictionary*)buildCommonParams:(NSString*)subject type:(NSString *)typeName
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (subject) {
@@ -43,7 +43,6 @@
         [params setObject:components forKey:@"components"];
     }
 
-    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:type];
     [params setObject:typeName forKey:@"type"];
     return params;
 }

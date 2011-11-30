@@ -45,7 +45,8 @@
  description:(NSString *)description
  attachments:(NSArray *)attachments {
 
-    NSMutableDictionary* params = [self buildCommonParams:subject defaultType:@"Bug"];
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
+    NSMutableDictionary* params = [self buildCommonParams:subject type:typeName];
 
     JMCQueueItem *queueItem = [self qeueItemWith:description
                                      attachments:attachments

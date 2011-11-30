@@ -89,7 +89,8 @@
 
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport
 {
-    NSMutableDictionary *params = [self buildCommonParams:subject defaultType:@"Crash"];
+    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
+    NSMutableDictionary *params = [self buildCommonParams:subject type:typeName];
     NSMutableArray* attachments = [NSMutableArray arrayWithCapacity:3];
 
     [self addCustomFieldsTo:attachments];
