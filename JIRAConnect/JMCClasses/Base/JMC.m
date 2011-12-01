@@ -79,6 +79,7 @@
     options.voiceEnabled = voice;
     options.locationEnabled = location;
     options.crashReportingEnabled = crashreporting;
+    options.notificationsEnabled = notifications;
     options.customFields = customFields;
     return options;
 }
