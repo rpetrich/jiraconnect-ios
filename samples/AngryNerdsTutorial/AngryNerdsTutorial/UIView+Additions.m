@@ -2,12 +2,6 @@
 #import "UIView+Additions.h"
 
 
-NSUInteger const UIViewAutoresizingFlexibleBottomRight = (UIViewAutoresizingFlexibleWidth |
-                                                          UIViewAutoresizingFlexibleRightMargin |
-                                                          UIViewAutoresizingFlexibleHeight |
-                                                          UIViewAutoresizingFlexibleBottomMargin);
-
-
 @implementation UIView(ConvenienceAdditions)
 
 
