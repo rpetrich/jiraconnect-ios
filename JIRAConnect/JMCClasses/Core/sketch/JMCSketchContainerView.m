@@ -61,7 +61,16 @@ UITouch *_touch;
 
     if (touch.tapCount == 2)
     {
-        [self enableScrolling:YES];
+        UIScrollView* scrollView = (UIScrollView *)self.superview;
+        CGRect scrollFrame = scrollView.frame;
+        CGSize size = CGSizeMake(scrollView.zoomScale * scrollFrame.size.width/2.0f, scrollView.zoomScale * scrollFrame.size.height/2.0f);
+        CGPoint origin = CGPointMake(point.x/2.0f, point.y/2.0f);
+        CGRect frame = CGRectMake(origin.x, origin.y, size.width, size.height);
+        [scrollView zoomToRect:frame animated:YES];
+     
+        if (scrollView.zoomScale != 1.0f) { // if zoomed to 1.0x, then no need to scroll.
+            [self enableScrolling:YES];
+        }
         return;
     }
 }
