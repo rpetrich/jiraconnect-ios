@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		010360C9148223BB009C49B8 /* JMCAttachmentsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 010360C7148223BB009C49B8 /* JMCAttachmentsViewController.h */; };
 		010360CA148223BB009C49B8 /* JMCAttachmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010360C8148223BB009C49B8 /* JMCAttachmentsViewController.m */; };
+		013DE10B148D88F0002AA432 /* JMCTransportTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DE10A148D88F0002AA432 /* JMCTransportTest.m */; };
 		0152EC9B1439CE27006024D1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0152EC9A1439CE27006024D1 /* SenTestingKit.framework */; };
 		0152EC9C1439CE27006024D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89A98D6139B58AC00D09DFF /* UIKit.framework */; };
 		0152EC9D1439CE27006024D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B80565139B57EC00EC5AD4 /* Foundation.framework */; };
@@ -166,6 +167,8 @@
 		010360C6148223BB009C49B8 /* JMCAttachmentsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCAttachmentsView.xib; sourceTree = "<group>"; };
 		010360C7148223BB009C49B8 /* JMCAttachmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCAttachmentsViewController.h; sourceTree = "<group>"; };
 		010360C8148223BB009C49B8 /* JMCAttachmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCAttachmentsViewController.m; sourceTree = "<group>"; };
+		013DE109148D88F0002AA432 /* JMCTransportTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCTransportTest.h; sourceTree = "<group>"; };
+		013DE10A148D88F0002AA432 /* JMCTransportTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCTransportTest.m; sourceTree = "<group>"; };
 		0152EC991439CE27006024D1 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0152EC9A1439CE27006024D1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0152ECA01439CE27006024D1 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
@@ -399,6 +402,8 @@
 				0152ECA41439CE27006024D1 /* JMCOptionsTests.h */,
 				0152ECA51439CE27006024D1 /* JMCOptionsTests.m */,
 				0152EC9F1439CE27006024D1 /* Supporting Files */,
+				013DE109148D88F0002AA432 /* JMCTransportTest.h */,
+				013DE10A148D88F0002AA432 /* JMCTransportTest.m */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -937,6 +942,7 @@
 				8D42A04514848F6B00B4A6C4 /* SBJsonStreamWriterState.m in Sources */,
 				8D42A04814848F6B00B4A6C4 /* SBJsonTokeniser.m in Sources */,
 				8D42A04B14848F6B00B4A6C4 /* SBJsonWriter.m in Sources */,
+				013DE10B148D88F0002AA432 /* JMCTransportTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

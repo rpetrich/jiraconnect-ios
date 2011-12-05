@@ -102,10 +102,27 @@
     NSError *error = nil;
     id feedResult = nil;
     
+    id nsjsonClass = NSClassFromString(@"NSJSONSerialization");
+    SEL nsjsonSelect = NSSelectorFromString(@"JSONObjectWithData:options:error:");
+    
     SEL sbJSONSelector = NSSelectorFromString(@"JSONValue");
     SEL jsonKitSelector = NSSelectorFromString(@"objectFromJSONStringWithParseOptions:error:");
     
-    if (jsonKitSelector && [jsonString respondsToSelector:jsonKitSelector]) {
+    if (nsjsonClass && [nsjsonClass respondsToSelector:nsjsonSelect]) {
+        
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[nsjsonClass methodSignatureForSelector:nsjsonSelect]];
+        invocation.target = nsjsonClass;
+        invocation.selector = nsjsonSelect;
+        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        
+        [invocation setArgument:&jsonData atIndex:2]; // arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+        NSUInteger readOptions = kNilOptions;
+        [invocation setArgument:&readOptions atIndex:3];
+        [invocation setArgument:&error atIndex:4];
+        [invocation invoke];
+        [invocation getReturnValue:&feedResult];
+    } 
+    else if (jsonKitSelector && [jsonString respondsToSelector:jsonKitSelector]) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[jsonString methodSignatureForSelector:jsonKitSelector]];
         invocation.target = jsonString;
         invocation.selector = jsonKitSelector;
@@ -143,10 +160,28 @@
     NSError *error = nil;
     id stringResult = nil;
     
+    id nsjsonClass = NSClassFromString(@"NSJSONSerialization");
+    SEL nsjsonSelect = NSSelectorFromString(@"dataWithJSONObject:options:error:");
+    
     SEL sbJSONSelector = NSSelectorFromString(@"JSONRepresentation");
     SEL jsonKitSelector = NSSelectorFromString(@"JSONString");
     
-    if (jsonKitSelector && [object respondsToSelector:jsonKitSelector]) {
+    if (nsjsonClass && [nsjsonClass respondsToSelector:nsjsonSelect]) {
+        
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[nsjsonClass methodSignatureForSelector:nsjsonSelect]];
+        invocation.target = nsjsonClass;
+        invocation.selector = nsjsonSelect;
+        NSData *jsonData = nil;
+        
+        [invocation setArgument:&object atIndex:2]; // arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+        NSUInteger readOptions = kNilOptions;
+        [invocation setArgument:&readOptions atIndex:3];
+        [invocation setArgument:&error atIndex:4];
+        [invocation invoke];
+        [invocation getReturnValue:&jsonData];
+        stringResult = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+        
+    } else if (jsonKitSelector && [object respondsToSelector:jsonKitSelector]) {
         stringResult = [object performSelector:jsonKitSelector];
     } 
     else if (sbJSONSelector && [object respondsToSelector:sbJSONSelector]) {
