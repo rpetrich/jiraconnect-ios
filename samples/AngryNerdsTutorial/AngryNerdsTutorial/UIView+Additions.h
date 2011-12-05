@@ -2,9 +2,6 @@
 #import <Foundation/Foundation.h>
 
 
-extern NSUInteger const UIViewAutoresizingFlexibleBottomRight;
-
-
 @interface UIView(ConvenienceAdditions)
 
 - (CGFloat)left;
