@@ -21,7 +21,7 @@
      5. NOTE: Location tracking is disabled by default.
      */
 
-    [[JMC instance] configureJiraConnect:@"http://connect.onjira.com"
+    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira"
                               projectKey:@"NERDS"
                                   apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
                                 location:YES

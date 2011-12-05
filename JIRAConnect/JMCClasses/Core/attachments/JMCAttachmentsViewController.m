@@ -23,7 +23,10 @@
 
 - (void)removeAttachmentAtIndex:(NSInteger)index;
 
+
 @end
+
+BOOL isFinishedSketching;
 
 @implementation JMCAttachmentsViewController
 
@@ -35,9 +38,20 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+    isFinishedSketching = NO;
     
     self.title = JMCLocalizedString(@"JMCAttachmentsTitle", @"Attachments");
     [self.tableView reloadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"1. viewWillAppear: %d", isFinishedSketching);
+    if (!isFinishedSketching && [self.attachments count] == 1) {
+        [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }     
+    isFinishedSketching = NO;
+    NSLog(@"2. viewWillAppear: %d", isFinishedSketching);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -109,7 +123,7 @@
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     JMCAttachmentItem *attachment = [self.attachments objectAtIndex:indexPath.row];
-    
+
     if (attachment.type == JMCAttachmentTypeImage) {
         JMCSketchViewController *sketchViewController = [[[JMCSketchViewController alloc] initWithNibName:@"JMCSketchViewController" bundle:nil] autorelease];
 
@@ -148,17 +162,23 @@
     if ([self.delegate respondsToSelector:@selector(attachmentsViewController:didChangeAttachment:)]) {
         [self.delegate attachmentsViewController:self didChangeAttachment:attachment];
     }
+    isFinishedSketching = YES;
+    NSLog(@"1. didFinishSketchingImage: %d", isFinishedSketching);
 }
 
 - (void)sketchControllerDidCancel:(UIViewController *)controller
 {
     [self dismissModalViewControllerAnimated:YES];
+    isFinishedSketching = YES;
+        NSLog(@"1. sketchControllerDidCancel: %d", isFinishedSketching);
 }
 
 - (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)imageId
 {
     [self dismissModalViewControllerAnimated:YES];
     [self removeAttachmentAtIndex:[imageId unsignedIntegerValue]];
+    isFinishedSketching = YES;
+        NSLog(@"1. didDeleteImageWithId: %d", isFinishedSketching);
 }
 
 #pragma mark - Helper Methods
