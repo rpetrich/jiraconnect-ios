@@ -440,7 +440,7 @@ static NSInteger kJMCTag = 10133;
                                                              filenameFormat:@"recording-%d.aac"];
     
     
-    attachment.thumbnail = [UIImage imageNamed:@"icon_recording"];
+    attachment.thumbnail = [UIImage imageNamed:@"audio_attachment"];
     [self addAttachmentItem:attachment withIcon:attachment.thumbnail action:@selector(voiceAttachmentTapped:)];
     [attachment release];
     [recorder cleanUp];

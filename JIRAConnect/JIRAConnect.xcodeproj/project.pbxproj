@@ -300,6 +300,8 @@
 		4D71E60B1468962F00E0A7C3 /* megaphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megaphone@2x.png"; sourceTree = "<group>"; };
 		4D71E60C1468962F00E0A7C3 /* notsent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notsent.png; sourceTree = "<group>"; };
 		4D71E60D1468962F00E0A7C3 /* notsent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notsent@2x.png"; sourceTree = "<group>"; };
+		8D1B9833148DCB7100616C0E /* audio_attachment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_attachment.png; sourceTree = "<group>"; };
+		8D1B9834148DCB7100616C0E /* audio_attachment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio_attachment@2x.png"; sourceTree = "<group>"; };
 		8D42A01D14848F6B00B4A6C4 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		8D42A01E14848F6B00B4A6C4 /* NSObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSON.h"; sourceTree = "<group>"; };
 		8D42A01F14848F6B00B4A6C4 /* NSObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSON.m"; sourceTree = "<group>"; };
@@ -633,6 +635,8 @@
 		4D71E5E81468962F00E0A7C3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8D1B9833148DCB7100616C0E /* audio_attachment.png */,
+				8D1B9834148DCB7100616C0E /* audio_attachment@2x.png */,
 				8D47F2E114845AE800872BEF /* icon_recording.png */,
 				8D47F2E214845AE800872BEF /* icon_recording@2x.png */,
 				8D47F2DE14845A2000872BEF /* background_overlay.png */,
