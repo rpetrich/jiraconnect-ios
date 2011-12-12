@@ -23,6 +23,7 @@
 #import "JMCMacros.h"
 #import "JMCReplyDelegate.h"
 #import "JMCTransport.h"
+#import "JMCSketchViewControllerFactory.h"
 #import "UIImage+JMCResize.h"
 #import "UIView+JMCAdditions.h"
 
@@ -344,9 +345,23 @@ static NSInteger kJMCTag = 10133;
 }
 
 - (void)viewAttachments:(UIButton *)sender {
-    self.attachmentsViewController.attachments = self.attachments;
+
     _ignoreKeyboardHide = YES;
+    if ([self.attachments count] == 1)  // if there is only image attached, bypass the attachments view
+    {
+        JMCAttachmentItem* attachment = ((JMCAttachmentItem*)[self.attachments objectAtIndex:0]);
+        if (attachment.type == JMCAttachmentTypeImage)
+        {   
+            JMCSketchViewController* sketchController = 
+            [JMCSketchViewControllerFactory makeSketchViewControllerFor:attachment.data withId:0];
+            sketchController.delegate = self;
+            [self presentModalViewController:sketchController animated:YES];
+            return;
+        }
+    }
+    self.attachmentsViewController.attachments = self.attachments;
     [self.navigationController pushViewController:self.attachmentsViewController animated:YES];
+
 }
 
 - (IBAction)sendFeedback
@@ -484,6 +499,30 @@ static NSInteger kJMCTag = 10133;
 }
 
 - (void)attachmentsViewController:(JMCAttachmentsViewController *)controller didChangeAttachment:(JMCAttachmentItem *)attachment {
+    [self reloadAttachmentsButton];
+}
+
+#pragma mark - JMCSketchViewControllerDelegate
+
+- (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
+{
+    NSUInteger index = [imageId unsignedIntegerValue];
+    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    attachment.data = UIImagePNGRepresentation(image);
+    attachment.thumbnail = [JMCSketchViewControllerFactory makeSketchThumbnailFor:image];
+    [self reloadAttachmentsButton];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)sketchControllerDidCancel:(UIViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)sketchController:(UIViewController *)controller didDeleteImageWithId:(NSNumber *)imageId
+{
+    [self dismissModalViewControllerAnimated:YES];
+    [self.attachments removeObjectAtIndex:[imageId unsignedIntegerValue]];
     [self reloadAttachmentsButton];
 }
 

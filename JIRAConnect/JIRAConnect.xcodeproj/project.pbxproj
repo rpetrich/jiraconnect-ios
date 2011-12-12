@@ -26,6 +26,8 @@
 		0152ECB51439D141006024D1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C933142ED40C00EB8F88 /* libsqlite3.dylib */; };
 		0157C932142ED3AB00EB8F88 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C931142ED3AB00EB8F88 /* libz.dylib */; };
 		0157C934142ED40C00EB8F88 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0157C933142ED40C00EB8F88 /* libsqlite3.dylib */; };
+		01D23C06149602AF004D4D63 /* JMCSketchViewControllerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D23C04149602AF004D4D63 /* JMCSketchViewControllerFactory.h */; };
+		01D23C07149602AF004D4D63 /* JMCSketchViewControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D23C05149602AF004D4D63 /* JMCSketchViewControllerFactory.m */; };
 		01E36567143BACA900A5239D /* JMCTestConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01E36566143BACA900A5239D /* JMCTestConfiguration.plist */; };
 		4D71E60E1468962F00E0A7C3 /* JMC.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D71E5801468962F00E0A7C3 /* JMC.h */; };
 		4D71E60F1468962F00E0A7C3 /* JMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D71E5811468962F00E0A7C3 /* JMC.m */; };
@@ -178,6 +180,8 @@
 		0152ECA71439CE27006024D1 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
 		0157C931142ED3AB00EB8F88 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0157C933142ED40C00EB8F88 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		01D23C04149602AF004D4D63 /* JMCSketchViewControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCSketchViewControllerFactory.h; sourceTree = "<group>"; };
+		01D23C05149602AF004D4D63 /* JMCSketchViewControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCSketchViewControllerFactory.m; sourceTree = "<group>"; };
 		01E36566143BACA900A5239D /* JMCTestConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JMCTestConfiguration.plist; sourceTree = "<group>"; };
 		4D71E5801468962F00E0A7C3 /* JMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMC.h; sourceTree = "<group>"; };
 		4D71E5811468962F00E0A7C3 /* JMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMC.m; sourceTree = "<group>"; };
@@ -570,6 +574,8 @@
 				4D71E5C51468962F00E0A7C3 /* JMCSketchViewController.m */,
 				4D71E5C61468962F00E0A7C3 /* JMCSketchViewController.xib */,
 				4D71E5C71468962F00E0A7C3 /* JMCSketchViewControllerDelegate.h */,
+				01D23C04149602AF004D4D63 /* JMCSketchViewControllerFactory.h */,
+				01D23C05149602AF004D4D63 /* JMCSketchViewControllerFactory.m */,
 			);
 			path = sketch;
 			sourceTree = "<group>";
@@ -827,6 +833,7 @@
 				8D42A04314848F6B00B4A6C4 /* SBJsonStreamWriterState.h in Headers */,
 				8D42A04614848F6B00B4A6C4 /* SBJsonTokeniser.h in Headers */,
 				8D42A04914848F6B00B4A6C4 /* SBJsonWriter.h in Headers */,
+				01D23C06149602AF004D4D63 /* JMCSketchViewControllerFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1008,7 @@
 				8D42A04414848F6B00B4A6C4 /* SBJsonStreamWriterState.m in Sources */,
 				8D42A04714848F6B00B4A6C4 /* SBJsonTokeniser.m in Sources */,
 				8D42A04A14848F6B00B4A6C4 /* SBJsonWriter.m in Sources */,
+				01D23C07149602AF004D4D63 /* JMCSketchViewControllerFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

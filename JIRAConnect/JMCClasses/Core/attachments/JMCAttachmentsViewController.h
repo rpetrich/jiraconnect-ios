@@ -34,6 +34,7 @@
 @private
     NSMutableArray *_attachments;
     NSUInteger currentAttachmentItemIndex;
+    
 }
 
 @property (nonatomic, retain) NSMutableArray *attachments;

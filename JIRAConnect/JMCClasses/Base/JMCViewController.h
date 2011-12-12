@@ -25,7 +25,7 @@
 
 @class JMCAttachmentsViewController;
 
-@interface JMCViewController : UIViewController<UITextViewDelegate, AVAudioRecorderDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, JMCAttachmentsViewControllerDelegate> {
+@interface JMCViewController : UIViewController<UITextViewDelegate, AVAudioRecorderDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, JMCAttachmentsViewControllerDelegate, JMCSketchViewControllerDelegate> {
     IBOutlet JMCAttachmentsViewController *attachmentsViewController;
     IBOutlet UITextView *descriptionField;
     IBOutlet UIImageView *buttonOverlayView;

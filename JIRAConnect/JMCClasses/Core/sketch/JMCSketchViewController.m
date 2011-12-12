@@ -62,9 +62,9 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
-        [self.scrollView setZoomScale:1.0 animated:YES];
-        [self.scrollView setZoomScale:0.5 animated:YES];
-        [self.scrollView setZoomScale:1.0 animated:YES];
+    [self.scrollView setZoomScale:1.0 animated:YES];
+    [self.scrollView setZoomScale:0.5 animated:YES];
+    [self.scrollView setZoomScale:1.0 animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated {
 
