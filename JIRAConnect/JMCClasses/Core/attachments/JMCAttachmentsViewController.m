@@ -18,10 +18,12 @@
 #import "UIImage+JMCResize.h"
 #import "JMCMacros.h"
 #import "JMCAttachmentItem.h"
+#import "JMCSketchViewControllerFactory.h"
 
 @interface JMCAttachmentsViewController ()
 
 - (void)removeAttachmentAtIndex:(NSInteger)index;
+
 
 @end
 
@@ -109,25 +111,12 @@
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     JMCAttachmentItem *attachment = [self.attachments objectAtIndex:indexPath.row];
-    
-    if (attachment.type == JMCAttachmentTypeImage) {
-        JMCSketchViewController *sketchViewController = [[[JMCSketchViewController alloc] initWithNibName:@"JMCSketchViewController" bundle:nil] autorelease];
 
-        // get the original image, wire it up to the sketch controller
-        sketchViewController.image = [[[UIImage alloc] initWithData:attachment.data] autorelease];
-        sketchViewController.imageId = [NSNumber numberWithUnsignedInteger:indexPath.row]; // set this image's id. just the index in the array
-        sketchViewController.delegate = self;
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            // On iPad, a cross dissolve works better in most cases
-            sketchViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        }
-        else {
-            // On iPhone, we use a flip horizontal flip
-            sketchViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        }
-        
-        [self presentModalViewController:sketchViewController animated:YES];
+    if (attachment.type == JMCAttachmentTypeImage) {
+        JMCSketchViewController* controller = 
+            [JMCSketchViewControllerFactory makeSketchViewControllerFor:attachment.data withId:indexPath.row];
+        controller.delegate = self;
+        [self presentModalViewController:controller animated:YES];
         currentAttachmentItemIndex = indexPath.row;
     }
 }
@@ -136,18 +125,18 @@
 
 - (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
-    [self dismissModalViewControllerAnimated:YES];
 
     NSUInteger index = [imageId unsignedIntegerValue];
     JMCAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+
     attachment.data = UIImagePNGRepresentation(image);
-    attachment.thumbnail = [image jmc_thumbnailImage:34 transparentBorder:0 cornerRadius:3.0 interpolationQuality:kCGInterpolationDefault];
-    
+    attachment.thumbnail = [JMCSketchViewControllerFactory makeSketchThumbnailFor:image];   
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:currentAttachmentItemIndex inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     
     if ([self.delegate respondsToSelector:@selector(attachmentsViewController:didChangeAttachment:)]) {
         [self.delegate attachmentsViewController:self didChangeAttachment:attachment];
     }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)sketchControllerDidCancel:(UIViewController *)controller
@@ -190,7 +179,6 @@
 {
     self.delegate = nil;
     self.attachments = nil;
-    
     [super dealloc];
 }
 
