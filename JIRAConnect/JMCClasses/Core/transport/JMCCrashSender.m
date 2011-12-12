@@ -87,6 +87,15 @@ JMCCrashTransport *_transport;
         return;
     }
 
+    if (![[JMC instance] crashReportingIsEnabled])
+    {
+        // clean the reports
+        [[CrashReporter sharedCrashReporter] cleanCrashReports];
+        JMCALog(@"Crash reporting is disabled. No crash information will be sent.");
+        return;
+    }
+    
+    
     NSArray *reports = [[CrashReporter sharedCrashReporter] crashReports];
     // queue all the reports
     for (NSString *report in reports) {

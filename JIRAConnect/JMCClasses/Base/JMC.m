@@ -264,16 +264,22 @@ static JMCViewController* _jcViewController;
     [self configureJiraConnect:options.url customDataSource:customDataSource];
 }
 
-- (void)configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
+- (void) configureJiraConnect:(NSString *)withUrl customDataSource:(id <JMCCustomDataSource>)customDataSource
 {
     self.options.url = withUrl;
     self.customDataSource = customDataSource;
     [self start];
 }
 
+-(BOOL) crashReportingIsEnabled
+{
+    return self.options.crashReportingEnabled && 
+            ![[NSUserDefaults standardUserDefaults] boolForKey:kJMCCrashReportingDisabled];
+}
+
 -(void) start 
 {
-    if (self.options.crashReportingEnabled) {
+    if ([self crashReportingIsEnabled]) {
         self._crashSender = [[[JMCCrashSender alloc] init] autorelease ];
         [CrashReporter enableCrashReporter];
         // TODO: firing this when network becomes active could be better

@@ -29,6 +29,7 @@
 #define kJIRAConnectUUID @"kJIRAConnectUUID"
 #define kJMCReceivedCommentsNotification @"kJMCReceivedCommentsNotification"
 #define kJMCLastSuccessfulPingTime @"kJMCLastSuccessfulPingTime"
+#define kJMCCrashReportingDisabled @"kJMCCrashReportingDisabled"
 #define kJMCIssueUpdated @"kJMCIssueUpdated"
 #define kJMCNewCommentCreated @"kJMCNewCommentCreated"
 
@@ -226,5 +227,12 @@ enum JMCViewControllerMode {
 
 /** The path that JMC uses to store its data: local DB cache, and offline request queue. **/
 - (NSString *)dataDirPath;
+
+/** Determines whether or not crash reporting is enabled based on: 
+    * the JMCOption.crashReportingEnabled, and
+    * the BOOL value of the NSUserDefault 'kJMCCrashReportingDisabled' 
+ Crash reporting can be remotely disabled via an admin setting in JIRA for the given project.
+ **/
+-(BOOL) crashReportingIsEnabled;
 
 @end
