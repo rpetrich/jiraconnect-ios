@@ -239,7 +239,8 @@
     return operation;
 }
 
--(void)sayThankYou {
+-(void)sayThankYou 
+{
     NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on feedback submission");
     NSString *appName = [[JMC instance] getAppName];
     NSString *projectName = appName ? appName : [[JMC instance] getProject];

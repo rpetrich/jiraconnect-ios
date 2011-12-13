@@ -218,6 +218,14 @@ static NSRecursiveLock *writeLock;
     }
 }
 
+
+-(void) deleteIssueByUUID:(NSString *)uuid {
+    
+    @synchronized (writeLock) {
+        [db executeUpdate:@"DELETE FROM issue WHERE uuid = ?", uuid];
+    }
+}
+
 -(void) updateIssueByUUID:(JMCIssue *)issue {
     // update an issue whenever the comments change. set comments and dateUpdated
     @synchronized (writeLock) {

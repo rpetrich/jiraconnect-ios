@@ -227,4 +227,9 @@ enum JMCViewControllerMode {
 /** The path that JMC uses to store its data: local DB cache, and offline request queue. **/
 - (NSString *)dataDirPath;
 
+/** Determines whether or not crash reporting is enabled based on: 
+    * the JMCOption.crashReportingEnabled
+ **/
+-(BOOL) crashReportingIsEnabled;
+
 @end

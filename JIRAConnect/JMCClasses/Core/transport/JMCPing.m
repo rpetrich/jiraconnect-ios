@@ -71,6 +71,8 @@
     NSNumber *sinceMillis = [comments valueForKey:@"sinceMillis"];
     [[NSUserDefaults standardUserDefaults] setObject:sinceMillis forKey:kJMCLastSuccessfulPingTime];
     JMCDLog(@"Time JIRA last saw this user: %@", [NSDate dateWithTimeIntervalSince1970:[sinceMillis doubleValue]/1000]);
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)flushQueue {

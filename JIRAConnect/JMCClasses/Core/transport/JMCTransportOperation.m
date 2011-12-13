@@ -177,13 +177,13 @@
     if ([error localizedDescription] != nil) {
         msg = [msg stringByAppendingFormat:@"%@.\n", [error localizedDescription]];
     }
-    NSString *response = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding];
-    if (response) {
-        msg = [msg stringByAppendingString:response];
+    NSString *responseString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding: NSUTF8StringEncoding];
+    if (responseString) {
+        msg = [msg stringByAppendingString:responseString];
     }
     NSString *absoluteURL = [[request.URL absoluteURL] description];
     JMCDLog(@"Request failed: %@ URL: %@, response code: %d", msg, absoluteURL, statusCode);
-    [response release];
+    [responseString release];
 #endif
     
     looping = NO;
