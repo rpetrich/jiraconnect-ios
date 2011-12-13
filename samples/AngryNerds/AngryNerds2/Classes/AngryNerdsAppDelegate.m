@@ -22,11 +22,18 @@
      */
 
 
-    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira"
+    [[JMC instance] configureJiraConnect:@"https://connect.onjira.com"
                               projectKey:@"NERDS"
                                   apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
                                 location:YES
                               dataSource:viewController];
+
+    
+//    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira"
+//                              projectKey:@"NERDS"
+//                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
+//                                location:YES
+//                              dataSource:viewController];
 
 
     // extra options may be configured directly on the options property of the JMC instance.
