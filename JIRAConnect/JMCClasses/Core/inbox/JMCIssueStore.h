@@ -34,6 +34,7 @@
 - (BOOL) issueExistsIssueByUUID:(NSString *)uuid;
 - (BOOL) commentExistsIssueByUUID:(NSString *)uuid;
 - (void) insertIssue:(JMCIssue *)issue;
+- (void) deleteIssueByUUID:(NSString *)uuid;
 - (void) insertComment:(JMCComment *)comment forIssue:(NSString *)issueKey;
 - (void) markAsRead:(JMCIssue *)issue;
 + (JMCIssueStore *) instance;

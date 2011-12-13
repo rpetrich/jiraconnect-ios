@@ -271,10 +271,10 @@ static JMCViewController* _jcViewController;
     [self start];
 }
 
+
 -(BOOL) crashReportingIsEnabled
 {
-    return self.options.crashReportingEnabled && 
-            ![[NSUserDefaults standardUserDefaults] boolForKey:kJMCCrashReportingDisabled];
+    return self.options.crashReportingEnabled;
 }
 
 -(void) start 
@@ -287,6 +287,8 @@ static JMCViewController* _jcViewController;
                                          target:_crashSender
                                        selector:@selector(promptThenMaybeSendCrashReports)
                                        userInfo:nil repeats:NO];
+    } else {
+        JMCDLog(@"JMC Crash reporting disabled.");
     }
 
 

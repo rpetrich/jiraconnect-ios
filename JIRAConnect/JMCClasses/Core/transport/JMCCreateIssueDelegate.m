@@ -36,11 +36,20 @@
     JMCIssue *issue = [JMCIssue issueWith:response requestId:requestId];
     
     JMCIssueStore *issueStore = [JMCIssueStore instance];
-    if ([issueStore issueExistsIssueByUUID:requestId]) {
+    
+    if ([issue.key isEqualToString:@"CRASHES-DISABLED"])
+    {
+        // delete this from the issue store. Crashes have been disabled in JIRA. No issue is created.
+        [issueStore deleteIssueByUUID:requestId];
+        JMCDLog(@"Crash reporting has been disabled in the JIRA Connect JIRA Plugin. No issues for crash reports will be created in JIRA.");
+    } 
+    else if ([issueStore issueExistsIssueByUUID:requestId]) 
+    {
         // this update will ensure the issuekey gets updated in the database
         [issueStore updateIssueByUUID:issue];
-
-    } else {
+    } 
+    else 
+    {
         // this means the issue didn't make it to JIRA before the JMCPing rebuilt the database. So, add a new issue.
         [issueStore insertOrUpdateIssue:issue];
     }
