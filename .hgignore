@@ -3,3 +3,4 @@ syntax: glob
 *.xcuserdatad
 *.xcworkspacedata
 .DS_Store
+**/output
