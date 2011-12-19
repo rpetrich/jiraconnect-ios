@@ -22,11 +22,18 @@
      */
 
 
-    [[JMC instance] configureJiraConnect:@"https://connect.onjira.com"
-                              projectKey:@"NERDS"
-                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
-                                location:YES
-                              dataSource:viewController];
+    [[JMC sharedInstance]
+     configureJiraConnect:@"http://localhost:2990/jira/"
+     projectKey:@"TEST"
+     apiKey:@"b3c8aadc-91e8-434a-a7ef-b3bec671e058" 
+     location:YES 
+     dataSource:nil];
+//    
+//    [[JMC instance] configureJiraConnect:@"https://connect.onjira.com"
+//                              projectKey:@"NERDS"
+//                                  apiKey:@"b84bcd12-1e02-47e9-8954-7e1671b42b55"
+//                                location:YES
+//                              dataSource:viewController];
 
     
 //    [[JMC instance] configureJiraConnect:@"http://localhost:2990/jira"

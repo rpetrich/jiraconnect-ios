@@ -26,7 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
       
-    [[JMC instance]
+    [[JMC sharedInstance]
         configureJiraConnect:@"https://connect.onjira.com"
                   projectKey:@"NERDS"
                       apiKey:@"a8848688-5f68-431a-84ad-8fa0a025f893"];

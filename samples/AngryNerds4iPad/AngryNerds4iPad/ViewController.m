@@ -19,7 +19,7 @@
 
 -(IBAction) feedMe
 {
-    [self presentModalViewController:[[JMC instance] viewController] animated:YES];
+    [self presentModalViewController:[[JMC sharedInstance] viewController] animated:YES];
 }
 
 

@@ -37,7 +37,7 @@
 
 - (IBAction)triggerFeedback
 {
-    UIViewController *controller = [[JMC instance] viewController];
+    UIViewController *controller = [[JMC sharedInstance] viewController];
     [self presentModalViewController:controller animated:YES];
 }
 
@@ -100,7 +100,7 @@
 
 - (IBAction)triggerDisplayNotifications
 {
-    [self presentModalViewController:[[JMC instance] issuesViewController] animated:YES];
+    [self presentModalViewController:[[JMC sharedInstance] issuesViewController] animated:YES];
 }
 
 // allow shake gesture to trigger Feedback
