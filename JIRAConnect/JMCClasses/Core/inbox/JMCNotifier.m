@@ -118,7 +118,7 @@ static CGRect endFrame;
     CGRect currEndFrame = CGRectMake(0, 0 + statusBarFrame.size.height, frameSize.width, frameSize.height);
 
     if (!_viewController) {
-        _viewController = [[[JMC instance] issuesViewControllerWithMode:JMCViewControllerModeDefault] retain];
+        _viewController = [[[JMC sharedInstance] issuesViewControllerWithMode:JMCViewControllerModeDefault] retain];
     }
     
     UIWindow *window = [self findVisibleWindow];

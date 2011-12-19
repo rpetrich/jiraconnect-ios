@@ -31,27 +31,27 @@
 
 - (void)sendPing {
     
-    if ([JMC instance].url == nil) 
+    if ([JMC sharedInstance].url == nil)
     {
         JMCDLog(@"JMC instance url not yet set. No ping this time.");
         return;
     }
     
-    NSString *project = [[JMC instance] getProject];
-    NSString *uuid = [[JMC instance] getUUID];
+    NSString *project = [[JMC sharedInstance] getProject];
+    NSString *uuid = [[JMC sharedInstance] getUUID];
     NSNumber* lastPingTime = [[NSUserDefaults standardUserDefaults] objectForKey:kJMCLastSuccessfulPingTime];
     lastPingTime = lastPingTime ? lastPingTime : [NSNumber numberWithInt:0];
 
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     [params setObject:project forKey:@"project"];
     [params setObject:uuid forKey:@"uuid"];
-    NSString* key = [[JMC instance] getApiKey];
+    NSString* key = [[JMC sharedInstance] getApiKey];
     [params setObject:key forKey:@"apikey"];
     [params setValue:[lastPingTime stringValue] forKey:@"sinceMillis"];
     NSString * queryString = [JMCTransport encodeParameters:params];
-    NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, [[JMC instance] getAPIVersion], queryString];
+    NSString *resourceUrl = [NSString stringWithFormat:kJMCTransportNotificationsPath, [[JMC sharedInstance] getAPIVersion], queryString];
 
-    NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:[JMC instance].url];
+    NSURL *url = [NSURL URLWithString:resourceUrl relativeToURL:[JMC sharedInstance].url];
     JMCDLog(@"Retrieving notifications via: %@", [url absoluteURL]);
 
     // send ping
@@ -76,7 +76,7 @@
 }
 
 - (void)flushQueue {
-    [[JMC instance] flushRequestQueue];
+    [[JMC sharedInstance] flushRequestQueue];
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {

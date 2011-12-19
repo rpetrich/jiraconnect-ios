@@ -326,7 +326,7 @@ static CrashReporter *crashReportSender = nil;
             CFRelease(uuid);
         }
         
-        [reportString appendFormat:@"CrashReporter Key:   %@\n", [[JMC instance] getUUID]];
+        [reportString appendFormat:@"CrashReporter Key:   %@\n", [[JMC sharedInstance] getUUID]];
         [reportString appendFormat:@"Hardware Model:       %@,%@\n", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
 
         [reportString appendFormat:@"Process:         %@ [%@]\n", processName, processId];

@@ -31,8 +31,8 @@
 - (NSURL *)makeUrlFor:(NSString *)issueKey
 {
     NSString *queryString = [JMCTransport encodeCommonParameters];
-    NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
-    return [NSURL URLWithString:path relativeToURL:[JMC instance].url];
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC sharedInstance] getAPIVersion], queryString];
+    return [NSURL URLWithString:path relativeToURL:[JMC sharedInstance].url];
 }
 
 - (NSString *) getType {
@@ -42,7 +42,7 @@
 - (void)addCustomFieldsTo:(NSMutableArray *)attachments
 {
     // add all custom fields as one attachment item
-    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
+    NSMutableDictionary *customFields = [[JMC sharedInstance] getCustomFields];
     if ([customFields count] > 0) 
     {
         NSData *customFieldsJSON = [[JMCTransport buildJSONString:customFields] dataUsingEncoding:NSUTF8StringEncoding];
@@ -64,7 +64,7 @@
     // TODO: use the actual crash date for this file extension
     // TODO: sanitize AppName for spaces, puntuation, etc..
     NSString *filename =
-    [[[JMC instance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
+    [[[JMC sharedInstance] getAppName] stringByAppendingFormat:@"-%@.crash", [dateFormatter stringFromDate:[NSDate date]]];
     [dateFormatter release];
     NSData *rawData = [crashReport dataUsingEncoding:NSUTF8StringEncoding];
     JMCAttachmentItem *crashData = [[JMCAttachmentItem alloc] initWithName:filename
@@ -79,8 +79,8 @@
 
 -(void)addCustomAttachmentTo:(NSMutableArray*)attachments
 {
-    if ([[JMC instance].customDataSource respondsToSelector:@selector(customAttachment)]) {
-        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource customAttachment];
+    if ([[JMC sharedInstance].customDataSource respondsToSelector:@selector(customAttachment)]) {
+        JMCAttachmentItem *payloadData = [[JMC sharedInstance].customDataSource customAttachment];
         if (payloadData) {
             [attachments addObject:payloadData];
         }
@@ -90,7 +90,7 @@
 - (void)send:(NSString *)subject description:(NSString *)description crashReport:(NSString *)crashReport
 {
         
-    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
+    NSString *typeName = [[JMC sharedInstance] issueTypeNameFor:JMCIssueTypeCrash useDefault:@"Crash"];
     NSMutableDictionary *params = [self buildCommonParams:subject type:typeName];
     [params setObject:[NSNumber numberWithBool:YES] forKey:@"isCrash"];
     NSMutableArray* attachments = [NSMutableArray arrayWithCapacity:3];

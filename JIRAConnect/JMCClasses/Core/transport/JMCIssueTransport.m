@@ -32,8 +32,8 @@
     // issue creation url is:
     // curl -u admin:admin -F media=@image.png "http://localhost:2990/jira/rest/jconnect/latest/issue/create?project=<projectname>"
     NSString *queryString = [JMCTransport encodeCommonParameters];
-    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC instance] getAPIVersion], queryString];
-    return [NSURL URLWithString:urlPath relativeToURL:[JMC instance].url];
+    NSString *urlPath = [NSString stringWithFormat:kJMCTransportCreateIssuePath, [[JMC sharedInstance] getAPIVersion], queryString];
+    return [NSURL URLWithString:urlPath relativeToURL:[JMC sharedInstance].url];
 }
 
 -(NSString *) getType {
@@ -45,7 +45,7 @@
  description:(NSString *)description
  attachments:(NSArray *)attachments {
 
-    NSString *typeName = [[JMC instance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
+    NSString *typeName = [[JMC sharedInstance] issueTypeNameFor:JMCIssueTypeFeedback useDefault:@"Bug"];
     NSMutableDictionary* params = [self buildCommonParams:subject type:typeName];
 
     JMCQueueItem *queueItem = [self qeueItemWith:description
@@ -54,7 +54,7 @@
                                         issueKey:nil];
     
     [[JMCRequestQueue sharedInstance] addItem:queueItem];
-    [[JMC instance] flushRequestQueue];
+    [[JMC sharedInstance] flushRequestQueue];
 
     [self sayThankYou];
 }

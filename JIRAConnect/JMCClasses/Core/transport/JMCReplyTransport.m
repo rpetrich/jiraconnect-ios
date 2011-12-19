@@ -25,8 +25,8 @@
 -(NSURL *)makeUrlFor:(NSString*)issueKey
 {
     NSString *queryString = [JMCTransport encodeCommonParameters];
-    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, [[JMC instance] getAPIVersion], issueKey, queryString];
-    return [NSURL URLWithString:path relativeToURL:[JMC instance].url];
+    NSString *path = [NSString stringWithFormat:kJMCTransportCreateCommentPath, [[JMC sharedInstance] getAPIVersion], issueKey, queryString];
+    return [NSURL URLWithString:path relativeToURL:[JMC sharedInstance].url];
 }
 
 -(NSString *) getType
@@ -46,7 +46,7 @@
                                         issueKey:originalIssue.key];
     JMCRequestQueue *queue = [JMCRequestQueue sharedInstance];
     [queue addItem:queueItem];
-    [[JMC instance] flushRequestQueue];
+    [[JMC sharedInstance] flushRequestQueue];
 
 }
 

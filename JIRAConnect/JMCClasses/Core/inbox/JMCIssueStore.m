@@ -31,7 +31,7 @@ static NSRecursiveLock *writeLock;
 +(JMCIssueStore *) instance {
     static JMCIssueStore *singleton = nil;
     if (singleton == nil) {
-        NSString* jmcDbPath = [[JMC instance] dataDirPath];
+        NSString* jmcDbPath = [[JMC sharedInstance] dataDirPath];
         _jcoDbPath = [[NSString stringWithFormat:@"%@/issues.db", jmcDbPath] retain];
         singleton = [[JMCIssueStore alloc] init];
         writeLock = [[NSRecursiveLock alloc] init];

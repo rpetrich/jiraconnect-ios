@@ -190,7 +190,7 @@
 		4D71E5841468962F00E0A7C3 /* JMCCustomDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCCustomDataSource.h; sourceTree = "<group>"; };
 		4D71E5851468962F00E0A7C3 /* JMCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCMacros.h; sourceTree = "<group>"; };
 		4D71E5861468962F00E0A7C3 /* JMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCViewController.h; sourceTree = "<group>"; };
-		4D71E5871468962F00E0A7C3 /* JMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCViewController.m; sourceTree = "<group>"; };
+		4D71E5871468962F00E0A7C3 /* JMCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCViewController.m; sourceTree = "<group>"; };
 		4D71E5881468962F00E0A7C3 /* JMCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCViewController.xib; sourceTree = "<group>"; };
 		4D71E58B1468962F00E0A7C3 /* JMCRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCRecorder.h; sourceTree = "<group>"; };
 		4D71E58C1468962F00E0A7C3 /* JMCRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCRecorder.m; sourceTree = "<group>"; };

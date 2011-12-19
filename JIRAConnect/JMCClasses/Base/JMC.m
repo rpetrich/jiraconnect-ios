@@ -152,7 +152,7 @@ static JMCViewController* _jcViewController;
 @synthesize _crashSender;
 @synthesize _dataDirPath;
 
-+ (JMC *)instance
++ (JMC *)sharedInstance
 {
     static JMC *singleton = nil;
     

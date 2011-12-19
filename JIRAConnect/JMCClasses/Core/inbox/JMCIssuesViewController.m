@@ -47,10 +47,10 @@ static NSString *cellId = @"CommentCell";
 - (void)compose:(UIBarItem *)arg
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        [self.navigationController pushViewController:[[JMC instance] feedbackViewControllerWithMode:JMCViewControllerModeCustom] animated:YES];
+        [self.navigationController pushViewController:[[JMC sharedInstance] feedbackViewControllerWithMode:JMCViewControllerModeCustom] animated:YES];
     }
     else {
-        [self presentModalViewController:[[JMC instance] feedbackViewControllerWithMode:JMCViewControllerModeDefault] animated:YES];
+        [self presentModalViewController:[[JMC sharedInstance] feedbackViewControllerWithMode:JMCViewControllerModeDefault] animated:YES];
     }
 }
 

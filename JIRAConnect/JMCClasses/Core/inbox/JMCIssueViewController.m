@@ -253,7 +253,7 @@ static BOOL isPad(void) {
     }
     else {
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.feedbackController];
-        navController.navigationBar.barStyle = [[JMC instance] getBarStyle];
+        navController.navigationBar.barStyle = [[JMC sharedInstance] getBarStyle];
         [self presentModalViewController:navController animated:YES];
         [navController release];
     }

@@ -54,7 +54,7 @@ JMCCrashTransport *_transport;
         @"Description explaining that crash data has been found and ask the user if the data might be uplaoded to the developers server");
 
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:JMCLocalizedString(@"CrashDataFoundTitle", @"Title showing in the alert box when crash report data has been found")
-                                                            message:[NSString stringWithFormat:description, [[JMC instance] getAppName]]
+                                                            message:[NSString stringWithFormat:description, [[JMC sharedInstance] getAppName]]
                                                            delegate:self
                                                   cancelButtonTitle:JMCLocalizedString(@"No", @"No") otherButtonTitles:JMCLocalizedString(@"Yes", @"Yes"), JMCLocalizedString(@"Always", @"Always"), nil];
         [alertView show];
@@ -87,7 +87,7 @@ JMCCrashTransport *_transport;
         return;
     }
 
-    if (![[JMC instance] crashReportingIsEnabled])
+    if (![[JMC sharedInstance] crashReportingIsEnabled])
     {
         // clean the reports
         [[CrashReporter sharedCrashReporter] cleanCrashReports];
@@ -107,7 +107,7 @@ JMCCrashTransport *_transport;
     // clean the reports
     [[CrashReporter sharedCrashReporter] cleanCrashReports];
     // flush the queue to ensure they get sent
-    [[JMC instance] flushRequestQueue];
+    [[JMC sharedInstance] flushRequestQueue];
 
 }
 

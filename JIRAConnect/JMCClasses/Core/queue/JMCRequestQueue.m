@@ -65,7 +65,7 @@ int _maxNumRequestFailures;
 }
 
 -(BOOL) reachable {
-    Reachability *r = [Reachability reachabilityWithHostName:[JMC instance].url.host];
+    Reachability *r = [Reachability reachabilityWithHostName:[JMC sharedInstance].url.host];
     NetworkStatus internetStatus = [r currentReachabilityStatus];
     return internetStatus == NotReachable ?  NO : YES;
 }
@@ -237,7 +237,7 @@ int _maxNumRequestFailures;
 }
 
 - (NSString *)getQueueDirPath {
-    return [[JMC instance] dataDirPath];
+    return [[JMC sharedInstance] dataDirPath];
 }
 
 -(void) dealloc

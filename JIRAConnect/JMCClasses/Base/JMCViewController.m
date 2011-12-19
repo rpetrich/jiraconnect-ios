@@ -372,12 +372,12 @@ static NSInteger kJMCTag = 10133;
         // No data entered, just return.
         return;
     }
-    NSMutableDictionary *customFields = [[JMC instance] getCustomFields];
+    NSMutableDictionary *customFields = [[JMC sharedInstance] getCustomFields];
     NSMutableArray* allAttachments = [NSMutableArray arrayWithArray:self.attachments];
     
     
-    if ([[JMC instance].customDataSource respondsToSelector:@selector(customAttachment)]) {
-        JMCAttachmentItem *payloadData = [[JMC instance].customDataSource customAttachment];
+    if ([[JMC sharedInstance].customDataSource respondsToSelector:@selector(customAttachment)]) {
+        JMCAttachmentItem *payloadData = [[JMC sharedInstance].customDataSource customAttachment];
         if (payloadData) {
             [allAttachments addObject:payloadData];
         }
@@ -580,7 +580,7 @@ static NSInteger kJMCTag = 10133;
 }
 
 - (void)addScreenshotButton {
-    if ([[JMC instance] isPhotosEnabled]) {
+    if ([[JMC sharedInstance] isPhotosEnabled]) {
         self.screenshotButton = [self buttonFor:@"icon_capture" action:@selector(addScreenshot)];
         [self layoutActionButton:self.screenshotButton];
         [self.descriptionField.superview addSubview:self.screenshotButton]; 
@@ -588,7 +588,7 @@ static NSInteger kJMCTag = 10133;
 }
 
 - (void)addVoiceButton {
-    if ([[JMC instance] isVoiceEnabled]) {
+    if ([[JMC sharedInstance] isVoiceEnabled]) {
         self.voiceButton = [self buttonFor:@"icon_record" action:@selector(addVoice)];
         [self layoutActionButton:self.voiceButton];
         [self.descriptionField.superview addSubview:self.voiceButton]; 
@@ -726,7 +726,7 @@ static NSInteger kJMCTag = 10133;
 }
 
 - (BOOL)shouldTrackLocation {
-    return [[JMC instance] isLocationEnabled] && [CLLocationManager locationServicesEnabled];
+    return [[JMC sharedInstance] isLocationEnabled] && [CLLocationManager locationServicesEnabled];
 }
 
 - (void)dismissKeyboard

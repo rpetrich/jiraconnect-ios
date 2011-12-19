@@ -26,8 +26,8 @@
 +(NSString *)encodeCommonParameters
 {
     NSMutableDictionary *queryParams = [NSMutableDictionary dictionaryWithCapacity:2];
-    [queryParams setObject:[[JMC instance] getProject] forKey:@"project"];
-    [queryParams setObject:[[JMC instance] getApiKey]  forKey:@"apikey"];
+    [queryParams setObject:[[JMC sharedInstance] getProject] forKey:@"project"];
+    [queryParams setObject:[[JMC sharedInstance] getApiKey]  forKey:@"apikey"];
     return [JMCTransport encodeParameters:queryParams];
 }
 
@@ -38,7 +38,7 @@
     if (subject) {
         [params setObject:subject forKey:@"summary"];
     }
-    NSArray *components = [[JMC instance] components];
+    NSArray *components = [[JMC sharedInstance] components];
     if (components) {
         [params setObject:components forKey:@"components"];
     }
@@ -242,8 +242,8 @@
 -(void)sayThankYou 
 {
     NSString *thankyouMsg = JMCLocalizedString(@"JMCFeedbackReceived", @"Thank you message on feedback submission");
-    NSString *appName = [[JMC instance] getAppName];
-    NSString *projectName = appName ? appName : [[JMC instance] getProject];
+    NSString *appName = [[JMC sharedInstance] getAppName];
+    NSString *projectName = appName ? appName : [[JMC sharedInstance] getProject];
     NSString *msg = [NSString stringWithFormat:thankyouMsg, projectName];
 
     NSString *thankyouTitle = JMCLocalizedString(@"Thank You", @"Thank you title on feedback submission");
@@ -265,7 +265,7 @@
     // write each data part to disk with a unique filename uuid-ID
     // store metadata in an index file: uid-index. Contains: URL, parameters(key=value pairs), parts(contentType, name, filename)
     [params setObject:description forKey:@"description"];
-    [params addEntriesFromDictionary:[[JMC instance] getMetaData]];
+    [params addEntriesFromDictionary:[[JMC sharedInstance] getMetaData]];
 
     NSString *issueJSON = [[self class] buildJSONString:params];
     NSData *jsonData = [issueJSON dataUsingEncoding:NSUTF8StringEncoding];

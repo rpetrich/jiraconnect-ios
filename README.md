@@ -45,13 +45,13 @@ To use JIRAConnect in your App:
 
         #import "JMC.h"
 
-1. Configure the [JMC instance] in your ApplicationDelegate.m like so:
+1. Configure the [JMC sharedInstance] in your ApplicationDelegate.m like so:
 
 
     `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
 method, add the following line:
 
-        [[JMC instance] configureJiraConnect:@"https://connect.onjira.com/"
+        [[JMC sharedInstance] configureJiraConnect:@"https://connect.onjira.com/"
                                   projectKey:@"NERDS"
                                       apiKey:@"591451a6-bc59-4ca9-8840-b67f8c1e440f"];
 
@@ -81,26 +81,26 @@ If your info ViewController is in a UINavigationController stack, then you can u
 
         -(void) showFeedback
         {
-            [self presentModalViewController:[[JMC instance] viewController] animated:YES];
+            [self presentModalViewController:[[JMC sharedInstance] viewController] animated:YES];
         }
 
-1. [[JMC instance] viewController] will return the 'Create Issue' view until the user creates feedback. From then on, the 'Issue Inbox' view is displayed, from where the
+1. [[JMC sharedInstance] viewController] will return the 'Create Issue' view until the user creates feedback. From then on, the 'Issue Inbox' view is displayed, from where the
 user can tap the 'Create' icon to send more feedback.
-1. If you would like your users to always access the Create Issue view, then you can do so by presenting the [[JMC instance] feedbackViewController] directly.
+1. If you would like your users to always access the Create Issue view, then you can do so by presenting the [[JMC sharedInstance] feedbackViewController] directly.
 e.g. the following will present just the create issue ViewController programatically:
 
         - (IBAction)triggerCreateIssueView
         {
-            [self presentModalViewController:[[JMC instance] feedbackViewController] animated:YES];
+            [self presentModalViewController:[[JMC sharedInstance] feedbackViewController] animated:YES];
         }
-Use [[JMC instance] issuesViewController] to simply present the inbox directly.
+Use [[JMC sharedInstance] issuesViewController] to simply present the inbox directly.
 
 1. You can test the Crash Reporting, simply by adding a CFRelease(NULL); statement somewhere in your code. 
 
 Advanced Configuration Options
 ------------------------------
 
-There are some other configuration options you can choose to set, if the defaults aren't what you require. To do this, explore the [JMC instance] configureXXX] methods.
+There are some other configuration options you can choose to set, if the defaults aren't what you require. To do this, explore the [JMC sharedInstance] configureXXX] methods.
 The JMCOptions object supports most of the advanced settings. This object gets passed to JMC when configure is called. ie during applicationDidFinishLaunching. The JMCOptions class lets you configure:
 
   * screenshots
@@ -129,6 +129,12 @@ Integration Notes
 -----------------
 
 * The notification view that slides up when a notification is received, is added to the application's keyWindow.
+
+Sample Apps
+-----------
+There are sample iPhone and iPad Apps in the jiraconnect-ios/samples directory.
+AngryNerds and AngryNerds4iPad both demonstrate submitting feedback and crashes to the
+[NERDS](https://connect.onjira.com/browse/NERDS) public project.
 
 JIRA Plugin
 ===========

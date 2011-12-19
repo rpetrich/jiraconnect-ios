@@ -154,7 +154,7 @@ enum JMCViewControllerMode {
 @property (nonatomic, retain) JMCOptions* options;
 @property (readonly) NSURL* url;
 
-+ (JMC *) instance;
++ (JMC *)sharedInstance;
 
 /**
 * This method setups JIRAConnect for a specific JIRA instance.
