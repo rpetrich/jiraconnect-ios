@@ -316,26 +316,26 @@ again: while (i < len) {
     return ret;
 }
 
-- (int)parseUnicodeEscape:(const char *)bytes index:(NSUInteger *)index {
-	int hi = [self decodeHexQuad:bytes + *index];
+- (int)parseUnicodeEscape:(const char *)bytes index:(NSUInteger *)charIndex {
+	int hi = [self decodeHexQuad:bytes + *charIndex];
 	if (hi == -2) return -2; // EOF
 	if (hi < 0) {
 		self.error = @"Missing hex quad";
 		return -1;
 	}
-	*index += 4;
+	*charIndex += 4;
 	
 	if (hi >= 0xd800) {     // high surrogate char?
 		if (hi < 0xdc00) {  // yes - expect a low char
 			int lo = -1;
-			if (bytes[(*index)++] == '\\' && bytes[(*index)++] == 'u')
-				lo = [self decodeHexQuad:bytes + *index];
+			if (bytes[(*charIndex)++] == '\\' && bytes[(*charIndex)++] == 'u')
+				lo = [self decodeHexQuad:bytes + *charIndex];
 			
 			if (lo < 0) {
 				self.error = @"Missing low character in surrogate pair";
 				return -1;
 			}
-			*index += 4;
+			*charIndex += 4;
 			
 			if (lo < 0xdc00 || lo >= 0xdfff) {
 				self.error = @"Invalid low surrogate char";

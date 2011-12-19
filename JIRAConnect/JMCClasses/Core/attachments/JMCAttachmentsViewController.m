@@ -126,8 +126,8 @@
 - (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
 
-    NSUInteger index = [imageId unsignedIntegerValue];
-    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    NSUInteger imgIndex = [imageId unsignedIntegerValue];
+    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:imgIndex];
 
     attachment.data = UIImagePNGRepresentation(image);
     attachment.thumbnail = [JMCSketchViewControllerFactory makeSketchThumbnailFor:image];   
@@ -152,12 +152,12 @@
 
 #pragma mark - Helper Methods
 
-- (void)removeAttachmentAtIndex:(NSInteger)index 
+- (void)removeAttachmentAtIndex:(NSInteger)attachmentIndex 
 {
-    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:attachmentIndex];
     
-    [self.attachments removeObjectAtIndex:index];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [self.attachments removeObjectAtIndex:attachmentIndex];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:attachmentIndex inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
     
     if ([self.delegate respondsToSelector:@selector(attachmentsViewController:didDeleteAttachment:)]) {
         [self.delegate attachmentsViewController:self didDeleteAttachment:attachment];

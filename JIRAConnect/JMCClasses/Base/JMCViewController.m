@@ -506,8 +506,8 @@ static NSInteger kJMCTag = 10133;
 
 - (void)sketchController:(UIViewController *)controller didFinishSketchingImage:(UIImage *)image withId:(NSNumber *)imageId
 {
-    NSUInteger index = [imageId unsignedIntegerValue];
-    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:index];
+    NSUInteger imgIndex = [imageId unsignedIntegerValue];
+    JMCAttachmentItem *attachment = [self.attachments objectAtIndex:imgIndex];
     attachment.data = UIImagePNGRepresentation(image);
     attachment.thumbnail = [JMCSketchViewControllerFactory makeSketchThumbnailFor:image];
     [self reloadAttachmentsButton];
@@ -610,9 +610,9 @@ static NSInteger kJMCTag = 10133;
     NSUInteger maxViews = MIN([imageViews count], kIconMaxCount);
     float size = (kIconMaxWidth - (maxViews - 1) * kIconMaxCount);
     float offset = ceil((self.attachmentsButton.frame.size.width - kIconMaxWidth) / 2);
-    for (NSUInteger index = 1; index <= maxViews; index++) {
-        float position = offset + (index - 1) * kIconMaxCount;
-        UIImageView *imageView = [imageViews objectAtIndex:[imageViews count] - index];
+    for (NSUInteger imgIndex = 1; imgIndex <= maxViews; imgIndex++) {
+        float position = offset + (imgIndex - 1) * kIconMaxCount;
+        UIImageView *imageView = [imageViews objectAtIndex:[imageViews count] - imgIndex];
         imageView.frame = CGRectMake(position, position, size, size);
         [self addShadowToImageView:imageView];
         [self.attachmentsButton insertSubview:imageView atIndex:0];

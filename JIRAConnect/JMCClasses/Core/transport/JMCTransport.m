@@ -54,13 +54,13 @@
     NSMutableDictionary *unique = [[NSMutableDictionary alloc] init];
     
     // Ignore for now
-    NSInteger index = 0;
+    NSInteger attachmentIndex = 0;
     for (u_int i = 0; i < [allAttachments count]; i++) {
         JMCAttachmentItem *item = [allAttachments objectAtIndex:i];
         if (item != nil && item.filenameFormat != nil) {
 
-            NSString *filename = [NSString stringWithFormat:item.filenameFormat, index];
-            NSString *key = [item.name stringByAppendingFormat:@"-%d", index];
+            NSString *filename = [NSString stringWithFormat:item.filenameFormat, attachmentIndex];
+            NSString *key = [item.name stringByAppendingFormat:@"-%d", attachmentIndex];
             JMCDLog(@"%@=%@ (%@)", key, item.name, item.contentType);
             if (item.type == JMCAttachmentTypeCustom ||
                 item.type == JMCAttachmentTypeSystem) {
@@ -74,7 +74,7 @@
                 [body appendData:[[NSString stringWithFormat:@"Content-Transfer-Encoding: binary\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
                 [body appendData:item.data];
                 [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-                index++;
+                attachmentIndex++;
             }
         }
     }
@@ -90,7 +90,7 @@
         [body appendData:item.data];
         [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
         
-        index++;
+        attachmentIndex++;
     }
     [unique release];
     
