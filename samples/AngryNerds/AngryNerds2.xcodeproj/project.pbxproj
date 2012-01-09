@@ -118,6 +118,7 @@
 		8D4C5086148484D30051C14C /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C507B148484D30051C14C /* SBJsonStreamWriterState.m */; };
 		8D4C5087148484D30051C14C /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C507D148484D30051C14C /* SBJsonTokeniser.m */; };
 		8D4C5088148484D30051C14C /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4C507F148484D30051C14C /* SBJsonWriter.m */; };
+		8D5FADEE14BBAAF6001F06CE /* JMCScrollViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FADED14BBAAF6001F06CE /* JMCScrollViewContainer.m */; };
 		F8B8053E139B573000EC5AD4 /* AngryNerdsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */; };
 		F8B8053F139B573000EC5AD4 /* AngryNerdsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B8053C139B573000EC5AD4 /* AngryNerdsViewController.m */; };
 		F8B80540139B573000EC5AD4 /* AngryNerdsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B8053D139B573000EC5AD4 /* AngryNerdsViewController.xib */; };
@@ -307,6 +308,8 @@
 		8D4C507D148484D30051C14C /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		8D4C507E148484D30051C14C /* SBJsonWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		8D4C507F148484D30051C14C /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		8D5FADEC14BBAAF6001F06CE /* JMCScrollViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCScrollViewContainer.h; sourceTree = "<group>"; };
+		8D5FADED14BBAAF6001F06CE /* JMCScrollViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCScrollViewContainer.m; sourceTree = "<group>"; };
 		F8B80539139B573000EC5AD4 /* AngryNerdsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsAppDelegate.h; path = Classes/AngryNerdsAppDelegate.h; sourceTree = "<group>"; };
 		F8B8053A139B573000EC5AD4 /* AngryNerdsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AngryNerdsAppDelegate.m; path = Classes/AngryNerdsAppDelegate.m; sourceTree = "<group>"; };
 		F8B8053B139B573000EC5AD4 /* AngryNerdsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AngryNerdsViewController.h; path = Classes/AngryNerdsViewController.h; sourceTree = "<group>"; };
@@ -622,6 +625,8 @@
 		8D47F24B1484566300872BEF /* views */ = {
 			isa = PBXGroup;
 			children = (
+				8D5FADEC14BBAAF6001F06CE /* JMCScrollViewContainer.h */,
+				8D5FADED14BBAAF6001F06CE /* JMCScrollViewContainer.m */,
 				8D47F24C1484566300872BEF /* JMCToolbarButton.h */,
 				8D47F24D1484566300872BEF /* JMCToolbarButton.m */,
 				8D47F24E1484566300872BEF /* UILabel+JMCVerticalAlign.h */,
@@ -911,6 +916,7 @@
 				8D4C5087148484D30051C14C /* SBJsonTokeniser.m in Sources */,
 				8D4C5088148484D30051C14C /* SBJsonWriter.m in Sources */,
 				01CE8D5814955DAA00363132 /* JMCSketchViewControllerFactory.m in Sources */,
+				8D5FADEE14BBAAF6001F06CE /* JMCScrollViewContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
